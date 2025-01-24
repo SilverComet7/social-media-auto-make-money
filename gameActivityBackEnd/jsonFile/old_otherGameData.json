@@ -1,0 +1,5501 @@
+[
+  {
+    "name": "以闪亮之名",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "以闪亮之名人均名品脸",
+            "specialTag": "#以闪亮之名人均名品脸",
+            "eDate": "2025/1/11",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 2000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 7,
+                "allViewNum": 2232,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457687509833665819",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386516,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 12,
+                      "collect_count": 0,
+                      "play_count": 297,
+                      "share_count": 0
+                    },
+                    "view": 297,
+                    "like": 12,
+                    "musicId": 7457687859907120000
+                  },
+                  {
+                    "aweme_id": "7457687662938377510",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736385916,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 60,
+                      "collect_count": 2,
+                      "play_count": 553,
+                      "share_count": 4
+                    },
+                    "view": 553,
+                    "like": 60,
+                    "musicId": 7457687684526378000
+                  },
+                  {
+                    "aweme_id": "7457172261087235338",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #美女·",
+                    "create_time": 1736266449,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 4,
+                      "collect_count": 0,
+                      "play_count": 126,
+                      "share_count": 0
+                    },
+                    "view": 126,
+                    "like": 4,
+                    "musicId": 7457172209610984000
+                  },
+                  {
+                    "aweme_id": "7457172185698929958",
+                    "desc": " #以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #美女·",
+                    "create_time": 1736265849,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 3,
+                      "collect_count": 0,
+                      "play_count": 154,
+                      "share_count": 0
+                    },
+                    "view": 154,
+                    "like": 3,
+                    "musicId": 7457172194867695000
+                  },
+                  {
+                    "aweme_id": "7456586642187357474",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736131499,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 40,
+                      "collect_count": 1,
+                      "play_count": 397,
+                      "share_count": 2
+                    },
+                    "view": 397,
+                    "like": 40,
+                    "musicId": 7456589602401291000
+                  },
+                  {
+                    "aweme_id": "7456587925682244898",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736130899,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 38,
+                      "collect_count": 3,
+                      "play_count": 320,
+                      "share_count": 1
+                    },
+                    "view": 320,
+                    "like": 38,
+                    "musicId": 7456589703823838000
+                  },
+                  {
+                    "aweme_id": "7456587356292910388",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736130299,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 25,
+                      "collect_count": 1,
+                      "play_count": 385,
+                      "share_count": 1
+                    },
+                    "view": 385,
+                    "like": 25,
+                    "musicId": 7456589462429126000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 4,
+                "allViewNum": 6479,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456589828726066466",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736132399,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 32,
+                      "collect_count": 1,
+                      "play_count": 501,
+                      "share_count": 0
+                    },
+                    "view": 501,
+                    "like": 32,
+                    "musicId": 7456589626854133000
+                  },
+                  {
+                    "aweme_id": "7456588230473960719",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736131799,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 97,
+                      "collect_count": 11,
+                      "play_count": 553,
+                      "share_count": 4
+                    },
+                    "view": 553,
+                    "like": 97,
+                    "musicId": 7456589770525871000
+                  },
+                  {
+                    "aweme_id": "7456588145669311784",
+                    "desc": " #以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736131199,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 23,
+                      "collect_count": 2,
+                      "play_count": 224,
+                      "share_count": 0
+                    },
+                    "view": 224,
+                    "like": 23,
+                    "musicId": 7456589375430807000
+                  },
+                  {
+                    "aweme_id": "7456587513969331491",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736130599,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 3,
+                      "digg_count": 371,
+                      "collect_count": 28,
+                      "play_count": 5201,
+                      "share_count": 17
+                    },
+                    "view": 5201,
+                    "like": 371,
+                    "musicId": 7456589651550146000
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 9,
+                "allViewNum": 4123,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457714279664454938",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736393113,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 193,
+                      "collect_count": 27,
+                      "play_count": 922,
+                      "share_count": 4
+                    },
+                    "view": 922,
+                    "like": 193,
+                    "musicId": 7457714513190604000
+                  },
+                  {
+                    "aweme_id": "7457687563676044581",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386816,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 4,
+                      "collect_count": 0,
+                      "play_count": 306,
+                      "share_count": 0
+                    },
+                    "view": 306,
+                    "like": 4,
+                    "musicId": 7457687915424468000
+                  },
+                  {
+                    "aweme_id": "7457687566536428850",
+                    "desc": " #以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386216,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 11,
+                      "collect_count": 2,
+                      "play_count": 284,
+                      "share_count": 0
+                    },
+                    "view": 284,
+                    "like": 11,
+                    "musicId": 7457687730408001000
+                  },
+                  {
+                    "aweme_id": "7457687267134508326",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736385616,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 36,
+                      "collect_count": 0,
+                      "play_count": 523,
+                      "share_count": 0
+                    },
+                    "view": 523,
+                    "like": 36,
+                    "musicId": 7457687647780081000
+                  },
+                  {
+                    "aweme_id": "7457172136260570406",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #美女·",
+                    "create_time": 1736265549,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 19,
+                      "collect_count": 2,
+                      "play_count": 214,
+                      "share_count": 0
+                    },
+                    "view": 214,
+                    "like": 19,
+                    "musicId": 7457172147237064000
+                  },
+                  {
+                    "aweme_id": "7456587956220923176",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736131199,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 117,
+                      "collect_count": 3,
+                      "play_count": 597,
+                      "share_count": 0
+                    },
+                    "view": 597,
+                    "like": 117,
+                    "musicId": 7456589705417723000
+                  },
+                  {
+                    "aweme_id": "7456587706387205411",
+                    "desc": " #以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736130599,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 13,
+                      "collect_count": 1,
+                      "play_count": 136,
+                      "share_count": 0
+                    },
+                    "view": 136,
+                    "like": 13,
+                    "musicId": 7456589580809063000
+                  },
+                  {
+                    "aweme_id": "7456587735575383331",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736129999,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 35,
+                      "collect_count": 2,
+                      "play_count": 409,
+                      "share_count": 0
+                    },
+                    "view": 409,
+                    "like": 35,
+                    "musicId": 7456589478023417000
+                  },
+                  {
+                    "aweme_id": "7454005688834985257",
+                    "desc": "发现一条观赏鱼  #以闪亮之名粉好看 #以闪亮之名女武神颂歌  #二次元 #coser #以闪亮之名人均名品脸",
+                    "create_time": 1735532107,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 42,
+                      "collect_count": 1,
+                      "play_count": 732,
+                      "share_count": 0
+                    },
+                    "view": 732,
+                    "like": 42,
+                    "musicId": 7454006484087672000
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "榜单",
+            "minView": 300,
+            "eDate": "2025/1/21",
+            "specialTag": "#以闪亮之名弥山见雪 #以闪亮之名以实力证明",
+            "reward": [
+              {
+                "allNum": 5,
+                "allViewNum": 10000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 1,
+                "allViewNum": 553,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457687662938377510",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736385916,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 60,
+                      "collect_count": 2,
+                      "play_count": 553,
+                      "share_count": 4
+                    },
+                    "view": 553,
+                    "like": 60,
+                    "musicId": 7457687684526378000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 3,
+                "allViewNum": 1751,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457714279664454938",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736393113,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 193,
+                      "collect_count": 27,
+                      "play_count": 922,
+                      "share_count": 4
+                    },
+                    "view": 922,
+                    "like": 193,
+                    "musicId": 7457714513190604000
+                  },
+                  {
+                    "aweme_id": "7457687563676044581",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386816,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 4,
+                      "collect_count": 0,
+                      "play_count": 306,
+                      "share_count": 0
+                    },
+                    "view": 306,
+                    "like": 4,
+                    "musicId": 7457687915424468000
+                  },
+                  {
+                    "aweme_id": "7457687267134508326",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736385616,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 36,
+                      "collect_count": 0,
+                      "play_count": 523,
+                      "share_count": 0
+                    },
+                    "view": 523,
+                    "like": 36,
+                    "musicId": 7457687647780081000
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "show": true,
+    "isOtherGame": true,
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "闪耀暖暖",
+    "etime": 1736956799,
+    "commonTagAll": "",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "基础",
+            "minView": 100,
+            "specialTag": "#闪耀暖暖 #闪耀暖暖深海密语",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 5000,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 20000,
+                "money": 25000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 4,
+                "allViewNum": 5470,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456870308515974437",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #美女",
+                    "create_time": 1736204947,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 27,
+                      "collect_count": 0,
+                      "play_count": 450,
+                      "share_count": 0
+                    },
+                    "view": 450,
+                    "like": 27,
+                    "musicId": 7456873158310743000
+                  },
+                  {
+                    "aweme_id": "7456869418673458458",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #美女",
+                    "create_time": 1736204347,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 5,
+                      "collect_count": 0,
+                      "play_count": 161,
+                      "share_count": 0
+                    },
+                    "view": 161,
+                    "like": 5,
+                    "musicId": 7456872851732319000
+                  },
+                  {
+                    "aweme_id": "7456871251693276454",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #一种很新的cosplay",
+                    "create_time": 1736203747,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 16,
+                      "collect_count": 0,
+                      "play_count": 962,
+                      "share_count": 1
+                    },
+                    "view": 962,
+                    "like": 16,
+                    "musicId": 7456872808333774000
+                  },
+                  {
+                    "aweme_id": "7456870726973394203",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #一种很新的cosplay",
+                    "create_time": 1736203147,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 23,
+                      "digg_count": 474,
+                      "collect_count": 3,
+                      "play_count": 3897,
+                      "share_count": 14
+                    },
+                    "view": 3897,
+                    "like": 474,
+                    "musicId": 7456873019290504000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 4,
+                "allViewNum": 1958,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456871128791878962",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #换装",
+                    "create_time": 1736205247,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 34,
+                      "collect_count": 0,
+                      "play_count": 586,
+                      "share_count": 0
+                    },
+                    "view": 586,
+                    "like": 34,
+                    "musicId": 7456873263755480000
+                  },
+                  {
+                    "aweme_id": "7456871836693826853",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #换装",
+                    "create_time": 1736204647,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 12,
+                      "collect_count": 0,
+                      "play_count": 439,
+                      "share_count": 0
+                    },
+                    "view": 439,
+                    "like": 12,
+                    "musicId": 7456873204074712000
+                  },
+                  {
+                    "aweme_id": "7456873231509622054",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #换装",
+                    "create_time": 1736204047,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 13,
+                      "collect_count": 2,
+                      "play_count": 580,
+                      "share_count": 1
+                    },
+                    "view": 580,
+                    "like": 13,
+                    "musicId": 7456872876952669000
+                  },
+                  {
+                    "aweme_id": "7456870753267453235",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #换装",
+                    "create_time": 1736203447,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 19,
+                      "collect_count": 0,
+                      "play_count": 353,
+                      "share_count": 0
+                    },
+                    "view": 353,
+                    "like": 19,
+                    "musicId": 7456872970896690000
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 4,
+                "allViewNum": 1432,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456871075855551795",
+                    "desc": " #闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #手机游戏",
+                    "create_time": 1736204647,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 11,
+                      "collect_count": 1,
+                      "play_count": 176,
+                      "share_count": 0
+                    },
+                    "view": 176,
+                    "like": 11,
+                    "musicId": 7456873243304005000
+                  },
+                  {
+                    "aweme_id": "7456870138264980762",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #手机游戏",
+                    "create_time": 1736204047,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 22,
+                      "collect_count": 1,
+                      "play_count": 418,
+                      "share_count": 0
+                    },
+                    "view": 418,
+                    "like": 22,
+                    "musicId": 7456873039624457000
+                  },
+                  {
+                    "aweme_id": "7456870818799242547",
+                    "desc": " #闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #手机游戏",
+                    "create_time": 1736203447,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 7,
+                      "collect_count": 1,
+                      "play_count": 140,
+                      "share_count": 0
+                    },
+                    "view": 140,
+                    "like": 7,
+                    "musicId": 7456872608613649000
+                  },
+                  {
+                    "aweme_id": "7456870978883292426",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #手机游戏",
+                    "create_time": 1736202847,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 39,
+                      "collect_count": 1,
+                      "play_count": 698,
+                      "share_count": 1
+                    },
+                    "view": 698,
+                    "like": 39,
+                    "musicId": 7456872954257739000
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "",
+            "specialTag": "#闪耀暖暖 #闪耀暖暖深海密语",
+            "reward": [
+              {
+                "allNum": 3,
+                "like": 10,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "like": 500,
+                "money": 15000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 4,
+                "allLike": 207,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "677c229d00000000200239e6",
+                    "desc": "闪耀暖暖 闪耀暖暖深海密语 二次元 coser 换装",
+                    "type": "video",
+                    "like": 13
+                  },
+                  {
+                    "aweme_id": "677c229c0000000020026f50",
+                    "desc": "闪耀暖暖 闪耀暖暖深海密语 二次元 coser 换装",
+                    "type": "video",
+                    "like": 36
+                  },
+                  {
+                    "aweme_id": "677c229a000000000800f441",
+                    "desc": "闪耀暖暖 闪耀暖暖深海密语 二次元 coser 换装",
+                    "type": "video",
+                    "like": 11
+                  },
+                  {
+                    "aweme_id": "677c22980000000020014a22",
+                    "desc": "闪耀暖暖 闪耀暖暖深海密语 二次元 coser 换装",
+                    "type": "video",
+                    "like": 147
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "show": true,
+    "isOtherGame": true,
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "心动小镇",
+    "commonTagAll": "",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "心动小镇冬日暖心计划",
+            "eDate": "2025/1/14",
+            "minView": 500,
+            "specialTag": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 3000,
+                "money": 70000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 10000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 1,
+                "allViewNum": 511,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457357837254151474",
+                    "desc": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736329948,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 25,
+                      "collect_count": 3,
+                      "play_count": 511,
+                      "share_count": 0
+                    },
+                    "view": 511,
+                    "like": 25,
+                    "musicId": 7457358058495299000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 3,
+                "allViewNum": 3682,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457358206688431387",
+                    "desc": " #心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736332048,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 288,
+                      "collect_count": 18,
+                      "play_count": 1881,
+                      "share_count": 6
+                    },
+                    "view": 1881,
+                    "like": 288,
+                    "musicId": 7457358362250972000
+                  },
+                  {
+                    "aweme_id": "7457358198316600614",
+                    "desc": " #心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736331448,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 298,
+                      "collect_count": 15,
+                      "play_count": 1028,
+                      "share_count": 7
+                    },
+                    "view": 1028,
+                    "like": 298,
+                    "musicId": 7457358368684953000
+                  },
+                  {
+                    "aweme_id": "7457357592621321499",
+                    "desc": " #心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736330248,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 206,
+                      "collect_count": 12,
+                      "play_count": 773,
+                      "share_count": 3
+                    },
+                    "view": 773,
+                    "like": 206,
+                    "musicId": 7457358170265095000
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 3,
+                "allViewNum": 3886,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457358348564925723",
+                    "desc": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736331448,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 185,
+                      "collect_count": 11,
+                      "play_count": 2073,
+                      "share_count": 2
+                    },
+                    "view": 2073,
+                    "like": 185,
+                    "musicId": 7457358331267517000
+                  },
+                  {
+                    "aweme_id": "7457357902743964938",
+                    "desc": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736330248,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 176,
+                      "collect_count": 9,
+                      "play_count": 791,
+                      "share_count": 2
+                    },
+                    "view": 791,
+                    "like": 176,
+                    "musicId": 7457358160354250000
+                  },
+                  {
+                    "aweme_id": "7457357794124041482",
+                    "desc": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736329648,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 82,
+                      "collect_count": 6,
+                      "play_count": 1022,
+                      "share_count": 8
+                    },
+                    "view": 1022,
+                    "like": 82,
+                    "musicId": 7457358085619846000
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "心动小镇冬日暖心计划",
+            "specialTag": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动",
+            "reward": [
+              {
+                "allViewNum": 500,
+                "like": 20,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 5,
+                "allLike": 67,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "677ddba2000000001a034136",
+                    "desc": "心动小镇 心动小镇创作计划 心动小镇线条小狗联动 coser 二次元 手机游戏",
+                    "type": "video",
+                    "like": 22
+                  },
+                  {
+                    "aweme_id": "677ddba1000000001903578c",
+                    "desc": "心动小镇 心动小镇创作计划 心动小镇线条小狗联动 coser 二次元 手机游戏",
+                    "type": "video",
+                    "like": 13
+                  },
+                  {
+                    "aweme_id": "677ddb9d000000002001ad03",
+                    "desc": "心动小镇 心动小镇创作计划 心动小镇线条小狗联动 coser 二次元 手机游戏",
+                    "type": "video",
+                    "like": 10
+                  },
+                  {
+                    "aweme_id": "677ddb9c000000002001f83c",
+                    "desc": "心动小镇 心动小镇创作计划 心动小镇线条小狗联动 coser 二次元 手机游戏",
+                    "type": "video",
+                    "like": 13
+                  },
+                  {
+                    "aweme_id": "677ddb9a000000001a03411d",
+                    "desc": "心动小镇 心动小镇创作计划 心动小镇线条小狗联动 coser 二次元 手机游戏",
+                    "type": "video",
+                    "like": 9
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "心动小镇冬日暖心计划",
+            "specialTag": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动",
+            "minView": 3000,
+            "reward": [
+              {
+                "allNum": 3,
+                "money": 70000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 10000,
+                "money": 30000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "show": true,
+    "isOtherGame": true,
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "界外狂潮",
+    "etime": 0,
+    "commonTagAll": "",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "界外狂潮",
+            "eDate": "2024/12/31",
+            "specialTag": "#界外狂潮 #界也太潮了，#界外狂潮国服首测开启",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 10000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "isOtherGame": true,
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "永劫无间手游",
+    "commonTagAll": "",
+    "suppleTag": "#永劫无间 #永劫无间梦华赛季",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "永劫无间KFC联动",
+            "minVideoTime": 6,
+            "minView": 100,
+            "eDate": "2025/1/03",
+            "specialTag": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 500,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 2,
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 2,
+                "allViewNum": 11050,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7454332581769792822",
+                    "desc": "泰斗大人！! #永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735637431,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 237,
+                      "collect_count": 12,
+                      "play_count": 1730,
+                      "share_count": 5
+                    },
+                    "view": 1730,
+                    "like": 237,
+                    "musicId": 7454335366892424000
+                  },
+                  {
+                    "aweme_id": "7454324947545099574",
+                    "desc": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735636531,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 1019,
+                      "collect_count": 37,
+                      "play_count": 9320,
+                      "share_count": 26
+                    },
+                    "view": 9320,
+                    "like": 1019,
+                    "musicId": 7454335125027835000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 1,
+                "allViewNum": 387,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7454332899911912715",
+                    "desc": "请等一下，泰斗大人！！！ #永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #cos",
+                    "create_time": 1735640131,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 40,
+                      "collect_count": 5,
+                      "play_count": 387,
+                      "share_count": 2
+                    },
+                    "view": 387,
+                    "like": 40,
+                    "musicId": 7454335050897722000
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 5,
+                "allViewNum": 17237,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7454331739507379475",
+                    "desc": "请等一下，泰斗大人！ #永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735640131,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 61,
+                      "collect_count": 5,
+                      "play_count": 689,
+                      "share_count": 0
+                    },
+                    "view": 689,
+                    "like": 61,
+                    "musicId": 7454335391286562000
+                  },
+                  {
+                    "aweme_id": "7454331313982639423",
+                    "desc": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735639231,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 734,
+                      "collect_count": 43,
+                      "play_count": 5348,
+                      "share_count": 23
+                    },
+                    "view": 5348,
+                    "like": 734,
+                    "musicId": 7454335576137846000
+                  },
+                  {
+                    "aweme_id": "7454331905052314919",
+                    "desc": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735638331,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 320,
+                      "collect_count": 21,
+                      "play_count": 3212,
+                      "share_count": 4
+                    },
+                    "view": 3212,
+                    "like": 320,
+                    "musicId": 7454335307463380000
+                  },
+                  {
+                    "aweme_id": "7454332687088717119",
+                    "desc": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735637431,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 717,
+                      "collect_count": 41,
+                      "play_count": 5603,
+                      "share_count": 20
+                    },
+                    "view": 5603,
+                    "like": 717,
+                    "musicId": 7454335217185164000
+                  },
+                  {
+                    "aweme_id": "7454332569417436427",
+                    "desc": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735636531,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 363,
+                      "collect_count": 13,
+                      "play_count": 2385,
+                      "share_count": 5
+                    },
+                    "view": 2385,
+                    "like": 363,
+                    "musicId": 7454335281315974000
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "永劫手游共斗诛神",
+            "minVideoTime": 6,
+            "minView": 100,
+            "eDate": "2025/1/15",
+            "specialTag": "#永劫无间手游 #永劫手游共斗诛神",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 1000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 30000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 300000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "永劫手游雷火映画瓜分",
+            "eDate": "2024/12/31",
+            "specialTag": "#永劫手游小剧场 #可惜我再会振刀也振不进你的心",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 20000,
+                "money": 25000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 100000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "show": true,
+    "isOtherGame": true,
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "逆水寒手游",
+    "sDate": "2025/1/6",
+    "eDate": "2025/1/11",
+    "commonTagAll": "",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "逆水寒手游1月",
+            "minView": 1000,
+            "eDate": "2025/1/16",
+            "specialTag": "#逆水寒手游 #逆水寒国风江湖",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 5000,
+                "money": 90000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 20000,
+                "money": 90000,
+                "minView": 2000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 100000,
+                "money": 90000,
+                "minView": 3000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 5,
+                "allViewNum": 10091,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456314812474150179",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #手机游戏",
+                    "create_time": 1736071756,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 116,
+                      "collect_count": 7,
+                      "play_count": 1032,
+                      "share_count": 2
+                    },
+                    "view": 1032,
+                    "like": 116,
+                    "musicId": 7456315756427431000
+                  },
+                  {
+                    "aweme_id": "7456314417584622900",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #手机游戏",
+                    "create_time": 1736071156,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 345,
+                      "collect_count": 35,
+                      "play_count": 3652,
+                      "share_count": 6
+                    },
+                    "view": 3652,
+                    "like": 345,
+                    "musicId": 7456315473295134000
+                  },
+                  {
+                    "aweme_id": "7455198104711761188",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735812059,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 73,
+                      "collect_count": 2,
+                      "play_count": 1092,
+                      "share_count": 1
+                    },
+                    "view": 1092,
+                    "like": 73,
+                    "musicId": 7455198830938689000
+                  },
+                  {
+                    "aweme_id": "7455198004748897590",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735810259,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 45,
+                      "collect_count": 2,
+                      "play_count": 1206,
+                      "share_count": 0
+                    },
+                    "view": 1206,
+                    "like": 45,
+                    "musicId": 7455198621038939000
+                  },
+                  {
+                    "aweme_id": "7455197755338657060",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735806659,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 292,
+                      "collect_count": 22,
+                      "play_count": 3109,
+                      "share_count": 33
+                    },
+                    "view": 3109,
+                    "like": 292,
+                    "musicId": 7455198506996108000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 4,
+                "allViewNum": 12943,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456314142010461455",
+                    "desc": "放开，让我来！ #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #美女",
+                    "create_time": 1736070856,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 98,
+                      "collect_count": 16,
+                      "play_count": 1663,
+                      "share_count": 6
+                    },
+                    "view": 1663,
+                    "like": 98,
+                    "musicId": 7456315217950117000
+                  },
+                  {
+                    "aweme_id": "7456314004349193472",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #美女",
+                    "create_time": 1736070256,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 36,
+                      "collect_count": 7,
+                      "play_count": 1435,
+                      "share_count": 0
+                    },
+                    "view": 1435,
+                    "like": 36,
+                    "musicId": 7456314777917279000
+                  },
+                  {
+                    "aweme_id": "7455198438276205835",
+                    "desc": "御姐 #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735812059,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 719,
+                      "collect_count": 36,
+                      "play_count": 7649,
+                      "share_count": 22
+                    },
+                    "view": 7649,
+                    "like": 719,
+                    "musicId": 7455198919153225000
+                  },
+                  {
+                    "aweme_id": "7455198036801703204",
+                    "desc": "一种很新的cosplay #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735810259,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 125,
+                      "collect_count": 5,
+                      "play_count": 2196,
+                      "share_count": 1
+                    },
+                    "view": 2196,
+                    "like": 125,
+                    "musicId": 7455198810910789000
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 2,
+                "allViewNum": 2047,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456313664040176911",
+                    "desc": "放开，让我来！ #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1736069656,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 39,
+                      "collect_count": 1,
+                      "play_count": 1027,
+                      "share_count": 1
+                    },
+                    "view": 1027,
+                    "like": 39,
+                    "musicId": 7456314467626831000
+                  },
+                  {
+                    "aweme_id": "7455197844589366547",
+                    "desc": "御姐 #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735812059,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 121,
+                      "collect_count": 6,
+                      "play_count": 1020,
+                      "share_count": 2
+                    },
+                    "view": 1020,
+                    "like": 121,
+                    "musicId": 7455198744527654000
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "",
+            "eDate": "2025/2/20",
+            "specialTag": "#逆水寒手游新赛年",
+            "reward": [
+              {
+                "allNum": 3,
+                "allLike": 5,
+                "money": 50000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allLike": 100,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allLike": 500,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allLike": 3000,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allLike": 5000,
+                "money": 50000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allLike": 10000,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "逆水寒手游迎新",
+            "eDate": "2025/1/15",
+            "specialTag": "#逆水寒手游",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 5000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 8000,
+                "money": 10000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "show": true,
+    "isOtherGame": true,
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "明日方舟",
+    "etime": 0,
+    "allMoney": 0,
+    "suppleTag": "#明日方舟 #策略游戏 #游戏杂谈 #塔防",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "明日方舟UP主应援计划 – 出苍白海",
+            "act_url": "https://www.bilibili.com/blackboard/era/oAgWT4ghqDxGPl8x.html",
+            "comment": "13.4万人参与",
+            "sDate": "2024/12/5",
+            "eDate": "2025/1/21",
+            "specialTag": "明日方舟UP主应援计划 – 出苍白海",
+            "searchKeyWord": "明日方舟UP主应援计划 – 出苍白海",
+            "reward": []
+          },
+          {
+            "name": "明日方舟仙术杯#6",
+            "act_url": "https://live.bilibili.com/blackboard/era/M8mMwutyI06WCb0R.html",
+            "comment": "1.2万人参与",
+            "sDate": "2024/12/11",
+            "eDate": "2025/1/11",
+            "specialTag": "明日方舟仙术杯#6",
+            "searchKeyWord": "明日方舟仙术杯#6",
+            "reward": []
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "明日方舟出苍白海（下）",
+            "eDate": "2025/1/21",
+            "specialTag": "#明日方舟 #明日方舟出苍白海",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 5000,
+                "money": 30000,
+                "person": 138,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 30000,
+                "money": 25000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 200000,
+                "money": 15000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "明日方舟出苍白海",
+            "eDate": "2025/1/21",
+            "specialTag": "#明日方舟 #明日方舟出苍白海",
+            "reward": [
+              {
+                "allNum": 2,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "like": 50,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "like": 300,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "明日方舟出苍白海",
+            "eDate": "2025/1/21",
+            "specialTag": "#明日方舟 #明日方舟出苍白海",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 100,
+                "money": 15000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 10000,
+                "money": 25000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "show": true,
+    "isOtherGame": true,
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "宝可梦大集结",
+    "etime": 0,
+    "allMoney": 0,
+    "suppleTag": "",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "满月庆典",
+            "eDate": "2025/1/10",
+            "minView": 1000,
+            "specialTag": "#宝可梦大集结 #宝可梦大集结可达鸭舞蹈",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 20000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "show": true,
+    "isOtherGame": true,
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "永劫无间",
+    "etime": 0,
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "永劫无间梦华赛季激励计划",
+            "minView": 5000,
+            "eDate": "2025/1/09",
+            "specialTag": "永劫无间 永劫无间梦华赛季",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 50000,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 100000,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "show": true,
+    "isOtherGame": true,
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "燕云十六声",
+    "etime": 0,
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "活动",
+            "specialTag": "#燕云十六声",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 20,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 200,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 10,
+                "allViewNum": 200,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "view": 5000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "view": 10000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "view": 20000,
+                "money": 10000,
+                "isGet": false
+              }
+            ]
+          },
+          {
+            "name": "燕云十六声公测激励活动",
+            "act_url": "https://www.bilibili.com/blackboard/era/Bh88xUQ5aVozSPec.html",
+            "comment": "5.6万人参与",
+            "sDate": "2024/12/27",
+            "eDate": "2025/1/26",
+            "specialTag": "燕云十六声公测激励活动",
+            "searchKeyWord": "燕云十六声公测激励活动",
+            "reward": []
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "瓜分首期",
+            "minVideoTime": 7,
+            "minView": 1000,
+            "eDate": "2025/01/08",
+            "specialTag": "#燕云十六声",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 5000,
+                "money": 80000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 30000,
+                "money": 60000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 100000,
+                "money": 60000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 3,
+                "allViewNum": 6550,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456113137561914676",
+                    "desc": "#燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736039008,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 132,
+                      "collect_count": 8,
+                      "play_count": 1423,
+                      "share_count": 1
+                    },
+                    "view": 1423,
+                    "like": 132,
+                    "musicId": 7456116793665752000
+                  },
+                  {
+                    "aweme_id": "7456113353333673251",
+                    "desc": "#燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736037808,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 121,
+                      "collect_count": 12,
+                      "play_count": 2066,
+                      "share_count": 6
+                    },
+                    "view": 2066,
+                    "like": 121,
+                    "musicId": 7456116636194541000
+                  },
+                  {
+                    "aweme_id": "7455749651174657320",
+                    "desc": "别乱倒呀 #燕云十六声 #燕云十六声混剪 #coser #燕云十六声攻略 #武侠",
+                    "create_time": 1735949441,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 108,
+                      "collect_count": 8,
+                      "play_count": 3061,
+                      "share_count": 6
+                    },
+                    "view": 3061,
+                    "like": 108,
+                    "musicId": 7455754262384119000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 6,
+                "allViewNum": 9346,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456112299296804111",
+                    "desc": "#燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736040508,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 3,
+                      "digg_count": 31,
+                      "collect_count": 1,
+                      "play_count": 1184,
+                      "share_count": 5
+                    },
+                    "view": 1184,
+                    "like": 31,
+                    "musicId": 7456117007738473000
+                  },
+                  {
+                    "aweme_id": "7456112038029331764",
+                    "desc": "收下姐姐的大礼！ #燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736039308,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 165,
+                      "collect_count": 6,
+                      "play_count": 1618,
+                      "share_count": 9
+                    },
+                    "view": 1618,
+                    "like": 165,
+                    "musicId": 7456116599930588000
+                  },
+                  {
+                    "aweme_id": "7456113229161401640",
+                    "desc": "收下姐姐的大礼！ #燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736038108,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 115,
+                      "collect_count": 7,
+                      "play_count": 1365,
+                      "share_count": 6
+                    },
+                    "view": 1365,
+                    "like": 115,
+                    "musicId": 7456116911395409000
+                  },
+                  {
+                    "aweme_id": "7455750714946489615",
+                    "desc": "姐姐的大礼！ #燕云十六声 #燕云十六声混剪 #coser #燕云十六声攻略 #美女",
+                    "create_time": 1735949741,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 58,
+                      "collect_count": 5,
+                      "play_count": 1139,
+                      "share_count": 1
+                    },
+                    "view": 1139,
+                    "like": 58,
+                    "musicId": 7455754360891395000
+                  },
+                  {
+                    "aweme_id": "7455681245939371264",
+                    "desc": "#燕云十六声 #coser #国风 #燕云十六声混剪 #美女",
+                    "create_time": 1735911484,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 34,
+                      "collect_count": 1,
+                      "play_count": 1408,
+                      "share_count": 0
+                    },
+                    "view": 1408,
+                    "like": 34,
+                    "musicId": 7455683011766521000
+                  },
+                  {
+                    "aweme_id": "7455365419562470691",
+                    "desc": "看看燕云coser吧！ #燕云十六声 #燕云十六声攻略 #燕云十六声混剪 #coser #武侠",
+                    "create_time": 1735866231,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 175,
+                      "collect_count": 11,
+                      "play_count": 2632,
+                      "share_count": 3
+                    },
+                    "view": 2632,
+                    "like": 175,
+                    "musicId": 7455369096868204000
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 4,
+                "allViewNum": 8538,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456111797901233423",
+                    "desc": "姐姐的大礼！ #燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736039908,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 112,
+                      "collect_count": 9,
+                      "play_count": 3219,
+                      "share_count": 7
+                    },
+                    "view": 3219,
+                    "like": 112,
+                    "musicId": 7456116909885394000
+                  },
+                  {
+                    "aweme_id": "7456111591273139471",
+                    "desc": "#燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736038708,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 131,
+                      "collect_count": 4,
+                      "play_count": 1588,
+                      "share_count": 4
+                    },
+                    "view": 1588,
+                    "like": 131,
+                    "musicId": 7456116946728144000
+                  },
+                  {
+                    "aweme_id": "7456111474415570216",
+                    "desc": "#燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736037508,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 124,
+                      "collect_count": 7,
+                      "play_count": 1563,
+                      "share_count": 3
+                    },
+                    "view": 1563,
+                    "like": 124,
+                    "musicId": 7456116568964058000
+                  },
+                  {
+                    "aweme_id": "7455364946315005199",
+                    "desc": "#燕云十六声 #这谁能顶得住啊   #燕云十六声混剪 #coser #游戏",
+                    "create_time": 1735866831,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 77,
+                      "collect_count": 4,
+                      "play_count": 2168,
+                      "share_count": 0
+                    },
+                    "view": 2168,
+                    "like": 77,
+                    "musicId": 7455369158113480000
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "攻略定向",
+            "minVideoTime": 20,
+            "minPhoto": 3,
+            "minView": 3000,
+            "eDate": "2025/01/27",
+            "specialTag": "#燕云十六声攻略",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 10000,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 100000,
+                "money": 60000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 1,
+                "allViewNum": 3061,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7455749651174657320",
+                    "desc": "别乱倒呀 #燕云十六声 #燕云十六声混剪 #coser #燕云十六声攻略 #武侠",
+                    "create_time": 1735949441,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 108,
+                      "collect_count": 8,
+                      "play_count": 3061,
+                      "share_count": 6
+                    },
+                    "view": 3061,
+                    "like": 108,
+                    "musicId": 7455754262384119000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "混剪定向",
+            "minVideoTime": 15,
+            "minPhoto": 3,
+            "minView": 3000,
+            "eDate": "2025/01/27",
+            "specialTag": "#燕云十六声混剪",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 10000,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 300000,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 1,
+                "allViewNum": 3061,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7455749651174657320",
+                    "desc": "别乱倒呀 #燕云十六声 #燕云十六声混剪 #coser #燕云十六声攻略 #武侠",
+                    "create_time": 1735949441,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 108,
+                      "collect_count": 8,
+                      "play_count": 3061,
+                      "share_count": 6
+                    },
+                    "view": 3061,
+                    "like": 108,
+                    "musicId": 7455754262384119000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "4个赛道(各5w)",
+            "minLike": 100,
+            "specialTag": "#燕云十六声 #燕云十六声混剪 #燕云十六声同人 #燕云十六声剧场 #燕云十六声种草",
+            "eDate": "2025/01/25",
+            "reward": [
+              {
+                "view": 1000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "like": 1000,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "show": true,
+    "isOtherGame": true,
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "崩坏星穹铁道",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "2.7瓜分",
+            "minView": 1000,
+            "specialTag": "#崩坏星穹铁道 #在第八日启程",
+            "eDate": "2025/01/14",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 100000,
+                "money": 400000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 1,
+                "allViewNum": 1049,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457714606715260211",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736395813,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 80,
+                      "collect_count": 3,
+                      "play_count": 1049,
+                      "share_count": 2
+                    },
+                    "view": 1049,
+                    "like": 80,
+                    "musicId": 7457714817743326000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 2,
+                "allViewNum": 2457,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457714509898190118",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736394913,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 272,
+                      "collect_count": 23,
+                      "play_count": 1411,
+                      "share_count": 1
+                    },
+                    "view": 1411,
+                    "like": 272,
+                    "musicId": 7457714651535609000
+                  },
+                  {
+                    "aweme_id": "7457714424862838053",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736393713,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 211,
+                      "collect_count": 20,
+                      "play_count": 1046,
+                      "share_count": 13
+                    },
+                    "view": 1046,
+                    "like": 211,
+                    "musicId": 7457714530379304000
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 1,
+                "allViewNum": 8583,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457714078870506803",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736391913,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 427,
+                      "collect_count": 37,
+                      "play_count": 8583,
+                      "share_count": 10
+                    },
+                    "view": 8583,
+                    "like": 427,
+                    "musicId": 7457714207195270000
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "视频瓜分43w",
+            "specialTag": "#崩坏星穹铁道 #崩坏星穹铁道创作者激励计划",
+            "eDate": "2025/01/14",
+            "reward": [
+              {
+                "allNum": 1,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 10,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "like": 50,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "like": 500,
+                "money": 60000,
+                "isGet": false
+              },
+              {
+                "like": 1000,
+                "money": 80000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 5,
+                "allLike": 722,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "677f1fc5000000000b0359fd",
+                    "desc": "崩坏星穹铁道 崩坏星穹铁道创作者激励计划 coser 二次元 可爱",
+                    "type": "video",
+                    "like": 64
+                  },
+                  {
+                    "aweme_id": "677f1fc1000000001903621f",
+                    "desc": "崩坏星穹铁道 崩坏星穹铁道创作者激励计划 coser 二次元 可爱",
+                    "type": "video",
+                    "like": 62
+                  },
+                  {
+                    "aweme_id": "677f1fbf0000000020022bb3",
+                    "desc": "崩坏星穹铁道 崩坏星穹铁道创作者激励计划 coser 二次元 可爱",
+                    "type": "video",
+                    "like": 468
+                  },
+                  {
+                    "aweme_id": "677f1fb9000000000b0146e1",
+                    "desc": "崩坏星穹铁道 崩坏星穹铁道创作者激励计划 coser 二次元 可爱",
+                    "type": "video",
+                    "like": 87
+                  },
+                  {
+                    "aweme_id": "677f1fb0000000000b0359d6",
+                    "desc": "崩坏星穹铁道 崩坏星穹铁道创作者激励计划 coser 二次元 可爱",
+                    "type": "video",
+                    "like": 41
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "图文瓜分27w",
+            "specialTag": "#崩坏星穹铁道 #崩坏星穹铁道创作者激励计划",
+            "eDate": "2025/01/14",
+            "reward": [
+              {
+                "allNum": 1,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 10,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "like": 50,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "like": 500,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "like": 1000,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 5,
+                "allLike": 722,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "677f1fc5000000000b0359fd",
+                    "desc": "崩坏星穹铁道 崩坏星穹铁道创作者激励计划 coser 二次元 可爱",
+                    "type": "video",
+                    "like": 64
+                  },
+                  {
+                    "aweme_id": "677f1fc1000000001903621f",
+                    "desc": "崩坏星穹铁道 崩坏星穹铁道创作者激励计划 coser 二次元 可爱",
+                    "type": "video",
+                    "like": 62
+                  },
+                  {
+                    "aweme_id": "677f1fbf0000000020022bb3",
+                    "desc": "崩坏星穹铁道 崩坏星穹铁道创作者激励计划 coser 二次元 可爱",
+                    "type": "video",
+                    "like": 468
+                  },
+                  {
+                    "aweme_id": "677f1fb9000000000b0146e1",
+                    "desc": "崩坏星穹铁道 崩坏星穹铁道创作者激励计划 coser 二次元 可爱",
+                    "type": "video",
+                    "like": 87
+                  },
+                  {
+                    "aweme_id": "677f1fb0000000000b0359d6",
+                    "desc": "崩坏星穹铁道 崩坏星穹铁道创作者激励计划 coser 二次元 可爱",
+                    "type": "video",
+                    "like": 41
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "鸣潮",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "里那他",
+            "minVideoTime": 6,
+            "minView": 100,
+            "specialTag": "鸣潮 前方到站黎那汐塔",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 10000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 30000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "鸣潮椿",
+            "minVideoTime": 6,
+            "minView": 100,
+            "specialTag": "鸣潮 鸣潮椿",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 10000,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 30000,
+                "money": 60000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "鸣潮椿",
+            "minVideoTime": 6,
+            "minView": 100,
+            "specialTag": "鸣潮 鸣潮肉鸽 鸣潮失序梦途",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 10000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 30000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "",
+            "specialTag": "#鸣潮 #鸣潮创作激励 #鸣潮日常 #在三次元复刻鸣潮",
+            "reward": [
+              {
+                "allNum": 5,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "鸣潮",
+            "minView": 500,
+            "specialTag": "#鸣潮 #鸣潮椿 ",
+            "reward": [
+              {
+                "allNum": 3,
+                "view": 500,
+                "money": 10000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "绝区零",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagAll": "绝区零星见雅 绝区零攻略杂谈 绝区零浅羽悠真",
+        "specialTagRequirements": [
+          {
+            "name": "绝区零创作激励计划",
+            "minVideoTime": 6,
+            "minView": 1000,
+            "specialTag": "绝区零 绝区零创作激励计划",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 10000,
+                "money": 200000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 50000,
+                "money": 100000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "绝区零1.4创作激励计划",
+            "specialTag": "#绝区零 #绝区零创作激励计划",
+            "reward": [
+              {
+                "allNum": 5,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "绝区零星见雅",
+            "specialTag": "#绝区零 #绝区零创作激励计划 #绝区零星见雅",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "第五人格",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "第五人格2025蛇年版",
+            "sDate": "2024/12/26",
+            "eDate": "2025/2/16",
+            "specialTag": "第五人格2025蛇年版",
+            "searchKeyWord": "第五人格2025蛇年版",
+            "reward": [
+              {
+                "money": 100,
+                "allNum": 10,
+                "allViewNum": 10000,
+                "view": 1000,
+                "like": 100
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "原神",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "基础赛道",
+            "minVideoTime": 10,
+            "minView": 5000,
+            "specialTag": "",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 40000,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 80000,
+                "money": 40000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 1,
+                "allViewNum": 10979,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7454654159728528652",
+                    "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋全球上线 #coser #二次元 #游戏日常",
+                    "create_time": 1735699934,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 491,
+                      "collect_count": 13,
+                      "play_count": 10979,
+                      "share_count": 8
+                    },
+                    "view": 10979,
+                    "like": 491,
+                    "musicId": 7454659137633357000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 2,
+                "allViewNum": 12850,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456587513969331491",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736130599,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 3,
+                      "digg_count": 371,
+                      "collect_count": 28,
+                      "play_count": 5201,
+                      "share_count": 17
+                    },
+                    "view": 5201,
+                    "like": 371,
+                    "musicId": 7456589651550146000
+                  },
+                  {
+                    "aweme_id": "7455198438276205835",
+                    "desc": "御姐 #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735812059,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 719,
+                      "collect_count": 36,
+                      "play_count": 7649,
+                      "share_count": 22
+                    },
+                    "view": 7649,
+                    "like": 719,
+                    "musicId": 7455198919153225000
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 4,
+                "allViewNum": 24853,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457714078870506803",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736391913,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 427,
+                      "collect_count": 37,
+                      "play_count": 8583,
+                      "share_count": 10
+                    },
+                    "view": 8583,
+                    "like": 427,
+                    "musicId": 7457714207195270000
+                  },
+                  {
+                    "aweme_id": "7454654971703840054",
+                    "desc": "#漫威争锋 #漫威争锋全球上线 #coser #二次元 #游戏日常",
+                    "create_time": 1735689134,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 3,
+                      "digg_count": 216,
+                      "collect_count": 15,
+                      "play_count": 5319,
+                      "share_count": 8
+                    },
+                    "view": 5319,
+                    "like": 216,
+                    "musicId": 7454658854819827000
+                  },
+                  {
+                    "aweme_id": "7454331313982639423",
+                    "desc": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735639231,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 734,
+                      "collect_count": 43,
+                      "play_count": 5348,
+                      "share_count": 23
+                    },
+                    "view": 5348,
+                    "like": 734,
+                    "musicId": 7454335576137846000
+                  },
+                  {
+                    "aweme_id": "7454332687088717119",
+                    "desc": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735637431,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 717,
+                      "collect_count": 41,
+                      "play_count": 5603,
+                      "share_count": 20
+                    },
+                    "view": 5603,
+                    "like": 717,
+                    "musicId": 7454335217185164000
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "基础赛道",
+            "minVideoTime": 10,
+            "minView": 5000,
+            "specialTag": "#原神 #原来你也玩原神 #原神创作者激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "4个Tag 榜单任务",
+            "minVideoTime": 10,
+            "minView": 5000,
+            "specialTag": "#恰斯卡 #原神",
+            "reward": []
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "无限暖暖",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "无限暖暖公测创作激励计划",
+            "specialTag": "#无限暖暖",
+            "searchKeyWord": "无限暖暖",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 100,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 300,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 500,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 5000,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 10000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "游戏小手柄贡献分",
+            "specialTag": "",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 33,
+                "allViewNum": 43518,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457714685308079398",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736397013,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 20,
+                      "collect_count": 1,
+                      "play_count": 548,
+                      "share_count": 3
+                    },
+                    "view": 548,
+                    "like": 20,
+                    "musicId": 7457714814153690000
+                  },
+                  {
+                    "aweme_id": "7457714606715260211",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736395813,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 80,
+                      "collect_count": 3,
+                      "play_count": 1049,
+                      "share_count": 2
+                    },
+                    "view": 1049,
+                    "like": 80,
+                    "musicId": 7457714817743326000
+                  },
+                  {
+                    "aweme_id": "7457714345766669618",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736393413,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 13,
+                      "collect_count": 1,
+                      "play_count": 183,
+                      "share_count": 2
+                    },
+                    "view": 183,
+                    "like": 13,
+                    "musicId": 7457714496690605000
+                  },
+                  {
+                    "aweme_id": "7457714202589924658",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736392213,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 49,
+                      "collect_count": 9,
+                      "play_count": 806,
+                      "share_count": 0
+                    },
+                    "view": 806,
+                    "like": 49,
+                    "musicId": 7457714413693324000
+                  },
+                  {
+                    "aweme_id": "7457687509833665819",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386516,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 12,
+                      "collect_count": 0,
+                      "play_count": 297,
+                      "share_count": 0
+                    },
+                    "view": 297,
+                    "like": 12,
+                    "musicId": 7457687859907120000
+                  },
+                  {
+                    "aweme_id": "7457687662938377510",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736385916,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 60,
+                      "collect_count": 2,
+                      "play_count": 553,
+                      "share_count": 4
+                    },
+                    "view": 553,
+                    "like": 60,
+                    "musicId": 7457687684526378000
+                  },
+                  {
+                    "aweme_id": "7457358206189325618",
+                    "desc": " #心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736331748,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 4,
+                      "collect_count": 0,
+                      "play_count": 123,
+                      "share_count": 0
+                    },
+                    "view": 123,
+                    "like": 4,
+                    "musicId": 7457358351085817000
+                  },
+                  {
+                    "aweme_id": "7457358016539659558",
+                    "desc": " #心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736331148,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 6,
+                      "collect_count": 1,
+                      "play_count": 104,
+                      "share_count": 0
+                    },
+                    "view": 104,
+                    "like": 6,
+                    "musicId": 7457358244982361000
+                  },
+                  {
+                    "aweme_id": "7457357837254151474",
+                    "desc": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736329948,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 25,
+                      "collect_count": 3,
+                      "play_count": 511,
+                      "share_count": 0
+                    },
+                    "view": 511,
+                    "like": 25,
+                    "musicId": 7457358058495299000
+                  },
+                  {
+                    "aweme_id": "7457357843075779878",
+                    "desc": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736329348,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 10,
+                      "collect_count": 0,
+                      "play_count": 360,
+                      "share_count": 0
+                    },
+                    "view": 360,
+                    "like": 10,
+                    "musicId": 7457358063817723000
+                  },
+                  {
+                    "aweme_id": "7457172261087235338",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #美女·",
+                    "create_time": 1736266449,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 4,
+                      "collect_count": 0,
+                      "play_count": 126,
+                      "share_count": 0
+                    },
+                    "view": 126,
+                    "like": 4,
+                    "musicId": 7457172209610984000
+                  },
+                  {
+                    "aweme_id": "7457172185698929958",
+                    "desc": " #以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #美女·",
+                    "create_time": 1736265849,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 3,
+                      "collect_count": 0,
+                      "play_count": 154,
+                      "share_count": 0
+                    },
+                    "view": 154,
+                    "like": 3,
+                    "musicId": 7457172194867695000
+                  },
+                  {
+                    "aweme_id": "7456870308515974437",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #美女",
+                    "create_time": 1736204947,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 27,
+                      "collect_count": 0,
+                      "play_count": 450,
+                      "share_count": 0
+                    },
+                    "view": 450,
+                    "like": 27,
+                    "musicId": 7456873158310743000
+                  },
+                  {
+                    "aweme_id": "7456869418673458458",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #美女",
+                    "create_time": 1736204347,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 5,
+                      "collect_count": 0,
+                      "play_count": 161,
+                      "share_count": 0
+                    },
+                    "view": 161,
+                    "like": 5,
+                    "musicId": 7456872851732319000
+                  },
+                  {
+                    "aweme_id": "7456871251693276454",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #一种很新的cosplay",
+                    "create_time": 1736203747,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 16,
+                      "collect_count": 0,
+                      "play_count": 962,
+                      "share_count": 1
+                    },
+                    "view": 962,
+                    "like": 16,
+                    "musicId": 7456872808333774000
+                  },
+                  {
+                    "aweme_id": "7456870726973394203",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #一种很新的cosplay",
+                    "create_time": 1736203147,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 23,
+                      "digg_count": 474,
+                      "collect_count": 3,
+                      "play_count": 3897,
+                      "share_count": 14
+                    },
+                    "view": 3897,
+                    "like": 474,
+                    "musicId": 7456873019290504000
+                  },
+                  {
+                    "aweme_id": "7456586642187357474",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736131499,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 40,
+                      "collect_count": 1,
+                      "play_count": 397,
+                      "share_count": 2
+                    },
+                    "view": 397,
+                    "like": 40,
+                    "musicId": 7456589602401291000
+                  },
+                  {
+                    "aweme_id": "7456587925682244898",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736130899,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 38,
+                      "collect_count": 3,
+                      "play_count": 320,
+                      "share_count": 1
+                    },
+                    "view": 320,
+                    "like": 38,
+                    "musicId": 7456589703823838000
+                  },
+                  {
+                    "aweme_id": "7456587356292910388",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736130299,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 25,
+                      "collect_count": 1,
+                      "play_count": 385,
+                      "share_count": 1
+                    },
+                    "view": 385,
+                    "like": 25,
+                    "musicId": 7456589462429126000
+                  },
+                  {
+                    "aweme_id": "7456314812474150179",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #手机游戏",
+                    "create_time": 1736071756,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 116,
+                      "collect_count": 7,
+                      "play_count": 1032,
+                      "share_count": 2
+                    },
+                    "view": 1032,
+                    "like": 116,
+                    "musicId": 7456315756427431000
+                  },
+                  {
+                    "aweme_id": "7456314417584622900",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #手机游戏",
+                    "create_time": 1736071156,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 345,
+                      "collect_count": 35,
+                      "play_count": 3652,
+                      "share_count": 6
+                    },
+                    "view": 3652,
+                    "like": 345,
+                    "musicId": 7456315473295134000
+                  },
+                  {
+                    "aweme_id": "7456313906353540367",
+                    "desc": "放开，让我来！ #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #手机游戏",
+                    "create_time": 1736070556,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 1,
+                      "collect_count": 1,
+                      "play_count": 455,
+                      "share_count": 0
+                    },
+                    "view": 455,
+                    "like": 1,
+                    "musicId": 7456313766783897000
+                  },
+                  {
+                    "aweme_id": "7456113137561914676",
+                    "desc": "#燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736039008,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 132,
+                      "collect_count": 8,
+                      "play_count": 1423,
+                      "share_count": 1
+                    },
+                    "view": 1423,
+                    "like": 132,
+                    "musicId": 7456116793665752000
+                  },
+                  {
+                    "aweme_id": "7456113353333673251",
+                    "desc": "#燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736037808,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 121,
+                      "collect_count": 12,
+                      "play_count": 2066,
+                      "share_count": 6
+                    },
+                    "view": 2066,
+                    "like": 121,
+                    "musicId": 7456116636194541000
+                  },
+                  {
+                    "aweme_id": "7455749651174657320",
+                    "desc": "别乱倒呀 #燕云十六声 #燕云十六声混剪 #coser #燕云十六声攻略 #武侠",
+                    "create_time": 1735949441,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 108,
+                      "collect_count": 8,
+                      "play_count": 3061,
+                      "share_count": 6
+                    },
+                    "view": 3061,
+                    "like": 108,
+                    "musicId": 7455754262384119000
+                  },
+                  {
+                    "aweme_id": "7455198104711761188",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735812059,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 73,
+                      "collect_count": 2,
+                      "play_count": 1092,
+                      "share_count": 1
+                    },
+                    "view": 1092,
+                    "like": 73,
+                    "musicId": 7455198830938689000
+                  },
+                  {
+                    "aweme_id": "7455198004748897590",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735810259,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 45,
+                      "collect_count": 2,
+                      "play_count": 1206,
+                      "share_count": 0
+                    },
+                    "view": 1206,
+                    "like": 45,
+                    "musicId": 7455198621038939000
+                  },
+                  {
+                    "aweme_id": "7455197755338657060",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735806659,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 292,
+                      "collect_count": 22,
+                      "play_count": 3109,
+                      "share_count": 33
+                    },
+                    "view": 3109,
+                    "like": 292,
+                    "musicId": 7455198506996108000
+                  },
+                  {
+                    "aweme_id": "7454887762357980455",
+                    "desc": "这么美呀 #共赴光遇爱丽丝茶会 #光遇狼人杀特别活动 #光遇官方电脑版来了 #coser #光遇",
+                    "create_time": 1735738815,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 31,
+                      "collect_count": 1,
+                      "play_count": 434,
+                      "share_count": 6
+                    },
+                    "view": 434,
+                    "like": 31,
+                    "musicId": 7454888875140419000
+                  },
+                  {
+                    "aweme_id": "7454654159728528652",
+                    "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋全球上线 #coser #二次元 #游戏日常",
+                    "create_time": 1735699934,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 491,
+                      "collect_count": 13,
+                      "play_count": 10979,
+                      "share_count": 8
+                    },
+                    "view": 10979,
+                    "like": 491,
+                    "musicId": 7454659137633357000
+                  },
+                  {
+                    "aweme_id": "7454655553122422055",
+                    "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋全球上线 #coser #二次元 #游戏日常",
+                    "create_time": 1735694534,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 14,
+                      "collect_count": 1,
+                      "play_count": 264,
+                      "share_count": 0
+                    },
+                    "view": 264,
+                    "like": 14,
+                    "musicId": 7454658949292281000
+                  },
+                  {
+                    "aweme_id": "7454655322519538963",
+                    "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋全球上线 #coser #二次元 #游戏日常",
+                    "create_time": 1735689134,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 72,
+                      "collect_count": 5,
+                      "play_count": 2440,
+                      "share_count": 4
+                    },
+                    "view": 2440,
+                    "like": 72,
+                    "musicId": 7454658972822310000
+                  },
+                  {
+                    "aweme_id": "7454656445053701395",
+                    "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋全球上线 #coser #二次元 #游戏日常",
+                    "create_time": 1735683734,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 22,
+                      "collect_count": 0,
+                      "play_count": 919,
+                      "share_count": 0
+                    },
+                    "view": 919,
+                    "like": 22,
+                    "musicId": 7454658888290274000
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 36,
+                "allViewNum": 44306,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457714736726052134",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736397313,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 265,
+                      "collect_count": 18,
+                      "play_count": 860,
+                      "share_count": 2
+                    },
+                    "view": 860,
+                    "like": 265,
+                    "musicId": 7457714884466298000
+                  },
+                  {
+                    "aweme_id": "7457714568819789106",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736396113,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 138,
+                      "collect_count": 17,
+                      "play_count": 600,
+                      "share_count": 3
+                    },
+                    "view": 600,
+                    "like": 138,
+                    "musicId": 7457714820033400000
+                  },
+                  {
+                    "aweme_id": "7457714509898190118",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736394913,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 272,
+                      "collect_count": 23,
+                      "play_count": 1411,
+                      "share_count": 1
+                    },
+                    "view": 1411,
+                    "like": 272,
+                    "musicId": 7457714651535609000
+                  },
+                  {
+                    "aweme_id": "7457714424862838053",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736393713,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 211,
+                      "collect_count": 20,
+                      "play_count": 1046,
+                      "share_count": 13
+                    },
+                    "view": 1046,
+                    "like": 211,
+                    "musicId": 7457714530379304000
+                  },
+                  {
+                    "aweme_id": "7457714136194108682",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736392513,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 71,
+                      "collect_count": 9,
+                      "play_count": 490,
+                      "share_count": 6
+                    },
+                    "view": 490,
+                    "like": 71,
+                    "musicId": 7457714392151379000
+                  },
+                  {
+                    "aweme_id": "7457358206688431387",
+                    "desc": " #心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736332048,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 288,
+                      "collect_count": 18,
+                      "play_count": 1881,
+                      "share_count": 6
+                    },
+                    "view": 1881,
+                    "like": 288,
+                    "musicId": 7457358362250972000
+                  },
+                  {
+                    "aweme_id": "7457358198316600614",
+                    "desc": " #心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736331448,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 298,
+                      "collect_count": 15,
+                      "play_count": 1028,
+                      "share_count": 7
+                    },
+                    "view": 1028,
+                    "like": 298,
+                    "musicId": 7457358368684953000
+                  },
+                  {
+                    "aweme_id": "7457358045698379045",
+                    "desc": " #心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736330848,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 81,
+                      "collect_count": 12,
+                      "play_count": 341,
+                      "share_count": 0
+                    },
+                    "view": 341,
+                    "like": 81,
+                    "musicId": 7457358195279859000
+                  },
+                  {
+                    "aweme_id": "7457357592621321499",
+                    "desc": " #心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736330248,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 206,
+                      "collect_count": 12,
+                      "play_count": 773,
+                      "share_count": 3
+                    },
+                    "view": 773,
+                    "like": 206,
+                    "musicId": 7457358170265095000
+                  },
+                  {
+                    "aweme_id": "7457357876667976997",
+                    "desc": " #心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736329648,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 28,
+                      "collect_count": 3,
+                      "play_count": 285,
+                      "share_count": 0
+                    },
+                    "view": 285,
+                    "like": 28,
+                    "musicId": 7457358070117699000
+                  },
+                  {
+                    "aweme_id": "7456871128791878962",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #换装",
+                    "create_time": 1736205247,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 34,
+                      "collect_count": 0,
+                      "play_count": 586,
+                      "share_count": 0
+                    },
+                    "view": 586,
+                    "like": 34,
+                    "musicId": 7456873263755480000
+                  },
+                  {
+                    "aweme_id": "7456871836693826853",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #换装",
+                    "create_time": 1736204647,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 12,
+                      "collect_count": 0,
+                      "play_count": 439,
+                      "share_count": 0
+                    },
+                    "view": 439,
+                    "like": 12,
+                    "musicId": 7456873204074712000
+                  },
+                  {
+                    "aweme_id": "7456873231509622054",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #换装",
+                    "create_time": 1736204047,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 13,
+                      "collect_count": 2,
+                      "play_count": 580,
+                      "share_count": 1
+                    },
+                    "view": 580,
+                    "like": 13,
+                    "musicId": 7456872876952669000
+                  },
+                  {
+                    "aweme_id": "7456870753267453235",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #换装",
+                    "create_time": 1736203447,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 19,
+                      "collect_count": 0,
+                      "play_count": 353,
+                      "share_count": 0
+                    },
+                    "view": 353,
+                    "like": 19,
+                    "musicId": 7456872970896690000
+                  },
+                  {
+                    "aweme_id": "7456589828726066466",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736132399,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 32,
+                      "collect_count": 1,
+                      "play_count": 501,
+                      "share_count": 0
+                    },
+                    "view": 501,
+                    "like": 32,
+                    "musicId": 7456589626854133000
+                  },
+                  {
+                    "aweme_id": "7456588230473960719",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736131799,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 97,
+                      "collect_count": 11,
+                      "play_count": 553,
+                      "share_count": 4
+                    },
+                    "view": 553,
+                    "like": 97,
+                    "musicId": 7456589770525871000
+                  },
+                  {
+                    "aweme_id": "7456587513969331491",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736130599,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 3,
+                      "digg_count": 371,
+                      "collect_count": 28,
+                      "play_count": 5201,
+                      "share_count": 17
+                    },
+                    "view": 5201,
+                    "like": 371,
+                    "musicId": 7456589651550146000
+                  },
+                  {
+                    "aweme_id": "7456314675643387170",
+                    "desc": "放开，让我来！ #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #美女",
+                    "create_time": 1736072056,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 57,
+                      "collect_count": 4,
+                      "play_count": 594,
+                      "share_count": 0
+                    },
+                    "view": 594,
+                    "like": 57,
+                    "musicId": 7456315812358540000
+                  },
+                  {
+                    "aweme_id": "7456314318037044515",
+                    "desc": "放开，让我来！ #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #美女",
+                    "create_time": 1736071456,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 77,
+                      "collect_count": 10,
+                      "play_count": 725,
+                      "share_count": 1
+                    },
+                    "view": 725,
+                    "like": 77,
+                    "musicId": 7456315404948901000
+                  },
+                  {
+                    "aweme_id": "7456314142010461455",
+                    "desc": "放开，让我来！ #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #美女",
+                    "create_time": 1736070856,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 98,
+                      "collect_count": 16,
+                      "play_count": 1663,
+                      "share_count": 6
+                    },
+                    "view": 1663,
+                    "like": 98,
+                    "musicId": 7456315217950117000
+                  },
+                  {
+                    "aweme_id": "7456314004349193472",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #美女",
+                    "create_time": 1736070256,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 36,
+                      "collect_count": 7,
+                      "play_count": 1435,
+                      "share_count": 0
+                    },
+                    "view": 1435,
+                    "like": 36,
+                    "musicId": 7456314777917279000
+                  },
+                  {
+                    "aweme_id": "7456313587917786403",
+                    "desc": "放开，让我来！ #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #美女",
+                    "create_time": 1736069656,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 110,
+                      "collect_count": 13,
+                      "play_count": 870,
+                      "share_count": 3
+                    },
+                    "view": 870,
+                    "like": 110,
+                    "musicId": 7456314660623666000
+                  },
+                  {
+                    "aweme_id": "7456112299296804111",
+                    "desc": "#燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736040508,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 3,
+                      "digg_count": 31,
+                      "collect_count": 1,
+                      "play_count": 1184,
+                      "share_count": 5
+                    },
+                    "view": 1184,
+                    "like": 31,
+                    "musicId": 7456117007738473000
+                  },
+                  {
+                    "aweme_id": "7456112038029331764",
+                    "desc": "收下姐姐的大礼！ #燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736039308,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 165,
+                      "collect_count": 6,
+                      "play_count": 1618,
+                      "share_count": 9
+                    },
+                    "view": 1618,
+                    "like": 165,
+                    "musicId": 7456116599930588000
+                  },
+                  {
+                    "aweme_id": "7456113229161401640",
+                    "desc": "收下姐姐的大礼！ #燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736038108,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 115,
+                      "collect_count": 7,
+                      "play_count": 1365,
+                      "share_count": 6
+                    },
+                    "view": 1365,
+                    "like": 115,
+                    "musicId": 7456116911395409000
+                  },
+                  {
+                    "aweme_id": "7455751359166418211",
+                    "desc": "燕云coser合集来咯！ #燕云十六声 #燕云十六声混剪 #coser #燕云十六声攻略 #美女",
+                    "create_time": 1735953341,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 12,
+                      "collect_count": 1,
+                      "play_count": 663,
+                      "share_count": 0
+                    },
+                    "view": 663,
+                    "like": 12,
+                    "musicId": 7455754634087419000
+                  },
+                  {
+                    "aweme_id": "7455750714946489615",
+                    "desc": "姐姐的大礼！ #燕云十六声 #燕云十六声混剪 #coser #燕云十六声攻略 #美女",
+                    "create_time": 1735949741,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 58,
+                      "collect_count": 5,
+                      "play_count": 1139,
+                      "share_count": 1
+                    },
+                    "view": 1139,
+                    "like": 58,
+                    "musicId": 7455754360891395000
+                  },
+                  {
+                    "aweme_id": "7455681245939371264",
+                    "desc": "#燕云十六声 #coser #国风 #燕云十六声混剪 #美女",
+                    "create_time": 1735911484,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 34,
+                      "collect_count": 1,
+                      "play_count": 1408,
+                      "share_count": 0
+                    },
+                    "view": 1408,
+                    "like": 34,
+                    "musicId": 7455683011766521000
+                  },
+                  {
+                    "aweme_id": "7455366459456244992",
+                    "desc": "看看燕云coser吧！ #燕云十六声 #燕云十六声攻略 #燕云十六声混剪 #coser #武侠",
+                    "create_time": 1735873431,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 17,
+                      "collect_count": 0,
+                      "play_count": 626,
+                      "share_count": 3
+                    },
+                    "view": 626,
+                    "like": 17,
+                    "musicId": 7455369323331292000
+                  },
+                  {
+                    "aweme_id": "7455365419562470691",
+                    "desc": "看看燕云coser吧！ #燕云十六声 #燕云十六声攻略 #燕云十六声混剪 #coser #武侠",
+                    "create_time": 1735866231,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 175,
+                      "collect_count": 11,
+                      "play_count": 2632,
+                      "share_count": 3
+                    },
+                    "view": 2632,
+                    "like": 175,
+                    "musicId": 7455369096868204000
+                  },
+                  {
+                    "aweme_id": "7455364972181310720",
+                    "desc": "看看燕云coser吧！ #燕云十六声 #燕云十六声攻略 #燕云十六声混剪 #coser #武侠",
+                    "create_time": 1735862631,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 6,
+                      "collect_count": 0,
+                      "play_count": 217,
+                      "share_count": 0
+                    },
+                    "view": 217,
+                    "like": 6,
+                    "musicId": 7455368172191895000
+                  },
+                  {
+                    "aweme_id": "7455198438276205835",
+                    "desc": "御姐 #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735812059,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 719,
+                      "collect_count": 36,
+                      "play_count": 7649,
+                      "share_count": 22
+                    },
+                    "view": 7649,
+                    "like": 719,
+                    "musicId": 7455198919153225000
+                  },
+                  {
+                    "aweme_id": "7455198036801703204",
+                    "desc": "一种很新的cosplay #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735810259,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 125,
+                      "collect_count": 5,
+                      "play_count": 2196,
+                      "share_count": 1
+                    },
+                    "view": 2196,
+                    "like": 125,
+                    "musicId": 7455198810910789000
+                  },
+                  {
+                    "aweme_id": "7455198062273629459",
+                    "desc": "国风 #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735806659,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 173,
+                      "collect_count": 6,
+                      "play_count": 917,
+                      "share_count": 8
+                    },
+                    "view": 917,
+                    "like": 173,
+                    "musicId": 7455198212673064000
+                  },
+                  {
+                    "aweme_id": "7454889022612180287",
+                    "desc": " #共赴光遇爱丽丝茶会​ #光遇狼人杀特别活动 #光遇官方电脑版来了 #coser #光遇",
+                    "create_time": 1735738815,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 10,
+                      "collect_count": 1,
+                      "play_count": 169,
+                      "share_count": 0
+                    },
+                    "view": 169,
+                    "like": 10,
+                    "musicId": 7454890293670710000
+                  },
+                  {
+                    "aweme_id": "7454888776687570195",
+                    "desc": " #共赴光遇爱丽丝茶会​ #光遇狼人杀特别活动 #光遇官方电脑版来了 #coser #光遇",
+                    "create_time": 1735737615,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 15,
+                      "collect_count": 0,
+                      "play_count": 308,
+                      "share_count": 0
+                    },
+                    "view": 308,
+                    "like": 15,
+                    "musicId": 7454890230118682000
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 33,
+                "allViewNum": 64811,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457714279664454938",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736393113,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 193,
+                      "collect_count": 27,
+                      "play_count": 922,
+                      "share_count": 4
+                    },
+                    "view": 922,
+                    "like": 193,
+                    "musicId": 7457714513190604000
+                  },
+                  {
+                    "aweme_id": "7457714078870506803",
+                    "desc": " #崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736391913,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 427,
+                      "collect_count": 37,
+                      "play_count": 8583,
+                      "share_count": 10
+                    },
+                    "view": 8583,
+                    "like": 427,
+                    "musicId": 7457714207195270000
+                  },
+                  {
+                    "aweme_id": "7457687563676044581",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386816,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 4,
+                      "collect_count": 0,
+                      "play_count": 306,
+                      "share_count": 0
+                    },
+                    "view": 306,
+                    "like": 4,
+                    "musicId": 7457687915424468000
+                  },
+                  {
+                    "aweme_id": "7457687566536428850",
+                    "desc": " #以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386216,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 11,
+                      "collect_count": 2,
+                      "play_count": 284,
+                      "share_count": 0
+                    },
+                    "view": 284,
+                    "like": 11,
+                    "musicId": 7457687730408001000
+                  },
+                  {
+                    "aweme_id": "7457687267134508326",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736385616,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 36,
+                      "collect_count": 0,
+                      "play_count": 523,
+                      "share_count": 0
+                    },
+                    "view": 523,
+                    "like": 36,
+                    "musicId": 7457687647780081000
+                  },
+                  {
+                    "aweme_id": "7457358348564925723",
+                    "desc": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736331448,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 185,
+                      "collect_count": 11,
+                      "play_count": 2073,
+                      "share_count": 2
+                    },
+                    "view": 2073,
+                    "like": 185,
+                    "musicId": 7457358331267517000
+                  },
+                  {
+                    "aweme_id": "7457357902743964938",
+                    "desc": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736330248,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 176,
+                      "collect_count": 9,
+                      "play_count": 791,
+                      "share_count": 2
+                    },
+                    "view": 791,
+                    "like": 176,
+                    "musicId": 7457358160354250000
+                  },
+                  {
+                    "aweme_id": "7457357794124041482",
+                    "desc": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动 #coser #二次元",
+                    "create_time": 1736329648,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 82,
+                      "collect_count": 6,
+                      "play_count": 1022,
+                      "share_count": 8
+                    },
+                    "view": 1022,
+                    "like": 82,
+                    "musicId": 7457358085619846000
+                  },
+                  {
+                    "aweme_id": "7457172136260570406",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #美女·",
+                    "create_time": 1736265549,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 19,
+                      "collect_count": 2,
+                      "play_count": 214,
+                      "share_count": 0
+                    },
+                    "view": 214,
+                    "like": 19,
+                    "musicId": 7457172147237064000
+                  },
+                  {
+                    "aweme_id": "7456871075855551795",
+                    "desc": " #闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #手机游戏",
+                    "create_time": 1736204647,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 11,
+                      "collect_count": 1,
+                      "play_count": 176,
+                      "share_count": 0
+                    },
+                    "view": 176,
+                    "like": 11,
+                    "musicId": 7456873243304005000
+                  },
+                  {
+                    "aweme_id": "7456870138264980762",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #手机游戏",
+                    "create_time": 1736204047,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 22,
+                      "collect_count": 1,
+                      "play_count": 418,
+                      "share_count": 0
+                    },
+                    "view": 418,
+                    "like": 22,
+                    "musicId": 7456873039624457000
+                  },
+                  {
+                    "aweme_id": "7456870978883292426",
+                    "desc": "#闪耀暖暖 #闪耀暖暖深海密语 #二次元 #coser #手机游戏",
+                    "create_time": 1736202847,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 39,
+                      "collect_count": 1,
+                      "play_count": 698,
+                      "share_count": 1
+                    },
+                    "view": 698,
+                    "like": 39,
+                    "musicId": 7456872954257739000
+                  },
+                  {
+                    "aweme_id": "7456587956220923176",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736131199,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 117,
+                      "collect_count": 3,
+                      "play_count": 597,
+                      "share_count": 0
+                    },
+                    "view": 597,
+                    "like": 117,
+                    "musicId": 7456589705417723000
+                  },
+                  {
+                    "aweme_id": "7456587735575383331",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736129999,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 35,
+                      "collect_count": 2,
+                      "play_count": 409,
+                      "share_count": 0
+                    },
+                    "view": 409,
+                    "like": 35,
+                    "musicId": 7456589478023417000
+                  },
+                  {
+                    "aweme_id": "7456313664040176911",
+                    "desc": "放开，让我来！ #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1736069656,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 39,
+                      "collect_count": 1,
+                      "play_count": 1027,
+                      "share_count": 1
+                    },
+                    "view": 1027,
+                    "like": 39,
+                    "musicId": 7456314467626831000
+                  },
+                  {
+                    "aweme_id": "7456111797901233423",
+                    "desc": "姐姐的大礼！ #燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736039908,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 112,
+                      "collect_count": 9,
+                      "play_count": 3219,
+                      "share_count": 7
+                    },
+                    "view": 3219,
+                    "like": 112,
+                    "musicId": 7456116909885394000
+                  },
+                  {
+                    "aweme_id": "7456111591273139471",
+                    "desc": "#燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736038708,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 131,
+                      "collect_count": 4,
+                      "play_count": 1588,
+                      "share_count": 4
+                    },
+                    "view": 1588,
+                    "like": 131,
+                    "musicId": 7456116946728144000
+                  },
+                  {
+                    "aweme_id": "7456111474415570216",
+                    "desc": "#燕云十六声 #燕云十六声同人 #coser #武侠 #美女",
+                    "create_time": 1736037508,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 124,
+                      "collect_count": 7,
+                      "play_count": 1563,
+                      "share_count": 3
+                    },
+                    "view": 1563,
+                    "like": 124,
+                    "musicId": 7456116568964058000
+                  },
+                  {
+                    "aweme_id": "7455364946315005199",
+                    "desc": "#燕云十六声 #这谁能顶得住啊   #燕云十六声混剪 #coser #游戏",
+                    "create_time": 1735866831,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 77,
+                      "collect_count": 4,
+                      "play_count": 2168,
+                      "share_count": 0
+                    },
+                    "view": 2168,
+                    "like": 77,
+                    "musicId": 7455369158113480000
+                  },
+                  {
+                    "aweme_id": "7455197844589366547",
+                    "desc": "御姐 #逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #国风",
+                    "create_time": 1735812059,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 121,
+                      "collect_count": 6,
+                      "play_count": 1020,
+                      "share_count": 2
+                    },
+                    "view": 1020,
+                    "like": 121,
+                    "musicId": 7455198744527654000
+                  },
+                  {
+                    "aweme_id": "7454655495933054220",
+                    "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋全球上线 #coser #二次元 #游戏日常",
+                    "create_time": 1735705334,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 101,
+                      "collect_count": 5,
+                      "play_count": 1246,
+                      "share_count": 0
+                    },
+                    "view": 1246,
+                    "like": 101,
+                    "musicId": 7454659229194980000
+                  },
+                  {
+                    "aweme_id": "7454653246183951652",
+                    "desc": "#漫威争锋 #漫威争锋全球上线 #coser #二次元 #游戏日常",
+                    "create_time": 1735699934,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 428,
+                      "collect_count": 16,
+                      "play_count": 4864,
+                      "share_count": 5
+                    },
+                    "view": 4864,
+                    "like": 428,
+                    "musicId": 7454659003679886000
+                  },
+                  {
+                    "aweme_id": "7454656227457371428",
+                    "desc": "#漫威争锋 #漫威争锋全球上线 #coser #二次元 #游戏日常",
+                    "create_time": 1735694534,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 163,
+                      "collect_count": 10,
+                      "play_count": 2521,
+                      "share_count": 2
+                    },
+                    "view": 2521,
+                    "like": 163,
+                    "musicId": 7454658918971641000
+                  },
+                  {
+                    "aweme_id": "7454654971703840054",
+                    "desc": "#漫威争锋 #漫威争锋全球上线 #coser #二次元 #游戏日常",
+                    "create_time": 1735689134,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 3,
+                      "digg_count": 216,
+                      "collect_count": 15,
+                      "play_count": 5319,
+                      "share_count": 8
+                    },
+                    "view": 5319,
+                    "like": 216,
+                    "musicId": 7454658854819827000
+                  },
+                  {
+                    "aweme_id": "7454654248127712531",
+                    "desc": "#漫威争锋 #漫威争锋全球上线 #coser #二次元 #游戏日常",
+                    "create_time": 1735683734,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 65,
+                      "collect_count": 3,
+                      "play_count": 2185,
+                      "share_count": 2
+                    },
+                    "view": 2185,
+                    "like": 65,
+                    "musicId": 7454658838004846000
+                  },
+                  {
+                    "aweme_id": "7454331739507379475",
+                    "desc": "请等一下，泰斗大人！ #永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735640131,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 61,
+                      "collect_count": 5,
+                      "play_count": 689,
+                      "share_count": 0
+                    },
+                    "view": 689,
+                    "like": 61,
+                    "musicId": 7454335391286562000
+                  },
+                  {
+                    "aweme_id": "7454331313982639423",
+                    "desc": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735639231,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 734,
+                      "collect_count": 43,
+                      "play_count": 5348,
+                      "share_count": 23
+                    },
+                    "view": 5348,
+                    "like": 734,
+                    "musicId": 7454335576137846000
+                  },
+                  {
+                    "aweme_id": "7454331905052314919",
+                    "desc": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735638331,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 320,
+                      "collect_count": 21,
+                      "play_count": 3212,
+                      "share_count": 4
+                    },
+                    "view": 3212,
+                    "like": 320,
+                    "musicId": 7454335307463380000
+                  },
+                  {
+                    "aweme_id": "7454332687088717119",
+                    "desc": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735637431,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 717,
+                      "collect_count": 41,
+                      "play_count": 5603,
+                      "share_count": 20
+                    },
+                    "view": 5603,
+                    "like": 717,
+                    "musicId": 7454335217185164000
+                  },
+                  {
+                    "aweme_id": "7454332569417436427",
+                    "desc": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃 #永劫手游共斗诛神 #coser",
+                    "create_time": 1735636531,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 363,
+                      "collect_count": 13,
+                      "play_count": 2385,
+                      "share_count": 5
+                    },
+                    "view": 2385,
+                    "like": 363,
+                    "musicId": 7454335281315974000
+                  },
+                  {
+                    "aweme_id": "7454337533585935652",
+                    "desc": "漂泊者速进！ #鸣潮 #前方到站黎那汐塔 #鸣潮椿 #鸣潮肉鸽 #鸣潮失序梦途",
+                    "create_time": 1735607580,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 142,
+                      "collect_count": 6,
+                      "play_count": 1247,
+                      "share_count": 4
+                    },
+                    "view": 1247,
+                    "like": 142,
+                    "musicId": 7454340080774188000
+                  },
+                  {
+                    "aweme_id": "7454337211861896459",
+                    "desc": "漂泊者速进！ #鸣潮 #前方到站黎那汐塔 #鸣潮椿 #鸣潮肉鸽 #鸣潮失序梦途",
+                    "create_time": 1735606380,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 9,
+                      "collect_count": 0,
+                      "play_count": 165,
+                      "share_count": 0
+                    },
+                    "view": 165,
+                    "like": 9,
+                    "musicId": 7454340294377557000
+                  },
+                  {
+                    "aweme_id": "7454329412067151123",
+                    "desc": "鸣潮coser！ #鸣潮 #鸣潮肉鸽 #前方到站黎那汐塔 #鸣潮椿 #鸣潮失序梦途",
+                    "create_time": 1735597255,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 97,
+                      "collect_count": 1,
+                      "play_count": 2426,
+                      "share_count": 1
+                    },
+                    "view": 2426,
+                    "like": 97,
+                    "musicId": 7454333327244381000
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "",
+            "specialTag": "#无限暖暖 #无限暖暖全球公测 #在全世界遇见无限暖暖",
+            "reward": [
+              {
+                "allNum": 3,
+                "like": 15,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 4,
+                "allLike": 139,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "677dba50000000000b035fd7",
+                    "desc": "无限暖暖 无限暖暖全球公测 在全世界遇见无限暖暖 coser 手机游戏",
+                    "type": "video",
+                    "like": 0
+                  },
+                  {
+                    "aweme_id": "677dba4e000000000b00c789",
+                    "desc": "无限暖暖 无限暖暖全球公测 在全世界遇见无限暖暖 coser 手机游戏",
+                    "type": "video",
+                    "like": 54
+                  },
+                  {
+                    "aweme_id": "677dba4d000000001a035160",
+                    "desc": "无限暖暖 无限暖暖全球公测 在全世界遇见无限暖暖 coser 手机游戏",
+                    "type": "video",
+                    "like": 32
+                  },
+                  {
+                    "aweme_id": "677dba4b000000002001c806",
+                    "desc": "无限暖暖 无限暖暖全球公测 在全世界遇见无限暖暖 coser 手机游戏",
+                    "type": "video",
+                    "like": 53
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "",
+            "specialTag": "#无限暖暖 #无限暖暖全球公测 #在全世界遇见无限暖暖",
+            "reward": [
+              {
+                "allNum": 3,
+                "like": 15,
+                "money": 10000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "崩坏3",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "崩坏3「愿启天光」创作激励计划",
+            "sDate": "2024/12/6",
+            "eDate": "2025/1/16",
+            "specialTag": "崩坏3「愿启天光」创作激励计划",
+            "searchKeyWord": "崩坏3「愿启天光」创作激励计划",
+            "reward": [
+             
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "航海王壮志雄心",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "航海王壮志雄心上线激励计划",
+            "sDate": "2024/12/26",
+            "eDate": "2025/2/16",
+            "specialTag": "航海王壮志雄心上线激励计划",
+            "searchKeyWord": "航海王壮志雄心上线激励计划",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 400,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 1000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 8,
+                "allViewNum": 3000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 10000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 25000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 50000,
+                "money": 10000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "基础赛道",
+            "minVideoTime": 10,
+            "minView": 1000,
+            "specialTag": "航海王壮志雄心",
+            "reward": [
+              {
+                "allNum": 5,
+                "money": 150000,
+                "isGet": false
+              }
+            ],
+            "videoData": []
+          },
+          {
+            "name": "进阶赛道",
+            "minVideoTime": 10,
+            "minView": 10000,
+            "specialTag": "航海王壮志雄心",
+            "reward": [
+              {
+                "allNum": 5,
+                "money": 150000,
+                "isGet": false
+              }
+            ]
+           
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "火影忍者",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "火影忍者九周年激励计划",
+            "sDate": "2024/12/4",
+            "eDate": "2025/1/19",
+            "specialTag": "火影忍者九周年激励计划",
+            "searchKeyWord": "火影忍者九周年激励计划",
+            "reward": [
+             
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "阴阳师",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "阴阳师友人偕行版本创作激励计划",
+            "sDate": "2024/12/24",
+            "eDate": "2025/1/13",
+            "specialTag": "阴阳师友人偕行版本创作激励计划",
+            "searchKeyWord": "阴阳师友人偕行版本创作激励计划",
+            "reward": [
+             
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "光遇",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "光遇宴会节创作激励计划",
+            "minVideoTime": 6,
+            "minView": 100,
+            "specialTag": "​#共赴光遇爱丽丝茶会​",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 3000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 20000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "光遇狼人杀特别活动 ",
+            "minVideoTime": 6,
+            "minView": 100,
+            "specialTag": "​​#光遇狼人杀特别活动",
+            "eDate": "2025/1/08",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 3000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 20000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "光遇官方电脑版来了",
+            "minVideoTime": 6,
+            "minView": 1000,
+            "eDate": "2025/1/08",
+            "specialTag": "​​#光遇官方电脑版来了",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 5000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 30000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 7,
+                "allViewNum": 100000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "光遇宴会节创作激励计划",
+            "specialTag": "​#共赴光遇爱丽丝茶会 #光遇是个巨大的童话世界​",
+            "reward": [
+              {
+                "allNum": 5,
+                "like": 150,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "光遇宴会节创作激励计划",
+            "specialTag": "​#共赴光遇爱丽丝茶会 #光遇是个巨大的童话世界​",
+            "reward": [
+              {
+                "allNum": 5,
+                "like": 100,
+                "money": 10000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "诛仙世界",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "",
+            "eDate": "2025/01/19",
+            "minVideoTime": 6,
+            "minPhoto": 2,
+            "minView": 1000,
+            "specialTag": "#诛仙世界 #诛仙世界公测",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 5000,
+                "money": 100000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 50000,
+                "money": 160000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "基础赛道",
+            "eDate": "2025/01/19",
+            "minView": 500,
+            "minLike": 30,
+            "specialTag": "#诛仙世界 #诛仙世界激励计划",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 5000,
+                "money": 10000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "王者荣耀",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "2024年王者荣耀挑战者杯激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/lv5DLhEPfLseStS3.html",
+            "comment": "20.0万人参与",
+            "sDate": "2024/12/7",
+            "eDate": "2025/1/20",
+            "specialTag": "2024年王者荣耀挑战者杯激励计划",
+            "searchKeyWord": "2024年王者荣耀挑战者杯激励计划",
+            "reward": []
+          },
+          {
+            "name": "王者荣耀联动冰雪奇缘",
+            "act_url": "https://www.bilibili.com/blackboard/era/uxSiQGV2pX6e8sQr.html",
+            "comment": "4856人参与",
+            "sDate": "2025/1/9",
+            "eDate": "2025/1/22",
+            "specialTag": "王者荣耀联动冰雪奇缘",
+            "searchKeyWord": "王者荣耀联动冰雪奇缘",
+            "reward": []
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "DNF",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "DNF手游2025新春会",
+            "act_url": "https://live.bilibili.com/blackboard/era/uAV7ZVcHR1yMeIy1.html",
+            "comment": "4.6万人参与",
+            "sDate": "2024/12/28",
+            "eDate": "2025/2/14",
+            "specialTag": "DNF手游2025新春会",
+            "searchKeyWord": "DNF手游2025新春会",
+            "reward": []
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "重返未来1999",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "重返未来1999创作者激励计划-雨幕漫谈",
+            "act_url": "https://www.bilibili.com/blackboard/era/O3HlNR4DyV5VKvP3.html",
+            "comment": "11.3万人参与",
+            "sDate": "2024/10/31",
+            "eDate": "2025/1/15",
+            "specialTag": "重返未来1999创作者激励计划-雨幕漫谈",
+            "searchKeyWord": "重返未来1999创作者激励计划-雨幕漫谈",
+            "reward": []
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "蛋仔派对",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "蛋仔派对乐园畅游激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/CvWQGRRLqnM3orna.html",
+            "comment": "1.6万人参与",
+            "sDate": "2024/12/27",
+            "eDate": "2025/2/20",
+            "specialTag": "蛋仔派对乐园畅游激励计划",
+            "searchKeyWord": "蛋仔派对乐园畅游激励计划",
+            "reward": []
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "尘白禁区",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "尘白禁区创作者激励计划2.4版本",
+            "act_url": "https://www.bilibili.com/blackboard/era/rsJ8s6cO1cm82Ot9.html",
+            "comment": "2.5万人参与",
+            "sDate": "2024/12/19",
+            "eDate": "2025/1/23",
+            "specialTag": "尘白禁区创作者激励计划2.4版本",
+            "searchKeyWord": "尘白禁区创作者激励计划2.4版本",
+            "reward": []
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  },
+  {
+    "name": "英雄联盟",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "英雄联盟手游2025迎新季",
+            "act_url": "https://www.bilibili.com/blackboard/era/hdNuiirYye5oTfVu.html",
+            "comment": "",
+            "sDate": "2025/1/9",
+            "eDate": "2025/2/9",
+            "specialTag": "英雄联盟手游2025迎新季",
+            "searchKeyWord": "英雄联盟手游2025迎新季",
+            "reward": []
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/9"
+  }
+]

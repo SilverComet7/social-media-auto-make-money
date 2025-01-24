@@ -1,0 +1,19 @@
+{
+  "name": "getbilibili_jili_list",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "dev_douyin": "nodemon douyin.js",
+    "start": "node index.js"
+  },
+  "author": "",
+ 
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "p-limit": "^6.2.0"
+  }
+}

@@ -1,0 +1,5808 @@
+[
+  {
+    "name": "以闪亮之名",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "以闪亮之名人均名品脸",
+            "specialTag": "#以闪亮之名人均名品脸",
+            "eDate": "2025/1/11",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 2000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 7,
+                "allViewNum": 2381,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457687509833665819",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386516,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 15,
+                      "collect_count": 0,
+                      "play_count": 332,
+                      "share_count": 0
+                    },
+                    "view": 332,
+                    "like": 15
+                  },
+                  {
+                    "aweme_id": "7457687662938377510",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736385916,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 63,
+                      "collect_count": 2,
+                      "play_count": 630,
+                      "share_count": 4
+                    },
+                    "view": 630,
+                    "like": 63
+                  },
+                  {
+                    "aweme_id": "7457172261087235338",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #美女·",
+                    "create_time": 1736266449,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 4,
+                      "collect_count": 0,
+                      "play_count": 135,
+                      "share_count": 0
+                    },
+                    "view": 135,
+                    "like": 4
+                  },
+                  {
+                    "aweme_id": "7457172185698929958",
+                    "desc": " #以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #美女·",
+                    "create_time": 1736265849,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 3,
+                      "collect_count": 0,
+                      "play_count": 160,
+                      "share_count": 0
+                    },
+                    "view": 160,
+                    "like": 3
+                  },
+                  {
+                    "aweme_id": "7456586642187357474",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736131499,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 40,
+                      "collect_count": 1,
+                      "play_count": 398,
+                      "share_count": 2
+                    },
+                    "view": 398,
+                    "like": 40
+                  },
+                  {
+                    "aweme_id": "7456587925682244898",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736130899,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 38,
+                      "collect_count": 3,
+                      "play_count": 328,
+                      "share_count": 1
+                    },
+                    "view": 328,
+                    "like": 38
+                  },
+                  {
+                    "aweme_id": "7456587356292910388",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #完美身材",
+                    "create_time": 1736130299,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 25,
+                      "collect_count": 1,
+                      "play_count": 398,
+                      "share_count": 1
+                    },
+                    "view": 398,
+                    "like": 25
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 4,
+                "allViewNum": 1499,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457687563676044581",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386816,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 5,
+                      "collect_count": 0,
+                      "play_count": 355,
+                      "share_count": 0
+                    },
+                    "view": 355,
+                    "like": 5
+                  },
+                  {
+                    "aweme_id": "7457687566536428850",
+                    "desc": " #以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386216,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 14,
+                      "collect_count": 2,
+                      "play_count": 329,
+                      "share_count": 0
+                    },
+                    "view": 329,
+                    "like": 14
+                  },
+                  {
+                    "aweme_id": "7457687267134508326",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736385616,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 41,
+                      "collect_count": 0,
+                      "play_count": 597,
+                      "share_count": 0
+                    },
+                    "view": 597,
+                    "like": 41
+                  },
+                  {
+                    "aweme_id": "7457172136260570406",
+                    "desc": "#以闪亮之名人均名品脸 #coser #二次元 #手机游戏 #美女·",
+                    "create_time": 1736265549,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 19,
+                      "collect_count": 2,
+                      "play_count": 218,
+                      "share_count": 0
+                    },
+                    "view": 218,
+                    "like": 19
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "榜单",
+            "minView": 300,
+            "eDate": "2025/1/21",
+            "specialTag": "#以闪亮之名弥山见雪 #以闪亮之名以实力证明",
+            "reward": [
+              {
+                "allNum": 5,
+                "allViewNum": 10000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 2,
+                "allViewNum": 962,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457687509833665819",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386516,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 15,
+                      "collect_count": 0,
+                      "play_count": 332,
+                      "share_count": 0
+                    },
+                    "view": 332,
+                    "like": 15
+                  },
+                  {
+                    "aweme_id": "7457687662938377510",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736385916,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 63,
+                      "collect_count": 2,
+                      "play_count": 630,
+                      "share_count": 4
+                    },
+                    "view": 630,
+                    "like": 63
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 3,
+                "allViewNum": 1281,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457687563676044581",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386816,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 5,
+                      "collect_count": 0,
+                      "play_count": 355,
+                      "share_count": 0
+                    },
+                    "view": 355,
+                    "like": 5
+                  },
+                  {
+                    "aweme_id": "7457687566536428850",
+                    "desc": " #以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736386216,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 14,
+                      "collect_count": 2,
+                      "play_count": 329,
+                      "share_count": 0
+                    },
+                    "view": 329,
+                    "like": 14
+                  },
+                  {
+                    "aweme_id": "7457687267134508326",
+                    "desc": "#以闪亮之名人均名品脸 #以闪亮之名弥山见雪 #以闪亮之名以实力证明 #coser #美女",
+                    "create_time": 1736385616,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 41,
+                      "collect_count": 0,
+                      "play_count": 597,
+                      "share_count": 0
+                    },
+                    "view": 597,
+                    "like": 41
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "瓜分",
+            "eDate": "2025/1/21",
+            "specialTag": "#就这个以闪亮之名技术爽",
+            "reward": [
+              {
+                "joinedPerson": 550,
+                "allNum": 2,
+                "allViewNum": 2000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 4,
+                "allViewNum": 922,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7462054587416022310",
+                    "desc": " #就这个以闪亮之名技术爽 #coser #二次元 #游戏 #甜妹",
+                    "create_time": 1737415598,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 12,
+                      "collect_count": 0,
+                      "play_count": 211,
+                      "share_count": 0
+                    },
+                    "view": 211,
+                    "like": 12
+                  },
+                  {
+                    "aweme_id": "7462053922363018546",
+                    "desc": " #就这个以闪亮之名技术爽 #coser #二次元 #游戏 #甜妹",
+                    "create_time": 1737414698,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 13,
+                      "collect_count": 0,
+                      "play_count": 169,
+                      "share_count": 0
+                    },
+                    "view": 169,
+                    "like": 13
+                  },
+                  {
+                    "aweme_id": "7462055122659495195",
+                    "desc": " #就这个以闪亮之名技术爽 #coser #二次元 #游戏 #甜妹",
+                    "create_time": 1737413798,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 9,
+                      "collect_count": 0,
+                      "play_count": 141,
+                      "share_count": 0
+                    },
+                    "view": 141,
+                    "like": 9
+                  },
+                  {
+                    "aweme_id": "7462055422250192179",
+                    "desc": " #就这个以闪亮之名技术爽 #coser #二次元 #游戏 #甜妹",
+                    "create_time": 1737412898,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 20,
+                      "collect_count": 1,
+                      "play_count": 401,
+                      "share_count": 1
+                    },
+                    "view": 401,
+                    "like": 20
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 4,
+                "allViewNum": 2254,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7462055843488402714",
+                    "desc": "#就这个以闪亮之名技术爽 #coser #二次元 #游戏 #甜妹",
+                    "create_time": 1737415298,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 68,
+                      "collect_count": 7,
+                      "play_count": 1146,
+                      "share_count": 1
+                    },
+                    "view": 1146,
+                    "like": 68
+                  },
+                  {
+                    "aweme_id": "7462055422250257715",
+                    "desc": "#就这个以闪亮之名技术爽 #coser #二次元 #游戏 #甜妹",
+                    "create_time": 1737414398,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 42,
+                      "collect_count": 4,
+                      "play_count": 506,
+                      "share_count": 0
+                    },
+                    "view": 506,
+                    "like": 42
+                  },
+                  {
+                    "aweme_id": "7462053487124303113",
+                    "desc": " #就这个以闪亮之名技术爽 #coser #二次元 #游戏 #甜妹",
+                    "create_time": 1737413498,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 9,
+                      "collect_count": 2,
+                      "play_count": 164,
+                      "share_count": 0
+                    },
+                    "view": 164,
+                    "like": 9
+                  },
+                  {
+                    "aweme_id": "7462053373685108005",
+                    "desc": "#就这个以闪亮之名技术爽 #coser #二次元 #游戏 #甜妹",
+                    "create_time": 1737412598,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 31,
+                      "collect_count": 1,
+                      "play_count": 438,
+                      "share_count": 4
+                    },
+                    "view": 438,
+                    "like": 31
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "isOtherGame": true,
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "闪耀暖暖",
+    "rewards": [
+      {
+        "specialTagRequirements": [
+          {
+            "name": "闪耀暖暖投稿瓜分活动",
+            "minVideoTime": 6,
+            "minView": 100,
+            "specialTag": "#闪耀暖暖，#闪耀暖暖诸神记",
+            "eDate": "2025/02/16",
+            "reward": [
+              {
+                "allNum": 1,
+                "allLikeNum": 5,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "like": 100,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allLikeNum": 1000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "like": 1000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ],
+        "name": "小红书"
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "闪耀暖暖投稿瓜分活动",
+            "minVideoTime": 6,
+            "minView": 100,
+            "specialTag": "#闪耀暖暖，#闪耀暖暖诸神记",
+            "eDate": "2025/02/16",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 1000,
+                "money": 25000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 10000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 6,
+                "allViewNum": 100000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "isOtherGame": true,
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "心动小镇",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "心动小镇新春季创作计划",
+            "eDate": "2025/03/14",
+            "minView": 500,
+            "specialTag": "#心动小镇 #心动小镇创作计划 #心动小镇新春季",
+            "reward": [
+              {
+                "allNum": 3,
+                "money": 100000,
+                "isGet": false,
+                "allViewNum": 5000
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 20000,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "心动小镇冬日暖心计划",
+            "specialTag": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动",
+            "reward": [
+              {
+                "allViewNum": 500,
+                "like": 20,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "心动小镇冬日暖心计划",
+            "specialTag": "#心动小镇 #心动小镇创作计划 #心动小镇线条小狗联动",
+            "minView": 3000,
+            "reward": [
+              {
+                "allNum": 3,
+                "money": 70000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 10000,
+                "money": 30000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "isOtherGame": true,
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "界外狂潮",
+    "etime": 0,
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "界外狂潮",
+            "eDate": "2024/12/31",
+            "specialTag": "#界外狂潮 #界也太潮了，#界外狂潮国服首测开启",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 10000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "isOtherGame": true,
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "永劫无间手游",
+    "suppleTag": "#永劫无间 #永劫无间梦华赛季",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "永劫无间手游S4吉星赛季UP主激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/RqAvskVWGRBX98Ki.html",
+            "comment": "3341人参与",
+            "sDate": "2025/1/16",
+            "eDate": "2025/2/16",
+            "specialTag": "#永劫无间手游S4吉星赛季UP主激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "永劫无间KFC联动",
+            "eDate": "2025/1/03",
+            "specialTag": "#永劫无间手游 #永劫无间肯德基联动 #无间美味在劫难逃",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 500,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 2,
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "永劫手游共斗诛神",
+            "eDate": "2025/1/15",
+            "specialTag": "#永劫无间手游 #永劫手游共斗诛神",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 1000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 30000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 300000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "永劫手游雷火映画瓜分",
+            "eDate": "2024/12/31",
+            "specialTag": "#永劫手游小剧场 #可惜我再会振刀也振不进你的心",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 20000,
+                "money": 25000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 100000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "isOtherGame": true,
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "逆水寒手游",
+    "sDate": "2025/1/6",
+    "eDate": "2025/1/11",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "逆水寒手游新春创作激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/ZeuLu2IludA0KLgP.html",
+            "comment": "1652人参与",
+            "sDate": "2025/1/16",
+            "eDate": "2025/2/20",
+            "specialTag": "逆水寒手游新春创作激励计划",
+            "searchKeyWord": "逆水寒手游新春创作激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "逆水寒手游1月",
+            "minView": 1000,
+            "eDate": "2025/1/16",
+            "specialTag": "#逆水寒手游 #逆水寒国风江湖",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 5000,
+                "money": 90000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 20000,
+                "money": 90000,
+                "minView": 2000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 100000,
+                "money": 90000,
+                "minView": 3000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 1,
+                "allViewNum": 1036,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7456314812474150179",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #逆水寒手游新赛年 #coser #手机游戏",
+                    "create_time": 1736071756,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 116,
+                      "collect_count": 7,
+                      "play_count": 1036,
+                      "share_count": 2
+                    },
+                    "view": 1036,
+                    "like": 116
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 1,
+                "allViewNum": 1807,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7458769719097593088",
+                    "desc": "好看！ #逆水寒手游 #逆水寒国风江湖 #游戏 #完美身材",
+                    "create_time": 1736639709,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 304,
+                      "collect_count": 35,
+                      "play_count": 1807,
+                      "share_count": 7
+                    },
+                    "view": 1807,
+                    "like": 304
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 2,
+                "allViewNum": 4217,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7458771023689829672",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #coser #游戏 #完美身材",
+                    "create_time": 1736639109,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 109,
+                      "collect_count": 13,
+                      "play_count": 1372,
+                      "share_count": 6
+                    },
+                    "view": 1372,
+                    "like": 109
+                  },
+                  {
+                    "aweme_id": "7458626201482005760",
+                    "desc": "#逆水寒手游 #逆水寒国风江湖 #coser #手机游戏 #国风",
+                    "create_time": 1736597160,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 222,
+                      "collect_count": 25,
+                      "play_count": 2845,
+                      "share_count": 4
+                    },
+                    "view": 2845,
+                    "like": 222
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "",
+            "eDate": "2025/2/20",
+            "specialTag": "#逆水寒手游新赛年",
+            "reward": [
+              {
+                "allNum": 3,
+                "allLike": 5,
+                "money": 50000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allLike": 100,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allLike": 500,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allLike": 3000,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allLike": 5000,
+                "money": 50000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allLike": 10000,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "逆水寒手游迎新",
+            "eDate": "2025/1/15",
+            "specialTag": "#逆水寒手游",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 5000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 8000,
+                "money": 10000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "isOtherGame": true,
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "明日方舟",
+    "etime": 0,
+    "allMoney": 0,
+    "suppleTag": "#明日方舟 #策略游戏 #游戏杂谈 #塔防",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "明日方舟UP主应援计划 – 出苍白海",
+            "act_url": "https://www.bilibili.com/blackboard/era/oAgWT4ghqDxGPl8x.html",
+            "comment": "13.4万人参与",
+            "sDate": "2024/12/5",
+            "eDate": "2025/01/21",
+            "specialTag": "#明日方舟创作者应援计划",
+            "searchKeyWord": "明日方舟UP主应援计划 – 出苍白海",
+            "reward": [
+              {
+                "allNum": 2,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "money": 40000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 3,
+                "allViewNum": 131,
+                "onePlayNumList": [
+                  {
+                    "title": "明日方舟coser合集2",
+                    "aweme_id": "BV1quw1eHEob",
+                    "desc": "明日方舟出苍白海",
+                    "create_time": 1737340282,
+                    "view": 48
+                  },
+                  {
+                    "title": "明日方舟coser合集1",
+                    "aweme_id": "BV1Euw1eHEEg",
+                    "desc": "明日方舟出苍白海",
+                    "create_time": 1737340271,
+                    "view": 33
+                  },
+                  {
+                    "title": "【明日方舟】最曹贼的一集",
+                    "aweme_id": "BV1csc7eyEsT",
+                    "desc": "",
+                    "create_time": 1736489271,
+                    "view": 50
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 5,
+                "allViewNum": 109,
+                "onePlayNumList": [
+                  {
+                    "title": "明日方舟coser合集5",
+                    "aweme_id": "BV17uw1eHEoT",
+                    "desc": "",
+                    "create_time": 1737340493,
+                    "view": 3
+                  },
+                  {
+                    "title": "明日方舟coser合集3",
+                    "aweme_id": "BV1quw1eHEoU",
+                    "desc": "",
+                    "create_time": 1737340467,
+                    "view": 68
+                  },
+                  {
+                    "title": "明日方舟coser合集4",
+                    "aweme_id": "BV17uw1eHEW5",
+                    "desc": "",
+                    "create_time": 1737340438,
+                    "view": 2
+                  },
+                  {
+                    "title": "明日方舟coser合集1",
+                    "aweme_id": "BV17uw1eHE4z",
+                    "desc": "明日方舟出苍白海",
+                    "create_time": 1737340275,
+                    "view": 30
+                  },
+                  {
+                    "title": "明日方舟coser合集2",
+                    "aweme_id": "BV17uw1eHEaF",
+                    "desc": "明日方舟出苍白海",
+                    "create_time": 1737340257,
+                    "view": 6
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "明日方舟终末地再次测试 - UP主应援计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/iNxOa5IxFxu3XeUr.html",
+            "comment": "1412人参与",
+            "sDate": "2025/1/17",
+            "eDate": "2025/2/24",
+            "specialTag": "",
+            "searchKeyWord": "明日方舟终末地再次测试 - UP主应援计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 3,
+                "allViewNum": 131,
+                "onePlayNumList": [
+                  {
+                    "title": "明日方舟coser合集2",
+                    "aweme_id": "BV1quw1eHEob",
+                    "desc": "明日方舟出苍白海",
+                    "create_time": 1737340282,
+                    "view": 48
+                  },
+                  {
+                    "title": "明日方舟coser合集1",
+                    "aweme_id": "BV1Euw1eHEEg",
+                    "desc": "明日方舟出苍白海",
+                    "create_time": 1737340271,
+                    "view": 33
+                  },
+                  {
+                    "title": "【明日方舟】最曹贼的一集",
+                    "aweme_id": "BV1csc7eyEsT",
+                    "desc": "",
+                    "create_time": 1736489271,
+                    "view": 50
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 5,
+                "allViewNum": 109,
+                "onePlayNumList": [
+                  {
+                    "title": "明日方舟coser合集5",
+                    "aweme_id": "BV17uw1eHEoT",
+                    "desc": "",
+                    "create_time": 1737340493,
+                    "view": 3
+                  },
+                  {
+                    "title": "明日方舟coser合集3",
+                    "aweme_id": "BV1quw1eHEoU",
+                    "desc": "",
+                    "create_time": 1737340467,
+                    "view": 68
+                  },
+                  {
+                    "title": "明日方舟coser合集4",
+                    "aweme_id": "BV17uw1eHEW5",
+                    "desc": "",
+                    "create_time": 1737340438,
+                    "view": 2
+                  },
+                  {
+                    "title": "明日方舟coser合集1",
+                    "aweme_id": "BV17uw1eHE4z",
+                    "desc": "明日方舟出苍白海",
+                    "create_time": 1737340275,
+                    "view": 30
+                  },
+                  {
+                    "title": "明日方舟coser合集2",
+                    "aweme_id": "BV17uw1eHEaF",
+                    "desc": "明日方舟出苍白海",
+                    "create_time": 1737340257,
+                    "view": 6
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "明日方舟出苍白海（下）",
+            "eDate": "2025/1/21",
+            "specialTag": "#明日方舟 #明日方舟出苍白海",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 5000,
+                "money": 30000,
+                "joinedPerson": 138,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 30000,
+                "money": 25000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 200000,
+                "money": 15000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 6,
+                "allViewNum": 6965,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7459096469736295732",
+                    "desc": "#明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736727300,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 37,
+                      "collect_count": 3,
+                      "play_count": 452,
+                      "share_count": 2
+                    },
+                    "view": 452,
+                    "like": 37
+                  },
+                  {
+                    "aweme_id": "7459097968495349026",
+                    "desc": "#明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736726100,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 6,
+                      "digg_count": 248,
+                      "collect_count": 17,
+                      "play_count": 1268,
+                      "share_count": 3
+                    },
+                    "view": 1268,
+                    "like": 248
+                  },
+                  {
+                    "aweme_id": "7459098394384928040",
+                    "desc": " #明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736724900,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 84,
+                      "collect_count": 2,
+                      "play_count": 355,
+                      "share_count": 1
+                    },
+                    "view": 355,
+                    "like": 84
+                  },
+                  {
+                    "aweme_id": "7459096043469262114",
+                    "desc": "#明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736723700,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 111,
+                      "collect_count": 9,
+                      "play_count": 880,
+                      "share_count": 4
+                    },
+                    "view": 880,
+                    "like": 111
+                  },
+                  {
+                    "aweme_id": "7459096729606982952",
+                    "desc": "#明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736722500,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 4,
+                      "digg_count": 90,
+                      "collect_count": 8,
+                      "play_count": 821,
+                      "share_count": 1
+                    },
+                    "view": 821,
+                    "like": 90
+                  },
+                  {
+                    "aweme_id": "7459096865116605711",
+                    "desc": "#明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736721300,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 13,
+                      "digg_count": 563,
+                      "collect_count": 41,
+                      "play_count": 3189,
+                      "share_count": 39
+                    },
+                    "view": 3189,
+                    "like": 563
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 6,
+                "allViewNum": 9961,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7459097509973986612",
+                    "desc": " #明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736727600,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 23,
+                      "collect_count": 0,
+                      "play_count": 148,
+                      "share_count": 0
+                    },
+                    "view": 148,
+                    "like": 23
+                  },
+                  {
+                    "aweme_id": "7459097585521806592",
+                    "desc": " #明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736726400,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 194,
+                      "collect_count": 18,
+                      "play_count": 1578,
+                      "share_count": 7
+                    },
+                    "view": 1578,
+                    "like": 194
+                  },
+                  {
+                    "aweme_id": "7459095873159580980",
+                    "desc": " #明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736725200,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 262,
+                      "collect_count": 12,
+                      "play_count": 1201,
+                      "share_count": 7
+                    },
+                    "view": 1201,
+                    "like": 262
+                  },
+                  {
+                    "aweme_id": "7459103436538121507",
+                    "desc": " #明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736724000,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 293,
+                      "collect_count": 16,
+                      "play_count": 2242,
+                      "share_count": 7
+                    },
+                    "view": 2242,
+                    "like": 293
+                  },
+                  {
+                    "aweme_id": "7459097617994140968",
+                    "desc": " #明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736722800,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 219,
+                      "collect_count": 16,
+                      "play_count": 1813,
+                      "share_count": 3
+                    },
+                    "view": 1813,
+                    "like": 219
+                  },
+                  {
+                    "aweme_id": "7459095539464932648",
+                    "desc": " #明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736721600,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 10,
+                      "digg_count": 656,
+                      "collect_count": 49,
+                      "play_count": 2979,
+                      "share_count": 27
+                    },
+                    "view": 2979,
+                    "like": 656
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 5,
+                "allViewNum": 9181,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7459097178124963112",
+                    "desc": "#明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736725800,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 174,
+                      "collect_count": 15,
+                      "play_count": 1839,
+                      "share_count": 7
+                    },
+                    "view": 1839,
+                    "like": 174
+                  },
+                  {
+                    "aweme_id": "7459095461778017551",
+                    "desc": "#明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736724600,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 250,
+                      "collect_count": 12,
+                      "play_count": 3401,
+                      "share_count": 17
+                    },
+                    "view": 3401,
+                    "like": 250
+                  },
+                  {
+                    "aweme_id": "7459095479620570403",
+                    "desc": "#明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736723400,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 124,
+                      "collect_count": 6,
+                      "play_count": 1020,
+                      "share_count": 2
+                    },
+                    "view": 1020,
+                    "like": 124
+                  },
+                  {
+                    "aweme_id": "7459095273478966528",
+                    "desc": " #明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736722200,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 3,
+                      "digg_count": 68,
+                      "collect_count": 7,
+                      "play_count": 383,
+                      "share_count": 1
+                    },
+                    "view": 383,
+                    "like": 68
+                  },
+                  {
+                    "aweme_id": "7459097267354471714",
+                    "desc": "#明日方舟 #明日方舟出苍白海 #coser #游戏 #二次元",
+                    "create_time": 1736721000,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 235,
+                      "collect_count": 13,
+                      "play_count": 2538,
+                      "share_count": 8
+                    },
+                    "view": 2538,
+                    "like": 235
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "明日方舟出苍白海",
+            "eDate": "2025/1/21",
+            "specialTag": "#明日方舟 #明日方舟出苍白海",
+            "reward": [
+              {
+                "allNum": 2,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "like": 50,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "like": 300,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "明日方舟出苍白海",
+            "eDate": "2025/1/21",
+            "specialTag": "#明日方舟 #明日方舟出苍白海",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 100,
+                "money": 15000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 10000,
+                "money": 25000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "isOtherGame": true,
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "宝可梦大集结",
+    "etime": 0,
+    "allMoney": 0,
+    "suppleTag": "",
+    "rewards": [
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "满月庆典",
+            "eDate": "2025/1/10",
+            "minView": 1000,
+            "specialTag": "#宝可梦大集结 #宝可梦大集结可达鸭舞蹈",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 20000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "isOtherGame": true,
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "燕云十六声",
+    "etime": 0,
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "燕云十六声公测激励活动",
+            "act_url": "https://www.bilibili.com/blackboard/era/Bh88xUQ5aVozSPec.html",
+            "comment": "5.6万人参与",
+            "sDate": "2024/12/27",
+            "eDate": "2025/01/26",
+            "specialTag": "#燕云十六声  #武侠",
+            "searchKeyWord": "燕云十六声公测激励活动",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 20,
+                "money": 50000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 200,
+                "money": 50000,
+                "isGet": false
+              },
+              {
+                "allNum": 10,
+                "allViewNum": 200,
+                "money": 50000,
+                "isGet": false
+              },
+              {
+                "view": 5000,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "view": 10000,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "view": 20000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 12,
+                "allViewNum": 1391,
+                "onePlayNumList": [
+                  {
+                    "title": "燕云十六声这些道具前期不要用！",
+                    "aweme_id": "BV1N5wYe8Ew1",
+                    "desc": "",
+                    "create_time": 1737537049,
+                    "view": 7
+                  },
+                  {
+                    "title": "燕云十六声新手必看！",
+                    "aweme_id": "BV1W5wYe8ESJ",
+                    "desc": "",
+                    "create_time": 1737526249,
+                    "view": 48
+                  },
+                  {
+                    "title": "燕云十六声每周必清道具",
+                    "aweme_id": "BV1P5wYe8E1M",
+                    "desc": "",
+                    "create_time": 1737515449,
+                    "view": 26
+                  },
+                  {
+                    "title": "【燕云十六声】燕云最良心的功能！",
+                    "aweme_id": "BV1N5wYe8ETa",
+                    "desc": "",
+                    "create_time": 1737504649,
+                    "view": 46
+                  },
+                  {
+                    "title": "【燕云十六声】燕云武器强度排行",
+                    "aweme_id": "BV1PLwYefEjF",
+                    "desc": "",
+                    "create_time": 1737493849,
+                    "view": 987
+                  },
+                  {
+                    "title": "【燕云十六声】都去给龟奶奶送钱！",
+                    "aweme_id": "BV1sLwYefEcA",
+                    "desc": "",
+                    "create_time": 1737483049,
+                    "view": 57
+                  },
+                  {
+                    "title": "燕云十六声新皮肤，以及识途功能用法",
+                    "aweme_id": "BV1hgwteoEH6",
+                    "desc": "",
+                    "create_time": 1737473629,
+                    "view": 34
+                  },
+                  {
+                    "title": "【燕云十六声】村里的第一个黄毛",
+                    "aweme_id": "BV1WLwYefEN5",
+                    "desc": "",
+                    "create_time": 1737472249,
+                    "view": 9
+                  },
+                  {
+                    "title": "燕云十六声养成材料获取方式",
+                    "aweme_id": "BV1agwteoETN",
+                    "desc": "",
+                    "create_time": 1737466429,
+                    "view": 18
+                  },
+                  {
+                    "title": "燕云十六声前往开封注意事项",
+                    "aweme_id": "BV1agwteoE3h",
+                    "desc": "",
+                    "create_time": 1737459229,
+                    "view": 60
+                  },
+                  {
+                    "title": "燕云十六声解谜奇术获取方法及使用场景",
+                    "aweme_id": "BV1agwteoETJ",
+                    "desc": "",
+                    "create_time": 1737452029,
+                    "view": 9
+                  },
+                  {
+                    "title": "【燕云十六声】燕云是网游还是单机？",
+                    "aweme_id": "BV1agwteoEMy",
+                    "desc": "",
+                    "create_time": 1737444829,
+                    "view": 90
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 7,
+                "allViewNum": 174,
+                "onePlayNumList": [
+                  {
+                    "title": "燕云十六声这些道具前期不要用！",
+                    "aweme_id": "BV1W5wYe8ESD",
+                    "desc": "",
+                    "create_time": 1737537349,
+                    "view": 0
+                  },
+                  {
+                    "title": "燕云十六声新手必看！",
+                    "aweme_id": "BV1P5wYe8EHc",
+                    "desc": "",
+                    "create_time": 1737526549,
+                    "view": 11
+                  },
+                  {
+                    "title": "燕云十六声每周必清道具",
+                    "aweme_id": "BV1N5wYe8EG7",
+                    "desc": "",
+                    "create_time": 1737515749,
+                    "view": 44
+                  },
+                  {
+                    "title": "【燕云十六声】燕云最良心的功能！",
+                    "aweme_id": "BV115wYe8EFR",
+                    "desc": "",
+                    "create_time": 1737504949,
+                    "view": 19
+                  },
+                  {
+                    "title": "【燕云十六声】燕云武器强度排行",
+                    "aweme_id": "BV1ALwYefEhp",
+                    "desc": "",
+                    "create_time": 1737494149,
+                    "view": 59
+                  },
+                  {
+                    "title": "【燕云十六声】都去给龟奶奶送钱！",
+                    "aweme_id": "BV1WLwYefEN2",
+                    "desc": "",
+                    "create_time": 1737483349,
+                    "view": 22
+                  },
+                  {
+                    "title": "【燕云十六声】村里的第一个黄毛",
+                    "aweme_id": "BV1ALwYefEqK",
+                    "desc": "",
+                    "create_time": 1737472549,
+                    "view": 19
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "攻略定向",
+            "minVideoTime": 20,
+            "minPhoto": 3,
+            "minView": 3000,
+            "eDate": "2025/01/27",
+            "specialTag": "#燕云十六声攻略",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 10000,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 100000,
+                "money": 60000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "混剪定向",
+            "minVideoTime": 15,
+            "minPhoto": 3,
+            "minView": 3000,
+            "eDate": "2025/01/27",
+            "specialTag": "#燕云十六声混剪",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 10000,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 300000,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "二期瓜分",
+            "specialTag": "#燕云十六声",
+            "eDate": "2025/01/27",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 5000,
+                "joinedPerson": 0,
+                "view": 0,
+                "like": 0,
+                "allLikeNum": 0,
+                "cday": 0,
+                "money": 120000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 30000,
+                "money": 100000,
+                "isGet": false
+              }
+            ],
+            "minVideoTime": 7,
+            "minView": 1000
+          },
+          {
+            "name": "燕云摄影",
+            "specialTag": "#燕云摄影大赛",
+            "eDate": "2025/01/27",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 5000,
+                "joinedPerson": 0,
+                "view": 0,
+                "like": 0,
+                "allLikeNum": 0,
+                "cday": 0,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "minVideoTime": 7,
+            "minView": 1000
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "4个赛道(各5w)",
+            "minLike": 100,
+            "specialTag": "#燕云十六声 #燕云十六声混剪 #燕云十六声同人 #燕云十六声剧场 #燕云十六声种草",
+            "eDate": "2025/01/25",
+            "reward": [
+              {
+                "view": 1000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "like": 1000,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "isOtherGame": true,
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "崩坏星穹铁道",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "崩坏星穹铁道2.7创作者激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/LcLSa6PYSKBxpSVj.html",
+            "comment": "139.5万人参与",
+            "sDate": "2024/12/4",
+            "eDate": "2025/1/14",
+            "specialTag": "崩坏星穹铁道2.7创作者激励计划",
+            "searchKeyWord": "崩坏星穹铁道2.7创作者激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 4,
+                "allViewNum": 10,
+                "onePlayNumList": [
+                  {
+                    "title": "崩坏星穹铁道coser合集3.0",
+                    "aweme_id": "BV19qrqYqE86",
+                    "desc": "",
+                    "create_time": 1736385046,
+                    "view": 1
+                  },
+                  {
+                    "title": "崩坏星穹铁道coser合集1.0",
+                    "aweme_id": "BV19qrqYqEyP",
+                    "desc": "",
+                    "create_time": 1736385021,
+                    "view": 3
+                  },
+                  {
+                    "title": "崩坏星穹铁道coser合集4.0",
+                    "aweme_id": "BV1XqrqYqEv2",
+                    "desc": "",
+                    "create_time": 1736385020,
+                    "view": 2
+                  },
+                  {
+                    "title": "崩坏星穹铁道coser合集2.0",
+                    "aweme_id": "BV19qrqYqEzC",
+                    "desc": "",
+                    "create_time": 1736384994,
+                    "view": 4
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "崩坏星穹铁道3.0版本音乐二创激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/Slyx0O7Of9cpRvqW.html",
+            "comment": "2.1万人参与",
+            "sDate": "2025/1/1",
+            "eDate": "2025/2/1",
+            "specialTag": "崩坏星穹铁道3.0版本音乐二创激励计划",
+            "searchKeyWord": "崩坏星穹铁道3.0版本音乐二创激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 4,
+                "allViewNum": 10,
+                "onePlayNumList": [
+                  {
+                    "title": "崩坏星穹铁道coser合集3.0",
+                    "aweme_id": "BV19qrqYqE86",
+                    "desc": "",
+                    "create_time": 1736385046,
+                    "view": 1
+                  },
+                  {
+                    "title": "崩坏星穹铁道coser合集1.0",
+                    "aweme_id": "BV19qrqYqEyP",
+                    "desc": "",
+                    "create_time": 1736385021,
+                    "view": 3
+                  },
+                  {
+                    "title": "崩坏星穹铁道coser合集4.0",
+                    "aweme_id": "BV1XqrqYqEv2",
+                    "desc": "",
+                    "create_time": 1736385020,
+                    "view": 2
+                  },
+                  {
+                    "title": "崩坏星穹铁道coser合集2.0",
+                    "aweme_id": "BV19qrqYqEzC",
+                    "desc": "",
+                    "create_time": 1736384994,
+                    "view": 4
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "崩坏星穹铁道3.0创作者激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/oEdf9S9dWjtnc5GE.html",
+            "comment": "20.3万人参与",
+            "sDate": "2025/1/15",
+            "eDate": "2025/2/25",
+            "specialTag": "崩坏星穹铁道3.0创作者激励计划",
+            "searchKeyWord": "崩坏星穹铁道3.0创作者激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 4,
+                "allViewNum": 10,
+                "onePlayNumList": [
+                  {
+                    "title": "崩坏星穹铁道coser合集3.0",
+                    "aweme_id": "BV19qrqYqE86",
+                    "desc": "",
+                    "create_time": 1736385046,
+                    "view": 1
+                  },
+                  {
+                    "title": "崩坏星穹铁道coser合集1.0",
+                    "aweme_id": "BV19qrqYqEyP",
+                    "desc": "",
+                    "create_time": 1736385021,
+                    "view": 3
+                  },
+                  {
+                    "title": "崩坏星穹铁道coser合集4.0",
+                    "aweme_id": "BV1XqrqYqEv2",
+                    "desc": "",
+                    "create_time": 1736385020,
+                    "view": 2
+                  },
+                  {
+                    "title": "崩坏星穹铁道coser合集2.0",
+                    "aweme_id": "BV19qrqYqEzC",
+                    "desc": "",
+                    "create_time": 1736384994,
+                    "view": 4
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "2.7瓜分",
+            "minView": 1000,
+            "specialTag": "#崩坏星穹铁道 #在第八日启程",
+            "eDate": "2025/01/14",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 100000,
+                "money": 400000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 2,
+                "allViewNum": 2405,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457714606715260211",
+                    "desc": "#崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736395813,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 4,
+                      "digg_count": 84,
+                      "collect_count": 4,
+                      "play_count": 1241,
+                      "share_count": 2
+                    },
+                    "view": 1241,
+                    "like": 84
+                  },
+                  {
+                    "aweme_id": "7457714202589924658",
+                    "desc": "#崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736392213,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 75,
+                      "collect_count": 12,
+                      "play_count": 1164,
+                      "share_count": 0
+                    },
+                    "view": 1164,
+                    "like": 75
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 2,
+                "allViewNum": 15807,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7457714056082869514",
+                    "desc": "#崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736394313,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 512,
+                      "collect_count": 50,
+                      "play_count": 6895,
+                      "share_count": 27
+                    },
+                    "view": 6895,
+                    "like": 512
+                  },
+                  {
+                    "aweme_id": "7457714078870506803",
+                    "desc": "#崩坏星穹铁道 #在第八日启程 #coser #二次元 #美女",
+                    "create_time": 1736391913,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 439,
+                      "collect_count": 39,
+                      "play_count": 8912,
+                      "share_count": 10
+                    },
+                    "view": 8912,
+                    "like": 439
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "视频瓜分43w",
+            "specialTag": "#崩坏星穹铁道 #崩坏星穹铁道创作者激励计划",
+            "eDate": "2025/01/14",
+            "reward": [
+              {
+                "allNum": 1,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 10,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "like": 50,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "like": 500,
+                "money": 60000,
+                "isGet": false
+              },
+              {
+                "like": 1000,
+                "money": 80000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "图文瓜分27w",
+            "specialTag": "#崩坏星穹铁道 #崩坏星穹铁道创作者激励计划",
+            "eDate": "2025/01/14",
+            "reward": [
+              {
+                "allNum": 1,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 10,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "like": 50,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "like": 500,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "like": 1000,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "鸣潮",
+    "eDate": "2025/2/12",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "2025鸣潮新春会",
+            "act_url": "https://www.bilibili.com/blackboard/era/tGGgNGj0IPEeA6Dv.html",
+            "comment": "25.7万人参与",
+            "sDate": "2025/1/2",
+            "eDate": "2025/2/12",
+            "specialTag": "2025鸣潮新春会",
+            "searchKeyWord": "2025鸣潮新春会",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "《鸣潮》2.0版本音乐二创活动",
+            "act_url": "https://www.bilibili.com/blackboard/era/5P8bBnwcgzgxFMcn.html",
+            "comment": "2.0万人参与",
+            "sDate": "2024/12/23",
+            "eDate": "2025/2/13",
+            "specialTag": "《鸣潮》2.0版本音乐二创活动",
+            "searchKeyWord": "《鸣潮》2.0版本音乐二创活动",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "鸣潮2.0",
+            "minView": 5000,
+            "specialTag": "#鸣潮 #鸣潮黎那汐塔",
+            "reward": [
+              {
+                "allNum": 5,
+                "allViewNum": 300000,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "鸣潮2.0",
+            "specialTag": "#鸣潮 #鸣潮创作激励 #鸣潮黎那汐塔 #鸣潮二创",
+            "reward": [
+              {
+                "allNum": 5,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "鸣潮",
+            "minView": 500,
+            "specialTag": "#鸣潮 #鸣潮黎那汐塔 #从0开始玩鸣潮",
+            "reward": [
+              {
+                "allNum": 3,
+                "view": 500,
+                "money": 10000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "绝区零",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "绝区零UP主激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/ZaU4lEQx4Czkwbsa.html",
+            "comment": "63.6万人参与",
+            "sDate": "2024/12/18",
+            "eDate": "2025/1/21",
+            "specialTag": "绝区零UP主激励计划",
+            "searchKeyWord": "绝区零UP主激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "绝区零创作激励计划",
+            "minView": 1000,
+            "eDate": "2025/01/21",
+            "specialTag": "绝区零 绝区零创作激励计划",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 10000,
+                "money": 200000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 50000,
+                "money": 100000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "绝区零1.4创作激励计划",
+            "specialTag": "#绝区零 #绝区零创作激励计划",
+            "reward": [
+              {
+                "allNum": 5,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "绝区零星见雅",
+            "specialTag": "#绝区零 #绝区零创作激励计划 #绝区零星见雅",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "第五人格",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "第五人格2025蛇年版",
+            "sDate": "2024/12/26",
+            "eDate": "2025/2/16",
+            "specialTag": "第五人格2025蛇年版",
+            "searchKeyWord": "第五人格2025蛇年版",
+            "reward": [
+              {
+                "money": 100,
+                "allNum": 10,
+                "allViewNum": 10000,
+                "view": 1000,
+                "like": 100
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "原神",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "原神5.3UP主激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/6WU8pjHx2fWQKHMp.html",
+            "comment": "18.4万人参与",
+            "sDate": "2025/1/1",
+            "eDate": "2025/2/11",
+            "specialTag": "原神5.3UP主激励计划",
+            "searchKeyWord": "原神5.3UP主激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "原神灼火之心音乐二创活动",
+            "act_url": "https://www.bilibili.com/blackboard/era/1e2fseowtxsbqqYt.html",
+            "comment": "1.5万人参与",
+            "sDate": "2024/12/31",
+            "eDate": "2025/1/21",
+            "specialTag": "原神灼火之心音乐二创活动",
+            "searchKeyWord": "原神灼火之心音乐二创活动",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "minVideoTime": 8,
+            "minView": 5000,
+            "specialTag": "#原神纳塔 #茜特菈莉",
+            "eDate": "2025/02/21",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 200000,
+                "money": 250000,
+                "isGet": false
+              }
+            ],
+            "name": "5.3版本「茜特菈莉」投稿瓜分",
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "基础赛道",
+            "minVideoTime": 10,
+            "minView": 5000,
+            "specialTag": "#原神",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 40000,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 80000,
+                "money": 40000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "基础赛道",
+            "minVideoTime": 10,
+            "minView": 5000,
+            "specialTag": "#原神 #原来你也玩原神 #原神创作者激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "4个Tag 榜单任务",
+            "minVideoTime": 10,
+            "minView": 5000,
+            "specialTag": "#恰斯卡 #原神",
+            "reward": []
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "无限暖暖",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "无限暖暖公测创作激励计划",
+            "specialTag": "#无限暖暖",
+            "searchKeyWord": "无限暖暖",
+            "reward": [
+              {
+                "allNum": 1,
+                "allViewNum": 100,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 300,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 500,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 5000,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 10000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "游戏小手柄贡献分",
+            "specialTag": "#无限暖暖",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "",
+            "specialTag": "#无限暖暖 #无限暖暖全球公测 #在全世界遇见无限暖暖",
+            "reward": [
+              {
+                "allNum": 3,
+                "like": 15,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "",
+            "specialTag": "#无限暖暖 #无限暖暖全球公测 #在全世界遇见无限暖暖",
+            "reward": [
+              {
+                "allNum": 3,
+                "like": 15,
+                "money": 10000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "崩坏3",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "崩坏3「愿启天光」创作激励计划",
+            "sDate": "2024/12/6",
+            "eDate": "2025/1/16",
+            "specialTag": "崩坏3「愿启天光」创作激励计划",
+            "searchKeyWord": "崩坏3「愿启天光」创作激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 3,
+                "allViewNum": 50,
+                "onePlayNumList": [
+                  {
+                    "title": "崩坏3coser合集3.0",
+                    "aweme_id": "BV1aAcQedE5F",
+                    "desc": "",
+                    "create_time": 1736835725,
+                    "view": 17
+                  },
+                  {
+                    "title": "崩坏3coser合集2.0",
+                    "aweme_id": "BV1aAcQedE5n",
+                    "desc": "",
+                    "create_time": 1736834525,
+                    "view": 9
+                  },
+                  {
+                    "title": "崩坏3coser合集1.0",
+                    "aweme_id": "BV1QAcQedEkJ",
+                    "desc": "",
+                    "create_time": 1736833325,
+                    "view": 24
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 3,
+                "allViewNum": 4,
+                "onePlayNumList": [
+                  {
+                    "title": "崩坏3coser合集3.0",
+                    "aweme_id": "BV1aAcQedEuS",
+                    "desc": "",
+                    "create_time": 1736835425,
+                    "view": 0
+                  },
+                  {
+                    "title": "崩坏3coser合集2.0",
+                    "aweme_id": "BV1YAcQedEPS",
+                    "desc": "",
+                    "create_time": 1736834225,
+                    "view": 2
+                  },
+                  {
+                    "title": "崩坏3coser合集1.0",
+                    "aweme_id": "BV1aAcQedEVH",
+                    "desc": "",
+                    "create_time": 1736833025,
+                    "view": 2
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "崩坏3「喧鼓祈新」创作激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/lmxfxxGkFfRfj6DZ.html",
+            "comment": "2056人参与",
+            "sDate": "2025/1/17",
+            "eDate": "2025/3/21",
+            "specialTag": "崩坏3「喧鼓祈新」创作激励计划",
+            "searchKeyWord": "崩坏3「喧鼓祈新」创作激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 3,
+                "allViewNum": 50,
+                "onePlayNumList": [
+                  {
+                    "title": "崩坏3coser合集3.0",
+                    "aweme_id": "BV1aAcQedE5F",
+                    "desc": "",
+                    "create_time": 1736835725,
+                    "view": 17
+                  },
+                  {
+                    "title": "崩坏3coser合集2.0",
+                    "aweme_id": "BV1aAcQedE5n",
+                    "desc": "",
+                    "create_time": 1736834525,
+                    "view": 9
+                  },
+                  {
+                    "title": "崩坏3coser合集1.0",
+                    "aweme_id": "BV1QAcQedEkJ",
+                    "desc": "",
+                    "create_time": 1736833325,
+                    "view": 24
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 3,
+                "allViewNum": 4,
+                "onePlayNumList": [
+                  {
+                    "title": "崩坏3coser合集3.0",
+                    "aweme_id": "BV1aAcQedEuS",
+                    "desc": "",
+                    "create_time": 1736835425,
+                    "view": 0
+                  },
+                  {
+                    "title": "崩坏3coser合集2.0",
+                    "aweme_id": "BV1YAcQedEPS",
+                    "desc": "",
+                    "create_time": 1736834225,
+                    "view": 2
+                  },
+                  {
+                    "title": "崩坏3coser合集1.0",
+                    "aweme_id": "BV1aAcQedEVH",
+                    "desc": "",
+                    "create_time": 1736833025,
+                    "view": 2
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "航海王壮志雄心",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "航海王壮志雄心上线激励计划",
+            "sDate": "2024/12/26",
+            "eDate": "2025/1/18",
+            "specialTag": "航海王壮志雄心上线激励计划",
+            "searchKeyWord": "航海王壮志雄心上线激励计划",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 400,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 1000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 8,
+                "allViewNum": 3000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 10000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 25000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 50000,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 5,
+                "allViewNum": 430,
+                "onePlayNumList": [
+                  {
+                    "title": "航海王壮志雄心 榜一鬼叔来了也得被卡等级",
+                    "aweme_id": "BV1qTriYuEQa",
+                    "desc": "",
+                    "create_time": 1736641169,
+                    "view": 132
+                  },
+                  {
+                    "title": "【航海王壮志雄心】宝哥： 不充一样玩？那我咋玩？",
+                    "aweme_id": "BV1BTriYuEwF",
+                    "desc": "",
+                    "create_time": 1736597969,
+                    "view": 58
+                  },
+                  {
+                    "title": "【航海王壮志雄心】鬼叔豪掷10万彩果，710高召拿下双6星",
+                    "aweme_id": "BV1qTriYuEXk",
+                    "desc": "",
+                    "create_time": 1736511569,
+                    "view": 57
+                  },
+                  {
+                    "title": "【航海王壮志雄心】3A无敌瞬移加抓取，这就是黄猿之力吗",
+                    "aweme_id": "BV17TriYgEPe",
+                    "desc": "",
+                    "create_time": 1736468369,
+                    "view": 79
+                  },
+                  {
+                    "title": "都说是火影换皮，那么航海王壮志雄心到底和火影有什么区别？",
+                    "aweme_id": "BV1ZTriYuE8z",
+                    "desc": "",
+                    "create_time": 1736425169,
+                    "view": 104
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "航海王壮志雄心新春会激励计划",
+            "act_url": "https://live.bilibili.com/blackboard/era/mlmliWL7y7kMJHMQ.html",
+            "comment": "",
+            "sDate": "2025/1/19",
+            "eDate": "2025/2/28",
+            "specialTag": "#航海王壮志雄心新春会激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 3,
+                "allViewNum": 247,
+                "onePlayNumList": [
+                  {
+                    "title": "航海王壮志雄心 榜一鬼叔来了也得被卡等级",
+                    "aweme_id": "BV1qTriYuEQa",
+                    "desc": "",
+                    "create_time": 1736641169,
+                    "view": 132
+                  },
+                  {
+                    "title": "【航海王壮志雄心】宝哥： 不充一样玩？那我咋玩？",
+                    "aweme_id": "BV1BTriYuEwF",
+                    "desc": "",
+                    "create_time": 1736597969,
+                    "view": 58
+                  },
+                  {
+                    "title": "【航海王壮志雄心】鬼叔豪掷10万彩果，710高召拿下双6星",
+                    "aweme_id": "BV1qTriYuEXk",
+                    "desc": "",
+                    "create_time": 1736511569,
+                    "view": 57
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "航海王壮志雄心公测瓜分",
+            "minVideoTime": 10,
+            "minView": 1000,
+            "eDate": "2025/1/19",
+            "specialTag": "#航海王壮志雄心",
+            "reward": [
+              {
+                "allNum": 5,
+                "money": 150000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 3,
+                "allViewNum": 6221,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7461293658059476260",
+                    "desc": " #航海王壮志雄心 #coser #游戏 #美女 #萌新入坑",
+                    "create_time": 1737238301,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 24,
+                      "collect_count": 2,
+                      "play_count": 1237,
+                      "share_count": 5
+                    },
+                    "view": 1237,
+                    "like": 24
+                  },
+                  {
+                    "aweme_id": "7461051097554226444",
+                    "desc": " #航海王壮志雄心 #coser #手机游戏 #完美身材",
+                    "create_time": 1737170341,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 23,
+                      "collect_count": 6,
+                      "play_count": 1164,
+                      "share_count": 2
+                    },
+                    "view": 1164,
+                    "like": 23
+                  },
+                  {
+                    "aweme_id": "7461051312038333708",
+                    "desc": "#航海王壮志雄心 #coser #手机游戏 #完美身材",
+                    "create_time": 1737169441,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 211,
+                      "collect_count": 15,
+                      "play_count": 3820,
+                      "share_count": 9
+                    },
+                    "view": 3820,
+                    "like": 211
+                  }
+                ]
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "进阶赛道",
+            "minVideoTime": 10,
+            "minView": 10000,
+            "specialTag": "#航海王壮志雄心",
+            "reward": [
+              {
+                "allNum": 5,
+                "money": 150000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "火影忍者",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "火影忍者九周年激励计划",
+            "sDate": "2024/12/4",
+            "eDate": "2025/1/19",
+            "specialTag": "火影忍者九周年激励计划",
+            "searchKeyWord": "火影忍者九周年激励计划",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 500,
+                "money": 20000
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 2000,
+                "money": 30000
+              },
+              {
+                "allViewNum": 10000,
+                "money": 30000
+              },
+              {
+                "allViewNum": 50000,
+                "money": 30000
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 8,
+                "allViewNum": 435,
+                "onePlayNumList": [
+                  {
+                    "title": "【火影忍者】“漂泊扉间上架，想买的进来看”",
+                    "aweme_id": "BV1yMwMe4Ekv",
+                    "desc": "",
+                    "create_time": 1737242129,
+                    "view": 77
+                  },
+                  {
+                    "title": "【火影忍者】“这对写轮眼将看穿一切”",
+                    "aweme_id": "BV1yMwMe4EBJ",
+                    "desc": "",
+                    "create_time": 1737241229,
+                    "view": 13
+                  },
+                  {
+                    "title": "【火影忍者】“阴间忍者统计”",
+                    "aweme_id": "BV11MwMe4Egp",
+                    "desc": "",
+                    "create_time": 1737240329,
+                    "view": 17
+                  },
+                  {
+                    "title": "【火影忍者】“牢九门的一员猛酱”",
+                    "aweme_id": "BV1yMwMe4E9g",
+                    "desc": "",
+                    "create_time": 1737239429,
+                    "view": 72
+                  },
+                  {
+                    "title": "【火影忍者】“卡卡西写轮眼最差使用者”",
+                    "aweme_id": "BV1NMwMetE1j",
+                    "desc": "",
+                    "create_time": 1737238529,
+                    "view": 51
+                  },
+                  {
+                    "title": "【火影忍者】“前奏很长，好好欣赏这惊天动地的忍术”",
+                    "aweme_id": "BV1n5w7e5EaW",
+                    "desc": "",
+                    "create_time": 1737071706,
+                    "view": 68
+                  },
+                  {
+                    "title": "【火影忍者】“老弟啊，我乱按你都赢不了吗”",
+                    "aweme_id": "BV1J5w7e5Em8",
+                    "desc": "",
+                    "create_time": 1737069906,
+                    "view": 53
+                  },
+                  {
+                    "title": "【火影忍者】“新水吃操作？明明不难啊”",
+                    "aweme_id": "BV1n5w7e5EYv",
+                    "desc": "",
+                    "create_time": 1737068106,
+                    "view": 84
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "阴阳师",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "阴阳师友人偕行版本创作激励计划",
+            "sDate": "2024/12/24",
+            "eDate": "2025/1/13",
+            "specialTag": "阴阳师友人偕行版本创作激励计划",
+            "searchKeyWord": "阴阳师友人偕行版本创作激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "光遇",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "光遇宴会节创作激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/5pVqfGRbMvMadd0R.html",
+            "comment": "1.2万人参与",
+            "sDate": "2024/12/24",
+            "eDate": "2025/1/13",
+            "specialTag": "光遇宴会节创作激励计划",
+            "searchKeyWord": "光遇宴会节创作激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "诛仙世界",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "诛仙世界公测激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/gUpZ4chlQefXPAn2.html",
+            "comment": "2.6万人参与",
+            "sDate": "2024/12/19",
+            "eDate": "2025/2/19",
+            "specialTag": "诛仙世界公测激励计划",
+            "searchKeyWord": "诛仙世界公测激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "",
+            "eDate": "2025/01/19",
+            "minView": 1000,
+            "specialTag": "#诛仙世界 #诛仙世界公测",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 5000,
+                "money": 100000,
+                "isGet": false
+              },
+              {
+                "minView": 5000,
+                "allNum": 3,
+                "allViewNum": 50000,
+                "money": 160000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 5,
+                "allViewNum": 18255,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7460578319428275519",
+                    "desc": " #诛仙世界 #诛仙世界公测 #coser #国风 #游戏",
+                    "create_time": 1737072182,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 206,
+                      "collect_count": 18,
+                      "play_count": 1560,
+                      "share_count": 3
+                    },
+                    "view": 1560,
+                    "like": 206
+                  },
+                  {
+                    "aweme_id": "7460579050285747495",
+                    "desc": " #诛仙世界 #诛仙世界公测 #coser #国风 #游戏",
+                    "create_time": 1737071282,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 398,
+                      "collect_count": 21,
+                      "play_count": 4092,
+                      "share_count": 4
+                    },
+                    "view": 4092,
+                    "like": 398
+                  },
+                  {
+                    "aweme_id": "7460214409474968851",
+                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
+                    "create_time": 1736983814,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 390,
+                      "collect_count": 26,
+                      "play_count": 2224,
+                      "share_count": 6
+                    },
+                    "view": 2224,
+                    "like": 390
+                  },
+                  {
+                    "aweme_id": "7460213570815495435",
+                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
+                    "create_time": 1736982914,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 30,
+                      "collect_count": 2,
+                      "play_count": 1074,
+                      "share_count": 0
+                    },
+                    "view": 1074,
+                    "like": 30
+                  },
+                  {
+                    "aweme_id": "7460213433716247844",
+                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
+                    "create_time": 1736982014,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 1128,
+                      "collect_count": 107,
+                      "play_count": 9305,
+                      "share_count": 20
+                    },
+                    "view": 9305,
+                    "like": 1128
+                  }
+                ]
+              },
+              {
+                "userName": "Chris",
+                "allNum": 4,
+                "allViewNum": 17759,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7460577428948241676",
+                    "desc": "#诛仙世界 #诛仙世界公测 #coser #国风 #游戏",
+                    "create_time": 1737071582,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 0,
+                      "digg_count": 141,
+                      "collect_count": 10,
+                      "play_count": 1425,
+                      "share_count": 2
+                    },
+                    "view": 1425,
+                    "like": 141
+                  },
+                  {
+                    "aweme_id": "7460214484355878198",
+                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
+                    "create_time": 1736984114,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 1,
+                      "digg_count": 301,
+                      "collect_count": 24,
+                      "play_count": 3030,
+                      "share_count": 19
+                    },
+                    "view": 3030,
+                    "like": 301
+                  },
+                  {
+                    "aweme_id": "7460213626339708201",
+                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
+                    "create_time": 1736983214,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 374,
+                      "collect_count": 27,
+                      "play_count": 3476,
+                      "share_count": 9
+                    },
+                    "view": 3476,
+                    "like": 374
+                  },
+                  {
+                    "aweme_id": "7460213272403381545",
+                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
+                    "create_time": 1736981414,
+                    "statistics": {
+                      "admire_count": 0,
+                      "comment_count": 2,
+                      "digg_count": 770,
+                      "collect_count": 62,
+                      "play_count": 9828,
+                      "share_count": 8
+                    },
+                    "view": 9828,
+                    "like": 770
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "小红书",
+        "specialTagRequirements": [
+          {
+            "name": "新年我染上了诛仙世界",
+            "sDate": "2025/01/15",
+            "eDate": "2025/02/15",
+            "specialTag": "​#染上了诛仙世界 #诛仙世界种草",
+            "reward": [
+              {
+                "allViewNum": 500,
+                "like": 50,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "快手",
+        "specialTagRequirements": [
+          {
+            "name": "基础赛道",
+            "eDate": "2025/01/19",
+            "minView": 500,
+            "minLike": 30,
+            "specialTag": "#诛仙世界 #诛仙世界激励计划",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 5000,
+                "money": 10000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "王者荣耀",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "2024年王者荣耀挑战者杯激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/lv5DLhEPfLseStS3.html",
+            "comment": "20.0万人参与",
+            "sDate": "2024/12/7",
+            "eDate": "2025/1/20",
+            "specialTag": "#游戏 #电子竞技 #王者荣耀 #赛事 #重庆狼队 #挑杯 #2024年王者荣耀挑战者杯 #挑战者杯 #kpl #成都AG超玩会",
+            "searchKeyWord": "2024年王者荣耀挑战者杯激励计划",
+            "reward": [
+              {}
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 4,
+                "allViewNum": 135,
+                "onePlayNumList": [
+                  {
+                    "title": "【王者荣耀】绿豆典韦也能打职业？这操作我上我也行！",
+                    "aweme_id": "BV1MnwTe8Eg1",
+                    "desc": "",
+                    "create_time": 1737253239,
+                    "view": 11
+                  },
+                  {
+                    "title": "【王者荣耀】新概念神：AG的十分钟！坏消息：劣势了！好消息：马上十分钟了",
+                    "aweme_id": "BV1TnwTe8Edy",
+                    "desc": "",
+                    "create_time": 1737251439,
+                    "view": 38
+                  },
+                  {
+                    "title": "【王者荣耀】书源野核美学！挑杯逆版本的勇者！",
+                    "aweme_id": "BV1MnwTe8Et1",
+                    "desc": "",
+                    "create_time": 1737250539,
+                    "view": 31
+                  },
+                  {
+                    "title": "【王者荣耀】老一辈艺术家的从容自信！天生的流量圣体！",
+                    "aweme_id": "BV1TnwTe8Eky",
+                    "desc": "",
+                    "create_time": 1737249639,
+                    "view": 55
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "王者荣耀联动冰雪奇缘",
+            "act_url": "https://www.bilibili.com/blackboard/era/uxSiQGV2pX6e8sQr.html",
+            "comment": "4856人参与",
+            "sDate": "2025/1/9",
+            "eDate": "2025/1/22",
+            "specialTag": "王者荣耀联动冰雪奇缘",
+            "searchKeyWord": "王者荣耀联动冰雪奇缘",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 4,
+                "allViewNum": 135,
+                "onePlayNumList": [
+                  {
+                    "title": "【王者荣耀】绿豆典韦也能打职业？这操作我上我也行！",
+                    "aweme_id": "BV1MnwTe8Eg1",
+                    "desc": "",
+                    "create_time": 1737253239,
+                    "view": 11
+                  },
+                  {
+                    "title": "【王者荣耀】新概念神：AG的十分钟！坏消息：劣势了！好消息：马上十分钟了",
+                    "aweme_id": "BV1TnwTe8Edy",
+                    "desc": "",
+                    "create_time": 1737251439,
+                    "view": 38
+                  },
+                  {
+                    "title": "【王者荣耀】书源野核美学！挑杯逆版本的勇者！",
+                    "aweme_id": "BV1MnwTe8Et1",
+                    "desc": "",
+                    "create_time": 1737250539,
+                    "view": 31
+                  },
+                  {
+                    "title": "【王者荣耀】老一辈艺术家的从容自信！天生的流量圣体！",
+                    "aweme_id": "BV1TnwTe8Eky",
+                    "desc": "",
+                    "create_time": 1737249639,
+                    "view": 55
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "王者荣耀新春会",
+            "act_url": "https://www.bilibili.com/blackboard/era/zgskKeezfzC1qc83.html",
+            "comment": "2991人参与",
+            "sDate": "2025/1/17",
+            "eDate": "2025/2/14",
+            "specialTag": "王者荣耀新春会",
+            "searchKeyWord": "王者荣耀新春会",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 4,
+                "allViewNum": 135,
+                "onePlayNumList": [
+                  {
+                    "title": "【王者荣耀】绿豆典韦也能打职业？这操作我上我也行！",
+                    "aweme_id": "BV1MnwTe8Eg1",
+                    "desc": "",
+                    "create_time": 1737253239,
+                    "view": 11
+                  },
+                  {
+                    "title": "【王者荣耀】新概念神：AG的十分钟！坏消息：劣势了！好消息：马上十分钟了",
+                    "aweme_id": "BV1TnwTe8Edy",
+                    "desc": "",
+                    "create_time": 1737251439,
+                    "view": 38
+                  },
+                  {
+                    "title": "【王者荣耀】书源野核美学！挑杯逆版本的勇者！",
+                    "aweme_id": "BV1MnwTe8Et1",
+                    "desc": "",
+                    "create_time": 1737250539,
+                    "view": 31
+                  },
+                  {
+                    "title": "【王者荣耀】老一辈艺术家的从容自信！天生的流量圣体！",
+                    "aweme_id": "BV1TnwTe8Eky",
+                    "desc": "",
+                    "create_time": 1737249639,
+                    "view": 55
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "DNF",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "DNF手游2025新春会",
+            "act_url": "https://live.bilibili.com/blackboard/era/uAV7ZVcHR1yMeIy1.html",
+            "comment": "4.6万人参与",
+            "sDate": "2024/12/28",
+            "eDate": "2025/2/14",
+            "specialTag": "DNF手游2025新春会",
+            "searchKeyWord": "DNF手游2025新春会",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "2025年DNF新春会",
+            "act_url": "https://www.bilibili.com/blackboard/era/wjSgXXRM1DILrO9N.html",
+            "comment": "2061人参与",
+            "sDate": "2025/1/16",
+            "eDate": "2025/2/14",
+            "specialTag": "2025年DNF新春会",
+            "searchKeyWord": "2025年DNF新春会",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "重返未来1999",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "重返未来1999创作者激励计划-雨幕漫谈",
+            "act_url": "https://www.bilibili.com/blackboard/era/O3HlNR4DyV5VKvP3.html",
+            "comment": "11.3万人参与",
+            "sDate": "2024/10/31",
+            "eDate": "2025/1/15",
+            "specialTag": "重返未来1999创作者激励计划-雨幕漫谈",
+            "searchKeyWord": "重返未来1999创作者激励计划-雨幕漫谈",
+            "reward": [
+              {
+                "allNum": 5,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 50000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "重返未来1999创作者激励计划-唐人街影话",
+            "act_url": "https://www.bilibili.com/blackboard/era/CtkRegxtyL1vcdWb.html",
+            "comment": "8672人参与",
+            "sDate": "2025/1/16",
+            "eDate": "2025/2/26",
+            "basicTopic": [],
+            "specialTag": "重返未来1999创作者激励计划-唐人街影话",
+            "searchKeyWord": "重返未来1999创作者激励计划-唐人街影话",
+            "reward": [
+              {
+                "allNum": 5,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 10000,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "基础赛道",
+            "minView": 1000,
+            "specialTag": "#重返未来1999",
+            "reward": [
+              {
+                "allNum": 6,
+                "allViewNum": 20000,
+                "money": 50000,
+                "isGet": false
+              },
+              {
+                "allNum": 12,
+                "allViewNum": 50000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "蛋仔派对",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "蛋仔派对乐园畅游激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/CvWQGRRLqnM3orna.html",
+            "comment": "1.6万人参与",
+            "sDate": "2024/12/27",
+            "eDate": "2025/2/20",
+            "topic": "蛋仔派对宝藏乐园地图",
+            "specialTag": "",
+            "searchKeyWord": "蛋仔派对宝藏乐园地图",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 200,
+                "money": 5000,
+                "isGet": false
+              },
+              {
+                "allNum": 3,
+                "allViewNum": 10000,
+                "money": 5000,
+                "isGet": false
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 400,
+                "money": 5000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 30000,
+                "money": 5000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 5000,
+                "money": 5000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 10000,
+                "money": 5000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "蛋仔派对创作者激励计划",
+            "eDate": "2025/1/26",
+            "specialTag": "#蛋仔派对 #蛋仔风格大赏",
+            "minView": 2000,
+            "reward": [
+              {
+                "allNum": 6,
+                "money": 60000,
+                "joinedPerson": 330
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "尘白禁区",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "尘白禁区创作者激励计划2.4版本",
+            "act_url": "https://www.bilibili.com/blackboard/era/rsJ8s6cO1cm82Ot9.html",
+            "comment": "2.5万人参与",
+            "sDate": "2024/12/19",
+            "eDate": "2025/1/23",
+            "specialTag": "",
+            "topic": "卜卜的逸闻轶事",
+            "searchKeyWord": "尘白禁区创作者激励计划2.4版本",
+            "reward": [
+              {
+                "view": 500,
+                "money": 30000
+              },
+              {
+                "allNum": 3,
+                "money": 20000
+              },
+              {
+                "view": 10000,
+                "money": 20000
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 7,
+                "allViewNum": 204,
+                "onePlayNumList": [
+                  {
+                    "title": "【尘白禁区】今天你要嫁给我！",
+                    "aweme_id": "BV1JhwxevEEd",
+                    "desc": "",
+                    "create_time": 1737424888,
+                    "view": 60
+                  },
+                  {
+                    "title": "【尘白禁区】小姐姐们的舞姿，你们爱了吗？",
+                    "aweme_id": "BV1JhwxevEtQ",
+                    "desc": "",
+                    "create_time": 1737423988,
+                    "view": 3
+                  },
+                  {
+                    "title": "【尘白禁区】玩这游戏得有一副钢铁腰子！",
+                    "aweme_id": "BV1JhwxevEN2",
+                    "desc": "",
+                    "create_time": 1737423088,
+                    "view": 36
+                  },
+                  {
+                    "title": "【尘白禁区】这舞跳到我心坎里了！",
+                    "aweme_id": "BV1JhwxevEWB",
+                    "desc": "",
+                    "create_time": 1737422188,
+                    "view": 0
+                  },
+                  {
+                    "title": "【尘白禁区】攻略卜卜！新来的就是招人稀罕！",
+                    "aweme_id": "BV1gVwNetEvy",
+                    "desc": "",
+                    "create_time": 1737226449,
+                    "view": 16
+                  },
+                  {
+                    "title": "【尘白禁区】尘白来了个妹子，疑似老中医！这下分析员有救了！",
+                    "aweme_id": "BV1bVwNe4ECM",
+                    "desc": "",
+                    "create_time": 1737225549,
+                    "view": 70
+                  },
+                  {
+                    "title": "【尘白禁区】找个这小玩意做女朋友，得老有意思了！",
+                    "aweme_id": "BV1uVwNe4E1K",
+                    "desc": "",
+                    "create_time": 1737224649,
+                    "view": 19
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 7,
+                "allViewNum": 135,
+                "onePlayNumList": [
+                  {
+                    "title": "【尘白禁区】今天你要嫁给我！",
+                    "aweme_id": "BV1JhwxevEc3",
+                    "desc": "",
+                    "create_time": 1737424588,
+                    "view": 47
+                  },
+                  {
+                    "title": "【尘白禁区】小姐姐们的舞姿，你们爱了吗？",
+                    "aweme_id": "BV1JhwxevENC",
+                    "desc": "",
+                    "create_time": 1737423688,
+                    "view": 2
+                  },
+                  {
+                    "title": "【尘白禁区】玩这游戏得有一副钢铁腰子！",
+                    "aweme_id": "BV16hwxevEnc",
+                    "desc": "",
+                    "create_time": 1737422788,
+                    "view": 39
+                  },
+                  {
+                    "title": "【尘白禁区】这舞跳到我心坎里了！",
+                    "aweme_id": "BV1JhwxevEto",
+                    "desc": "",
+                    "create_time": 1737421888,
+                    "view": 0
+                  },
+                  {
+                    "title": "【尘白禁区】攻略卜卜！新来的就是招人稀罕！",
+                    "aweme_id": "BV1uVwNe4EVR",
+                    "desc": "",
+                    "create_time": 1737226149,
+                    "view": 1
+                  },
+                  {
+                    "title": "【尘白禁区】尘白来了个妹子，疑似老中医！这下分析员有救了！",
+                    "aweme_id": "BV1gVwNe4EMV",
+                    "desc": "",
+                    "create_time": 1737225249,
+                    "view": 45
+                  },
+                  {
+                    "title": "【尘白禁区】找个这小玩意做女朋友，得老有意思了！",
+                    "aweme_id": "BV1uVwNe4E6X",
+                    "desc": "",
+                    "create_time": 1737224349,
+                    "view": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "英雄联盟",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "英雄联盟手游2025迎新季",
+            "act_url": "https://www.bilibili.com/blackboard/era/hdNuiirYye5oTfVu.html",
+            "comment": "",
+            "sDate": "2025/1/9",
+            "eDate": "2025/2/9",
+            "specialTag": "英雄联盟手游2025迎新季",
+            "searchKeyWord": "英雄联盟手游2025迎新季",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "漫威争锋",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "漫威争锋S1赛季创作激励活动",
+            "act_url": "https://live.bilibili.com/blackboard/era/jqVkDYouZutyx8St.html",
+            "comment": "",
+            "sDate": "2025/1/10",
+            "eDate": "2025/2/10",
+            "specialTag": "#漫威争锋第1赛季 #漫威争锋超英奥斯卡",
+            "searchKeyWord": "漫威争锋S1赛季创作激励活动",
+            "reward": [
+              {
+                "allNum": 4,
+                "allViewNum": 400,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 6,
+                "allViewNum": 900,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 10,
+                "allViewNum": 1500,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "view": 2332,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "view": 2233,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "view": 5000,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "漫威争锋S1赛季创作激励活动",
+            "sDate": "2025/1/9",
+            "eDate": "2025/2/10",
+            "specialTag": "#漫威争锋 #漫威争锋第1赛季",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 10000,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 80000,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "无畏契约",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "无畏契约赛事激励企划7.0",
+            "act_url": "https://www.bilibili.com/blackboard/era/B5gYMr3rGLBPXDSv.html",
+            "comment": "5796人参与",
+            "sDate": "2025/1/11",
+            "eDate": "2025/2/21",
+            "specialTag": "无畏契约赛事激励企划7.0",
+            "searchKeyWord": "无畏契约赛事激励企划7.0",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "逆水寒",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "逆水寒黄金时代激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/Tnn0hBmpLR5RYSf0.html",
+            "comment": "1904人参与",
+            "sDate": "2025/1/10",
+            "eDate": "2025/2/13",
+            "specialTag": "逆水寒黄金时代激励计划",
+            "searchKeyWord": "逆水寒黄金时代激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "物华弥新",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "物华弥新创作者激励计划第七期",
+            "act_url": "https://www.bilibili.com/blackboard/era/1d1z1d0xzmTOugbs.html",
+            "comment": "1.7万人参与",
+            "sDate": "2024/12/24",
+            "eDate": "2025/1/22",
+            "specialTag": "#物华弥新 #物华弥新二创",
+            "searchKeyWord": "物华弥新创作者激励计划第七期",
+            "reward": [
+              {
+                "allNum": 5,
+                "allViewNum": 2000,
+                "money": 10000
+              },
+              {
+                "allViewNum": 10000,
+                "money": 10000
+              },
+              {
+                "view": 5000,
+                "money": 10000
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "使命召唤手游",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "使命召唤手游新春激励计划",
+            "act_url": "https://live.bilibili.com/blackboard/era/3XLpKq4JO3AytJQV.html",
+            "comment": "2176人参与",
+            "sDate": "2025/1/10",
+            "eDate": "2025/2/28",
+            "specialTag": "使命召唤手游新春激励计划",
+            "searchKeyWord": "使命召唤手游新春激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "战双帕弥什",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "2025战双帕弥什新春会",
+            "act_url": "https://www.bilibili.com/blackboard/era/xE6yWpfEyDXVzd7X.html",
+            "comment": "6485人参与",
+            "sDate": "2025/1/2",
+            "eDate": "2025/3/16",
+            "specialTag": "2025战双帕弥什新春会",
+            "searchKeyWord": "2025战双帕弥什新春会",
+            "reward": [
+              {
+                "allNum": 1000,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "基础赛道",
+            "specialTag": "#战双帕弥什 #战双帕弥什新春版本",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 5000,
+                "money": 20000,
+                "joinedPerson": 213
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 20000,
+                "money": 20000
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "幻塔",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "幻塔4.6UP主激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/2g6Yjze9I5nV83Rt.html",
+            "comment": "1.7万人参与",
+            "sDate": "2024/12/12",
+            "eDate": "2025/2/14",
+            "specialTag": "幻塔4.6UP主激励计划",
+            "searchKeyWord": "幻塔4.6UP主激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "穿越火线",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "穿越火线新春会征稿",
+            "act_url": "https://www.bilibili.com/blackboard/era/sazAm97u3tR3TBkw.html",
+            "comment": "6088人参与",
+            "sDate": "2025/1/1",
+            "eDate": "2025/3/1",
+            "specialTag": "穿越火线新春会征稿",
+            "searchKeyWord": "穿越火线新春会征稿",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "一梦江湖",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "一梦江湖七周年激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/N8TrxhkToj3hSx51.html",
+            "comment": "1518人参与",
+            "sDate": "2025/1/10",
+            "eDate": "2025/2/16",
+            "specialTag": "一梦江湖七周年激励计划",
+            "searchKeyWord": "一梦江湖七周年激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "恋与制作人",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "恋与制作人七周年同人征集",
+            "act_url": "https://lyzzr.biligame.com/qizn",
+            "comment": "2232人参与",
+            "sDate": "2024/12/5",
+            "eDate": "2025/2/15",
+            "specialTag": "恋与制作人七周年同人征集",
+            "searchKeyWord": "恋与制作人七周年同人征集",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "荒野乱斗",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "荒野乱斗蛇年新春会激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/NF1UfAo1J8INtFT5.html",
+            "comment": "17.2万人参与",
+            "sDate": "2025/1/3",
+            "eDate": "2025/2/16",
+            "specialTag": "荒野乱斗蛇年新春会激励计划",
+            "searchKeyWord": "荒野乱斗蛇年新春会激励计划",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "暗区",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "暗区新春百万激励",
+            "act_url": "https://www.bilibili.com/blackboard/era/NEE0h6VPzKYLfnF1.html",
+            "comment": "4.9万人参与",
+            "sDate": "2025/1/3",
+            "eDate": "2025/2/17",
+            "specialTag": "暗区新春百万激励",
+            "searchKeyWord": "暗区新春百万激励",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "暗区突围无限预约",
+            "act_url": "https://www.bilibili.com/blackboard/era/MRDCej5mRVO5gvu7.html",
+            "comment": "",
+            "sDate": "2025/1/20",
+            "eDate": "2025/2/28",
+            "specialTag": "#暗区突围无限预约",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "三角洲行动",
+    "rewards": [
+      {
+        "specialTagRequirements": [
+          {
+            "name": "综合瓜分",
+            "specialTag": "#一张图证明你玩过三角洲",
+            "eDate": "2025/02/28",
+            "reward": [
+              {
+                "allNum": 3,
+                "allLikeNum": 100,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 6,
+                "allLikeNum": 500,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allNum": 10,
+                "allLikeNum": 2000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "二创赛道榜单",
+            "specialTag": "#三角洲春节整大活",
+            "eDate": "2025/02/28",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allLike": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ],
+        "name": "小红书"
+      },
+      {
+        "specialTagRequirements": [
+          {
+            "name": "三角洲投稿瓜分-15万",
+            "minVideoTime": 6,
+            "minView": 1000,
+            "specialTag": "#三角洲新年正当红",
+            "topic": "",
+            "eDate": "2025/02/15",
+            "reward": [
+              {
+                "allNum": 5,
+                "allViewNum": 50000,
+                "money": 150000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ],
+        "name": "抖音"
+      },
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "三角洲行动新年创作活动",
+            "act_url": "https://www.bilibili.com/blackboard/era/qsUuwSjqV9gf4K11.html",
+            "comment": "3.8万人参与",
+            "sDate": "2025/1/1",
+            "eDate": "2025/02/15",
+            "specialTag": "#三角洲行动",
+            "searchKeyWord": "三角洲行动新年创作活动",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 500,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 500,
+                "cday": 5,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 1000,
+                "cday": 10,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 10000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 25000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 50000,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 100000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ],
+            "topic": "三角洲新年正当红"
+          },
+          {
+            "name": "三角洲行动新年创作活动",
+            "topic": "和三角洲一起迎新年",
+            "specialTag": "",
+            "eDate": "2025/02/15",
+            "reward": [
+              {
+                "allNum": 0,
+                "allViewNum": 100,
+                "joinedPerson": 0,
+                "view": 0,
+                "like": 0,
+                "allLikeNum": 0,
+                "cday": 0,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "恋与深空",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "恋与深空3.0创作征集",
+            "act_url": "https://www.bilibili.com/blackboard/era/5DDKaM0yiRNFtYR5.html",
+            "comment": "3360人参与",
+            "sDate": "2025/1/12",
+            "eDate": "2025/02/07",
+            "specialTag": "",
+            "searchKeyWord": "恋与深空3.0创作征集",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 300,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allNum": 5,
+                "allViewNum": 1000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 5000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 10000,
+                "money": 10000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 50000,
+                "money": 20000,
+                "isGet": false
+              },
+              {
+                "view": 10000,
+                "money": 40000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ],
+            "topic": "恋与深空创作者激励计划"
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "星际战甲1999",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "星际战甲1999创作者激励活动",
+            "act_url": "https://www.bilibili.com/blackboard/era/V3POjF7D7tp9eKxt.html",
+            "comment": "5.1万人参与",
+            "sDate": "2024/12/14",
+            "eDate": "2025/1/14",
+            "specialTag": "星际战甲1999创作者激励活动",
+            "searchKeyWord": "星际战甲1999创作者激励活动",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "新月同行",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "新月同行新春会",
+            "act_url": "https://www.bilibili.com/blackboard/era/PoWK6rBHgizrQLwo.html",
+            "comment": "1487人参与",
+            "sDate": "2025/1/16",
+            "eDate": "2025/2/12",
+            "specialTag": "新月同行新春会",
+            "searchKeyWord": "新月同行新春会",
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "和平精英",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "和平精英地铁逃生",
+            "act_url": "https://www.bilibili.com/blackboard/era/q7oqCHSbcR44BQc8.html",
+            "comment": "7334人参与",
+            "sDate": "2025/1/14",
+            "eDate": "2025/3/10",
+            "specialTag": "#和平精英地铁逃生",
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 200,
+                "money": 10000
+              },
+              {
+                "allNum": 4,
+                "allViewNum": 500,
+                "money": 20000
+              },
+              {
+                "allViewNum": 5000,
+                "money": 10000
+              },
+              {
+                "allViewNum": 10000,
+                "money": 20000
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "和平精英新春荣都",
+            "act_url": "https://www.bilibili.com/blackboard/era/q7oqCHSbcR44BQc8.html",
+            "comment": "7334人参与",
+            "sDate": "2025/1/14",
+            "eDate": "2025/3/10",
+            "specialTag": "#和平精英新春荣都",
+            "reward": [
+              {
+                "cday": 5,
+                "money": 20000
+              },
+              {
+                "cday": 10,
+                "money": 20000
+              },
+              {
+                "cday": 15,
+                "money": 20000
+              },
+              {
+                "allViewNum": 5000,
+                "money": 10000
+              },
+              {
+                "allViewNum": 10000,
+                "money": 20000
+              },
+              {
+                "allViewNum": 20000,
+                "money": 20000
+              },
+              {
+                "allViewNum": 40000,
+                "money": 40000
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "和平精英本地人穿搭",
+            "minView": 5000,
+            "eDate": "2025/2/11",
+            "specialTag": "#和平精英本地人穿搭 #大吉大利和平年",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 15000,
+                "money": 50000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          },
+          {
+            "name": "新春摸金狂欢季",
+            "minView": 10000,
+            "eDate": "2025/2/11",
+            "specialTag": "#新春摸金狂欢季 #和平精英地铁逃生",
+            "reward": [
+              {
+                "allNum": 3,
+                "money": 80000,
+                "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  },
+  {
+    "name": "CF",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "CF手游新春会",
+            "act_url": "https://www.bilibili.com/blackboard/era/zOMjVSUbZaD193i4.html",
+            "comment": "2439人参与",
+            "sDate": "2025/1/16",
+            "eDate": "2025/2/28",
+            "specialTag": "#CF手游新春会",
+            "reward": [
+              {
+                "cday": 3,
+                "money": 20000
+              },
+              {
+                "cday": 6,
+                "money": 10000
+              },
+              {
+                "view": 100,
+                "money": 5000
+              },
+              {
+                "view": 200,
+                "money": 10000
+              },
+              {
+                "view": 400,
+                "money": 15000
+              },
+              {
+                "allViewNum": 5000,
+                "money": 20000
+              },
+              {
+                "allViewNum": 10000,
+                "money": 20000
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "抖音",
+        "specialTagRequirements": [
+          {
+            "name": "CF手游新春会",
+            "sDate": "2025/1/16",
+            "eDate": "2025/2/10",
+            "specialTag": "#cf手游 #cf手游百闻封神录",
+            "minView": 10000,
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 30000,
+                "money": 40000
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "updateDate": "2025/1/22"
+  }
+]

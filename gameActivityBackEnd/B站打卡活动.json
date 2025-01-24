@@ -1,0 +1,4986 @@
+[
+  {
+    "act_id": 1359,
+    "title": "电台新星征集令5.0",
+    "act_img": "http://i0.hdslb.com/bfs/archive/5c3f587bb285d8b8696f01809f672b2bc0fdbdd3.png",
+    "rtime": 1736697600,
+    "stime": 1736697600,
+    "etime": 1740931199,
+    "icon_state": -1,
+    "act_tags": [
+      "电台",
+      "歌单\t"
+    ],
+    "act_brief": "选择指定话题投稿1分钟以上的符合话题内容",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1192620,
+      "name": "电台新星征集令"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "电台新星征集令5.0",
+      "rtime": 1736697600,
+      "stime": 1736697600,
+      "etime": 1740931199,
+      "rule_text": "【投稿时间】\n2025年1月13日00:00-2025年3月2日23:59\n【数据统计】\n1.自然周连续打卡类型数据统计截止时间统一为次周一24时，参与打卡的稿件需要在此之前保持开放浏览状态。\n2.二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。\n\n【参与方式】\n1.点击“立即报名”报名参与本打卡挑战\n2.报名成功后，选择话题\n#电台新星征集令\n#白噪音电台\n#新春音乐电台\n并带上TAG词：电台,歌单，投稿与话题相关的自制稿件\n3.打卡稿件需要在数据完成结算前保持开放浏览状态。\n\n【奖励发放】\n所有打卡奖金将于2025年4月30日前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，选择指定话题发布符合话题内容的视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "电台",
+        "歌单\t"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/5c3f587bb285d8b8696f01809f672b2bc0fdbdd3.png",
+      "act_brief": "选择指定话题投稿1分钟以上的符合话题内容",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 1,
+      "act_type": 2,
+      "tags": "",
+      "task_data": {
+        "main": {
+          "desc": "加入周打卡挑战后，选择以下话题投稿符合话题内容的有效视频，需要带TAG词：电台,歌单,每周瓜分2100元。\n#电台新星征集令\n#白噪音电台\n#新春音乐电台",
+          "highlight": "电台,歌单"
+        },
+        "weeks": [
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1736697600,
+            "etime": 1737302399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-1-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-1-1",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-1-2",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1737302400,
+            "etime": 1737907199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-2-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-2-1",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-2-2",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1737907200,
+            "etime": 1738511999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-3-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-3-1",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-3-2",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1738512000,
+            "etime": 1739116799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-4-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-4-1",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-4-2",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1739116800,
+            "etime": 1739721599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-5-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-5-1",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-5-2",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1739721600,
+            "etime": 1740326399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-6-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-6-1",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-6-2",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1740326400,
+            "etime": 1740931199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-7-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-7-1",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1359-2-7-2",
+                "award_name": "瓜分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1192620,
+            "name": "电台新星征集令",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1243563,
+            "name": "白噪音电台",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1179840,
+            "name": "假期奏乐不打烊",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1358,
+    "title": "KPOP回归前线打卡挑战",
+    "act_img": "http://i0.hdslb.com/bfs/archive/92ff4b280c5e31182b8675367dbdf919434ce0d0.png",
+    "rtime": 1736092800,
+    "stime": 1736092800,
+    "etime": 1739635199,
+    "icon_state": 0,
+    "act_tags": [
+      "KPOP",
+      "MV",
+      "舞蹈"
+    ],
+    "act_brief": "投稿KPOP相关视频参与打卡",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1248895,
+      "name": "KPOP年末大赏"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "KPOP回归前线打卡挑战",
+      "rtime": 1736092800,
+      "stime": 1736092800,
+      "etime": 1739635199,
+      "rule_text": "【投稿时间】\n2025年1月6日00:00-2025年2月15日24:00（注：以投稿时间为准，而非稿件过审/定时发布/开放浏览时间）\n\n【参与方式】\n1.点击“立即打卡”报名参与本赛季打卡挑战。\n2.选择指定的“参与话题”投稿自制视频。\n3.打卡稿件需要在2月16日24时数据完成结算前保持开放浏览状态。（注：二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。）\n\n【奖励发放】\n所有打卡奖金将于2025年3月31日前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，选择指定话题发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（7）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "KPOP",
+        "MV",
+        "舞蹈"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/92ff4b280c5e31182b8675367dbdf919434ce0d0.png",
+      "act_brief": "投稿KPOP相关视频参与打卡",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 2,
+      "act_type": 3,
+      "tags": "",
+      "task_data": {
+        "desc": "加入打卡挑战后，选择以下任意“参与话题”投稿音乐、舞蹈视频，2025.01.06-2025.2.15期间投稿满足以下任务，即可参与合计瓜分10000元。",
+        "highlight": "任意“参与话题”,10000元",
+        "example_av": null,
+        "tasks": [
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1358-4-0",
+            "award_name": "瓜分2000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 2000,
+            "target_progress": 0
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1358-4-1",
+            "award_name": "瓜分3000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 10000,
+            "target_progress": 0
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1358-4-2",
+            "award_name": "瓜分5000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 20000,
+            "target_progress": 0
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1248895,
+            "name": "KPOP年末大赏",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1260988,
+            "name": "KPOP回归前线",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1263270,
+            "name": "KPOP春节联欢晚会",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1262553,
+            "name": "我在B站剪MV",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1136728,
+            "name": "KPOP人年末特别舞台",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 93252,
+            "name": "KPOP人的练舞打卡",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 93254,
+            "name": "KPOP人的年末总结",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1357,
+    "title": "寻找100位非遗手艺人-打卡奖励",
+    "act_img": "http://i0.hdslb.com/bfs/archive/b04518818f01916a80107eca0692bbf7f8775900.png",
+    "rtime": 1736092800,
+    "stime": 1736092800,
+    "etime": 1740931199,
+    "icon_state": 0,
+    "act_tags": [
+      "手工"
+    ],
+    "act_brief": "指定话题下投稿",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 187051,
+      "name": "做一种很新的手工"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "寻找100位非遗手艺人-打卡奖励",
+      "rtime": 1736092800,
+      "stime": 1736092800,
+      "etime": 1740931199,
+      "rule_text": "【活动时间】\n投稿时间：2025/1/6 00:00:00 - 2025/3/2 23:59:59\n数据统计截止：活动期间每周打卡任务数据结算时间为次周一24:00\n【参与方式】\n1. 活动期间，点击页面下方“立即报名”按钮参与当前打卡活动；\n2. 成功报名后，投稿自制视频稿件（以下简称“打卡稿件”），并选择任意活动指定话题即可参与活动。\n【活动奖励】\n请详见“本周挑战”\n【稿件要求】\n1. 活动期间，投递自制稿件：\n（1）报名成功后投递的打卡稿件方可计入有效稿件（报名前投递的无法统计）；\n（2）稿件仅限原创自制作品，代投、搬运、转载类均不能参与活动；\n（3）投稿者必须为作品作者本人，剽窃他人作品参加活动将被取消活动资格；\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主；\n（5）在本站已投稿过的或带有其他平台水印的稿件不能参与活动；\n（6）稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》、《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 保持稿件为开放浏览状态：\n（1）在数据统计截止时间前，稿件需保持开放浏览状态；\n（2）若稿件为定时发布，开放浏览的时间必须设置在次周周一24:00前，否则将不会被计入有效稿件；\n（3）二次编辑稿件或添加分P，均会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件或添加分P，修复审核完成前稿件将无法被统计；\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n【奖励发放】\n1. 打卡瓜分奖励将在数据统计结算后的20个工作日内发放；\n2. 打卡瓜分奖励将以“贝壳”形式发放至哔哩哔哩账号。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任；\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\t",
+      "act_tags": [
+        "手工"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/b04518818f01916a80107eca0692bbf7f8775900.png",
+      "act_brief": "指定话题下投稿",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 2,
+      "act_type": 2,
+      "tags": "",
+      "task_data": {
+        "main": {
+          "desc": "报名打卡后，添加以下任意话题投稿自制视频，活动期间每周投稿天数≥3即可参与瓜分500元，活动期间每周投稿天数≥6，再瓜分1000元。",
+          "highlight": "每周投稿天数≥3,投稿天数≥6"
+        },
+        "weeks": [
+          {
+            "now_week": true,
+            "task_state": 0,
+            "stime": 1736092800,
+            "etime": 1736697599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-1-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-1-1",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 6,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1736697600,
+            "etime": 1737302399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-2-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-2-1",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 6,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1737302400,
+            "etime": 1737907199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-3-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-3-1",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 6,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1737907200,
+            "etime": 1738511999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-4-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-4-1",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 6,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1738512000,
+            "etime": 1739116799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-5-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-5-1",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 6,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1739116800,
+            "etime": 1739721599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-6-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-6-1",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 6,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1739721600,
+            "etime": 1740326399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-7-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-7-1",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 6,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1740326400,
+            "etime": 1740931199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-8-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1357-2-8-1",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 6,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 187051,
+            "name": "做一种很新的手工",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1220377,
+            "name": "寻找100位非遗手艺人",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 3887,
+            "name": "一起做手工吧！",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1178987,
+            "name": "手工吃谷日常",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 506648,
+            "name": "画画的日常",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1004553,
+            "name": "一起来画画吧！",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1238966,
+            "name": "万物皆可绘非遗",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1356,
+    "title": "接！二零二五",
+    "act_img": "http://i0.hdslb.com/bfs/archive/5825efb96f7e04bcfdfb6e4ba3b9d1db03f2f48e.png",
+    "rtime": 1736092800,
+    "stime": 1736092800,
+    "etime": 1740931199,
+    "icon_state": 0,
+    "act_tags": [
+      "瓜分万元现金"
+    ],
+    "act_brief": "投稿自制视频稿件并选择指定话题\t",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1262862,
+      "name": "上B站接2025!"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "接！二零二五",
+      "rtime": 1736092800,
+      "stime": 1736092800,
+      "etime": 1740931199,
+      "rule_text": "【活动时间】\n投稿时间：2025/01/06 00:00:00 - 2025/03/02 23:59:59\n数据统计截止：活动期间每周打卡任务数据结算时间为次周周一24:00\n【参与方式】\n1. 活动期间，点击页面下方“立即报名”按钮参与当前打卡活动；\n2. 成功报名后，投稿自制视频稿件（以下简称“打卡稿件”），并选择指定话题\n【活动奖励】\n请详见“本周挑战”\n【稿件要求】\n1. 活动期间，投递自制稿件：\n（1）报名成功后投递的打卡稿件方可计入有效稿件（报名前投递的无法统计）；\n（2）稿件仅限原创自制作品，代投、搬运、转载类均不能参与活动；\n（3）投稿者必须为作品作者本人，剽窃他人作品参加活动将被取消活动资格；\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主；\n（5）在本站已投稿过的或带有其他平台水印的稿件不能参与活动；\n（6）稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》、《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 保持稿件为开放浏览状态：\n（1）在数据统计截止时间前，稿件需保持开放浏览状态；\n（2）若稿件为定时发布，开放浏览的时间必须设置在次周周一24:00前，否则将不会被计入有效稿件；\n（3）二次编辑稿件或添加分P，均会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件或添加分P，修复审核完成前稿件将无法被统计；\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n【奖励发放】\n1. 打卡瓜分奖励将在数据统计结算后的20个工作日内发放；\n2. 打卡瓜分奖励将以“贝壳”形式发放至哔哩哔哩账号。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任；\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。",
+      "act_tags": [
+        "瓜分万元现金"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/5825efb96f7e04bcfdfb6e4ba3b9d1db03f2f48e.png",
+      "act_brief": "投稿自制视频稿件并选择指定话题\t",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 2,
+      "act_type": 2,
+      "tags": "",
+      "task_data": {
+        "main": {
+          "desc": "1.报名后选择以下任一话题并投稿自制视频，完成任务即可瓜分对应奖励。\n2.每周投稿天数≥5天，瓜分1000元。\n3.活动稿件不得为无意义视频，包括但不限于单一图片、白屏、黑屏、静置画面、无意义拼接、简单剪辑一刀切、不相关(无意义)搬运、无实质内容安出、重复相似内容多次投递转载内容等。",
+          "highlight": "以下任一话题"
+        },
+        "weeks": [
+          {
+            "now_week": true,
+            "task_state": 0,
+            "stime": 1736092800,
+            "etime": 1736697599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1356-2-1-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1736697600,
+            "etime": 1737302399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1356-2-2-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1737302400,
+            "etime": 1737907199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1356-2-3-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1737907200,
+            "etime": 1738511999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1356-2-4-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1738512000,
+            "etime": 1739116799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1356-2-5-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1739116800,
+            "etime": 1739721599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1356-2-6-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1739721600,
+            "etime": 1740326399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1356-2-7-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1740326400,
+            "etime": 1740931199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1356-2-8-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1262862,
+            "name": "上B站接2025!",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1251413,
+            "name": "上B站，聊情感",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1262863,
+            "name": "2025聊点走心的",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1262864,
+            "name": "我的恋爱打卡日记",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1355,
+    "title": "动物总动员-打卡奖励",
+    "act_img": "http://i0.hdslb.com/bfs/archive/2bf819dbaa161106928fcafa47e5664886865f34.png",
+    "rtime": 1735488000,
+    "stime": 1735488000,
+    "etime": 1739116799,
+    "icon_state": 1,
+    "act_tags": [
+      "动物圈",
+      "萌宠",
+      "动物总动员",
+      "猫",
+      "狗\t"
+    ],
+    "act_brief": "指定话题下投稿",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1152322,
+      "name": "动物总动员"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "动物总动员-打卡奖励",
+      "rtime": 1735488000,
+      "stime": 1735488000,
+      "etime": 1739116799,
+      "rule_text": "【活动时间】\n投稿时间：2024/12/30 00:00:00 - 2025/2/9 23:59:59\n数据统计截止：活动期间每周打卡任务数据结算时间为次周一24:00\n【参与方式】\n1. 活动期间，点击页面下方“立即报名”按钮参与当前打卡活动；\n2. 成功报名后，投稿自制视频稿件（以下简称“打卡稿件”），并选择#动物总动员 等活动指定话题即可参与活动。\n【活动奖励】\n请详见“本周挑战”\n【稿件要求】\n1. 活动期间，投递自制稿件：\n（1）报名成功后投递的打卡稿件方可计入有效稿件（报名前投递的无法统计）；\n（2）稿件仅限原创自制作品，代投、搬运、转载类均不能参与活动；\n（3）投稿者必须为作品作者本人，剽窃他人作品参加活动将被取消活动资格；\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主；\n（5）在本站已投稿过的或带有其他平台水印的稿件不能参与活动；\n（6）稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》、《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 保持稿件为开放浏览状态：\n（1）在数据统计截止时间前，稿件需保持开放浏览状态；\n（2）若稿件为定时发布，开放浏览的时间必须设置在次周周一24:00前，否则将不会被计入有效稿件；\n（3）二次编辑稿件或添加分P，均会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件或添加分P，修复审核完成前稿件将无法被统计；\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n【奖励发放】\n1. 打卡瓜分奖励将在数据统计结算后的20个工作日内发放；\n2. 打卡瓜分奖励将以“贝壳”形式发放至哔哩哔哩账号。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任；\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\t",
+      "act_tags": [
+        "动物圈",
+        "萌宠",
+        "动物总动员",
+        "猫",
+        "狗\t"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/2bf819dbaa161106928fcafa47e5664886865f34.png",
+      "act_brief": "指定话题下投稿",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 3,
+      "tags": "",
+      "task_data": {
+        "desc": "报名打卡后，添加以下任意话题投稿自制视频，活动期间每周投稿量≥10即可瓜分1000元奖金。",
+        "highlight": "",
+        "example_av": null,
+        "tasks": [
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1355-4-0",
+            "award_name": "瓜分1000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "av_num",
+            "target_value": 10,
+            "target_progress": 0
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1152322,
+            "name": "动物总动员",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1264786,
+            "name": "毛孩子的春节打开方式",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1127194,
+            "name": "动物名场面剪辑",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1152191,
+            "name": "谁家小猫这么可爱",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1093519,
+            "name": "小狗快乐日记",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1047348,
+            "name": "100种小动物图鉴",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 8811,
+            "name": "野生动物奇遇记",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1127215,
+            "name": "动物圈神配音",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1264802,
+            "name": "回村后的毛孩子",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1260836,
+            "name": "萌宠来拜年",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1354,
+    "title": "崩坏星穹铁道3.0版本音乐二创激励计划-打卡挑战",
+    "act_img": "http://i0.hdslb.com/bfs/archive/c21d463fba007764b485f091d5fa156e230694a8.png",
+    "rtime": 1735732800,
+    "stime": 1735732800,
+    "etime": 1738339199,
+    "icon_state": 1,
+    "act_tags": [
+      "游戏音乐",
+      "音乐二创\t"
+    ],
+    "act_brief": "带话题#星穹铁道3.0音乐二创#投稿",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1262139,
+      "name": "星穹铁道何者二创"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "崩坏星穹铁道3.0版本音乐二创激励计划-打卡挑战",
+      "rtime": 1735732800,
+      "stime": 1735732800,
+      "etime": 1738339199,
+      "rule_text": "【投稿时间】\n2025年1月1日20：00-2025年1月31日23：59（注：以投稿时间为准，而非稿件过审/定时发布/开放浏览时间）\n\n【参与方式】\n1.点击“立即打卡”报名参与本赛季打卡挑战。\n2.选择指定的“参与话题”投稿自制视频。\n3.打卡稿件需要在2025年2月1日24时数据完成结算前保持开放浏览状态。（注：二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。）\n\n【奖励发放】\n所有打卡奖金将于2025年3月前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，在活动指定分区下选择指定话题发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（7）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "游戏音乐",
+        "音乐二创\t"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/c21d463fba007764b485f091d5fa156e230694a8.png",
+      "act_brief": "带话题#星穹铁道3.0音乐二创#投稿",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 3,
+      "tags": "",
+      "task_data": {
+        "desc": "带话题#星穹铁道3.0音乐二创#投稿参与打卡，稿件需原创非搬运、低创低质作品。",
+        "highlight": "",
+        "example_av": null,
+        "tasks": [
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1354-4-0",
+            "award_name": "瓜分5000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 3,
+            "target_type": "av_num",
+            "target_value": 3,
+            "target_progress": 3
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1354-4-1",
+            "award_name": "瓜分5000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 3,
+            "target_type": "av_num",
+            "target_value": 7,
+            "target_progress": 7
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1354-4-2",
+            "award_name": "瓜分10000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 5000,
+            "target_progress": 109
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1262139,
+            "name": "星穹铁道何者二创",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1262137,
+            "name": "星穹铁道3.0音乐二创",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1353,
+    "title": "bilibili跨年季2.0",
+    "act_img": "http://i0.hdslb.com/bfs/archive/a88a65cac7adceaa13a0a6ca848ab89103dce57c.png",
+    "rtime": 1735660800,
+    "stime": 1735660800,
+    "etime": 1737475199,
+    "icon_state": 1,
+    "act_tags": [
+      "跨年季，跨年"
+    ],
+    "act_brief": "使用指定话题投稿跨年季相关原创视频\t",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1130206,
+      "name": "bilibili跨年季"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "bilibili跨年季2.0",
+      "rtime": 1735660800,
+      "stime": 1735660800,
+      "etime": 1737475199,
+      "rule_text": "【投稿时间】\n2025年1月1日00:00-2025年1月21日23:59\n\n【数据统计】\n1.数据统计截止至2025年1月21日23:59，参与打卡的稿件需要在此之前保持开放浏览状态。 \n2.二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。\n\n【参与方式】\n1.点击“立即报名”报名参与本打卡挑战\n2.报名成功后，选择页面中的指定话题投稿自制视频稿件。\n3.打卡稿件需要在数据完成结算前保持开放浏览状态。\n\n【奖励发放】\n所有打卡奖金将不晚于2025年3月21日前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，选择指定话题发布视频作品。\n（2）投稿视频需和跨年季相关。\n（3）投稿视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（4）投稿者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（5）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（6） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（7）投稿视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（8）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（3）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "跨年季，跨年"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/a88a65cac7adceaa13a0a6ca848ab89103dce57c.png",
+      "act_brief": "使用指定话题投稿跨年季相关原创视频\t",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 3,
+      "tags": "",
+      "task_data": {
+        "desc": "成功报名后选择以下任一指定话题投稿自制视频。",
+        "highlight": "",
+        "example_av": null,
+        "tasks": [
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1353-4-0",
+            "award_name": "瓜分1000元\t",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 100,
+            "target_progress": 0
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1353-4-1",
+            "award_name": "瓜分2000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 300,
+            "target_progress": 0
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1353-4-2",
+            "award_name": "瓜分3000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 500,
+            "target_progress": 0
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1130206,
+            "name": "bilibili跨年季",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1248983,
+            "name": "我的2024年度总结",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1248952,
+            "name": "你好2025！",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1259745,
+            "name": "宅家跨年迎接2025",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1259747,
+            "name": "出门跨年迎接2025",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1352,
+    "title": "原神5.3版本音乐二创活动-打卡挑战",
+    "act_img": "http://i0.hdslb.com/bfs/archive/81af9a4ec5a239dec151e3a88daa2ccff679374e.png",
+    "rtime": 1735617600,
+    "stime": 1735617600,
+    "etime": 1737388799,
+    "icon_state": 1,
+    "act_tags": [
+      "游戏音乐",
+      "音乐二创\t"
+    ],
+    "act_brief": "带话题#原神音乐二创#投稿",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1263981,
+      "name": "原神音乐二创"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "原神5.3版本音乐二创活动-打卡挑战",
+      "rtime": 1735617600,
+      "stime": 1735617600,
+      "etime": 1737388799,
+      "rule_text": "【投稿时间】\n2024年12月31日12：00-2025年1月20日23：59（注：以投稿时间为准，而非稿件过审/定时发布/开放浏览时间）\n\n【参与方式】\n1.点击“立即打卡”报名参与本赛季打卡挑战。\n2.选择指定的“参与话题”投稿自制视频。\n3.打卡稿件需要在2025年2月1日24时数据完成结算前保持开放浏览状态。（注：二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。）\n\n【奖励发放】\n所有打卡奖金将于2025年3月前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，在活动指定分区下选择指定话题发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（7）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "游戏音乐",
+        "音乐二创\t"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/81af9a4ec5a239dec151e3a88daa2ccff679374e.png",
+      "act_brief": "带话题#原神音乐二创#投稿",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 3,
+      "tags": "",
+      "task_data": {
+        "desc": "带话题#原神音乐二创#投稿参与打卡，稿件需原创非搬运、低创低质作品。",
+        "highlight": "",
+        "example_av": null,
+        "tasks": [
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1352-4-0",
+            "award_name": "瓜分2000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 3,
+            "target_type": "av_num",
+            "target_value": 3,
+            "target_progress": 3
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1352-4-1",
+            "award_name": "瓜分3000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 3,
+            "target_type": "av_num",
+            "target_value": 7,
+            "target_progress": 7
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1263981,
+            "name": "原神音乐二创",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1263980,
+            "name": "原神5.3版本音乐二创",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1263979,
+            "name": "原神灼火之心音乐二创活动",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1351,
+    "title": "必剪创作冬令营（25年1月）",
+    "act_img": "http://i0.hdslb.com/bfs/archive/0b42cb3f295cba2c4cee4b7f874779910e43aada.png",
+    "rtime": 1735315200,
+    "stime": 1735488000,
+    "etime": 1737907199,
+    "icon_state": 1,
+    "act_tags": [
+      "不限内容",
+      "不限分区",
+      "周周有奖"
+    ],
+    "act_brief": "报名打卡后用必剪投稿",
+    "process": 0,
+    "process_type": 0,
+    "business": 1,
+    "topic": null,
+    "tags": "",
+    "rank": 11,
+    "call_type": 3,
+    "material": null,
+    "detail": {
+      "title": "必剪创作冬令营（25年1月）",
+      "rtime": 1735315200,
+      "stime": 1735488000,
+      "etime": 1737907199,
+      "rule_text": "【投稿时间】\n2024年12月30日0:00 ~ 2025年1月26日23:59\n\n【参与方式】\n点击“立即报名”，报名成功后，前往必剪APP或Windows版投稿。\n\n【数据统计】\n1.每个自然周数据统计截止至次周一24时，参与打卡的稿件需要在此之前保持开放浏览状态。\n2.二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。\n\n【奖励发放】\n本活动奖励将于2025年4月25日前陆续发放至用户贝壳账户。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，根据活动规则发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "不限内容",
+        "不限分区",
+        "周周有奖"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/0b42cb3f295cba2c4cee4b7f874779910e43aada.png",
+      "act_brief": "报名打卡后用必剪投稿",
+      "business": 1,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 2,
+      "tags": "",
+      "task_data": {
+        "main": {
+          "desc": "使用必剪APP或Windows版投稿，完成任务瓜分奖金。\n播放数按该自然周内必剪稿件的累计播放量统计。\n【首投奖金】活动期间内首次使用必剪投稿，且稿件点赞数≥3，可得3元（活动结束后，随机抽取符合条件的3,000名用户可获得）。\t",
+          "highlight": "3元"
+        },
+        "weeks": [
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1735488000,
+            "etime": 1736092799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-1-0",
+                "award_name": "瓜分10000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 200,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-1-1",
+                "award_name": "再分7000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-1-2",
+                "award_name": "再分3000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 3000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": true,
+            "task_state": 0,
+            "stime": 1736092800,
+            "etime": 1736697599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-2-0",
+                "award_name": "瓜分10000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 200,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-2-1",
+                "award_name": "再分7000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-2-2",
+                "award_name": "再分3000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 3000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1736697600,
+            "etime": 1737302399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-3-0",
+                "award_name": "瓜分10000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 200,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-3-1",
+                "award_name": "再分7000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-3-2",
+                "award_name": "再分3000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 3000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1737302400,
+            "etime": 1737907199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-4-0",
+                "award_name": "瓜分10000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 200,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-4-1",
+                "award_name": "再分7000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1351-2-4-2",
+                "award_name": "再分3000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 3000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          }
+        ]
+      },
+      "call_type": 3,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": null,
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1350,
+    "title": "一起来看live打卡挑战",
+    "act_img": "http://i0.hdslb.com/bfs/archive/b472e85e223021dfc1a6a95b489173007b1f5164.png",
+    "rtime": 1735142400,
+    "stime": 1735142400,
+    "etime": 1739548799,
+    "icon_state": 1,
+    "act_tags": [
+      "音乐现场",
+      "饭拍",
+      "live",
+      "直拍"
+    ],
+    "act_brief": "投稿live饭拍/直拍视频参与打卡\t",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1163041,
+      "name": "乐迷圆梦计划"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "一起来看live打卡挑战",
+      "rtime": 1735142400,
+      "stime": 1735142400,
+      "etime": 1739548799,
+      "rule_text": "【投稿时间】\n2024年12月26日00:00-2025年2月14日24:00（注：以投稿时间为准，而非稿件过审/定时发布/开放浏览时间）\n\n【参与方式】\n1.点击“立即打卡”报名参与本赛季打卡挑战。\n2.选择指定的“参与话题”投稿自制视频。\n3.打卡稿件需要在12月12日24时数据完成结算前保持开放浏览状态。（注：二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。）\n\n【奖励发放】\n所有打卡奖金将于2025年3月31日前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，选择指定话题发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（7）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "音乐现场",
+        "饭拍",
+        "live",
+        "直拍"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/b472e85e223021dfc1a6a95b489173007b1f5164.png",
+      "act_brief": "投稿live饭拍/直拍视频参与打卡\t",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 3,
+      "tags": "",
+      "task_data": {
+        "desc": "加入打卡挑战后，选择以下任意“参与话题”投稿音乐现场视频，2024.12.26-2025.2.14期间投稿满足以下任务，即可参与合计瓜分10000元。\t",
+        "highlight": "任意“参与话题”,10000元",
+        "example_av": [
+          {
+            "bv": "BV146421u7aU",
+            "pic": "http://i2.hdslb.com/bfs/archive/6cdaea43fd8048eb1d698b3fbb5674be0c24a99c.jpg"
+          },
+          {
+            "bv": "BV126421M7Ha",
+            "pic": "http://i0.hdslb.com/bfs/archive/b4a7477f7a6ab5992884df32d90c650379af8066.jpg"
+          },
+          {
+            "bv": "BV1kp421o7FP",
+            "pic": "http://i0.hdslb.com/bfs/archive/e1dcccac7128c1f449e3cf0378fa92e6a3c6ac19.jpg"
+          }
+        ],
+        "tasks": [
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1350-4-0",
+            "award_name": "瓜分2000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 2000,
+            "target_progress": 0
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1350-4-1",
+            "award_name": "再分3000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 10000,
+            "target_progress": 0
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1350-4-2",
+            "award_name": "再分5000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 20000,
+            "target_progress": 0
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1163041,
+            "name": "乐迷圆梦计划",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1017869,
+            "name": "一起来看live",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 60122,
+            "name": "一起来看演唱会",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1019348,
+            "name": "一起来看音乐节",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1036994,
+            "name": "一起来看演出",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1140837,
+            "name": "演唱会神级现场",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1262871,
+            "name": "年度LIVE大赏",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1348,
+    "title": "冬日必备·美食御寒季",
+    "act_img": "http://i0.hdslb.com/bfs/archive/691939edff939b71cf51476a272dbf6723e3207d.png",
+    "rtime": 1734969600,
+    "stime": 1734969600,
+    "etime": 1736956799,
+    "icon_state": 1,
+    "act_tags": [
+      "美食"
+    ],
+    "act_brief": "投稿美食内容瓜分3000元奖金",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1122120,
+      "name": "冬日必备·美食御寒季"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "冬日必备·美食御寒季",
+      "rtime": 1734969600,
+      "stime": 1734969600,
+      "etime": 1736956799,
+      "rule_text": "【投稿时间】\n2024/12/24 00:00:00- 2025/1/15 23:59:59\n数据统计截止时间：活动结束第二天的24时\n【参与方式】\n1.点击“立即报名”报名参与本打卡挑战\n2.报名成功后，选择话题#冬日必备·美食御寒季#、#街头巷尾寻冬味#、#一口晕碳的快乐#、#冬日深夜食堂#、#冬日暖胃食谱#、#厨房小白过冬指南#、#记录早市的烟火气#、#南北早市大不同#，投稿自制美食视频稿件。\n3.打卡稿件需要在数据完成结算前保持开放浏览状态。\n【奖励发放】\n所有打卡奖金将于2025年4月31日前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，在活动下选择指定话题发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（7）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（3）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。",
+      "act_tags": [
+        "美食"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/691939edff939b71cf51476a272dbf6723e3207d.png",
+      "act_brief": "投稿美食内容瓜分3000元奖金",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 3,
+      "tags": "",
+      "task_data": {
+        "desc": "选择指定话题#冬日必备·美食御寒季#、#街头巷尾寻冬味#和下方本页面内话题，投稿自制美食视频。在2024/12/24- 2024/1/15 期间投稿满足以下任务，且投稿视频时长≥30s，可瓜分3000元，每个任务中每个账号限瓜分1次，奖金在2025年4月31日前陆续发放至用户贝壳账户上。\t",
+        "highlight": "",
+        "example_av": null,
+        "tasks": [
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1348-4-0",
+            "award_name": "瓜分1000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "av_num",
+            "target_value": 3,
+            "target_progress": 0
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1348-4-1",
+            "award_name": "瓜分2000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "av_num",
+            "target_value": 5,
+            "target_progress": 0
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1122120,
+            "name": "冬日必备·美食御寒季",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1245776,
+            "name": "街头巷尾寻冬味",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1245773,
+            "name": "冬日深夜食堂",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1245774,
+            "name": "冬日暖胃食谱",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1245776,
+            "name": "街头巷尾寻冬味",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1245775,
+            "name": "厨房小白过冬指南",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1250533,
+            "name": "一口晕碳的快乐",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1245412,
+            "name": "南北早市大不同",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1346,
+    "title": "鸣潮2.0版本音乐二创活动-打卡挑战",
+    "act_img": "http://i0.hdslb.com/bfs/archive/fab18363c8d4c75756803f7ed4bf417a4fc0923d.png",
+    "rtime": 1734922800,
+    "stime": 1734922800,
+    "etime": 1739375999,
+    "icon_state": 1,
+    "act_tags": [
+      "游戏音乐",
+      "音乐二创\t"
+    ],
+    "act_brief": "带话题#鸣潮先约电台音乐二创活动#投稿\t",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1186151,
+      "name": "鸣潮先约电台音乐二创活动"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "鸣潮2.0版本音乐二创活动-打卡挑战",
+      "rtime": 1734922800,
+      "stime": 1734922800,
+      "etime": 1739375999,
+      "rule_text": "【投稿时间】\n2024年12月23日11：00-2025年2月12日23：59（注：以投稿时间为准，而非稿件过审/定时发布/开放浏览时间）\n\n【参与方式】\n1.点击“立即打卡”报名参与本赛季打卡挑战。\n2.选择指定的“参与话题”投稿自制视频。\n3.打卡稿件需要在2025年2月13日24时数据完成结算前保持开放浏览状态。（注：二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。）\n\n【奖励发放】\n所有打卡奖金将于2025年3月前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，在活动指定分区下选择指定话题发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（7）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "游戏音乐",
+        "音乐二创\t"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/fab18363c8d4c75756803f7ed4bf417a4fc0923d.png",
+      "act_brief": "带话题#鸣潮先约电台音乐二创活动#投稿\t",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 3,
+      "tags": "",
+      "task_data": {
+        "desc": "带话题#鸣潮先约电台音乐二创活动#投稿参与打卡，稿件需原创非搬运、低创低质作品。\t",
+        "highlight": "",
+        "example_av": null,
+        "tasks": [
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1346-4-0",
+            "award_name": "瓜分5000元\t",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 3,
+            "target_type": "av_num",
+            "target_value": 3,
+            "target_progress": 3
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1346-4-1",
+            "award_name": "再分5000元\t",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 1000,
+            "target_progress": 0
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1346-4-2",
+            "award_name": "再分10000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 10000,
+            "target_progress": 0
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1186151,
+            "name": "鸣潮先约电台音乐二创活动",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1345,
+    "title": "及时行乐，广接好运",
+    "act_img": "http://i0.hdslb.com/bfs/archive/7b91eb1e02b3baf9b59151e06883236680da1eff.png",
+    "rtime": 1734883200,
+    "stime": 1734883200,
+    "etime": 1740931199,
+    "icon_state": 1,
+    "act_tags": [
+      "新年音乐\t"
+    ],
+    "act_brief": "选择指定话题投稿\t",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1137108,
+      "name": "新年音乐狂欢季"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "及时行乐，广接好运",
+      "rtime": 1734883200,
+      "stime": 1734883200,
+      "etime": 1740931199,
+      "rule_text": "【投稿时间】\n2024年12月23日00:00-2025年3月2日23:59\n【数据统计】\n1.自然周连续打卡类型数据统计截止时间统一为次周一24时，参与打卡的稿件需要在此之前保持开放浏览状态。\n2.二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。\n\n【参与方式】\n1.点击“立即报名”报名参与本打卡挑战\n2.报名成功后，选择话题#翻唱总动员##演奏挑战赛##新年音乐狂欢季##音乐小课堂开课了#投稿自制音乐相关视频稿件。\n3.打卡稿件需要在数据完成结算前保持开放浏览状态。\n\n【奖励发放】\n所有打卡奖金将于2025年4月30日前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，在活动指定分区下选择指定话题发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（7）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "新年音乐\t"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/7b91eb1e02b3baf9b59151e06883236680da1eff.png",
+      "act_brief": "选择指定话题投稿\t",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 2,
+      "tags": "",
+      "task_data": {
+        "main": {
+          "desc": "加入周打卡挑战后，选择以下任一指定话题投稿音乐内容相关自制视频，每周瓜分3000元。\t",
+          "highlight": ""
+        },
+        "weeks": [
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734883200,
+            "etime": 1735487999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-1-0",
+                "award_name": "瓜分800元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-1-1",
+                "award_name": "再分1000元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-1-2",
+                "award_name": "再分1200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 2000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1735488000,
+            "etime": 1736092799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-2-0",
+                "award_name": "瓜分800元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 1
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-2-1",
+                "award_name": "再分1000元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 1
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-2-2",
+                "award_name": "再分1200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 2000,
+                "target_progress": 1
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": true,
+            "task_state": 0,
+            "stime": 1736092800,
+            "etime": 1736697599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-3-0",
+                "award_name": "瓜分800元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-3-1",
+                "award_name": "再分1000元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-3-2",
+                "award_name": "再分1200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 2000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1736697600,
+            "etime": 1737302399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-4-0",
+                "award_name": "瓜分800元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-4-1",
+                "award_name": "再分1000元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-4-2",
+                "award_name": "再分1200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 2000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1737302400,
+            "etime": 1737907199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-5-0",
+                "award_name": "瓜分800元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-5-1",
+                "award_name": "再分1000元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-5-2",
+                "award_name": "再分1200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 2000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1737907200,
+            "etime": 1738511999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-6-0",
+                "award_name": "瓜分800元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-6-1",
+                "award_name": "再分1000元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-6-2",
+                "award_name": "再分1200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 2000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1738512000,
+            "etime": 1739116799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-7-0",
+                "award_name": "瓜分800元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-7-1",
+                "award_name": "再分1000元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-7-2",
+                "award_name": "再分1200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 2000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1739116800,
+            "etime": 1739721599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-8-0",
+                "award_name": "瓜分800元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-8-1",
+                "award_name": "再分1000元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-8-2",
+                "award_name": "再分1200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 2000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1739721600,
+            "etime": 1740326399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-9-0",
+                "award_name": "瓜分800元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-9-1",
+                "award_name": "再分1000元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-9-2",
+                "award_name": "再分1200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 2000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1740326400,
+            "etime": 1740931199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-10-0",
+                "award_name": "瓜分800元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-10-1",
+                "award_name": "再分1000元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1345-2-10-2",
+                "award_name": "再分1200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 2000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1137108,
+            "name": "新年音乐狂欢季",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 61506,
+            "name": "翻唱总动员",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 14336,
+            "name": "演奏挑战赛",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 44565,
+            "name": "音乐小课堂开课了",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1344,
+    "title": "“医”起打卡挑战-健康科普瓜分赛道",
+    "act_img": "http://i0.hdslb.com/bfs/archive/14a2b93ee18fc547f218e01bda2a3779699ab301.png",
+    "rtime": 1734624000,
+    "stime": 1734624000,
+    "etime": 1740931199,
+    "icon_state": 1,
+    "act_tags": [
+      "健康",
+      "健康科普"
+    ],
+    "act_brief": "投稿打卡瓜分千元奖金",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1240980,
+      "name": "医学界健康科普"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "“医”起打卡挑战-健康科普瓜分赛道",
+      "rtime": 1734624000,
+      "stime": 1734624000,
+      "etime": 1740931199,
+      "rule_text": "【投稿时间】\n2024年12月20日00:00:00-2025年3月2日23:59:59\n\n【数据统计】\n1.累计投稿量的数据统计截止至3月2日24时，参与打卡的稿件需要在此之前保持开放浏览状态。 \n2.二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。\n\n【参与方式】\n1.点击“立即报名”报名参与本打卡挑战，未报名用户无法获得奖励。\n2.报名打卡成功后，报名打卡成功后，选择#我的健康经验#、#我的就医指南#、#暖冬健康守护计划#、#科学养生手册#、#每天一个健康知识#、#医学界健康科普#、#医生陪你唠健康#、#健康深呼吸#和#冬季护心指南#，投稿≥10秒的健康科普相关原创视频。\n3.打卡稿件需要在数据完成结算前保持开放浏览状态。\n\n\n【奖励发放】\n所有打卡奖金将于2025年4月30日前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，在活动指定分区下选择指定话题发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（7）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（3）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "健康",
+        "健康科普"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/14a2b93ee18fc547f218e01bda2a3779699ab301.png",
+      "act_brief": "投稿打卡瓜分千元奖金",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 3,
+      "tags": "",
+      "task_data": {
+        "desc": "报名打卡成功后，选择#我的健康经验#、#我的就医指南#、#暖冬健康守护计划#、#科学养生手册#、#每天一个健康知识#、#医学界健康科普#、#医生陪你唠健康#、#健康深呼吸#和#冬季护心指南#，投稿≥10秒的健康科普相关原创视频，并满足以下任务，达成任务后即可参与合计5000元奖金瓜分。\t",
+        "highlight": "#我的健康经验#,#我的就医指南#,#暖冬健康守护计划#,#科学养生手册#,#每天一个健康知识#,#医学界健康科普#,#医生陪你唠健康#,#健康深呼吸#,#冬季护心指南#,健康科普相关",
+        "example_av": null,
+        "tasks": [
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1344-4-0",
+            "award_name": "瓜分500元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 10000,
+            "target_progress": 0
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1344-4-1",
+            "award_name": "再分1500元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 50000,
+            "target_progress": 0
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1344-4-2",
+            "award_name": "再分3000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "view",
+            "target_value": 100000,
+            "target_progress": 0
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1240980,
+            "name": "医学界健康科普",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1260775,
+            "name": "医生陪你唠健康",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1260776,
+            "name": "健康深呼吸",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1260777,
+            "name": "冬季护心指南",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1260772,
+            "name": "我的健康经验",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1260774,
+            "name": "我的就医指南",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1260779,
+            "name": "暖冬健康守护计划",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1141828,
+            "name": "科学养生手册",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1002555,
+            "name": "每天一个健康知识",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1339,
+    "title": "当B站UP主有娃后2.0打卡",
+    "act_img": "http://i0.hdslb.com/bfs/archive/2dfd19be49b5b5e1695a27798f244cd80a77f9ed.png",
+    "rtime": 1734278400,
+    "stime": 1734278400,
+    "etime": 1737907199,
+    "icon_state": 1,
+    "act_tags": [
+      "家庭",
+      "带娃",
+      "萌娃\t"
+    ],
+    "act_brief": "选择指定话题投稿亲子相关内容",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1258094,
+      "name": "回顾我的年度带娃时刻"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "当B站UP主有娃后2.0打卡",
+      "rtime": 1734278400,
+      "stime": 1734278400,
+      "etime": 1737907199,
+      "rule_text": "【活动时间】\n投稿时间：2024/12/16 00:00:00 - 2025/01/26 23:59:59\t\n数据统计截止：活动期间每周打卡任务数据结算时间为次周周一24:00\n【参与方式】\n1. 活动期间，点击页面下方“立即报名”按钮参与当前打卡活动；\n2. 成功报名后，投稿自制视频稿件（以下简称“打卡稿件”），并选择指定话题，投稿亲子相关内容）。\n【活动奖励】\n请详见“本周挑战”\n【稿件要求】\n1. 活动期间，投递自制稿件：\n（1）报名成功后投递的打卡稿件方可计入有效稿件（报名前投递的无法统计）；\n（2）稿件仅限原创自制作品，代投、搬运、转载类均不能参与活动；\n（3）投稿者必须为作品作者本人，剽窃他人作品参加活动将被取消活动资格；\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主；\n（5）在本站已投稿过的或带有其他平台水印的稿件不能参与活动；\n（6）稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》、《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 保持稿件为开放浏览状态：\n（1）在数据统计截止时间前，稿件需保持开放浏览状态；\n（2）若稿件为定时发布，开放浏览的时间必须设置在次周周一24:00前，否则将不会被计入有效稿件；\n（3）二次编辑稿件或添加分P，均会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件或添加分P，修复审核完成前稿件将无法被统计；\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n【奖励发放】\n1. 打卡瓜分奖励将在数据统计结算后的20个工作日内发放；\n2. 打卡瓜分奖励将以“贝壳”形式发放至哔哩哔哩账号。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任；\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\t",
+      "act_tags": [
+        "家庭",
+        "带娃",
+        "萌娃\t"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/2dfd19be49b5b5e1695a27798f244cd80a77f9ed.png",
+      "act_brief": "选择指定话题投稿亲子相关内容",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 2,
+      "tags": "",
+      "task_data": {
+        "main": {
+          "desc": "报名后，投稿亲子相关内容，添加以下任一话题，投稿自制视频，每周【投稿天数≥3天】 可瓜分500元（共六周）。\t",
+          "highlight": "亲子相关内容,以下任一话题"
+        },
+        "weeks": [
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734278400,
+            "etime": 1734883199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1339-2-1-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734883200,
+            "etime": 1735487999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1339-2-2-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1735488000,
+            "etime": 1736092799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1339-2-3-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": true,
+            "task_state": 0,
+            "stime": 1736092800,
+            "etime": 1736697599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1339-2-4-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1736697600,
+            "etime": 1737302399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1339-2-5-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1737302400,
+            "etime": 1737907199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1339-2-6-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1258094,
+            "name": "回顾我的年度带娃时刻",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1255722,
+            "name": "冬日亲子好时光",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1149435,
+            "name": "假期带娃指南",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1243218,
+            "name": "当代年轻人带娃现状",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1338,
+    "title": "宅舞人穿搭派对",
+    "act_img": "http://i0.hdslb.com/bfs/archive/834a96cd30e8eb24b38aab130d17e0601ce761e8.png",
+    "rtime": 1734278400,
+    "stime": 1734278400,
+    "etime": 1736697599,
+    "icon_state": 1,
+    "act_tags": [
+      "宅舞",
+      "投稿必得奖 "
+    ],
+    "act_brief": "参与活动话题投稿宅舞相关内容必得奖金\t",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1248241,
+      "name": "我的秋冬宅舞穿搭"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "宅舞人穿搭派对",
+      "rtime": 1734278400,
+      "stime": 1734278400,
+      "etime": 1736697599,
+      "rule_text": "【投稿时间】\n2024年11月16日00：00至2025年1月12日23:59\n\n【数据统计】\n1.每个自然周数据统计截止次周一24时，参与打卡的稿件需要在此之前保持开放浏览状态。 \n2.二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。\n\n【参与方式】\n1.点击“立即报名”报名参与本打卡挑战\n2.报名成功后，选择指定话题投稿自制宅舞视频稿件。\n3.打卡稿件需要在数据完成结算前保持开放浏览状态。\n\n【奖励发放】\n所有打卡奖金将于2025年4月30日前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，在活动指定话题发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（7）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "宅舞",
+        "投稿必得奖 "
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/834a96cd30e8eb24b38aab130d17e0601ce761e8.png",
+      "act_brief": "参与活动话题投稿宅舞相关内容必得奖金\t",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 2,
+      "tags": "",
+      "task_data": {
+        "main": {
+          "desc": "成功报名后，投稿宅舞内容选择参与以下话题投稿自制视频，完成每周投稿任务共计瓜分800元奖金。\t",
+          "highlight": "800元"
+        },
+        "weeks": [
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734278400,
+            "etime": 1734883199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1338-2-1-0",
+                "award_name": "瓜分50元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1338-2-1-1",
+                "award_name": "再分150元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734883200,
+            "etime": 1735487999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1338-2-2-0",
+                "award_name": "瓜分50元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1338-2-2-1",
+                "award_name": "再分150元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1735488000,
+            "etime": 1736092799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1338-2-3-0",
+                "award_name": "瓜分50元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1338-2-3-1",
+                "award_name": "再分150元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": true,
+            "task_state": 0,
+            "stime": 1736092800,
+            "etime": 1736697599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1338-2-4-0",
+                "award_name": "瓜分50元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1338-2-4-1",
+                "award_name": "再分150元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1248241,
+            "name": "我的秋冬宅舞穿搭",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1248237,
+            "name": "COS灵感宅舞秀",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1248239,
+            "name": "宅舞演出OOTD",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1336,
+    "title": "我的年度游记",
+    "act_img": "http://i0.hdslb.com/bfs/archive/d3bf68b75f7a9db1f73d960eecbea9cc0f96b260.png",
+    "rtime": 1734192000,
+    "stime": 1734278400,
+    "etime": 1737302399,
+    "icon_state": 1,
+    "act_tags": [
+      "周周有奖"
+    ],
+    "act_brief": "活动期间选择指定话题投稿",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1251454,
+      "name": "我的年度游记"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "我的年度游记",
+      "rtime": 1734192000,
+      "stime": 1734278400,
+      "etime": 1737302399,
+      "rule_text": "【活动时间】\n投稿时间：2024年12月16日00:00-2025年1月19日23:59\n数据统计截止：活动期间每周打卡任务数据结算时间为次周周一24:00\n【参与方式】\n1. 活动期间，点击页面下方“立即报名”按钮参与当前打卡活动；\n2. 成功报名后，投稿自制视频稿件（以下简称“打卡稿件”），并选择任一活动指定话题#我的年度游记，#冬日出游溜达一下即可参与活动\n【活动奖励】\n单周投稿数≥1条，即可瓜分打卡奖池1000元\n【稿件要求】\n1. 活动期间，投递自制原创稿件：\n（1）报名成功后投递的打卡稿件方可计入有效稿件（报名前投递的无法统计）；\n（2）稿件仅限原创自制作品，代投、搬运、转载类均不能参与活动；\n（3）投稿者必须为作品作者本人，剽窃他人作品参加活动将被取消活动资格；\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主；\n（5）在本站已投稿过的或带有其他平台水印的稿件不能参与活动；\n（6）稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》、《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 保持稿件为开放浏览状态：\n（1）在数据统计截止时间前，稿件需保持开放浏览状态；\n（2）若稿件为定时发布，开放浏览的时间必须设置在次周周一24:00前，否则将不会被计入有效稿件；\n（3）二次编辑稿件或添加，均会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件或添加分P，修复审核完成前稿件将无法被统计；\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n【奖励发放】\n1. 打卡瓜分奖励将在活动结束后的60个工作日内发放；\n2. 打卡瓜分奖励将以“贝壳金”形式发放至哔哩哔哩账号。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任；\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\t",
+      "act_tags": [
+        "周周有奖"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/d3bf68b75f7a9db1f73d960eecbea9cc0f96b260.png",
+      "act_brief": "活动期间选择指定话题投稿",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 2,
+      "tags": "",
+      "task_data": {
+        "main": {
+          "desc": "活动期间选择指定话题的，单周投稿数≥1条，即可瓜分打卡奖池1000元。",
+          "highlight": ""
+        },
+        "weeks": [
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734278400,
+            "etime": 1734883199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1336-2-1-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 1,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734883200,
+            "etime": 1735487999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1336-2-2-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 1,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 1,
+            "stime": 1735488000,
+            "etime": 1736092799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1336-2-3-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 3,
+                "target_type": "av_num",
+                "target_value": 1,
+                "target_progress": 1
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": true,
+            "task_state": 0,
+            "stime": 1736092800,
+            "etime": 1736697599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1336-2-4-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 1,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1736697600,
+            "etime": 1737302399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1336-2-5-0",
+                "award_name": "瓜分1000元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 1,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1251454,
+            "name": "我的年度游记",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1255302,
+            "name": "冬日出游溜达一下",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1333,
+    "title": "轻舞蹈竖屏打卡挑战",
+    "act_img": "http://i0.hdslb.com/bfs/archive/ea3fb2546473057e198d3a03dbfb4ffea722231a.png",
+    "rtime": 1733500800,
+    "stime": 1733673600,
+    "etime": 1736697599,
+    "icon_state": 1,
+    "act_tags": [
+      "舞蹈",
+      "竖屏",
+      "投稿必得奖"
+    ],
+    "act_brief": "选择指定话题投稿",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1228844,
+      "name": "轻舞蹈竖屏激励计划"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "轻舞蹈竖屏打卡挑战",
+      "rtime": 1733500800,
+      "stime": 1733673600,
+      "etime": 1736697599,
+      "rule_text": "【投稿时间】\n12月9日00：00至1月12日23:59:59\n【数据统计】\n1.每个自然周累计播放数和点赞数的数据统计截止至次周一24时，参与打卡的稿件需要在此之前保持开放浏览状态。 \n2.二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。\n\n【参与方式】\n1.点击“立即报名”报名参与本打卡挑战\n2.报名成功后，投稿指定形式舞蹈内容，选择指定话题投稿自制视频稿件。\n3.打卡稿件需要在数据完成结算前保持开放浏览状态。\n\n【奖励发放】\n所有打卡奖金将于2024年12月31日前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，在活动指定分区下选择指定话题发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（7）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "舞蹈",
+        "竖屏",
+        "投稿必得奖"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/ea3fb2546473057e198d3a03dbfb4ffea722231a.png",
+      "act_brief": "选择指定话题投稿",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 2,
+      "tags": "",
+      "task_data": {
+        "main": {
+          "desc": "成功报名后，投稿【竖屏舞蹈】内容参与以下话题，每周打卡瓜分400元。共计瓜分2000元。",
+          "highlight": "【竖屏舞蹈】,2000元"
+        },
+        "weeks": [
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1733673600,
+            "etime": 1734278399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1333-2-1-0",
+                "award_name": "瓜分200元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1333-2-1-1",
+                "award_name": "再分200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734278400,
+            "etime": 1734883199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1333-2-2-0",
+                "award_name": "瓜分200元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1333-2-2-1",
+                "award_name": "再分200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734883200,
+            "etime": 1735487999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1333-2-3-0",
+                "award_name": "瓜分200元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1333-2-3-1",
+                "award_name": "再分200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1735488000,
+            "etime": 1736092799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1333-2-4-0",
+                "award_name": "瓜分200元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 1
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1333-2-4-1",
+                "award_name": "再分200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 1
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": true,
+            "task_state": 0,
+            "stime": 1736092800,
+            "etime": 1736697599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1333-2-5-0",
+                "award_name": "瓜分200元\t",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1333-2-5-1",
+                "award_name": "再分200元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 5,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1228844,
+            "name": "轻舞蹈竖屏激励计划",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1324,
+    "title": "Vsinger创作激励计划2024冬季物语",
+    "act_img": "http://i0.hdslb.com/bfs/archive/1328338c33c16095cdcbf7e2c82fe5a59d504524.png",
+    "rtime": 1732982400,
+    "stime": 1732982400,
+    "etime": 1738339199,
+    "icon_state": 1,
+    "act_tags": [
+      "虚拟歌手"
+    ],
+    "act_brief": "使用指定话题参与创作投稿",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 9865,
+      "name": "Vsinger创作激励计划"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "Vsinger创作激励计划2024冬季物语",
+      "rtime": 1732982400,
+      "stime": 1732982400,
+      "etime": 1738339199,
+      "rule_text": "规则说明\n1.  活动时间：\n2024年12月1日-2025年1月31日23:59:59\n打卡数据统计时间截止到2025年2月1日24时\n*投稿天数以投稿提交时间为准，而非稿件过审/定时发布/开放浏览时间。\n*二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。\n\n2.征集范围：\n参与打卡奖的稿件需使用Vsinger成员洛天依、言和、乐正绫、乐正龙牙、徵羽摩柯、墨清弦的音源或虚拟形象，创作相关内容，选择活动话题#Vsinger创作激励计划#投稿。（稿件时长≥30s）\n*使用Vsinger音乐作品的非音乐区投稿，应选择Vsinger演唱版。\n\n3. 参与活动稿件应遵守法律法规及哔哩哔哩平台投稿规则，不得违反社会公序良俗或侵害他人合法权益，不得含有商业推广内容。\n\n4 活动作品应为首次投稿的原创作品。代投、搬运、转载、盗用或过往已公开稿件，均不计入活动。\n\n5. 需按规范使用Vsinger的软件音源、歌曲和形象进行创作。若有盗用、抄袭、侵权等情况，及不符合活动规则或数据异常的稿件，一经核实将取消参与资格。\n\n6. 本活动对音乐、舞蹈、动画、鬼畜4个分区开放联合投稿，投稿需符合《联合投稿创作公约》。\n\n7. 奖项评选将由主办方根据作品质量、数据等维度综合评定；特约稿件不参与奖项评选。\n\n8. 活动评审结束后，将通过公告及官方账号@Vsinger团队，私信通知获奖用户；活动奖金以贝壳奖金形式在20个工作日内发放到账户；瓜分奖金仅按投稿UP主统计；联合投稿奖金将发放至投稿UP主账户，成员奖励由团队自行分配。\n\n9. 推进商业化项目的相关合作事宜由双方另行约定。\n\n10. 获奖稿件需在活动结束后保持“获奖作品需在活动结束后保持“开放浏览”状态，在活动统计结束前，因删除、版权侵权、违规等行为造成无法获奖等后果，由UP主自行承担。\t",
+      "act_tags": [
+        "虚拟歌手"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/1328338c33c16095cdcbf7e2c82fe5a59d504524.png",
+      "act_brief": "使用指定话题参与创作投稿",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 3,
+      "tags": "",
+      "task_data": {
+        "desc": "加入后使用Vsinger成员洛天依、言和、乐正绫、乐正龙牙、徵羽摩柯、墨清弦的音源或虚拟形象，带话题#Vsinger创作激励计划#投稿自制视频（时长≥30s)。\t",
+        "highlight": "",
+        "example_av": null,
+        "tasks": [
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1324-4-0",
+            "award_name": "瓜分3000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "av_day",
+            "target_value": 3,
+            "target_progress": 1
+          },
+          {
+            "task_type": 1,
+            "award_type": 1,
+            "task_oid": "1324-4-1",
+            "award_name": "再分3000元",
+            "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+            "award_state": 0,
+            "target_type": "av_day",
+            "target_value": 6,
+            "target_progress": 1
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 9865,
+            "name": "Vsinger创作激励计划",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1190317,
+            "name": "和洛天依一起唱",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1253673,
+            "name": "徵羽摩柯六周年",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1306,
+    "title": "AI音乐征集大赛·2024第四期（每周打卡）",
+    "act_img": "http://i0.hdslb.com/bfs/archive/e6ee9b052e483805678433deaa1712eb821edd0e.png",
+    "rtime": 1730649600,
+    "stime": 1730649600,
+    "etime": 1736697599,
+    "icon_state": 1,
+    "act_tags": [
+      "AI音乐"
+    ],
+    "act_brief": "创作AI音乐相关内容并投稿",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1179402,
+      "name": "AI音乐征集大赛"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "AI音乐征集大赛·2024第四期（每周打卡）",
+      "rtime": 1730649600,
+      "stime": 1730649600,
+      "etime": 1736697599,
+      "rule_text": "【投稿时间】\n2024年11月4日0:00-2025年1月12日23:59\n\n【数据统计】\n1.自然周连续打卡类型数据统计截止时间统一为次周一24时，参与打卡的稿件需要在此之前保持开放浏览状态 \n2.二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。\n\n【参与方式】\n1.点击“立即报名”报名参与本打卡挑战\n2.报名成功后，在音乐-AI音乐分区，选择话题#AI音乐征集大赛#等话题投稿自制视频稿件。\n3.打卡稿件需要在数据完成结算前保持开放浏览状态。\n\n【奖励发放】\n所有打卡奖金将于2025年2月28日前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，在活动指定分区下选择指定话题发布视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（7）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）二次编辑稿件会导致稿件进入修复待审的状态。请避免在统计截止前修改稿件，修复审核完成前稿件将无法被统计。\n（4）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "AI音乐"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/e6ee9b052e483805678433deaa1712eb821edd0e.png",
+      "act_brief": "创作AI音乐相关内容并投稿",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 2,
+      "tags": "",
+      "task_data": {
+        "main": {
+          "desc": "加入打卡挑战后，在【音乐-AI音乐】分区选择以下任意“参与话题”投稿自制的AI音乐相关视频（包含不限于：，2024.11.4-2025.1.12期间投稿满足以下任务，即可每周参与瓜分800元，10周合计8000元奖金。（奖金在活动结束后2月中旬发放）\t",
+          "highlight": ""
+        },
+        "weeks": [
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1730649600,
+            "etime": 1731254399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-1-0",
+                "award_name": "瓜分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 2,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-1-1",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 400,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-1-2",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 4,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1731254400,
+            "etime": 1731859199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-2-0",
+                "award_name": "瓜分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 2,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-2-1",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 400,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-2-2",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 4,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1731859200,
+            "etime": 1732463999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-3-0",
+                "award_name": "瓜分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 2,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-3-1",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 400,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-3-2",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 4,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1732464000,
+            "etime": 1733068799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-4-0",
+                "award_name": "瓜分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 2,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-4-1",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 400,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-4-2",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 4,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1733068800,
+            "etime": 1733673599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-5-0",
+                "award_name": "瓜分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 2,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-5-1",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 400,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-5-2",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 4,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1733673600,
+            "etime": 1734278399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-6-0",
+                "award_name": "瓜分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 2,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-6-1",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 400,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-6-2",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 4,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734278400,
+            "etime": 1734883199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-7-0",
+                "award_name": "瓜分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 2,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-7-1",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 400,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-7-2",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 4,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734883200,
+            "etime": 1735487999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-8-0",
+                "award_name": "瓜分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 2,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-8-1",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 400,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-8-2",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 4,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 1,
+            "stime": 1735488000,
+            "etime": 1736092799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-9-0",
+                "award_name": "瓜分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 3,
+                "target_type": "av_num",
+                "target_value": 2,
+                "target_progress": 2
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-9-1",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 400,
+                "target_progress": 4
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-9-2",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 4,
+                "target_progress": 2
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": true,
+            "task_state": 0,
+            "stime": 1736092800,
+            "etime": 1736697599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-10-0",
+                "award_name": "瓜分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 2,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-10-1",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 400,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1306-2-10-2",
+                "award_name": "再分300元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_num",
+                "target_value": 4,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1179402,
+            "name": "AI音乐征集大赛",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1012791,
+            "name": "AI虚拟之声实验室",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1047195,
+            "name": "AI翻唱集结计划",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1033425,
+            "name": "AI音乐大赏",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  },
+  {
+    "act_id": 1301,
+    "title": "电台新星征集令4.0",
+    "act_img": "http://i0.hdslb.com/bfs/archive/f21c6e0ac1e38dc700c16cecc9ea8e99cedef33e.png",
+    "rtime": 1730649600,
+    "stime": 1730649600,
+    "etime": 1736697599,
+    "icon_state": 1,
+    "act_tags": [
+      "电台",
+      "歌单"
+    ],
+    "act_brief": "在指定分区【音乐-电台】选择指定话题投稿",
+    "process": 0,
+    "process_type": 0,
+    "business": 3,
+    "topic": {
+      "id": 1192620,
+      "name": "电台新星征集令"
+    },
+    "tags": "",
+    "rank": 11,
+    "call_type": 1,
+    "material": null,
+    "detail": {
+      "title": "电台新星征集令4.0",
+      "rtime": 1730649600,
+      "stime": 1730649600,
+      "etime": 1736697599,
+      "rule_text": "【投稿时间】\n2024年11月4日00:00-2024年1月12日23:59\n【数据统计】\n1.自然周连续打卡类型数据统计截止时间统一为次周一24时，参与打卡的稿件需要在此之前保持开放浏览状态。\n2.二次编辑稿件会导致稿件进入修复待审的状态。请避免在数据完成结算前临时修改稿件，修复审核完成前稿件将无法被统计。\n\n【参与方式】\n1.点击“立即报名”报名参与本打卡挑战\n2.报名成功后，在音乐-电台分区，选择话题\n#电台新星征集令\n#白噪音电台\n#好梦助眠电台\n#宝藏播客电台\n3.打卡稿件需要在数据完成结算前保持开放浏览状态。\n\n【奖励发放】\n所有打卡奖金将于2025年2月28日前陆续发放至用户贝壳账户上。\n\n【打卡稿件的要求】\n1. 在指定的投稿时间内，投递自制稿件：\n（1）报名成功后，在活动指定分区下选择指定话题发布符合话题内容的视频作品。\n（2）参赛视频仅限原创自制作品，如代投、搬运、转载类均不能参与活动。\n（3）参赛者必须为作品的作者本人，剽窃他人作品参加活动将被取消活动资格。\n（4）同一篇作品不能由多人提交，重复参加。作品如由多位作者共同创作，作品获奖，奖品将发放给提交作品的UP主。\n（5） 在本站已投稿过的视频将不能参加本次活动，不接受有其他平台水印的投稿。\n（6）打卡稿件不得违反法律法规或《哔哩哔哩弹幕网用户使用协议》《创作公约》等哔哩哔哩平台规则，不得违反社会公序良俗或侵害他人的合法权益。\n2. 在数据统计截止前保持稿件为开放浏览状态：\n（1）若稿件为定时发布，开放浏览的时间必须设置在数据统计截止前，否则将不会被计入有效稿件。\n（2）数据统计以投稿时间为准，而非稿件过审/定时发布/开放浏览时间。\n3. 无效稿件：不符合活动规则的稿件将被认定为无效稿件；如稿件被认定为无效稿件，将会视作活动参与失败，不会获得活动奖励。\n【注意事项及平台声明】\n1. 哔哩哔哩依法运营本活动，并有权根据法律法规、国家政策、行业规范、哔哩哔哩经营策略和/或合作方（如有）的变化调整，单方变更、中止、终止本活动，哔哩哔哩无须为此承担任何责任。\n2. 因不可抗力（指不能预见、不能避免且不能克服的客观情况，包括国家法律、法规、政策及国家机关的命令及其他政府行为或者其它的诸如台风、洪水、地震、海啸、战争、罢工等）及不可归责于哔哩哔哩的原因，导致您无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n3. 活动期间，因您自身原因（包括但不限于操作不当、错过活动时间等）导致无法参与本活动或参与失败的，哔哩哔哩无须为此承担任何责任。\n【参与资格、获奖资格的取消】\n1. 您不得以不正当手段或舞弊行为参与本活动，包括但不限于：开设多个哔哩哔哩账号重复参与本活动，或通过机器人软件、蜘蛛软件、爬虫软件、刷屏软件等任何程序或技术手段（包括但不限于刷粉、盗用他人账号等）参与本活动。\n2. 您不得在活动期间违反法律法规、哔哩哔哩平台规则和/或本活动规则，或在本活动前曾因违反哔哩哔哩平台规则导致账号封禁。\n3. 如我们发现或接举报后发现您存在以上任意一种情况，一经查实，我们有权采取包括但不限于取消您的参与资格、取消奖励、追回已发放奖励等措施。\n4. 请您通过哔哩哔哩官方手机客户端及哔哩哔哩官方指定途径参与本活动。哔哩哔哩无须对非经哔哩哔哩指定途径参与本活动的用户，或非经哔哩哔哩官方名义发布的信息承担任何义务或责任。\t",
+      "act_tags": [
+        "电台",
+        "歌单"
+      ],
+      "act_img": "http://i0.hdslb.com/bfs/archive/f21c6e0ac1e38dc700c16cecc9ea8e99cedef33e.png",
+      "act_brief": "在指定分区【音乐-电台】选择指定话题投稿",
+      "business": 3,
+      "process_type": 0,
+      "recommend": {
+        "title": "",
+        "up_list": null
+      },
+      "act_state": 3,
+      "act_type": 2,
+      "tags": "",
+      "task_data": {
+        "main": {
+          "desc": "加入周打卡挑战后，在【音乐-电台】分区选择\n#电台新星征集令\n#白噪音电台\n#好梦助眠电台\n#宝藏播客电台\n话题投稿符合话题内容的有效视频，每周瓜分2100元。",
+          "highlight": "【音乐-电台】"
+        },
+        "weeks": [
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1730649600,
+            "etime": 1731254399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-1-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-1-1",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-1-2",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1731254400,
+            "etime": 1731859199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-2-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-2-1",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-2-2",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1731859200,
+            "etime": 1732463999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-3-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-3-1",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-3-2",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1732464000,
+            "etime": 1733068799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-4-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-4-1",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-4-2",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1733068800,
+            "etime": 1733673599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-5-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-5-1",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-5-2",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1733673600,
+            "etime": 1734278399,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-6-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-6-1",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-6-2",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734278400,
+            "etime": 1734883199,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-7-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-7-1",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-7-2",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1734883200,
+            "etime": 1735487999,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-8-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-8-1",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-8-2",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": false,
+            "task_state": 0,
+            "stime": 1735488000,
+            "etime": 1736092799,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-9-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-9-1",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-9-2",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          },
+          {
+            "now_week": true,
+            "task_state": 0,
+            "stime": 1736092800,
+            "etime": 1736697599,
+            "tasks": [
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-10-0",
+                "award_name": "瓜分500元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "av_day",
+                "target_value": 3,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-10-1",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 1000,
+                "target_progress": 0
+              },
+              {
+                "task_type": 1,
+                "award_type": 1,
+                "task_oid": "1301-2-10-2",
+                "award_name": "再分800元",
+                "award_pic": "http://i0.hdslb.com/bfs/archive/be8d517bce16c9e29b2116feefbe032aa7a3a6e0.png",
+                "award_state": 0,
+                "target_type": "view",
+                "target_value": 10000,
+                "target_progress": 0
+              }
+            ],
+            "allow_repair": false
+          }
+        ]
+      },
+      "call_type": 1,
+      "recommend_more": [],
+      "act_rule": {
+        "material": {
+          "material_type": 0,
+          "material_id": 0
+        },
+        "topic": [
+          {
+            "id": 1192620,
+            "name": "电台新星征集令",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1243563,
+            "name": "白噪音电台",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1219434,
+            "name": "好梦助眠电台",
+            "button_text": "",
+            "link": ""
+          },
+          {
+            "id": 1219107,
+            "name": "宝藏播客电台",
+            "button_text": "",
+            "link": ""
+          }
+        ],
+        "topic_extra": {
+          "module_name": "",
+          "topic_hidden": false
+        },
+        "tools_material": {
+          "module_name": "",
+          "material_list": null
+        }
+      }
+    }
+  }
+]
