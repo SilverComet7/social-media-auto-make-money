@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-const { concurrentFetchWithDelay } = require('./commonFunction.js');
+const { concurrentFetchWithDelay } = require('../commonFunction.js');
 
 // 读取 accountList.json 文件
-const accountListPath = path.join(__dirname, 'jsonFile', 'accountList.json');
+const accountListPath = path.join(__dirname, '../jsonFile', 'accountList.json');
 const accountList = JSON.parse(fs.readFileSync(accountListPath, 'utf8'));
 
 // 循环查询每个账号的数据

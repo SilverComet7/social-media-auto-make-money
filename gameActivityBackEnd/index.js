@@ -3,15 +3,17 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = 3000;
+const path = require('path');
+const { exec } = require('child_process');
+const schedule = require('node-schedule');
 
-const { concurrentFetchWithDelay, formatSecondTimestamp, calculateTotalMoney } = require('./commonFunction.js');
-const { queryDouYinAllAccountsData } = require('./douyin.js');
-const { queryXiaoHongShuAllAccountsData } = require('./xhs.js');
-const { querybilibiliAllAccountsData } = require('./bilibili.js');
-const { ffmpegHandleVideos } = require('../TikTokDownloader/videoReName_FFmpegHandle_douyin_bilibili_async.js')
+const { concurrentFetchWithDelay, calculateTotalMoney } = require('./commonFunction.js');
+const { queryDouYinAllAccountsData } = require('./handleCrawer/douyin.js');
+const { queryXiaoHongShuAllAccountsData } = require('./handleCrawer/xhs.js');
+const { querybilibiliAllAccountsData } = require('./handleCrawer/bilibili.js');
+const { ffmpegHandleVideos } = require('../TikTokDownloader/videoReName_FFmpegHandle.js')
 const { downloadVideosAndGroup } = require('../TikTokDownloader/videoDownloadAndGroupList.js')
 const { allGameList } = require('../baseAvg.js');
-
 
 // 格式化成为 YYYY-MM-DD-HH 的字符串
 const formatDate = (timestamp = (new Date().getTime())) => {
@@ -20,21 +22,39 @@ const formatDate = (timestamp = (new Date().getTime())) => {
 }
 
 function getOldData(jsonPath = './data.json') {
-    const data = fs.readFileSync(jsonPath);
-    let oldDataArr = JSON.parse(data);
-    // 将new 字段设置为false
-    if (Array.isArray(oldDataArr)) {
-        oldDataArr = oldDataArr.map(item => ({
-            ...item,
-            // new: false,
-            // updateData: false,
-        }));
+    try {
+        // 检查文件是否存在
+        if (!fs.existsSync(jsonPath)) {
+            console.warn(`文件不存在: ${jsonPath}`);
+            // return [];
+        }
+
+        const data = fs.readFileSync(jsonPath, 'utf8');
+
+        try {
+            let oldDataArr = JSON.parse(data);
+
+            // 确保返回的是数组
+            if (!Array.isArray(oldDataArr)) {
+                console.warn(`${jsonPath} 的内容不是数组格式`);
+                // return [];
+            }
+
+            return oldDataArr;
+
+        } catch (parseError) {
+            console.error(`JSON 解析错误 (${jsonPath}):`, parseError);
+            console.error('问题数据:', data.substring(0, 200) + '...'); // 只显示前200个字符
+            return [];
+        }
+
+    } catch (error) {
+        console.error(`读取文件错误 (${jsonPath}):`, error);
+        return [];
     }
-    return oldDataArr;
 }
 
 const accountJson = getOldData('./jsonFile/accountList.json');
-
 app.use(cors());
 app.use(express.json());
 
@@ -61,11 +81,9 @@ async function writeLocalDataJson(arr, fileName = 'data.json') {
     fs.writeFileSync(fileName, data);
 }
 
-
 async function get_BiliBili_Data(i, account = accountJson.bilibili[0]) {
     const keyword = i.searchKeyWord || "逆水寒"
     const fetchUrl = `https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=1&ps=30&keyword=${keyword}&coop=1&interactive=1`
-    // 计算数据
     const bilibili = {
         "allNum": 0,
         "allViewNum": 0,
@@ -108,7 +126,6 @@ async function get_BiliBili_Data(i, account = accountJson.bilibili[0]) {
 
 app.get('/getNewActData', async (req, res) => {
     try {
-        // 获取活动数据，游戏任务转到otherGameData.json里
         async function getActivitiesList() {
             let oldDataArr = getOldData();
             const fetchUrl = `https://member.bilibili.com/x/web/activity/videoall`
@@ -127,10 +144,6 @@ app.get('/getNewActData', async (req, res) => {
                 map(item => {
                     const oldDataHasThisRewardsItem = oldDataArr.find(item2 => item.name === item2.name)
                     return {
-
-                        // type: item.type,
-                        // new: true,
-
                         ...(oldDataHasThisRewardsItem ? {
                             // searchKeyWord: oldDataHasThisRewardsItem.searchKeyWord,
                             // baseTopic: oldDataHasThisRewardsItem.baseTopic,
@@ -153,7 +166,7 @@ app.get('/getNewActData', async (req, res) => {
                 )
 
 
-            let oldOtherDataArr = getOldData('./otherGameData.json');
+            let oldOtherDataArr = getOldData('./gameData.json');
             newActList.filter(item => {
                 return allGameList.some(gameName => item.name.includes(gameName))
             }).map(item => {
@@ -188,7 +201,7 @@ app.get('/getNewActData', async (req, res) => {
                         ]
                     })
                 } else {
-                    // 3. 如果otherGameData.json中已经收录该游戏活动，则将该游戏活动收录到对应gameName下的rewards的下name为bilibili下的specialTagRequirements中细分活动中
+                    // 3. 如果gameData.json中已经收录该游戏活动，则将该游戏活动收录到对应gameName下的rewards的下name为bilibili下的specialTagRequirements中细分活动中
 
                     const gameBilibiliRewards = oldOtherDataArr.find(item2 => item2.name === gameName)?.rewards?.find(item2 => item2.name === "bilibili")
                     if (!gameBilibiliRewards) {
@@ -243,7 +256,7 @@ app.get('/getNewActData', async (req, res) => {
 
 
             writeLocalDataJson(list);
-            writeLocalDataJson(oldOtherDataArr, './otherGameData.json');
+            writeLocalDataJson(oldOtherDataArr, './gameData.json');
 
             return newActList
         }
@@ -252,51 +265,10 @@ app.get('/getNewActData', async (req, res) => {
     } catch (error) {
         console.error("Error in /data endpoint:", error);
         res.json({
-
             msg: error
         });
-        // res.status(500).send("Internal Server Error");
     }
 });
-
-
-app.post('/updateReward', async (req, res) => {
-    try {
-        const { name, specialTagRequirements } = req.body;
-
-        // 读取现有的 otherGameData.json 文件
-        let oldOtherDataArr = getOldData('./otherGameData.json');
-
-        // 找到对应的游戏
-        const gameIndex = oldOtherDataArr.findIndex(item => item.name === name);
-        if (gameIndex === -1) {
-            return res.status(404).json({ code: -1, msg: '游戏未找到' });
-        }
-
-        // 找到对应平台的奖励
-        const platformIndex = oldOtherDataArr[gameIndex].rewards.findIndex(item => item.name === specialTagRequirements[0].name);
-        if (platformIndex === -1) {
-            // 如果平台不存在，则添加新的平台
-            oldOtherDataArr[gameIndex].rewards.push({
-                name: specialTagRequirements[0].name,
-                specialTagRequirements: [specialTagRequirements[0]],
-            });
-        } else {
-            // 如果平台存在，则更新奖励
-            oldOtherDataArr[gameIndex].rewards[platformIndex].specialTagRequirements = [specialTagRequirements[0]];
-        }
-
-        // 写入本地文件
-        writeLocalDataJson(oldOtherDataArr, './otherGameData.json');
-
-        res.json({ code: 0, msg: '奖励更新成功' });
-    } catch (error) {
-        console.error("Error in /updateReward endpoint:", error);
-        res.status(500).send("Internal Server Error");
-    }
-});
-
-
 
 app.post('/addPlatformReward', async (req, res) => {
     try {
@@ -305,8 +277,8 @@ app.post('/addPlatformReward', async (req, res) => {
         let { gameName, platformName, isUpdate } = platformData
         delete platformData.isUpdate
 
-        // 读取现有的 otherGameData.json 文件
-        let oldOtherDataArr = getOldData('./otherGameData.json');
+        // 读取现有的 gameData.json 文件
+        let oldOtherDataArr = getOldData('./gameData.json');
 
         // 找到对应的游戏
         const gameIndex = oldOtherDataArr.findIndex(item => item.name === gameName);
@@ -318,19 +290,17 @@ app.post('/addPlatformReward', async (req, res) => {
         // 1. 如果还未有该平台奖励，则直接添加新的平台和对应的活动赛道
         if (platformIndex === -1) {
             oldOtherDataArr[gameIndex].rewards.unshift(platformData)
-            console.log("🚀 ~ app.post ~ oldOtherDataArr:", oldOtherDataArr)
         } else {
 
             // 2. 如果已有该平台的其他活动赛道，则添加新的活动赛道
             // if (!isUpdate) oldOtherDataArr[gameIndex].rewards[platformIndex].specialTagRequirements = platformData.specialTagRequirements.concat(oldOtherDataArr[gameIndex].rewards[platformIndex].specialTagRequirements)
             // else 
-            oldOtherDataArr[gameIndex].rewards[platformIndex].specialTagRequirements = platformData.specialTagRequirements
-            console.log("🚀 ~ app.post ~ oldOtherDataArr:", oldOtherDataArr)
+            oldOtherDataArr[gameIndex].rewards[platformIndex] = platformData
         }
-        
+
 
         // 写入本地文件
-        writeLocalDataJson(oldOtherDataArr, './otherGameData.json');
+        writeLocalDataJson(oldOtherDataArr, './gameData.json');
 
         res.json({ code: 0, msg: '奖励更新成功' });
     } catch (error) {
@@ -338,9 +308,6 @@ app.post('/addPlatformReward', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
-
-
-
 
 app.post('/downloadVideosAndGroup', async (req, res) => {
     try {
@@ -352,6 +319,7 @@ app.post('/downloadVideosAndGroup', async (req, res) => {
         res.status(500).send('视频处理失败');
     }
 });
+
 app.post('/ffmpegHandleVideos', async (req, res) => {
     try {
         const { ffmpegSettings } = req.body;
@@ -362,9 +330,7 @@ app.post('/ffmpegHandleVideos', async (req, res) => {
         console.error('视频处理失败:', error);
         res.status(500).send('视频处理失败');
     }
-});
-
-
+})
 
 // 更新打卡活动列表
 app.get('/getNewDakaData', async (req, res) => {
@@ -413,15 +379,12 @@ app.get('/getNewDakaData', async (req, res) => {
     }
 });
 
-
-
-
 app.get('/data', async (req, res) => {
     try {
         // 每次都实时读取data.json 文件并返回
         const data = getOldData()
 
-        let otherGameData = getOldData('./otherGameData.json')
+        let otherGameData = getOldData('./gameData.json')
         // 计算otherGameData rewards下各平台specialTagRequirements里的最近的活动结束时间，并赋值给最外层etime
         otherGameData.forEach(game => {
             let minEtime = game.etime || Number.MAX_SAFE_INTEGER;  // 默认活动最大
@@ -431,7 +394,7 @@ app.get('/data', async (req, res) => {
                     reward.specialTagRequirements.forEach(requirement => {
                         if (requirement.eDate) {
                             const eTime = (new Date(requirement.eDate).getTime() + 24 * 60 * 60 * 60) / 1000;
-                            // 如果结束日期小于当天的etime，则跳过 不计入最近结束日期
+                            // 如果结束日期小于当天的time，则跳过 不计入最近结束日期
                             if (eTime < new Date().getTime() / 1000) return;
                             // 如果结束日期小于minEtime，则更新minEtime
                             if (eTime < minEtime) {
@@ -510,7 +473,6 @@ app.post('/updateDataOne', async (req, res) => {
             }
             return item
         })
-        // 写入本地文件
         writeLocalDataJson(arr);
 
         res.json({
@@ -525,7 +487,7 @@ app.post('/updateDataOne', async (req, res) => {
 });
 
 
-app.post('/updateOnePlatData', async (req, res) => {
+app.post('/getPlatformData', async (req, res) => {
     let douyinData = []
     let xhsData = []
     let bilibiliData = []
@@ -536,7 +498,7 @@ app.post('/updateOnePlatData', async (req, res) => {
         // else if (rewardName === '快手') data = await queryXiaoHongShuAllAccountsData();
         // else if (rewardName === 'BiliBili') data = await queryXiaoHongShuAllAccountsData();
         bilibiliData = await querybilibiliAllAccountsData();
-        const oldOtherGameDataArr = getOldData('./otherGameData.json');
+        const oldOtherGameDataArr = getOldData('./gameData.json');
         const jsonData = oldOtherGameDataArr.map(item => {
             return {
                 ...item,
@@ -551,7 +513,7 @@ app.post('/updateOnePlatData', async (req, res) => {
                                     ...i,
                                     videoData: douyinData.map(t => {
                                         // 过滤不满足条件的视频
-                                        const valuedList = t.aweme_list.filter(l => l.desc.includes(i.specialTag) && l.view >= (l.minView || i.minView || 100))
+                                        const valuedList = t.aweme_list.filter(l => l.desc.includes(i.specialTag) && l.view >= (i.minView || 100))
                                         // 目前忽视了挂在小手柄问题，可手动isGet调整
 
                                         let alsoRelayList = []
@@ -666,7 +628,7 @@ app.post('/updateOnePlatData', async (req, res) => {
             }
         })
         // 写入本地文件
-        writeLocalDataJson(jsonData, './otherGameData.json');
+        writeLocalDataJson(jsonData, './gameData.json');
 
         res.json({
             code: 200,
@@ -675,24 +637,159 @@ app.post('/updateOnePlatData', async (req, res) => {
         });
 
     } catch (error) {
-        // writeLocalDataJson(douyinData, './jsonFile/douyinHandleData.json');
-        // writeLocalDataJson(xhsData, './jsonFile/xhsHandleData.json');
+        writeLocalDataJson(douyinData, './jsonFile/douyinHandleData.json');
+        writeLocalDataJson(xhsData, './jsonFile/xhsHandleData.json');
         console.error("Error in /data endpoint:", error);
         res.status(500).send("Internal Server Error");
     }
 });
 
 
+// 使用C:\Users\ChrisWang\code\platform_game_activity\social-auto-upload\uploader\bilibili_uploader\biliup.exe 程序定时任上传B站视频，完成天数任务   
 
+// 扫描视频目录生成任务
+async function generateScheduleJobs(missionId, videoDir, intervalHours = 24) {
+    const files = fs.readdirSync(videoDir);
+    const videoFiles = files.filter(f => f.endsWith('.mp4'));
 
+    const jobs = [];
+    let execTime = new Date();
 
+    for (const file of videoFiles) {
+        jobs.push({
+            videoPath: path.join(videoDir, file),
+            execTime: new Date(execTime).toISOString(),
+            successExecAccount: []
+        });
+        execTime.setHours(execTime.getHours() + intervalHours);
+    }
+
+    return jobs;
+}
+
+// 检查并清理过期任务
+function cleanExpiredJobs(jobs, expireDays = 7) {
+    const now = new Date();
+    return jobs.filter(job => {
+        const jobTime = new Date(job.execTime);
+        const diffDays = (now - jobTime) / (1000 * 60 * 60 * 24);
+        return diffDays < expireDays;
+    });
+}
+// 定时上传接口
+app.post('/scheduleUpload', async (req, res) => {
+    try {
+        const { tag, tid, missionId, videoDir,topicName } = req.body;
+
+        // 读取定时任务配置文件
+        const scheduleJobsPath = './scheduleJob/BiliBiliScheduleJob.json';
+        let scheduleJobs = [];
+        try {
+            scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
+        } catch (err) {
+            console.log('定时任务配置文件不存在,创建新文件');
+            scheduleJobs = [];
+        }
+        if (!videoDir) {
+            // 执行已有的过期任务
+            const now = new Date();
+            const expiredJobs = [];
+            // 遍历所有游戏的定时任务
+            scheduleJobs.forEach(game => {
+                if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
+                    const gameExpiredJobs = game.scheduleJob.filter(job => {
+                        const jobTime = new Date(job.execTime);
+                        return jobTime < now && jobTime.getDate() === now.getDate() &&
+                            job.successExecAccount.length < accountJson.bilibili.length;
+                    }).map(job => ({
+                        ...job,
+                        tag: game.tag,
+                        tid: game.tid,
+                        missionId: game.missionId,
+                        gameIndex: scheduleJobs.indexOf(game),
+                        jobIndex: game.scheduleJob.indexOf(job)
+                    }));
+                    expiredJobs.push(...gameExpiredJobs);
+                }
+            });
+
+            // 立即执行过期任务
+            for (const job of expiredJobs) {
+                for (let account of accountJson.bilibili) {
+                    try {
+                        if (job.successExecAccount.includes(account.accountName)) continue;
+
+                        const BILIUP_PATH = "C:\\Users\\ChrisWang\\code\\platform_game_activity\\social-auto-upload\\uploader\\bilibili_uploader\\";
+                        const uploadCmd = `"${BILIUP_PATH}biliup.exe"  -u "${BILIUP_PATH}${account.accountName}.json" upload --tag "${job.tag}" --mission-id "${job.missionId}" --tid ${job.tid} --title "${path.basename(job.videoPath, '.mp4')}" "${job.videoPath}"`;
+
+                        await new Promise((resolve, reject) => {
+                            exec(uploadCmd, (error, stdout, stderr) => {
+                                if (error) {
+                                    console.error(`上传失败 ${account.accountName}: ${error}`);
+                                    reject(error);
+                                    return;
+                                }
+                                // 更新原始scheduleJobs中对应任务的successExecAccount
+                                scheduleJobs[job.gameIndex].scheduleJob[job.jobIndex].successExecAccount.push(account.accountName);
+                                console.log(`上传成功 ${account.accountName}`);
+                                resolve();
+                            });
+                        });
+
+                    } catch (err) {
+                        console.error(`账号 ${account.accountName} 上传出错:`, err);
+                    }
+                }
+            }
+
+            // 所有任务执行完成后统一写入文件
+            fs.writeFileSync('./scheduleJob/BiliBiliScheduleJob.json', JSON.stringify(scheduleJobs, null, 2));
+
+        } else {
+            // 生成新的定时任务
+            const newJobs = await generateScheduleJobs(missionId, videoDir);
+            
+            // 创建或更新定时任务配置
+            const gameIndex = scheduleJobs.findIndex(game => game.missionId === missionId);
+            if (gameIndex === -1) {
+                // 添加新游戏配置
+                scheduleJobs.push({
+                    topicName: topicName,
+                    missionId,
+                    tag,
+                    tid,
+                    videoDir,
+                    scheduleJob: newJobs
+                });
+            } else {
+                // 更新现有游戏配置
+                scheduleJobs[gameIndex].scheduleJob = newJobs;
+            }
+
+            // 保存配置到文件
+            fs.writeFileSync(scheduleJobsPath, JSON.stringify(scheduleJobs, null, 2));
+
+          
+        }
+
+        res.json({
+            code: 200,
+            msg: "任务处理成功",
+            jobs: scheduleJobs
+        });
+
+    } catch (error) {
+        console.error("处理任务失败:", error);
+        res.status(500).json({
+            code: 500,
+            msg: "处理任务失败"
+        });
+    }
+});
 
 // 定时任务：查询评论接口并记录不利评论功能
 // 查询最近50条评论，加入出现  抄 | 发过 | 假 | 抄袭 其中某一个词则记录改评论的所有信息   
 // 查询接口 GET  https://api.bilibili.com/x/v2/reply/up/fulllist?keyword=${keyword}&order=1&filter=-1&type=1&bvid=&pn=1&ps=50&charge_plus_filter=false
-
-
-// 查询不利评论接口
 app.get('/unfavorableReply', async (req, res) => {
     const unfavorableWords = [
         { id: 1, keyword: '抄' },
@@ -725,7 +822,6 @@ app.get('/unfavorableReply', async (req, res) => {
     res.json(messageList.flat());
 });
 
-
 // https://api.bilibili.com/x/v2/reply/del
 // 删除评论接口
 
@@ -755,8 +851,6 @@ app.post('/deleteUnfavorableReply', async (req, res) => {
     }
 
 })
-
-
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

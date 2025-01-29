@@ -10,10 +10,10 @@
             class="w-500 h-[5vw]"
             preview-src="/public/douyin.jpg"
           />
-          <el-affix :offset="20" class="text-blue-800">
+          <!-- <el-affix :offset="20" class="text-blue-800">
             <div class="bg-slate-300 h-[5vw] overflow-auto">
               <div>#游戏鉴赏官 #联机游戏</div>
-              <div>#二次元 #coser #完美身材 #美女</div>
+              <div>#二次元 #coser #完美身材</div>
               <div>#MMORPG #古风 #逆水寒</div>
               <div>#沙雕#故事#整活#搞笑</div>
               <div>#电子竞技 #教程攻略</div>
@@ -25,7 +25,7 @@
                 永劫无间 鸣潮 明日方舟，第五人格，崩坏3 和平精英
               </div>
             </div>
-          </el-affix>
+          </el-affix> -->
           <div>
             <div>
               <el-button type="primary" @click="updateOnePlatData('抖音')"
@@ -80,7 +80,7 @@
                 >
                 <!-- <p>视频时长至少需 {{ scope.row.timeRange ?? '>=30s' }}</p> -->
                 <p>任务结束日期 {{ formatDate(scope.row.etime) }}</p>
-                <!-- <p>添加任务日期 {{ scope.row.addTime }}</p> -->
+                <p>添加任务日期 {{ scope.row.addTime }}</p>
                 <el-button type="primary" @click="openEditRewardDialog(scope.row.name)"
                   >添加平台奖励</el-button
                 >
@@ -124,6 +124,14 @@
                     >
                       TAG: {{ getSpecialTagAll(reward) }}
                     </p>
+                    <!-- B站suppleTag -->
+                    <p
+                      class="text-blue-800 cursor-pointer"
+                      v-if="reward.suppleTag"
+                      @click="copyTag(reward.suppleTag)"
+                    >
+                      补充TAG: {{ reward.suppleTag }}
+                    </p>
                   </div>
 
                   <div
@@ -135,11 +143,9 @@
                     "
                     class="flex-1"
                   >
-                    <template
-                      v-for="(rew, reqIndex) in reward.specialTagRequirements"
-                      :key="reqIndex"
-                    >
+                    <template v-for="(rew, reqIndex) in reward.specialTagRequirements">
                       <el-card
+                        :key="rew"
                         v-if="
                           rew.eDate
                             ? getDaysDiff(new Date(rew.eDate).getTime()) >= 0
@@ -153,9 +159,13 @@
                           v-if="reward.name === 'bilibili'"
                           >{{ rew.name }} {{ rew.comment }}</a
                         >
-
                         <h4 class="font-bold" v-else>{{ rew.name }}</h4>
-                        <h4 class="font-bold" v-if="reward.name === 'bilibili'">话题：{{ rew.topic }}</h4>
+                        <h4 class="font-bold" v-if="reward.name === 'bilibili'">
+                          话题：{{ rew.topic }}
+                        </h4>
+                        <el-button @click="setScheduleJob(rew.name, reward)"
+                          >设置该活动定时执行任务
+                        </el-button>
                         <!-- <h4 class="font-bold" v-if="rew.sDate">活动开始{{ rew.sDate }} </h4> -->
                         <h4
                           class="font-bold"
@@ -169,13 +179,14 @@
                           }}天
                         </h4>
                         <div>
+
                           <p
                             class="text-blue-800 cursor-pointer"
-                            @click="copyTag(rew.specialTag || rew.specialTagAll)"
-                            v-if="rew.specialTag || rew.specialTagAll"
+                            @click="copyTag(rew.specialTag)"
+                            v-if="rew.specialTag"
                           >
                             必带TAG:
-                            {{ reward.specialTagRequirements.map((e) => e.specialTag).join(' ') }}
+                            {{ rew.specialTag }}
                           </p>
                         </div>
                         <p v-if="rew.minVideoTime">单稿件最低时长：{{ rew.minVideoTime || 6 }}s</p>
@@ -228,10 +239,7 @@
           </el-table-column>
           <el-table-column label="Video Detail" min-width="750">
             <template #default="scope">
-              <p
-                class="text-blue-800 cursor-pointer"
-                @click="copyTag(getCommonTagAll(scope.row))"
-              >
+              <p class="text-blue-800 cursor-pointer" @click="copyTag(getCommonTagAll(scope.row))">
                 总标签 :{{ getCommonTagAll(scope.row) }}
               </p>
             </template>
@@ -707,11 +715,85 @@
               <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
             </el-select>
           </el-form-item>
+          <!-- 去重配置 -->
+          <el-divider>去重配置</el-divider>
+
+          <el-form-item label="变速因子">
+            <el-slider
+              v-model="ffmpegSettings.deduplication.speedFactor"
+              :min="0.8"
+              :max="1.2"
+              :step="0.05"
+            />
+          </el-form-item>
+
+          <el-form-item label="启用镜像">
+            <el-switch v-model="ffmpegSettings.deduplication.enableMirror" />
+          </el-form-item>
+
+          <el-form-item label="启用旋转">
+            <el-switch v-model="ffmpegSettings.deduplication.enableRotate" />
+            <el-input-number
+              v-if="ffmpegSettings.deduplication.enableRotate"
+              v-model="ffmpegSettings.deduplication.rotateAngle"
+              :min="0"
+              :max="360"
+              :step="1"
+            />
+          </el-form-item>
+
+          <el-form-item label="启用模糊">
+            <el-switch v-model="ffmpegSettings.deduplication.enableBlur" />
+            <el-slider
+              v-if="ffmpegSettings.deduplication.enableBlur"
+              v-model="ffmpegSettings.deduplication.blurRadius"
+              :min="0"
+              :max="1"
+              :step="0.1"
+            />
+          </el-form-item>
+
+          <el-form-item label="启用淡入淡出">
+            <el-switch v-model="ffmpegSettings.deduplication.enableFade" />
+            <el-input-number
+              v-if="ffmpegSettings.deduplication.enableFade"
+              v-model="ffmpegSettings.deduplication.fadeDuration"
+              :min="0"
+              :max="2"
+              :step="0.1"
+            />
+          </el-form-item>
+
+          <el-form-item label="亮度调整">
+            <el-slider
+              v-model="ffmpegSettings.deduplication.brightness"
+              :min="-1"
+              :max="1"
+              :step="0.1"
+            />
+          </el-form-item>
+
+          <el-form-item label="对比度调整">
+            <el-slider
+              v-model="ffmpegSettings.deduplication.contrast"
+              :min="0"
+              :max="2"
+              :step="0.1"
+            />
+          </el-form-item>
+
+          <el-form-item label="饱和度调整">
+            <el-slider
+              v-model="ffmpegSettings.deduplication.saturation"
+              :min="0"
+              :max="2"
+              :step="0.1"
+            />
+          </el-form-item>
         </div>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <!-- <el-button @click="cancelFFmpegSettings">取 消</el-button> -->
           <el-button type="primary" @click="confirmFFmpegSettings">确 定</el-button>
         </span>
       </template>
@@ -733,6 +815,9 @@
             <el-option label="快手" value="快手" />
           </el-select>
         </el-form-item>
+        <el-form-item label="B站多标签引流" v-if="editRewardForm.platformName === 'bilibili'">
+          <el-input v-model="editRewardForm.suppleTag" placeholder="请输入支撑标签" />
+        </el-form-item>
         <el-form-item label="活动赛道">
           <div
             v-for="(specialTagRequirement, index) in editRewardForm.specialTagRequirements"
@@ -743,17 +828,17 @@
                 <el-input v-model="specialTagRequirement.name" placeholder="请输入活动名称" />
               </el-form-item>
               <el-form-item label="视频最低时长">
-                <el-input-number v-model="specialTagRequirement.minVideoTime"  />
+                <el-input-number v-model="specialTagRequirement.minVideoTime" />
               </el-form-item>
               <el-form-item label="视频最低观看量">
-                <el-input-number v-model="specialTagRequirement.minView"  />
+                <el-input-number v-model="specialTagRequirement.minView" />
               </el-form-item>
               <el-form-item label="B站活动话题" v-if="editRewardForm.platformName === 'bilibili'">
                 <el-input v-model="specialTagRequirement.topic" placeholder="请输入活动话题" />
               </el-form-item>
-              <el-form-item label="B站多标签引流" v-if="editRewardForm.platformName === 'bilibili'">
+              <!-- <el-form-item label="B站多标签引流" v-if="editRewardForm.platformName === 'bilibili'">
                 <el-input v-model="specialTagRequirement.suppleTag" placeholder="请输入支撑标签" />
-              </el-form-item>
+              </el-form-item> -->
               <el-form-item label="必带标签">
                 <el-input v-model="specialTagRequirement.specialTag" placeholder="请输入必带标签" />
               </el-form-item>
@@ -777,6 +862,9 @@
                   <el-form-item label="视频总观看量(w)">
                     <el-input-number v-model="reward.allViewNum" :min="0" :max="100" />
                     <span v-if="reward.allViewNum">{{ reward.allViewNum * 10000 }}</span>
+                  </el-form-item>
+                  <el-form-item label="视频最低播放量计入">
+                    <el-input-number v-model="reward.minView" :min="0" />
                   </el-form-item>
                   <el-form-item label="参与人数">
                     <el-input-number v-model="reward.joinedPerson" :min="0" :max="10000" />
@@ -822,6 +910,37 @@
         </span>
       </template>
     </el-dialog>
+
+    <!-- 设置定时上传任务 -->
+    <el-dialog
+      title="设置定时上传任务"
+      v-model="scheduleDialogVisible"
+      :before-close="cancelScheduleJob"
+    >
+      <el-form :model="scheduleForm" label-width="120px">
+        <el-form-item label="活动名称">
+          <el-input v-model="scheduleForm.topicName" placeholder="请输入活动名称" />
+        </el-form-item>
+        <el-form-item label="视频目录">
+          <el-input v-model="scheduleForm.videoDir" placeholder="请输入视频所在目录路径" />
+        </el-form-item>
+        <el-form-item label="标签">
+          <el-input v-model="scheduleForm.tag" placeholder="请输入视频标签" />
+        </el-form-item>
+        <el-form-item label="分区ID">
+          <el-input-number v-model="scheduleForm.tid" :min="1" placeholder="请输入分区ID" />
+        </el-form-item>
+        <el-form-item label="任务ID">
+          <el-input v-model="scheduleForm.missionId" placeholder="请输入任务ID" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="cancelScheduleJob">取 消</el-button>
+          <el-button type="primary" @click="confirmScheduleJob">确 定</el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -829,8 +948,9 @@
 import { ref, onMounted } from 'vue'
 import { ElTable, ElTableColumn, ElProgress, ElEmpty } from 'element-plus'
 import { ElMessage } from 'element-plus'
+// import { defaultDeduplicationConfig } from '../../../TikTokDownloader/videoTransformDeduplication.js'
+import topic from '../../public/topic.json'
 
-// 格式化成为 YYYY-MM-DD 的字符串
 const formatDate = (timestamp) => {
   const date = new Date(timestamp * 1000)
   return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
@@ -848,6 +968,71 @@ const copyTag = (tag) => {
   ElMessage.success('复制成功')
 }
 
+// 新增的响应式变量
+const scheduleDialogVisible = ref(false)
+const scheduleForm = ref({
+  topicName: '',
+  videoDir: '',
+  tag: '',
+  tid: 172, // 默认分区ID
+  missionId: '',
+})
+
+// 打开定时任务设置弹窗
+const setScheduleJob = (gameName, reward) => {
+  // topic 中 gameName 对应的 missionId
+  const missionId = topic.find((item) => item.topic_name === gameName)?.mission_id
+
+  // 如果没有找到对应的 missionId，则提示用户
+  if (!missionId) {
+    ElMessage.error('没有找到对应的 missionId')
+    return
+  }
+
+  scheduleForm.value = {
+    topicName: gameName,
+    videoDir: '', // 需要用户填写
+    tag: getSpecialTagAll(reward), // 使用已有的标签获取函数
+    tid: 172, // 默认分区ID
+    missionId: missionId,
+  }
+
+  scheduleDialogVisible.value = true
+}
+
+// 取消设置
+const cancelScheduleJob = () => {
+  scheduleDialogVisible.value = false
+}
+
+// 确认设置
+const confirmScheduleJob = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/scheduleUpload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(scheduleForm.value),
+    })
+
+    if (!response.ok) {
+      throw new Error('设置失败')
+    }
+
+    const result = await response.json()
+    if (result.code === 200) {
+      ElMessage.success('定时任务设置成功')
+      scheduleDialogVisible.value = false
+    } else {
+      ElMessage.error(result.msg || '设置失败')
+    }
+  } catch (error) {
+    console.error('设置定时任务失败:', error)
+    ElMessage.error('设置定时任务失败')
+  }
+}
+
 const editRewardDialogVisible = ref(false)
 const editRewardForm = ref({
   platformName: '',
@@ -861,14 +1046,15 @@ const editRewardForm = ref({
       eDate: '',
       reward: [
         {
-          allNum: 0,
-          allViewNum: 0,
-          joinedPerson: 0,
-          view: 0,
-          like: 0,
-          allLikeNum: 0,
-          cday: 0,
-          money: 0,
+          allNum: undefined,
+          allViewNum: undefined,
+          joinedPerson: undefined,
+          view: undefined,
+          like: undefined,
+          allLikeNum: undefined,
+          cday: undefined,
+          minView: undefined,
+          money: undefined,
           isGet: false,
         },
       ],
@@ -879,24 +1065,9 @@ const editRewardForm = ref({
 const addSpecialTagRequirement = () => {
   editRewardForm.value.specialTagRequirements.push({
     name: '',
-    // minVideoTime: 6,
-    // minView: 100,
-    // topic: '',
     specialTag: '',
     eDate: '',
-    reward: [
-      {
-        allNum: 0,
-        allViewNum: 0,
-        joinedPerson: 0,
-        view: 0,
-        like: 0,
-        allLikeNum: 0,
-        cday: 0,
-        money: 0,
-        isGet: false,
-      },
-    ],
+    reward: [],
   })
 }
 
@@ -913,6 +1084,7 @@ const addReward = (index) => {
     like: undefined,
     allLikeNum: undefined,
     cday: undefined,
+    minView: undefined,
     money: undefined,
     isGet: false,
   })
@@ -940,6 +1112,7 @@ const openEditRewardDialog = (gameName, platform) => {
           like: undefined,
           allLikeNum: undefined,
           cday: undefined,
+          minView: undefined,
           money: undefined,
           isGet: false,
         },
@@ -964,6 +1137,7 @@ const openEditRewardDialog = (gameName, platform) => {
     )
   }
   editRewardForm.value = {
+    ...platform,
     platformName: platform?.name || '抖音',
     isUpdate: !!platform,
     specialTagRequirements: specialTagRequirements,
@@ -973,7 +1147,6 @@ const openEditRewardDialog = (gameName, platform) => {
 }
 
 const confirmEditReward = async () => {
-  // 过滤掉未填写的参数
   const filteredReward = JSON.parse(JSON.stringify(editRewardForm.value))
   filteredReward.specialTagRequirements = filteredReward.specialTagRequirements.map(
     (specialTagRequirement) => {
@@ -981,12 +1154,20 @@ const confirmEditReward = async () => {
       // delete specialTagRequirement.name
       specialTagRequirement.reward = specialTagRequirement.reward
         .filter((reward) =>
+          // 过滤出起码有一个值的参数
           Object.values(reward).some((value) => value !== 0 && value !== false && value !== ''),
         )
         .map((e) => {
           if (e.allViewNum) e.allViewNum = e.allViewNum * 10000
           if (e.view) e.view = e.view * 10000
           if (e.money) e.money = e.money * 10000
+          // 删除未填写的参数
+          Object.keys(e).forEach((key) => {
+            // null undefined 空字符串 空数组 空对象
+            if (e[key] === undefined || e[key] === null) {
+              delete e[key]
+            }
+          })
           return e
         })
       return specialTagRequirement
@@ -1035,6 +1216,26 @@ const ffmpegSettings = ref({
   musicName: 'billll',
   gameName: '火影忍者',
   groupName: '攻略',
+  deduplication: {
+    speedFactor: 0.95,
+    targetWidth: 1280,
+    targetHeight: 720,
+    frameRate: 30,
+    scalePercent: 0.8,
+    enableMirror: false,
+    enableRotate: false,
+    rotateAngle: 1,
+    enableBlur: false,
+    blurRadius: 0.1,
+    enableFade: false,
+    fadeDuration: 0.5,
+    brightness: 0.1,
+    contrast: 1.2,
+    saturation: 1.1,
+    enableBgBlur: false,
+    bgBlurTop: 0.1,
+    bgBlurBottom: 0.1,
+  },
 })
 
 const handleDownloadSettings = (name) => {
@@ -1065,6 +1266,7 @@ const confirmDownloadSettings = async () => {
     }
   })
 }
+
 const confirmFFmpegSettings = async () => {
   // 发送后端请求下载
   await fetch(`http://localhost:3000/ffmpegHandleVideos`, {
@@ -1117,7 +1319,7 @@ const getCommonTagAll = (row) => {
   ]
   const suppleTag = row?.suppleTag ? row.suppleTag.split(' ') : [] // 补充Tag,给B站/小红书提供
 
-  return [...new Set( [row.name].concat(specialTagArr.concat(suppleTag)))].join(' ')
+  return [...new Set([row.name].concat(specialTagArr.concat(suppleTag)))].join(' ')
 }
 
 const bilibiliActTableData = ref([])
@@ -1194,6 +1396,7 @@ const fetchUnfavorableReply = async () => {
 
 onMounted(() => {
   fetchData()
+  confirmScheduleJob()
   // fetchUnfavorableReply()
 })
 
@@ -1212,7 +1415,7 @@ const updateData = async (row, specialTag) => {
 }
 
 const updateOnePlatData = async (rewardName) => {
-  await fetch(`http://localhost:3000/updateOnePlatData`, {
+  await fetch(`http://localhost:3000/getPlatformData`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',

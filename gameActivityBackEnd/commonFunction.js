@@ -1,8 +1,5 @@
 
 
-// import pLimit from 'p-limit';
-// // 设置并发限制
-// const limit = pLimit(10);
 
 
 // 格式化成为 YYYY-MM-DD 的字符串
@@ -25,23 +22,6 @@ const getDaysDiff = (timeStamp1, timeStamp2) => {
 }
 
 
-/* 
-// 延迟函数，带有随机间隔
-function delayWithRandomInterval(minDelay = 100, maxDelay = 500) {
-    const delay = Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
-    return new Promise(resolve => setTimeout(resolve, delay));
-}
-
-// 封装 Promise.all 以包含随机延迟
-export async function concurrentFetchWithDelay(promises, minDelay, maxDelay) {
-    return Promise.all(promises.map(promise => {
-        return limit(async () => {
-            await delayWithRandomInterval(minDelay, maxDelay); // 延迟 1-3 秒
-            return promise();
-        });
-    }));
-}
- */
 
 
 
