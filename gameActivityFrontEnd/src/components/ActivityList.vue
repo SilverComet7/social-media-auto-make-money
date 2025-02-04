@@ -32,6 +32,10 @@
                 >更新所有平台最新播放数据</el-button
               >
               <el-button type="primary" @click="fetchNewActData">查询B站是否有新活动</el-button>
+              <!-- <el-button type="primary" @click="handleManualAccount">手动养号</el-button> -->
+              <el-button type="primary" @click="confirmScheduleJob(true)"
+                >立即执行定时上传任务</el-button
+              >
             </div>
             <div>
               <el-button type="primary" @click="handleDownloadSettings">下载视频并分组</el-button>
@@ -163,7 +167,7 @@
                         <h4 class="font-bold" v-if="reward.name === 'bilibili'">
                           话题：{{ rew.topic }}
                         </h4>
-                        <el-button @click="setScheduleJob(rew.name, reward)"
+                        <el-button @click="setScheduleJob(rew, scope.row)"
                           >设置该活动定时执行任务
                         </el-button>
                         <!-- <h4 class="font-bold" v-if="rew.sDate">活动开始{{ rew.sDate }} </h4> -->
@@ -179,7 +183,6 @@
                           }}天
                         </h4>
                         <div>
-
                           <p
                             class="text-blue-800 cursor-pointer"
                             @click="copyTag(rew.specialTag)"
@@ -290,8 +293,6 @@
           <el-table-column prop="endDiffDate" label="Days Left" width="100" sortable>
             <template #default="scope"> {{ getDaysDiff(scope.row.etime * 1000) }} 天 </template>
           </el-table-column>
-          <!-- <el-table-column prop="bilibili.allNum" label="Total Videos" width="100" /> -->
-          <!-- <el-table-column prop="bilibili.allViewNum" label="Total Views" width="100" copyable /> -->
           <el-table-column label="Rewards" min-width="800">
             <template #default="scope">
               <el-card v-for="(reward, rewardIndex) in scope.row.rewards" :key="rewardIndex">
@@ -359,11 +360,9 @@
                     "
                     class="flex-1"
                   >
-                    <template
-                      v-for="(rew, reqIndex) in reward.specialTagRequirements"
-                      :key="reqIndex"
-                    >
+                    <template v-for="(rew, reqIndex) in reward.specialTagRequirements">
                       <el-card
+                        :key="reqIndex"
                         v-if="
                           rew.eDate
                             ? getDaysDiff(new Date(rew.eDate).getTime()) >= 0
@@ -559,10 +558,12 @@
                           <template #default="scope">
                             <el-progress
                               :percentage="
-                                (
-                                  (scope.row.target_progress / scope.row.target_value) *
-                                  100
-                                ).toFixed(0)
+                                scope.row.target_value !== 0
+                                  ? (
+                                      (scope.row.target_progress / scope.row.target_value) *
+                                      100
+                                    ).toFixed(0)
+                                  : 0
                               "
                             />
                           </template>
@@ -632,7 +633,7 @@
             />
           </div>
         </el-form-item>
-        <el-form-item label="是否单独检测名称">
+        <el-form-item label="单独检测名称">
           <el-switch v-model="downloadSettings.checkName" active-text="是" inactive-text="否" />
         </el-form-item>
         <el-form-item label="下载视频">
@@ -662,11 +663,7 @@
     </el-dialog>
 
     <!-- ffmpeg dialog -->
-    <el-dialog
-      title="FFmpeg 处理设置"
-      v-model="ffmpegDialogVisible"
-      :before-close="cancelFFmpegSettings"
-    >
+    <el-dialog title="FFmpeg 处理设置" v-model="ffmpegDialogVisible">
       <el-form :model="ffmpegSettings" label-width="250px">
         <el-form-item label="名称">
           <el-select v-model="ffmpegSettings.gameName" placeholder="请输入游戏名称" filterable>
@@ -680,8 +677,6 @@
         </el-form-item>
         <el-form-item label="分组">
           <el-select v-model="ffmpegSettings.groupName" placeholder="请选择分组" filterable>
-            <!-- <el-option label="coser本人" value="coser本人" /> -->
-            <!-- <el-option label="coser同行" value="coser同行" /> -->
             <el-option label="攻略" value="攻略" />
             <el-option
               v-for="game in allGameList"
@@ -691,103 +686,154 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="是否单独检测名称">
+        <el-form-item label="单独检测名称">
           <el-switch v-model="ffmpegSettings.checkName" active-text="是" inactive-text="否" />
         </el-form-item>
-        <div v-if="ffmpegSettings.groupName !== '攻略'">
-          <!-- <el-form-item label="仅重命名（coser组给B站打卡用）">
-            <el-switch v-model="ffmpegSettings.onlyRename" active-text="是" inactive-text="否" />
-          </el-form-item> -->
-          <el-form-item label="Before Time">
+        <el-form-item label="仅重命名">
+          <el-switch v-model="ffmpegSettings.onlyRename" active-text="是" inactive-text="否" />
+        </el-form-item>
+        <div v-if="!ffmpegSettings.onlyRename && !ffmpegSettings.checkName">
+          <el-divider>基础变换</el-divider>
+          <el-form-item label="截取开始时间n秒后">
             <el-input-number v-model="ffmpegSettings.beforeTime" :min="0" :max="100" />
           </el-form-item>
-          <el-form-item label="FPS">
+          <el-form-item label="帧率">
             <el-input-number v-model="ffmpegSettings.fps" :min="30" :max="60" />
           </el-form-item>
-          <el-form-item label="Scale Percent (%)">
+          <el-form-item label="分辨率百分比">
             <el-input-number v-model="ffmpegSettings.scalePercent" :min="0" :max="100" />
           </el-form-item>
           <el-form-item label="是否替换音乐">
             <el-switch v-model="ffmpegSettings.replaceMusic" active-text="是" inactive-text="否" />
-          </el-form-item>
-          <el-form-item label="选择音乐">
-            <el-select v-model="ffmpegSettings.musicName" placeholder="请选择音乐">
+            <el-select
+              v-model="ffmpegSettings.musicName"
+              placeholder="请选择音乐"
+              v-if="ffmpegSettings.replaceMusic"
+            >
               <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
             </el-select>
           </el-form-item>
+          <!-- <el-form-item label="选择音乐" v-if="ffmpegSettings.replaceMusic">
+          </el-form-item> -->
           <!-- 去重配置 -->
           <el-divider>去重配置</el-divider>
-
-          <el-form-item label="变速因子">
-            <el-slider
-              v-model="ffmpegSettings.deduplication.speedFactor"
-              :min="0.8"
-              :max="1.2"
-              :step="0.05"
+          <el-form-item label="是否开启去重配置">
+            <el-switch
+              v-model="ffmpegSettings.deduplicationConfig.enable"
+              @change="handleDeduplicationChange"
             />
           </el-form-item>
+          <div v-if="ffmpegSettings.deduplicationConfig.enable">
+            <el-form-item label="变速因子">
+              <el-slider
+                v-model="ffmpegSettings.deduplicationConfig.speedFactor"
+                :min="0.8"
+                :max="1.2"
+                :step="0.05"
+              />
+            </el-form-item>
 
-          <el-form-item label="启用镜像">
-            <el-switch v-model="ffmpegSettings.deduplication.enableMirror" />
+            <el-form-item label="启用镜像">
+              <el-switch v-model="ffmpegSettings.deduplicationConfig.enableMirror" />
+            </el-form-item>
+
+            <el-form-item label="启用旋转">
+              <el-switch v-model="ffmpegSettings.deduplicationConfig.enableRotate" />
+              <el-input-number
+                v-if="ffmpegSettings.deduplicationConfig.enableRotate"
+                v-model="ffmpegSettings.deduplicationConfig.rotateAngle"
+                :min="0"
+                :max="360"
+                :step="1"
+              />
+            </el-form-item>
+
+            <el-form-item label="启用模糊">
+              <el-switch v-model="ffmpegSettings.deduplicationConfig.enableBlur" />
+              <el-slider
+                v-if="ffmpegSettings.deduplicationConfig.enableBlur"
+                v-model="ffmpegSettings.deduplicationConfig.blurRadius"
+                :min="0"
+                :max="1"
+                :step="0.1"
+              />
+            </el-form-item>
+
+            <el-form-item label="启用淡入淡出">
+              <el-switch v-model="ffmpegSettings.deduplicationConfig.enableFade" />
+              <el-input-number
+                v-if="ffmpegSettings.deduplicationConfig.enableFade"
+                v-model="ffmpegSettings.deduplicationConfig.fadeDuration"
+                :min="0"
+                :max="2"
+                :step="0.1"
+              />
+            </el-form-item>
+
+            <el-form-item label="亮度调整">
+              <el-slider
+                v-model="ffmpegSettings.deduplicationConfig.brightness"
+                :min="-1"
+                :max="1"
+                :step="0.1"
+              />
+            </el-form-item>
+
+            <el-form-item label="对比度调整">
+              <el-slider
+                v-model="ffmpegSettings.deduplicationConfig.contrast"
+                :min="0"
+                :max="2"
+                :step="0.1"
+              />
+            </el-form-item>
+
+            <el-form-item label="饱和度调整">
+              <el-slider
+                v-model="ffmpegSettings.deduplicationConfig.saturation"
+                :min="0"
+                :max="2"
+                :step="0.1"
+              />
+            </el-form-item>
+
+            <!-- <el-divider>背景虚化设置</el-divider> -->
+            <el-form-item label="启用背景虚化">
+              <el-switch v-model="ffmpegSettings.deduplicationConfig.enableBgBlur" />
+            </el-form-item>
+
+            <template v-if="ffmpegSettings.deduplicationConfig.enableBgBlur">
+              <el-form-item label="上部虚化比例">
+                <el-slider
+                  v-model="ffmpegSettings.deduplicationConfig.bgBlurTop"
+                  :min="0"
+                  :max="1"
+                  :step="0.1"
+                />
+              </el-form-item>
+
+              <el-form-item label="下部虚化比例">
+                <el-slider
+                  v-model="ffmpegSettings.deduplicationConfig.bgBlurBottom"
+                  :min="0"
+                  :max="1"
+                  :step="0.1"
+                />
+              </el-form-item>
+            </template>
+          </div>
+          <!-- 新增合并视频控制选项 -->
+          <el-divider>合并合集设置</el-divider>
+          <el-form-item label="启用视频合并">
+            <el-switch v-model="ffmpegSettings.enableMerge" />
           </el-form-item>
 
-          <el-form-item label="启用旋转">
-            <el-switch v-model="ffmpegSettings.deduplication.enableRotate" />
+          <el-form-item label="合并时长限制(秒)" v-if="ffmpegSettings.enableMerge">
             <el-input-number
-              v-if="ffmpegSettings.deduplication.enableRotate"
-              v-model="ffmpegSettings.deduplication.rotateAngle"
-              :min="0"
-              :max="360"
-              :step="1"
-            />
-          </el-form-item>
-
-          <el-form-item label="启用模糊">
-            <el-switch v-model="ffmpegSettings.deduplication.enableBlur" />
-            <el-slider
-              v-if="ffmpegSettings.deduplication.enableBlur"
-              v-model="ffmpegSettings.deduplication.blurRadius"
-              :min="0"
-              :max="1"
-              :step="0.1"
-            />
-          </el-form-item>
-
-          <el-form-item label="启用淡入淡出">
-            <el-switch v-model="ffmpegSettings.deduplication.enableFade" />
-            <el-input-number
-              v-if="ffmpegSettings.deduplication.enableFade"
-              v-model="ffmpegSettings.deduplication.fadeDuration"
-              :min="0"
-              :max="2"
-              :step="0.1"
-            />
-          </el-form-item>
-
-          <el-form-item label="亮度调整">
-            <el-slider
-              v-model="ffmpegSettings.deduplication.brightness"
-              :min="-1"
-              :max="1"
-              :step="0.1"
-            />
-          </el-form-item>
-
-          <el-form-item label="对比度调整">
-            <el-slider
-              v-model="ffmpegSettings.deduplication.contrast"
-              :min="0"
-              :max="2"
-              :step="0.1"
-            />
-          </el-form-item>
-
-          <el-form-item label="饱和度调整">
-            <el-slider
-              v-model="ffmpegSettings.deduplication.saturation"
-              :min="0"
-              :max="2"
-              :step="0.1"
+              v-model="ffmpegSettings.mergedLimitTime"
+              :min="10"
+              :max="60"
+              :step="5"
             />
           </el-form-item>
         </div>
@@ -933,11 +979,27 @@
         <el-form-item label="任务ID">
           <el-input v-model="scheduleForm.missionId" placeholder="请输入任务ID" />
         </el-form-item>
+        <el-form-item label="开始时间">
+          <!-- 日期+时间选择器 -->
+          <el-date-picker
+            v-model="scheduleForm.startTime"
+            type="datetime"
+            placeholder="选择开始时间"
+          />
+        </el-form-item>
+        <el-form-item label="上传间隔(小时)">
+          <el-input-number
+            v-model="scheduleForm.intervalHours"
+            :min="1"
+            :max="24"
+            placeholder="请输入上传间隔"
+          />
+        </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="cancelScheduleJob">取 消</el-button>
-          <el-button type="primary" @click="confirmScheduleJob">确 定</el-button>
+          <el-button type="primary" @click="confirmScheduleJob(false)">确 定</el-button>
         </span>
       </template>
     </el-dialog>
@@ -946,10 +1008,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { ElTable, ElTableColumn, ElProgress, ElEmpty } from 'element-plus'
+import { ElTable, ElTableColumn, ElProgress, ElEmpty, ElDatePicker } from 'element-plus'
 import { ElMessage } from 'element-plus'
-// import { defaultDeduplicationConfig } from '../../../TikTokDownloader/videoTransformDeduplication.js'
-import topic from '../../public/topic.json'
+import topicJson from '../../public/topic.json'
 
 const formatDate = (timestamp) => {
   const date = new Date(timestamp * 1000)
@@ -976,12 +1037,14 @@ const scheduleForm = ref({
   tag: '',
   tid: 172, // 默认分区ID
   missionId: '',
+  startTime: '',
+  intervalHours: 24,
 })
 
 // 打开定时任务设置弹窗
-const setScheduleJob = (gameName, reward) => {
-  // topic 中 gameName 对应的 missionId
-  const missionId = topic.find((item) => item.topic_name === gameName)?.mission_id
+const setScheduleJob = (rew, row) => {
+  const { topic, specialTag } = rew
+  const missionId = topicJson.find((item) => item.topic_name === topic)?.mission_id
 
   // 如果没有找到对应的 missionId，则提示用户
   if (!missionId) {
@@ -990,11 +1053,14 @@ const setScheduleJob = (gameName, reward) => {
   }
 
   scheduleForm.value = {
-    topicName: gameName,
+    topicName: topic,
     videoDir: '', // 需要用户填写
-    tag: getSpecialTagAll(reward), // 使用已有的标签获取函数
-    tid: 172, // 默认分区ID
+    tag: row.name, // 使用已有的标签获取函数
+    tid: 172, // 默认分区ID 手游
     missionId: missionId,
+    startTime: null, //默认早上6:00
+    intervalHours: 24,
+    immediately:false
   }
 
   scheduleDialogVisible.value = true
@@ -1006,14 +1072,14 @@ const cancelScheduleJob = () => {
 }
 
 // 确认设置
-const confirmScheduleJob = async () => {
+const confirmScheduleJob = async (immediately = false) => {
   try {
     const response = await fetch('http://localhost:3000/scheduleUpload', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(scheduleForm.value),
+      body: JSON.stringify({ ...scheduleForm.value, immediately }),
     })
 
     if (!response.ok) {
@@ -1170,6 +1236,7 @@ const confirmEditReward = async () => {
           })
           return e
         })
+
       return specialTagRequirement
     },
   )
@@ -1206,38 +1273,75 @@ const downloadSettings = ref({
 
 const ffmpegDialogVisible = ref(false)
 const musicOptions = ref(['billll', '难却'])
-const ffmpegSettings = ref({
-  onlyRename: true,
-  checkName: false,
-  beforeTime: 1,
-  fps: 30,
-  scalePercent: 0,
-  replaceMusic: false,
-  musicName: 'billll',
-  gameName: '火影忍者',
-  groupName: '攻略',
-  deduplication: {
-    speedFactor: 0.95,
-    targetWidth: 1280,
-    targetHeight: 720,
-    frameRate: 30,
-    scalePercent: 0.8,
+// 定义不同类别的默认去重配置
+const defaultDeduplicationConfigs = {
+  攻略: {
+    speedFactor: 0.9,
     enableMirror: false,
-    enableRotate: false,
+    enableRotate: true,
     rotateAngle: 1,
-    enableBlur: false,
-    blurRadius: 0.1,
-    enableFade: false,
+    enableBlur: true,
+    blurRadius: 0.2,
+    enableFade: false, // 攻略启用淡入淡出
     fadeDuration: 0.5,
     brightness: 0.1,
-    contrast: 1.2,
-    saturation: 1.1,
+    contrast: 1.1,
+    saturation: 1.2,
     enableBgBlur: false,
     bgBlurTop: 0.1,
     bgBlurBottom: 0.1,
   },
+  coser: {
+    speedFactor: 0.9,
+    enableMirror: true, // 启用镜像
+    enableRotate: true,
+    rotateAngle: 1,
+    enableBlur: true,
+    blurRadius: 0.1,
+    enableFade: false, // 启用淡入淡出
+    fadeDuration: 0.5,
+    brightness: 0,
+    contrast: 1,
+    saturation: 1,
+    enableBgBlur: true, // 启用背景虚化
+    bgBlurTop: 0.1,
+    bgBlurBottom: 0.1,
+  },
+}
+const ffmpegSettings = ref({
+  onlyRename: false,
+  checkName: false,
+  beforeTime: 1,
+  fps: 30,
+  scalePercent: 90,
+  replaceMusic: false,
+  musicName: 'billll',
+  gameName: '火影忍者',
+  groupName: '攻略',
+  deduplicationConfig: {
+    enable: false,
+    ...defaultDeduplicationConfigs.coser, // 默认使用 coser 配置
+  },
+  enableMerge: false,
+  mergedLimitTime: 20,
 })
 
+// 处理去重开关变化
+const handleDeduplicationChange = (value) => {
+  if (value) {
+    // 根据分组类型设置默认配置
+    const isCoser = ffmpegSettings.value.groupName.includes('coser')
+    const defaultConfig = isCoser
+      ? defaultDeduplicationConfigs.coser
+      : defaultDeduplicationConfigs.攻略
+
+    // 更新去重配置
+    ffmpegSettings.value.deduplicationConfig = {
+      enable: true,
+      ...defaultConfig,
+    }
+  }
+}
 const handleDownloadSettings = (name) => {
   dialogVisible.value = true
   const gameItem = allGameList.value.find((item) => item.name === name)
@@ -1341,9 +1445,7 @@ const fetchData = async () => {
     })
     dakaTableData.value = res.dakaData
     gameTableData.value = res.gameData.filter((item) => {
-      // if (item.show) {
       return true
-      // }
       return item.etime > new Date().getTime() / 1000
     })
     allGameList.value = res.allGameList.map((e) => ({ name: e, checked: false }))
@@ -1363,6 +1465,24 @@ const fetchNewActData = async () => {
     fetchData()
   } catch (error) {
     console.error('Error fetching data:', error)
+  }
+}
+
+const handleManualAccount = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/manualAccount')
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
+    const res = await response.json()
+    if (res.code === 200) {
+      ElMessage.success('手动养号成功')
+    } else {
+      ElMessage.error(res.msg || '手动养号失败')
+    }
+  } catch (error) {
+    console.error('Error handling manual account:', error)
+    ElMessage.error('手动养号失败')
   }
 }
 
@@ -1396,7 +1516,7 @@ const fetchUnfavorableReply = async () => {
 
 onMounted(() => {
   fetchData()
-  confirmScheduleJob()
+  // confirmScheduleJob()
   // fetchUnfavorableReply()
 })
 
