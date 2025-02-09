@@ -82,7 +82,6 @@
                   v-if="scope.row.searchKeyWord"
                   >更新B站数据</el-button
                 >
-                <!-- <p>视频时长至少需 {{ scope.row.timeRange ?? '>=30s' }}</p> -->
                 <p>任务结束日期 {{ formatDate(scope.row.etime) }}</p>
                 <p>添加任务日期 {{ scope.row.addTime }}</p>
                 <el-button type="primary" @click="openEditRewardDialog(scope.row.name)"
@@ -1279,31 +1278,31 @@ const defaultDeduplicationConfigs = {
     speedFactor: 0.9,
     enableMirror: false,
     enableRotate: true,
-    rotateAngle: 1,
-    enableBlur: true,
+    rotateAngle: 0.5,
+    enableBlur: false,
     blurRadius: 0.2,
     enableFade: false, // 攻略启用淡入淡出
     fadeDuration: 0.5,
     brightness: 0.1,
     contrast: 1.1,
-    saturation: 1.2,
+    saturation: 1.1,
     enableBgBlur: false,
     bgBlurTop: 0.1,
     bgBlurBottom: 0.1,
   },
   coser: {
     speedFactor: 0.9,
-    enableMirror: true, // 启用镜像
+    enableMirror: false,
     enableRotate: true,
-    rotateAngle: 1,
-    enableBlur: true,
-    blurRadius: 0.1,
-    enableFade: false, // 启用淡入淡出
+    rotateAngle: 0.5,
+    enableBlur: false,
+    blurRadius: 0.2,
+    enableFade: false, // 攻略启用淡入淡出
     fadeDuration: 0.5,
-    brightness: 0,
-    contrast: 1,
-    saturation: 1,
-    enableBgBlur: true, // 启用背景虚化
+    brightness: 0.1,
+    contrast: 1.1,
+    saturation: 1.1,
+    enableBgBlur: false,
     bgBlurTop: 0.1,
     bgBlurBottom: 0.1,
   },
@@ -1516,8 +1515,6 @@ const fetchUnfavorableReply = async () => {
 
 onMounted(() => {
   fetchData()
-  // confirmScheduleJob()
-  // fetchUnfavorableReply()
 })
 
 const updateData = async (row, specialTag) => {

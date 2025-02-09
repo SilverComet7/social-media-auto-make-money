@@ -379,9 +379,16 @@
             "act_url": "https://www.bilibili.com/blackboard/era/RqAvskVWGRBX98Ki.html",
             "comment": "3341人参与",
             "sDate": "2025/1/16",
-            "eDate": "2025/2/16",
-            "specialTag": "#永劫无间手游S4吉星赛季UP主激励计划",
-            "reward": [],
+            "eDate": "2025/02/16",
+            "specialTag": "",
+            "reward": [
+              {
+                "allNum": 5,
+                "allViewNum": 10000,
+                "money": 40000,
+                "isGet": false
+              }
+            ],
             "videoData": [
               {
                 "userName": "Feeling",
@@ -401,7 +408,8 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "永劫无间手游日常"
           }
         ]
       },
@@ -2527,6 +2535,15 @@
                 "onePlayNumList": []
               }
             ]
+          },
+          {
+            "name": "燕云十六声新春UP激励活动",
+            "act_url": "https://www.bilibili.com/blackboard/era/GYzTP3FwDiu3dfpY.html",
+            "comment": "1.7万人参与",
+            "sDate": "2025/1/27",
+            "eDate": "2025/2/28",
+            "specialTag": "#燕云十六声新春UP激励活动",
+            "reward": []
           }
         ]
       },
@@ -3346,10 +3363,17 @@
             "act_url": "https://www.bilibili.com/blackboard/era/tGGgNGj0IPEeA6Dv.html",
             "comment": "25.7万人参与",
             "sDate": "2025/1/2",
-            "eDate": "2025/2/12",
-            "specialTag": "2025鸣潮新春会",
+            "eDate": "2025/02/12",
+            "specialTag": "",
             "searchKeyWord": "2025鸣潮新春会",
-            "reward": [],
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 50000,
+                "money": 80000,
+                "isGet": false
+              }
+            ],
             "videoData": [
               {
                 "userName": "Feeling",
@@ -3369,17 +3393,25 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "鸣潮创作激励计划"
           },
           {
             "name": "《鸣潮》2.0版本音乐二创活动",
             "act_url": "https://www.bilibili.com/blackboard/era/5P8bBnwcgzgxFMcn.html",
             "comment": "2.0万人参与",
             "sDate": "2024/12/23",
-            "eDate": "2025/2/13",
-            "specialTag": "《鸣潮》2.0版本音乐二创活动",
+            "eDate": "2025/02/12",
+            "specialTag": "",
             "searchKeyWord": "《鸣潮》2.0版本音乐二创活动",
-            "reward": [],
+            "reward": [
+              {
+                "allNum": 2,
+                "allViewNum": 10000,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
             "videoData": [
               {
                 "userName": "Feeling",
@@ -3399,7 +3431,9 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "鸣潮先约电台音乐二创活动",
+            "minVideoTime": 15
           }
         ]
       },
@@ -4752,7 +4786,7 @@
             "comment": "2.6万人参与",
             "sDate": "2024/12/19",
             "eDate": "2025/2/19",
-            "specialTag": "诛仙世界公测激励计划",
+            "specialTag": "",
             "searchKeyWord": "诛仙世界公测激励计划",
             "reward": [],
             "videoData": [
@@ -4774,7 +4808,8 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "诛仙世界震撼公测"
           }
         ]
       },
@@ -4782,150 +4817,18 @@
         "name": "抖音",
         "specialTagRequirements": [
           {
-            "name": "",
-            "eDate": "2025/01/19",
-            "minView": 1000,
-            "specialTag": "#诛仙世界 #诛仙世界公测",
+            "name": "诛仙世界春节",
+            "specialTag": "#诛仙世界 #诛仙世界迎新年 #诛仙世界美学",
+            "eDate": "2025/02/23",
             "reward": [
               {
-                "allNum": 2,
-                "allViewNum": 5000,
-                "money": 100000,
-                "isGet": false
-              },
-              {
-                "minView": 5000,
                 "allNum": 3,
-                "allViewNum": 50000,
-                "money": 160000,
+                "allViewNum": 5000,
+                "money": 30000,
                 "isGet": false
               }
             ],
-            "videoData": [
-              {
-                "userName": "资料新",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              },
-              {
-                "userName": "Feeling",
-                "allNum": 5,
-                "allViewNum": 18280,
-                "onePlayNumList": [
-                  {
-                    "aweme_id": "7460578319428275519",
-                    "desc": " #诛仙世界 #诛仙世界公测 #coser #国风 #游戏",
-                    "create_time": 1737072182,
-                    "view": 1585,
-                    "like": 206
-                  },
-                  {
-                    "aweme_id": "7460579050285747495",
-                    "desc": " #诛仙世界 #诛仙世界公测 #coser #国风 #游戏",
-                    "create_time": 1737071282,
-                    "statistics": {
-                      "admire_count": 0,
-                      "comment_count": 1,
-                      "digg_count": 398,
-                      "collect_count": 21,
-                      "play_count": 4092,
-                      "share_count": 4
-                    },
-                    "view": 4092,
-                    "like": 398
-                  },
-                  {
-                    "aweme_id": "7460214409474968851",
-                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
-                    "create_time": 1736983814,
-                    "statistics": {
-                      "admire_count": 0,
-                      "comment_count": 1,
-                      "digg_count": 390,
-                      "collect_count": 26,
-                      "play_count": 2224,
-                      "share_count": 6
-                    },
-                    "view": 2224,
-                    "like": 390
-                  },
-                  {
-                    "aweme_id": "7460213570815495435",
-                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
-                    "create_time": 1736982914,
-                    "statistics": {
-                      "admire_count": 0,
-                      "comment_count": 1,
-                      "digg_count": 30,
-                      "collect_count": 2,
-                      "play_count": 1074,
-                      "share_count": 0
-                    },
-                    "view": 1074,
-                    "like": 30
-                  },
-                  {
-                    "aweme_id": "7460213433716247844",
-                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
-                    "create_time": 1736982014,
-                    "statistics": {
-                      "admire_count": 0,
-                      "comment_count": 1,
-                      "digg_count": 1128,
-                      "collect_count": 107,
-                      "play_count": 9305,
-                      "share_count": 20
-                    },
-                    "view": 9305,
-                    "like": 1128
-                  }
-                ]
-              },
-              {
-                "userName": "Chris",
-                "allNum": 4,
-                "allViewNum": 17766,
-                "onePlayNumList": [
-                  {
-                    "aweme_id": "7460577428948241676",
-                    "desc": "#诛仙世界 #诛仙世界公测 #coser #国风 #游戏",
-                    "create_time": 1737071582,
-                    "view": 1426,
-                    "like": 141
-                  },
-                  {
-                    "aweme_id": "7460214484355878198",
-                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
-                    "create_time": 1736984114,
-                    "view": 3033,
-                    "like": 301
-                  },
-                  {
-                    "aweme_id": "7460213626339708201",
-                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
-                    "create_time": 1736983214,
-                    "view": 3478,
-                    "like": 374
-                  },
-                  {
-                    "aweme_id": "7460213272403381545",
-                    "desc": "#诛仙世界 #诛仙世界公测 #coser #游戏 #国风",
-                    "create_time": 1736981414,
-                    "statistics": {
-                      "admire_count": 0,
-                      "comment_count": 2,
-                      "digg_count": 771,
-                      "collect_count": 62,
-                      "play_count": 9829,
-                      "share_count": 8
-                    },
-                    "view": 9829,
-                    "like": 771
-                  }
-                ]
-              }
-            ]
+            "minView": 1000
           }
         ]
       },
@@ -5645,7 +5548,7 @@
         "specialTagRequirements": [
           {
             "name": "尘白禁区夙圆心行",
-            "specialTag": "#尘白禁区夙圆心行",
+            "specialTag": "#尘白禁区，#尘白禁区夙圆心行",
             "eDate": "2025/03/06",
             "reward": [
               {
@@ -5653,26 +5556,6 @@
                 "allViewNum": 2000,
                 "money": 50000,
                 "isGet": false
-              }
-            ],
-            "videoData": [
-              {
-                "userName": "资料新",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              },
-              {
-                "userName": "Feeling",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              },
-              {
-                "userName": "Chris",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
               }
             ]
           }
@@ -6261,7 +6144,8 @@
             ],
             "suppleTag": "雷神 蜘蛛侠 钢铁侠 守望先锋 漫威 漫威争锋"
           }
-        ]
+        ],
+        "suppleTag": "网易 漫威争锋 竞技游戏 火箭浣熊 MOBA MMORPG 风暴女 守望先锋2"
       },
       {
         "name": "抖音",
@@ -6346,6 +6230,15 @@
                 "onePlayNumList": []
               }
             ]
+          },
+          {
+            "name": "无畏契约训练营第14期",
+            "act_url": "https://www.bilibili.com/blackboard/era/dghF7DcErJX23Iw4.html",
+            "comment": "8837人参与",
+            "sDate": "2025/1/27",
+            "eDate": "2025/3/27",
+            "specialTag": "#无畏契约训练营第14期",
+            "reward": []
           }
         ]
       }
@@ -7092,13 +6985,14 @@
             "act_url": "https://www.bilibili.com/blackboard/era/xE6yWpfEyDXVzd7X.html",
             "comment": "6485人参与",
             "sDate": "2025/1/2",
-            "eDate": "2025/3/16",
-            "specialTag": "2025战双帕弥什新春会",
+            "eDate": "2025/03/16",
+            "specialTag": "",
             "searchKeyWord": "2025战双帕弥什新春会",
             "reward": [
               {
-                "allNum": 1000,
-                "money": 10000,
+                "allNum": 5,
+                "allViewNum": 50000,
+                "money": 60000,
                 "isGet": false
               }
             ],
@@ -7121,7 +7015,8 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "战双帕弥什奇思创想"
           }
         ]
       },
@@ -7668,40 +7563,6 @@
       {
         "specialTagRequirements": [
           {
-            "name": "春节瓜分",
-            "specialTag": "#暗区突围 #暗区新版本极境风雪",
-            "eDate": "2025/01/16",
-            "reward": [
-              {
-                "allNum": 5,
-                "allViewNum": 10000,
-                "money": 100000,
-                "isGet": false
-              }
-            ],
-            "minView": 1000,
-            "videoData": [
-              {
-                "userName": "资料新",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              },
-              {
-                "userName": "Feeling",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              },
-              {
-                "userName": "Chris",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              }
-            ]
-          },
-          {
             "name": "瓜分",
             "specialTag": "#暗区突围  #暗区蛇金病",
             "eDate": "2025/02/09",
@@ -7734,6 +7595,20 @@
                 "onePlayNumList": []
               }
             ]
+          },
+          {
+            "name": "春节",
+            "specialTag": "#暗区突围  #暗区新版本极境风雪",
+            "eDate": "2025/02/16",
+            "reward": [
+              {
+                "allNum": 10,
+                "allViewNum": 20000,
+                "money": 200000,
+                "isGet": false
+              }
+            ],
+            "minView": 1000
           }
         ],
         "name": "抖音"
@@ -8982,10 +8857,17 @@
             "act_url": "https://www.bilibili.com/blackboard/era/PoWK6rBHgizrQLwo.html",
             "comment": "1487人参与",
             "sDate": "2025/1/16",
-            "eDate": "2025/2/12",
-            "specialTag": "新月同行新春会",
+            "eDate": "2025/02/12",
+            "specialTag": "",
             "searchKeyWord": "新月同行新春会",
-            "reward": [],
+            "reward": [
+              {
+                "allNum": 5,
+                "allViewNum": 10000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
             "videoData": [
               {
                 "userName": "Feeling",
@@ -9005,7 +8887,8 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "新月同行新春会"
           }
         ]
       }
@@ -12039,6 +11922,15 @@
                 ]
               }
             ]
+          },
+          {
+            "name": "和平精英2025吃鸡搭子",
+            "act_url": "https://www.bilibili.com/blackboard/era/q7oqCHSbcR44BQc8.html",
+            "comment": "",
+            "sDate": "2025/1/23",
+            "eDate": "2025/2/16",
+            "specialTag": "#和平精英2025吃鸡搭子",
+            "reward": []
           }
         ],
         "suppleTag": "游戏 手机游戏 FPS 动作游戏 皮肤 吃鸡游戏 和平精英"
@@ -12197,8 +12089,8 @@
             "act_url": "https://www.bilibili.com/blackboard/era/zOMjVSUbZaD193i4.html",
             "comment": "2439人参与",
             "sDate": "2025/1/16",
-            "eDate": "2025/2/28",
-            "specialTag": "#CF手游新春会",
+            "eDate": "2025/02/28",
+            "specialTag": "",
             "reward": [
               {
                 "cday": 3,
@@ -12248,7 +12140,8 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "CF手游新春会"
           }
         ]
       },

@@ -1,12 +1,7 @@
+const fs = require("fs");
 
 
 
-
-// 格式化成为 YYYY-MM-DD 的字符串
-const formatDate = (timestamp) => {
-    const date = new Date(timestamp * 1000)
-    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-}
 
 
 // 格式化 YYYY-MM-DD 为秒级时间戳
@@ -21,8 +16,41 @@ const getDaysDiff = (timeStamp1, timeStamp2) => {
     return Math.ceil(endDiffDate);
 }
 
+const formatDate = (timestamp = new Date().getTime()) => {
+  const date = new Date(timestamp);
+  return (
+    date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+  );
+};
 
+function getOldData(jsonPath = "./data.json") {
+  try {
+    // 检查文件是否存在
+    if (!fs.existsSync(jsonPath)) {
+      console.warn(`文件不存在: ${jsonPath}`);
+    }
 
+    const data = fs.readFileSync(jsonPath, "utf8");
+
+    try {
+      let oldDataArr = JSON.parse(data);
+
+      // 确保返回的是数组
+      if (!Array.isArray(oldDataArr)) {
+        console.warn(`${jsonPath} 的内容不是数组格式`);
+      }
+
+      return oldDataArr;
+    } catch (parseError) {
+      console.error(`JSON 解析错误 (${jsonPath}):`, parseError);
+      console.error("问题数据:", data.substring(0, 200) + "..."); // 只显示前200个字符
+      return [];
+    }
+  } catch (error) {
+    console.error(`读取文件错误 (${jsonPath}):`, error);
+    return [];
+  }
+}
 
 
 async function concurrentFetchWithDelay(promises, minDelay = 100, maxDelay = 500, limitNum = 5) {
@@ -68,6 +96,7 @@ function calculateTotalMoney(gameData) {
 
 module.exports = {
     formatDate,
+    getOldData,
     formatSecondTimestamp,
     getDaysDiff,
     concurrentFetchWithDelay,

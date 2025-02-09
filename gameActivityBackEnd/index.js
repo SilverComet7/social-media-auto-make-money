@@ -4,12 +4,14 @@ const cors = require("cors");
 const app = express();
 const port = 3000;
 const path = require("path");
-const { exec } = require("child_process");
+const { exec, spawn } = require("child_process");
 const schedule = require("node-schedule");
 
 const {
   concurrentFetchWithDelay,
   calculateTotalMoney,
+  formatDate,
+  getOldData,
 } = require("./commonFunction.js");
 const { queryDouYinAllAccountsData } = require("./handleCrawer/douyin.js");
 const { queryXiaoHongShuAllAccountsData } = require("./handleCrawer/xhs.js");
@@ -20,47 +22,8 @@ const {
 const {
   downloadVideosAndGroup,
 } = require("../TikTokDownloader/videoDownloadAndGroupList.js");
-
 const { allGameList } = require("../baseAvg.js");
 
-// 格式化成为 YYYY-MM-DD-HH 的字符串
-const formatDate = (timestamp = new Date().getTime()) => {
-  const date = new Date(timestamp);
-  return (
-    date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
-  );
-};
-
-function getOldData(jsonPath = "./data.json") {
-  try {
-    // 检查文件是否存在
-    if (!fs.existsSync(jsonPath)) {
-      console.warn(`文件不存在: ${jsonPath}`);
-      // return [];
-    }
-
-    const data = fs.readFileSync(jsonPath, "utf8");
-
-    try {
-      let oldDataArr = JSON.parse(data);
-
-      // 确保返回的是数组
-      if (!Array.isArray(oldDataArr)) {
-        console.warn(`${jsonPath} 的内容不是数组格式`);
-        // return [];
-      }
-
-      return oldDataArr;
-    } catch (parseError) {
-      console.error(`JSON 解析错误 (${jsonPath}):`, parseError);
-      console.error("问题数据:", data.substring(0, 200) + "..."); // 只显示前200个字符
-      return [];
-    }
-  } catch (error) {
-    console.error(`读取文件错误 (${jsonPath}):`, error);
-    return [];
-  }
-}
 
 const accountJson = getOldData("./jsonFile/accountList.json");
 app.use(cors());
@@ -83,9 +46,6 @@ const headers = {
 };
 
 async function writeLocalDataJson(arr, fileName = "data.json") {
-  // 保存一下旧数据
-  // const oldArr = await getOldData(fileName)
-  // fs.writeFileSync(`./jsonFile/old_${fileName}`, JSON.stringify(oldArr, null, 2))
 
   // 写入新数据
   const data = JSON.stringify(arr, null, 2);
@@ -246,35 +206,6 @@ app.get("/getNewActData", async (req, res) => {
           }
         });
 
-      // // 计算每个活动奖励是否达标,优化按顺序查询，避免被风控
-      // Promise.all(
-      //     oldDataArr.map(async item => {
-      //         // 有获奖档位设置  且  距离上一次评测时间不小于一天
-      //         if (item.rewards) {
-      //             if (item?.lastJudgeTime) {
-      //                 if ((new Date().getTime() - item.lastJudgeTime) < 86400000) return
-      //             }
-      //             const bilibili = await get_BiliBili_Data(item)
-      //             item.rewards.forEach(i => {
-      //                 i.requirements = i.requirements.map(i2 => {
-      //                     let isGet = false;
-      //                     if (i2.allNum) i2.allNum <= bilibili.allNum ? isGet = true : isGet = false
-      //                     if (i2.allViewNum) i2.allViewNum <= bilibili.allViewNum ? isGet = true : isGet = false
-      //                     if (i2.view) bilibili.onePlayNumList.some(i3 => i3.view >= i2.view) ? isGet = true : isGet = false
-      //                     return {
-      //                         ...i2,
-      //                         isGet
-      //                     }
-      //                 })
-      //             })
-      //             item['bilibili'] = bilibili
-      //             item['lastJudgeTime'] = new Date().getTime()
-      //             item["updateData"] = true
-      //             item["updateDate"] = formatDateHour(new Date())
-      //             return item
-      //         }
-      //     })).then((res) => {
-      //     })
 
       writeLocalDataJson(list);
       writeLocalDataJson(oldOtherDataArr, "./gameData.json");
@@ -355,7 +286,6 @@ app.post("/ffmpegHandleVideos", async (req, res) => {
   }
 });
 
-// 更新打卡活动列表
 app.get("/getNewDakaData", async (req, res) => {
   try {
     async function getDakaNewData() {
@@ -441,10 +371,9 @@ app.get("/data", async (req, res) => {
           });
         }
       });
-      game.etime = minEtime; // 更新最外层的etime
+      game.etime = minEtime; 
     });
 
-    // filter(e => e.etime < Number.MAX_SAFE_INTEGER).
     const gameData = otherGameData
       .sort((a, b) => a.etime - b.etime)
       .map((item) => {
@@ -704,25 +633,26 @@ app.post("/getPlatformData", async (req, res) => {
 });
 
 
+schedule.scheduleJob('0 40 11 * * *', async () => {
+  try {
+    const cmd = 'C:\\Users\\ChrisWang\\Downloads\\bilibili-tool-pro-v2.1.3-win-x64\\win-x64\\Ray.BiliBiliTool.Console.exe';
+    const child = spawn(cmd);
 
+    child.stdout.on('data', (data) => {
+      console.log(`养号执行成功: ${data}`);
+    });
 
-// // 每天8点d执行养号  "C:\Users\ChrisWang\Downloads\bilibili-tool-pro-v2.1.3-win-x64\win-x64\Ray.BiliBiliTool.Console.exe"
-// schedule.scheduleJob('0 17 8 * * *', async () => {
-//   try {
-//     const cmd = '"C:\\Users\\ChrisWang\\Downloads\\bilibili-tool-pro-v2.1.3-win-x64\\win-x64\\Ray.BiliBiliTool.Console.exe"';
-//     exec(cmd, (error, stdout, stderr) => {
-//       if (error) {
-//         console.error('养号执行失败:', error);
-//         return;
-//       }
-//       console.log('养号执行成功');
-//       console.log('输出:', stdout);
-//     });
-//   } catch (error) {
-//     console.error('定时养号出错:', error);
-//   }
-// });
+    child.stderr.on('data', (data) => {
+      console.error(`养号执行失败: ${data}`);
+    });
 
+    child.on('close', (code) => {
+      console.log(`子进程退出，退出码 ${code}`);
+    });
+  } catch (error) {
+    console.error('定时养号出错:', error);
+  }
+});
 
 
 // 执行过期任务的函数
@@ -780,6 +710,10 @@ async function executeExpiredJobs() {
               ".mp4"
             )}" "${job.videoPath}"`;
 
+          // 间隔随机时间 防止过快
+          const randomDelay = Math.floor(Math.random() * 5000);
+          await new Promise((resolve) => setTimeout(resolve, randomDelay));
+
           await new Promise((resolve, reject) => {
             exec(uploadCmd, (error, stdout, stderr) => {
               if (error) {
@@ -792,6 +726,7 @@ async function executeExpiredJobs() {
                 job.jobIndex
               ].successExecAccount.push(account.accountName);
               console.log(`上传成功 ${account.accountName}  ${job.videoPath}`);
+
               resolve();
             });
           });
@@ -897,7 +832,7 @@ app.post("/scheduleUpload", async (req, res) => {
         msg: "任务处理成功",
         jobs: scheduleJobs,
       });
-    } 
+    }
   } catch (error) {
     console.error("处理任务失败:", error);
     res.status(500).json({
@@ -907,9 +842,7 @@ app.post("/scheduleUpload", async (req, res) => {
   }
 });
 
-// 定时任务：查询评论接口并记录不利评论功能
 // 查询最近50条评论，加入出现  抄 | 发过 | 假 | 抄袭 其中某一个词则记录改评论的所有信息
-// 查询接口 GET  https://api.bilibili.com/x/v2/reply/up/fulllist?keyword=${keyword}&order=1&filter=-1&type=1&bvid=&pn=1&ps=50&charge_plus_filter=false
 app.get("/unfavorableReply", async (req, res) => {
   const unfavorableWords = [
     { id: 1, keyword: "抄" },
@@ -949,9 +882,7 @@ app.get("/unfavorableReply", async (req, res) => {
   res.json(messageList.flat());
 });
 
-// https://api.bilibili.com/x/v2/reply/del
 // 删除评论接口
-
 app.post("/deleteUnfavorableReply", async (req, res) => {
   try {
     // 获取参数
