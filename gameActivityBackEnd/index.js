@@ -12,6 +12,7 @@ const {
   calculateTotalMoney,
   formatDate,
   getOldData,
+  formatSecondTimestamp,
 } = require("./commonFunction.js");
 const { queryDouYinAllAccountsData } = require("./handleCrawer/douyin.js");
 const { queryXiaoHongShuAllAccountsData } = require("./handleCrawer/xhs.js");
@@ -22,16 +23,14 @@ const {
 const {
   downloadVideosAndGroup,
 } = require("../TikTokDownloader/videoDownloadAndGroupList.js");
-const { allGameList } = require("../baseAvg.js");
-
-
+const { allGameList } = require("../allGameNameList.js");
 const accountJson = getOldData("./jsonFile/accountList.json");
+
+
 app.use(cors());
 app.use(express.json());
 
-const Cookie =
-  accountJson.bilibili[0].Cookie ||
-  `_uuid=DCB4B48C-46CC-6F1F-ED51-8152E8E101210B71254infoc; buvid3=9F62B9DD-33A9-6EC7-B838-6B3E180B154D72386infoc; b_nut=1730444972; enable_web_push=DISABLE; header_theme_version=CLOSE; rpdid=|(u|u))kR)u~0J'u~J|RlY~~k; LIVE_BUVID=AUTO7617304600468294; buvid_fp_plain=undefined; buvid4=8004C396-1E33-8C47-8AF8-D095CCBBF99B72541-024110107-nifL5evEKW7y%2B%2FaLdI%2FWoQ%3D%3D; deviceFingerprint=bbcff4d201222c7527e097b38162802a; hit-dyn-v2=1; go-back-dyn=0; is-2022-channel=1; match_float_version=ENABLE; bmg_af_switch=1; bmg_src_def_domain=i1.hdslb.com; opus-goback=1; DedeUserID=64684387; DedeUserID__ckMd5=37df564f28a09f19; bsource_origin=other_widgetUP_bilibili_recommendcard; fingerprint=2126a416c7a6aa6e7bcdd0868c50721f; CURRENT_QUALITY=80; msource=pc_web; home_feed_column=5; browser_resolution=1661-930; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzY5NDk0NjAsImlhdCI6MTczNjY5MDIwMCwicGx0IjotMX0.5O5V-B0jLimTxZpDUlG-EMohH1X_wZay-ozEPbFmwqA; bili_ticket_expires=1736949400; SESSDATA=db5cf7a3%2C1752242266%2C2f2d0%2A12CjBIE_kOLzvU8QjZRWS4Mp5rha6vmNDQspSdutj2w2q5cI0Ydz8J_4aic3ZMMsHGGg4SVjFTRERSQTRLYl9LRHdEOTBKVHdzNXUyMlQ2UEQzU24tQlZqUVg0ek5JWnZiS0dfVm5FOGZaYTJpdmRoa3hBVUhyUDlaZFhKSl9FX3FjTlNCd1l5VXRRIIEC; bili_jct=8bfe601af9073e968fe9345a9d1ab72c; sid=8bs92re3; buvid_fp=2126a416c7a6aa6e7bcdd0868c50721f; share_source_origin=QQ; bsource=share_source_qqchat; bp_t_offset_64684387=1021651554396012544; CURRENT_FNVAL=2000; PVID=11; b_lsid=10A3F1081D_19460521E52`;
+const Cookie = accountJson.bilibili[0].Cookie;
 const csrfToken = Cookie.split("; ")
   .find((cookie) => cookie.startsWith("bili_jct="))
   .split("=")[1];
@@ -46,8 +45,6 @@ const headers = {
 };
 
 async function writeLocalDataJson(arr, fileName = "data.json") {
-
-  // 写入新数据
   const data = JSON.stringify(arr, null, 2);
   fs.writeFileSync(fileName, data);
 }
@@ -206,7 +203,6 @@ app.get("/getNewActData", async (req, res) => {
           }
         });
 
-
       writeLocalDataJson(list);
       writeLocalDataJson(oldOtherDataArr, "./gameData.json");
 
@@ -352,17 +348,21 @@ app.get("/data", async (req, res) => {
       game.rewards.forEach((reward) => {
         if (reward.specialTagRequirements) {
           reward.specialTagRequirements = reward.specialTagRequirements.filter(
-            (e) =>
-              new Date(e.eDate).getTime() + 24 * 60 * 60 * 60 >
-              new Date().getTime()
+            (e) => {
+              const dateTime = formatSecondTimestamp(e.eDate + ' 23:59:59');
+              console.log("🚀 ~ game.rewards.forEach ~ dateTime:", e.name, dateTime > new Date().getTime())
+              return (dateTime) >
+                new Date().getTime()
+            }
+
           );
           reward.specialTagRequirements.forEach((requirement) => {
             if (requirement.eDate) {
               const eTime =
                 (new Date(requirement.eDate).getTime() + 24 * 60 * 60 * 60) /
                 1000;
-              // 如果结束日期小于当天的time，则跳过 不计入最近结束日期
-              if (eTime < new Date().getTime() / 1000) return;
+              // // 如果结束日期小于当天的time，则跳过 不计入最近结束日期
+              // if (eTime < new Date().getTime() / 1000) return;
               // 如果结束日期小于minEtime，则更新minEtime
               if (eTime < minEtime) {
                 minEtime = eTime;
@@ -371,7 +371,7 @@ app.get("/data", async (req, res) => {
           });
         }
       });
-      game.etime = minEtime; 
+      game.etime = minEtime;
     });
 
     const gameData = otherGameData
@@ -427,7 +427,6 @@ app.get("/data", async (req, res) => {
   }
 });
 
-// 单个更新活动投稿数据通过 judgeArchiveIsGet 函数
 app.post("/updateDataOne", async (req, res) => {
   try {
     // 获取参数
@@ -632,30 +631,28 @@ app.post("/getPlatformData", async (req, res) => {
   }
 });
 
+// schedule.scheduleJob("0 40 11 * * *", async () => {
+//   try {
+//     const cmd =
+//       "C:\\Users\\ChrisWang\\Downloads\\bilibili-tool-pro-v2.1.3-win-x64\\win-x64\\Ray.BiliBiliTool.Console.exe";
+//     const child = spawn(cmd);
 
-schedule.scheduleJob('0 40 11 * * *', async () => {
-  try {
-    const cmd = 'C:\\Users\\ChrisWang\\Downloads\\bilibili-tool-pro-v2.1.3-win-x64\\win-x64\\Ray.BiliBiliTool.Console.exe';
-    const child = spawn(cmd);
+//     child.stdout.on("data", (data) => {
+//       console.log(`养号执行成功: ${data}`);
+//     });
 
-    child.stdout.on('data', (data) => {
-      console.log(`养号执行成功: ${data}`);
-    });
+//     child.stderr.on("data", (data) => {
+//       console.error(`养号执行失败: ${data}`);
+//     });
 
-    child.stderr.on('data', (data) => {
-      console.error(`养号执行失败: ${data}`);
-    });
+//     child.on("close", (code) => {
+//       console.log(`子进程退出，退出码 ${code}`);
+//     });
+//   } catch (error) {
+//     console.error("定时养号出错:", error);
+//   }
+// });
 
-    child.on('close', (code) => {
-      console.log(`子进程退出，退出码 ${code}`);
-    });
-  } catch (error) {
-    console.error('定时养号出错:', error);
-  }
-});
-
-
-// 执行过期任务的函数
 async function executeExpiredJobs() {
   try {
     // 读取定时任务配置
@@ -744,23 +741,20 @@ async function executeExpiredJobs() {
     return {
       code: 200,
       msg: "过期任务执行完成",
-      jobs: scheduleJobs
+      jobs: scheduleJobs,
     };
   } catch (error) {
     console.error("执行过期任务失败:", error);
     return {
       code: 500,
-      msg: "执行过期任务失败"
+      msg: "执行过期任务失败",
     };
   }
 }
 
-// 每隔2小时执行过期任务
 setInterval(executeExpiredJobs, 2 * 60 * 60 * 1000);
 
-// 生成定时上传任务或手动执行
 app.post("/scheduleUpload", async (req, res) => {
-
   // 生成定时上传任务
   async function generateScheduleJobs(videoDir, startTime, intervalHours) {
     const files = fs.readdirSync(videoDir);
@@ -784,10 +778,22 @@ app.post("/scheduleUpload", async (req, res) => {
   }
 
   try {
-    const { tag, tid, missionId, videoDir, topicName, startTime, intervalHours, immediately } = req.body;
+    const {
+      tag,
+      tid,
+      missionId,
+      videoDir,
+      topicName,
+      startTime,
+      intervalHours,
+      immediately,
+    } = req.body;
 
-    // 读取定时任务配置文件
+    // 生成定时上传任务或手动执行
+
     const scheduleJobsPath = "./scheduleJob/BiliBiliScheduleJob.json";
+
+
     let scheduleJobs = [];
     try {
       scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
@@ -798,11 +804,14 @@ app.post("/scheduleUpload", async (req, res) => {
 
     if (immediately) {
       // 立即执行上传 executeExpiredJobs
-      await executeExpiredJobs()
-
+      await executeExpiredJobs();
     } else {
       // 生成新的定时任务
-      const newJobs = await generateScheduleJobs(videoDir, startTime, intervalHours);
+      const newJobs = await generateScheduleJobs(
+        videoDir,
+        startTime,
+        intervalHours
+      );
 
       // 创建或更新定时任务配置
       const gameIndex = scheduleJobs.findIndex(
@@ -841,7 +850,6 @@ app.post("/scheduleUpload", async (req, res) => {
   }
 });
 
-// 查询最近50条评论，加入出现  抄 | 发过 | 假 | 抄袭 其中某一个词则记录改评论的所有信息
 app.get("/unfavorableReply", async (req, res) => {
   const unfavorableWords = [
     { id: 1, keyword: "抄" },
@@ -881,7 +889,6 @@ app.get("/unfavorableReply", async (req, res) => {
   res.json(messageList.flat());
 });
 
-// 删除评论接口
 app.post("/deleteUnfavorableReply", async (req, res) => {
   try {
     // 获取参数
