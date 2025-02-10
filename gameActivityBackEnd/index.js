@@ -676,7 +676,6 @@ async function executeExpiredJobs() {
             const jobTime = new Date(job.execTime);
             return (
               jobTime < now &&
-              jobTime.getDate() === now.getDate() &&
               job.successExecAccount.length < accountJson.bilibili.length
             );
           })
