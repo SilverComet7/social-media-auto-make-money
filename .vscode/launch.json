@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Python: CLI Main",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/social-auto-upload/cli_main.py ",
+        "args": [
+            "douyin",
+            "Feeling",
+            "upload",
+            "C:\\Users\\ChrisWang\\code\\platform_game_activity\\social-auto-upload\\videos\\demo.mp4",
+            "-pt",
+            "0"
+          ],
+        "console": "integratedTerminal"
+      }
+    ]
+  }
