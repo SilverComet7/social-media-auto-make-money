@@ -20,7 +20,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-accountList.json
 node_modules
 .env
 *.zip
+*.history
+accountList.json
