@@ -350,7 +350,6 @@ app.get("/data", async (req, res) => {
           reward.specialTagRequirements = reward.specialTagRequirements.filter(
             (e) => {
               const dateTime = formatSecondTimestamp(e.eDate + ' 23:59:59');
-              console.log("🚀 ~ game.rewards.forEach ~ dateTime:", e.name, dateTime > new Date().getTime())
               return (dateTime) >
                 new Date().getTime()
             }
