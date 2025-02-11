@@ -127,7 +127,6 @@
                     >
                       TAG: {{ getSpecialTagAll(reward) }}
                     </p>
-                    <!-- B站suppleTag -->
                     <p
                       class="text-blue-800 cursor-pointer"
                       v-if="reward.suppleTag"

@@ -20,7 +20,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-accountList.json
 node_modules
 .env
 *.zip
+
+
+*.history
+accountList.json
+
+social-auto-upload/
+TikTokDownloader
+Crawle/
+XHS-Downloader/
