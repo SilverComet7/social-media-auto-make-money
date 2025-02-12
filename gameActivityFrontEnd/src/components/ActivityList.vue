@@ -23,8 +23,10 @@
             <!-- 爬虫查询栏 -->
             <div class="operation-group bg-gray-100 p-4 rounded">
               <h3 class="text-lg font-bold mb-2">爬虫查询操作</h3>
-              <div class="space-y-2">
-                <el-button type="primary" @click="updateOnePlatData('抖音')">查询4平台视频数据</el-button>
+              <div class="flex">
+                <el-button type="primary" @click="updateOnePlatData('抖音')"
+                  >查询视频数据</el-button
+                >
                 <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
               </div>
             </div>
@@ -32,18 +34,20 @@
             <!-- 视频下载处理栏 -->
             <div class="operation-group bg-blue-50 p-4 rounded">
               <h3 class="text-lg font-bold mb-2">视频处理操作</h3>
-              <div class="space-y-2">
+              <div class="flex">
                 <el-button type="primary" @click="handleDownloadSettings">下载视频并分组</el-button>
-                <el-button type="primary" @click="ffmpegDialogVisible = true">ffmpeg去重处理</el-button>
+                <el-button type="primary" @click="ffmpegDialogVisible = true"
+                  >ffmpeg去重处理</el-button
+                >
               </div>
             </div>
 
             <!-- 定时任务栏 -->
             <div class="operation-group bg-green-50 p-4 rounded">
               <h3 class="text-lg font-bold mb-2">定时任务操作</h3>
-              <div class="space-y-2">
-                <el-button type="primary" @click="confirmScheduleJob(true)">立即执行定时任务</el-button>
-                <el-button type="primary" @click="handleManualAccount">立即执行手动养号</el-button>
+              <div class="flex">
+                <el-button type="primary" @click="confirmScheduleJob(true)">执行定时任务</el-button>
+                <el-button type="primary" @click="handleManualAccount">执行手动养号</el-button>
               </div>
             </div>
           </div>
@@ -112,18 +116,9 @@
                     <h4 class="font-bold" :class="reward.notDo ? 'text-red-500' : ''">
                       {{ reward.name }}
                     </h4>
-                    <!-- 编辑平台活动 -->
                     <el-button type="primary" @click="openEditRewardDialog(scope.row.name, reward)"
                       >编辑</el-button
                     >
-
-                    <!-- <p
-                      class="text-blue-800"
-                      @click="copyTag(reward.baseTopic)"
-                      v-if="reward.baseTopic"
-                    >
-                      选择话题名称: {{ reward.baseTopic }}
-                    </p> -->
                     <p
                       class="text-blue-800 font-bold cursor-pointer"
                       @click="copyTag(getSpecialTagAll(reward))"
@@ -156,84 +151,87 @@
                             ? getDaysDiff(new Date(rew.eDate).getTime()) >= 0
                             : getDaysDiff(scope.row.etime * 1000) >= 0
                         "
+
                       >
-                        <a
-                          :href="rew.act_url"
-                          target="_blank"
-                          class="font-bold text-blue-600"
-                          v-if="reward.name === 'bilibili'"
-                          >{{ rew.name }} {{ rew.comment }}</a
-                        >
-                        <h4 class="font-bold" v-else>{{ rew.name }}</h4>
-                        <h4 class="font-bold" v-if="reward.name === 'bilibili'">
-                          话题：{{ rew.topic }}
-                        </h4>
-                        <el-button type='primary' @click="setScheduleJob(rew, scope.row) "
-                          >设置该活动定时执行任务
-                        </el-button>
-                        <!-- <h4 class="font-bold" v-if="rew.sDate">活动开始{{ rew.sDate }} </h4> -->
-                        <h4
-                          class="font-bold"
-                          v-if="rew.eDate"
-                          :class="
-                            getDaysDiff(new Date(rew.eDate).getTime()) <= 4 ? 'text-orange-500' : ''
-                          "
-                        >
-                          活动结束{{ rew.eDate }} 还剩{{
-                            getDaysDiff(new Date(rew.eDate).getTime())
-                          }}天
-                        </h4>
-                        <div>
-                          <p
-                            class="text-blue-800 cursor-pointer"
-                            @click="copyTag(rew.specialTag)"
-                            v-if="rew.specialTag"
+                       <div :class="rew.isNotDo ? 'bg-red-300' : ''">
+                          <a
+                            :href="rew.act_url"
+                            target="_blank"
+                            class="font-bold text-blue-600"
+                            v-if="reward.name === 'bilibili'"
+                            >{{ rew.name }} {{ rew.comment }}</a
                           >
-                            必带TAG:
-                            {{ rew.specialTag }}
-                          </p>
-                        </div>
-                        <p v-if="rew.minVideoTime">单稿件最低时长：{{ rew.minVideoTime || 6 }}s</p>
-                        <p v-if="rew.minView">单稿件最低播放量：{{ rew.minView || 100 }}</p>
-                        <div v-for="(req, reqIndex) in rew.reward" :key="reqIndex">
-                          <span v-if="req.time"> 持续时间>={{ req.time }} </span>
-                          <span v-if="req.allNum">总投稿数{{ req.allNum }} </span>
-                          <span
-                            v-if="req.allViewNum"
-                            :class="req.allViewNum <= 20000 ? ' text-orange-500' : ''"
+                          <h4 class="font-bold" v-else>{{ rew.name }}</h4>
+                          <h4 class="font-bold" v-if="reward.name === 'bilibili'">
+                            话题：{{ rew.topic }}
+                          </h4>
+                          <el-button type="primary" @click="setScheduleJob(rew, scope.row)"
+                            >设置该活动定时执行任务
+                          </el-button>
+                          <!-- <h4 class="font-bold" v-if="rew.sDate">活动开始{{ rew.sDate }} </h4> -->
+                          <h4
+                            class="font-bold"
+                            v-if="rew.eDate"
+                            :class="
+                              getDaysDiff(new Date(rew.eDate).getTime()) <= 4 ? 'text-orange-500' : ''
+                            "
                           >
-                            总播放量{{ req.allViewNum }}
-                          </span>
-                          <span v-if="req.view"> 单视频播放量{{ req.view }} </span>
-                          <span v-if="req.cday"> 投稿天数>={{ req.cday }} </span>
-                          <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
-                          <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
-                          <span
-                            v-if="req.money"
-                            :class="req.money >= 50000 ? ' text-orange-500' : ''"
-                            >=瓜分{{ req.money }}</span
-                          >
+                            活动结束{{ rew.eDate }} 还剩{{
+                              getDaysDiff(new Date(rew.eDate).getTime())
+                            }}天
+                          </h4>
+                          <div>
+                            <p
+                              class="text-blue-800 cursor-pointer"
+                              @click="copyTag(rew.specialTag)"
+                              v-if="rew.specialTag"
+                            >
+                              必带TAG:
+                              {{ rew.specialTag }}
+                            </p>
+                          </div>
+                          <p v-if="rew.minVideoTime">单稿件最低时长：{{ rew.minVideoTime || 6 }}s</p>
+                          <p v-if="rew.minView">单稿件最低播放量：{{ rew.minView || 100 }}</p>
+                          <div v-for="(req, reqIndex) in rew.reward" :key="reqIndex">
+                            <span v-if="req.time"> 持续时间>={{ req.time }} </span>
+                            <span v-if="req.allNum">总投稿数{{ req.allNum }} </span>
+                            <span
+                              v-if="req.allViewNum"
+                              :class="req.allViewNum <= 20000 ? ' text-orange-500' : ''"
+                            >
+                              总播放量{{ req.allViewNum }}
+                            </span>
+                            <span v-if="req.view"> 单视频播放量{{ req.view }} </span>
+                            <span v-if="req.cday"> 投稿天数>={{ req.cday }} </span>
+                            <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
+                            <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
+                            <span
+                              v-if="req.money"
+                              :class="req.money >= 50000 ? ' text-orange-500' : ''"
+                              >=瓜分{{ req.money }}</span
+                            >
 
-                          <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
+                            <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
-                          <template v-if="rew?.videoData">
-                            <div v-for="r in rew.videoData" :key="r">
-                              {{ r.userName }}:
-                              <el-tooltip
-                                effect="dark"
-                                placement="top-start"
-                                :content="getTooltipContent(req, r, reward)"
-                                v-if="r.userName"
-                              >
-                                <el-progress
-                                  :percentage="getCompletionPercentage(req, r).percentage"
-                                  :status="getCompletionStatus(req, r)"
-                                  :format="(percentage) => formatRequirement(req, percentage, r)"
-                                />
-                              </el-tooltip>
-                            </div>
-                          </template>
-                        </div>
+                            <template v-if="rew?.videoData">
+                              <div v-for="r in rew.videoData" :key="r">
+                                {{ r.userName }}:
+                                <el-tooltip
+                                  effect="dark"
+                                  placement="top-start"
+                                  :content="getTooltipContent(req, r, reward)"
+                                  v-if="r.userName"
+                                >
+                                  <el-progress
+                                    :percentage="getCompletionPercentage(req, r).percentage"
+                                    :status="getCompletionStatus(req, r)"
+                                    :format="(percentage) => formatRequirement(req, percentage, r)"
+                                  />
+                                </el-tooltip>
+                              </div>
+                            </template>
+                          </div>
+                       </div >
                       </el-card>
                     </template>
                   </div>
@@ -900,6 +898,14 @@
               <el-form-item label="活动名称">
                 <el-input v-model="specialTagRequirement.name" placeholder="请输入活动名称" />
               </el-form-item>
+              <!-- el-switch 不做该任务（展示但整个框标橙色） 参与人数多|奖励少 -->
+              <el-form-item label="不做该任务">
+                <el-switch
+                  v-model="specialTagRequirement.isNotDo"
+                  active-text="是"
+                  inactive-text="否"
+                />
+              </el-form-item>
               <el-form-item label="视频最低时长">
                 <el-input-number v-model="specialTagRequirement.minVideoTime" />
               </el-form-item>
@@ -909,9 +915,6 @@
               <el-form-item label="B站活动话题" v-if="editRewardForm.platformName === 'bilibili'">
                 <el-input v-model="specialTagRequirement.topic" placeholder="请输入活动话题" />
               </el-form-item>
-              <!-- <el-form-item label="B站多标签引流" v-if="editRewardForm.platformName === 'bilibili'">
-                <el-input v-model="specialTagRequirement.suppleTag" placeholder="请输入支撑标签" />
-              </el-form-item> -->
               <el-form-item label="必带标签">
                 <el-input v-model="specialTagRequirement.specialTag" placeholder="请输入必带标签" />
               </el-form-item>
@@ -962,12 +965,14 @@
                   <el-form-item label="是否达标">
                     <el-switch v-model="reward.isGet" active-text="是" inactive-text="否" />
                   </el-form-item>
+
                   <el-button type="danger" @click="removeReward(index, rewardIndex)"
                     >删除</el-button
                   >
                 </div>
                 <el-button type="primary" @click="addReward(index)">添加奖励</el-button>
               </el-form-item>
+
               <el-button type="danger" @click="removeSpecialTagRequirement(index)"
                 >删除活动赛道</el-button
               >
@@ -975,6 +980,9 @@
           </div>
           <el-button type="primary" @click="addSpecialTagRequirement">添加活动赛道</el-button>
         </el-form-item>
+        <!-- <el-form-item label="不做该任务（展示但整个框标橙色） 参与人数多|奖励少 ">
+          <el-switch v-model="editRewardForm.isNotDo" active-text="是" inactive-text="否" />
+        </el-form-item> -->
       </el-form>
       <template #footer>
         <span class="dialog-footer">
@@ -1003,8 +1011,8 @@
         <el-form-item label="分区ID">
           <el-input-number v-model="scheduleForm.tid" :min="1" placeholder="请输入分区ID" />
         </el-form-item>
-        <el-form-item label="任务ID">
-          <el-input v-model="scheduleForm.missionId" placeholder="请输入任务ID" />
+        <el-form-item label="活动ID">
+          <el-input v-model="scheduleForm.missionId" placeholder="请输入活动ID" />
         </el-form-item>
         <el-form-item label="开始时间">
           <!-- 日期+时间选择器 -->
@@ -1725,6 +1733,6 @@ h4 {
   width: 32%;
   min-width: 300px;
   border: 1px solid #ebeef5;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 </style>
