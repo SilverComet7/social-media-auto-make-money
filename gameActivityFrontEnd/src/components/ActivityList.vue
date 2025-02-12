@@ -53,7 +53,7 @@
         </div>
         <el-table v-if="gameTableData.length" :data="gameTableData" style="width: 100%" border>
           <el-table-column type="index" label="No." width="50" fixed />
-          <el-table-column prop="name" label="Event Name" width="250" fixed>
+          <el-table-column prop="name" label="Activity Name" width="250" fixed>
             <template #default="scope">
               <div :class="scope.row.notDo ? 'text-red-500' : ''">
                 <a
@@ -258,7 +258,7 @@
           border
         >
           <el-table-column type="index" label="No." width="50" fixed />
-          <el-table-column prop="name" label="Event Name" width="250" fixed>
+          <el-table-column prop="name" label="Activity Name" width="250" fixed>
             <template #default="scope">
               <div :class="scope.row.notDo ? 'text-red-500' : ''">
                 <a
@@ -604,8 +604,8 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="B站(目前)已投稿件的评论管理">
-        <el-button type="primary" @click="fetchUnfavorableReply">查询新的所有不利评论</el-button>
+      <el-tab-pane label="B站稿件的评论管理">
+        <el-button type="primary" @click="fetchUnfavorableReply">查询所有不喜欢的评论</el-button>
         <div v-for="(unfavorableReply, index) in unfavorableReplyList" :key="index">
           {{ unfavorableReply.message }}
           <el-button type="primary" @click="deleteUnfavorableReply(unfavorableReply)"
@@ -619,7 +619,6 @@
     <el-dialog
       title="下载视频和分组区分"
       v-model="dialogVisible"
-      width="30%"
       :before-close="cancelDownloadSettings"
     >
       <el-form :model="downloadSettings" label-width="150px">

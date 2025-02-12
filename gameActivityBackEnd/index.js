@@ -428,11 +428,9 @@ app.get("/data", async (req, res) => {
 
 app.post("/updateDataOne", async (req, res) => {
   try {
-    // 获取参数
     const { searchKeyWord } = req.body;
     const newData = await get_BiliBili_Data(req.body);
     const oldDataArr = getOldData();
-    // 查找并替换newData
     const arr = oldDataArr.map((item) => {
       if (item.searchKeyWord === searchKeyWord) {
         item.bilibili = newData;
@@ -860,7 +858,6 @@ app.get("/unfavorableReply", async (req, res) => {
 
   const messageList = await concurrentFetchWithDelay(
     unfavorableWords.map((word) => {
-      // 查询接口 fetch GET  https://api.bilibili.com/x/v2/reply/up/fulllist?keyword=${keyword}&order=1&filter=-1&type=1&bvid=&pn=1&ps=50&charge_plus_filter=false
       return () =>
         fetch(
           `https://api.bilibili.com/x/v2/reply/up/fulllist?keyword=${word.keyword}&order=1&filter=-1&type=1&bvid=&pn=1&ps=10&charge_plus_filter=false`,
