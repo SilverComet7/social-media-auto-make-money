@@ -650,22 +650,35 @@ app.post("/getPlatformData", async (req, res) => {
 //   }
 // });
 
-async function executeExpiredJobs() {
+async function executeExpiredJobs(platform) {
   try {
-    // 读取定时任务配置
-    const scheduleJobsPath = "./scheduleJob/BiliBiliScheduleJob.json";
+    // 根据平台选择配置文件
+    const platformConfig = {
+      bilibili: {
+        configPath: "./scheduleJob/BiliBiliScheduleJob.json",
+        uploaderPath: "C:\\Users\\ChrisWang\\code\\platform_game_activity\\social-auto-upload\\uploader\\bilibili_uploader\\biliup.exe",
+        accountType: "bilibili"
+      },
+      douyin: {
+        configPath: "./scheduleJob/DouyinScheduleJob.json", 
+        uploaderPath: "C:\\Users\\ChrisWang\\code\\platform_game_activity\\social-auto-upload\\uploader\\douyin_uploader\\douyinup.exe",
+        accountType: "douyin"
+      }
+    };
+
+    const {configPath, uploaderPath, accountType} = platformConfig[platform];
     let scheduleJobs = [];
     try {
-      scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
+      scheduleJobs = JSON.parse(fs.readFileSync(configPath));
     } catch (err) {
-      console.log("定时任务配置文件不存在");
+      console.log(`${platform}定时任务配置文件不存在`);
       return;
     }
 
     const now = new Date();
     const expiredJobs = [];
 
-    // 遍历所有游戏的定时任务
+    // 遍历所有游戏的定时任务（通用逻辑）
     scheduleJobs.forEach((game) => {
       if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
         const gameExpiredJobs = game.scheduleJob
@@ -673,14 +686,12 @@ async function executeExpiredJobs() {
             const jobTime = new Date(job.execTime);
             return (
               jobTime < now &&
-              job.successExecAccount.length < accountJson.bilibili.length
+              job.successExecAccount.length < accountJson[accountType].length
             );
           })
           .map((job) => ({
             ...job,
-            tag: game.tag,
-            tid: game.tid,
-            missionId: game.missionId,
+            platform: platform,
             gameIndex: scheduleJobs.indexOf(game),
             jobIndex: game.scheduleJob.indexOf(job),
           }));
@@ -688,79 +699,153 @@ async function executeExpiredJobs() {
       }
     });
 
-    // 立即执行过期任务
+    // 处理过期任务
     for (const job of expiredJobs) {
-      for (let account of accountJson.bilibili) {
-        try {
-          if (job.successExecAccount.includes(account.accountName)) continue;
-
-          const BILIUP_PATH =
-            "C:\\Users\\ChrisWang\\code\\platform_game_activity\\social-auto-upload\\uploader\\bilibili_uploader\\";
-          const uploadCmd = `"${BILIUP_PATH}biliup.exe"  -u "${BILIUP_PATH}${account.accountName
-            }.json" upload --tag "${job.tag}" --mission-id "${job.missionId
-            }" --tid ${job.tid} --title "${path.basename(
-              job.videoPath,
-              ".mp4"
-            )}" "${job.videoPath}"`;
-
-          // 间隔随机时间 防止过快
-          const randomDelay = Math.floor(Math.random() * 5000);
-          await new Promise((resolve) => setTimeout(resolve, randomDelay));
-
-          await new Promise((resolve, reject) => {
-            spawn(uploadCmd, (error, stdout, stderr) => {
-              if (error) {
-                console.error(`上传失败 ${account.accountName}: ${error}`);
-                reject(error);
-                return;
-              }
-              // 更新原始scheduleJobs中对应任务的successExecAccount
-              scheduleJobs[job.gameIndex].scheduleJob[
-                job.jobIndex
-              ].successExecAccount.push(account.accountName);
-              console.log(`上传成功 ${account.accountName}  ${job.videoPath}`);
-
-              resolve();
-            });
-          });
-        } catch (err) {
-          console.error(`账号 ${account.accountName} 上传出错:`, err);
+      // 仅抖音平台需要生成元数据文件
+      if (platform === 'douyin') {
+        const metaFilePath = path.join(path.dirname(job.videoPath), 
+          path.basename(job.videoPath, '.mp4') + '.txt');
+        
+        if (!fs.existsSync(metaFilePath)) {
+          const gameConfig = scheduleJobs[job.gameIndex];
+          const metaContent = [
+            path.basename(job.videoPath, '.mp4'), // 标题
+            gameConfig.tag,                       // 主标签
+            gameConfig.gameName                   // 游戏名称
+          ].join('\n');
+          
+          fs.writeFileSync(metaFilePath, metaContent);
+          console.log(`生成抖音元数据文件: ${metaFilePath}`);
         }
       }
+
+      // 并行执行上传任务
+      const uploadPromises = [];
+      const MAX_CONCURRENT_UPLOADS = 3; // 最大并发数
+      
+      for (let account of accountJson[accountType]) {
+        if (job.successExecAccount.includes(account.accountName)) continue;
+
+        const uploadCmd = generateUploadCommand(platform, uploaderPath, account, job);
+        uploadPromises.push(
+          (async () => {
+            try {
+              // 使用信号量控制并发
+              await acquireSemaphore(MAX_CONCURRENT_UPLOADS);
+              const randomDelay = Math.floor(Math.random() * 5000);
+              await new Promise(resolve => setTimeout(resolve, randomDelay));
+
+              await new Promise((resolve, reject) => {
+                const child = spawn(uploadCmd, { shell: true });
+                
+                child.on('exit', (code) => {
+                  releaseSemaphore();
+                  if (code === 0) {
+                    scheduleJobs[job.gameIndex].scheduleJob[job.jobIndex]
+                      .successExecAccount.push(account.accountName);
+                    console.log(`${platform}上传成功 ${account.accountName} ${job.videoPath}`);
+                    resolve();
+                  } else {
+                    reject(new Error(`${platform}上传失败 ${account.accountName}`));
+                  }
+                });
+              });
+            } catch (err) {
+              console.error(`${platform}账号 ${account.accountName} 上传出错:`, err);
+            }
+          })()
+        );
+      }
+
+      // 等待所有上传完成
+      await Promise.all(uploadPromises);
     }
 
-    // 所有任务执行完成后统一写入文件
-    fs.writeFileSync(
-      "./scheduleJob/BiliBiliScheduleJob.json",
-      JSON.stringify(scheduleJobs, null, 2)
-    );
+    // 统一写入文件
+    fs.writeFileSync(configPath, JSON.stringify(scheduleJobs, null, 2));
 
     return {
       code: 200,
-      msg: "过期任务执行完成",
+      msg: `${platform}过期任务执行完成`,
       jobs: scheduleJobs,
     };
   } catch (error) {
-    console.error("执行过期任务失败:", error);
+    console.error(`执行${platform}过期任务失败:`, error);
     return {
       code: 500,
-      msg: "执行过期任务失败",
+      msg: `执行${platform}过期任务失败`,
     };
   }
 }
 
-setInterval(executeExpiredJobs, 2 * 60 * 60 * 1000);
+// 生成平台特定的上传命令
+function generateUploadCommand(platform, uploaderPath, account, job) {
+  const PROJECT_ROOT = "C:\\Users\\ChrisWang\\code\\platform_game_activity\\";
+  
+  const commonParams = `-u "${path.join(uploaderPath, '..', `${account.accountName}.json`)}"`; 
+  
+  if (platform === 'bilibili') {
+    return `"${uploaderPath}" ${commonParams} upload --tag "${job.tag}" --mission-id "${job.missionId}" 
+      --tid ${job.tid} --title "${path.basename(job.videoPath, ".mp4")}" "${job.videoPath}"`;
+  }
+  
+  if (platform === 'douyin') {
+    const metaFilePath = path.join(path.dirname(job.videoPath), 
+      path.basename(job.videoPath, '.mp4') + '.txt');
+    
+    return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}" douyin ${
+      account.accountName} upload "${job.videoPath}" --meta "${metaFilePath}" -pt ${
+      Date.now() > new Date(job.execTime) ? 0 : 1} ${
+      Date.now() > new Date(job.execTime) ? '' : `-t "${new Date(job.execTime).toISOString()}"`}`;
+  }
+}
+
+// 信号量控制
+const semaphore = {
+  count: 0,
+  queue: [],
+  async acquire(max) {
+    while (this.count >= max) {
+      await new Promise(resolve => this.queue.push(resolve));
+    }
+    this.count++;
+  },
+  release() {
+    this.count--;
+    if (this.queue.length > 0) this.queue.shift()();
+  }
+};
+const acquireSemaphore = (max) => semaphore.acquire(max);
+const releaseSemaphore = () => semaphore.release();
+
+// 修改定时任务检查逻辑（立即执行过期任务）
+async function checkAndExecuteJobs() {
+  try {
+    const platforms = ['bilibili', 'douyin'];
+    const results = await Promise.allSettled(platforms.map(p => executeExpiredJobs(p)));
+    
+    results.forEach((result, index) => {
+      if (result.status === 'rejected') {
+        console.error(`${platforms[index]}任务执行失败:`, result.reason);
+      }
+    });
+  } catch (error) {
+    console.error('任务检查异常:', error);
+  }
+}
+
+// 提高任务检查频率（每2小时检查一次）
+setInterval(checkAndExecuteJobs, 2 * 60 * 60 * 1000);
+// 启动时立即检查
+checkAndExecuteJobs();
 
 app.post("/scheduleUpload", async (req, res) => {
   // 生成定时上传任务
   async function generateScheduleJobs(videoDir, startTime, intervalHours) {
     const files = fs.readdirSync(videoDir);
     const videoFiles = files.filter((f) => f.endsWith(".mp4"));
-
     const jobs = [];
-
     let execTime = new Date(startTime);
-
     for (const file of videoFiles) {
       jobs.push({
         videoPath: path.join(videoDir, file),
@@ -770,7 +855,6 @@ app.post("/scheduleUpload", async (req, res) => {
       // 增加指定的时间间隔
       execTime.setHours(execTime.getHours() + intervalHours);
     }
-
     return jobs;
   }
 
@@ -785,12 +869,7 @@ app.post("/scheduleUpload", async (req, res) => {
       intervalHours,
       immediately,
     } = req.body;
-
-    // 生成定时上传任务或手动执行
-
     const scheduleJobsPath = "./scheduleJob/BiliBiliScheduleJob.json";
-
-
     let scheduleJobs = [];
     try {
       scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
