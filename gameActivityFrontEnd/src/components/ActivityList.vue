@@ -3,50 +3,53 @@
     <el-tabs type="card">
       <el-tab-pane label="四平台游戏活动激励">
         <div class="flex justify-between">
-          <el-image
+          <!-- <el-image
             src="/public/douyin.jpg"
             alt=""
             srcset=""
             class="w-500 h-[5vw]"
             preview-src="/public/douyin.jpg"
-          />
-          <!-- <el-affix :offset="20" class="text-blue-800">
+          /> -->
+          <el-affix :offset="20" class="text-blue-800">
+            <h4>公共标签参考</h4>
             <div class="bg-slate-300 h-[5vw] overflow-auto">
               <div>#游戏鉴赏官 #联机游戏</div>
-              <div>#二次元 #coser #完美身材</div>
+              <div>#二次元 #完美身材 女大学生 音乐 巅峰赛 合集 故事 #搞笑 #教程</div>
               <div>#MMORPG #古风 #逆水寒</div>
-              <div>#沙雕#故事#整活#搞笑</div>
-              <div>#电子竞技 #教程攻略</div>
-              <div>#射击游戏 #FPS #穿越火线 #无畏契约 #暗区突围 #三角洲行动</div>
-              <div>#Steam游戏 #单机游戏</div>
-              <div>
-                #手机游戏
-                蛋仔派对，和平精英，暗区突围，王者荣耀，原神，火影忍者，CF手游，光遇，英雄联盟，崩坏星穹铁道，原神
-                永劫无间 鸣潮 明日方舟，第五人格，崩坏3 和平精英
+              <div>#射击游戏 #FPS #穿越火线 #无畏契约 #暗区突围 #三角洲行动 #枪战</div>
+            </div>
+          </el-affix>
+          <div class="flex justify-between">
+            <!-- 爬虫查询栏 -->
+            <div class="operation-group bg-gray-100 p-4 rounded">
+              <h3 class="text-lg font-bold mb-2">爬虫查询操作</h3>
+              <div class="space-y-2">
+                <el-button type="primary" @click="updateOnePlatData('抖音')">查询4平台视频数据</el-button>
+                <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
               </div>
             </div>
-          </el-affix> -->
-          <div>
-            <div>
-              <el-button type="primary" @click="updateOnePlatData('抖音')"
-                >更新所有平台最新播放数据</el-button
-              >
-              <el-button type="primary" @click="fetchNewActData">查询B站是否有新活动</el-button>
-              <!-- <el-button type="primary" @click="handleManualAccount">手动养号</el-button> -->
-              <el-button type="primary" @click="confirmScheduleJob(true)"
-                >立即执行定时上传任务</el-button
-              >
+
+            <!-- 视频下载处理栏 -->
+            <div class="operation-group bg-blue-50 p-4 rounded">
+              <h3 class="text-lg font-bold mb-2">视频处理操作</h3>
+              <div class="space-y-2">
+                <el-button type="primary" @click="handleDownloadSettings">下载视频并分组</el-button>
+                <el-button type="primary" @click="ffmpegDialogVisible = true">ffmpeg去重处理</el-button>
+              </div>
             </div>
-            <div>
-              <el-button type="primary" @click="handleDownloadSettings">下载视频并分组</el-button>
-              <el-button type="primary" @click="ffmpegDialogVisible = true"
-                >ffmpeg去重处理</el-button
-              >
+
+            <!-- 定时任务栏 -->
+            <div class="operation-group bg-green-50 p-4 rounded">
+              <h3 class="text-lg font-bold mb-2">定时任务操作</h3>
+              <div class="space-y-2">
+                <el-button type="primary" @click="confirmScheduleJob(true)">立即执行定时任务</el-button>
+                <el-button type="primary" @click="handleManualAccount">立即执行手动养号</el-button>
+              </div>
             </div>
-            <el-affix :offset="20">
-              <el-button type="primary" @click="fetchData">获取最新的后台合并数据</el-button>
-            </el-affix>
           </div>
+          <el-affix :offset="20">
+            <el-button type="primary" @click="fetchData">获取后台合并数据</el-button>
+          </el-affix>
         </div>
         <el-table v-if="gameTableData.length" :data="gameTableData" style="width: 100%" border>
           <el-table-column type="index" label="No." width="50" fixed />
@@ -165,7 +168,7 @@
                         <h4 class="font-bold" v-if="reward.name === 'bilibili'">
                           话题：{{ rew.topic }}
                         </h4>
-                        <el-button @click="setScheduleJob(rew, scope.row)"
+                        <el-button type='primary' @click="setScheduleJob(rew, scope.row) "
                           >设置该活动定时执行任务
                         </el-button>
                         <!-- <h4 class="font-bold" v-if="rew.sDate">活动开始{{ rew.sDate }} </h4> -->
@@ -613,7 +616,6 @@
     </el-tabs>
     <el-backtop :right="100" :bottom="100" />
 
-    <!-- 下载视频 dialog -->
     <el-dialog
       title="下载视频和分组区分"
       v-model="dialogVisible"
@@ -621,29 +623,53 @@
       :before-close="cancelDownloadSettings"
     >
       <el-form :model="downloadSettings" label-width="150px">
-        <el-form-item label="选择游戏">
-          <div>
-            <el-checkbox
-              v-for="game in allGameList"
-              :key="game.name"
-              v-model="game.checked"
-              :label="game.name"
-            />
-          </div>
-        </el-form-item>
-        <el-form-item label="单独检测名称">
-          <el-switch v-model="downloadSettings.checkName" active-text="是" inactive-text="否" />
-        </el-form-item>
         <el-form-item label="下载视频">
           <el-switch v-model="downloadSettings.isDownload" active-text="是" inactive-text="否" />
         </el-form-item>
         <div v-if="downloadSettings.isDownload">
+          <el-form-item label="下载策略">
+            <el-radio-group v-model="downloadSettings.selectedStrategy">
+              <el-radio label="group">按分组下载</el-radio>
+              <el-radio label="keyword">关键词下载</el-radio>
+              <el-radio label="file">读取download.txt</el-radio>
+            </el-radio-group>
+          </el-form-item>
+
+          <template v-if="downloadSettings.selectedStrategy === 'keyword'">
+            <el-form-item label="关键词">
+              <el-input
+                v-model="downloadSettings.keyword"
+                placeholder="输入视频关键词，多个用逗号分隔"
+              />
+            </el-form-item>
+          </template>
+
+          <template v-if="downloadSettings.selectedStrategy === 'file'">
+            <el-form-item label="文件路径">
+              <el-input
+                v-model="downloadSettings.filePath"
+                placeholder="输入download.txt完整路径"
+              />
+            </el-form-item>
+          </template>
+
+          <template v-if="downloadSettings.selectedStrategy === 'group'">
+            <el-form-item label="选择分组">
+              <el-checkbox
+                v-for="game in allGameList"
+                :key="game.name"
+                v-model="game.checked"
+                :label="game.name"
+              />
+            </el-form-item>
+          </template>
           <el-form-item label="新旧JSON文件对比">
             <el-switch v-model="downloadSettings.checkNewAdd" active-text="是" inactive-text="否" />
           </el-form-item>
           <el-form-item label="开启全部视频下载">
             <el-switch v-model="downloadSettings.allDownload" active-text="是" inactive-text="否" />
           </el-form-item>
+
           <el-form-item label="视频开始时间">
             <el-input
               v-model="downloadSettings.earliest"
@@ -651,6 +677,10 @@
             />
           </el-form-item>
         </div>
+
+        <el-form-item label="分组只检测名称">
+          <el-switch v-model="downloadSettings.checkName" active-text="是" inactive-text="否" />
+        </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
@@ -821,7 +851,7 @@
             </template>
           </div>
           <!-- 新增合并视频控制选项 -->
-          <el-divider>合并合集设置</el-divider>
+          <el-divider>合并视频设置</el-divider>
           <el-form-item label="启用视频合并">
             <el-switch v-model="ffmpegSettings.enableMerge" />
           </el-form-item>
@@ -1058,7 +1088,7 @@ const setScheduleJob = (rew, row) => {
     missionId: missionId,
     startTime: null, //默认早上6:00
     intervalHours: 24,
-    immediately:false
+    immediately: false,
   }
 
   scheduleDialogVisible.value = true
@@ -1262,6 +1292,9 @@ const allGameList = ref([])
 const dialogVisible = ref(false)
 const downloadSettings = ref({
   isDownload: true,
+  selectedStrategy: 'group',
+  keyword: '',
+  filePath: '',
   checkNewAdd: false,
   allDownload: false,
   checkName: false,
@@ -1687,5 +1720,12 @@ h4 {
 
 .el-progress {
   margin-bottom: 5px;
+}
+
+.operation-group {
+  width: 32%;
+  min-width: 300px;
+  border: 1px solid #ebeef5;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
 }
 </style>

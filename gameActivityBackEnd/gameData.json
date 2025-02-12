@@ -3816,6 +3816,15 @@
                 "onePlayNumList": []
               }
             ]
+          },
+          {
+            "name": "原神5.4UP主激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/NAV1use70VbtmpGm.html",
+            "comment": "1.3万人参与",
+            "sDate": "2025/2/12",
+            "eDate": "2025/3/25",
+            "specialTag": "#原神5.4UP主激励计划",
+            "reward": []
           }
         ]
       },
@@ -12599,5 +12608,55 @@
       }
     ],
     "updateDate": "2025/2/3"
+  },
+  {
+    "name": "QQ飞车",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "QQ飞车新春会激励计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/dF1OLmRYDyEznywD.html",
+            "comment": "1.7万人参与",
+            "sDate": "2025/1/16",
+            "eDate": "2025/2/13",
+            "specialTag": "#QQ飞车新春会激励计划",
+            "reward": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "决战平安京",
+    "rewards": [
+      {
+        "name": "bilibili",
+        "specialTagRequirements": [
+          {
+            "name": "决战平安京七周年庆典",
+            "act_url": "https://www.bilibili.com/blackboard/era/ikvfruqpNgTWTZ84.html",
+            "comment": "2.7万人参与",
+            "sDate": "2024/12/27",
+            "eDate": "2025/2/15",
+            "specialTag": "#决战平安京七周年庆典",
+            "reward": [
+              {
+                "allNum": 5,
+                "allViewNum": 500,
+                "money": 40000,
+                "isGet": false
+              },
+              {
+                "allViewNum": 5000,
+                "money": 40000,
+                "isGet": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 ]
