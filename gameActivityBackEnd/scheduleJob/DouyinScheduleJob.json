@@ -1,18 +1,51 @@
 [
-    {
-        "gameName": "漫威争锋",
-        "tag": "#漫威争锋第一赛季",
-        "videoDir": "C:\\Users\\ChrisWang\\code\\platform_game_activity\\TikTokDownloader\\gameList\\漫威争锋\\攻略\\已重命名处理\\持续15日",
-        "scheduleJob": [
-            {
-                "videoPath": "C:\\Users\\ChrisWang\\code\\platform_game_activity\\TikTokDownloader\\gameList\\漫威争锋\\攻略\\已重命名处理\\持续15日\\【漫威争锋】《依波戏耍合集》 .mp4",
-                "execTime": "2025-01-29T06:47:31.109Z",
-                "successExecAccount": [
-                    "Feeling",
-                    "小芯游戏说",
-                    "想看的coser集"
-                ]
-            }
+  {
+    "gameName": "漫威争锋",
+    "tag": "#漫威争锋第一赛季",
+    "videoDir": "C:\\Users\\ChrisWang\\code\\platform_game_activity\\TikTokDownloader\\gameList\\漫威争锋\\攻略\\已重命名处理\\持续15日",
+    "scheduleJob": [
+      {
+        "videoPath": "C:\\Users\\ChrisWang\\code\\platform_game_activity\\TikTokDownloader\\gameList\\漫威争锋\\攻略\\已重命名处理\\持续15日\\【漫威争锋】《依波戏耍合集》 .mp4",
+        "execTime": "2025-01-29T06:47:31.109Z",
+        "successExecAccount": [
+          "Feeling",
+          "小芯游戏说",
+          "想看的coser集"
         ]
-    }
+      }
+    ]
+  },
+  {
+    "gameName": "诛仙世界",
+    "topicName": "诛仙世界春节",
+    "tag": "#诛仙世界 #诛仙世界迎新年 #诛仙世界美学",
+    "videoDir": "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\诛仙世界\\coser同行\\2025-1-16-2-32-11_截取1秒后_缩放0%_合集时间大于30_帧数=30",
+    "scheduleJob": [
+      {
+        "videoPath": "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\诛仙世界\\coser同行\\2025-1-16-2-32-11_截取1秒后_缩放0%_合集时间大于30_帧数=30\\二次元.mp4",
+        "execTime": "2025-02-13T16:00:00.000Z",
+        "successExecAccount": []
+      },
+      {
+        "videoPath": "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\诛仙世界\\coser同行\\2025-1-16-2-32-11_截取1秒后_缩放0%_合集时间大于30_帧数=30\\仙侠田灵儿 .mp4",
+        "execTime": "2025-02-15T16:00:00.000Z",
+        "successExecAccount": []
+      },
+      {
+        "videoPath": "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\诛仙世界\\coser同行\\2025-1-16-2-32-11_截取1秒后_缩放0%_合集时间大于30_帧数=30\\好美的碧瑶 .mp4",
+        "execTime": "2025-02-16T16:00:00.000Z",
+        "successExecAccount": []
+      },
+      {
+        "videoPath": "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\诛仙世界\\coser同行\\2025-1-16-2-32-11_截取1秒后_缩放0%_合集时间大于30_帧数=30\\白月光登场！ .mp4",
+        "execTime": "2025-02-17T16:00:00.000Z",
+        "successExecAccount": []
+      },
+      {
+        "videoPath": "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\诛仙世界\\coser同行\\2025-1-16-2-32-11_截取1秒后_缩放0%_合集时间大于30_帧数=30\\诛仙世界coser合集1.0.mp4",
+        "execTime": "2025-02-18T16:00:00.000Z",
+        "successExecAccount": []
+      }
+    ]
+  }
 ]
