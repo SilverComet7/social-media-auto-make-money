@@ -110,89 +110,86 @@
 
           <el-table-column label="Rewards" min-width="800">
             <template #default="scope">
-              <el-card v-for="(reward, rewardIndex) in scope.row.rewards" :key="rewardIndex">
+              <el-card v-for="(platform, platformIndex) in scope.row.rewards" :key="platformIndex">
                 <div class="flex">
                   <div class="w-1/4">
-                    <h4 class="font-bold" :class="reward.notDo ? 'text-red-500' : ''">
-                      {{ reward.name }}
+                    <h4 class="font-bold" :class="platform.notDo ? 'text-red-500' : ''">
+                      {{ platform.name }}
                     </h4>
-                    <el-button type="primary" @click="openEditRewardDialog(scope.row.name, reward)"
+                    <el-button
+                      type="primary"
+                      @click="openEditRewardDialog(scope.row.name, platform)"
                       >编辑</el-button
                     >
                     <p
                       class="text-blue-800 font-bold cursor-pointer"
-                      @click="copyTag(getSpecialTagAll(reward))"
+                      @click="copyTag(getSpecialTagAll(platform))"
                     >
-                      TAG: {{ getSpecialTagAll(reward) }}
+                      TAG: {{ getSpecialTagAll(platform) }}
                     </p>
                     <p
                       class="text-blue-800 cursor-pointer"
-                      v-if="reward.suppleTag"
-                      @click="copyTag(reward.suppleTag)"
+                      v-if="platform.suppleTag"
+                      @click="copyTag(platform.suppleTag)"
                     >
-                      补充TAG: {{ reward.suppleTag }}
+                      补充TAG: {{ platform.suppleTag }}
                     </p>
                   </div>
-
-                  <div
-                    v-if="
-                      reward.specialTagRequirements &&
-                      ['抖音', '快手', '小红书', 'bilibili'].includes(
-                        reward.name || reward.platformName,
-                      )
-                    "
-                    class="flex-1"
-                  >
-                    <template v-for="(rew, reqIndex) in reward.specialTagRequirements">
+                  <div class="flex-1">
+                    <template v-for="speReq in platform.specialTagRequirements">
                       <el-card
-                        :key="rew"
+                        :key="speReq"
                         v-if="
-                          rew.eDate
-                            ? getDaysDiff(new Date(rew.eDate).getTime()) >= 0
+                          speReq.eDate
+                            ? getDaysDiff(new Date(speReq.eDate).getTime()) >= 0
                             : getDaysDiff(scope.row.etime * 1000) >= 0
                         "
-
                       >
-                       <div :class="rew.isNotDo ? 'bg-red-300' : ''">
+                        <div :class="speReq.isNotDo ? 'bg-red-300' : ''">
                           <a
-                            :href="rew.act_url"
+                            :href="speReq.act_url"
                             target="_blank"
                             class="font-bold text-blue-600"
-                            v-if="reward.name === 'bilibili'"
-                            >{{ rew.name }} {{ rew.comment }}</a
+                            v-if="platform.name === 'bilibili'"
+                            >{{ speReq.name }} {{ speReq.comment }}</a
                           >
-                          <h4 class="font-bold" v-else>{{ rew.name }}</h4>
-                          <h4 class="font-bold" v-if="reward.name === 'bilibili'">
-                            话题：{{ rew.topic }}
+                          <h4 class="font-bold" v-else>{{ speReq.name }}</h4>
+                          <h4 class="font-bold" v-if="platform.name === 'bilibili'">
+                            话题：{{ speReq.topic }}
                           </h4>
-                          <el-button type="primary" @click="setScheduleJob(rew, scope.row)"
+                          <el-button
+                            type="primary"
+                            @click="setScheduleJob(speReq, platform, scope.row)"
                             >设置该活动定时执行任务
                           </el-button>
-                          <!-- <h4 class="font-bold" v-if="rew.sDate">活动开始{{ rew.sDate }} </h4> -->
                           <h4
                             class="font-bold"
-                            v-if="rew.eDate"
+                            v-if="speReq.eDate"
                             :class="
-                              getDaysDiff(new Date(rew.eDate).getTime()) <= 4 ? 'text-orange-500' : ''
+                              getDaysDiff(new Date(speReq.eDate).getTime()) <= 4
+                                ? 'text-orange-500'
+                                : ''
                             "
                           >
-                            活动结束{{ rew.eDate }} 还剩{{
-                              getDaysDiff(new Date(rew.eDate).getTime())
+                            活动结束{{ speReq.eDate }} 还剩{{
+                              getDaysDiff(new Date(speReq.eDate).getTime())
                             }}天
                           </h4>
                           <div>
                             <p
                               class="text-blue-800 cursor-pointer"
-                              @click="copyTag(rew.specialTag)"
-                              v-if="rew.specialTag"
+                              @click="copyTag(speReq.specialTag)"
+                              v-if="speReq.specialTag"
                             >
                               必带TAG:
-                              {{ rew.specialTag }}
+                              {{ speReq.specialTag }}
                             </p>
                           </div>
-                          <p v-if="rew.minVideoTime">单稿件最低时长：{{ rew.minVideoTime || 6 }}s</p>
-                          <p v-if="rew.minView">单稿件最低播放量：{{ rew.minView || 100 }}</p>
-                          <div v-for="(req, reqIndex) in rew.reward" :key="reqIndex">
+                          <p v-if="speReq.minVideoTime">
+                            单稿件最低时长：{{ speReq.minVideoTime || 6 }}s
+                          </p>
+                          <p v-if="speReq.minView">单稿件最低播放量：{{ speReq.minView || 100 }}</p>
+                          <div v-for="(req, reqIndex) in speReq.reward" :key="reqIndex">
                             <span v-if="req.time"> 持续时间>={{ req.time }} </span>
                             <span v-if="req.allNum">总投稿数{{ req.allNum }} </span>
                             <span
@@ -213,13 +210,13 @@
 
                             <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
-                            <template v-if="rew?.videoData">
-                              <div v-for="r in rew.videoData" :key="r">
+                            <template v-if="speReq?.videoData">
+                              <div v-for="r in speReq.videoData" :key="r">
                                 {{ r.userName }}:
                                 <el-tooltip
                                   effect="dark"
                                   placement="top-start"
-                                  :content="getTooltipContent(req, r, reward)"
+                                  :content="getTooltipContent(req, r, platform)"
                                   v-if="r.userName"
                                 >
                                   <el-progress
@@ -231,7 +228,7 @@
                               </div>
                             </template>
                           </div>
-                       </div >
+                        </div>
                       </el-card>
                     </template>
                   </div>
@@ -999,23 +996,28 @@
       :before-close="cancelScheduleJob"
     >
       <el-form :model="scheduleForm" label-width="120px">
+        <el-form-item label="游戏名称">
+          <el-input v-model="scheduleForm.gameName" placeholder="请输入游戏名称" />
+        </el-form-item>
         <el-form-item label="活动名称">
           <el-input v-model="scheduleForm.topicName" placeholder="请输入活动名称" />
         </el-form-item>
+        <template v-if="scheduleForm.platform !== '抖音'">
+          <el-form-item label="分区ID">
+            <el-input-number v-model="scheduleForm.tid" :min="1" placeholder="请输入分区ID" />
+          </el-form-item>
+          <el-form-item label="活动ID">
+            <el-input v-model="scheduleForm.missionId" placeholder="请输入活动ID" />
+          </el-form-item>
+        </template>
         <el-form-item label="视频目录">
           <el-input v-model="scheduleForm.videoDir" placeholder="请输入视频所在目录路径" />
         </el-form-item>
         <el-form-item label="标签">
           <el-input v-model="scheduleForm.tag" placeholder="请输入视频标签" />
         </el-form-item>
-        <el-form-item label="分区ID">
-          <el-input-number v-model="scheduleForm.tid" :min="1" placeholder="请输入分区ID" />
-        </el-form-item>
-        <el-form-item label="活动ID">
-          <el-input v-model="scheduleForm.missionId" placeholder="请输入活动ID" />
-        </el-form-item>
+
         <el-form-item label="开始时间">
-          <!-- 日期+时间选择器 -->
           <el-date-picker
             v-model="scheduleForm.startTime"
             type="datetime"
@@ -1077,24 +1079,37 @@ const scheduleForm = ref({
 })
 
 // 打开定时任务设置弹窗
-const setScheduleJob = (rew, row) => {
-  const { topic, specialTag } = rew
+const setScheduleJob = (rew, platform, row) => {
+  const { topic, specialTag, suppleTag } = rew
   const missionId = topicJson.find((item) => item.topic_name === topic)?.mission_id
 
-  // 如果没有找到对应的 missionId，则提示用户
-  if (!missionId) {
+  // B站平台 如果没有找到对应的 missionId
+  if (!missionId && platform.name === 'bilibili') {
     ElMessage.error('没有找到对应的 missionId')
     return
   }
 
+  // 生成全量标签：活动标签 + 支撑标签 + 游戏名称
+  const allTag = [
+    ...new Set([
+      ...(specialTag?.split(/\s+/) || []), // 拆分活动特殊标签
+      ...(platform.suppleTag?.split(/\s+/) || []), // 平台补充标签
+      row.name, // 游戏名称
+    ]),
+  ]
+    .filter(Boolean)
+    .map((t) => (t.startsWith('#') ? t : `#${t}`)) // 自动补全井号
+
   scheduleForm.value = {
-    topicName: topic,
+    gameName: row.name,
+    topicName: topic || rew.name,
     videoDir: '', // 需要用户填写
-    tag: row.name, // 使用已有的标签获取函数
+    tag: allTag.join(' '), // 用空格分隔标签
     tid: 172, // 默认分区ID 手游
     missionId: missionId,
     startTime: null, //默认早上6:00
     intervalHours: 24,
+    platform: platform.name,
     immediately: false,
   }
 
@@ -1142,8 +1157,8 @@ const editRewardForm = ref({
       name: '',
       // minVideoTime: 6,
       // minView: 100,
-      specialTag: '',
       // topic: '',
+      specialTag: '',
       eDate: '',
       reward: [
         {

@@ -837,10 +837,9 @@ async function checkAndExecuteJobs() {
 // 提高任务检查频率（每2小时检查一次）
 setInterval(checkAndExecuteJobs, 2 * 60 * 60 * 1000);
 // 启动时立即检查
-checkAndExecuteJobs();
+// checkAndExecuteJobs();
 
 app.post("/scheduleUpload", async (req, res) => {
-  // 生成定时上传任务
   async function generateScheduleJobs(videoDir, startTime, intervalHours) {
     const files = fs.readdirSync(videoDir);
     const videoFiles = files.filter((f) => f.endsWith(".mp4"));
@@ -860,6 +859,8 @@ app.post("/scheduleUpload", async (req, res) => {
 
   try {
     const {
+      gameName,
+      platform,
       tag,
       tid,
       missionId,
@@ -869,8 +870,16 @@ app.post("/scheduleUpload", async (req, res) => {
       intervalHours,
       immediately,
     } = req.body;
-    const scheduleJobsPath = "./scheduleJob/BiliBiliScheduleJob.json";
+
+    // 根据平台选择配置文件路径
+    const platformConfig = {
+      bilibili: "./scheduleJob/BiliBiliScheduleJob.json",
+      '抖音': "./scheduleJob/DouyinScheduleJob.json"
+    };
+    const scheduleJobsPath = platformConfig[platform];
+
     let scheduleJobs = [];
+    
     try {
       scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
     } catch (err) {
@@ -879,33 +888,38 @@ app.post("/scheduleUpload", async (req, res) => {
     }
 
     if (immediately) {
-      // 立即执行上传 executeExpiredJobs
-      await executeExpiredJobs();
+      await executeExpiredJobs(platform);
     } else {
-      // 生成新的定时任务
-      const newJobs = await generateScheduleJobs(
+      const newJobs = await generateScheduleJobs(videoDir, startTime, intervalHours);
+      
+      // 添加平台特定字段
+      const baseConfig = {
+        gameName,
+        topicName,
+        missionId,
+        tag,
         videoDir,
-        startTime,
-        intervalHours
-      );
+        scheduleJob: newJobs
+      };
+      
+      // 根据平台补充不同字段
+      const platformSpecificConfig = platform === 'bilibili' ? 
+        { tid } : 
+        { gameName: gameName };
 
-      // 创建或更新定时任务配置
-      const gameIndex = scheduleJobs.findIndex(
-        (game) => game.missionId === missionId
-      );
-      if (gameIndex === -1) {
-        // 添加新游戏配置
+      // 创建或更新配置
+      const topicIndex = scheduleJobs.findIndex(g => g.topicName === topicName);
+      if (topicIndex === -1) {
         scheduleJobs.push({
-          topicName: topicName,
-          missionId,
-          tag,
-          tid,
-          videoDir,
-          scheduleJob: newJobs,
+          ...baseConfig,
+          ...platformSpecificConfig
         });
       } else {
-        // 更新现有游戏配置
-        scheduleJobs[gameIndex].scheduleJob = newJobs;
+        scheduleJobs[topicIndex] = {
+          ...scheduleJobs[topicIndex],
+          ...baseConfig,
+          ...platformSpecificConfig
+        };
       }
 
       // 保存配置到文件
