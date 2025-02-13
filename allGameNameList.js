@@ -23,6 +23,10 @@ const allGameList = [
     "碧蓝航线", "无限暖暖", "闪耀暖暖", "无尽梦回", "天龙八部", "重返未来1999", "崩坏3", "无畏契约", "魔兽世界",
 ]
 
+// D:\code\platform_game_activity
+const PROJECT_ROOT = "D:\\code\\platform_game_activity\\";
+
 module.exports = {
-    allGameList
+    allGameList,
+    PROJECT_ROOT
 }   

@@ -6,6 +6,7 @@ const port = 3000;
 const path = require("path");
 const { exec, spawn } = require("child_process");
 const schedule = require("node-schedule");
+const { PROJECT_ROOT } = require("../allGameNameList.js");
 
 const {
   concurrentFetchWithDelay,
@@ -24,7 +25,7 @@ const {
   downloadVideosAndGroup,
 } = require("../TikTokDownloader/videoDownloadAndGroupList.js");
 const { allGameList } = require("../allGameNameList.js");
-const accountJson = getOldData("./jsonFile/accountList.json");
+const accountJson = getOldData("./jsonFile/accountList.json"); // 账号列表模块，去
 
 
 app.use(cors());
@@ -656,17 +657,17 @@ async function executeExpiredJobs(platform) {
     const platformConfig = {
       bilibili: {
         configPath: "./scheduleJob/BiliBiliScheduleJob.json",
-        uploaderPath: "C:\\Users\\ChrisWang\\code\\platform_game_activity\\social-auto-upload\\uploader\\bilibili_uploader\\biliup.exe",
+        uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload\\uploader\\bilibili_uploader\\biliup.exe"),
         accountType: "bilibili"
       },
-      douyin: {
-        configPath: "./scheduleJob/DouyinScheduleJob.json", 
-        uploaderPath: "C:\\Users\\ChrisWang\\code\\platform_game_activity\\social-auto-upload\\uploader\\douyin_uploader\\douyinup.exe",
+      '抖音': {
+        configPath: "./scheduleJob/DouyinScheduleJob.json",
+        uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
         accountType: "douyin"
       }
     };
 
-    const {configPath, uploaderPath, accountType} = platformConfig[platform];
+    const { configPath, uploaderPath, accountType } = platformConfig[platform];
     let scheduleJobs = [];
     try {
       scheduleJobs = JSON.parse(fs.readFileSync(configPath));
@@ -702,10 +703,10 @@ async function executeExpiredJobs(platform) {
     // 处理过期任务
     for (const job of expiredJobs) {
       // 仅抖音平台需要生成元数据文件
-      if (platform === 'douyin') {
-        const metaFilePath = path.join(path.dirname(job.videoPath), 
+      if (platform === '抖音') {
+        const metaFilePath = path.join(path.dirname(job.videoPath),
           path.basename(job.videoPath, '.mp4') + '.txt');
-        
+
         if (!fs.existsSync(metaFilePath)) {
           const gameConfig = scheduleJobs[job.gameIndex];
           const metaContent = [
@@ -713,7 +714,7 @@ async function executeExpiredJobs(platform) {
             gameConfig.tag,                       // 主标签
             gameConfig.gameName                   // 游戏名称
           ].join('\n');
-          
+
           fs.writeFileSync(metaFilePath, metaContent);
           console.log(`生成抖音元数据文件: ${metaFilePath}`);
         }
@@ -722,7 +723,7 @@ async function executeExpiredJobs(platform) {
       // 并行执行上传任务
       const uploadPromises = [];
       const MAX_CONCURRENT_UPLOADS = 3; // 最大并发数
-      
+
       for (let account of accountJson[accountType]) {
         if (job.successExecAccount.includes(account.accountName)) continue;
 
@@ -737,7 +738,7 @@ async function executeExpiredJobs(platform) {
 
               await new Promise((resolve, reject) => {
                 const child = spawn(uploadCmd, { shell: true });
-                
+
                 child.on('exit', (code) => {
                   releaseSemaphore();
                   if (code === 0) {
@@ -780,23 +781,15 @@ async function executeExpiredJobs(platform) {
 
 // 生成平台特定的上传命令
 function generateUploadCommand(platform, uploaderPath, account, job) {
-  const PROJECT_ROOT = "C:\\Users\\ChrisWang\\code\\platform_game_activity\\";
-  
-  const commonParams = `-u "${path.join(uploaderPath, '..', `${account.accountName}.json`)}"`; 
-  
+
   if (platform === 'bilibili') {
+    const commonParams = `-u "${path.join(uploaderPath, '..', `${account.accountName}.json`)}"`;
     return `"${uploaderPath}" ${commonParams} upload --tag "${job.tag}" --mission-id "${job.missionId}" 
       --tid ${job.tid} --title "${path.basename(job.videoPath, ".mp4")}" "${job.videoPath}"`;
   }
-  
-  if (platform === 'douyin') {
-    const metaFilePath = path.join(path.dirname(job.videoPath), 
-      path.basename(job.videoPath, '.mp4') + '.txt');
-    
-    return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}" douyin ${
-      account.accountName} upload "${job.videoPath}" --meta "${metaFilePath}" -pt ${
-      Date.now() > new Date(job.execTime) ? 0 : 1} ${
-      Date.now() > new Date(job.execTime) ? '' : `-t "${new Date(job.execTime).toISOString()}"`}`;
+
+  if (platform === '抖音') {
+    return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}" douyin ${account.accountName} upload "${job.videoPath}" -pt ${Date.now() > new Date(job.execTime) ? 0 : 1} ${Date.now() > new Date(job.execTime) ? '' : `-t "${new Date(job.execTime).toISOString()}"`}`;
   }
 }
 
@@ -821,9 +814,9 @@ const releaseSemaphore = () => semaphore.release();
 // 修改定时任务检查逻辑（立即执行过期任务）
 async function checkAndExecuteJobs() {
   try {
-    const platforms = ['bilibili', 'douyin'];
+    const platforms = ['bilibili', '抖音'];
     const results = await Promise.allSettled(platforms.map(p => executeExpiredJobs(p)));
-    
+
     results.forEach((result, index) => {
       if (result.status === 'rejected') {
         console.error(`${platforms[index]}任务执行失败:`, result.reason);
@@ -879,7 +872,7 @@ app.post("/scheduleUpload", async (req, res) => {
     const scheduleJobsPath = platformConfig[platform];
 
     let scheduleJobs = [];
-    
+
     try {
       scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
     } catch (err) {
@@ -891,7 +884,7 @@ app.post("/scheduleUpload", async (req, res) => {
       await executeExpiredJobs(platform);
     } else {
       const newJobs = await generateScheduleJobs(videoDir, startTime, intervalHours);
-      
+
       // 添加平台特定字段
       const baseConfig = {
         gameName,
@@ -901,10 +894,10 @@ app.post("/scheduleUpload", async (req, res) => {
         videoDir,
         scheduleJob: newJobs
       };
-      
+
       // 根据平台补充不同字段
-      const platformSpecificConfig = platform === 'bilibili' ? 
-        { tid } : 
+      const platformSpecificConfig = platform === 'bilibili' ?
+        { tid } :
         { gameName: gameName };
 
       // 创建或更新配置
