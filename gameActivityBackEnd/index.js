@@ -708,7 +708,7 @@ async function executeExpiredJobs() {
           await new Promise((resolve) => setTimeout(resolve, randomDelay));
 
           await new Promise((resolve, reject) => {
-            spawn(uploadCmd, (error, stdout, stderr) => {
+            exec(uploadCmd, (error, stdout, stderr) => {
               if (error) {
                 console.error(`上传失败 ${account.accountName}: ${error}`);
                 reject(error);
@@ -719,7 +719,6 @@ async function executeExpiredJobs() {
                 job.jobIndex
               ].successExecAccount.push(account.accountName);
               console.log(`上传成功 ${account.accountName}  ${job.videoPath}`);
-
               resolve();
             });
           });
