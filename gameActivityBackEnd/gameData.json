@@ -41,9 +41,23 @@
               },
               {
                 "userName": "Chris",
-                "allNum": 1,
-                "allViewNum": 1079,
+                "allNum": 3,
+                "allViewNum": 6430,
                 "onePlayNumList": [
+                  {
+                    "aweme_id": "7469996355553889547",
+                    "desc": "#以闪亮之名武侠梦 #以闪亮之名新春跨次元 #coser #游戏 #可爱",
+                    "create_time": 1739256912,
+                    "view": 2947,
+                    "like": 185
+                  },
+                  {
+                    "aweme_id": "7469995716270624011",
+                    "desc": "起猛看见美人鱼了？ #以闪亮之名武侠梦 #以闪亮之名新春跨次元 #coser #游戏 #可爱",
+                    "create_time": 1739251512,
+                    "view": 2404,
+                    "like": 127
+                  },
                   {
                     "aweme_id": "7465014566829788467",
                     "desc": "#以闪亮之名 #以闪亮之名武侠梦 #以闪亮之名新春跨次元 #coser #手机游戏",
@@ -97,9 +111,23 @@
               },
               {
                 "userName": "Chris",
-                "allNum": 1,
-                "allViewNum": 1079,
+                "allNum": 3,
+                "allViewNum": 6430,
                 "onePlayNumList": [
+                  {
+                    "aweme_id": "7469996355553889547",
+                    "desc": "#以闪亮之名武侠梦 #以闪亮之名新春跨次元 #coser #游戏 #可爱",
+                    "create_time": 1739256912,
+                    "view": 2947,
+                    "like": 185
+                  },
+                  {
+                    "aweme_id": "7469995716270624011",
+                    "desc": "起猛看见美人鱼了？ #以闪亮之名武侠梦 #以闪亮之名新春跨次元 #coser #游戏 #可爱",
+                    "create_time": 1739251512,
+                    "view": 2404,
+                    "like": 127
+                  },
                   {
                     "aweme_id": "7465014566829788467",
                     "desc": "#以闪亮之名 #以闪亮之名武侠梦 #以闪亮之名新春跨次元 #coser #手机游戏",
@@ -114,7 +142,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "闪耀暖暖",
@@ -125,7 +153,7 @@
             "name": "闪耀暖暖投稿瓜分活动",
             "minVideoTime": 6,
             "minView": 100,
-            "specialTag": "#闪耀暖暖，#闪耀暖暖诸神记",
+            "specialTag": "#闪耀暖暖 #闪耀暖暖诸神记",
             "eDate": "2025/02/16",
             "reward": [
               {
@@ -169,7 +197,7 @@
             "name": "闪耀暖暖投稿瓜分活动",
             "minVideoTime": 6,
             "minView": 100,
-            "specialTag": "#闪耀暖暖，#闪耀暖暖诸神记",
+            "specialTag": "#闪耀暖暖 #闪耀暖暖诸神记",
             "eDate": "2025/02/16",
             "reward": [
               {
@@ -215,7 +243,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "心动小镇",
@@ -314,7 +342,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "界外狂潮",
@@ -365,7 +393,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "永劫无间手游",
@@ -542,7 +570,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "逆水寒手游",
@@ -1263,9 +1291,16 @@
               },
               {
                 "userName": "Chris",
-                "allNum": 5,
-                "allViewNum": 6444,
+                "allNum": 6,
+                "allViewNum": 7777,
                 "onePlayNumList": [
+                  {
+                    "aweme_id": "7466796026452659465",
+                    "desc": "#逆水寒手游潮光 #逆水寒新春版本 #逆水寒手游 #手机游戏 #游戏杂谈",
+                    "create_time": 1738537704,
+                    "view": 1333,
+                    "like": 19
+                  },
                   {
                     "aweme_id": "7465749052987034906",
                     "desc": "#逆水寒手游潮光 #逆水寒新春版本 #逆水寒手游 #逆水寒手游新赛年 #coser",
@@ -1427,9 +1462,16 @@
               },
               {
                 "userName": "Chris",
-                "allNum": 5,
-                "allViewNum": 6444,
+                "allNum": 6,
+                "allViewNum": 7777,
                 "onePlayNumList": [
+                  {
+                    "aweme_id": "7466796026452659465",
+                    "desc": "#逆水寒手游潮光 #逆水寒新春版本 #逆水寒手游 #手机游戏 #游戏杂谈",
+                    "create_time": 1738537704,
+                    "view": 1333,
+                    "like": 19
+                  },
                   {
                     "aweme_id": "7465749052987034906",
                     "desc": "#逆水寒手游潮光 #逆水寒新春版本 #逆水寒手游 #逆水寒手游新赛年 #coser",
@@ -1545,7 +1587,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "明日方舟",
@@ -2183,7 +2225,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "宝可梦大集结",
@@ -2237,7 +2279,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "燕云十六声",
@@ -2543,7 +2585,27 @@
             "sDate": "2025/1/27",
             "eDate": "2025/2/28",
             "specialTag": "#燕云十六声新春UP激励活动",
-            "reward": []
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "小芯游戏说",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
           }
         ]
       },
@@ -3054,7 +3116,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "崩坏星穹铁道",
@@ -3349,7 +3411,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "鸣潮",
@@ -3518,7 +3580,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "绝区零",
@@ -3670,7 +3732,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "第五人格",
@@ -3717,7 +3779,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "原神",
@@ -3824,7 +3886,27 @@
             "sDate": "2025/2/12",
             "eDate": "2025/3/25",
             "specialTag": "#原神5.4UP主激励计划",
-            "reward": []
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "小芯游戏说",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
           }
         ]
       },
@@ -3941,7 +4023,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "无限暖暖",
@@ -4132,7 +4214,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "崩坏3",
@@ -4141,84 +4223,12 @@
         "name": "bilibili",
         "specialTagRequirements": [
           {
-            "name": "崩坏3「愿启天光」创作激励计划",
-            "sDate": "2024/12/6",
-            "eDate": "2025/1/16",
-            "specialTag": "崩坏3「愿启天光」创作激励计划",
-            "searchKeyWord": "崩坏3「愿启天光」创作激励计划",
-            "reward": [],
-            "videoData": [
-              {
-                "userName": "Feeling",
-                "allNum": 3,
-                "allViewNum": 50,
-                "onePlayNumList": [
-                  {
-                    "title": "崩坏3coser合集3.0",
-                    "aweme_id": "BV1aAcQedE5F",
-                    "desc": "",
-                    "create_time": 1736835725,
-                    "view": 17
-                  },
-                  {
-                    "title": "崩坏3coser合集2.0",
-                    "aweme_id": "BV1aAcQedE5n",
-                    "desc": "",
-                    "create_time": 1736834525,
-                    "view": 9
-                  },
-                  {
-                    "title": "崩坏3coser合集1.0",
-                    "aweme_id": "BV1QAcQedEkJ",
-                    "desc": "",
-                    "create_time": 1736833325,
-                    "view": 24
-                  }
-                ]
-              },
-              {
-                "userName": "想看的coser集",
-                "allNum": 3,
-                "allViewNum": 4,
-                "onePlayNumList": [
-                  {
-                    "title": "崩坏3coser合集3.0",
-                    "aweme_id": "BV1aAcQedEuS",
-                    "desc": "",
-                    "create_time": 1736835425,
-                    "view": 0
-                  },
-                  {
-                    "title": "崩坏3coser合集2.0",
-                    "aweme_id": "BV1YAcQedEPS",
-                    "desc": "",
-                    "create_time": 1736834225,
-                    "view": 2
-                  },
-                  {
-                    "title": "崩坏3coser合集1.0",
-                    "aweme_id": "BV1aAcQedEVH",
-                    "desc": "",
-                    "create_time": 1736833025,
-                    "view": 2
-                  }
-                ]
-              },
-              {
-                "userName": "小芯游戏说",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              }
-            ]
-          },
-          {
             "name": "崩坏3「喧鼓祈新」创作激励计划",
             "act_url": "https://www.bilibili.com/blackboard/era/lmxfxxGkFfRfj6DZ.html",
             "comment": "2056人参与",
             "sDate": "2025/1/17",
-            "eDate": "2025/3/21",
-            "specialTag": "崩坏3「喧鼓祈新」创作激励计划",
+            "eDate": "2025/03/21",
+            "specialTag": "",
             "searchKeyWord": "崩坏3「喧鼓祈新」创作激励计划",
             "reward": [],
             "videoData": [
@@ -4284,12 +4294,13 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "崩坏3创作激励计划"
           }
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "航海王壮志雄心",
@@ -4315,9 +4326,37 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 4,
-                "allViewNum": 252,
+                "allNum": 8,
+                "allViewNum": 285,
                 "onePlayNumList": [
+                  {
+                    "title": "艾斯上线无敌拉扯 一套直接半血！ ~航海王壮志雄心",
+                    "aweme_id": "BV1j5KKeJEJo",
+                    "desc": "",
+                    "create_time": 1739529525,
+                    "view": 0
+                  },
+                  {
+                    "title": "航海王壮志雄心 艾斯的特殊奥义图",
+                    "aweme_id": "BV1oMKLe5E7w",
+                    "desc": "",
+                    "create_time": 1739370775,
+                    "view": 6
+                  },
+                  {
+                    "title": "航海王壮志雄心 艾斯普攻拦截，二代：...创作者团",
+                    "aweme_id": "BV1ixNBeMEcp",
+                    "desc": "",
+                    "create_time": 1739269516,
+                    "view": 2
+                  },
+                  {
+                    "title": "航海王壮志雄心 策划桑尼又送金币了...创作者团",
+                    "aweme_id": "BV1jxNBeMEhd",
+                    "desc": "",
+                    "create_time": 1739269487,
+                    "view": 25
+                  },
                   {
                     "title": "思路 ~航海王壮志雄心",
                     "aweme_id": "BV1iXFkeqErN",
@@ -4350,9 +4389,37 @@
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 1,
-                "allViewNum": 1,
+                "allNum": 5,
+                "allViewNum": 16,
                 "onePlayNumList": [
+                  {
+                    "title": "艾斯上线无敌拉扯 一套直接半血！ ~航海王壮志雄心",
+                    "aweme_id": "BV1j5KKeJEwc",
+                    "desc": "",
+                    "create_time": 1739529463,
+                    "view": 1
+                  },
+                  {
+                    "title": "航海王壮志雄心 艾斯超绝待机动画，...技能爆料",
+                    "aweme_id": "BV1yDKWemEYs",
+                    "desc": "",
+                    "create_time": 1739452505,
+                    "view": 0
+                  },
+                  {
+                    "title": "航海王壮志雄心 艾斯的特殊奥义图",
+                    "aweme_id": "BV1ZMKLe5EAP",
+                    "desc": "",
+                    "create_time": 1739370765,
+                    "view": 3
+                  },
+                  {
+                    "title": "航海王壮志雄心 策划桑尼又送金币了...创作者团",
+                    "aweme_id": "BV1ydN6exEM4",
+                    "desc": "",
+                    "create_time": 1739278284,
+                    "view": 11
+                  },
                   {
                     "title": "思路 ~航海王壮志雄心",
                     "aweme_id": "BV1iXFkeqEaE",
@@ -4364,9 +4431,30 @@
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 1,
-                "allViewNum": 1,
+                "allNum": 4,
+                "allViewNum": 15,
                 "onePlayNumList": [
+                  {
+                    "title": "艾斯上线无敌拉扯 一套直接半血！ ~航海王壮志雄心",
+                    "aweme_id": "BV1j5KKeJEjK",
+                    "desc": "",
+                    "create_time": 1739529614,
+                    "view": 6
+                  },
+                  {
+                    "title": "航海王壮志雄心 艾斯超绝待机动画，...技能爆料",
+                    "aweme_id": "BV1PDKWeUEZD",
+                    "desc": "",
+                    "create_time": 1739452508,
+                    "view": 0
+                  },
+                  {
+                    "title": "航海王壮志雄心 艾斯的特殊奥义图",
+                    "aweme_id": "BV1EMKLeLEmm",
+                    "desc": "",
+                    "create_time": 1739370773,
+                    "view": 8
+                  },
                   {
                     "title": "思路 ~航海王壮志雄心",
                     "aweme_id": "BV1vXFkeqE2P",
@@ -4536,122 +4624,17 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "火影忍者",
     "rewards": [
       {
         "name": "bilibili",
-        "specialTagRequirements": [
-          {
-            "name": "火影忍者九周年激励计划",
-            "sDate": "2024/12/4",
-            "eDate": "2025/1/19",
-            "specialTag": "火影忍者九周年激励计划",
-            "searchKeyWord": "火影忍者九周年激励计划",
-            "reward": [
-              {
-                "allNum": 2,
-                "allViewNum": 500,
-                "money": 20000
-              },
-              {
-                "allNum": 5,
-                "allViewNum": 2000,
-                "money": 30000
-              },
-              {
-                "allViewNum": 10000,
-                "money": 30000
-              },
-              {
-                "allViewNum": 50000,
-                "money": 30000
-              }
-            ],
-            "videoData": [
-              {
-                "userName": "Feeling",
-                "allNum": 8,
-                "allViewNum": 435,
-                "onePlayNumList": [
-                  {
-                    "title": "【火影忍者】“漂泊扉间上架，想买的进来看”",
-                    "aweme_id": "BV1yMwMe4Ekv",
-                    "desc": "",
-                    "create_time": 1737242129,
-                    "view": 77
-                  },
-                  {
-                    "title": "【火影忍者】“这对写轮眼将看穿一切”",
-                    "aweme_id": "BV1yMwMe4EBJ",
-                    "desc": "",
-                    "create_time": 1737241229,
-                    "view": 13
-                  },
-                  {
-                    "title": "【火影忍者】“阴间忍者统计”",
-                    "aweme_id": "BV11MwMe4Egp",
-                    "desc": "",
-                    "create_time": 1737240329,
-                    "view": 17
-                  },
-                  {
-                    "title": "【火影忍者】“牢九门的一员猛酱”",
-                    "aweme_id": "BV1yMwMe4E9g",
-                    "desc": "",
-                    "create_time": 1737239429,
-                    "view": 72
-                  },
-                  {
-                    "title": "【火影忍者】“卡卡西写轮眼最差使用者”",
-                    "aweme_id": "BV1NMwMetE1j",
-                    "desc": "",
-                    "create_time": 1737238529,
-                    "view": 51
-                  },
-                  {
-                    "title": "【火影忍者】“前奏很长，好好欣赏这惊天动地的忍术”",
-                    "aweme_id": "BV1n5w7e5EaW",
-                    "desc": "",
-                    "create_time": 1737071706,
-                    "view": 68
-                  },
-                  {
-                    "title": "【火影忍者】“老弟啊，我乱按你都赢不了吗”",
-                    "aweme_id": "BV1J5w7e5Em8",
-                    "desc": "",
-                    "create_time": 1737069906,
-                    "view": 53
-                  },
-                  {
-                    "title": "【火影忍者】“新水吃操作？明明不难啊”",
-                    "aweme_id": "BV1n5w7e5EYv",
-                    "desc": "",
-                    "create_time": 1737068106,
-                    "view": 84
-                  }
-                ]
-              },
-              {
-                "userName": "想看的coser集",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              },
-              {
-                "userName": "小芯游戏说",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              }
-            ]
-          }
-        ]
+        "specialTagRequirements": []
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "阴阳师",
@@ -4690,7 +4673,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "光遇",
@@ -4781,7 +4764,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "诛仙世界",
@@ -4801,21 +4784,108 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
+                "allNum": 4,
+                "allViewNum": 14,
+                "onePlayNumList": [
+                  {
+                    "title": "诛仙世界注意事项，天人五问，区服选择，阵营选择，门派选择",
+                    "aweme_id": "BV1b8KKeuEmd",
+                    "desc": "",
+                    "create_time": 1739523871,
+                    "view": 10
+                  },
+                  {
+                    "title": "诛仙世界奇遇位置大全",
+                    "aweme_id": "BV1b8KKeuEn1",
+                    "desc": "",
+                    "create_time": 1739523795,
+                    "view": 3
+                  },
+                  {
+                    "title": "诛仙世界十种银两获取方式",
+                    "aweme_id": "BV1M8KKeuEZ8",
+                    "desc": "",
+                    "create_time": 1739523776,
+                    "view": 0
+                  },
+                  {
+                    "title": "诛仙世界全部11个隐藏百景游位置",
+                    "aweme_id": "BV1T8KKeuEUX",
+                    "desc": "",
+                    "create_time": 1739523759,
+                    "view": 1
+                  }
+                ]
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
+                "allNum": 4,
+                "allViewNum": 1,
+                "onePlayNumList": [
+                  {
+                    "title": "诛仙世界十种银两获取方式",
+                    "aweme_id": "BV1VqKNeCEn7",
+                    "desc": "",
+                    "create_time": 1739531470,
+                    "view": 0
+                  },
+                  {
+                    "title": "诛仙世界注意事项，天人五问，区服选择，阵营选择，门派选择",
+                    "aweme_id": "BV1nKKKeREwp",
+                    "desc": "",
+                    "create_time": 1739526534,
+                    "view": 0
+                  },
+                  {
+                    "title": "诛仙世界奇遇位置大全",
+                    "aweme_id": "BV1nKKKeREnn",
+                    "desc": "",
+                    "create_time": 1739526502,
+                    "view": 1
+                  },
+                  {
+                    "title": "诛仙世界全部11个隐藏百景游位置",
+                    "aweme_id": "BV1fMKKeWEDm",
+                    "desc": "",
+                    "create_time": 1739526489,
+                    "view": 0
+                  }
+                ]
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
+                "allNum": 4,
+                "allViewNum": 2,
+                "onePlayNumList": [
+                  {
+                    "title": "诛仙世界十种银两获取方式",
+                    "aweme_id": "BV1nKKKeRE3b",
+                    "desc": "",
+                    "create_time": 1739526485,
+                    "view": 0
+                  },
+                  {
+                    "title": "诛仙世界注意事项，天人五问，区服选择，阵营选择，门派选择",
+                    "aweme_id": "BV1JMKKeWEMx",
+                    "desc": "",
+                    "create_time": 1739526459,
+                    "view": 0
+                  },
+                  {
+                    "title": "诛仙世界奇遇位置大全",
+                    "aweme_id": "BV1zMKKeWEE1",
+                    "desc": "",
+                    "create_time": 1739526403,
+                    "view": 0
+                  },
+                  {
+                    "title": "诛仙世界全部11个隐藏百景游位置",
+                    "aweme_id": "BV1JMKKeWEji",
+                    "desc": "",
+                    "create_time": 1739526361,
+                    "view": 2
+                  }
+                ]
               }
             ],
             "topic": "诛仙世界震撼公测"
@@ -4837,7 +4907,27 @@
                 "isGet": false
               }
             ],
-            "minView": 1000
+            "minView": 1000,
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
           }
         ]
       },
@@ -4889,7 +4979,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "王者荣耀",
@@ -4897,126 +4987,6 @@
       {
         "name": "bilibili",
         "specialTagRequirements": [
-          {
-            "name": "2024年王者荣耀挑战者杯激励计划",
-            "act_url": "https://www.bilibili.com/blackboard/era/lv5DLhEPfLseStS3.html",
-            "comment": "20.0万人参与",
-            "sDate": "2024/12/7",
-            "eDate": "2025/1/20",
-            "specialTag": "#游戏 #电子竞技 #王者荣耀 #赛事 #重庆狼队 #挑杯 #2024年王者荣耀挑战者杯 #挑战者杯 #kpl #成都AG超玩会",
-            "searchKeyWord": "2024年王者荣耀挑战者杯激励计划",
-            "reward": [
-              {}
-            ],
-            "videoData": [
-              {
-                "userName": "Feeling",
-                "allNum": 4,
-                "allViewNum": 135,
-                "onePlayNumList": [
-                  {
-                    "title": "【王者荣耀】绿豆典韦也能打职业？这操作我上我也行！",
-                    "aweme_id": "BV1MnwTe8Eg1",
-                    "desc": "",
-                    "create_time": 1737253239,
-                    "view": 11
-                  },
-                  {
-                    "title": "【王者荣耀】新概念神：AG的十分钟！坏消息：劣势了！好消息：马上十分钟了",
-                    "aweme_id": "BV1TnwTe8Edy",
-                    "desc": "",
-                    "create_time": 1737251439,
-                    "view": 38
-                  },
-                  {
-                    "title": "【王者荣耀】书源野核美学！挑杯逆版本的勇者！",
-                    "aweme_id": "BV1MnwTe8Et1",
-                    "desc": "",
-                    "create_time": 1737250539,
-                    "view": 31
-                  },
-                  {
-                    "title": "【王者荣耀】老一辈艺术家的从容自信！天生的流量圣体！",
-                    "aweme_id": "BV1TnwTe8Eky",
-                    "desc": "",
-                    "create_time": 1737249639,
-                    "view": 55
-                  }
-                ]
-              },
-              {
-                "userName": "想看的coser集",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              },
-              {
-                "userName": "小芯游戏说",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              }
-            ]
-          },
-          {
-            "name": "王者荣耀联动冰雪奇缘",
-            "act_url": "https://www.bilibili.com/blackboard/era/uxSiQGV2pX6e8sQr.html",
-            "comment": "4856人参与",
-            "sDate": "2025/1/9",
-            "eDate": "2025/1/22",
-            "specialTag": "王者荣耀联动冰雪奇缘",
-            "searchKeyWord": "王者荣耀联动冰雪奇缘",
-            "reward": [],
-            "videoData": [
-              {
-                "userName": "Feeling",
-                "allNum": 4,
-                "allViewNum": 135,
-                "onePlayNumList": [
-                  {
-                    "title": "【王者荣耀】绿豆典韦也能打职业？这操作我上我也行！",
-                    "aweme_id": "BV1MnwTe8Eg1",
-                    "desc": "",
-                    "create_time": 1737253239,
-                    "view": 11
-                  },
-                  {
-                    "title": "【王者荣耀】新概念神：AG的十分钟！坏消息：劣势了！好消息：马上十分钟了",
-                    "aweme_id": "BV1TnwTe8Edy",
-                    "desc": "",
-                    "create_time": 1737251439,
-                    "view": 38
-                  },
-                  {
-                    "title": "【王者荣耀】书源野核美学！挑杯逆版本的勇者！",
-                    "aweme_id": "BV1MnwTe8Et1",
-                    "desc": "",
-                    "create_time": 1737250539,
-                    "view": 31
-                  },
-                  {
-                    "title": "【王者荣耀】老一辈艺术家的从容自信！天生的流量圣体！",
-                    "aweme_id": "BV1TnwTe8Eky",
-                    "desc": "",
-                    "create_time": 1737249639,
-                    "view": 55
-                  }
-                ]
-              },
-              {
-                "userName": "想看的coser集",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              },
-              {
-                "userName": "小芯游戏说",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              }
-            ]
-          },
           {
             "name": "王者荣耀新春会",
             "act_url": "https://www.bilibili.com/blackboard/era/zgskKeezfzC1qc83.html",
@@ -5076,10 +5046,11 @@
               }
             ]
           }
-        ]
+        ],
+        "isNotDo": true
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "DNF",
@@ -5092,8 +5063,8 @@
             "act_url": "https://live.bilibili.com/blackboard/era/uAV7ZVcHR1yMeIy1.html",
             "comment": "4.6万人参与",
             "sDate": "2024/12/28",
-            "eDate": "2025/2/14",
-            "specialTag": "DNF手游2025新春会",
+            "eDate": "2025/02/14",
+            "specialTag": "",
             "searchKeyWord": "DNF手游2025新春会",
             "reward": [],
             "videoData": [
@@ -5115,15 +5086,16 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "DNF手游激励计划"
           },
           {
             "name": "2025年DNF新春会",
             "act_url": "https://www.bilibili.com/blackboard/era/wjSgXXRM1DILrO9N.html",
             "comment": "2061人参与",
             "sDate": "2025/1/16",
-            "eDate": "2025/2/14",
-            "specialTag": "2025年DNF新春会",
+            "eDate": "2025/02/14",
+            "specialTag": "",
             "searchKeyWord": "2025年DNF新春会",
             "reward": [],
             "videoData": [
@@ -5145,12 +5117,13 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "DNF重力之泉"
           }
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "重返未来1999",
@@ -5319,7 +5292,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "蛋仔派对",
@@ -5548,7 +5521,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "尘白禁区",
@@ -5565,6 +5538,26 @@
                 "allViewNum": 2000,
                 "money": 50000,
                 "isGet": false
+              }
+            ],
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
               }
             ]
           }
@@ -5797,7 +5790,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "英雄联盟",
@@ -5981,7 +5974,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "漫威争锋",
@@ -6181,9 +6174,38 @@
             "videoData": [
               {
                 "userName": "资料新",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
+                "allNum": 4,
+                "allViewNum": 12450,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7469360044354587923",
+                    "desc": "超还原的蜘蛛侠？ #漫威争锋 #漫威争锋第1赛季 #二次元 #coser #游戏",
+                    "create_time": 1739104875,
+                    "view": 2490,
+                    "like": 283
+                  },
+                  {
+                    "aweme_id": "7469359271751322892",
+                    "desc": "#漫威争锋 #漫威争锋第1赛季 #二次元 #coser #游戏",
+                    "create_time": 1739103675,
+                    "view": 9133,
+                    "like": 655
+                  },
+                  {
+                    "aweme_id": "7467903201853852966",
+                    "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋第1赛季 #coser #美女 #记录",
+                    "create_time": 1738819859,
+                    "view": 120,
+                    "like": 9
+                  },
+                  {
+                    "aweme_id": "7467902194553982218",
+                    "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋第1赛季 #coser #美女 #记录",
+                    "create_time": 1738798259,
+                    "view": 707,
+                    "like": 8
+                  }
+                ]
               },
               {
                 "userName": "Feeling",
@@ -6193,16 +6215,66 @@
               },
               {
                 "userName": "Chris",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
+                "allNum": 7,
+                "allViewNum": 9933,
+                "onePlayNumList": [
+                  {
+                    "aweme_id": "7469757630190259495",
+                    "desc": "哪个蜘蛛侠最还原？ #漫威争锋 #漫威争锋第1赛季 #coser #二次元 #游戏",
+                    "create_time": 1739188916,
+                    "view": 3607,
+                    "like": 113
+                  },
+                  {
+                    "aweme_id": "7469359079538871591",
+                    "desc": "超还原的蜘蛛侠？ #漫威争锋 #漫威争锋第1赛季 #二次元 #coser #游戏",
+                    "create_time": 1739103975,
+                    "view": 119,
+                    "like": 4
+                  },
+                  {
+                    "aweme_id": "7469359318656175401",
+                    "desc": "超还原的蜘蛛侠？ #漫威争锋 #漫威争锋第1赛季 #二次元 #coser #游戏",
+                    "create_time": 1739103375,
+                    "view": 4036,
+                    "like": 115
+                  },
+                  {
+                    "aweme_id": "7467903350797880627",
+                    "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋第1赛季 #coser #美女 #记录",
+                    "create_time": 1738820459,
+                    "view": 1792,
+                    "like": 75
+                  },
+                  {
+                    "aweme_id": "7467903050997435675",
+                    "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋第1赛季 #coser #美女 #记录",
+                    "create_time": 1738813259,
+                    "view": 125,
+                    "like": 2
+                  },
+                  {
+                    "aweme_id": "7467569738500148489",
+                    "desc": " #漫威争锋 #漫威争锋第1赛季 #游戏 #coser #氪金",
+                    "create_time": 1738704859,
+                    "view": 132,
+                    "like": 6
+                  },
+                  {
+                    "aweme_id": "7467062048241831178",
+                    "desc": " #漫威争锋 #漫威争锋第1赛季 #手机游戏 #coser",
+                    "create_time": 1738561147,
+                    "view": 122,
+                    "like": 15
+                  }
+                ]
               }
             ]
           }
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "无畏契约",
@@ -6247,12 +6319,32 @@
             "sDate": "2025/1/27",
             "eDate": "2025/3/27",
             "specialTag": "#无畏契约训练营第14期",
-            "reward": []
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "小芯游戏说",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
           }
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "逆水寒",
@@ -6856,7 +6948,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "物华弥新",
@@ -6940,7 +7032,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "使命召唤手游",
@@ -6981,7 +7073,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "战双帕弥什",
@@ -7072,7 +7164,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "幻塔",
@@ -7242,7 +7334,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "穿越火线",
@@ -7283,7 +7375,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "一梦江湖",
@@ -7481,7 +7573,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "恋与制作人",
@@ -7517,12 +7609,13 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "isNotDo": true
           }
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "荒野乱斗",
@@ -7563,7 +7656,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "暗区突围",
@@ -7617,7 +7710,27 @@
                 "isGet": false
               }
             ],
-            "minView": 1000
+            "minView": 1000,
+            "videoData": [
+              {
+                "userName": "资料新",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "Chris",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
           }
         ],
         "name": "抖音"
@@ -7648,9 +7761,44 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 3,
-                "allViewNum": 9,
+                "allNum": 8,
+                "allViewNum": 19,
                 "onePlayNumList": [
+                  {
+                    "title": "起全装白给合集~暗区突围",
+                    "aweme_id": "BV1i5KKeJEtb",
+                    "desc": "",
+                    "create_time": 1739529570,
+                    "view": 4
+                  },
+                  {
+                    "title": "谁说这刀差的！这刀太棒了呀！~暗区突围",
+                    "aweme_id": "BV1sDKWeUESn",
+                    "desc": "",
+                    "create_time": 1739452713,
+                    "view": 3
+                  },
+                  {
+                    "title": "有点炸裂咯奥@安然电竞~暗区突围",
+                    "aweme_id": "BV1EMKLeLEyK",
+                    "desc": "",
+                    "create_time": 1739370801,
+                    "view": 3
+                  },
+                  {
+                    "title": "我的61弹啊！~暗区突围",
+                    "aweme_id": "BV154NBeqEit",
+                    "desc": "",
+                    "create_time": 1739269667,
+                    "view": 0
+                  },
+                  {
+                    "title": "我嘞个霸道打手@小鬼俱乐部~暗区突围",
+                    "aweme_id": "BV15xNBeME1o",
+                    "desc": "",
+                    "create_time": 1739269562,
+                    "view": 0
+                  },
                   {
                     "title": "也是很肥很肥@牛逼电竞俱乐部 ~暗区突围",
                     "aweme_id": "BV118F6eyE36",
@@ -7676,9 +7824,37 @@
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 3,
-                "allViewNum": 0,
+                "allNum": 7,
+                "allViewNum": 1,
                 "onePlayNumList": [
+                  {
+                    "title": "起全装白给合集~暗区突围",
+                    "aweme_id": "BV1i5KKeJEay",
+                    "desc": "",
+                    "create_time": 1739529775,
+                    "view": 0
+                  },
+                  {
+                    "title": "谁说这刀差的！这刀太棒了呀！~暗区突围",
+                    "aweme_id": "BV1WDKWeUE1L",
+                    "desc": "",
+                    "create_time": 1739452971,
+                    "view": 0
+                  },
+                  {
+                    "title": "有点炸裂咯奥@安然电竞~暗区突围",
+                    "aweme_id": "BV1fMKLe5EnY",
+                    "desc": "",
+                    "create_time": 1739370694,
+                    "view": 1
+                  },
+                  {
+                    "title": "我嘞个霸道打手@小鬼俱乐部~暗区突围",
+                    "aweme_id": "BV1LxNBeMEDx",
+                    "desc": "",
+                    "create_time": 1739269567,
+                    "view": 0
+                  },
                   {
                     "title": "也是很肥很肥@牛逼电竞俱乐部 ~暗区突围",
                     "aweme_id": "BV118F6eyEwq",
@@ -7704,9 +7880,37 @@
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 3,
-                "allViewNum": 11,
+                "allNum": 7,
+                "allViewNum": 13,
                 "onePlayNumList": [
+                  {
+                    "title": "起全装白给合集~暗区突围",
+                    "aweme_id": "BV1j5KKenETp",
+                    "desc": "",
+                    "create_time": 1739529570,
+                    "view": 2
+                  },
+                  {
+                    "title": "谁说这刀差的！这刀太棒了呀！~暗区突围",
+                    "aweme_id": "BV1NDKWeUEnM",
+                    "desc": "",
+                    "create_time": 1739452828,
+                    "view": 0
+                  },
+                  {
+                    "title": "有点炸裂咯奥@安然电竞~暗区突围",
+                    "aweme_id": "BV1EMKLeLEiM",
+                    "desc": "",
+                    "create_time": 1739370722,
+                    "view": 0
+                  },
+                  {
+                    "title": "我的61弹啊！~暗区突围",
+                    "aweme_id": "BV1jxNBeMECs",
+                    "desc": "",
+                    "create_time": 1739269627,
+                    "view": 0
+                  },
                   {
                     "title": "也是很肥很肥@牛逼电竞俱乐部 ~暗区突围",
                     "aweme_id": "BV1P8F6e1Ea5",
@@ -7771,9 +7975,44 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 3,
-                "allViewNum": 9,
+                "allNum": 8,
+                "allViewNum": 19,
                 "onePlayNumList": [
+                  {
+                    "title": "起全装白给合集~暗区突围",
+                    "aweme_id": "BV1i5KKeJEtb",
+                    "desc": "",
+                    "create_time": 1739529570,
+                    "view": 4
+                  },
+                  {
+                    "title": "谁说这刀差的！这刀太棒了呀！~暗区突围",
+                    "aweme_id": "BV1sDKWeUESn",
+                    "desc": "",
+                    "create_time": 1739452713,
+                    "view": 3
+                  },
+                  {
+                    "title": "有点炸裂咯奥@安然电竞~暗区突围",
+                    "aweme_id": "BV1EMKLeLEyK",
+                    "desc": "",
+                    "create_time": 1739370801,
+                    "view": 3
+                  },
+                  {
+                    "title": "我的61弹啊！~暗区突围",
+                    "aweme_id": "BV154NBeqEit",
+                    "desc": "",
+                    "create_time": 1739269667,
+                    "view": 0
+                  },
+                  {
+                    "title": "我嘞个霸道打手@小鬼俱乐部~暗区突围",
+                    "aweme_id": "BV15xNBeME1o",
+                    "desc": "",
+                    "create_time": 1739269562,
+                    "view": 0
+                  },
                   {
                     "title": "也是很肥很肥@牛逼电竞俱乐部 ~暗区突围",
                     "aweme_id": "BV118F6eyE36",
@@ -7799,9 +8038,37 @@
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 3,
-                "allViewNum": 0,
+                "allNum": 7,
+                "allViewNum": 1,
                 "onePlayNumList": [
+                  {
+                    "title": "起全装白给合集~暗区突围",
+                    "aweme_id": "BV1i5KKeJEay",
+                    "desc": "",
+                    "create_time": 1739529775,
+                    "view": 0
+                  },
+                  {
+                    "title": "谁说这刀差的！这刀太棒了呀！~暗区突围",
+                    "aweme_id": "BV1WDKWeUE1L",
+                    "desc": "",
+                    "create_time": 1739452971,
+                    "view": 0
+                  },
+                  {
+                    "title": "有点炸裂咯奥@安然电竞~暗区突围",
+                    "aweme_id": "BV1fMKLe5EnY",
+                    "desc": "",
+                    "create_time": 1739370694,
+                    "view": 1
+                  },
+                  {
+                    "title": "我嘞个霸道打手@小鬼俱乐部~暗区突围",
+                    "aweme_id": "BV1LxNBeMEDx",
+                    "desc": "",
+                    "create_time": 1739269567,
+                    "view": 0
+                  },
                   {
                     "title": "也是很肥很肥@牛逼电竞俱乐部 ~暗区突围",
                     "aweme_id": "BV118F6eyEwq",
@@ -7827,9 +8094,37 @@
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 3,
-                "allViewNum": 11,
+                "allNum": 7,
+                "allViewNum": 13,
                 "onePlayNumList": [
+                  {
+                    "title": "起全装白给合集~暗区突围",
+                    "aweme_id": "BV1j5KKenETp",
+                    "desc": "",
+                    "create_time": 1739529570,
+                    "view": 2
+                  },
+                  {
+                    "title": "谁说这刀差的！这刀太棒了呀！~暗区突围",
+                    "aweme_id": "BV1NDKWeUEnM",
+                    "desc": "",
+                    "create_time": 1739452828,
+                    "view": 0
+                  },
+                  {
+                    "title": "有点炸裂咯奥@安然电竞~暗区突围",
+                    "aweme_id": "BV1EMKLeLEiM",
+                    "desc": "",
+                    "create_time": 1739370722,
+                    "view": 0
+                  },
+                  {
+                    "title": "我的61弹啊！~暗区突围",
+                    "aweme_id": "BV1jxNBeMECs",
+                    "desc": "",
+                    "create_time": 1739269627,
+                    "view": 0
+                  },
                   {
                     "title": "也是很肥很肥@牛逼电竞俱乐部 ~暗区突围",
                     "aweme_id": "BV1P8F6e1Ea5",
@@ -7859,7 +8154,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "三角洲行动",
@@ -8011,21 +8306,87 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
+                "allNum": 3,
+                "allViewNum": 23,
+                "onePlayNumList": [
+                  {
+                    "title": "三角洲行动获取五级套",
+                    "aweme_id": "BV1AFKLeDEF2",
+                    "desc": "",
+                    "create_time": 1739372133,
+                    "view": 12
+                  },
+                  {
+                    "title": "三角洲行动完美开局",
+                    "aweme_id": "BV1pFKLeDEL9",
+                    "desc": "",
+                    "create_time": 1739372045,
+                    "view": 8
+                  },
+                  {
+                    "title": "三角洲行动七大必改设置",
+                    "aweme_id": "BV1wFKLeDE4y",
+                    "desc": "",
+                    "create_time": 1739372008,
+                    "view": 3
+                  }
+                ]
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
+                "allNum": 3,
+                "allViewNum": 202,
+                "onePlayNumList": [
+                  {
+                    "title": "三角洲行动获取五级套",
+                    "aweme_id": "BV1wFKLeDE28",
+                    "desc": "",
+                    "create_time": 1739371987,
+                    "view": 4
+                  },
+                  {
+                    "title": "三角洲行动七大必改设置",
+                    "aweme_id": "BV1wFKLeDENa",
+                    "desc": "",
+                    "create_time": 1739371924,
+                    "view": 198
+                  },
+                  {
+                    "title": "三角洲行动完美开局",
+                    "aweme_id": "BV1wFKLeDEBJ",
+                    "desc": "",
+                    "create_time": 1739371901,
+                    "view": 0
+                  }
+                ]
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
+                "allNum": 3,
+                "allViewNum": 11,
+                "onePlayNumList": [
+                  {
+                    "title": "三角洲行动获取五级套",
+                    "aweme_id": "BV1HFKLeDEoA",
+                    "desc": "",
+                    "create_time": 1739372039,
+                    "view": 3
+                  },
+                  {
+                    "title": "三角洲行动七大必改设置",
+                    "aweme_id": "BV1kFKLeDEw2",
+                    "desc": "",
+                    "create_time": 1739372035,
+                    "view": 5
+                  },
+                  {
+                    "title": "三角洲行动完美开局",
+                    "aweme_id": "BV1wFKLeDEfT",
+                    "desc": "",
+                    "create_time": 1739372027,
+                    "view": 3
+                  }
+                ]
               }
             ],
             "topic": "三角洲新年正当红"
@@ -8051,28 +8412,94 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
+                "allNum": 3,
+                "allViewNum": 23,
+                "onePlayNumList": [
+                  {
+                    "title": "三角洲行动获取五级套",
+                    "aweme_id": "BV1AFKLeDEF2",
+                    "desc": "",
+                    "create_time": 1739372133,
+                    "view": 12
+                  },
+                  {
+                    "title": "三角洲行动完美开局",
+                    "aweme_id": "BV1pFKLeDEL9",
+                    "desc": "",
+                    "create_time": 1739372045,
+                    "view": 8
+                  },
+                  {
+                    "title": "三角洲行动七大必改设置",
+                    "aweme_id": "BV1wFKLeDE4y",
+                    "desc": "",
+                    "create_time": 1739372008,
+                    "view": 3
+                  }
+                ]
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
+                "allNum": 3,
+                "allViewNum": 202,
+                "onePlayNumList": [
+                  {
+                    "title": "三角洲行动获取五级套",
+                    "aweme_id": "BV1wFKLeDE28",
+                    "desc": "",
+                    "create_time": 1739371987,
+                    "view": 4
+                  },
+                  {
+                    "title": "三角洲行动七大必改设置",
+                    "aweme_id": "BV1wFKLeDENa",
+                    "desc": "",
+                    "create_time": 1739371924,
+                    "view": 198
+                  },
+                  {
+                    "title": "三角洲行动完美开局",
+                    "aweme_id": "BV1wFKLeDEBJ",
+                    "desc": "",
+                    "create_time": 1739371901,
+                    "view": 0
+                  }
+                ]
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
+                "allNum": 3,
+                "allViewNum": 11,
+                "onePlayNumList": [
+                  {
+                    "title": "三角洲行动获取五级套",
+                    "aweme_id": "BV1HFKLeDEoA",
+                    "desc": "",
+                    "create_time": 1739372039,
+                    "view": 3
+                  },
+                  {
+                    "title": "三角洲行动七大必改设置",
+                    "aweme_id": "BV1kFKLeDEw2",
+                    "desc": "",
+                    "create_time": 1739372035,
+                    "view": 5
+                  },
+                  {
+                    "title": "三角洲行动完美开局",
+                    "aweme_id": "BV1wFKLeDEfT",
+                    "desc": "",
+                    "create_time": 1739372027,
+                    "view": 3
+                  }
+                ]
               }
             ]
           }
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "恋与深空",
@@ -8812,7 +9239,7 @@
         "suppleTag": "恋与深空 氪金 恋爱 手游 单身 乙女游戏 游戏 游戏杂谈 乙女 "
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "星际战甲1999",
@@ -8853,7 +9280,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "新月同行",
@@ -8897,12 +9324,13 @@
                 "onePlayNumList": []
               }
             ],
-            "topic": "新月同行新春会"
+            "topic": "新月同行新春会",
+            "isNotDo": true
           }
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "和平精英",
@@ -8978,9 +9406,30 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 36,
-                "allViewNum": 956,
+                "allNum": 39,
+                "allViewNum": 992,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1fMKLe5EJD",
+                    "desc": "",
+                    "create_time": 1739370765,
+                    "view": 7
+                  },
+                  {
+                    "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
+                    "aweme_id": "BV1L4NBeqEf1",
+                    "desc": "",
+                    "create_time": 1739269484,
+                    "view": 8
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV154NBeqEnA",
+                    "desc": "",
+                    "create_time": 1739269383,
+                    "view": 21
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV118F6eyEKh",
@@ -9237,9 +9686,23 @@
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 36,
-                "allViewNum": 735,
+                "allNum": 38,
+                "allViewNum": 742,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1ZMKLe5E34",
+                    "desc": "",
+                    "create_time": 1739370779,
+                    "view": 2
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV1wdN6exEGZ",
+                    "desc": "",
+                    "create_time": 1739278269,
+                    "view": 5
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV1y8F6eyETN",
@@ -9496,9 +9959,30 @@
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 28,
-                "allViewNum": 339,
+                "allNum": 31,
+                "allViewNum": 344,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1oMKLe5Ex3",
+                    "desc": "",
+                    "create_time": 1739370735,
+                    "view": 1
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV1PdN6exEgh",
+                    "desc": "",
+                    "create_time": 1739278328,
+                    "view": 2
+                  },
+                  {
+                    "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
+                    "aweme_id": "BV1jxNBeMExV",
+                    "desc": "",
+                    "create_time": 1739269798,
+                    "view": 2
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV1y8F6eyEXo",
@@ -9740,9 +10224,30 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 36,
-                "allViewNum": 956,
+                "allNum": 39,
+                "allViewNum": 992,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1fMKLe5EJD",
+                    "desc": "",
+                    "create_time": 1739370765,
+                    "view": 7
+                  },
+                  {
+                    "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
+                    "aweme_id": "BV1L4NBeqEf1",
+                    "desc": "",
+                    "create_time": 1739269484,
+                    "view": 8
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV154NBeqEnA",
+                    "desc": "",
+                    "create_time": 1739269383,
+                    "view": 21
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV118F6eyEKh",
@@ -9999,9 +10504,23 @@
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 36,
-                "allViewNum": 735,
+                "allNum": 38,
+                "allViewNum": 742,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1ZMKLe5E34",
+                    "desc": "",
+                    "create_time": 1739370779,
+                    "view": 2
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV1wdN6exEGZ",
+                    "desc": "",
+                    "create_time": 1739278269,
+                    "view": 5
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV1y8F6eyETN",
@@ -10258,9 +10777,30 @@
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 28,
-                "allViewNum": 339,
+                "allNum": 31,
+                "allViewNum": 344,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1oMKLe5Ex3",
+                    "desc": "",
+                    "create_time": 1739370735,
+                    "view": 1
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV1PdN6exEgh",
+                    "desc": "",
+                    "create_time": 1739278328,
+                    "view": 2
+                  },
+                  {
+                    "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
+                    "aweme_id": "BV1jxNBeMExV",
+                    "desc": "",
+                    "create_time": 1739269798,
+                    "view": 2
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV1y8F6eyEXo",
@@ -10473,9 +11013,30 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 36,
-                "allViewNum": 956,
+                "allNum": 39,
+                "allViewNum": 992,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1fMKLe5EJD",
+                    "desc": "",
+                    "create_time": 1739370765,
+                    "view": 7
+                  },
+                  {
+                    "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
+                    "aweme_id": "BV1L4NBeqEf1",
+                    "desc": "",
+                    "create_time": 1739269484,
+                    "view": 8
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV154NBeqEnA",
+                    "desc": "",
+                    "create_time": 1739269383,
+                    "view": 21
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV118F6eyEKh",
@@ -10732,9 +11293,23 @@
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 36,
-                "allViewNum": 735,
+                "allNum": 38,
+                "allViewNum": 742,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1ZMKLe5E34",
+                    "desc": "",
+                    "create_time": 1739370779,
+                    "view": 2
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV1wdN6exEGZ",
+                    "desc": "",
+                    "create_time": 1739278269,
+                    "view": 5
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV1y8F6eyETN",
@@ -10991,9 +11566,30 @@
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 28,
-                "allViewNum": 339,
+                "allNum": 31,
+                "allViewNum": 344,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1oMKLe5Ex3",
+                    "desc": "",
+                    "create_time": 1739370735,
+                    "view": 1
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV1PdN6exEgh",
+                    "desc": "",
+                    "create_time": 1739278328,
+                    "view": 2
+                  },
+                  {
+                    "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
+                    "aweme_id": "BV1jxNBeMExV",
+                    "desc": "",
+                    "create_time": 1739269798,
+                    "view": 2
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV1y8F6eyEXo",
@@ -11211,9 +11807,30 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 36,
-                "allViewNum": 956,
+                "allNum": 39,
+                "allViewNum": 992,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1fMKLe5EJD",
+                    "desc": "",
+                    "create_time": 1739370765,
+                    "view": 7
+                  },
+                  {
+                    "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
+                    "aweme_id": "BV1L4NBeqEf1",
+                    "desc": "",
+                    "create_time": 1739269484,
+                    "view": 8
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV154NBeqEnA",
+                    "desc": "",
+                    "create_time": 1739269383,
+                    "view": 21
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV118F6eyEKh",
@@ -11470,9 +12087,23 @@
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 36,
-                "allViewNum": 735,
+                "allNum": 38,
+                "allViewNum": 742,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1ZMKLe5E34",
+                    "desc": "",
+                    "create_time": 1739370779,
+                    "view": 2
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV1wdN6exEGZ",
+                    "desc": "",
+                    "create_time": 1739278269,
+                    "view": 5
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV1y8F6eyETN",
@@ -11729,9 +12360,30 @@
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 28,
-                "allViewNum": 339,
+                "allNum": 31,
+                "allViewNum": 344,
                 "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1oMKLe5Ex3",
+                    "desc": "",
+                    "create_time": 1739370735,
+                    "view": 1
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV1PdN6exEgh",
+                    "desc": "",
+                    "create_time": 1739278328,
+                    "view": 2
+                  },
+                  {
+                    "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
+                    "aweme_id": "BV1jxNBeMExV",
+                    "desc": "",
+                    "create_time": 1739269798,
+                    "view": 2
+                  },
                   {
                     "title": "【和平精英】《小老虎2900分巅峰赛撞车一休以及老队友阿猫》",
                     "aweme_id": "BV1y8F6eyEXo",
@@ -11939,7 +12591,86 @@
             "sDate": "2025/1/23",
             "eDate": "2025/2/16",
             "specialTag": "#和平精英2025吃鸡搭子",
-            "reward": []
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 3,
+                "allViewNum": 36,
+                "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1fMKLe5EJD",
+                    "desc": "",
+                    "create_time": 1739370765,
+                    "view": 7
+                  },
+                  {
+                    "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
+                    "aweme_id": "BV1L4NBeqEf1",
+                    "desc": "",
+                    "create_time": 1739269484,
+                    "view": 8
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV154NBeqEnA",
+                    "desc": "",
+                    "create_time": 1739269383,
+                    "view": 21
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 2,
+                "allViewNum": 7,
+                "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1ZMKLe5E34",
+                    "desc": "",
+                    "create_time": 1739370779,
+                    "view": 2
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV1wdN6exEGZ",
+                    "desc": "",
+                    "create_time": 1739278269,
+                    "view": 5
+                  }
+                ]
+              },
+              {
+                "userName": "小芯游戏说",
+                "allNum": 3,
+                "allViewNum": 5,
+                "onePlayNumList": [
+                  {
+                    "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
+                    "aweme_id": "BV1oMKLe5Ex3",
+                    "desc": "",
+                    "create_time": 1739370735,
+                    "view": 1
+                  },
+                  {
+                    "title": "【和平精英】巅峰赛必看改动 榜单内将无法隐藏玩家信息，增加人脸验证",
+                    "aweme_id": "BV1PdN6exEgh",
+                    "desc": "",
+                    "create_time": 1739278328,
+                    "view": 2
+                  },
+                  {
+                    "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
+                    "aweme_id": "BV1jxNBeMExV",
+                    "desc": "",
+                    "create_time": 1739269798,
+                    "view": 2
+                  }
+                ]
+              }
+            ]
           }
         ],
         "suppleTag": "游戏 手机游戏 FPS 动作游戏 皮肤 吃鸡游戏 和平精英"
@@ -12085,7 +12816,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "CF",
@@ -12194,7 +12925,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "无期迷途",
@@ -12207,7 +12938,7 @@
             "act_url": "https://www.bilibili.com/blackboard/era/eY8uwGl2PcBDhVxs.html",
             "comment": "3722人参与",
             "sDate": "2025/1/22",
-            "eDate": "2025/3/21",
+            "eDate": "2025/03/21",
             "specialTag": "#无期迷途攻略 #无期迷途二创",
             "reward": [
               {
@@ -12252,12 +12983,13 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "无期迷途UP主激励计划"
           }
         ]
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "英雄联盟手游",
@@ -12607,7 +13339,7 @@
         "suppleTag": "游戏 手机游戏 lolm 英雄联盟手游 lol手游 排行 MOBA"
       }
     ],
-    "updateDate": "2025/2/3"
+    "updateDate": "2025/2/14"
   },
   {
     "name": "QQ飞车",
@@ -12622,11 +13354,32 @@
             "sDate": "2025/1/16",
             "eDate": "2025/2/13",
             "specialTag": "#QQ飞车新春会激励计划",
-            "reward": []
+            "reward": [],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              },
+              {
+                "userName": "小芯游戏说",
+                "allNum": 0,
+                "allViewNum": 0,
+                "onePlayNumList": []
+              }
+            ]
           }
         ]
       }
-    ]
+    ],
+    "updateDate": "2025/2/14"
   },
   {
     "name": "决战平安京",
@@ -12653,10 +13406,160 @@
                 "money": 40000,
                 "isGet": false
               }
+            ],
+            "videoData": [
+              {
+                "userName": "Feeling",
+                "allNum": 4,
+                "allViewNum": 11,
+                "onePlayNumList": [
+                  {
+                    "title": "扒鸡这红叶年限把典藏赢麻了~决战平安京",
+                    "aweme_id": "BV1QHKLevEeG",
+                    "desc": "",
+                    "create_time": 1739429617,
+                    "view": 3
+                  },
+                  {
+                    "title": "平安京八岐大蛇居然这么鸡肋~决战平安京",
+                    "aweme_id": "BV1QHKLevEfT",
+                    "desc": "",
+                    "create_time": 1739418817,
+                    "view": 2
+                  },
+                  {
+                    "title": "平安京白狼年限入了不亏~决战平安京",
+                    "aweme_id": "BV1QHKLevEU4",
+                    "desc": "",
+                    "create_time": 1739413417,
+                    "view": 0
+                  },
+                  {
+                    "title": "平安京白狼传说年限果然是双形态~决战平安京",
+                    "aweme_id": "BV1QWKLePETp",
+                    "desc": "",
+                    "create_time": 1739408017,
+                    "view": 6
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 7,
+                "allViewNum": 9,
+                "onePlayNumList": [
+                  {
+                    "title": "扒鸡这红叶年限把典藏赢麻了~决战平安京",
+                    "aweme_id": "BV1aHKLeiE6k",
+                    "desc": "",
+                    "create_time": 1739429917,
+                    "view": 4
+                  },
+                  {
+                    "title": "平安京白狼贼吃辅助！打后期手长逆天~决战平安京",
+                    "aweme_id": "BV1QHKLevECN",
+                    "desc": "",
+                    "create_time": 1739424517,
+                    "view": 0
+                  },
+                  {
+                    "title": "平安京八岐大蛇居然这么鸡肋~决战平安京",
+                    "aweme_id": "BV1QHKLevEfN",
+                    "desc": "",
+                    "create_time": 1739419117,
+                    "view": 2
+                  },
+                  {
+                    "title": "平安京白狼年限入了不亏~决战平安京",
+                    "aweme_id": "BV1aHKLeiE2W",
+                    "desc": "",
+                    "create_time": 1739413717,
+                    "view": 2
+                  },
+                  {
+                    "title": "平安京白狼传说年限果然是双形态~决战平安京",
+                    "aweme_id": "BV1QHKLevEyW",
+                    "desc": "",
+                    "create_time": 1739408317,
+                    "view": 1
+                  },
+                  {
+                    "title": "扒鸡这次年限要是能开大爆衣就绝了 ~决战平安京",
+                    "aweme_id": "BV1QWKLePE3Q",
+                    "desc": "",
+                    "create_time": 1739402917,
+                    "view": 0
+                  },
+                  {
+                    "title": "扒鸡这技改真是又臭又香~决战平安京",
+                    "aweme_id": "BV1QWKLePEGu",
+                    "desc": "",
+                    "create_time": 1739397517,
+                    "view": 0
+                  }
+                ]
+              },
+              {
+                "userName": "小芯游戏说",
+                "allNum": 7,
+                "allViewNum": 15,
+                "onePlayNumList": [
+                  {
+                    "title": "扒鸡这红叶年限把典藏赢麻了~决战平安京",
+                    "aweme_id": "BV1QHKLevExu",
+                    "desc": "",
+                    "create_time": 1739429917,
+                    "view": 4
+                  },
+                  {
+                    "title": "平安京白狼贼吃辅助！打后期手长逆天~决战平安京",
+                    "aweme_id": "BV1QHKLevECu",
+                    "desc": "",
+                    "create_time": 1739424517,
+                    "view": 0
+                  },
+                  {
+                    "title": "平安京八岐大蛇居然这么鸡肋~决战平安京",
+                    "aweme_id": "BV1QHKLevEZR",
+                    "desc": "",
+                    "create_time": 1739419117,
+                    "view": 1
+                  },
+                  {
+                    "title": "平安京白狼年限入了不亏~决战平安京",
+                    "aweme_id": "BV1QHKLevEvN",
+                    "desc": "",
+                    "create_time": 1739413717,
+                    "view": 2
+                  },
+                  {
+                    "title": "平安京白狼传说年限果然是双形态~决战平安京",
+                    "aweme_id": "BV1QHKLevEvx",
+                    "desc": "",
+                    "create_time": 1739408317,
+                    "view": 4
+                  },
+                  {
+                    "title": "扒鸡这次年限要是能开大爆衣就绝了 ~决战平安京",
+                    "aweme_id": "BV1DWKLePEjm",
+                    "desc": "",
+                    "create_time": 1739402917,
+                    "view": 4
+                  },
+                  {
+                    "title": "扒鸡这技改真是又臭又香~决战平安京",
+                    "aweme_id": "BV13WKLeNE7Q",
+                    "desc": "",
+                    "create_time": 1739397517,
+                    "view": 0
+                  }
+                ]
+              }
             ]
           }
         ]
       }
-    ]
+    ],
+    "updateDate": "2025/2/14"
   }
 ]

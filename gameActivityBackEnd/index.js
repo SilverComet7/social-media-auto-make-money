@@ -679,9 +679,11 @@ async function executeExpiredJobs(platform) {
     const now = new Date();
     const expiredJobs = [];
 
-    // 遍历所有游戏的定时任务（通用逻辑）
+    // 遍历所有游戏的定时任务
     scheduleJobs.forEach((game) => {
       if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
+        // 获取游戏配置
+        const { topicName, missionId, tag, tid } = game;
         const gameExpiredJobs = game.scheduleJob
           .filter((job) => {
             const jobTime = new Date(job.execTime);
@@ -692,6 +694,10 @@ async function executeExpiredJobs(platform) {
           })
           .map((job) => ({
             ...job,
+            topicName,
+            missionId,
+            tag,
+            tid,
             platform: platform,
             gameIndex: scheduleJobs.indexOf(game),
             jobIndex: game.scheduleJob.indexOf(job),
@@ -735,9 +741,48 @@ async function executeExpiredJobs(platform) {
               await acquireSemaphore(MAX_CONCURRENT_UPLOADS);
               const randomDelay = Math.floor(Math.random() * 5000);
               await new Promise(resolve => setTimeout(resolve, randomDelay));
-
               await new Promise((resolve, reject) => {
-                const child = spawn(uploadCmd, { shell: true });
+
+                let child;
+
+                // 根据平台类型采用不同的执行方式
+                if (platform === 'bilibili') {
+                  // Windows系统需要特殊处理参数格式
+                  child = spawn(uploadCmd[0], uploadCmd.slice(1), {
+                    windowsVerbatimArguments: true,
+                    shell: true
+                  });
+                } else if (platform === '抖音') {
+                  // Python命令需要拆分为独立参数
+
+                  child = spawn(uploadCmd, {
+                    shell: true,
+                    env: {
+                      // ...process.env,
+                      PYTHONUTF8: '1',  // 强制Python使用UTF-8编码
+                      PYTHONIOENCODING: 'utf-8'  // 设置输入输出编码
+                    }
+                  });
+                }
+
+                // 捕获标准输出（添加编码处理）
+                child.stdout.on('data', (data) => {
+                  // 将buffer转为字符串时指定编码，并替换无效字符
+                  const output = data.toString('utf8', { 
+                    stripBOM: true,
+                    replacementChar: ''
+                  });
+                  console.log(`[${account.accountName} stdout]: ${output}`);
+                });
+
+                // 捕获错误输出（添加编码处理）
+                child.stderr.on('data', (data) => {
+                  const errorOutput = data.toString('utf8', {
+                    stripBOM: true,
+                    replacementChar: ''
+                  });
+                  console.error(`[${account.accountName} stderr]: ${errorOutput}`);
+                });
 
                 child.on('exit', (code) => {
                   releaseSemaphore();
@@ -762,7 +807,7 @@ async function executeExpiredJobs(platform) {
       await Promise.all(uploadPromises);
     }
 
-    // 统一写入文件
+    // 统一写入对应文件
     fs.writeFileSync(configPath, JSON.stringify(scheduleJobs, null, 2));
 
     return {
@@ -781,11 +826,18 @@ async function executeExpiredJobs(platform) {
 
 // 生成平台特定的上传命令
 function generateUploadCommand(platform, uploaderPath, account, job) {
-
   if (platform === 'bilibili') {
-    const commonParams = `-u "${path.join(uploaderPath, '..', `${account.accountName}.json`)}"`;
-    return `"${uploaderPath}" ${commonParams} upload --tag "${job.tag}" --mission-id "${job.missionId}" 
-      --tid ${job.tid} --title "${path.basename(job.videoPath, ".mp4")}" "${job.videoPath}"`;
+    const configPath = path.join(path.dirname(uploaderPath), `${account.accountName}.json`);
+    return [
+      uploaderPath,
+      '-u', `"${configPath}"`,
+      'upload',
+      '--tag', job.tag,
+      '--mission-id', job.missionId,
+      '--tid', job.tid.toString(),
+      '--title', path.basename(job.videoPath, ".mp4"),
+      `"${job.videoPath}"` 
+    ];
   }
 
   if (platform === '抖音') {
@@ -830,7 +882,7 @@ async function checkAndExecuteJobs() {
 // 提高任务检查频率（每2小时检查一次）
 setInterval(checkAndExecuteJobs, 2 * 60 * 60 * 1000);
 // 启动时立即检查
-// checkAndExecuteJobs();
+
 
 app.post("/scheduleUpload", async (req, res) => {
   async function generateScheduleJobs(videoDir, startTime, intervalHours) {
@@ -864,25 +916,28 @@ app.post("/scheduleUpload", async (req, res) => {
       immediately,
     } = req.body;
 
-    // 根据平台选择配置文件路径
-    const platformConfig = {
-      bilibili: "./scheduleJob/BiliBiliScheduleJob.json",
-      '抖音': "./scheduleJob/DouyinScheduleJob.json"
-    };
-    const scheduleJobsPath = platformConfig[platform];
 
-    let scheduleJobs = [];
-
-    try {
-      scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
-    } catch (err) {
-      console.log("定时任务配置文件不存在,创建新文件");
-      scheduleJobs = [];
-    }
 
     if (immediately) {
-      await executeExpiredJobs(platform);
+      await checkAndExecuteJobs();
     } else {
+
+      // 根据平台选择配置文件路径
+      const platformConfig = {
+        bilibili: "./scheduleJob/BiliBiliScheduleJob.json",
+        '抖音': "./scheduleJob/DouyinScheduleJob.json"
+      };
+      const scheduleJobsPath = platformConfig[platform];
+
+      let scheduleJobs = [];
+
+      try {
+        scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
+      } catch (err) {
+        console.log("定时任务配置文件不存在,创建新文件");
+        scheduleJobs = [];
+      }
+
       const newJobs = await generateScheduleJobs(videoDir, startTime, intervalHours);
 
       // 添加平台特定字段

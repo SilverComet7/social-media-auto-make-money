@@ -1,0 +1,9 @@
+{
+  "name": "platform-game-activity",
+  "scripts": {
+    "start": "concurrently \"cd gameActivityBackEnd && npm run dev\" \"cd gameActivityFrontEnd && npm run dev\" \"cd Crawler && python main.py\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+} 

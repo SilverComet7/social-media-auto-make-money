@@ -1,20 +1,35 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Python: CLI Main",
-        "type": "debugpy",
-        "request": "launch",
-        "program": "${workspaceFolder}/social-auto-upload/cli_main.py ",
-        "args": [
-            "douyin",
-            "Feeling",
-            "upload",
-            "D:\\code\\platform_game_activity\\social-auto-upload\\videos\\demo.mp4",
-            "-pt",
-            "0"
-          ],
-        "console": "integratedTerminal"
-      }
-    ]
-  }
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: CLI upload douyin",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/social-auto-upload/cli_main.py ",
+      "args": [
+        "douyin",
+        "Feeling",
+        "upload",
+        "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\诛仙世界\\coser同行\\2025-1-16-2-32-11_截取1秒后_缩放0%_合集时间大于30_帧数=30\\二次元.mp4",
+        "-pt",
+        "0"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: bilibili upload",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/social-auto-upload/upload/bilibili_uploader.py",
+      "args": [
+        "bilibili",
+        "Feeling",
+        "upload",
+        "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\诛仙世界\\coser同行\\2025-1-16-2-32-11_截取1秒后_缩放0%_合集时间大于30_帧数=30\\二次元.mp4",
+        "-pt",
+        "0"
+      ],
+      "console": "integratedTerminal"
+    }
+  ]
+}

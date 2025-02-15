@@ -1003,11 +1003,11 @@
           <el-input v-model="scheduleForm.topicName" placeholder="请输入活动名称" />
         </el-form-item>
         <template v-if="scheduleForm.platform !== '抖音'">
-          <el-form-item label="分区ID">
-            <el-input-number v-model="scheduleForm.tid" :min="1" placeholder="请输入分区ID" />
-          </el-form-item>
           <el-form-item label="活动ID">
             <el-input v-model="scheduleForm.missionId" placeholder="请输入活动ID" />
+          </el-form-item>
+          <el-form-item label="分区ID">
+            <el-input-number v-model="scheduleForm.tid" :min="1" placeholder="请输入分区ID" />
           </el-form-item>
         </template>
         <el-form-item label="视频目录">
@@ -1093,7 +1093,7 @@ const setScheduleJob = (rew, platform, row) => {
   const allTag = [
     ...new Set([
       ...(specialTag?.split(/\s+/) || []), // 拆分活动特殊标签
-      ...(platform.suppleTag?.split(/\s+/) || []), // 平台补充标签
+      ...(suppleTag?.split(/\s+/) || []), // 平台补充标签
       row.name, // 游戏名称
     ]),
   ]
