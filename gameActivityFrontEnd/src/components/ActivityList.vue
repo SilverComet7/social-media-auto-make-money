@@ -14,7 +14,7 @@
             <h4>公共标签参考</h4>
             <div class="bg-slate-300 h-[5vw] overflow-auto">
               <div>#游戏鉴赏官 #联机游戏</div>
-              <div>#二次元 #完美身材 女大学生 音乐 巅峰赛 合集 故事 #搞笑 #教程</div>
+              <div>#二次元 #完美身材 #女大学生 #音乐 #巅峰赛 #合集 #故事 #搞笑 #教程</div>
               <div>#MMORPG #古风 #逆水寒</div>
               <div>#射击游戏 #FPS #穿越火线 #无畏契约 #暗区突围 #三角洲行动 #枪战</div>
             </div>
@@ -160,8 +160,12 @@
                           <el-button
                             type="primary"
                             @click="setScheduleJob(speReq, platform, scope.row)"
-                            >设置该活动定时执行任务
-                          </el-button>
+                            >设置该活动定时执行任务</el-button>
+                          <el-button
+                            type="info"
+                            v-if="BiliBiliScheduleJob.some(e=>e.topicName === speReq.topic)"
+                            @click="showScheduleJobDialog(speReq.topic)"
+                          >查看定时任务</el-button>
                           <h4
                             class="font-bold"
                             v-if="speReq.eDate"
@@ -688,7 +692,7 @@
     <el-dialog title="FFmpeg 处理设置" v-model="ffmpegDialogVisible">
       <el-form :model="ffmpegSettings" label-width="250px">
         <el-form-item label="名称">
-          <el-select v-model="ffmpegSettings.gameName" placeholder="请输入游戏名称" filterable>
+          <el-select v-model="ffmpegSettings.gameName" placeholder="请输入游戏名称" filterable clearable>
             <el-option
               v-for="game in allGameList"
               :key="game.name"
@@ -698,7 +702,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="分组">
-          <el-select v-model="ffmpegSettings.groupName" placeholder="请选择分组" filterable>
+          <el-select v-model="ffmpegSettings.groupName" placeholder="请选择分组" filterable clearable>
             <el-option label="攻略" value="攻略" />
             <el-option
               v-for="game in allGameList"
@@ -708,6 +712,13 @@
             />
           </el-select>
         </el-form-item>
+        <el-form-item label="处理地址">
+          <el-input v-model="ffmpegSettings.videoDir" placeholder="请输入处理地址" />
+        </el-form-item>
+        <el-form-item label="添加发布时间">
+          <el-switch v-model="ffmpegSettings.addPublishTime" active-text="是" inactive-text="否" />
+        </el-form-item>
+
         <el-form-item label="单独检测名称">
           <el-switch v-model="ffmpegSettings.checkName" active-text="是" inactive-text="否" />
         </el-form-item>
@@ -1003,11 +1014,26 @@
           <el-input v-model="scheduleForm.topicName" placeholder="请输入活动名称" />
         </el-form-item>
         <template v-if="scheduleForm.platform !== '抖音'">
+          <el-form-item label="分区选择">
+            <el-select v-model="scheduleForm.selectedArea" placeholder="请选择分区" @change="handleAreaChange">
+              <el-option
+                v-for="area in bilibiliTid"
+                :key="area.name"
+                :label="area.name"
+                :value="area.name"
+              />
+            </el-select>
+            <el-select v-model="scheduleForm.tid" placeholder="请选择子分区">
+              <el-option
+                v-for="subArea in getSubAreas"
+                :key="subArea.tid"
+                :label="subArea.name"
+                :value="subArea.tid"
+              />
+            </el-select>
+          </el-form-item>
           <el-form-item label="活动ID">
             <el-input v-model="scheduleForm.missionId" placeholder="请输入活动ID" />
-          </el-form-item>
-          <el-form-item label="分区ID">
-            <el-input-number v-model="scheduleForm.tid" :min="1" placeholder="请输入分区ID" />
           </el-form-item>
         </template>
         <el-form-item label="视频目录">
@@ -1040,48 +1066,172 @@
         </span>
       </template>
     </el-dialog>
+
+    <!-- 添加定时任务查看对话框 -->
+    <el-dialog
+      title="定时任务列表"
+      v-model="scheduleJobDialogVisible"
+      width="70%"
+    >
+      <template v-if="currentScheduleJob">
+        <h3 class="mb-4">活动名称: {{ currentScheduleJob.topicName }}</h3>
+        <el-table :data="currentScheduleJob.scheduleJob" style="width: 100%">
+          <el-table-column label="视频文件" min-width="300">
+            <template #default="scope">
+              {{ getFileName(scope.row.videoPath) }}
+            </template>
+          </el-table-column>
+          <el-table-column label="执行时间" width="200">
+            <template #default="scope">
+              {{ formatDateTime(scope.row.execTime) }}
+            </template>
+          </el-table-column>
+          <el-table-column label="已执行账号" min-width="200">
+            <template #default="scope">
+              <el-tag
+                v-for="account in scope.row.successExecAccount"
+                :key="account"
+                class="mr-2"
+              >
+                {{ account }}
+              </el-tag>
+            </template>
+          </el-table-column>
+        </el-table>
+      </template>
+      <template v-else>
+        <el-empty description="未找到相关定时任务" />
+      </template>
+    </el-dialog>
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted, computed } from 'vue'
 import { ElTable, ElTableColumn, ElProgress, ElEmpty, ElDatePicker } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import topicJson from '../../public/topic.json'
+import bilibiliTid from '../../public/bilibiliTid.json'
 
-const formatDate = (timestamp) => {
+interface BilibiliArea {
+  name: string
+  children: {
+    tid: number
+    name: string
+  }[]
+}
+
+interface VideoData {
+  userName: string
+  allNum: number
+  onePlayNumList: {
+    view: number
+    like: number
+    reply: number
+    ctime: number
+    title: string
+    bvid: string
+  }[]
+  allViewNum: number
+  allLike: number
+}
+
+interface Reward {
+  allNum?: number
+  allViewNum?: number
+  joinedPerson?: number
+  view?: number
+  like?: number
+  allLikeNum?: number
+  cday?: number
+  minView?: number
+  money?: number
+  isGet: boolean
+}
+
+interface SpecialTagRequirement {
+  name: string
+  specialTag: string
+  eDate: string
+  isNotDo?: boolean
+  minVideoTime?: number
+  minView?: number
+  topic?: string
+  reward: Reward[]
+  videoData?: VideoData[]
+}
+
+interface PlatformReward {
+  name: string
+  specialTagRequirements: SpecialTagRequirement[]
+  suppleTag?: string
+}
+
+interface GameActivity {
+  name: string
+  act_url: string
+  etime: number
+  addTime: string
+  rewards: PlatformReward[]
+  updateDate?: string
+  searchKeyWord?: string
+  notDo?: boolean
+  new?: boolean
+  updateData?: boolean
+  bilibili?: VideoData
+}
+
+interface ScheduleForm {
+  gameName: string
+  topicName: string
+  videoDir: string
+  tag: string
+  tid: number
+  missionId: string
+  startTime: Date | null
+  intervalHours: number
+  platform: string
+  immediately: boolean
+  selectedArea: string
+}
+
+const formatDate = (timestamp: number): string => {
   const date = new Date(timestamp * 1000)
   return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
 }
 
 // 计算天数差
-const getDaysDiff = (timeStamp1, timeStamp2 = new Date().getTime()) => {
+const getDaysDiff = (timeStamp1: number, timeStamp2: number = new Date().getTime()): number => {
   const diffTime = timeStamp1 - timeStamp2
   const endDiffDate = diffTime / (1000 * 60 * 60 * 24)
   return Math.ceil(endDiffDate)
 }
 
-const copyTag = (tag) => {
+const copyTag = (tag: string): void => {
   navigator.clipboard.writeText(tag)
   ElMessage.success('复制成功')
 }
 
 // 新增的响应式变量
 const scheduleDialogVisible = ref(false)
-const scheduleForm = ref({
+const scheduleForm = ref<ScheduleForm>({
+  gameName: '',
   topicName: '',
   videoDir: '',
   tag: '',
-  tid: 172, // 默认分区ID
+  tid: 172,
   missionId: '',
-  startTime: '',
+  startTime: null,
   intervalHours: 24,
+  platform: '',
+  immediately: false,
+  selectedArea: '',
 })
 
 // 打开定时任务设置弹窗
-const setScheduleJob = (rew, platform, row) => {
-  const { topic, specialTag, suppleTag } = rew
-  const missionId = topicJson.find((item) => item.topic_name === topic)?.mission_id
+const setScheduleJob = (rew: SpecialTagRequirement, platform: PlatformReward, row: GameActivity) => {
+  const { topic, specialTag } = rew
+  const missionId = topicJson.find((item: any) => item.topic_name === topic)?.mission_id
 
   // B站平台 如果没有找到对应的 missionId
   if (!missionId && platform.name === 'bilibili') {
@@ -1092,25 +1242,32 @@ const setScheduleJob = (rew, platform, row) => {
   // 生成全量标签：活动标签 + 支撑标签 + 游戏名称
   const allTag = [
     ...new Set([
-      ...(specialTag?.split(/\s+/) || []), // 拆分活动特殊标签
-      ...(suppleTag?.split(/\s+/) || []), // 平台补充标签
-      row.name, // 游戏名称
+      '#' + row.name,
+      ...(specialTag?.split(/\s+/) || []),
+      ...(platform.suppleTag?.split(/\s+/) || []),
     ]),
   ]
     .filter(Boolean)
-    .map((t) => (t.startsWith('#') ? t : `#${t}`)) // 自动补全井号
+    .map((t) => {
+      if (platform.name === 'bilibili') {
+        return t.startsWith('#') ? t.slice(1) : t
+      }
+      return t.startsWith('#') ? t : `#${t}`
+    })
+    .join(platform.name === 'bilibili' ? ',' : ' ')
 
   scheduleForm.value = {
     gameName: row.name,
     topicName: topic || rew.name,
-    videoDir: '', // 需要用户填写
-    tag: allTag.join(' '), // 用空格分隔标签
-    tid: 172, // 默认分区ID 手游
-    missionId: missionId,
-    startTime: null, //默认早上6:00
+    videoDir: '',
+    tag: allTag,
+    tid: 172,
+    missionId: missionId || '',
+    startTime: null,
     intervalHours: 24,
     platform: platform.name,
     immediately: false,
+    selectedArea: '',
   }
 
   scheduleDialogVisible.value = true
@@ -1140,6 +1297,7 @@ const confirmScheduleJob = async (immediately = false) => {
     if (result.code === 200) {
       ElMessage.success('定时任务设置成功')
       scheduleDialogVisible.value = false
+      fetchData()
     } else {
       ElMessage.error(result.msg || '设置失败')
     }
@@ -1335,7 +1493,7 @@ const defaultDeduplicationConfigs = {
     rotateAngle: 0.5,
     enableBlur: false,
     blurRadius: 0.2,
-    enableFade: false, // 攻略启用淡入淡出
+    enableFade: false,
     fadeDuration: 0.5,
     brightness: 0.1,
     contrast: 1.1,
@@ -1351,7 +1509,7 @@ const defaultDeduplicationConfigs = {
     rotateAngle: 0.5,
     enableBlur: false,
     blurRadius: 0.2,
-    enableFade: false, // 攻略启用淡入淡出
+    enableFade: false,
     fadeDuration: 0.5,
     brightness: 0.1,
     contrast: 1.1,
@@ -1369,11 +1527,12 @@ const ffmpegSettings = ref({
   scalePercent: 90,
   replaceMusic: false,
   musicName: 'billll',
-  gameName: '火影忍者',
-  groupName: '攻略',
+  gameName: '',
+  groupName: '',
+  addPublishTime: false,
   deduplicationConfig: {
     enable: false,
-    ...defaultDeduplicationConfigs.coser, // 默认使用 coser 配置
+    ...defaultDeduplicationConfigs.coser,
   },
   enableMerge: false,
   mergedLimitTime: 20,
@@ -1482,6 +1641,7 @@ const getCommonTagAll = (row) => {
 const bilibiliActTableData = ref([])
 const gameTableData = ref([])
 const dakaTableData = ref([])
+const BiliBiliScheduleJob = ref([])
 
 const fetchData = async () => {
   try {
@@ -1497,11 +1657,9 @@ const fetchData = async () => {
       return item.etime > new Date().getTime() / 1000 && !item.notDo
     })
     dakaTableData.value = res.dakaData
-    gameTableData.value = res.gameData.filter((item) => {
-      return true
-      return item.etime > new Date().getTime() / 1000
-    })
+    gameTableData.value = res.gameData
     allGameList.value = res.allGameList.map((e) => ({ name: e, checked: false }))
+    BiliBiliScheduleJob.value = res.BiliBiliScheduleJob
     ElMessage.success('数据刷新成功')
   } catch (error) {
     console.error('Error fetching data:', error)
@@ -1720,6 +1878,43 @@ const deleteUnfavorableReply = async (row) => {
       ElMessage.success('删除成功')
     }
   })
+}
+
+// 添加新的响应式变量
+const scheduleJobDialogVisible = ref(false)
+const currentScheduleJob = ref(null)
+
+// 添加新的方法
+const showScheduleJobDialog = async (topic) => {
+  try {
+    const scheduleJob = BiliBiliScheduleJob.value.find((e) => e.topicName === topic)
+    currentScheduleJob.value = scheduleJob
+    scheduleJobDialogVisible.value = true
+  } catch (error) {
+    console.error('获取定时任务失败:', error)
+    ElMessage.error('获取定时任务失败')
+  }
+}
+
+// 工具函数
+const getFileName = (path) => {
+  return path.split('\\').pop()
+}
+
+const formatDateTime = (dateStr) => {
+  const date = new Date(dateStr)
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+}
+
+// 添加计算属性获取子分区列表
+const getSubAreas = computed(() => {
+  const selectedArea = (bilibiliTid as BilibiliArea[]).find(area => area.name === scheduleForm.value.selectedArea)
+  return selectedArea ? selectedArea.children : []
+})
+
+// 处理分区变化
+const handleAreaChange = () => {
+  scheduleForm.value.tid = 0 // 清空子分区选择
 }
 </script>
 

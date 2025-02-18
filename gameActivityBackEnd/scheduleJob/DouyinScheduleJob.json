@@ -51,5 +51,50 @@
         ]
       }
     ]
+  },
+  {
+    "gameName": "尘白禁区",
+    "topicName": "尘白禁区夙圆心行",
+    "missionId": "",
+    "tag": "#尘白禁区 #尘白禁区夙圆心行 #游戏 #fps #美少女",
+    "videoDir": "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\尘白禁区\\攻略\\已重命名处理\\小于30s\\转换\\2025-2-17-14-1-5_截取0秒后_缩放90%_合集时间大于20_帧数=30",
+    "scheduleJob": [
+      {
+        "videoPath": "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\尘白禁区\\攻略\\已重命名处理\\小于30s\\转换\\2025-2-17-14-1-5_截取0秒后_缩放90%_合集时间大于20_帧数=30\\【尘白禁区】兄弟萌顶不住了啊！又是一帧一帧打码的一天！.mp4",
+        "execTime": "2025-02-13T16:00:00.000Z",
+        "successExecAccount": [
+          "资料新",
+          "Feeling",
+          "Chris"
+        ]
+      },
+      {
+        "videoPath": "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\尘白禁区\\攻略\\已重命名处理\\小于30s\\转换\\2025-2-17-14-1-5_截取0秒后_缩放90%_合集时间大于20_帧数=30\\【尘白禁区】旗袍开叉的美女道士！这是buff叠满了！.mp4",
+        "execTime": "2025-02-14T16:00:00.000Z",
+        "successExecAccount": [
+          "资料新",
+          "Feeling",
+          "Chris"
+        ]
+      },
+      {
+        "videoPath": "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\尘白禁区\\攻略\\已重命名处理\\小于30s\\转换\\2025-2-17-14-1-5_截取0秒后_缩放90%_合集时间大于20_帧数=30\\【尘白禁区】麻了！麻了！尘白的新皮肤点我麻筋上了！.mp4",
+        "execTime": "2025-02-15T16:00:00.000Z",
+        "successExecAccount": [
+          "资料新",
+          "Feeling",
+          "Chris"
+        ]
+      },
+      {
+        "videoPath": "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\尘白禁区\\攻略\\已重命名处理\\小于30s\\转换\\2025-2-17-14-1-5_截取0秒后_缩放90%_合集时间大于20_帧数=30\\尘白禁区玩家的快乐，你根本想象不到！.mp4",
+        "execTime": "2025-02-16T16:00:00.000Z",
+        "successExecAccount": [
+          "资料新",
+          "Feeling",
+          "Chris"
+        ]
+      }
+    ]
   }
 ]

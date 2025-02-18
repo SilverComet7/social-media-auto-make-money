@@ -42,20 +42,20 @@
               {
                 "userName": "Chris",
                 "allNum": 3,
-                "allViewNum": 6430,
+                "allViewNum": 6436,
                 "onePlayNumList": [
                   {
                     "aweme_id": "7469996355553889547",
                     "desc": "#以闪亮之名武侠梦 #以闪亮之名新春跨次元 #coser #游戏 #可爱",
                     "create_time": 1739256912,
-                    "view": 2947,
+                    "view": 2948,
                     "like": 185
                   },
                   {
                     "aweme_id": "7469995716270624011",
                     "desc": "起猛看见美人鱼了？ #以闪亮之名武侠梦 #以闪亮之名新春跨次元 #coser #游戏 #可爱",
                     "create_time": 1739251512,
-                    "view": 2404,
+                    "view": 2409,
                     "like": 127
                   },
                   {
@@ -112,20 +112,20 @@
               {
                 "userName": "Chris",
                 "allNum": 3,
-                "allViewNum": 6430,
+                "allViewNum": 6436,
                 "onePlayNumList": [
                   {
                     "aweme_id": "7469996355553889547",
                     "desc": "#以闪亮之名武侠梦 #以闪亮之名新春跨次元 #coser #游戏 #可爱",
                     "create_time": 1739256912,
-                    "view": 2947,
+                    "view": 2948,
                     "like": 185
                   },
                   {
                     "aweme_id": "7469995716270624011",
                     "desc": "起猛看见美人鱼了？ #以闪亮之名武侠梦 #以闪亮之名新春跨次元 #coser #游戏 #可爱",
                     "create_time": 1739251512,
-                    "view": 2404,
+                    "view": 2409,
                     "like": 127
                   },
                   {
@@ -142,7 +142,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "闪耀暖暖",
@@ -243,7 +243,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "心动小镇",
@@ -342,7 +342,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "界外狂潮",
@@ -393,7 +393,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "永劫无间手游",
@@ -570,7 +570,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "逆水寒手游",
@@ -1587,7 +1587,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "明日方舟",
@@ -1599,22 +1599,18 @@
         "name": "bilibili",
         "specialTagRequirements": [
           {
-            "name": "明日方舟UP主应援计划 – 出苍白海",
-            "act_url": "https://www.bilibili.com/blackboard/era/oAgWT4ghqDxGPl8x.html",
-            "comment": "13.4万人参与",
-            "sDate": "2024/12/5",
-            "eDate": "2025/01/21",
-            "specialTag": "#明日方舟创作者应援计划",
-            "searchKeyWord": "明日方舟UP主应援计划 – 出苍白海",
+            "name": "明日方舟终末地再次测试 - UP主应援计划",
+            "act_url": "https://www.bilibili.com/blackboard/era/iNxOa5IxFxu3XeUr.html",
+            "comment": "1412人参与",
+            "sDate": "2025/1/17",
+            "eDate": "2025/02/24",
+            "specialTag": "",
+            "searchKeyWord": "明日方舟终末地再次测试 - UP主应援计划",
             "reward": [
               {
                 "allNum": 2,
-                "money": 40000,
-                "isGet": false
-              },
-              {
-                "allNum": 5,
-                "money": 40000,
+                "allViewNum": 200,
+                "money": 20000,
                 "isGet": false
               }
             ],
@@ -1695,160 +1691,8 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
-          },
-          {
-            "name": "明日方舟终末地再次测试 - UP主应援计划",
-            "act_url": "https://www.bilibili.com/blackboard/era/iNxOa5IxFxu3XeUr.html",
-            "comment": "1412人参与",
-            "sDate": "2025/1/17",
-            "eDate": "2025/2/24",
-            "specialTag": "",
-            "searchKeyWord": "明日方舟终末地再次测试 - UP主应援计划",
-            "reward": [],
-            "videoData": [
-              {
-                "userName": "Feeling",
-                "allNum": 3,
-                "allViewNum": 131,
-                "onePlayNumList": [
-                  {
-                    "title": "明日方舟coser合集2",
-                    "aweme_id": "BV1quw1eHEob",
-                    "desc": "明日方舟出苍白海",
-                    "create_time": 1737340282,
-                    "view": 48
-                  },
-                  {
-                    "title": "明日方舟coser合集1",
-                    "aweme_id": "BV1Euw1eHEEg",
-                    "desc": "明日方舟出苍白海",
-                    "create_time": 1737340271,
-                    "view": 33
-                  },
-                  {
-                    "title": "【明日方舟】最曹贼的一集",
-                    "aweme_id": "BV1csc7eyEsT",
-                    "desc": "",
-                    "create_time": 1736489271,
-                    "view": 50
-                  }
-                ]
-              },
-              {
-                "userName": "想看的coser集",
-                "allNum": 5,
-                "allViewNum": 109,
-                "onePlayNumList": [
-                  {
-                    "title": "明日方舟coser合集5",
-                    "aweme_id": "BV17uw1eHEoT",
-                    "desc": "",
-                    "create_time": 1737340493,
-                    "view": 3
-                  },
-                  {
-                    "title": "明日方舟coser合集3",
-                    "aweme_id": "BV1quw1eHEoU",
-                    "desc": "",
-                    "create_time": 1737340467,
-                    "view": 68
-                  },
-                  {
-                    "title": "明日方舟coser合集4",
-                    "aweme_id": "BV17uw1eHEW5",
-                    "desc": "",
-                    "create_time": 1737340438,
-                    "view": 2
-                  },
-                  {
-                    "title": "明日方舟coser合集1",
-                    "aweme_id": "BV17uw1eHE4z",
-                    "desc": "明日方舟出苍白海",
-                    "create_time": 1737340275,
-                    "view": 30
-                  },
-                  {
-                    "title": "明日方舟coser合集2",
-                    "aweme_id": "BV17uw1eHEaF",
-                    "desc": "明日方舟出苍白海",
-                    "create_time": 1737340257,
-                    "view": 6
-                  }
-                ]
-              },
-              {
-                "userName": "小芯游戏说",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              }
-            ]
-          },
-          {
-            "name": "明日方舟UP主应援计划 – 相见欢",
-            "act_url": "https://www.bilibili.com/blackboard/era/uGjoaMNTYQmyBZ6r.html",
-            "comment": "4.3万人参与",
-            "sDate": "2025/1/22",
-            "eDate": "2025/2/13",
-            "specialTag": "#明日方舟UP主应援计划 – 相见欢",
-            "reward": [],
-            "videoData": [
-              {
-                "userName": "Feeling",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              },
-              {
-                "userName": "想看的coser集",
-                "allNum": 5,
-                "allViewNum": 109,
-                "onePlayNumList": [
-                  {
-                    "title": "明日方舟coser合集5",
-                    "aweme_id": "BV17uw1eHEoT",
-                    "desc": "",
-                    "create_time": 1737340493,
-                    "view": 3
-                  },
-                  {
-                    "title": "明日方舟coser合集3",
-                    "aweme_id": "BV1quw1eHEoU",
-                    "desc": "",
-                    "create_time": 1737340467,
-                    "view": 68
-                  },
-                  {
-                    "title": "明日方舟coser合集4",
-                    "aweme_id": "BV17uw1eHEW5",
-                    "desc": "",
-                    "create_time": 1737340438,
-                    "view": 2
-                  },
-                  {
-                    "title": "明日方舟coser合集1",
-                    "aweme_id": "BV17uw1eHE4z",
-                    "desc": "明日方舟出苍白海",
-                    "create_time": 1737340275,
-                    "view": 30
-                  },
-                  {
-                    "title": "明日方舟coser合集2",
-                    "aweme_id": "BV17uw1eHEaF",
-                    "desc": "明日方舟出苍白海",
-                    "create_time": 1737340257,
-                    "view": 6
-                  }
-                ]
-              },
-              {
-                "userName": "小芯游戏说",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              }
-            ]
+            ],
+            "topic": "明日方舟终末地再次测试"
           }
         ]
       },
@@ -2225,7 +2069,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "宝可梦大集结",
@@ -2279,7 +2123,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "燕云十六声",
@@ -2289,325 +2133,173 @@
         "name": "bilibili",
         "specialTagRequirements": [
           {
-            "name": "燕云十六声公测激励活动",
-            "act_url": "https://www.bilibili.com/blackboard/era/Bh88xUQ5aVozSPec.html",
-            "comment": "5.6万人参与",
-            "sDate": "2024/12/27",
-            "eDate": "2025/01/26",
-            "specialTag": "#燕云十六声 #武侠",
-            "searchKeyWord": "燕云十六声公测激励活动",
+            "name": "燕云十六声新春UP激励活动",
+            "act_url": "https://www.bilibili.com/blackboard/era/GYzTP3FwDiu3dfpY.html",
+            "comment": "1.7万人参与",
+            "sDate": "2025/1/27",
+            "eDate": "2025/02/28",
+            "specialTag": "",
             "reward": [
-              {
-                "allNum": 1,
-                "allViewNum": 20,
-                "money": 50000,
-                "isGet": false
-              },
-              {
-                "allNum": 5,
-                "allViewNum": 200,
-                "money": 50000,
-                "isGet": false
-              },
               {
                 "allNum": 10,
                 "allViewNum": 200,
-                "money": 50000,
-                "isGet": false
-              },
-              {
-                "view": 5000,
-                "money": 30000,
-                "isGet": false
-              },
-              {
-                "view": 10000,
-                "money": 30000,
-                "isGet": false
-              },
-              {
-                "view": 20000,
-                "money": 30000,
+                "money": 150000,
                 "isGet": false
               }
             ],
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 17,
-                "allViewNum": 2807,
+                "allNum": 6,
+                "allViewNum": 13,
                 "onePlayNumList": [
                   {
-                    "title": "【燕云十六声】隔着屏幕都感觉到寒姨的伤心了",
-                    "aweme_id": "BV1DofnYhEKb",
+                    "title": "尴尬",
+                    "aweme_id": "BV1R1AVe8Efn",
                     "desc": "",
-                    "create_time": 1737727316,
-                    "view": 15
+                    "create_time": 1739689524,
+                    "view": 3
                   },
                   {
-                    "title": "【燕云十六声】“是那个小孩啊”“都长这么大了”“",
-                    "aweme_id": "BV1gofnYaE8c",
+                    "title": "监控下的爆笑",
+                    "aweme_id": "BV1gTA3eUEhP",
                     "desc": "",
-                    "create_time": 1737723716,
-                    "view": 8
-                  },
-                  {
-                    "title": "【燕云十六声】嘿嘿嘿寒姨~我从外面鬼混回来了！！！",
-                    "aweme_id": "BV1DofnYhEgc",
-                    "desc": "",
-                    "create_time": 1737721916,
-                    "view": 15
-                  },
-                  {
-                    "title": "【燕云十六声】笑不活了变成狗打麻将居然还胡了！！！",
-                    "aweme_id": "BV1SofnYhEbf",
-                    "desc": "",
-                    "create_time": 1737729116,
-                    "view": 6
-                  },
-                  {
-                    "title": "【燕云十六声】要被天泉的特训笑死谁家跑步裹个浴巾光着脚丫子跑啊！！！",
-                    "aweme_id": "BV1DofnYhEgQ",
-                    "desc": "",
-                    "create_time": 1737725516,
-                    "view": 8
-                  },
-                  {
-                    "title": "燕云十六声这些道具前期不要用！",
-                    "aweme_id": "BV1N5wYe8Ew1",
-                    "desc": "",
-                    "create_time": 1737537049,
-                    "view": 11
-                  },
-                  {
-                    "title": "燕云十六声新手必看！",
-                    "aweme_id": "BV1W5wYe8ESJ",
-                    "desc": "",
-                    "create_time": 1737526249,
-                    "view": 53
-                  },
-                  {
-                    "title": "燕云十六声每周必清道具",
-                    "aweme_id": "BV1P5wYe8E1M",
-                    "desc": "",
-                    "create_time": 1737515449,
-                    "view": 28
-                  },
-                  {
-                    "title": "【燕云十六声】燕云最良心的功能！",
-                    "aweme_id": "BV1N5wYe8ETa",
-                    "desc": "",
-                    "create_time": 1737504649,
-                    "view": 48
-                  },
-                  {
-                    "title": "【燕云十六声】燕云武器强度排行",
-                    "aweme_id": "BV1PLwYefEjF",
-                    "desc": "",
-                    "create_time": 1737493849,
-                    "view": 2269
-                  },
-                  {
-                    "title": "【燕云十六声】都去给龟奶奶送钱！",
-                    "aweme_id": "BV1sLwYefEcA",
-                    "desc": "",
-                    "create_time": 1737483049,
-                    "view": 64
-                  },
-                  {
-                    "title": "燕云十六声新皮肤，以及识途功能用法",
-                    "aweme_id": "BV1hgwteoEH6",
-                    "desc": "",
-                    "create_time": 1737473629,
-                    "view": 41
-                  },
-                  {
-                    "title": "【燕云十六声】村里的第一个黄毛",
-                    "aweme_id": "BV1WLwYefEN5",
-                    "desc": "",
-                    "create_time": 1737472249,
-                    "view": 9
-                  },
-                  {
-                    "title": "燕云十六声养成材料获取方式",
-                    "aweme_id": "BV1agwteoETN",
-                    "desc": "",
-                    "create_time": 1737466429,
-                    "view": 20
-                  },
-                  {
-                    "title": "燕云十六声前往开封注意事项",
-                    "aweme_id": "BV1agwteoE3h",
-                    "desc": "",
-                    "create_time": 1737459229,
-                    "view": 81
-                  },
-                  {
-                    "title": "燕云十六声解谜奇术获取方法及使用场景",
-                    "aweme_id": "BV1agwteoETJ",
-                    "desc": "",
-                    "create_time": 1737452029,
-                    "view": 10
-                  },
-                  {
-                    "title": "【燕云十六声】燕云是网游还是单机？",
-                    "aweme_id": "BV1agwteoEMy",
-                    "desc": "",
-                    "create_time": 1737444829,
-                    "view": 121
-                  }
-                ]
-              },
-              {
-                "userName": "想看的coser集",
-                "allNum": 15,
-                "allViewNum": 320,
-                "onePlayNumList": [
-                  {
-                    "title": "【燕云十六声】笑不活了变成狗打麻将居然还胡了！！！",
-                    "aweme_id": "BV1DofnYhEJY",
-                    "desc": "",
-                    "create_time": 1737728516,
-                    "view": 7
-                  },
-                  {
-                    "title": "【燕云十六声】隔着屏幕都感觉到寒姨的伤心了",
-                    "aweme_id": "BV1DofnYhEKa",
-                    "desc": "",
-                    "create_time": 1737726716,
-                    "view": 0
-                  },
-                  {
-                    "title": "【燕云十六声】要被天泉的特训笑死谁家跑步裹个浴巾光着脚丫子跑啊！！！",
-                    "aweme_id": "BV1DofnYhEuZ",
-                    "desc": "",
-                    "create_time": 1737724916,
-                    "view": 6
-                  },
-                  {
-                    "title": "【燕云十六声】“是那个小孩啊”“都长这么大了”“",
-                    "aweme_id": "BV1gofnYaEmQ",
-                    "desc": "",
-                    "create_time": 1737723116,
-                    "view": 13
-                  },
-                  {
-                    "title": "【燕云十六声】嘿嘿嘿寒姨~我从外面鬼混回来了！！！",
-                    "aweme_id": "BV1gofnYaEey",
-                    "desc": "",
-                    "create_time": 1737721316,
+                    "create_time": 1739679085,
                     "view": 5
                   },
                   {
-                    "title": "燕云十六声这些道具前期不要用！",
-                    "aweme_id": "BV1W5wYe8ESD",
+                    "title": "憨憨女孩倒霉瞬间",
+                    "aweme_id": "BV1hTA3eUEVB",
                     "desc": "",
-                    "create_time": 1737537349,
+                    "create_time": 1739679078,
+                    "view": 3
+                  },
+                  {
+                    "title": "夫妻",
+                    "aweme_id": "BV1GTA3eUEjn",
+                    "desc": "",
+                    "create_time": 1739679063,
                     "view": 1
                   },
                   {
-                    "title": "燕云十六声新手必看！",
-                    "aweme_id": "BV1P5wYe8EHc",
+                    "title": "女生的迷惑行为",
+                    "aweme_id": "BV1gTA3eUErT",
                     "desc": "",
-                    "create_time": 1737526549,
-                    "view": 33
+                    "create_time": 1739679051,
+                    "view": 0
                   },
                   {
-                    "title": "燕云十六声每周必清道具",
-                    "aweme_id": "BV1N5wYe8EG7",
+                    "title": "女生尴尬行为",
+                    "aweme_id": "BV13TA3eUERA",
                     "desc": "",
-                    "create_time": 1737515749,
-                    "view": 48
+                    "create_time": 1739678983,
+                    "view": 1
+                  }
+                ]
+              },
+              {
+                "userName": "想看的coser集",
+                "allNum": 6,
+                "allViewNum": 0,
+                "onePlayNumList": [
+                  {
+                    "title": "尴尬",
+                    "aweme_id": "BV1d1AVe8EGz",
+                    "desc": "",
+                    "create_time": 1739689526,
+                    "view": 0
                   },
                   {
-                    "title": "【燕云十六声】燕云最良心的功能！",
-                    "aweme_id": "BV115wYe8EFR",
+                    "title": "夫妻",
+                    "aweme_id": "BV1GTA3eUEjg",
                     "desc": "",
-                    "create_time": 1737504949,
-                    "view": 24
+                    "create_time": 1739679124,
+                    "view": 0
                   },
                   {
-                    "title": "【燕云十六声】燕云武器强度排行",
-                    "aweme_id": "BV1ALwYefEhp",
+                    "title": "监控下的爆笑",
+                    "aweme_id": "BV13TA3eUEeX",
                     "desc": "",
-                    "create_time": 1737494149,
-                    "view": 74
+                    "create_time": 1739679064,
+                    "view": 0
                   },
                   {
-                    "title": "【燕云十六声】都去给龟奶奶送钱！",
-                    "aweme_id": "BV1WLwYefEN2",
+                    "title": "女生的迷惑行为",
+                    "aweme_id": "BV1aTA3eUEpz",
                     "desc": "",
-                    "create_time": 1737483349,
-                    "view": 25
+                    "create_time": 1739679044,
+                    "view": 0
                   },
                   {
-                    "title": "【燕云十六声】村里的第一个黄毛",
-                    "aweme_id": "BV1ALwYefEqK",
+                    "title": "憨憨女孩倒霉瞬间",
+                    "aweme_id": "BV1aTA3eUEvZ",
                     "desc": "",
-                    "create_time": 1737472549,
-                    "view": 20
+                    "create_time": 1739679038,
+                    "view": 0
                   },
                   {
-                    "title": "燕云十六声coser合集2",
-                    "aweme_id": "BV1X5feYqEAR",
+                    "title": "女生尴尬行为",
+                    "aweme_id": "BV13TA3eUESy",
                     "desc": "",
-                    "create_time": 1737587816,
-                    "view": 16
-                  },
-                  {
-                    "title": "燕云十六声coser合集1",
-                    "aweme_id": "BV1X5feYqESJ",
-                    "desc": "",
-                    "create_time": 1737587816,
-                    "view": 20
-                  },
-                  {
-                    "title": "燕云十六声coser合集3",
-                    "aweme_id": "BV1X5feYqEyW",
-                    "desc": "",
-                    "create_time": 1737587816,
-                    "view": 28
+                    "create_time": 1739678958,
+                    "view": 0
                   }
                 ]
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 0,
+                "allNum": 6,
                 "allViewNum": 0,
-                "onePlayNumList": []
+                "onePlayNumList": [
+                  {
+                    "title": "女生尴尬行为",
+                    "aweme_id": "BV1iAAVeFEjc",
+                    "desc": "",
+                    "create_time": 1739696638,
+                    "view": 0
+                  },
+                  {
+                    "title": "监控下的爆笑",
+                    "aweme_id": "BV151AVehE5Y",
+                    "desc": "",
+                    "create_time": 1739689534,
+                    "view": 0
+                  },
+                  {
+                    "title": "憨憨女孩倒霉瞬间",
+                    "aweme_id": "BV1gTA3eUEyk",
+                    "desc": "",
+                    "create_time": 1739679155,
+                    "view": 0
+                  },
+                  {
+                    "title": "尴尬",
+                    "aweme_id": "BV1hTA3eUE6z",
+                    "desc": "",
+                    "create_time": 1739679003,
+                    "view": 0
+                  },
+                  {
+                    "title": "女生的迷惑行为",
+                    "aweme_id": "BV1aTA3eUEE3",
+                    "desc": "",
+                    "create_time": 1739678994,
+                    "view": 0
+                  },
+                  {
+                    "title": "夫妻",
+                    "aweme_id": "BV1gTA3eUEhB",
+                    "desc": "",
+                    "create_time": 1739678939,
+                    "view": 0
+                  }
+                ]
               }
-            ]
-          },
-          {
-            "name": "燕云十六声新春UP激励活动",
-            "act_url": "https://www.bilibili.com/blackboard/era/GYzTP3FwDiu3dfpY.html",
-            "comment": "1.7万人参与",
-            "sDate": "2025/1/27",
-            "eDate": "2025/2/28",
-            "specialTag": "#燕云十六声新春UP激励活动",
-            "reward": [],
-            "videoData": [
-              {
-                "userName": "Feeling",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              },
-              {
-                "userName": "想看的coser集",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              },
-              {
-                "userName": "小芯游戏说",
-                "allNum": 0,
-                "allViewNum": 0,
-                "onePlayNumList": []
-              }
-            ]
+            ],
+            "topic": "燕云十六声新春激励"
           }
-        ]
+        ],
+        "suppleTag": "#二次元 #完美身材 #女大学生 #音乐 #巅峰赛 #合集 #故事 #搞笑 #教程"
       },
       {
         "name": "抖音",
@@ -3116,7 +2808,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "崩坏星穹铁道",
@@ -3411,7 +3103,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "鸣潮",
@@ -3580,7 +3272,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "绝区零",
@@ -3732,7 +3424,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "第五人格",
@@ -3779,7 +3471,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "原神",
@@ -4023,7 +3715,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "无限暖暖",
@@ -4054,9 +3746,30 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 3,
-                "allViewNum": 5,
+                "allNum": 6,
+                "allViewNum": 8,
                 "onePlayNumList": [
+                  {
+                    "title": "【无限暖暖】全黑跑图套装获取方式！还有人没拿到吗！",
+                    "aweme_id": "BV151AVehE3i",
+                    "desc": "",
+                    "create_time": 1739689482,
+                    "view": 3
+                  },
+                  {
+                    "title": "【无限暖暖】克服恐惧就是出片的秘诀！",
+                    "aweme_id": "BV1GTA3eUEFL",
+                    "desc": "",
+                    "create_time": 1739678936,
+                    "view": 0
+                  },
+                  {
+                    "title": "【无限暖暖】一想到可能要和金蔷薇一样到处打天王我就肝疼",
+                    "aweme_id": "BV1gTA3eUEYB",
+                    "desc": "",
+                    "create_time": 1739678906,
+                    "view": 0
+                  },
                   {
                     "title": "处对象么宝宝~无限暖暖",
                     "aweme_id": "BV11YFkenENa",
@@ -4082,9 +3795,30 @@
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 3,
-                "allViewNum": 1,
+                "allNum": 6,
+                "allViewNum": 2,
                 "onePlayNumList": [
+                  {
+                    "title": "【无限暖暖】克服恐惧就是出片的秘诀！",
+                    "aweme_id": "BV1d1AVe8E5P",
+                    "desc": "",
+                    "create_time": 1739689438,
+                    "view": 0
+                  },
+                  {
+                    "title": "【无限暖暖】全黑跑图套装获取方式！还有人没拿到吗！",
+                    "aweme_id": "BV1GTA3eUEG5",
+                    "desc": "",
+                    "create_time": 1739678974,
+                    "view": 1
+                  },
+                  {
+                    "title": "【无限暖暖】一想到可能要和金蔷薇一样到处打天王我就肝疼",
+                    "aweme_id": "BV1hTA3eUELv",
+                    "desc": "",
+                    "create_time": 1739678894,
+                    "view": 0
+                  },
                   {
                     "title": "处对象么宝宝~无限暖暖",
                     "aweme_id": "BV11YFkenEDF",
@@ -4110,9 +3844,30 @@
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 3,
+                "allNum": 6,
                 "allViewNum": 2,
                 "onePlayNumList": [
+                  {
+                    "title": "【无限暖暖】全黑跑图套装获取方式！还有人没拿到吗！",
+                    "aweme_id": "BV1R1AVe8EqB",
+                    "desc": "",
+                    "create_time": 1739689502,
+                    "view": 0
+                  },
+                  {
+                    "title": "【无限暖暖】克服恐惧就是出片的秘诀！",
+                    "aweme_id": "BV1gTA3eUEk3",
+                    "desc": "",
+                    "create_time": 1739678904,
+                    "view": 0
+                  },
+                  {
+                    "title": "【无限暖暖】一想到可能要和金蔷薇一样到处打天王我就肝疼",
+                    "aweme_id": "BV1aTA3eUEkb",
+                    "desc": "",
+                    "create_time": 1739678885,
+                    "view": 0
+                  },
                   {
                     "title": "处对象么宝宝~无限暖暖",
                     "aweme_id": "BV11YFkenE1r",
@@ -4139,7 +3894,8 @@
             ],
             "topic": "无限暖暖花焰季游记"
           }
-        ]
+        ],
+        "suppleTag": "#女儿 #女大学生"
       },
       {
         "name": "抖音",
@@ -4214,7 +3970,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "崩坏3",
@@ -4300,7 +4056,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "航海王壮志雄心",
@@ -4327,7 +4083,7 @@
               {
                 "userName": "Feeling",
                 "allNum": 8,
-                "allViewNum": 285,
+                "allViewNum": 289,
                 "onePlayNumList": [
                   {
                     "title": "艾斯上线无敌拉扯 一套直接半血！ ~航海王壮志雄心",
@@ -4341,7 +4097,7 @@
                     "aweme_id": "BV1oMKLe5E7w",
                     "desc": "",
                     "create_time": 1739370775,
-                    "view": 6
+                    "view": 10
                   },
                   {
                     "title": "航海王壮志雄心 艾斯普攻拦截，二代：...创作者团",
@@ -4390,14 +4146,14 @@
               {
                 "userName": "想看的coser集",
                 "allNum": 5,
-                "allViewNum": 16,
+                "allViewNum": 17,
                 "onePlayNumList": [
                   {
                     "title": "艾斯上线无敌拉扯 一套直接半血！ ~航海王壮志雄心",
                     "aweme_id": "BV1j5KKeJEwc",
                     "desc": "",
                     "create_time": 1739529463,
-                    "view": 1
+                    "view": 2
                   },
                   {
                     "title": "航海王壮志雄心 艾斯超绝待机动画，...技能爆料",
@@ -4432,21 +4188,21 @@
               {
                 "userName": "小芯游戏说",
                 "allNum": 4,
-                "allViewNum": 15,
+                "allViewNum": 23,
                 "onePlayNumList": [
                   {
                     "title": "艾斯上线无敌拉扯 一套直接半血！ ~航海王壮志雄心",
                     "aweme_id": "BV1j5KKeJEjK",
                     "desc": "",
                     "create_time": 1739529614,
-                    "view": 6
+                    "view": 12
                   },
                   {
                     "title": "航海王壮志雄心 艾斯超绝待机动画，...技能爆料",
                     "aweme_id": "BV1PDKWeUEZD",
                     "desc": "",
                     "create_time": 1739452508,
-                    "view": 0
+                    "view": 2
                   },
                   {
                     "title": "航海王壮志雄心 艾斯的特殊奥义图",
@@ -4624,7 +4380,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "火影忍者",
@@ -4634,7 +4390,7 @@
         "specialTagRequirements": []
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "阴阳师",
@@ -4673,7 +4429,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "光遇",
@@ -4764,7 +4520,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "诛仙世界",
@@ -4784,44 +4540,72 @@
             "videoData": [
               {
                 "userName": "Feeling",
-                "allNum": 4,
-                "allViewNum": 14,
+                "allNum": 6,
+                "allViewNum": 109,
                 "onePlayNumList": [
+                  {
+                    "title": "诛仙世界需要注意的五大坑点",
+                    "aweme_id": "BV1EBAweiEAy",
+                    "desc": "",
+                    "create_time": 1739600118,
+                    "view": 6
+                  },
+                  {
+                    "title": "诛仙世界画面设置攻略，低配电脑一样畅玩",
+                    "aweme_id": "BV1BBAweiEDq",
+                    "desc": "",
+                    "create_time": 1739600070,
+                    "view": 40
+                  },
                   {
                     "title": "诛仙世界注意事项，天人五问，区服选择，阵营选择，门派选择",
                     "aweme_id": "BV1b8KKeuEmd",
                     "desc": "",
                     "create_time": 1739523871,
-                    "view": 10
+                    "view": 22
                   },
                   {
                     "title": "诛仙世界奇遇位置大全",
                     "aweme_id": "BV1b8KKeuEn1",
                     "desc": "",
                     "create_time": 1739523795,
-                    "view": 3
+                    "view": 14
                   },
                   {
                     "title": "诛仙世界十种银两获取方式",
                     "aweme_id": "BV1M8KKeuEZ8",
                     "desc": "",
                     "create_time": 1739523776,
-                    "view": 0
+                    "view": 10
                   },
                   {
                     "title": "诛仙世界全部11个隐藏百景游位置",
                     "aweme_id": "BV1T8KKeuEUX",
                     "desc": "",
                     "create_time": 1739523759,
-                    "view": 1
+                    "view": 17
                   }
                 ]
               },
               {
                 "userName": "想看的coser集",
-                "allNum": 4,
-                "allViewNum": 1,
+                "allNum": 6,
+                "allViewNum": 5,
                 "onePlayNumList": [
+                  {
+                    "title": "诛仙世界需要注意的五大坑点",
+                    "aweme_id": "BV1EBAweiEG1",
+                    "desc": "",
+                    "create_time": 1739600045,
+                    "view": 0
+                  },
+                  {
+                    "title": "诛仙世界画面设置攻略，低配电脑一样畅玩",
+                    "aweme_id": "BV1EBAweiEha",
+                    "desc": "",
+                    "create_time": 1739600039,
+                    "view": 1
+                  },
                   {
                     "title": "诛仙世界十种银两获取方式",
                     "aweme_id": "BV1VqKNeCEn7",
@@ -4834,7 +4618,7 @@
                     "aweme_id": "BV1nKKKeREwp",
                     "desc": "",
                     "create_time": 1739526534,
-                    "view": 0
+                    "view": 2
                   },
                   {
                     "title": "诛仙世界奇遇位置大全",
@@ -4848,42 +4632,56 @@
                     "aweme_id": "BV1fMKKeWEDm",
                     "desc": "",
                     "create_time": 1739526489,
-                    "view": 0
+                    "view": 1
                   }
                 ]
               },
               {
                 "userName": "小芯游戏说",
-                "allNum": 4,
-                "allViewNum": 2,
+                "allNum": 6,
+                "allViewNum": 32,
                 "onePlayNumList": [
+                  {
+                    "title": "诛仙世界需要注意的五大坑点",
+                    "aweme_id": "BV17BAweiEVp",
+                    "desc": "",
+                    "create_time": 1739600054,
+                    "view": 8
+                  },
+                  {
+                    "title": "诛仙世界画面设置攻略，低配电脑一样畅玩",
+                    "aweme_id": "BV1EBAweiEAT",
+                    "desc": "",
+                    "create_time": 1739600035,
+                    "view": 2
+                  },
                   {
                     "title": "诛仙世界十种银两获取方式",
                     "aweme_id": "BV1nKKKeRE3b",
                     "desc": "",
                     "create_time": 1739526485,
-                    "view": 0
+                    "view": 1
                   },
                   {
                     "title": "诛仙世界注意事项，天人五问，区服选择，阵营选择，门派选择",
                     "aweme_id": "BV1JMKKeWEMx",
                     "desc": "",
                     "create_time": 1739526459,
-                    "view": 0
+                    "view": 10
                   },
                   {
                     "title": "诛仙世界奇遇位置大全",
                     "aweme_id": "BV1zMKKeWEE1",
                     "desc": "",
                     "create_time": 1739526403,
-                    "view": 0
+                    "view": 1
                   },
                   {
                     "title": "诛仙世界全部11个隐藏百景游位置",
                     "aweme_id": "BV1JMKKeWEji",
                     "desc": "",
                     "create_time": 1739526361,
-                    "view": 2
+                    "view": 10
                   }
                 ]
               }
@@ -4979,7 +4777,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "王者荣耀",
@@ -5050,7 +4848,7 @@
         "isNotDo": true
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "DNF",
@@ -5123,7 +4921,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "重返未来1999",
@@ -5292,7 +5090,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "蛋仔派对",
@@ -5521,7 +5319,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "尘白禁区",
@@ -5530,7 +5328,7 @@
         "specialTagRequirements": [
           {
             "name": "尘白禁区夙圆心行",
-            "specialTag": "#尘白禁区，#尘白禁区夙圆心行",
+            "specialTag": "#尘白禁区 #尘白禁区夙圆心行",
             "eDate": "2025/03/06",
             "reward": [
               {
@@ -5790,7 +5588,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "英雄联盟",
@@ -5974,7 +5772,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "漫威争锋",
@@ -6175,21 +5973,21 @@
               {
                 "userName": "资料新",
                 "allNum": 4,
-                "allViewNum": 12450,
+                "allViewNum": 12544,
                 "onePlayNumList": [
                   {
                     "aweme_id": "7469360044354587923",
                     "desc": "超还原的蜘蛛侠？ #漫威争锋 #漫威争锋第1赛季 #二次元 #coser #游戏",
                     "create_time": 1739104875,
-                    "view": 2490,
+                    "view": 2571,
                     "like": 283
                   },
                   {
                     "aweme_id": "7469359271751322892",
                     "desc": "#漫威争锋 #漫威争锋第1赛季 #二次元 #coser #游戏",
                     "create_time": 1739103675,
-                    "view": 9133,
-                    "like": 655
+                    "view": 9146,
+                    "like": 656
                   },
                   {
                     "aweme_id": "7467903201853852966",
@@ -6216,13 +6014,13 @@
               {
                 "userName": "Chris",
                 "allNum": 7,
-                "allViewNum": 9933,
+                "allViewNum": 9950,
                 "onePlayNumList": [
                   {
                     "aweme_id": "7469757630190259495",
                     "desc": "哪个蜘蛛侠最还原？ #漫威争锋 #漫威争锋第1赛季 #coser #二次元 #游戏",
                     "create_time": 1739188916,
-                    "view": 3607,
+                    "view": 3614,
                     "like": 113
                   },
                   {
@@ -6236,28 +6034,28 @@
                     "aweme_id": "7469359318656175401",
                     "desc": "超还原的蜘蛛侠？ #漫威争锋 #漫威争锋第1赛季 #二次元 #coser #游戏",
                     "create_time": 1739103375,
-                    "view": 4036,
+                    "view": 4038,
                     "like": 115
                   },
                   {
                     "aweme_id": "7467903350797880627",
                     "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋第1赛季 #coser #美女 #记录",
                     "create_time": 1738820459,
-                    "view": 1792,
+                    "view": 1798,
                     "like": 75
                   },
                   {
                     "aweme_id": "7467903050997435675",
                     "desc": "漫威人物进入三次元了？ #漫威争锋 #漫威争锋第1赛季 #coser #美女 #记录",
                     "create_time": 1738813259,
-                    "view": 125,
+                    "view": 126,
                     "like": 2
                   },
                   {
                     "aweme_id": "7467569738500148489",
                     "desc": " #漫威争锋 #漫威争锋第1赛季 #游戏 #coser #氪金",
                     "create_time": 1738704859,
-                    "view": 132,
+                    "view": 133,
                     "like": 6
                   },
                   {
@@ -6274,7 +6072,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "无畏契约",
@@ -6317,9 +6115,16 @@
             "act_url": "https://www.bilibili.com/blackboard/era/dghF7DcErJX23Iw4.html",
             "comment": "8837人参与",
             "sDate": "2025/1/27",
-            "eDate": "2025/3/27",
-            "specialTag": "#无畏契约训练营第14期",
-            "reward": [],
+            "eDate": "2025/03/27",
+            "specialTag": "",
+            "reward": [
+              {
+                "allNum": 4,
+                "allViewNum": 660,
+                "money": 20000,
+                "isGet": false
+              }
+            ],
             "videoData": [
               {
                 "userName": "Feeling",
@@ -6339,12 +6144,13 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "无畏契约训练营"
           }
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "逆水寒",
@@ -6948,7 +6754,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "物华弥新",
@@ -7032,7 +6838,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "使命召唤手游",
@@ -7073,7 +6879,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "战双帕弥什",
@@ -7164,7 +6970,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "幻塔",
@@ -7334,7 +7140,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "穿越火线",
@@ -7347,10 +7153,16 @@
             "act_url": "https://www.bilibili.com/blackboard/era/sazAm97u3tR3TBkw.html",
             "comment": "6088人参与",
             "sDate": "2025/1/1",
-            "eDate": "2025/3/1",
+            "eDate": "2025/02/28",
             "specialTag": "穿越火线新春会征稿",
             "searchKeyWord": "穿越火线新春会征稿",
-            "reward": [],
+            "reward": [
+              {
+                "allViewNum": 10000,
+                "money": 10000,
+                "isGet": false
+              }
+            ],
             "videoData": [
               {
                 "userName": "Feeling",
@@ -7370,12 +7182,13 @@
                 "allViewNum": 0,
                 "onePlayNumList": []
               }
-            ]
+            ],
+            "topic": "穿越火线新春会"
           }
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "一梦江湖",
@@ -7573,7 +7386,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "恋与制作人",
@@ -7615,7 +7428,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "荒野乱斗",
@@ -7656,7 +7469,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "暗区突围",
@@ -7762,14 +7575,14 @@
               {
                 "userName": "Feeling",
                 "allNum": 8,
-                "allViewNum": 19,
+                "allViewNum": 22,
                 "onePlayNumList": [
                   {
                     "title": "起全装白给合集~暗区突围",
                     "aweme_id": "BV1i5KKeJEtb",
                     "desc": "",
                     "create_time": 1739529570,
-                    "view": 4
+                    "view": 7
                   },
                   {
                     "title": "谁说这刀差的！这刀太棒了呀！~暗区突围",
@@ -7881,21 +7694,21 @@
               {
                 "userName": "小芯游戏说",
                 "allNum": 7,
-                "allViewNum": 13,
+                "allViewNum": 18,
                 "onePlayNumList": [
                   {
                     "title": "起全装白给合集~暗区突围",
                     "aweme_id": "BV1j5KKenETp",
                     "desc": "",
                     "create_time": 1739529570,
-                    "view": 2
+                    "view": 5
                   },
                   {
                     "title": "谁说这刀差的！这刀太棒了呀！~暗区突围",
                     "aweme_id": "BV1NDKWeUEnM",
                     "desc": "",
                     "create_time": 1739452828,
-                    "view": 0
+                    "view": 2
                   },
                   {
                     "title": "有点炸裂咯奥@安然电竞~暗区突围",
@@ -7976,14 +7789,14 @@
               {
                 "userName": "Feeling",
                 "allNum": 8,
-                "allViewNum": 19,
+                "allViewNum": 22,
                 "onePlayNumList": [
                   {
                     "title": "起全装白给合集~暗区突围",
                     "aweme_id": "BV1i5KKeJEtb",
                     "desc": "",
                     "create_time": 1739529570,
-                    "view": 4
+                    "view": 7
                   },
                   {
                     "title": "谁说这刀差的！这刀太棒了呀！~暗区突围",
@@ -8095,21 +7908,21 @@
               {
                 "userName": "小芯游戏说",
                 "allNum": 7,
-                "allViewNum": 13,
+                "allViewNum": 18,
                 "onePlayNumList": [
                   {
                     "title": "起全装白给合集~暗区突围",
                     "aweme_id": "BV1j5KKenETp",
                     "desc": "",
                     "create_time": 1739529570,
-                    "view": 2
+                    "view": 5
                   },
                   {
                     "title": "谁说这刀差的！这刀太棒了呀！~暗区突围",
                     "aweme_id": "BV1NDKWeUEnM",
                     "desc": "",
                     "create_time": 1739452828,
-                    "view": 0
+                    "view": 2
                   },
                   {
                     "title": "有点炸裂咯奥@安然电竞~暗区突围",
@@ -8154,7 +7967,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "三角洲行动",
@@ -8307,21 +8120,21 @@
               {
                 "userName": "Feeling",
                 "allNum": 3,
-                "allViewNum": 23,
+                "allViewNum": 30,
                 "onePlayNumList": [
                   {
                     "title": "三角洲行动获取五级套",
                     "aweme_id": "BV1AFKLeDEF2",
                     "desc": "",
                     "create_time": 1739372133,
-                    "view": 12
+                    "view": 15
                   },
                   {
                     "title": "三角洲行动完美开局",
                     "aweme_id": "BV1pFKLeDEL9",
                     "desc": "",
                     "create_time": 1739372045,
-                    "view": 8
+                    "view": 12
                   },
                   {
                     "title": "三角洲行动七大必改设置",
@@ -8335,21 +8148,21 @@
               {
                 "userName": "想看的coser集",
                 "allNum": 3,
-                "allViewNum": 202,
+                "allViewNum": 759,
                 "onePlayNumList": [
                   {
                     "title": "三角洲行动获取五级套",
                     "aweme_id": "BV1wFKLeDE28",
                     "desc": "",
                     "create_time": 1739371987,
-                    "view": 4
+                    "view": 5
                   },
                   {
                     "title": "三角洲行动七大必改设置",
                     "aweme_id": "BV1wFKLeDENa",
                     "desc": "",
                     "create_time": 1739371924,
-                    "view": 198
+                    "view": 754
                   },
                   {
                     "title": "三角洲行动完美开局",
@@ -8363,28 +8176,28 @@
               {
                 "userName": "小芯游戏说",
                 "allNum": 3,
-                "allViewNum": 11,
+                "allViewNum": 15,
                 "onePlayNumList": [
                   {
                     "title": "三角洲行动获取五级套",
                     "aweme_id": "BV1HFKLeDEoA",
                     "desc": "",
                     "create_time": 1739372039,
-                    "view": 3
+                    "view": 4
                   },
                   {
                     "title": "三角洲行动七大必改设置",
                     "aweme_id": "BV1kFKLeDEw2",
                     "desc": "",
                     "create_time": 1739372035,
-                    "view": 5
+                    "view": 7
                   },
                   {
                     "title": "三角洲行动完美开局",
                     "aweme_id": "BV1wFKLeDEfT",
                     "desc": "",
                     "create_time": 1739372027,
-                    "view": 3
+                    "view": 4
                   }
                 ]
               }
@@ -8413,21 +8226,21 @@
               {
                 "userName": "Feeling",
                 "allNum": 3,
-                "allViewNum": 23,
+                "allViewNum": 30,
                 "onePlayNumList": [
                   {
                     "title": "三角洲行动获取五级套",
                     "aweme_id": "BV1AFKLeDEF2",
                     "desc": "",
                     "create_time": 1739372133,
-                    "view": 12
+                    "view": 15
                   },
                   {
                     "title": "三角洲行动完美开局",
                     "aweme_id": "BV1pFKLeDEL9",
                     "desc": "",
                     "create_time": 1739372045,
-                    "view": 8
+                    "view": 12
                   },
                   {
                     "title": "三角洲行动七大必改设置",
@@ -8441,21 +8254,21 @@
               {
                 "userName": "想看的coser集",
                 "allNum": 3,
-                "allViewNum": 202,
+                "allViewNum": 759,
                 "onePlayNumList": [
                   {
                     "title": "三角洲行动获取五级套",
                     "aweme_id": "BV1wFKLeDE28",
                     "desc": "",
                     "create_time": 1739371987,
-                    "view": 4
+                    "view": 5
                   },
                   {
                     "title": "三角洲行动七大必改设置",
                     "aweme_id": "BV1wFKLeDENa",
                     "desc": "",
                     "create_time": 1739371924,
-                    "view": 198
+                    "view": 754
                   },
                   {
                     "title": "三角洲行动完美开局",
@@ -8469,28 +8282,28 @@
               {
                 "userName": "小芯游戏说",
                 "allNum": 3,
-                "allViewNum": 11,
+                "allViewNum": 15,
                 "onePlayNumList": [
                   {
                     "title": "三角洲行动获取五级套",
                     "aweme_id": "BV1HFKLeDEoA",
                     "desc": "",
                     "create_time": 1739372039,
-                    "view": 3
+                    "view": 4
                   },
                   {
                     "title": "三角洲行动七大必改设置",
                     "aweme_id": "BV1kFKLeDEw2",
                     "desc": "",
                     "create_time": 1739372035,
-                    "view": 5
+                    "view": 7
                   },
                   {
                     "title": "三角洲行动完美开局",
                     "aweme_id": "BV1wFKLeDEfT",
                     "desc": "",
                     "create_time": 1739372027,
-                    "view": 3
+                    "view": 4
                   }
                 ]
               }
@@ -8499,7 +8312,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "恋与深空",
@@ -9239,7 +9052,7 @@
         "suppleTag": "恋与深空 氪金 恋爱 手游 单身 乙女游戏 游戏 游戏杂谈 乙女 "
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "星际战甲1999",
@@ -9280,7 +9093,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "新月同行",
@@ -9330,7 +9143,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "和平精英",
@@ -9407,14 +9220,14 @@
               {
                 "userName": "Feeling",
                 "allNum": 39,
-                "allViewNum": 992,
+                "allViewNum": 999,
                 "onePlayNumList": [
                   {
                     "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
                     "aweme_id": "BV1fMKLe5EJD",
                     "desc": "",
                     "create_time": 1739370765,
-                    "view": 7
+                    "view": 14
                   },
                   {
                     "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
@@ -10225,14 +10038,14 @@
               {
                 "userName": "Feeling",
                 "allNum": 39,
-                "allViewNum": 992,
+                "allViewNum": 999,
                 "onePlayNumList": [
                   {
                     "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
                     "aweme_id": "BV1fMKLe5EJD",
                     "desc": "",
                     "create_time": 1739370765,
-                    "view": 7
+                    "view": 14
                   },
                   {
                     "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
@@ -11014,14 +10827,14 @@
               {
                 "userName": "Feeling",
                 "allNum": 39,
-                "allViewNum": 992,
+                "allViewNum": 999,
                 "onePlayNumList": [
                   {
                     "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
                     "aweme_id": "BV1fMKLe5EJD",
                     "desc": "",
                     "create_time": 1739370765,
-                    "view": 7
+                    "view": 14
                   },
                   {
                     "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
@@ -11808,14 +11621,14 @@
               {
                 "userName": "Feeling",
                 "allNum": 39,
-                "allViewNum": 992,
+                "allViewNum": 999,
                 "onePlayNumList": [
                   {
                     "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
                     "aweme_id": "BV1fMKLe5EJD",
                     "desc": "",
                     "create_time": 1739370765,
-                    "view": 7
+                    "view": 14
                   },
                   {
                     "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
@@ -12596,14 +12409,14 @@
               {
                 "userName": "Feeling",
                 "allNum": 3,
-                "allViewNum": 36,
+                "allViewNum": 43,
                 "onePlayNumList": [
                   {
                     "title": "【和平精英】标点增强功能即将上线 以后将解决手动标点的烦恼",
                     "aweme_id": "BV1fMKLe5EJD",
                     "desc": "",
                     "create_time": 1739370765,
-                    "view": 7
+                    "view": 14
                   },
                   {
                     "title": "【和平精英】春节大唐西安玩法爆料 前所未有的道具还不抓紧学起来！",
@@ -12816,7 +12629,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "CF",
@@ -12925,7 +12738,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "无期迷途",
@@ -12989,7 +12802,7 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "英雄联盟手游",
@@ -13339,7 +13152,7 @@
         "suppleTag": "游戏 手机游戏 lolm 英雄联盟手游 lol手游 排行 MOBA"
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   },
   {
     "name": "QQ飞车",
@@ -13379,7 +13192,38 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
+  },
+  {
+    "name": "时空中的绘旅人",
+    "rewards": [
+      {
+        "specialTagRequirements": [
+          {
+            "name": "绘旅人新春投稿瓜分",
+            "specialTag": "#绘旅人生生世世爱  #时空中的绘旅人",
+            "eDate": "2025/02/28",
+            "reward": [
+              {
+                "allNum": 3,
+                "allViewNum": 6000,
+                "money": 30000,
+                "isGet": false
+              },
+              {
+                "allNum": 6,
+                "allViewNum": 30000,
+                "money": 30000,
+                "isGet": false
+              }
+            ],
+            "minView": 800
+          }
+        ],
+        "name": "抖音"
+      }
+    ],
+    "updateDate": "2025/2/16"
   },
   {
     "name": "决战平安京",
@@ -13411,7 +13255,7 @@
               {
                 "userName": "Feeling",
                 "allNum": 4,
-                "allViewNum": 11,
+                "allViewNum": 18,
                 "onePlayNumList": [
                   {
                     "title": "扒鸡这红叶年限把典藏赢麻了~决战平安京",
@@ -13425,7 +13269,7 @@
                     "aweme_id": "BV1QHKLevEfT",
                     "desc": "",
                     "create_time": 1739418817,
-                    "view": 2
+                    "view": 6
                   },
                   {
                     "title": "平安京白狼年限入了不亏~决战平安京",
@@ -13439,14 +13283,14 @@
                     "aweme_id": "BV1QWKLePETp",
                     "desc": "",
                     "create_time": 1739408017,
-                    "view": 6
+                    "view": 9
                   }
                 ]
               },
               {
                 "userName": "想看的coser集",
                 "allNum": 7,
-                "allViewNum": 9,
+                "allViewNum": 10,
                 "onePlayNumList": [
                   {
                     "title": "扒鸡这红叶年限把典藏赢麻了~决战平安京",
@@ -13474,7 +13318,7 @@
                     "aweme_id": "BV1aHKLeiE2W",
                     "desc": "",
                     "create_time": 1739413717,
-                    "view": 2
+                    "view": 3
                   },
                   {
                     "title": "平安京白狼传说年限果然是双形态~决战平安京",
@@ -13560,6 +13404,6 @@
         ]
       }
     ],
-    "updateDate": "2025/2/14"
+    "updateDate": "2025/2/16"
   }
 ]
