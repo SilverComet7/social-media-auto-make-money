@@ -1225,7 +1225,7 @@ const scheduleForm = ref<ScheduleForm>({
   intervalHours: 24,
   platform: '',
   immediately: false,
-  selectedArea: '',
+  selectedArea: '游戏区',
 })
 
 // 打开定时任务设置弹窗
@@ -1267,7 +1267,7 @@ const setScheduleJob = (rew: SpecialTagRequirement, platform: PlatformReward, ro
     intervalHours: 24,
     platform: platform.name,
     immediately: false,
-    selectedArea: '',
+    selectedArea: '游戏区',
   }
 
   scheduleDialogVisible.value = true
