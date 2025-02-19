@@ -955,11 +955,7 @@ app.post("/scheduleUpload", async (req, res) => {
           ...platformSpecificConfig
         });
       } else {
-        scheduleJobs[topicIndex] = {
-          ...scheduleJobs[topicIndex],
-          ...baseConfig,
-          ...platformSpecificConfig
-        };
+        scheduleJobs[topicIndex].scheduleJob.push(...newJobs);
       }
 
       // 保存配置到文件
