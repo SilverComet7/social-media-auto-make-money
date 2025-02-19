@@ -18,6 +18,9 @@ const {
 const { queryDouYinAllAccountsData } = require("./handleCrawer/douyin.js");
 const { queryXiaoHongShuAllAccountsData } = require("./handleCrawer/xhs.js");
 const { querybilibiliAllAccountsData } = require("./handleCrawer/bilibili.js");
+
+const BiliBiliScheduleJobJson = require("./scheduleJob/BiliBiliScheduleJob.json");
+
 const {
   ffmpegHandleVideos,
 } = require("../TikTokDownloader/videoReName_FFmpegHandle.js");
@@ -420,6 +423,7 @@ app.get("/data", async (req, res) => {
       bilibiliActData,
       dakaData,
       allGameList,
+      BiliBiliScheduleJob: BiliBiliScheduleJobJson
     });
   } catch (error) {
     console.error("Error in /data endpoint:", error);
@@ -453,168 +457,8 @@ app.post("/updateDataOne", async (req, res) => {
 });
 
 app.post("/getPlatformData", async (req, res) => {
-  let douyinData = [];
-  let xhsData = [];
-  let bilibiliData = [];
   try {
-    // const { rewardName } = req.body;
-    douyinData = await queryDouYinAllAccountsData();
-    xhsData = await queryXiaoHongShuAllAccountsData();
-    // else if (rewardName === '快手') data = await queryXiaoHongShuAllAccountsData();
-    // else if (rewardName === 'BiliBili') data = await queryXiaoHongShuAllAccountsData();
-    bilibiliData = await querybilibiliAllAccountsData();
-    const oldOtherGameDataArr = getOldData("./gameData.json");
-    const jsonData = oldOtherGameDataArr.map((item) => {
-      return {
-        ...item,
-        updateDate: formatDate(new Date().getTime()),
-        rewards: item.rewards.map((e) => {
-          if (e.name === "抖音") {
-            return {
-              ...e,
-              specialTagRequirements: e.specialTagRequirements.map((i) => {
-                return {
-                  ...i,
-                  videoData: douyinData.map((t) => {
-                    // 过滤不满足条件的视频
-                    const valuedList = t.aweme_list.filter(
-                      (l) =>
-                        l.desc.includes(i.specialTag) &&
-                        l.view >= (i.minView || 100)
-                    );
-                    // 目前忽视了挂在小手柄问题，可手动isGet调整
-
-                    let alsoRelayList = [];
-                    if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-                      alsoRelayList = i?.videoData
-                        .find((c) => c.userName === t.user.name)
-                        .onePlayNumList.filter((l) => {
-                          // 保留活动期间过去发过的稿件数据计入（因为单次可能只发36条数据）
-                          if (
-                            valuedList.find((v) => v.aweme_id === l.aweme_id)
-                          ) {
-                            return false;
-                          }
-                          // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-                          // if (l.create_time > formatSecondTimestamp(eDate)) {
-                          //     return false
-                          // }
-                          return true;
-                        });
-                    }
-
-                    let list = valuedList.concat(alsoRelayList).sort((a, b) => {
-                      return b.create_time - a.create_time;
-                    });
-                    return {
-                      userName: t.user.name,
-                      allNum: list.length,
-                      allViewNum: list.reduce((a, b) => a + b.view, 0),
-                      onePlayNumList: list,
-                    };
-                  }),
-                };
-              }),
-            };
-          } else if (e.name === "小红书") {
-            return {
-              ...e,
-              specialTagRequirements: e.specialTagRequirements.map((i) => {
-                return {
-                  ...i,
-                  videoData: xhsData.map((t) => {
-                    // 过滤不满足条件的视频
-                    const valuedList = t.aweme_list.filter((l) =>
-                      l.desc
-                        .split(" ")
-                        .map((e) => "#" + e)
-                        .join(" ")
-                        .includes(i.specialTag)
-                    );
-
-                    let alsoRelayList = [];
-                    if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-                      alsoRelayList = i?.videoData
-                        .find((c) => c.userName === t.user.name)
-                        .onePlayNumList.filter((l) => {
-                          // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
-                          if (
-                            valuedList.find((v) => v.aweme_id === l.aweme_id)
-                          ) {
-                            return false;
-                          }
-                          // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-                          // if (l.create_time > formatSecondTimestamp(eDate)) {
-                          //     return false
-                          // }
-                          return true;
-                        });
-                    }
-
-                    let list = valuedList.concat(alsoRelayList);
-                    return {
-                      userName: t.user.name,
-                      allNum: list.length,
-                      allLike: list.reduce((a, b) => a + b.like, 0),
-                      // allViewNum: list.reduce((a, b) => a + b.view, 0),
-                      onePlayNumList: list,
-                    };
-                  }),
-                };
-              }),
-            };
-          } else if (e.name === "bilibili") {
-            return {
-              ...e,
-              specialTagRequirements: e.specialTagRequirements.map((i) => {
-                return {
-                  ...i,
-                  videoData: bilibiliData.map((t) => {
-                    // 过滤不满足条件的视频
-                    const valuedList = t.aweme_list.filter(
-                      (l) =>
-                        l.title.includes(item.name) ||
-                        l.desc.includes(item.name)
-                    );
-
-                    let alsoRelayList = [];
-                    if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-                      alsoRelayList = i?.videoData
-                        .find((c) => c.userName === t.user.name)
-                        .onePlayNumList.filter((l) => {
-                          // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
-                          if (
-                            valuedList.find((v) => v.aweme_id === l.aweme_id)
-                          ) {
-                            return false;
-                          }
-                          // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-                          // if (l.create_time > formatSecondTimestamp(eDate)) {
-                          //     return false
-                          // }
-                          return true;
-                        });
-                    }
-
-                    let list = valuedList.concat(alsoRelayList);
-                    return {
-                      userName: t.user.name,
-                      allNum: list.length,
-                      // allLike: list.reduce((a, b) => a + b.like, 0),
-                      allViewNum: list.reduce((a, b) => a + b.view, 0),
-                      onePlayNumList: list,
-                    };
-                  }),
-                };
-              }),
-            };
-          }
-          return e;
-        }),
-      };
-    });
-    // 写入本地文件
-    writeLocalDataJson(jsonData, "./gameData.json");
+    const jsonData = await getPlatformData();
 
     res.json({
       code: 200,
@@ -622,34 +466,179 @@ app.post("/getPlatformData", async (req, res) => {
       msg: "更新成功",
     });
   } catch (error) {
-    writeLocalDataJson(douyinData, "./jsonFile/douyinHandleData.json");
-    writeLocalDataJson(xhsData, "./jsonFile/xhsHandleData.json");
     console.error("Error in /data endpoint:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-// schedule.scheduleJob("0 40 11 * * *", async () => {
-//   try {
-//     const cmd =
-//       "C:\\Users\\ChrisWang\\Downloads\\bilibili-tool-pro-v2.1.3-win-x64\\win-x64\\Ray.BiliBiliTool.Console.exe";
-//     const child = spawn(cmd);
+async function getPlatformData() {
+  let douyinData = [];
+  let xhsData = [];
+  let bilibiliData = [];
+  xhsData = await queryXiaoHongShuAllAccountsData();
+  douyinData = await queryDouYinAllAccountsData();
+  bilibiliData = await querybilibiliAllAccountsData();
+  const oldOtherGameDataArr = getOldData("./gameData.json");
+  const jsonData = oldOtherGameDataArr.map((item) => {
+    return {
+      ...item,
+      updateDate: formatDate(new Date().getTime()),
+      rewards: item.rewards.map((e) => {
+        if (e.name === "抖音") {
+          return {
+            ...e,
+            specialTagRequirements: e.specialTagRequirements.map((i) => {
+              return {
+                ...i,
+                videoData: douyinData.map((t) => {
+                  // 过滤不满足条件的视频
+                  const valuedList = t.aweme_list.filter(
+                    (l) => l.desc.includes(i.specialTag) &&
+                      l.view >= (i.minView || 100)
+                  );
+                  // 目前忽视了挂在小手柄问题，可手动isGet调整
+                  let alsoRelayList = [];
+                  if (i?.videoData?.find((c) => c.userName === t.user.name)) {
+                    alsoRelayList = i?.videoData
+                      .find((c) => c.userName === t.user.name)
+                      .onePlayNumList.filter((l) => {
+                        // 保留活动期间过去发过的稿件数据计入（因为单次可能只发36条数据）
+                        if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
+                          return false;
+                        }
+                        // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
+                        // if (l.create_time > formatSecondTimestamp(eDate)) {
+                        //     return false
+                        // }
+                        return true;
+                      });
+                  }
 
-//     child.stdout.on("data", (data) => {
-//       console.log(`养号执行成功: ${data}`);
-//     });
+                  let list = valuedList.concat(alsoRelayList).sort((a, b) => {
+                    return b.create_time - a.create_time;
+                  });
+                  return {
+                    userName: t.user.name,
+                    allNum: list.length,
+                    allViewNum: list.reduce((a, b) => a + b.view, 0),
+                    onePlayNumList: list,
+                  };
+                }),
+              };
+            }),
+          };
+        } else if (e.name === "小红书") {
+          return {
+            ...e,
+            specialTagRequirements: e.specialTagRequirements.map((i) => {
+              return {
+                ...i,
+                videoData: xhsData.map((t) => {
+                  // 过滤不满足条件的视频
+                  const valuedList = t.aweme_list.filter((l) => l.desc
+                    .split(" ")
+                    .map((e) => "#" + e)
+                    .join(" ")
+                    .includes(i.specialTag)
+                  );
 
-//     child.stderr.on("data", (data) => {
-//       console.error(`养号执行失败: ${data}`);
-//     });
+                  let alsoRelayList = [];
+                  if (i?.videoData?.find((c) => c.userName === t.user.name)) {
+                    alsoRelayList = i?.videoData
+                      .find((c) => c.userName === t.user.name)
+                      .onePlayNumList.filter((l) => {
+                        // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
+                        if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
+                          return false;
+                        }
+                        // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
+                        // if (l.create_time > formatSecondTimestamp(eDate)) {
+                        //     return false
+                        // }
+                        return true;
+                      });
+                  }
 
-//     child.on("close", (code) => {
-//       console.log(`子进程退出，退出码 ${code}`);
-//     });
-//   } catch (error) {
-//     console.error("定时养号出错:", error);
-//   }
-// });
+                  let list = valuedList.concat(alsoRelayList);
+                  return {
+                    userName: t.user.name,
+                    allNum: list.length,
+                    allLike: list.reduce((a, b) => a + b.like, 0),
+                    // allViewNum: list.reduce((a, b) => a + b.view, 0),
+                    onePlayNumList: list,
+                  };
+                }),
+              };
+            }),
+          };
+        } else if (e.name === "bilibili") {
+          return {
+            ...e,
+            specialTagRequirements: e.specialTagRequirements.map((i) => {
+              // 查找对应的定时任务
+              const hasSameTopicScheduleJob = BiliBiliScheduleJobJson.find(job => job.topicName === i.topic);
+
+              return {
+                ...i,
+                videoData: bilibiliData.map((t) => {
+                  // 过滤不满足条件的视频
+                  const valuedList = t.aweme_list.filter(l => {
+                    // 检查视频标题或描述是否包含 topic
+                    const matchesName = l.title.includes(item.name) || l.desc.includes(item.name);
+
+                    // 如果有定时任务，检查视频文件名是否在定时任务中
+                    let matchesScheduleJob = false;
+                    if (hasSameTopicScheduleJob) {
+                      const videoFileName = l.title;
+                      matchesScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
+                        const jobFileName = job.videoPath.split('\\').pop().replace('.mp4', '');
+                        return videoFileName.includes(jobFileName);
+                      });
+                    }
+
+                    return matchesName || matchesScheduleJob;
+                  });
+
+                  let alsoRelayList = [];
+                  if (i?.videoData?.find((c) => c.userName === t.user.name)) {
+                    alsoRelayList = i?.videoData
+                      .find((c) => c.userName === t.user.name)
+                      .onePlayNumList.filter((l) => {
+                        // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
+                        if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
+                          return false;
+                        }
+                        // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
+                        // if (l.create_time > formatSecondTimestamp(eDate)) {
+                        //     return false
+                        // }
+                        return true;
+                      });
+                  }
+
+                  let list = valuedList.concat(alsoRelayList);
+                  return {
+                    userName: t.user.name,
+                    allNum: list.length,
+                    // allLike: list.reduce((a, b) => a + b.like, 0),
+                    allViewNum: list.reduce((a, b) => a + b.view, 0),
+                    onePlayNumList: list,
+                  };
+                }),
+              };
+            }),
+          };
+        }
+        return e;
+      }),
+    };
+  });
+  writeLocalDataJson(jsonData, "./gameData.json");
+  return jsonData;
+}
+
+// 每24小时更新一次平台数据
+setInterval(getPlatformData, 1000 * 60 * 60 * 24);
 
 async function executeExpiredJobs(platform) {
   try {
@@ -679,9 +668,11 @@ async function executeExpiredJobs(platform) {
     const now = new Date();
     const expiredJobs = [];
 
-    // 遍历所有游戏的定时任务（通用逻辑）
+    // 遍历所有游戏的定时任务
     scheduleJobs.forEach((game) => {
       if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
+        // 获取游戏配置
+        const { topicName, missionId, tag, tid } = game;
         const gameExpiredJobs = game.scheduleJob
           .filter((job) => {
             const jobTime = new Date(job.execTime);
@@ -692,6 +683,10 @@ async function executeExpiredJobs(platform) {
           })
           .map((job) => ({
             ...job,
+            topicName,
+            missionId,
+            tag,
+            tid,
             platform: platform,
             gameIndex: scheduleJobs.indexOf(game),
             jobIndex: game.scheduleJob.indexOf(job),
@@ -728,16 +723,55 @@ async function executeExpiredJobs(platform) {
         if (job.successExecAccount.includes(account.accountName)) continue;
 
         const uploadCmd = generateUploadCommand(platform, uploaderPath, account, job);
+        await waitSecond(10000);
         uploadPromises.push(
           (async () => {
             try {
               // 使用信号量控制并发
               await acquireSemaphore(MAX_CONCURRENT_UPLOADS);
-              const randomDelay = Math.floor(Math.random() * 5000);
-              await new Promise(resolve => setTimeout(resolve, randomDelay));
-
+              await waitSecond(5000);
               await new Promise((resolve, reject) => {
-                const child = spawn(uploadCmd, { shell: true });
+
+                let child;
+
+                // 根据平台类型采用不同的执行方式
+                if (platform === 'bilibili') {
+                  // Windows系统需要特殊处理参数格式
+                  child = spawn(uploadCmd[0], uploadCmd.slice(1), {
+                    // windowsVerbatimArguments: true,
+                    shell: true
+                  });
+                } else if (platform === '抖音') {
+                  // Python命令需要拆分为独立参数
+
+                  child = spawn(uploadCmd, {
+                    shell: true,
+                    env: {
+                      // ...process.env,
+                      PYTHONUTF8: '1',  // 强制Python使用UTF-8编码
+                      PYTHONIOENCODING: 'utf-8'  // 设置输入输出编码
+                    }
+                  });
+                }
+
+                // 捕获标准输出（添加编码处理）
+                child.stdout.on('data', (data) => {
+                  // 将buffer转为字符串时指定编码，并替换无效字符
+                  const output = data.toString('utf8', {
+                    stripBOM: true,
+                    replacementChar: ''
+                  });
+                  console.log(`[${account.accountName} stdout]: ${output}`);
+                });
+
+                // 捕获错误输出（添加编码处理）
+                child.stderr.on('data', (data) => {
+                  const errorOutput = data.toString('utf8', {
+                    stripBOM: true,
+                    replacementChar: ''
+                  });
+                  console.error(`[${account.accountName} stderr]: ${errorOutput}`);
+                });
 
                 child.on('exit', (code) => {
                   releaseSemaphore();
@@ -762,7 +796,7 @@ async function executeExpiredJobs(platform) {
       await Promise.all(uploadPromises);
     }
 
-    // 统一写入文件
+    // 统一写入对应文件
     fs.writeFileSync(configPath, JSON.stringify(scheduleJobs, null, 2));
 
     return {
@@ -777,15 +811,27 @@ async function executeExpiredJobs(platform) {
       msg: `执行${platform}过期任务失败`,
     };
   }
+
+  async function waitSecond(time = 5000) {
+    const randomDelay = Math.floor(2000 + Math.random() * time); // 随机延迟2-7秒 
+    await new Promise(resolve => setTimeout(resolve, randomDelay));
+  }
 }
 
 // 生成平台特定的上传命令
 function generateUploadCommand(platform, uploaderPath, account, job) {
-
   if (platform === 'bilibili') {
-    const commonParams = `-u "${path.join(uploaderPath, '..', `${account.accountName}.json`)}"`;
-    return `"${uploaderPath}" ${commonParams} upload --tag "${job.tag}" --mission-id "${job.missionId}" 
-      --tid ${job.tid} --title "${path.basename(job.videoPath, ".mp4")}" "${job.videoPath}"`;
+    const configPath = path.join(path.dirname(uploaderPath), `${account.accountName}.json`);
+    return [
+      uploaderPath,
+      '-u', `"${configPath}"`,
+      'upload',
+      '--tag', job.tag,
+      '--mission-id', job.missionId,
+      '--tid', job.tid.toString(),
+      '--title', `"${path.basename(job.videoPath, ".mp4")}"`,
+      `"${job.videoPath}"`
+    ];
   }
 
   if (platform === '抖音') {
@@ -829,8 +875,6 @@ async function checkAndExecuteJobs() {
 
 // 提高任务检查频率（每2小时检查一次）
 setInterval(checkAndExecuteJobs, 2 * 60 * 60 * 1000);
-// 启动时立即检查
-// checkAndExecuteJobs();
 
 app.post("/scheduleUpload", async (req, res) => {
   async function generateScheduleJobs(videoDir, startTime, intervalHours) {
@@ -864,25 +908,28 @@ app.post("/scheduleUpload", async (req, res) => {
       immediately,
     } = req.body;
 
-    // 根据平台选择配置文件路径
-    const platformConfig = {
-      bilibili: "./scheduleJob/BiliBiliScheduleJob.json",
-      '抖音': "./scheduleJob/DouyinScheduleJob.json"
-    };
-    const scheduleJobsPath = platformConfig[platform];
 
-    let scheduleJobs = [];
-
-    try {
-      scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
-    } catch (err) {
-      console.log("定时任务配置文件不存在,创建新文件");
-      scheduleJobs = [];
-    }
 
     if (immediately) {
-      await executeExpiredJobs(platform);
+      await checkAndExecuteJobs();
     } else {
+
+      // 根据平台选择配置文件路径
+      const platformConfig = {
+        bilibili: "./scheduleJob/BiliBiliScheduleJob.json",
+        '抖音': "./scheduleJob/DouyinScheduleJob.json"
+      };
+      const scheduleJobsPath = platformConfig[platform];
+
+      let scheduleJobs = [];
+
+      try {
+        scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
+      } catch (err) {
+        console.log("定时任务配置文件不存在,创建新文件");
+        scheduleJobs = [];
+      }
+
       const newJobs = await generateScheduleJobs(videoDir, startTime, intervalHours);
 
       // 添加平台特定字段
@@ -908,11 +955,7 @@ app.post("/scheduleUpload", async (req, res) => {
           ...platformSpecificConfig
         });
       } else {
-        scheduleJobs[topicIndex] = {
-          ...scheduleJobs[topicIndex],
-          ...baseConfig,
-          ...platformSpecificConfig
-        };
+        scheduleJobs[topicIndex].scheduleJob.push(...newJobs);
       }
 
       // 保存配置到文件
@@ -966,14 +1009,12 @@ app.get("/unfavorableReply", async (req, res) => {
         });
     })
   );
-
-  // Return the results as JSON
   res.json(messageList.flat());
 });
 
 app.post("/deleteUnfavorableReply", async (req, res) => {
   try {
-    // 获取参数
+
     const { oid, rpid } = req.body;
 
     const jsonBody = {
@@ -998,6 +1039,8 @@ app.post("/deleteUnfavorableReply", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

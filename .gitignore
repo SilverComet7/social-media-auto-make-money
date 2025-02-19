@@ -27,6 +27,7 @@ node_modules
 
 *.history
 accountList.json
+*.vscode
 
 social-auto-upload/
 TikTokDownloader
