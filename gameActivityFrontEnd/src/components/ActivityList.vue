@@ -3,20 +3,11 @@
     <el-tabs type="card">
       <el-tab-pane label="四平台游戏活动激励">
         <div class="flex justify-between">
-          <!-- <el-image
-            src="/public/douyin.jpg"
-            alt=""
-            srcset=""
-            class="w-500 h-[5vw]"
-            preview-src="/public/douyin.jpg"
-          /> -->
           <el-affix :offset="20" class="text-blue-800">
             <h4>公共标签参考</h4>
             <div class="bg-slate-300 h-[5vw] overflow-auto">
               <div>#游戏鉴赏官 #联机游戏</div>
-              <div>#二次元 #完美身材 #女大学生 #音乐 #巅峰赛 #故事 #搞笑 #教程</div>
-              <div>#女神 #诱惑 #小姐姐 #丝袜 #萌妹子 #记录 #爱情 #情感 #校园 #娱乐 #情侣 #生活记录 #分享 #必剪创作</div>
-              <div>#时尚 #穿搭 #性感 #高能 #穿搭 #女装 #时尚 #美女 #妹子</div>
+              <div>#二次元 #音乐 #巅峰赛 #故事 #搞笑 #教程</div>
               <div>#MMORPG #古风 #逆水寒</div>
               <div>#射击游戏 #FPS #穿越火线 #无畏契约 #暗区突围 #三角洲行动 #枪战</div>
             </div>
@@ -32,7 +23,6 @@
                 <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
               </div>
             </div>
-
             <!-- 视频下载处理栏 -->
             <div class="operation-group bg-blue-50 p-4 rounded">
               <h3 class="text-lg font-bold mb-2">视频处理操作</h3>
@@ -43,7 +33,6 @@
                 >
               </div>
             </div>
-
             <!-- 定时任务栏 -->
             <div class="operation-group bg-green-50 p-4 rounded">
               <h3 class="text-lg font-bold mb-2">定时任务操作</h3>
@@ -99,18 +88,25 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="allMoney"
-            label="allMoney 计入(总播放<5w,单稿件<10000,点赞<500,最低单稿播放<5000)"
-            sortable=""
-            width="150"
-          />
-          <el-table-column prop="comment" label="Comment" width="150" copyable />
-          <el-table-column prop="endDiffDate" label="Days Left" width="100" sortable>
+          <el-table-column prop="allMoney" label="allMoney" width="150" sortable>
+            <template #header>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="总播放<5w,单稿件<10000,点赞<500,最低单稿播放<5000"
+                placement="top"
+              >
+                <span>allMoney <i class="el-icon-question"></i></span>
+              </el-tooltip>
+            </template>
+            <template #default="scope">
+              <span>{{ scope.row.allMoney }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="endDiffDate" label="剩余天数" width="150" sortable>
             <template #default="scope"> {{ getDaysDiff(scope.row.etime * 1000) }} 天 </template>
           </el-table-column>
-
-          <el-table-column label="Rewards" min-width="800">
+          <el-table-column label="Rewards" width="750">
             <template #default="scope">
               <el-card v-for="(platform, platformIndex) in scope.row.rewards" :key="platformIndex">
                 <div class="flex">
@@ -162,12 +158,17 @@
                           <el-button
                             type="primary"
                             @click="setScheduleJob(speReq, platform, scope.row)"
-                            >设置该活动定时执行任务</el-button>
+                            >设置该活动定时执行任务</el-button
+                          >
                           <el-button
                             type="info"
-                            v-if="BiliBiliScheduleJob.some(e=>e.topicName === speReq.topic)"
-                            @click="showScheduleJobDialog(speReq.topic)"
-                          >查看定时任务</el-button>
+                            v-if="
+                              BiliBiliScheduleJob.find((e) => e.topicName === speReq.topic) ||
+                              DouyinScheduleJob.find((e) => e.topicName === speReq.name)
+                            "
+                            @click="showScheduleJobDialog(speReq, platform.name)"
+                            >查看定时任务</el-button
+                          >
                           <h4
                             class="font-bold"
                             v-if="speReq.eDate"
@@ -213,9 +214,7 @@
                               :class="req.money >= 50000 ? ' text-orange-500' : ''"
                               >=瓜分{{ req.money }}</span
                             >
-
                             <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
-
                             <template v-if="speReq?.videoData">
                               <div v-for="r in speReq.videoData" :key="r">
                                 {{ r.userName }}:
@@ -242,7 +241,7 @@
               </el-card>
             </template>
           </el-table-column>
-          <el-table-column label="Video Detail" min-width="750">
+          <el-table-column label="Video Detail" min-width="400">
             <template #default="scope">
               <p class="text-blue-800 cursor-pointer" @click="copyTag(getCommonTagAll(scope.row))">
                 总标签 :{{ getCommonTagAll(scope.row) }}
@@ -605,7 +604,7 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="B站稿件的评论管理">
+      <!-- <el-tab-pane label="B站稿件的评论管理">
         <el-button type="primary" @click="fetchUnfavorableReply">查询所有不喜欢的评论</el-button>
         <div v-for="(unfavorableReply, index) in unfavorableReplyList" :key="index">
           {{ unfavorableReply.message }}
@@ -613,7 +612,7 @@
             >delete</el-button
           >
         </div>
-      </el-tab-pane>
+      </el-tab-pane> -->
     </el-tabs>
     <el-backtop :right="100" :bottom="100" />
 
@@ -694,7 +693,12 @@
     <el-dialog title="FFmpeg 处理设置" v-model="ffmpegDialogVisible">
       <el-form :model="ffmpegSettings" label-width="250px">
         <el-form-item label="名称">
-          <el-select v-model="ffmpegSettings.gameName" placeholder="请输入游戏名称" filterable clearable>
+          <el-select
+            v-model="ffmpegSettings.gameName"
+            placeholder="请输入游戏名称"
+            filterable
+            clearable
+          >
             <el-option
               v-for="game in allGameList"
               :key="game.name"
@@ -704,7 +708,12 @@
           </el-select>
         </el-form-item>
         <el-form-item label="分组">
-          <el-select v-model="ffmpegSettings.groupName" placeholder="请选择分组" filterable clearable>
+          <el-select
+            v-model="ffmpegSettings.groupName"
+            placeholder="请选择分组"
+            filterable
+            clearable
+          >
             <el-option label="攻略" value="攻略" />
             <el-option
               v-for="game in allGameList"
@@ -1017,7 +1026,11 @@
         </el-form-item>
         <template v-if="scheduleForm.platform !== '抖音'">
           <el-form-item label="分区选择">
-            <el-select v-model="scheduleForm.selectedArea" placeholder="请选择分区" @change="handleAreaChange">
+            <el-select
+              v-model="scheduleForm.selectedArea"
+              placeholder="请选择分区"
+              @change="handleAreaChange"
+            >
               <el-option
                 v-for="area in bilibiliTid"
                 :key="area.name"
@@ -1070,11 +1083,7 @@
     </el-dialog>
 
     <!-- 添加定时任务查看对话框 -->
-    <el-dialog
-      title="定时任务列表"
-      v-model="scheduleJobDialogVisible"
-      width="70%"
-    >
+    <el-dialog title="定时任务列表" v-model="scheduleJobDialogVisible" width="70%">
       <template v-if="currentScheduleJob">
         <h3 class="mb-4">活动名称: {{ currentScheduleJob.topicName }}</h3>
         <el-table :data="currentScheduleJob.scheduleJob" style="width: 100%">
@@ -1090,11 +1099,7 @@
           </el-table-column>
           <el-table-column label="已执行账号" min-width="200">
             <template #default="scope">
-              <el-tag
-                v-for="account in scope.row.successExecAccount"
-                :key="account"
-                class="mr-2"
-              >
+              <el-tag v-for="account in scope.row.successExecAccount" :key="account" class="mr-2">
                 {{ account }}
               </el-tag>
             </template>
@@ -1110,7 +1115,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { ElTable, ElTableColumn, ElProgress, ElEmpty, ElDatePicker } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import topicJson from '../../public/topic.json'
 import bilibiliTid from '../../public/bilibiliTid.json'
@@ -1231,7 +1235,11 @@ const scheduleForm = ref<ScheduleForm>({
 })
 
 // 打开定时任务设置弹窗
-const setScheduleJob = (rew: SpecialTagRequirement, platform: PlatformReward, row: GameActivity) => {
+const setScheduleJob = (
+  rew: SpecialTagRequirement,
+  platform: PlatformReward,
+  row: GameActivity,
+) => {
   const { topic, specialTag } = rew
   const missionId = topicJson.find((item: any) => item.topic_name === topic)?.mission_id
 
@@ -1569,7 +1577,6 @@ const confirmDownloadSettings = async () => {
     .filter((game) => game.checked)
     .map((game) => game.name)
 
-  // 发送后端请求下载
   await fetch(`http://localhost:3000/downloadVideosAndGroup`, {
     method: 'post',
     headers: {
@@ -1578,7 +1585,6 @@ const confirmDownloadSettings = async () => {
     body: JSON.stringify({ downloadSettings: downloadSettings.value }),
   }).then((res) => {
     if (res.ok) {
-      // fetchData()
       dialogVisible.value = false
       ElMessage.success('成功下载')
     }
@@ -1643,7 +1649,9 @@ const getCommonTagAll = (row) => {
 const bilibiliActTableData = ref([])
 const gameTableData = ref([])
 const dakaTableData = ref([])
+
 const BiliBiliScheduleJob = ref([])
+const DouyinScheduleJob = ref([])
 
 const fetchData = async () => {
   try {
@@ -1661,7 +1669,10 @@ const fetchData = async () => {
     dakaTableData.value = res.dakaData
     gameTableData.value = res.gameData
     allGameList.value = res.allGameList.map((e) => ({ name: e, checked: false }))
-    BiliBiliScheduleJob.value = res.BiliBiliScheduleJob
+
+    BiliBiliScheduleJob.value = res.scheduleJob.BiliBiliScheduleJob
+    DouyinScheduleJob.value = res.scheduleJob.DouyinScheduleJob
+
     ElMessage.success('数据刷新成功')
   } catch (error) {
     console.error('Error fetching data:', error)
@@ -1887,9 +1898,15 @@ const scheduleJobDialogVisible = ref(false)
 const currentScheduleJob = ref(null)
 
 // 添加新的方法
-const showScheduleJobDialog = async (topic) => {
+const showScheduleJobDialog = async (speReq?: any, platformType: string) => {
   try {
-    const scheduleJob = BiliBiliScheduleJob.value.find((e) => e.topicName === topic)
+    let scheduleJob
+    const { topic, name } = speReq
+    if (platformType === 'bilibili') {
+      scheduleJob = BiliBiliScheduleJob.value.find((e) => e.topicName === topic)
+    } else if (platformType === '抖音') {
+      scheduleJob = DouyinScheduleJob.value.find((e) => e.topicName === name)
+    }
     currentScheduleJob.value = scheduleJob
     scheduleJobDialogVisible.value = true
   } catch (error) {
@@ -1898,7 +1915,6 @@ const showScheduleJobDialog = async (topic) => {
   }
 }
 
-// 工具函数
 const getFileName = (path) => {
   return path.split('\\').pop()
 }
@@ -1910,7 +1926,9 @@ const formatDateTime = (dateStr) => {
 
 // 添加计算属性获取子分区列表
 const getSubAreas = computed(() => {
-  const selectedArea = (bilibiliTid as BilibiliArea[]).find(area => area.name === scheduleForm.value.selectedArea)
+  const selectedArea = (bilibiliTid as BilibiliArea[]).find(
+    (area) => area.name === scheduleForm.value.selectedArea,
+  )
   return selectedArea ? selectedArea.children : []
 })
 
