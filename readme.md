@@ -86,7 +86,7 @@ npm run start
 - 定时上传视频
 - 视频数据聚合
 
-![首页](./image/首页.png)
+![首页部分](./image/首页部分.png)
 ![下载视频弹窗](./image/下载视频弹窗.png)
 ![FFmpeg去重](./image/FFmpeg去重.png)
 
