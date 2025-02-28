@@ -5,7 +5,7 @@
         <div class="flex justify-between">
           <el-affix :offset="20" class="text-blue-800">
             <h4>公共标签参考</h4>
-            <div class="bg-slate-300 h-[5vw] overflow-auto">
+            <div class=" bg-red-300 h-[5vw] overflow-auto">
               <div>#游戏鉴赏官 #联机游戏</div>
               <div>#二次元 #音乐 #巅峰赛 #故事 #搞笑 #教程</div>
               <div>#MMORPG #古风 #逆水寒</div>
@@ -14,28 +14,24 @@
           </el-affix>
           <div class="flex justify-between">
             <!-- 爬虫查询栏 -->
-            <div class="operation-group bg-gray-100 p-4 rounded">
-              <h3 class="text-lg font-bold mb-2">爬虫查询操作</h3>
+            <div class="operation-group bg-gray-300 p-4 rounded">
+              <h3 class="text-lg font-bold mb-2 text-black">爬虫查询操作</h3>
               <div class="flex">
-                <el-button type="primary" @click="updateOnePlatData('抖音')"
-                  >查询视频数据</el-button
-                >
+                <el-button type="primary" @click="updateOnePlatData('抖音')">查询视频数据</el-button>
                 <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
               </div>
             </div>
             <!-- 视频下载处理栏 -->
-            <div class="operation-group bg-blue-50 p-4 rounded">
-              <h3 class="text-lg font-bold mb-2">视频处理操作</h3>
+            <div class="operation-group bg-blue-300 p-4 rounded">
+              <h3 class="text-lg font-bold mb-2 text-black">视频处理操作</h3>
               <div class="flex">
                 <el-button type="primary" @click="handleDownloadSettings">下载视频并分组</el-button>
-                <el-button type="primary" @click="ffmpegDialogVisible = true"
-                  >ffmpeg去重处理</el-button
-                >
+                <el-button type="primary" @click="ffmpegDialogVisible = true">ffmpeg去重处理</el-button>
               </div>
             </div>
             <!-- 定时任务栏 -->
-            <div class="operation-group bg-green-50 p-4 rounded">
-              <h3 class="text-lg font-bold mb-2">定时任务操作</h3>
+            <div class="operation-group bg-green-300 p-4 rounded">
+              <h3 class="text-lg font-bold mb-2 text-black">定时任务操作</h3>
               <div class="flex">
                 <el-button type="primary" @click="confirmScheduleJob(true)">执行定时任务</el-button>
                 <el-button type="primary" @click="handleManualAccount">执行手动养号</el-button>
@@ -48,54 +44,31 @@
         </div>
         <el-table v-if="gameTableData.length" :data="gameTableData" style="width: 100%" border>
           <el-table-column type="index" label="No." width="50" fixed />
-          <el-table-column prop="name" label="Activity Name" width="250" fixed>
+          <el-table-column prop="name" label="Game Name" width="250" fixed>
             <template #default="scope">
               <div :class="scope.row.notDo ? 'text-red-500' : ''">
-                <a
-                  :href="scope.row.act_url"
-                  target="_blank"
-                  :class="
-                    scope.row.updateData || scope.row.new ? 'text-green-500 ' : 'text-blue-500'
-                  "
-                  class="font-bold"
-                >
+                <a :href="scope.row.act_url" target="_blank" :class="scope.row.updateData || scope.row.new ? 'text-green-500 ' : 'text-blue-500'
+                  " class="font-bold">
                   {{ scope.row.name }}
                 </a>
                 <div>
-                  <el-button type="primary" @click="handleDownloadSettings(scope.row.name)"
-                    >下载视频</el-button
-                  >
-                  <el-button
-                    type="primary"
-                    @click="
-                      ((ffmpegDialogVisible = true), (ffmpegSettings.gameName = scope.row.name))
-                    "
-                    >ffmpeg处理</el-button
-                  >
+                  <el-button type="primary" @click="handleDownloadSettings(scope.row.name)">下载视频</el-button>
+                  <el-button type="primary" @click="
+                    ((ffmpegDialogVisible = true), (ffmpegSettings.gameName = scope.row.name))
+                    ">ffmpeg处理</el-button>
                 </div>
                 <p>上一次更新时间 {{ scope.row.updateDate }}</p>
-                <el-button
-                  type="primary"
-                  @click="updateData(scope.row)"
-                  v-if="scope.row.searchKeyWord"
-                  >更新B站数据</el-button
-                >
+                <el-button type="primary" @click="updateData(scope.row)"
+                  v-if="scope.row.searchKeyWord">更新B站数据</el-button>
                 <p>任务结束日期 {{ formatDate(scope.row.etime) }}</p>
                 <p>添加任务日期 {{ scope.row.addTime }}</p>
-                <el-button type="primary" @click="openEditRewardDialog(scope.row.name)"
-                  >添加平台奖励</el-button
-                >
+                <el-button type="primary" @click="openEditRewardDialog(scope.row.name)">添加平台奖励</el-button>
               </div>
             </template>
           </el-table-column>
           <el-table-column prop="allMoney" label="allMoney" width="150" sortable>
             <template #header>
-              <el-tooltip
-                class="item"
-                effect="dark"
-                content="总播放<5w,单稿件<10000,点赞<500,最低单稿播放<5000"
-                placement="top"
-              >
+              <el-tooltip class="item" effect="dark" content="总播放<5w,单稿件<10000,点赞<500,最低单稿播放<5000" placement="top">
                 <span>allMoney <i class="el-icon-question"></i></span>
               </el-tooltip>
             </template>
@@ -106,7 +79,7 @@
           <el-table-column prop="endDiffDate" label="剩余天数" width="150" sortable>
             <template #default="scope"> {{ getDaysDiff(scope.row.etime * 1000) }} 天 </template>
           </el-table-column>
-          <el-table-column label="Rewards" width="750">
+          <el-table-column label="达标条件" width="750">
             <template #default="scope">
               <el-card v-for="(platform, platformIndex) in scope.row.rewards" :key="platformIndex">
                 <div class="flex">
@@ -114,80 +87,46 @@
                     <h4 class="font-bold" :class="platform.notDo ? 'text-red-500' : ''">
                       {{ platform.name }}
                     </h4>
-                    <el-button
-                      type="primary"
-                      @click="openEditRewardDialog(scope.row.name, platform)"
-                      >编辑</el-button
-                    >
-                    <p
-                      class="text-blue-800 font-bold cursor-pointer"
-                      @click="copyTag(getSpecialTagAll(platform))"
-                    >
+                    <el-button type="primary" @click="openEditRewardDialog(scope.row.name, platform)">编辑</el-button>
+                    <p class="text-blue-800 font-bold cursor-pointer" @click="copyTag(getSpecialTagAll(platform))">
                       TAG: {{ getSpecialTagAll(platform) }}
                     </p>
-                    <p
-                      class="text-blue-800 cursor-pointer"
-                      v-if="platform.suppleTag"
-                      @click="copyTag(platform.suppleTag)"
-                    >
+                    <p class="text-blue-800 cursor-pointer" v-if="platform.suppleTag"
+                      @click="copyTag(platform.suppleTag)">
                       补充TAG: {{ platform.suppleTag }}
                     </p>
                   </div>
                   <div class="flex-1">
                     <template v-for="speReq in platform.specialTagRequirements">
-                      <el-card
-                        :key="speReq"
-                        v-if="
-                          speReq.eDate
-                            ? getDaysDiff(new Date(speReq.eDate).getTime()) >= 0
-                            : getDaysDiff(scope.row.etime * 1000) >= 0
-                        "
-                      >
+                      <el-card :key="speReq" v-if="
+                        speReq.eDate
+                          ? getDaysDiff(new Date(speReq.eDate).getTime()) >= 0
+                          : getDaysDiff(scope.row.etime * 1000) >= 0
+                      ">
                         <div :class="speReq.isNotDo ? 'bg-red-300' : ''">
-                          <a
-                            :href="speReq.act_url"
-                            target="_blank"
-                            class="font-bold text-blue-600"
-                            v-if="platform.name === 'bilibili'"
-                            >{{ speReq.name }} {{ speReq.comment }}</a
-                          >
+                          <a :href="speReq.act_url" target="_blank" class="font-bold text-blue-600"
+                            v-if="platform.name === 'bilibili'">{{ speReq.name }} {{ speReq.comment }}</a>
                           <h4 class="font-bold" v-else>{{ speReq.name }}</h4>
                           <h4 class="font-bold" v-if="platform.name === 'bilibili'">
                             话题：{{ speReq.topic }}
                           </h4>
-                          <el-button
-                            type="primary"
-                            @click="setScheduleJob(speReq, platform, scope.row)"
-                            >设置该活动定时执行任务</el-button
-                          >
-                          <el-button
-                            type="info"
-                            v-if="
-                              BiliBiliScheduleJob.find((e) => e.topicName === speReq.topic) ||
-                              DouyinScheduleJob.find((e) => e.topicName === speReq.name)
-                            "
-                            @click="showScheduleJobDialog(speReq, platform.name)"
-                            >查看定时任务</el-button
-                          >
-                          <h4
-                            class="font-bold"
-                            v-if="speReq.eDate"
-                            :class="
-                              getDaysDiff(new Date(speReq.eDate).getTime()) <= 4
-                                ? 'text-orange-500'
-                                : ''
-                            "
-                          >
+                          <el-button type="primary"
+                            @click="setScheduleJob(speReq, platform, scope.row)">设置该活动定时执行任务</el-button>
+                          <el-button type="info" v-if="
+                            BiliBiliScheduleJob.find((e) => e.topicName === speReq.topic) ||
+                            DouyinScheduleJob.find((e) => e.topicName === speReq.name)
+                          " @click="showScheduleJobDialog(speReq, platform.name)">查看定时任务</el-button>
+                          <h4 class="font-bold" v-if="speReq.eDate" :class="getDaysDiff(new Date(speReq.eDate).getTime()) <= 4
+                            ? 'text-orange-500'
+                            : ''
+                            ">
                             活动结束{{ speReq.eDate }} 还剩{{
                               getDaysDiff(new Date(speReq.eDate).getTime())
                             }}天
                           </h4>
                           <div>
-                            <p
-                              class="text-blue-800 cursor-pointer"
-                              @click="copyTag(speReq.specialTag)"
-                              v-if="speReq.specialTag"
-                            >
+                            <p class="text-blue-800 cursor-pointer" @click="copyTag(speReq.specialTag)"
+                              v-if="speReq.specialTag">
                               必带TAG:
                               {{ speReq.specialTag }}
                             </p>
@@ -199,36 +138,24 @@
                           <div v-for="(req, reqIndex) in speReq.reward" :key="reqIndex">
                             <span v-if="req.time"> 持续时间>={{ req.time }} </span>
                             <span v-if="req.allNum">总投稿数{{ req.allNum }} </span>
-                            <span
-                              v-if="req.allViewNum"
-                              :class="req.allViewNum <= 20000 ? ' text-orange-500' : ''"
-                            >
+                            <span v-if="req.allViewNum" :class="req.allViewNum <= 20000 ? ' text-orange-500' : ''">
                               总播放量{{ req.allViewNum }}
                             </span>
                             <span v-if="req.view"> 单视频播放量{{ req.view }} </span>
                             <span v-if="req.cday"> 投稿天数>={{ req.cday }} </span>
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
-                            <span
-                              v-if="req.money"
-                              :class="req.money >= 50000 ? ' text-orange-500' : ''"
-                              >=瓜分{{ req.money }}</span
-                            >
+                            <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
+                              }}</span>
                             <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
                             <template v-if="speReq?.videoData">
                               <div v-for="r in speReq.videoData" :key="r">
                                 {{ r.userName }}:
-                                <el-tooltip
-                                  effect="dark"
-                                  placement="top-start"
-                                  :content="getTooltipContent(req, r, platform)"
-                                  v-if="r.userName"
-                                >
-                                  <el-progress
-                                    :percentage="getCompletionPercentage(req, r).percentage"
+                                <el-tooltip effect="dark" placement="top-start"
+                                  :content="getTooltipContent(req, r, platform)" v-if="r.userName">
+                                  <el-progress :percentage="getCompletionPercentage(req, r).percentage"
                                     :status="getCompletionStatus(req, r)"
-                                    :format="(percentage) => formatRequirement(req, percentage, r)"
-                                  />
+                                    :format="(percentage) => formatRequirement(req, percentage, r)" />
                                 </el-tooltip>
                               </div>
                             </template>
@@ -241,7 +168,7 @@
               </el-card>
             </template>
           </el-table-column>
-          <el-table-column label="Video Detail" min-width="400">
+          <el-table-column label="Tag All" min-width="400">
             <template #default="scope">
               <p class="text-blue-800 cursor-pointer" @click="copyTag(getCommonTagAll(scope.row))">
                 总标签 :{{ getCommonTagAll(scope.row) }}
@@ -251,45 +178,26 @@
         </el-table>
       </el-tab-pane>
       <el-tab-pane label="B站活动激励">
-        <el-table
-          v-if="bilibiliActTableData.length"
-          :data="bilibiliActTableData"
-          style="width: 100%"
-          border
-        >
+        <el-table v-if="bilibiliActTableData.length" :data="bilibiliActTableData" style="width: 100%" border>
           <el-table-column type="index" label="No." width="50" fixed />
           <el-table-column prop="name" label="Activity Name" width="250" fixed>
             <template #default="scope">
               <div :class="scope.row.notDo ? 'text-red-500' : ''">
-                <a
-                  :href="scope.row.act_url"
-                  target="_blank"
-                  :class="
-                    scope.row.updateData || scope.row.new ? 'text-green-500 ' : 'text-blue-500'
-                  "
-                  class="font-bold"
-                >
+                <a :href="scope.row.act_url" target="_blank" :class="scope.row.updateData || scope.row.new ? 'text-green-500 ' : 'text-blue-500'
+                  " class="font-bold">
                   {{ scope.row.name }}
                 </a>
                 <p>上一次更新时间 {{ scope.row.updateDate }}</p>
-                <el-button
-                  type="primary"
-                  @click="updateData(scope.row)"
-                  v-if="scope.row.searchKeyWord"
-                  >更新B站数据</el-button
-                >
+                <el-button type="primary" @click="updateData(scope.row)"
+                  v-if="scope.row.searchKeyWord">更新B站数据</el-button>
                 <p>视频时长需 {{ scope.row.timeRange ?? '>=30s' }}</p>
                 <p>任务结束日期 {{ formatDate(scope.row.etime) }}</p>
                 <p>添加任务日期 {{ scope.row.addTime }}</p>
               </div>
             </template>
           </el-table-column>
-          <el-table-column
-            prop="allMoney"
-            label="allMoney 计入(总播放<5w,单稿件<10000,点赞<500,最低单稿播放<5000)"
-            sortable=""
-            width="150"
-          />
+          <el-table-column prop="allMoney" label="allMoney 计入(总播放<5w,单稿件<10000,点赞<500,最低单稿播放<5000)" sortable=""
+            width="150" />
           <el-table-column prop="comment" label="Comment" width="150" copyable />
           <el-table-column prop="endDiffDate" label="Days Left" width="100" sortable>
             <template #default="scope"> {{ getDaysDiff(scope.row.etime * 1000) }} 天 </template>
@@ -302,17 +210,10 @@
                     <h4 class="font-bold" :class="reward.notDo ? 'text-red-500' : ''">
                       {{ reward.name }}
                     </h4>
-                    <p
-                      class="text-blue-800"
-                      @click="copyTag(reward.baseTopic)"
-                      v-if="reward.baseTopic"
-                    >
+                    <p class="text-blue-800" @click="copyTag(reward.baseTopic)" v-if="reward.baseTopic">
                       可选话题: {{ reward.baseTopic }}
                     </p>
-                    <p
-                      class="text-blue-800 font-bold cursor-pointer"
-                      @click="copyTag(getSpecialTagAll(reward))"
-                    >
+                    <p class="text-blue-800 font-bold cursor-pointer" @click="copyTag(getSpecialTagAll(reward))">
                       特殊TAG: {{ getSpecialTagAll(reward) || reward.specialTagAll }}
                     </p>
 
@@ -322,73 +223,44 @@
                   <div class="w-1/2 mx-4" v-if="reward.requirements?.length">
                     <div v-for="(req, reqIndex) in reward.requirements" :key="reqIndex">
                       <span v-if="req.allNum">总投稿数{{ req.allNum }}</span>
-                      <span
-                        v-if="req.allViewNum"
-                        :class="req.allViewNum <= 30000 ? ' text-orange-500' : ''"
-                      >
-                        <span>+</span>总播放量{{ req.allViewNum }}</span
-                      >
+                      <span v-if="req.allViewNum" :class="req.allViewNum <= 30000 ? ' text-orange-500' : ''">
+                        <span>+</span>总播放量{{ req.allViewNum }}</span>
                       <span v-if="req.view" :class="req.view <= 3000 ? ' text-orange-500' : ''">
-                        <span>+</span>单视频播放量{{ req.view }}</span
-                      >
+                        <span>+</span>单视频播放量{{ req.view }}</span>
                       <span v-if="req.cday"> <span>+</span>投稿天数>={{ req.cday }}</span>
                       <span v-if="req.like" :class="req.like <= 500 ? ' text-orange-500' : ''">
-                        <span>+</span>点赞>={{ req.like }}</span
-                      >
-                      <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''"
-                        >=瓜分{{ req.money }}</span
-                      >
-                      <el-tooltip
-                        effect="dark"
-                        placement="top-start"
-                        :content="getTooltipContent(req, scope.row.bilibili)"
-                        v-if="scope.row.bilibili"
-                      >
-                        <el-progress
-                          :percentage="getCompletionPercentage(req, scope.row.bilibili).percentage"
-                          :status="getCompletionStatus(req, scope.row.bilibili)"
-                          :format="
-                            (percentage) => formatRequirement(req, percentage, scope.row.bilibili)
-                          "
-                        />
+                        <span>+</span>点赞>={{ req.like }}</span>
+                      <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
+                        }}</span>
+                      <el-tooltip effect="dark" placement="top-start"
+                        :content="getTooltipContent(req, scope.row.bilibili)" v-if="scope.row.bilibili">
+                        <el-progress :percentage="getCompletionPercentage(req, scope.row.bilibili).percentage"
+                          :status="getCompletionStatus(req, scope.row.bilibili)" :format="(percentage) => formatRequirement(req, percentage, scope.row.bilibili)
+                            " />
                       </el-tooltip>
                     </div>
                   </div>
-                  <div
-                    v-if="
-                      reward.specialTagRequirements &&
-                      ['抖音', '快手', '小红书', 'bilibili'].includes(reward.name)
-                    "
-                    class="flex-1"
-                  >
+                  <div v-if="
+                    reward.specialTagRequirements &&
+                    ['抖音', '快手', '小红书', 'bilibili'].includes(reward.name)
+                  " class="flex-1">
                     <template v-for="(rew, reqIndex) in reward.specialTagRequirements">
-                      <el-card
-                        :key="reqIndex"
-                        v-if="
-                          rew.eDate
-                            ? getDaysDiff(new Date(rew.eDate).getTime()) >= 0
-                            : getDaysDiff(scope.row.etime * 1000) >= 0
-                        "
-                      >
+                      <el-card :key="reqIndex" v-if="
+                        rew.eDate
+                          ? getDaysDiff(new Date(rew.eDate).getTime()) >= 0
+                          : getDaysDiff(scope.row.etime * 1000) >= 0
+                      ">
                         <!-- <h4 class="font-bold" v-if="rew.sDate">活动开始{{ rew.sDate }} </h4> -->
-                        <h4
-                          class="font-bold"
-                          v-if="rew.eDate"
-                          :class="
-                            getDaysDiff(new Date(rew.eDate).getTime()) <= 4 ? 'text-orange-500' : ''
-                          "
-                        >
+                        <h4 class="font-bold" v-if="rew.eDate" :class="getDaysDiff(new Date(rew.eDate).getTime()) <= 4 ? 'text-orange-500' : ''
+                          ">
                           活动结束{{ rew.eDate }} 还剩{{
                             getDaysDiff(new Date(rew.eDate).getTime())
                           }}天
                         </h4>
                         <h4 class="font-bold">{{ rew.name }}</h4>
                         <div>
-                          <p
-                            class="text-blue-800 cursor-pointer"
-                            @click="copyTag(rew.specialTag || rew.specialTagAll)"
-                            v-if="rew.specialTag || rew.specialTagAll"
-                          >
+                          <p class="text-blue-800 cursor-pointer" @click="copyTag(rew.specialTag || rew.specialTagAll)"
+                            v-if="rew.specialTag || rew.specialTagAll">
                             特殊TAG:
                             {{
                               rew.specialTag ||
@@ -403,20 +275,13 @@
                         <div v-for="(req, reqIndex) in rew.reward" :key="reqIndex">
                           <span v-if="req.time"> <span>+</span>持续时间>={{ req.time }}</span>
                           <span v-if="req.allNum">总投稿数{{ req.allNum }}</span>
-                          <span
-                            v-if="req.allViewNum"
-                            :class="req.allViewNum <= 20000 ? ' text-orange-500' : ''"
-                          >
-                            <span>+</span>总播放量{{ req.allViewNum }}</span
-                          >
+                          <span v-if="req.allViewNum" :class="req.allViewNum <= 20000 ? ' text-orange-500' : ''">
+                            <span>+</span>总播放量{{ req.allViewNum }}</span>
                           <span v-if="req.view"> <span>+</span>单视频播放量{{ req.view }}</span>
                           <span v-if="req.cday"> <span>+</span>投稿天数>={{ req.cday }}</span>
                           <span v-if="req.like"> <span>+</span>点赞>={{ req.like }}</span>
-                          <span
-                            v-if="req.money"
-                            :class="req.money >= 50000 ? ' text-orange-500' : ''"
-                            >=瓜分{{ req.money }}</span
-                          >
+                          <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
+                            }}</span>
 
                           <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
@@ -425,17 +290,11 @@
                           <template v-if="rew?.videoData">
                             <div v-for="r in rew.videoData" :key="r">
                               {{ r.userName }}:
-                              <el-tooltip
-                                effect="dark"
-                                placement="top-start"
-                                :content="getTooltipContent(req, r, reward)"
-                                v-if="r.userName"
-                              >
-                                <el-progress
-                                  :percentage="getCompletionPercentage(req, r).percentage"
+                              <el-tooltip effect="dark" placement="top-start"
+                                :content="getTooltipContent(req, r, reward)" v-if="r.userName">
+                                <el-progress :percentage="getCompletionPercentage(req, r).percentage"
                                   :status="getCompletionStatus(req, r)"
-                                  :format="(percentage) => formatRequirement(req, percentage, r)"
-                                />
+                                  :format="(percentage) => formatRequirement(req, percentage, r)" />
                               </el-tooltip>
                             </div>
                           </template>
@@ -449,20 +308,14 @@
           </el-table-column>
           <el-table-column label="Video Detail" min-width="750">
             <template #default="scope">
-              <p
-                class="text-blue-800 cursor-pointer"
-                @click="copyTag(getCommonTagAll(scope.row) || scope.row.commonTagALL)"
-              >
+              <p class="text-blue-800 cursor-pointer"
+                @click="copyTag(getCommonTagAll(scope.row) || scope.row.commonTagALL)">
                 总标签 :{{ getCommonTagAll(scope.row) || scope.row.commonTagALL }}
               </p>
               <div v-if="scope.row?.bilibili?.onePlayNumList.length >= 1">
                 <p v-for="(video, index) in scope.row.bilibili.onePlayNumList" :key="index">
-                  <a
-                    :href="`https://www.bilibili.com/video/${video.bvid}/?spm_id_from=333.337.search-card.all.click&vd_source=c9acef8cde35247caf98fa45c32fe95f`"
-                    target="_blank"
-                    class="text-blue-500"
-                    >{{ video.title }}</a
-                  >
+                  <a :href="`https://www.bilibili.com/video/${video.bvid}/?spm_id_from=333.337.search-card.all.click&vd_source=c9acef8cde35247caf98fa45c32fe95f`"
+                    target="_blank" class="text-blue-500">{{ video.title }}</a>
                   ({{ video.view }} 播放) ({{ video.like }} 点赞) ({{ video.reply }} 回复)
                 </p>
               </div>
@@ -475,13 +328,11 @@
         <el-affix :offset="20" :right="20" class="right-4">
           <el-button type="primary" @click="fetchNewDakaData">查询新的打卡挑战数据</el-button>
         </el-affix>
-        <el-table :data="dakaTableData" style="width: 100%">
+        <el-table :data="dakaTableData" style="width: 100%" border>
           <el-table-column prop="title" label="活动标题" width="180">
             <template #default="scope">
-              <a
-                :href="`https://member.bilibili.com/york/platform-punch-card/detail?navhide=1&id=${scope.row.act_id}&from=1`"
-                target="_blank"
-              >
+              <a :href="`https://member.bilibili.com/york/platform-punch-card/detail?navhide=1&id=${scope.row.act_id}&from=1`"
+                target="_blank">
                 {{ scope.row.title }}
                 <div v-if="scope.row.icon_state === 1">立即投稿</div>
                 <div v-else class="text-red-500">去报名</div>
@@ -495,11 +346,7 @@
           </el-table-column>
           <el-table-column label="话题" width="150">
             <template #default="scope">
-              <el-tag
-                v-for="tag in scope.row.detail.act_rule.topic"
-                :key="tag"
-                style="margin-right: 5px"
-              >
+              <el-tag v-for="tag in scope.row.detail.act_rule.topic" :key="tag" style="margin-right: 5px">
                 {{ tag.name }}
               </el-tag>
             </template>
@@ -507,9 +354,7 @@
           <el-table-column prop="etime" label="结束时间" width="180">
             <template #default="scope">
               <div v-html="getDaysHtml(scope.row.etime)"></div>
-              <div
-                v-html="scope.row.detail.task_data?.main?.desc || scope.row.detail.task_data?.desc"
-              ></div>
+              <div v-html="scope.row.detail.task_data?.main?.desc || scope.row.detail.task_data?.desc"></div>
             </template>
           </el-table-column>
           <el-table-column label="规则文本" width="300">
@@ -517,7 +362,7 @@
               <div v-html="scope.row.detail.rule_text.split('\n\n【打卡稿件的要求】\n')[0]" />
             </template>
           </el-table-column>
-          <el-table-column label="任务数据">
+          <el-table-column label="任务数据" min-width="1000">
             <template #default="scope">
               <div v-if="scope.row.detail.task_data.weeks">
                 <el-table :data="scope.row.detail.task_data.weeks">
@@ -537,13 +382,10 @@
                       <el-table :data="scope.row.tasks">
                         <el-table-column prop="award_name" label="奖励名称">
                           <template #default="scope">
-                            <span
-                              :class="
-                                scope.row.target_value <= scope.row.target_progress
-                                  ? 'text-emerald-400'
-                                  : ''
-                              "
-                              >{{ scope.row.award_name }}
+                            <span :class="scope.row.target_value <= scope.row.target_progress
+                              ? 'text-emerald-400'
+                              : ''
+                              ">{{ scope.row.award_name }}
                             </span>
                           </template>
                         </el-table-column>
@@ -557,16 +399,13 @@
                         <el-table-column prop="target_value" label="目标值" />
                         <el-table-column prop="target_progress" label="进度">
                           <template #default="scope">
-                            <el-progress
-                              :percentage="
-                                scope.row.target_value !== 0
-                                  ? (
-                                      (scope.row.target_progress / scope.row.target_value) *
-                                      100
-                                    ).toFixed(0)
-                                  : 0
-                              "
-                            />
+                            <el-progress :percentage="scope.row.target_value !== 0
+                              ? (
+                                (scope.row.target_progress / scope.row.target_value) *
+                                100
+                              ).toFixed(0)
+                              : 0
+                              " />
                           </template>
                         </el-table-column>
                       </el-table>
@@ -578,13 +417,10 @@
                 <el-table :data="scope.row.detail.task_data.tasks" style="width: 100%">
                   <el-table-column prop="award_name" label="奖励名称" width="120">
                     <template #default="scope">
-                      <span
-                        :class="
-                          scope.row.target_value <= scope.row.target_progress
-                            ? 'text-emerald-400'
-                            : ''
-                        "
-                        >{{ scope.row.award_name }}
+                      <span :class="scope.row.target_value <= scope.row.target_progress
+                        ? 'text-emerald-400'
+                        : ''
+                        ">{{ scope.row.award_name }}
                       </span>
                     </template>
                   </el-table-column>
@@ -616,11 +452,8 @@
     </el-tabs>
     <el-backtop :right="100" :bottom="100" />
 
-    <el-dialog
-      title="下载视频和分组区分"
-      v-model="dialogVisible"
-      :before-close="cancelDownloadSettings"
-    >
+
+    <el-dialog title="下载视频和分组区分" v-model="dialogVisible" :before-close="cancelDownloadSettings">
       <el-form :model="downloadSettings" label-width="150px">
         <el-form-item label="下载视频">
           <el-switch v-model="downloadSettings.isDownload" active-text="是" inactive-text="否" />
@@ -636,30 +469,19 @@
 
           <template v-if="downloadSettings.selectedStrategy === 'keyword'">
             <el-form-item label="关键词">
-              <el-input
-                v-model="downloadSettings.keyword"
-                placeholder="输入视频关键词，多个用逗号分隔"
-              />
+              <el-input v-model="downloadSettings.keyword" placeholder="输入视频关键词，多个用逗号分隔" />
             </el-form-item>
           </template>
 
           <template v-if="downloadSettings.selectedStrategy === 'file'">
             <el-form-item label="文件路径">
-              <el-input
-                v-model="downloadSettings.filePath"
-                placeholder="输入download.txt完整路径"
-              />
+              <el-input v-model="downloadSettings.filePath" placeholder="输入download.txt完整路径" />
             </el-form-item>
           </template>
 
           <template v-if="downloadSettings.selectedStrategy === 'group'">
             <el-form-item label="选择分组">
-              <el-checkbox
-                v-for="game in allGameList"
-                :key="game.name"
-                v-model="game.checked"
-                :label="game.name"
-              />
+              <el-checkbox v-for="game in allGameList" :key="game.name" v-model="game.checked" :label="game.name" />
             </el-form-item>
           </template>
           <el-form-item label="新旧JSON文件对比">
@@ -670,10 +492,7 @@
           </el-form-item>
 
           <el-form-item label="视频开始时间">
-            <el-input
-              v-model="downloadSettings.earliest"
-              placeholder="统一下载的最早时间 xx/xx/xx"
-            />
+            <el-input v-model="downloadSettings.earliest" placeholder="统一下载的最早时间 xx/xx/xx" />
           </el-form-item>
         </div>
 
@@ -693,34 +512,14 @@
     <el-dialog title="FFmpeg 处理设置" v-model="ffmpegDialogVisible">
       <el-form :model="ffmpegSettings" label-width="250px">
         <el-form-item label="名称">
-          <el-select
-            v-model="ffmpegSettings.gameName"
-            placeholder="请输入游戏名称"
-            filterable
-            clearable
-          >
-            <el-option
-              v-for="game in allGameList"
-              :key="game.name"
-              :label="game.name"
-              :value="game.name"
-            />
+          <el-select v-model="ffmpegSettings.gameName" placeholder="请输入游戏名称" filterable clearable>
+            <el-option v-for="game in allGameList" :key="game.name" :label="game.name" :value="game.name" />
           </el-select>
         </el-form-item>
         <el-form-item label="分组">
-          <el-select
-            v-model="ffmpegSettings.groupName"
-            placeholder="请选择分组"
-            filterable
-            clearable
-          >
+          <el-select v-model="ffmpegSettings.groupName" placeholder="请选择分组" filterable clearable>
             <el-option label="攻略" value="攻略" />
-            <el-option
-              v-for="game in allGameList"
-              :key="game.name"
-              :label="game.name"
-              :value="game.name"
-            />
+            <el-option v-for="game in allGameList" :key="game.name" :label="game.name" :value="game.name" />
           </el-select>
         </el-form-item>
         <el-form-item label="处理地址">
@@ -749,11 +548,7 @@
           </el-form-item>
           <el-form-item label="是否替换音乐">
             <el-switch v-model="ffmpegSettings.replaceMusic" active-text="是" inactive-text="否" />
-            <el-select
-              v-model="ffmpegSettings.musicName"
-              placeholder="请选择音乐"
-              v-if="ffmpegSettings.replaceMusic"
-            >
+            <el-select v-model="ffmpegSettings.musicName" placeholder="请选择音乐" v-if="ffmpegSettings.replaceMusic">
               <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
             </el-select>
           </el-form-item>
@@ -762,19 +557,11 @@
           <!-- 去重配置 -->
           <el-divider>去重配置</el-divider>
           <el-form-item label="是否开启去重配置">
-            <el-switch
-              v-model="ffmpegSettings.deduplicationConfig.enable"
-              @change="handleDeduplicationChange"
-            />
+            <el-switch v-model="ffmpegSettings.deduplicationConfig.enable" @change="handleDeduplicationChange" />
           </el-form-item>
           <div v-if="ffmpegSettings.deduplicationConfig.enable">
             <el-form-item label="变速因子">
-              <el-slider
-                v-model="ffmpegSettings.deduplicationConfig.speedFactor"
-                :min="0.8"
-                :max="1.2"
-                :step="0.05"
-              />
+              <el-slider v-model="ffmpegSettings.deduplicationConfig.speedFactor" :min="0.8" :max="1.2" :step="0.05" />
             </el-form-item>
 
             <el-form-item label="启用镜像">
@@ -783,62 +570,32 @@
 
             <el-form-item label="启用旋转">
               <el-switch v-model="ffmpegSettings.deduplicationConfig.enableRotate" />
-              <el-input-number
-                v-if="ffmpegSettings.deduplicationConfig.enableRotate"
-                v-model="ffmpegSettings.deduplicationConfig.rotateAngle"
-                :min="0"
-                :max="360"
-                :step="1"
-              />
+              <el-input-number v-if="ffmpegSettings.deduplicationConfig.enableRotate"
+                v-model="ffmpegSettings.deduplicationConfig.rotateAngle" :min="0" :max="360" :step="1" />
             </el-form-item>
 
             <el-form-item label="启用模糊">
               <el-switch v-model="ffmpegSettings.deduplicationConfig.enableBlur" />
-              <el-slider
-                v-if="ffmpegSettings.deduplicationConfig.enableBlur"
-                v-model="ffmpegSettings.deduplicationConfig.blurRadius"
-                :min="0"
-                :max="1"
-                :step="0.1"
-              />
+              <el-slider v-if="ffmpegSettings.deduplicationConfig.enableBlur"
+                v-model="ffmpegSettings.deduplicationConfig.blurRadius" :min="0" :max="1" :step="0.1" />
             </el-form-item>
 
             <el-form-item label="启用淡入淡出">
               <el-switch v-model="ffmpegSettings.deduplicationConfig.enableFade" />
-              <el-input-number
-                v-if="ffmpegSettings.deduplicationConfig.enableFade"
-                v-model="ffmpegSettings.deduplicationConfig.fadeDuration"
-                :min="0"
-                :max="2"
-                :step="0.1"
-              />
+              <el-input-number v-if="ffmpegSettings.deduplicationConfig.enableFade"
+                v-model="ffmpegSettings.deduplicationConfig.fadeDuration" :min="0" :max="2" :step="0.1" />
             </el-form-item>
 
             <el-form-item label="亮度调整">
-              <el-slider
-                v-model="ffmpegSettings.deduplicationConfig.brightness"
-                :min="-1"
-                :max="1"
-                :step="0.1"
-              />
+              <el-slider v-model="ffmpegSettings.deduplicationConfig.brightness" :min="-1" :max="1" :step="0.1" />
             </el-form-item>
 
             <el-form-item label="对比度调整">
-              <el-slider
-                v-model="ffmpegSettings.deduplicationConfig.contrast"
-                :min="0"
-                :max="2"
-                :step="0.1"
-              />
+              <el-slider v-model="ffmpegSettings.deduplicationConfig.contrast" :min="0" :max="2" :step="0.1" />
             </el-form-item>
 
             <el-form-item label="饱和度调整">
-              <el-slider
-                v-model="ffmpegSettings.deduplicationConfig.saturation"
-                :min="0"
-                :max="2"
-                :step="0.1"
-              />
+              <el-slider v-model="ffmpegSettings.deduplicationConfig.saturation" :min="0" :max="2" :step="0.1" />
             </el-form-item>
 
             <!-- <el-divider>背景虚化设置</el-divider> -->
@@ -848,21 +605,11 @@
 
             <template v-if="ffmpegSettings.deduplicationConfig.enableBgBlur">
               <el-form-item label="上部虚化比例">
-                <el-slider
-                  v-model="ffmpegSettings.deduplicationConfig.bgBlurTop"
-                  :min="0"
-                  :max="1"
-                  :step="0.1"
-                />
+                <el-slider v-model="ffmpegSettings.deduplicationConfig.bgBlurTop" :min="0" :max="1" :step="0.1" />
               </el-form-item>
 
               <el-form-item label="下部虚化比例">
-                <el-slider
-                  v-model="ffmpegSettings.deduplicationConfig.bgBlurBottom"
-                  :min="0"
-                  :max="1"
-                  :step="0.1"
-                />
+                <el-slider v-model="ffmpegSettings.deduplicationConfig.bgBlurBottom" :min="0" :max="1" :step="0.1" />
               </el-form-item>
             </template>
           </div>
@@ -873,12 +620,7 @@
           </el-form-item>
 
           <el-form-item label="合并时长限制(秒)" v-if="ffmpegSettings.enableMerge">
-            <el-input-number
-              v-model="ffmpegSettings.mergedLimitTime"
-              :min="10"
-              :max="60"
-              :step="5"
-            />
+            <el-input-number v-model="ffmpegSettings.mergedLimitTime" :min="10" :max="60" :step="5" />
           </el-form-item>
         </div>
       </el-form>
@@ -889,13 +631,8 @@
       </template>
     </el-dialog>
 
-    <!-- 奖励dialog -->
-    <el-dialog
-      title="编辑奖励"
-      v-model="editRewardDialogVisible"
-      width="50%"
-      :before-close="cancelEditReward"
-    >
+    <!-- 设置奖励dialog -->
+    <el-dialog title="编辑奖励" v-model="editRewardDialogVisible" width="50%" :before-close="cancelEditReward">
       <el-form :model="editRewardForm" label-width="150px">
         <el-form-item label="平台名称">
           <el-select v-model="editRewardForm.platformName" placeholder="请选择平台">
@@ -909,21 +646,14 @@
           <el-input v-model="editRewardForm.suppleTag" placeholder="请输入支撑标签" />
         </el-form-item>
         <el-form-item label="活动赛道">
-          <div
-            v-for="(specialTagRequirement, index) in editRewardForm.specialTagRequirements"
-            :key="index"
-          >
+          <div v-for="(specialTagRequirement, index) in editRewardForm.specialTagRequirements" :key="index">
             <el-card>
               <el-form-item label="活动名称">
                 <el-input v-model="specialTagRequirement.name" placeholder="请输入活动名称" />
               </el-form-item>
               <!-- el-switch 不做该任务（展示但整个框标橙色） 参与人数多|奖励少 -->
               <el-form-item label="不做该任务">
-                <el-switch
-                  v-model="specialTagRequirement.isNotDo"
-                  active-text="是"
-                  inactive-text="否"
-                />
+                <el-switch v-model="specialTagRequirement.isNotDo" active-text="是" inactive-text="否" />
               </el-form-item>
               <el-form-item label="视频最低时长">
                 <el-input-number v-model="specialTagRequirement.minVideoTime" />
@@ -938,19 +668,11 @@
                 <el-input v-model="specialTagRequirement.specialTag" placeholder="请输入必带标签" />
               </el-form-item>
               <el-form-item label="结束时间">
-                <el-date-picker
-                  v-model="specialTagRequirement.eDate"
-                  type="date"
-                  placeholder="选择结束时间"
-                  format="YYYY/MM/DD"
-                  value-format="YYYY/MM/DD"
-                />
+                <el-date-picker v-model="specialTagRequirement.eDate" type="date" placeholder="选择结束时间"
+                  format="YYYY/MM/DD" value-format="YYYY/MM/DD" />
               </el-form-item>
               <el-form-item label="奖励参数">
-                <div
-                  v-for="(reward, rewardIndex) in specialTagRequirement.reward"
-                  :key="rewardIndex"
-                >
+                <div v-for="(reward, rewardIndex) in specialTagRequirement.reward" :key="rewardIndex">
                   <el-form-item label="投稿数">
                     <el-input-number v-model="reward.allNum" :min="0" :max="1000" />
                   </el-form-item>
@@ -985,16 +707,12 @@
                     <el-switch v-model="reward.isGet" active-text="是" inactive-text="否" />
                   </el-form-item>
 
-                  <el-button type="danger" @click="removeReward(index, rewardIndex)"
-                    >删除</el-button
-                  >
+                  <el-button type="danger" @click="removeReward(index, rewardIndex)">删除</el-button>
                 </div>
                 <el-button type="primary" @click="addReward(index)">添加奖励</el-button>
               </el-form-item>
 
-              <el-button type="danger" @click="removeSpecialTagRequirement(index)"
-                >删除活动赛道</el-button
-              >
+              <el-button type="danger" @click="removeSpecialTagRequirement(index)">删除活动赛道</el-button>
             </el-card>
           </div>
           <el-button type="primary" @click="addSpecialTagRequirement">添加活动赛道</el-button>
@@ -1012,11 +730,7 @@
     </el-dialog>
 
     <!-- 设置定时上传任务 -->
-    <el-dialog
-      title="设置定时上传任务"
-      v-model="scheduleDialogVisible"
-      :before-close="cancelScheduleJob"
-    >
+    <el-dialog title="设置定时上传任务" v-model="scheduleDialogVisible" :before-close="cancelScheduleJob">
       <el-form :model="scheduleForm" label-width="120px">
         <el-form-item label="游戏名称">
           <el-input v-model="scheduleForm.gameName" placeholder="请输入游戏名称" />
@@ -1026,25 +740,11 @@
         </el-form-item>
         <template v-if="scheduleForm.platform !== '抖音'">
           <el-form-item label="分区选择">
-            <el-select
-              v-model="scheduleForm.selectedArea"
-              placeholder="请选择分区"
-              @change="handleAreaChange"
-            >
-              <el-option
-                v-for="area in bilibiliTid"
-                :key="area.name"
-                :label="area.name"
-                :value="area.name"
-              />
+            <el-select v-model="scheduleForm.selectedArea" placeholder="请选择分区" @change="handleAreaChange">
+              <el-option v-for="area in bilibiliTid" :key="area.name" :label="area.name" :value="area.name" />
             </el-select>
             <el-select v-model="scheduleForm.tid" placeholder="请选择子分区">
-              <el-option
-                v-for="subArea in getSubAreas"
-                :key="subArea.tid"
-                :label="subArea.name"
-                :value="subArea.tid"
-              />
+              <el-option v-for="subArea in getSubAreas" :key="subArea.tid" :label="subArea.name" :value="subArea.tid" />
             </el-select>
           </el-form-item>
           <el-form-item label="活动ID">
@@ -1059,19 +759,10 @@
         </el-form-item>
 
         <el-form-item label="开始时间">
-          <el-date-picker
-            v-model="scheduleForm.startTime"
-            type="datetime"
-            placeholder="选择开始时间"
-          />
+          <el-date-picker v-model="scheduleForm.startTime" type="datetime" placeholder="选择开始时间" />
         </el-form-item>
         <el-form-item label="上传间隔(小时)">
-          <el-input-number
-            v-model="scheduleForm.intervalHours"
-            :min="1"
-            :max="24"
-            placeholder="请输入上传间隔"
-          />
+          <el-input-number v-model="scheduleForm.intervalHours" :min="1" :max="24" placeholder="请输入上传间隔" />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -1082,7 +773,7 @@
       </template>
     </el-dialog>
 
-    <!-- 添加定时任务查看对话框 -->
+    <!-- 定时任务查看弹窗 -->
     <el-dialog title="定时任务列表" v-model="scheduleJobDialogVisible" width="70%">
       <template v-if="currentScheduleJob">
         <h3 class="mb-4">活动名称: {{ currentScheduleJob.topicName }}</h3>
@@ -1545,7 +1236,7 @@ const ffmpegSettings = ref({
     ...defaultDeduplicationConfigs.coser,
   },
   enableMerge: false,
-  mergedLimitTime: 20,
+  mergedLimitTime: 30,
 })
 
 // 处理去重开关变化
@@ -1800,11 +1491,11 @@ const getCompletionPercentage = (requirement, videoData) => {
     percentage:
       totalRequirements === 1
         ? Math.min(
-            (currentValues[Object.keys(requirement)[0]] /
-              targetValues[Object.keys(requirement)[0]]) *
-              100,
-            100,
-          )
+          (currentValues[Object.keys(requirement)[0]] /
+            targetValues[Object.keys(requirement)[0]]) *
+          100,
+          100,
+        )
         : (completedRequirements / totalRequirements) * 100,
     details,
     currentValues,
@@ -1827,8 +1518,8 @@ function getCurrentValue(key, data, requirement) {
     case 'allViewNum':
       return requirement?.minView
         ? data.onePlayNumList
-            .filter((i) => i.view >= requirement?.minView)
-            .reduce((sum, item) => sum + item.view, 0)
+          .filter((i) => i.view >= requirement?.minView)
+          .reduce((sum, item) => sum + item.view, 0)
         : data.allViewNum
     default:
       return 0

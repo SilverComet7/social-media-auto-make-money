@@ -3,38 +3,40 @@
     <!--  w-[1920px] h-[1080px] -->
 
     <!-- <audio :src="`${voice}`"></audio> -->
-    <audio ref="audioPlayer" src="../../public/五月天 - 后来的我们.mp3"
-     ></audio>
-
-
+    <audio ref="audioPlayer" src="../../public/五月天 - 后来的我们.mp3"></audio>
     <!-- <audio ref="audioPlayer" :src="audioSource" @timeupdate="onTimeUpdate" @loadedmetadata="onLoadedMetadata"></audio> -->
 
-
-    <div class="w-full  max-w-[84rem] mx-auto">
+    <div class="w-full max-w-[84rem] mx-auto">
       <h1 class="text-3xl font-black text-white mb-3 text-center">{{ videoTitle }}</h1>
       <div :class="`relative ${isOverHidden ? 'overflow-hidden' : 'overflow-auto'}`">
         <div class="flex" :style="{
           'transition-property': 'transform',
           transform: `translateX(-${currentIndex * 25}%)`,
         }">
-
           <RatingCard v-for="(card, index) in cards" :key="index" v-bind="card" :number="cards.length - index"
             :isCardEdit="isCardEdit" class="w-[24.7%] flex-shrink-0 mr-1">
-            <div v-if="isCardEdit" @click="cards.splice(index, 1)" class=" bg-red-600">删除这个卡片</div>
+            <div v-if="isCardEdit" @click="cards.splice(index, 1)" class="bg-red-600">
+              删除这个卡片
+            </div>
           </RatingCard>
         </div>
       </div>
     </div>
     <div class="my-10 flex flex-col text-white">
-      <button @click="nextCard">move</button>
+      <button @click="nextCard">自动滚动+播放音乐</button>
       <!-- <button @click="startAutoMove">
         {{ isRecording ? 'Recording...' : 'Start Recording Move' }}
       </button> -->
-      <button @click="resetMove">reset</button>
+      <button @click="resetMove">重置页面到初始状态</button>
       <!-- <button @click="isOverHidden = !isOverHidden">滚轮查看</button> -->
-      <button @click="isOverHidden = !isOverHidden; isCardEdit = !isCardEdit">滚轮查看+观察文本+编辑卡片</button>
+      <button @click="
+        isOverHidden = !isOverHidden;
+      isCardEdit = !isCardEdit
+        ">
+        滚轮查看+观察文本+编辑卡片
+      </button>
 
-      <div class=" flex ">
+      <div class="flex">
         <input type="number" v-model="num" class="text-black" />
         <button @click="cards = cards.slice(cards.length - num)">截取排名前N位</button>
         <button @click="cards = cards.slice(0, num).reverse()" class="mx-2">截取排名后N位</button>
@@ -42,12 +44,12 @@
       </div>
 
       <div class="flex">
-        page: <input v-model="page" class="text-black" />
-        pageNum: <input v-model="pageNum" class="text-black" />
+        page: <input v-model="page" class="text-black" /> pageNum:
+        <input v-model="pageNum" class="text-black" />
       </div>
-      <div class=" flex ">
+      <div class="flex">
         nodeId: <input v-model="nodeValue" class="text-black" />
-        <button @click="getNodeList()" class=" bg-blue-500">查询</button>
+        <button @click="getNodeList()" class="bg-blue-500">根据nodeId查询排行怕</button>
         <!-- <button @click="getNodeList()">每页100查询</button> -->
       </div>
     </div>
@@ -141,14 +143,6 @@ const cards = ref(
         'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/37/8d/33/378d33e3-8024-8f48-5d86-1740e70782be/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/300x300bb.png',
       company: 'Shanghai Hode Information Technology Co.,Ltd.',
     },
-
-    // {
-    //   imageUrl: '/placeholder.svg?height=200&width=300',
-    //   title: '赵六',
-    //   ratings: 2000,
-    //   score: 9.0,
-    //   description: '惊艳全场',
-    // },
   ].reverse(),
 )
 
@@ -161,61 +155,52 @@ const isCardEdit = ref(false)
 const recordedVideoUrl = ref(null)
 const num = ref(20)
 
-const audioPlayer = ref(null);
+const audioPlayer = ref(null)
 const nextCard = () => {
   if (currentIndex.value < cards.value.length - 4) {
     currentIndex.value += 0.0015
   }
-
-  // 打开随机音乐
   audioPlayer.value.play()
-
   autoMoveInterval.value = window.requestAnimationFrame(nextCard)
 }
 
-
-
 const resetMove = () => {
-
-  // 关闭音乐,重置到第一秒
   audioPlayer.value.pause()
   audioPlayer.value.currentTime = 0
 
   window.cancelAnimationFrame(autoMoveInterval.value)
   currentIndex.value = 0
   autoMoveInterval.value = null
-
 }
 const nodeValue = ref(11139732)
 const pageNum = ref(100)
 const page = ref(1)
 const queryType = ref('hot')
 const saveToDesktop = () => {
-  console.log(recordedVideoUrl.value)
-
   if (recordedVideoUrl.value) {
     const a = document.createElement('a')
     a.href = recordedVideoUrl.value
-    a.download = `{videoTitle.value}.mp4`
+    a.download = `${videoTitle.value}.mp4`
     a.click()
   }
 }
 onMounted(() => {
-  getNodeList()
+  // getNodeList()
 })
 
 onUnmounted(() => {
-  resetMove()
+  // resetMove()
 })
 
+// 查询排行榜API
 function getNodeList() {
   fetch(
     `https://games.mobileapi.hupu.com/1/8.1.6/bplcommentapi/bff/bpl/score_tree/groupAndSubNodes?pageSize=${pageNum.value}&page=${page.value}&nodeId=${nodeValue.value}&queryType=hot`,
     {
       headers: {
-        'Cookie': 'cpck=eyJpZGZhIjoiIiwiY2xpZW50IjoiYTEwNTVlZTRlYWFmYzZjNyIsInByb2plY3RJZCI6MX0%3D',
+        Cookie: '', // hupu_cookie
       },
-    }
+    },
   )
     .then((response) => {
       return response.json()
@@ -223,7 +208,9 @@ function getNodeList() {
     .then((res) => {
       videoTitle.value = res.data.groupInfo.name
       const list = res.data.nodePageResult.data
-        .filter((item) => item.node.hottestComments[0]?.length > 0 && item.node.scorePersonCount > 5)
+        .filter(
+          (item) => item.node.hottestComments[0]?.length > 0 && item.node.scorePersonCount > 5,
+        )
         .map((e) => {
           return {
             imageUrl: e.node.image[0],
@@ -235,7 +222,6 @@ function getNodeList() {
         })
 
       cards.value = list.sort((a, b) => a.score - b.score)
-      // Process the data and update the cards array accordingly
     })
     .catch((error) => {
       console.error('Error fetching data:', error)
