@@ -14,6 +14,7 @@ const {
   formatDate,
   getJsonData,
   formatSecondTimestamp,
+  writeLocalDataJson,
 } = require("./commonFunction.js");
 
 const { queryDouYinAllAccountsData } = require("./handleCrawer/douyin.js");
@@ -28,7 +29,8 @@ const {
   downloadVideosAndGroup,
 } = require("../TikTokDownloader/videoDownloadAndGroupList.js");
 const { allGameList } = require("../allGameNameList.js");
-const accountJson = getJsonData("./jsonFile/accountList.json");
+const accountJson = getJsonData("accountList.json");
+
 
 // 导入路由
 const replyRoutes = require('./src/modules/reply/controllers/reply.controller');
@@ -50,10 +52,7 @@ const headers = {
   Cookie: Cookie,
 };
 
-async function writeLocalDataJson(arr, fileName = "data.json") {
-  const data = JSON.stringify(arr, null, 2);
-  fs.writeFileSync(fileName, data);
-}
+
 
 async function get_BiliBili_Data(i, account = accountJson.bilibili[0]) {
   const keyword = i.searchKeyWord || "逆水寒";
@@ -148,7 +147,7 @@ app.get("/getNewActData", async (req, res) => {
           };
         });
 
-      let oldOtherDataArr = getJsonData("./gameData.json");
+      let oldOtherDataArr = getJsonData("gameData.json");
       newActList
         .filter((item) => {
           return allGameList.some((gameName) => item.name.includes(gameName));
@@ -210,7 +209,7 @@ app.get("/getNewActData", async (req, res) => {
         });
 
       writeLocalDataJson(list);
-      writeLocalDataJson(oldOtherDataArr, "./gameData.json");
+      writeLocalDataJson(oldOtherDataArr, "gameData.json");
 
       return newActList;
     }
@@ -232,7 +231,7 @@ app.post("/addPlatformReward", async (req, res) => {
     delete platformData.isUpdate;
 
     // 读取现有的 gameData.json 文件
-    let oldOtherDataArr = getJsonData("./gameData.json");
+    let oldOtherDataArr = getJsonData("gameData.json");
 
     // 找到对应的游戏
     const gameIndex = oldOtherDataArr.findIndex(
@@ -256,7 +255,7 @@ app.post("/addPlatformReward", async (req, res) => {
     }
 
     // 写入本地文件
-    writeLocalDataJson(oldOtherDataArr, "./gameData.json");
+    writeLocalDataJson(oldOtherDataArr, "gameData.json");
 
     res.json({ code: 0, msg: "奖励更新成功" });
   } catch (error) {
@@ -343,13 +342,13 @@ app.get("/getNewDakaData", async (req, res) => {
 });
 
 app.get("/data", async (req, res) => {
-  const BiliBiliScheduleJob = getJsonData("./scheduleJob/BiliBiliScheduleJob.json");
-  const DouyinScheduleJob = getJsonData("./scheduleJob/DouyinScheduleJob.json");
+  const BiliBiliScheduleJob = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
+  const DouyinScheduleJob = getJsonData("scheduleJob/DouyinScheduleJob.json");
+ 
   try {
     // 每次都实时读取data.json 文件并返回
     const data = getJsonData();
-
-    let otherGameData = getJsonData("./gameData.json");
+    let otherGameData = getJsonData("gameData.json");
     // 计算otherGameData rewards下各平台specialTagRequirements里的最近的活动结束时间，并赋值给最外层etime
     otherGameData.forEach((game) => {
       let minEtime = game.etime || Number.MAX_SAFE_INTEGER; // 默认活动最大
@@ -404,7 +403,7 @@ app.get("/data", async (req, res) => {
         };
       });
 
-    let dakaData = getJsonData("./B站打卡活动.json");
+    let dakaData = getJsonData("B站打卡活动.json");
 
     dakaData = dakaData
       .filter((item) => item.stime * 1000 < new Date().getTime())
@@ -427,7 +426,7 @@ app.get("/data", async (req, res) => {
       bilibiliActData,
       dakaData,
       allGameList,
-      scheduleJob:{
+      scheduleJob: {
         BiliBiliScheduleJob,
         DouyinScheduleJob
       }
@@ -486,8 +485,8 @@ async function getPlatformData() {
   xhsData = await queryXiaoHongShuAllAccountsData();
   douyinData = await queryDouYinAllAccountsData();
   bilibiliData = await querybilibiliAllAccountsData();
-  const oldOtherGameDataArr = getJsonData("./gameData.json");
-  const BiliBiliScheduleJobJson = getJsonData("./scheduleJob/BiliBiliScheduleJob.json");
+  const oldOtherGameDataArr = getJsonData("gameData.json");
+  const BiliBiliScheduleJobJson = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
   const jsonData = oldOtherGameDataArr.map((item) => {
     return {
       ...item,
@@ -642,7 +641,7 @@ async function getPlatformData() {
       }),
     };
   });
-  writeLocalDataJson(jsonData, "./gameData.json");
+  writeLocalDataJson(jsonData, "gameData.json");
   return jsonData;
 }
 
