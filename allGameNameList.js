@@ -1,10 +1,10 @@
 // 例举account_urls 可能没包含的相应的game攻略，不会分类
 const allGameList = [
-    // 其他
-    "coser本人", "coser同行", "游戏综合", "搞笑",
+    // 特殊赛道
+    "coser本人", "coser同行", "搞笑", "可爱赛道",
 
     // TODO 后续按厂商分类
-
+    "游戏综合",
     // 米哈游
     "崩坏星穹铁道", "绝区零", "原神", "少女前线2", "无期迷途", "剑与远征启程", "QQ飞车", "决战平安京",
     // 网易
@@ -23,7 +23,7 @@ const allGameList = [
     "碧蓝航线", "无限暖暖", "闪耀暖暖", "无尽梦回", "天龙八部", "重返未来1999", "崩坏3", "无畏契约", "魔兽世界",
 ]
 
-// D:\code\platform_game_activity
+
 const PROJECT_ROOT = "D:\\code\\platform_game_activity\\";
 
 module.exports = {

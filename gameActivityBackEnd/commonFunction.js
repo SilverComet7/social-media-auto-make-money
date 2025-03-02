@@ -1,16 +1,13 @@
 const fs = require("fs");
 
-// 格式化 YYYY-MM-DD 为秒级时间戳
-
 function formatSecondTimestamp(dateString, unit) {
   const date = new Date(dateString);
   if (unit === 'second') {
-      return Math.floor(date.getTime() / 1000);
+    return Math.floor(date.getTime() / 1000);
   }
   return date.getTime();
 }
 
-// 计算天数差
 const getDaysDiff = (timeStamp1, timeStamp2) => {
   const diffTime = timeStamp1 - timeStamp2;
   const endDiffDate = diffTime / (1000 * 60 * 60 * 24);
@@ -24,7 +21,7 @@ const formatDate = (timestamp = new Date().getTime()) => {
   );
 };
 
-function getOldData(jsonPath = "./data.json") {
+function getJsonData(jsonPath = "./data.json") {
   try {
     if (!fs.existsSync(jsonPath)) {
       console.warn(`文件不存在: ${jsonPath}`);
@@ -59,7 +56,7 @@ async function concurrentFetchWithDelay(
   limitNum = 5
 ) {
   const pLimit = (await import("p-limit")).default;
-  const limit = pLimit(limitNum); // 假设我们限制并发为1，可以根据需要调整
+  const limit = pLimit(limitNum);
 
   const limitedPromises = promises.map((promiseFactory) =>
     limit(async () => {
@@ -79,7 +76,7 @@ async function concurrentFetchWithDelay(
   return Promise.all(limitedPromises);
 }
 
-// 计算能简单瓜分到的钱
+// 计算能简单瓜分到的钱  任务指标【根据账号数据调整】
 function calculateTotalMoney(gameData) {
   let totalMoney = 0;
 
@@ -102,7 +99,7 @@ function calculateTotalMoney(gameData) {
 
 module.exports = {
   formatDate,
-  getOldData,
+  getJsonData,
   formatSecondTimestamp,
   getDaysDiff,
   concurrentFetchWithDelay,

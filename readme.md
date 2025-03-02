@@ -4,15 +4,17 @@
 
 > **目前处于积极更新中~**
 
-该项目原先是自己探索自媒体挣米，去仿 B 站 （虎扑评分排行榜）这种定位类型的自媒体账号，写的一个自动制作相应风格视频的网页工具. 后续不断扩大，想写成自动去完成多平台游戏任务的综合管理后台，已经能跑通了盈利点。 由于刚开始未往这个方向思考与设计，整体写的很乱，包括当时的迫切变现需要，很多都没封装，想优化的点很多，由于作者现在正在寻找工作，所以将仓库公开后，期望后续能寻找到也想探索自媒体赚米，（特别是游戏自媒体方向）的开发者，一起去完善该项目。
+该项目原先是自己探索自媒体挣米，去仿 **B 站 （虎扑评分排行榜）**![虎扑排行榜](./assert/image/hupu_Rank/首页.png)这种类型定位的自媒体账号，写的一个**自动制作**相应风格视频的网页工具. 后续不断扩大，想写成自动去完成多平台游戏任务的综合管理后台。虽已经能跑通了盈利点，不过由于刚开始未往多账号多平台这个方向思考与设计，整体代码结构很乱，还有待优化的点很多。由于作者现在正在**寻找新工作**，所以将仓库公开后，期望后续能寻找到也想探索自媒体赚米，（特别是游戏自媒体方向）的开发者，一起去完善（**优化详见 TODO 文件**）该项目。
 
-挣米逻辑
-（平台发放推广商单任务，接受任务后发视频做相关任务，播放量等指标达标后 1-2 月后会发放收益，任务不限粉丝量。该工具能以多号的方式扩大收益，目前也往这个方向开发设计）
+## 逻辑
 
-![B站](./image/B站收益后台.png)
-![抖音](./image/抖音收益后台.jpg)
+（平台发放推广商单任务，接受任务后发视频做相关任务，达到设定的指标后， 1-2 月或 1-2 个版本后会发放收益，部分任务不要求账号粉丝量。以多号的方式扩大收益，目前也往这个方向开发设计）\*\*\*\*
 
-小红书/快手 刚开始跑,我自己的号之前不怎么玩这两个平台,待测收益。
+![B站](./assert/image/game/social/B站收益后台.png)
+![抖音](./assert/image/game/social/抖音收益后台.jpg)
+![小红书](./assert/image/game/social/小红书收益后台.jpg)
+
+**快手平台**刚开始跑,我自己的号之前不怎么玩这个平台,待测收益。
 
 # 依赖
 
@@ -23,21 +25,24 @@
 - [TikTokDownloader](https://github.com/SilverComet7/TikTokDownloader) 筛选采集视频
 - [ffmpeg](https://ffmpeg.org/) 视频去重处理
 - [social-auto-upload](https://github.com/SilverComet7/social-auto-upload) 多平台定时上传
-- [Crawler](https://github.com/SilverComet7/Crawler) 获取视频播放数据
+- [Crawler](https://github.com/SilverComet7/Crawler) 获取视频数据
 
 ## 安装步骤
 
 1. 克隆项目到本地：
 
 ```bash
-git clone https://github.com/SilverComet7/social-media-auto-make-money?tab=readme-ov-file
-cd platform-game-activity
+git clone https://github.com/SilverComet7/social-media-auto-make-money
+cd social-media-auto-make-money
+git clone https://github.com/SilverComet7/TikTokDownloader
+git clone https://github.com/SilverComet7/Crawler
+git clone https://github.com/SilverComet7/social-auto-upload
 ```
 
 2. 安装项目依赖：
 
 ```bash
-npm run install        # 这将同时安装前端和后端的依赖
+npm run install
 ```
 
 其它仓库的依赖请参考各个仓库的 README.md 文件。
@@ -54,17 +59,9 @@ npm run dev_start
 
 这将同时启动前端和后端服务。
 
-### 生产环境
-
-运行以下命令启动生产环境：
-
-```bash
-npm run start
-```
-
 # ✨ 核心功能
 
-- **跨平台管理**：支持抖音/B 站/小红书等主流平台自动化运营
+- **跨平台管理**：支持抖音/B 站/小红书等主流平台
 - **自定义视频去重**：基于 FFmpeg 的视频二次创作
 - **任务自动化**：
   - 定时视频发布
@@ -77,26 +74,23 @@ npm run start
 
 - **零粉丝启动**：专为游戏厂商激励计划设计，新号即可参与
 
-- 定时养号（B 站）， 目前其它三个平台（快手/小红书/抖音）采用其它方式
+![首页部分](./assert/image/game/首页部分.png)
+![下载视频弹窗](./assert/image/game/下载视频弹窗.png)
+![FFmpeg去重](./assert/image/game/FFmpeg去重.png)
+![设置定时任务](./assert/image/game/设置定时任务.png)
+
+# 🌱 已实现功能和未来计划
+
+- [x] 定时养号（B 站）， 目前其它三个平台（快手/小红书/抖音）采用其它方式
 - 筛选视频并下载 （抖音）
+  - [x] 按分组下载
   - 关键词下载
-  - 按分组下载
   - 读取特定 download.txt 文件路径下载
-- 自定义控制视频去重参数
-- 定时上传视频
-- 视频数据聚合
-
-![首页部分](./image/首页部分.png)
-![下载视频弹窗](./image/下载视频弹窗.png)
-![FFmpeg去重](./image/FFmpeg去重.png)
-
-# 🌱 未来计划
-
-- [ ] 接入 AI 大模型辅助修改标题为爆款标题
-
-# 最终期望：自媒体的全链路解决方案
-
-1. 查找对标定位账号
-2. 每日养号 / 起号
-3. 辅助内容创作：视频采集 / 分镜混剪 / 去重 / 文案标题生成与优化
-4. 批量分发
+- [x] 自定义控制视频去重参数
+- [x] 设置定时任务上传视频
+- [x] 视频数据聚合
+- [ ] 查找对标同类型账号
+- [ ] 每日多平台自动养号
+- [ ] 辅助内容创作：视频采集 / 分镜混剪 / 视频去重 / 文案生成 / 接入 AI 大模型辅助修改标题为爆款标题
+- [ ] 批量分发
+- [ ] GUI 桌面化
