@@ -12,14 +12,14 @@ const {
   concurrentFetchWithDelay,
   calculateTotalMoney,
   formatDate,
-  getOldData,
+  getJsonData,
   formatSecondTimestamp,
 } = require("./commonFunction.js");
+
 const { queryDouYinAllAccountsData } = require("./handleCrawer/douyin.js");
 const { queryXiaoHongShuAllAccountsData } = require("./handleCrawer/xhs.js");
 const { querybilibiliAllAccountsData } = require("./handleCrawer/bilibili.js");
 
-const BiliBiliScheduleJobJson = require("./scheduleJob/BiliBiliScheduleJob.json");
 
 const {
   ffmpegHandleVideos,
@@ -28,8 +28,10 @@ const {
   downloadVideosAndGroup,
 } = require("../TikTokDownloader/videoDownloadAndGroupList.js");
 const { allGameList } = require("../allGameNameList.js");
-const accountJson = getOldData("./jsonFile/accountList.json"); // 账号列表模块，去
+const accountJson = getJsonData("./jsonFile/accountList.json");
 
+// 导入路由
+const replyRoutes = require('./src/modules/reply/controllers/reply.controller');
 
 app.use(cors());
 app.use(express.json());
@@ -102,7 +104,7 @@ async function get_BiliBili_Data(i, account = accountJson.bilibili[0]) {
 app.get("/getNewActData", async (req, res) => {
   try {
     async function getActivitiesList() {
-      let oldDataArr = getOldData();
+      let oldDataArr = getJsonData();
       const fetchUrl = `https://member.bilibili.com/x/web/activity/videoall`;
       const response = await fetch(fetchUrl, {
         headers,
@@ -146,7 +148,7 @@ app.get("/getNewActData", async (req, res) => {
           };
         });
 
-      let oldOtherDataArr = getOldData("./gameData.json");
+      let oldOtherDataArr = getJsonData("./gameData.json");
       newActList
         .filter((item) => {
           return allGameList.some((gameName) => item.name.includes(gameName));
@@ -226,11 +228,11 @@ app.post("/addPlatformReward", async (req, res) => {
   try {
     const { platformData } = req.body;
 
-    let { gameName, platformName, isUpdate } = platformData;
+    let { gameName, platformName } = platformData;
     delete platformData.isUpdate;
 
     // 读取现有的 gameData.json 文件
-    let oldOtherDataArr = getOldData("./gameData.json");
+    let oldOtherDataArr = getJsonData("./gameData.json");
 
     // 找到对应的游戏
     const gameIndex = oldOtherDataArr.findIndex(
@@ -341,11 +343,13 @@ app.get("/getNewDakaData", async (req, res) => {
 });
 
 app.get("/data", async (req, res) => {
+  const BiliBiliScheduleJob = getJsonData("./scheduleJob/BiliBiliScheduleJob.json");
+  const DouyinScheduleJob = getJsonData("./scheduleJob/DouyinScheduleJob.json");
   try {
     // 每次都实时读取data.json 文件并返回
-    const data = getOldData();
+    const data = getJsonData();
 
-    let otherGameData = getOldData("./gameData.json");
+    let otherGameData = getJsonData("./gameData.json");
     // 计算otherGameData rewards下各平台specialTagRequirements里的最近的活动结束时间，并赋值给最外层etime
     otherGameData.forEach((game) => {
       let minEtime = game.etime || Number.MAX_SAFE_INTEGER; // 默认活动最大
@@ -400,7 +404,7 @@ app.get("/data", async (req, res) => {
         };
       });
 
-    let dakaData = getOldData("./B站打卡活动.json");
+    let dakaData = getJsonData("./B站打卡活动.json");
 
     dakaData = dakaData
       .filter((item) => item.stime * 1000 < new Date().getTime())
@@ -423,7 +427,10 @@ app.get("/data", async (req, res) => {
       bilibiliActData,
       dakaData,
       allGameList,
-      BiliBiliScheduleJob: BiliBiliScheduleJobJson
+      scheduleJob:{
+        BiliBiliScheduleJob,
+        DouyinScheduleJob
+      }
     });
   } catch (error) {
     console.error("Error in /data endpoint:", error);
@@ -435,7 +442,7 @@ app.post("/updateDataOne", async (req, res) => {
   try {
     const { searchKeyWord } = req.body;
     const newData = await get_BiliBili_Data(req.body);
-    const oldDataArr = getOldData();
+    const oldDataArr = getJsonData();
     const arr = oldDataArr.map((item) => {
       if (item.searchKeyWord === searchKeyWord) {
         item.bilibili = newData;
@@ -444,6 +451,7 @@ app.post("/updateDataOne", async (req, res) => {
       }
       return item;
     });
+
     writeLocalDataJson(arr);
 
     res.json({
@@ -478,7 +486,8 @@ async function getPlatformData() {
   xhsData = await queryXiaoHongShuAllAccountsData();
   douyinData = await queryDouYinAllAccountsData();
   bilibiliData = await querybilibiliAllAccountsData();
-  const oldOtherGameDataArr = getOldData("./gameData.json");
+  const oldOtherGameDataArr = getJsonData("./gameData.json");
+  const BiliBiliScheduleJobJson = getJsonData("./scheduleJob/BiliBiliScheduleJob.json");
   const jsonData = oldOtherGameDataArr.map((item) => {
     return {
       ...item,
@@ -813,7 +822,7 @@ async function executeExpiredJobs(platform) {
   }
 
   async function waitSecond(time = 5000) {
-    const randomDelay = Math.floor(2000 + Math.random() * time); // 随机延迟2-7秒 
+    const randomDelay = Math.floor(2000 + Math.random() * time); // 随机延迟2-n秒 
     await new Promise(resolve => setTimeout(resolve, randomDelay));
   }
 }
@@ -976,71 +985,9 @@ app.post("/scheduleUpload", async (req, res) => {
   }
 });
 
-app.get("/unfavorableReply", async (req, res) => {
-  const unfavorableWords = [
-    { id: 1, keyword: "抄" },
-    { id: 2, keyword: "侵权" },
-    { id: 6, keyword: "洗稿" },
-    { id: 5, keyword: "搬运" },
-    { id: 5, keyword: "盗" },
-  ];
+// 注册路由
 
-  const messageList = await concurrentFetchWithDelay(
-    unfavorableWords.map((word) => {
-      return () =>
-        fetch(
-          `https://api.bilibili.com/x/v2/reply/up/fulllist?keyword=${word.keyword}&order=1&filter=-1&type=1&bvid=&pn=1&ps=10&charge_plus_filter=false`,
-          {
-            headers,
-          }
-        ).then(async (response) => {
-          // Process the data and return the results
-          const result = await response.json();
-          return (
-            result?.data?.list?.map((wordData) => {
-              return {
-                bvid: wordData.bvid,
-                oid: wordData.oid,
-                rpid: wordData.rpid,
-                message: wordData.content.message,
-              };
-            }) ?? []
-          );
-        });
-    })
-  );
-  res.json(messageList.flat());
-});
-
-app.post("/deleteUnfavorableReply", async (req, res) => {
-  try {
-
-    const { oid, rpid } = req.body;
-
-    const jsonBody = {
-      type: 1,
-      rpid: rpid,
-      oid: oid,
-      jsonp: "jsonp",
-      csrf: csrfToken,
-    };
-    const response = await fetch(`https://api.bilibili.com/x/v2/reply/del`, {
-      method: "POST",
-      headers: {
-        ...headers,
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-      },
-      body: JSON.stringify(jsonBody),
-    });
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    console.error("Error in /data endpoint:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-
+// app.use('/api/reply', replyRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
