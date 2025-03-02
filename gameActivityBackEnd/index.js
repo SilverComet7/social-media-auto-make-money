@@ -6,7 +6,7 @@ const port = 3000;
 const path = require("path");
 const { exec, spawn } = require("child_process");
 const schedule = require("node-schedule");
-const { PROJECT_ROOT } = require("../allGameNameList.js");
+const { PROJECT_ROOT, allGameList } = require("../const.js");
 
 const {
   concurrentFetchWithDelay,
@@ -28,7 +28,6 @@ const {
 const {
   downloadVideosAndGroup,
 } = require("../TikTokDownloader/videoDownloadAndGroupList.js");
-const { allGameList } = require("../allGameNameList.js");
 const accountJson = getJsonData("accountList.json");
 
 
@@ -344,7 +343,7 @@ app.get("/getNewDakaData", async (req, res) => {
 app.get("/data", async (req, res) => {
   const BiliBiliScheduleJob = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
   const DouyinScheduleJob = getJsonData("scheduleJob/DouyinScheduleJob.json");
- 
+
   try {
     // 每次都实时读取data.json 文件并返回
     const data = getJsonData();
@@ -426,6 +425,7 @@ app.get("/data", async (req, res) => {
       bilibiliActData,
       dakaData,
       allGameList,
+      topicJson: getJsonData("topic.json")?.topics,
       scheduleJob: {
         BiliBiliScheduleJob,
         DouyinScheduleJob
@@ -647,27 +647,26 @@ async function getPlatformData() {
 
 // 每24小时更新一次平台数据
 setInterval(getPlatformData, 1000 * 60 * 60 * 24);
+ // 根据平台选择配置文件
+ const platformConfig = {
+  bilibili: {
+    configPath: "scheduleJob/BiliBiliScheduleJob.json",
+    uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload\\uploader\\bilibili_uploader\\biliup.exe"),
+    accountType: "bilibili"
+  },
+  '抖音': {
+    configPath: "scheduleJob/DouyinScheduleJob.json",
+    uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
+    accountType: "douyin"
+  }
+};
 
 async function executeExpiredJobs(platform) {
   try {
-    // 根据平台选择配置文件
-    const platformConfig = {
-      bilibili: {
-        configPath: "./scheduleJob/BiliBiliScheduleJob.json",
-        uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload\\uploader\\bilibili_uploader\\biliup.exe"),
-        accountType: "bilibili"
-      },
-      '抖音': {
-        configPath: "./scheduleJob/DouyinScheduleJob.json",
-        uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
-        accountType: "douyin"
-      }
-    };
-
     const { configPath, uploaderPath, accountType } = platformConfig[platform];
     let scheduleJobs = [];
     try {
-      scheduleJobs = JSON.parse(fs.readFileSync(configPath));
+      scheduleJobs = getJsonData(configPath);
     } catch (err) {
       console.log(`${platform}定时任务配置文件不存在`);
       return;
@@ -922,12 +921,8 @@ app.post("/scheduleUpload", async (req, res) => {
       await checkAndExecuteJobs();
     } else {
 
-      // 根据平台选择配置文件路径
-      const platformConfig = {
-        bilibili: "./scheduleJob/BiliBiliScheduleJob.json",
-        '抖音': "./scheduleJob/DouyinScheduleJob.json"
-      };
-      const scheduleJobsPath = platformConfig[platform];
+    
+      const scheduleJobsPath = platformConfig[platform].configPath
 
       let scheduleJobs = [];
 
@@ -980,6 +975,51 @@ app.post("/scheduleUpload", async (req, res) => {
     res.status(500).json({
       code: 500,
       msg: "处理任务失败",
+    });
+  }
+});
+
+app.get("/getNewTopicData", async (req, res) => {
+  try {
+    const fetchUrl = "https://member.bilibili.com/x/vupre/web/topic/type";
+    const params = {
+      type_id: 172,
+      pn: 0,
+      ps: 200,
+      title: "",
+      t: Date.now()
+    };
+
+    const queryString = Object.keys(params)
+      .map(key => `${key}=${encodeURIComponent(params[key])}`)
+      .join('&');
+
+    const response = await fetch(`${fetchUrl}?${queryString}`, {
+      headers: {
+        ...headers,
+        "referer": "https://member.bilibili.com/"
+      }
+    });
+
+    const topicData = await response.json();
+    
+    if (topicData.code === 0 && topicData.data) {
+      // 写入topic.json文件
+      writeLocalDataJson(topicData.data, "topic.json");
+      
+      res.json({
+        code: 200,
+        msg: "Topic数据更新成功",
+        data: topicData.data
+      });
+    } else {
+      throw new Error(topicData.message || "获取Topic数据失败");
+    }
+  } catch (error) {
+    console.error("获取Topic数据时出错:", error);
+    res.status(500).json({
+      code: 500,
+      msg: error.message || "获取Topic数据失败"
     });
   }
 });

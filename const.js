@@ -30,3 +30,13 @@ module.exports = {
     allGameList,
     PROJECT_ROOT
 }   
+
+// 赛道
+// 该分组的博主
+// 通用tag
+// 通用title库
+
+
+// 文件
+// 多平台
+// 多账号

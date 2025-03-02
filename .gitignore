@@ -26,9 +26,11 @@ node_modules
 
 
 *.history
-accountList.json
 *.vscode
 
+accountList.json
+*.json
+scheduleJob/
 social-auto-upload/
 TikTokDownloader
 Crawle/

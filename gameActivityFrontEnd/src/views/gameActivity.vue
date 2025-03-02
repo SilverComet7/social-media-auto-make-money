@@ -79,7 +79,7 @@
           <el-table-column prop="endDiffDate" label="剩余天数" width="150" sortable>
             <template #default="scope"> {{ getDaysDiff(scope.row.etime * 1000) }} 天 </template>
           </el-table-column>
-          <el-table-column label="达标条件" width="750">
+          <el-table-column label="各平台活动与达标条件" width="750">
             <template #default="scope">
               <el-card v-for="(platform, platformIndex) in scope.row.rewards" :key="platformIndex">
                 <div class="flex">
@@ -146,7 +146,7 @@
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
                             <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                              }}</span>
+                            }}</span>
                             <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
                             <template v-if="speReq?.videoData">
                               <div v-for="r in speReq.videoData" :key="r">
@@ -231,7 +231,7 @@
                       <span v-if="req.like" :class="req.like <= 500 ? ' text-orange-500' : ''">
                         <span>+</span>点赞>={{ req.like }}</span>
                       <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                        }}</span>
+                      }}</span>
                       <el-tooltip effect="dark" placement="top-start"
                         :content="getTooltipContent(req, scope.row.bilibili)" v-if="scope.row.bilibili">
                         <el-progress :percentage="getCompletionPercentage(req, scope.row.bilibili).percentage"
@@ -281,7 +281,7 @@
                           <span v-if="req.cday"> <span>+</span>投稿天数>={{ req.cday }}</span>
                           <span v-if="req.like"> <span>+</span>点赞>={{ req.like }}</span>
                           <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                            }}</span>
+                          }}</span>
 
                           <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
@@ -536,6 +536,66 @@
           <el-switch v-model="ffmpegSettings.onlyRename" active-text="是" inactive-text="否" />
         </el-form-item>
         <div v-if="!ffmpegSettings.onlyRename && !ffmpegSettings.checkName">
+          <el-divider>视频去重配置</el-divider>
+          <el-form-item label="是否开启去重配置">
+            <el-switch v-model="ffmpegSettings.deduplicationConfig.enable" @change="handleDeduplicationChange" />
+            <div v-if="ffmpegSettings.deduplicationConfig.enable">
+              <el-form-item label="变速因子">
+                <el-slider v-model="ffmpegSettings.deduplicationConfig.speedFactor" :min="0.8" :max="1.2"
+                  :step="0.05" />
+              </el-form-item>
+
+              <el-form-item label="启用镜像">
+                <el-switch v-model="ffmpegSettings.deduplicationConfig.enableMirror" />
+              </el-form-item>
+
+              <el-form-item label="启用旋转">
+                <el-switch v-model="ffmpegSettings.deduplicationConfig.enableRotate" />
+                <el-input-number v-if="ffmpegSettings.deduplicationConfig.enableRotate"
+                  v-model="ffmpegSettings.deduplicationConfig.rotateAngle" :min="0" :max="360" :step="1" />
+              </el-form-item>
+
+              <el-form-item label="启用模糊">
+                <el-switch v-model="ffmpegSettings.deduplicationConfig.enableBlur" />
+                <el-slider v-if="ffmpegSettings.deduplicationConfig.enableBlur"
+                  v-model="ffmpegSettings.deduplicationConfig.blurRadius" :min="0" :max="1" :step="0.1" />
+              </el-form-item>
+
+              <el-form-item label="启用淡入淡出">
+                <el-switch v-model="ffmpegSettings.deduplicationConfig.enableFade" />
+                <el-input-number v-if="ffmpegSettings.deduplicationConfig.enableFade"
+                  v-model="ffmpegSettings.deduplicationConfig.fadeDuration" :min="0" :max="2" :step="0.1" />
+              </el-form-item>
+
+              <el-form-item label="亮度调整">
+                <el-slider v-model="ffmpegSettings.deduplicationConfig.brightness" :min="-1" :max="1" :step="0.1" />
+              </el-form-item>
+
+              <el-form-item label="对比度调整">
+                <el-slider v-model="ffmpegSettings.deduplicationConfig.contrast" :min="0" :max="2" :step="0.1" />
+              </el-form-item>
+
+              <el-form-item label="饱和度调整">
+                <el-slider v-model="ffmpegSettings.deduplicationConfig.saturation" :min="0" :max="2" :step="0.1" />
+              </el-form-item>
+
+              <!-- <el-divider>背景虚化设置</el-divider> -->
+              <el-form-item label="启用背景虚化">
+                <el-switch v-model="ffmpegSettings.deduplicationConfig.enableBgBlur" />
+              </el-form-item>
+
+              <template v-if="ffmpegSettings.deduplicationConfig.enableBgBlur">
+                <el-form-item label="上部虚化比例">
+                  <el-slider v-model="ffmpegSettings.deduplicationConfig.bgBlurTop" :min="0" :max="1" :step="0.1" />
+                </el-form-item>
+
+                <el-form-item label="下部虚化比例">
+                  <el-slider v-model="ffmpegSettings.deduplicationConfig.bgBlurBottom" :min="0" :max="1" :step="0.1" />
+                </el-form-item>
+              </template>
+            </div>
+          </el-form-item>
+
           <el-divider>基础变换</el-divider>
           <el-form-item label="截取开始时间n秒后">
             <el-input-number v-model="ffmpegSettings.beforeTime" :min="0" :max="100" />
@@ -546,73 +606,16 @@
           <el-form-item label="分辨率百分比">
             <el-input-number v-model="ffmpegSettings.scalePercent" :min="0" :max="100" />
           </el-form-item>
-          <el-form-item label="是否替换音乐">
+
+
+
+          <el-form-item label="单视频替换音乐">
             <el-switch v-model="ffmpegSettings.replaceMusic" active-text="是" inactive-text="否" />
             <el-select v-model="ffmpegSettings.musicName" placeholder="请选择音乐" v-if="ffmpegSettings.replaceMusic">
               <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
             </el-select>
           </el-form-item>
-          <!-- <el-form-item label="选择音乐" v-if="ffmpegSettings.replaceMusic">
-          </el-form-item> -->
-          <!-- 去重配置 -->
-          <el-divider>去重配置</el-divider>
-          <el-form-item label="是否开启去重配置">
-            <el-switch v-model="ffmpegSettings.deduplicationConfig.enable" @change="handleDeduplicationChange" />
-          </el-form-item>
-          <div v-if="ffmpegSettings.deduplicationConfig.enable">
-            <el-form-item label="变速因子">
-              <el-slider v-model="ffmpegSettings.deduplicationConfig.speedFactor" :min="0.8" :max="1.2" :step="0.05" />
-            </el-form-item>
 
-            <el-form-item label="启用镜像">
-              <el-switch v-model="ffmpegSettings.deduplicationConfig.enableMirror" />
-            </el-form-item>
-
-            <el-form-item label="启用旋转">
-              <el-switch v-model="ffmpegSettings.deduplicationConfig.enableRotate" />
-              <el-input-number v-if="ffmpegSettings.deduplicationConfig.enableRotate"
-                v-model="ffmpegSettings.deduplicationConfig.rotateAngle" :min="0" :max="360" :step="1" />
-            </el-form-item>
-
-            <el-form-item label="启用模糊">
-              <el-switch v-model="ffmpegSettings.deduplicationConfig.enableBlur" />
-              <el-slider v-if="ffmpegSettings.deduplicationConfig.enableBlur"
-                v-model="ffmpegSettings.deduplicationConfig.blurRadius" :min="0" :max="1" :step="0.1" />
-            </el-form-item>
-
-            <el-form-item label="启用淡入淡出">
-              <el-switch v-model="ffmpegSettings.deduplicationConfig.enableFade" />
-              <el-input-number v-if="ffmpegSettings.deduplicationConfig.enableFade"
-                v-model="ffmpegSettings.deduplicationConfig.fadeDuration" :min="0" :max="2" :step="0.1" />
-            </el-form-item>
-
-            <el-form-item label="亮度调整">
-              <el-slider v-model="ffmpegSettings.deduplicationConfig.brightness" :min="-1" :max="1" :step="0.1" />
-            </el-form-item>
-
-            <el-form-item label="对比度调整">
-              <el-slider v-model="ffmpegSettings.deduplicationConfig.contrast" :min="0" :max="2" :step="0.1" />
-            </el-form-item>
-
-            <el-form-item label="饱和度调整">
-              <el-slider v-model="ffmpegSettings.deduplicationConfig.saturation" :min="0" :max="2" :step="0.1" />
-            </el-form-item>
-
-            <!-- <el-divider>背景虚化设置</el-divider> -->
-            <el-form-item label="启用背景虚化">
-              <el-switch v-model="ffmpegSettings.deduplicationConfig.enableBgBlur" />
-            </el-form-item>
-
-            <template v-if="ffmpegSettings.deduplicationConfig.enableBgBlur">
-              <el-form-item label="上部虚化比例">
-                <el-slider v-model="ffmpegSettings.deduplicationConfig.bgBlurTop" :min="0" :max="1" :step="0.1" />
-              </el-form-item>
-
-              <el-form-item label="下部虚化比例">
-                <el-slider v-model="ffmpegSettings.deduplicationConfig.bgBlurBottom" :min="0" :max="1" :step="0.1" />
-              </el-form-item>
-            </template>
-          </div>
           <!-- 新增合并视频控制选项 -->
           <el-divider>合并视频设置</el-divider>
           <el-form-item label="启用视频合并">
@@ -622,6 +625,16 @@
           <el-form-item label="合并时长限制(秒)" v-if="ffmpegSettings.enableMerge">
             <el-input-number v-model="ffmpegSettings.mergedLimitTime" :min="10" :max="60" :step="5" />
           </el-form-item>
+
+          <!-- 合集音乐控制 -->
+          <el-form-item label="启用合集音乐" v-if="ffmpegSettings.enableMerge">
+            <el-switch v-model="ffmpegSettings.enableMergeMusic" />
+            <el-select v-if="ffmpegSettings.enableMergeMusic" v-model="ffmpegSettings.mergeMusicName"
+              placeholder="请选择音乐">
+              <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
+            </el-select>
+          </el-form-item>
+
         </div>
       </el-form>
       <template #footer>
@@ -738,7 +751,36 @@
         <el-form-item label="活动名称">
           <el-input v-model="scheduleForm.topicName" placeholder="请输入活动名称" />
         </el-form-item>
-        <template v-if="scheduleForm.platform !== '抖音'">
+        <el-form-item label="视频目录">
+          <el-input v-model="scheduleForm.videoDir" placeholder="请输入视频所在目录路径" />
+        </el-form-item>
+        <el-form-item label="特殊赛道标签组">
+          <el-select v-model="selectedTrack" placeholder="选择特殊赛道" @change="handleTrackChange"
+            style="margin-bottom: 10px" clearable>
+            <el-option v-for="(config, track) in specialTrackConfigs" :key="track" :label="track" :value="track">
+              <div>
+                <div>{{ track }}</div>
+                <small class="text-gray-500">
+                  {{ config.baseTags.join(' ') }}
+                </small>
+              </div>
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="标签">
+          <el-input v-model="scheduleForm.tag" type="textarea" :rows="3" placeholder="标签将根据选择的赛道自动生成，也可以手动编辑" />
+        </el-form-item>
+
+        <el-form-item label="开始时间">
+          <el-date-picker v-model="scheduleForm.startTime" type="datetime" placeholder="选择开始时间" />
+        </el-form-item>
+        <el-form-item label="上传间隔(小时)">
+          <el-input-number v-model="scheduleForm.intervalHours" :min="1" :max="24" placeholder="请输入上传间隔" />
+        </el-form-item>
+
+
+
+        <template v-if="scheduleForm.platform === 'bilibili'">
           <el-form-item label="分区选择">
             <el-select v-model="scheduleForm.selectedArea" placeholder="请选择分区" @change="handleAreaChange">
               <el-option v-for="area in bilibiliTid" :key="area.name" :label="area.name" :value="area.name" />
@@ -751,19 +793,10 @@
             <el-input v-model="scheduleForm.missionId" placeholder="请输入活动ID" />
           </el-form-item>
         </template>
-        <el-form-item label="视频目录">
-          <el-input v-model="scheduleForm.videoDir" placeholder="请输入视频所在目录路径" />
-        </el-form-item>
-        <el-form-item label="标签">
-          <el-input v-model="scheduleForm.tag" placeholder="请输入视频标签" />
-        </el-form-item>
 
-        <el-form-item label="开始时间">
-          <el-date-picker v-model="scheduleForm.startTime" type="datetime" placeholder="选择开始时间" />
-        </el-form-item>
-        <el-form-item label="上传间隔(小时)">
-          <el-input-number v-model="scheduleForm.intervalHours" :min="1" :max="24" placeholder="请输入上传间隔" />
-        </el-form-item>
+
+
+
       </el-form>
       <template #footer>
         <span class="dialog-footer">
@@ -807,7 +840,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { ElMessage } from 'element-plus'
-import topicJson from '../../public/topic.json'
+// import topicJson from '../../public/topic.json'
 import bilibiliTid from '../../public/bilibiliTid.json'
 
 interface BilibiliArea {
@@ -821,14 +854,14 @@ interface BilibiliArea {
 interface VideoData {
   userName: string
   allNum: number
-  onePlayNumList: {
+  onePlayNumList: Array<{
     view: number
     like: number
     reply: number
     ctime: number
     title: string
     bvid: string
-  }[]
+  }>
   allViewNum: number
   allLike: number
 }
@@ -880,14 +913,14 @@ interface GameActivity {
 
 interface ScheduleForm {
   gameName: string
+  platform: string
+  tag: string
   topicName: string
   videoDir: string
-  tag: string
   tid: number
   missionId: string
   startTime: Date | null
   intervalHours: number
-  platform: string
   immediately: boolean
   selectedArea: string
 }
@@ -922,7 +955,7 @@ const scheduleForm = ref<ScheduleForm>({
   intervalHours: 24,
   platform: '',
   immediately: false,
-  selectedArea: '游戏区',
+  selectedArea: '游戏区'
 })
 
 // 打开定时任务设置弹窗
@@ -932,7 +965,7 @@ const setScheduleJob = (
   row: GameActivity,
 ) => {
   const { topic, specialTag } = rew
-  const missionId = topicJson.find((item: any) => item.topic_name === topic)?.mission_id
+  const missionId = topicJson.value.find((item: any) => item.topic_name === topic)?.mission_id
 
   // B站平台 如果没有找到对应的 missionId
   if (!missionId && platform.name === 'bilibili') {
@@ -960,15 +993,16 @@ const setScheduleJob = (
   scheduleForm.value = {
     gameName: row.name,
     topicName: topic || rew.name,
-    videoDir: '',
+    platform: platform.name,
     tag: allTag,
-    tid: 172,
     missionId: missionId || '',
     startTime: null,
     intervalHours: 24,
-    platform: platform.name,
     immediately: false,
     selectedArea: '游戏区',
+    tid: 172,
+    videoDir: '',
+    ...rew
   }
 
   scheduleDialogVisible.value = true
@@ -1179,7 +1213,7 @@ const downloadSettings = ref({
   checkNewAdd: false,
   allDownload: false,
   checkName: false,
-  earliest: '2024/9/19',
+  earliest: '', // 近两个月
   currentUpdateGameList: [],
 })
 
@@ -1225,7 +1259,7 @@ const ffmpegSettings = ref({
   checkName: false,
   beforeTime: 1,
   fps: 30,
-  scalePercent: 90,
+  scalePercent: 0,  // 1920X1080
   replaceMusic: false,
   musicName: 'billll',
   gameName: '',
@@ -1235,8 +1269,11 @@ const ffmpegSettings = ref({
     enable: false,
     ...defaultDeduplicationConfigs.coser,
   },
+
   enableMerge: false,
   mergedLimitTime: 30,
+  enableMergeMusic: false,
+  mergeMusicName: 'billll',
 })
 
 // 处理去重开关变化
@@ -1292,7 +1329,6 @@ const confirmFFmpegSettings = async () => {
     body: JSON.stringify({ ffmpegSettings: ffmpegSettings.value }),
   }).then((res) => {
     if (res.ok) {
-      // fetchData()
       dialogVisible.value = false
       ElMessage.success('ffmpeg成功处理视频')
     } else {
@@ -1340,9 +1376,9 @@ const getCommonTagAll = (row) => {
 const bilibiliActTableData = ref([])
 const gameTableData = ref([])
 const dakaTableData = ref([])
-
 const BiliBiliScheduleJob = ref([])
 const DouyinScheduleJob = ref([])
+const topicJson = ref([])
 
 const fetchData = async () => {
   try {
@@ -1360,9 +1396,9 @@ const fetchData = async () => {
     dakaTableData.value = res.dakaData
     gameTableData.value = res.gameData
     allGameList.value = res.allGameList.map((e) => ({ name: e, checked: false }))
-
     BiliBiliScheduleJob.value = res.scheduleJob.BiliBiliScheduleJob
     DouyinScheduleJob.value = res.scheduleJob.DouyinScheduleJob
+    topicJson.value = res.topicJson
 
     ElMessage.success('数据刷新成功')
   } catch (error) {
@@ -1627,6 +1663,77 @@ const getSubAreas = computed(() => {
 const handleAreaChange = () => {
   scheduleForm.value.tid = 0 // 清空子分区选择
 }
+
+interface SpecialTrackConfig {
+  baseTags: string[]
+  extraTags: string[]
+}
+
+interface SpecialTrackConfigs {
+  [key: string]: SpecialTrackConfig
+}
+
+const selectedTrack = ref<string>('')
+
+const specialTrackConfigs: SpecialTrackConfigs = {
+  'coser本人': {
+    baseTags: ['#coser', '#cos正片', '#cos', '#写真'],
+    extraTags: ['#coser本人']
+  },
+  'coser同行': {
+    baseTags: ['#coser', '#cos正片', '#cos', '#写真'],
+    extraTags: ['#coser同行']
+  },
+  '搞笑': {
+    baseTags: ['#搞笑', '#游戏搞笑', '#沙雕'],
+    extraTags: ['#沙雕剪辑']
+  }
+}
+
+// 使用 computed 属性计算特殊赛道的标签
+const computedTrackTags = computed(() => {
+  if (!selectedTrack.value || !scheduleForm.value?.gameName) {
+    return ''
+  }
+
+  const config = specialTrackConfigs[selectedTrack.value]
+  if (!config) return ''
+
+  // 合并基础标签、额外标签和游戏名称
+  const allTags = [
+    ...new Set([
+      `#${scheduleForm.value.gameName}`,
+      ...config.baseTags,
+      ...config.extraTags
+    ])
+  ]
+
+  // 根据平台格式化标签
+  return formatTagsByPlatform(allTags, scheduleForm.value.platform)
+})
+
+// 格式化标签函数
+const formatTagsByPlatform = (tags: string[], platform: string): string => {
+  const formattedTags = tags.map(tag => {
+    if (platform === 'bilibili') {
+      return tag.startsWith('#') ? tag.slice(1) : tag
+    }
+    return tag.startsWith('#') ? tag : `#${tag}`
+  })
+
+  return formattedTags.join(platform === 'bilibili' ? ',' : ' ')
+}
+
+// 处理赛道选择变化
+const handleTrackChange = (value: string): void => {
+  if (!value) {
+    scheduleForm.value.tag = ''
+    return
+  }
+
+  // 使用计算好的标签
+  scheduleForm.value.tag = computedTrackTags.value
+}
 </script>
 
 <style scoped>
@@ -1655,5 +1762,10 @@ h4 {
   min-width: 300px;
   border: 1px solid #ebeef5;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.text-gray-500 {
+  color: #6b7280;
+  font-size: 12px;
 }
 </style>

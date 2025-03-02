@@ -3530,34 +3530,14 @@
         "name": "小红书",
         "specialTagRequirements": [
           {
-            "name": "绝区零1.4创作激励计划",
-            "specialTag": "#绝区零 #绝区零创作激励计划",
+            "name": "",
+            "specialTag": "#绝区零 #绝区零创作者激励计划",
+            "eDate": "2025/03/11",
             "reward": [
               {
                 "allNum": 5,
-                "money": 20000,
+                "money": 50000,
                 "isGet": false
-              }
-            ],
-            "videoData": [
-              {
-                "userName": "Feeling",
-                "allNum": 0,
-                "allLike": 0,
-                "onePlayNumList": []
-              }
-            ]
-          },
-          {
-            "name": "绝区零星见雅",
-            "specialTag": "#绝区零 #绝区零创作激励计划 #绝区零星见雅",
-            "reward": [],
-            "videoData": [
-              {
-                "userName": "Feeling",
-                "allNum": 0,
-                "allLike": 0,
-                "onePlayNumList": []
               }
             ]
           }
