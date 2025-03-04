@@ -25,8 +25,20 @@ const allGameList = [
 
 
 const PROJECT_ROOT = "D:\\code\\platform_game_activity\\";
+const TikTokDownloader_ROOT = "D:\\code\\platform_game_activity\\TikTokDownloader\\";
 
 module.exports = {
     allGameList,
-    PROJECT_ROOT
+    PROJECT_ROOT,
+    TikTokDownloader_ROOT
 }   
+
+// 赛道
+// 该分组的博主
+// 通用tag
+// 通用title库
+
+
+// 文件
+// 多平台
+// 多账号

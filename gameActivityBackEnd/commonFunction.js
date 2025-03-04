@@ -1,4 +1,6 @@
 const fs = require("fs");
+const path = require("path");
+const jsonParentPath = 'jsonFile';
 
 function formatSecondTimestamp(dateString, unit) {
   const date = new Date(dateString);
@@ -21,7 +23,9 @@ const formatDate = (timestamp = new Date().getTime()) => {
   );
 };
 
-function getJsonData(jsonPath = "./data.json") {
+function getJsonData(inJsonPath = "data.json") {
+  const jsonPath = path.join(__dirname, jsonParentPath, inJsonPath);
+
   try {
     if (!fs.existsSync(jsonPath)) {
       console.warn(`文件不存在: ${jsonPath}`);
@@ -47,6 +51,12 @@ function getJsonData(jsonPath = "./data.json") {
     console.error(`读取文件错误 (${jsonPath}):`, error);
     return [];
   }
+}
+
+async function writeLocalDataJson(arr, fileName = "data.json") {
+  const data = JSON.stringify(arr, null, 2);
+  const filePath = path.join(__dirname, jsonParentPath, fileName);
+  fs.writeFileSync(filePath, data);
 }
 
 async function concurrentFetchWithDelay(
@@ -104,4 +114,5 @@ module.exports = {
   getDaysDiff,
   concurrentFetchWithDelay,
   calculateTotalMoney,
+  writeLocalDataJson,
 };

@@ -39,8 +39,6 @@ async function querybilibiliAllAccountsData() {
     return handleData
 }
 
-// 账号失活 自动更新Cookie
-
 module.exports = {
     querybilibiliAllAccountsData
 }   

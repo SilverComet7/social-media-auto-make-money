@@ -6,7 +6,7 @@ const port = 3000;
 const path = require("path");
 const { exec, spawn } = require("child_process");
 const schedule = require("node-schedule");
-const { PROJECT_ROOT } = require("../allGameNameList.js");
+const { PROJECT_ROOT, allGameList } = require("../const.js");
 
 const {
   concurrentFetchWithDelay,
@@ -14,6 +14,7 @@ const {
   formatDate,
   getJsonData,
   formatSecondTimestamp,
+  writeLocalDataJson,
 } = require("./commonFunction.js");
 
 const { queryDouYinAllAccountsData } = require("./handleCrawer/douyin.js");
@@ -23,12 +24,12 @@ const { querybilibiliAllAccountsData } = require("./handleCrawer/bilibili.js");
 
 const {
   ffmpegHandleVideos,
-} = require("../TikTokDownloader/videoReName_FFmpegHandle.js");
+} = require("./ffmpegHandle/videoReName_FFmpegHandle.js");
 const {
   downloadVideosAndGroup,
-} = require("../TikTokDownloader/videoDownloadAndGroupList.js");
-const { allGameList } = require("../allGameNameList.js");
-const accountJson = getJsonData("./jsonFile/accountList.json");
+} = require("./ffmpegHandle/videoDownloadAndGroupList.js");
+const accountJson = getJsonData("accountList.json");
+
 
 // 导入路由
 const replyRoutes = require('./src/modules/reply/controllers/reply.controller');
@@ -50,10 +51,7 @@ const headers = {
   Cookie: Cookie,
 };
 
-async function writeLocalDataJson(arr, fileName = "data.json") {
-  const data = JSON.stringify(arr, null, 2);
-  fs.writeFileSync(fileName, data);
-}
+
 
 async function get_BiliBili_Data(i, account = accountJson.bilibili[0]) {
   const keyword = i.searchKeyWord || "逆水寒";
@@ -148,7 +146,7 @@ app.get("/getNewActData", async (req, res) => {
           };
         });
 
-      let oldOtherDataArr = getJsonData("./gameData.json");
+      let oldOtherDataArr = getJsonData("gameData.json");
       newActList
         .filter((item) => {
           return allGameList.some((gameName) => item.name.includes(gameName));
@@ -210,7 +208,7 @@ app.get("/getNewActData", async (req, res) => {
         });
 
       writeLocalDataJson(list);
-      writeLocalDataJson(oldOtherDataArr, "./gameData.json");
+      writeLocalDataJson(oldOtherDataArr, "gameData.json");
 
       return newActList;
     }
@@ -232,7 +230,7 @@ app.post("/addPlatformReward", async (req, res) => {
     delete platformData.isUpdate;
 
     // 读取现有的 gameData.json 文件
-    let oldOtherDataArr = getJsonData("./gameData.json");
+    let oldOtherDataArr = getJsonData("gameData.json");
 
     // 找到对应的游戏
     const gameIndex = oldOtherDataArr.findIndex(
@@ -256,7 +254,7 @@ app.post("/addPlatformReward", async (req, res) => {
     }
 
     // 写入本地文件
-    writeLocalDataJson(oldOtherDataArr, "./gameData.json");
+    writeLocalDataJson(oldOtherDataArr, "gameData.json");
 
     res.json({ code: 0, msg: "奖励更新成功" });
   } catch (error) {
@@ -343,13 +341,13 @@ app.get("/getNewDakaData", async (req, res) => {
 });
 
 app.get("/data", async (req, res) => {
-  const BiliBiliScheduleJob = getJsonData("./scheduleJob/BiliBiliScheduleJob.json");
-  const DouyinScheduleJob = getJsonData("./scheduleJob/DouyinScheduleJob.json");
+  const BiliBiliScheduleJob = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
+  const DouyinScheduleJob = getJsonData("scheduleJob/DouyinScheduleJob.json");
+
   try {
     // 每次都实时读取data.json 文件并返回
     const data = getJsonData();
-
-    let otherGameData = getJsonData("./gameData.json");
+    let otherGameData = getJsonData("gameData.json");
     // 计算otherGameData rewards下各平台specialTagRequirements里的最近的活动结束时间，并赋值给最外层etime
     otherGameData.forEach((game) => {
       let minEtime = game.etime || Number.MAX_SAFE_INTEGER; // 默认活动最大
@@ -404,7 +402,7 @@ app.get("/data", async (req, res) => {
         };
       });
 
-    let dakaData = getJsonData("./B站打卡活动.json");
+    let dakaData = getJsonData("B站打卡活动.json");
 
     dakaData = dakaData
       .filter((item) => item.stime * 1000 < new Date().getTime())
@@ -427,7 +425,8 @@ app.get("/data", async (req, res) => {
       bilibiliActData,
       dakaData,
       allGameList,
-      scheduleJob:{
+      topicJson: getJsonData("topic.json")?.topics,
+      scheduleJob: {
         BiliBiliScheduleJob,
         DouyinScheduleJob
       }
@@ -486,8 +485,8 @@ async function getPlatformData() {
   xhsData = await queryXiaoHongShuAllAccountsData();
   douyinData = await queryDouYinAllAccountsData();
   bilibiliData = await querybilibiliAllAccountsData();
-  const oldOtherGameDataArr = getJsonData("./gameData.json");
-  const BiliBiliScheduleJobJson = getJsonData("./scheduleJob/BiliBiliScheduleJob.json");
+  const oldOtherGameDataArr = getJsonData("gameData.json");
+  const BiliBiliScheduleJobJson = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
   const jsonData = oldOtherGameDataArr.map((item) => {
     return {
       ...item,
@@ -642,33 +641,32 @@ async function getPlatformData() {
       }),
     };
   });
-  writeLocalDataJson(jsonData, "./gameData.json");
+  writeLocalDataJson(jsonData, "gameData.json");
   return jsonData;
 }
 
 // 每24小时更新一次平台数据
 setInterval(getPlatformData, 1000 * 60 * 60 * 24);
+ // 根据平台选择配置文件
+ const platformConfig = {
+  bilibili: {
+    configPath: "scheduleJob/BiliBiliScheduleJob.json",
+    uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload\\uploader\\bilibili_uploader\\biliup.exe"),
+    accountType: "bilibili"
+  },
+  '抖音': {
+    configPath: "scheduleJob/DouyinScheduleJob.json",
+    uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
+    accountType: "douyin"
+  }
+};
 
 async function executeExpiredJobs(platform) {
   try {
-    // 根据平台选择配置文件
-    const platformConfig = {
-      bilibili: {
-        configPath: "./scheduleJob/BiliBiliScheduleJob.json",
-        uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload\\uploader\\bilibili_uploader\\biliup.exe"),
-        accountType: "bilibili"
-      },
-      '抖音': {
-        configPath: "./scheduleJob/DouyinScheduleJob.json",
-        uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
-        accountType: "douyin"
-      }
-    };
-
     const { configPath, uploaderPath, accountType } = platformConfig[platform];
     let scheduleJobs = [];
     try {
-      scheduleJobs = JSON.parse(fs.readFileSync(configPath));
+      scheduleJobs = getJsonData(configPath);
     } catch (err) {
       console.log(`${platform}定时任务配置文件不存在`);
       return;
@@ -677,31 +675,35 @@ async function executeExpiredJobs(platform) {
     const now = new Date();
     const expiredJobs = [];
 
-    // 遍历所有游戏的定时任务
-    scheduleJobs.forEach((game) => {
-      if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
-        // 获取游戏配置
-        const { topicName, missionId, tag, tid } = game;
-        const gameExpiredJobs = game.scheduleJob
-          .filter((job) => {
-            const jobTime = new Date(job.execTime);
-            return (
-              jobTime < now &&
-              job.successExecAccount.length < accountJson[accountType].length
-            );
-          })
-          .map((job) => ({
-            ...job,
-            topicName,
-            missionId,
-            tag,
-            tid,
-            platform: platform,
-            gameIndex: scheduleJobs.indexOf(game),
-            jobIndex: game.scheduleJob.indexOf(job),
-          }));
-        expiredJobs.push(...gameExpiredJobs);
+    // 遍历所有游戏的定时任务，过滤掉已过期的任务
+    scheduleJobs = scheduleJobs.filter(game => {
+      if (!game.etime || new Date(game.etime) > now) {
+        if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
+          // 获取游戏配置
+          const { topicName, missionId, tag, tid } = game;
+          const gameExpiredJobs = game.scheduleJob
+            .filter((job) => {
+              const jobTime = new Date(job.execTime);
+              return (
+                jobTime < now &&
+                job.successExecAccount.length < accountJson[accountType].length
+              );
+            })
+            .map((job) => ({
+              ...job,
+              topicName,
+              missionId,
+              tag,
+              tid,
+              platform: platform,
+              gameIndex: scheduleJobs.indexOf(game),
+              jobIndex: game.scheduleJob.indexOf(job),
+            }));
+          expiredJobs.push(...gameExpiredJobs);
+        }
+        return true; // 保留未过期的任务
       }
+      return false; // 移除过期的任务
     });
 
     // 处理过期任务
@@ -805,8 +807,8 @@ async function executeExpiredJobs(platform) {
       await Promise.all(uploadPromises);
     }
 
-    // 统一写入对应文件
-    fs.writeFileSync(configPath, JSON.stringify(scheduleJobs, null, 2));
+    // 统一写入对应文件，此时已经过滤掉了过期的任务
+    writeLocalDataJson(scheduleJobs, configPath);
 
     return {
       code: 200,
@@ -915,25 +917,21 @@ app.post("/scheduleUpload", async (req, res) => {
       startTime,
       intervalHours,
       immediately,
+      etime, // 添加活动结束时间
     } = req.body;
-
-
 
     if (immediately) {
       await checkAndExecuteJobs();
     } else {
-
-      // 根据平台选择配置文件路径
-      const platformConfig = {
-        bilibili: "./scheduleJob/BiliBiliScheduleJob.json",
-        '抖音': "./scheduleJob/DouyinScheduleJob.json"
-      };
-      const scheduleJobsPath = platformConfig[platform];
-
+      const scheduleJobsPath = platformConfig[platform].configPath;
+      console.log("scheduleJobsPath", scheduleJobsPath);
+      
       let scheduleJobs = [];
 
       try {
-        scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
+        scheduleJobs = getJsonData(scheduleJobsPath);
+        console.log(scheduleJobs);
+        
       } catch (err) {
         console.log("定时任务配置文件不存在,创建新文件");
         scheduleJobs = [];
@@ -948,7 +946,8 @@ app.post("/scheduleUpload", async (req, res) => {
         missionId,
         tag,
         videoDir,
-        scheduleJob: newJobs
+        scheduleJob: newJobs,
+        etime, // 添加活动结束时间
       };
 
       // 根据平台补充不同字段
@@ -964,11 +963,13 @@ app.post("/scheduleUpload", async (req, res) => {
           ...platformSpecificConfig
         });
       } else {
+        // 更新现有配置的结束时间和任务
+        scheduleJobs[topicIndex].etime = etime;
         scheduleJobs[topicIndex].scheduleJob.push(...newJobs);
       }
 
       // 保存配置到文件
-      fs.writeFileSync(scheduleJobsPath, JSON.stringify(scheduleJobs, null, 2));
+      writeLocalDataJson(scheduleJobs, scheduleJobsPath);
 
       res.json({
         code: 200,
@@ -981,6 +982,51 @@ app.post("/scheduleUpload", async (req, res) => {
     res.status(500).json({
       code: 500,
       msg: "处理任务失败",
+    });
+  }
+});
+
+app.get("/getNewTopicData", async (req, res) => {
+  try {
+    const fetchUrl = "https://member.bilibili.com/x/vupre/web/topic/type";
+    const params = {
+      type_id: 172,
+      pn: 0,
+      ps: 200,
+      title: "",
+      t: Date.now()
+    };
+
+    const queryString = Object.keys(params)
+      .map(key => `${key}=${encodeURIComponent(params[key])}`)
+      .join('&');
+
+    const response = await fetch(`${fetchUrl}?${queryString}`, {
+      headers: {
+        ...headers,
+        "referer": "https://member.bilibili.com/"
+      }
+    });
+
+    const topicData = await response.json();
+    
+    if (topicData.code === 0 && topicData.data) {
+      // 写入topic.json文件
+      writeLocalDataJson(topicData.data, "topic.json");
+      
+      res.json({
+        code: 200,
+        msg: "Topic数据更新成功",
+        data: topicData.data
+      });
+    } else {
+      throw new Error(topicData.message || "获取Topic数据失败");
+    }
+  } catch (error) {
+    console.error("获取Topic数据时出错:", error);
+    res.status(500).json({
+      code: 500,
+      msg: error.message || "获取Topic数据失败"
     });
   }
 });
