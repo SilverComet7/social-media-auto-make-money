@@ -6,7 +6,49 @@ const fsPromises = fs.promises;
 const execPromise = util.promisify(exec);
 const { deduplicateVideo } = require('./videoTransformDeduplication.js');
 const { TikTokDownloader_ROOT } = require("../../const.js");
+const os = require('os');
+const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
 
+// 日志记录函数
+const logFilePath = path.join(__dirname, 'logs/ffmpeg_process.log');
+
+function ensureLogDirectory() {
+  const logDir = path.dirname(logFilePath);
+  if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir, { recursive: true });
+  }
+}
+
+function writeLog(message) {
+  const timestamp = new Date().toISOString();
+  const logMessage = `[${timestamp}] ${message}\n`;
+  console.log(logMessage.trim());
+  
+  ensureLogDirectory();
+  fs.appendFileSync(logFilePath, logMessage);
+}
+
+// 获取CPU核心数
+const cpuCount = os.cpus().length;
+writeLog(`系统CPU核心数: ${cpuCount}`);
+
+// 工作线程处理函数
+if (!isMainThread) {
+  const { filePath, basicVideoInfoObj, pathInfoObj, mergeVideoInfoObj } = workerData;
+  const startTime = Date.now();
+  writeLog(`工作线程开始处理文件: ${path.basename(filePath)}`);
+  
+  processVideo(filePath, basicVideoInfoObj, pathInfoObj, mergeVideoInfoObj)
+    .then(result => {
+      const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+      writeLog(`工作线程完成处理文件: ${path.basename(filePath)}, 耗时: ${duration}秒`);
+      parentPort.postMessage({ success: true, result, duration });
+    })
+    .catch(error => {
+      writeLog(`工作线程处理失败: ${path.basename(filePath)}, 错误: ${error.message}`);
+      parentPort.postMessage({ success: false, error: error.message });
+    });
+}
 
 const formatDate = () => {
   const date = new Date();
@@ -29,19 +71,55 @@ if (fs.existsSync(mapFilePath)) {
   }
 }
 
-
-
-
 async function runFFmpegCommand(command) {
+  const startTime = Date.now();
   try {
-    const { stdout, stderr } = await execPromise(command);
-    if (stderr) {
-      // console.warn(`FFmpeg警告输出: ${stderr}`);
+    // 检测GPU支持情况
+    let gpuInfo = '';
+    let gpuType = 'CPU';
+    
+    try {
+      // 检测 NVIDIA GPU
+      const { stdout: nvidiaInfo } = await execPromise('nvidia-smi -L').catch(() => ({ stdout: '' }));
+      if (nvidiaInfo.toLowerCase().includes('nvidia')) {
+        gpuInfo = nvidiaInfo;
+        gpuType = 'NVIDIA';
+        command = command.replace('-c:v libx264', '-c:v h264_nvenc -preset p4 -tune hq');
+      } else {
+        // 检测 AMD GPU
+        const { stdout: amdInfo } = await execPromise('lspci | grep AMD').catch(() => ({ stdout: '' }));
+        if (amdInfo.toLowerCase().includes('amd')) {
+          gpuInfo = amdInfo;
+          gpuType = 'AMD';
+          command = command.replace('-c:v libx264', '-c:v h264_amf -quality quality -preset quality');
+        }
+      }
+    } catch (error) {
+      writeLog(`GPU检测失败: ${error.message}`);
     }
-    // console.log(`FFmpeg标准输出: ${stdout}`);
+
+    writeLog(`使用硬件: ${gpuType}`);
+    if (gpuInfo) {
+      writeLog(`GPU信息: ${gpuInfo.trim()}`);
+    }
+    writeLog(`执行FFmpeg命令: ${command}`);
+
+    const { stdout, stderr } = await execPromise(command);
+    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+    
+    if (stderr) {
+      writeLog(`FFmpeg警告输出 (耗时${duration}秒): ${stderr}`);
+    }
+    writeLog(`FFmpeg命令执行完成，耗时: ${duration}秒`);
+    
+    return { success: true, duration };
   } catch (error) {
-    console.error(`执行命令时出错: ${error.message}`);
-    console.error(`FFmpeg标准错误输出: ${error.stderr}`);
+    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
+    writeLog(`FFmpeg命令执行失败 (耗时${duration}秒):`);
+    writeLog(`错误信息: ${error.message}`);
+    if (error.stderr) {
+      writeLog(`FFmpeg错误输出: ${error.stderr}`);
+    }
     throw error;
   }
 }
@@ -273,9 +351,13 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
   deduplicationConfig: null,
   enableMerge: false,
   mergedLimitTime: 20,
-  addPublishTime: false,  // 新增：是否添加发布时间参数
+  addPublishTime: false,
   videoDir: ''
 }) {
+  const startTime = Date.now();
+  writeLog('开始FFmpeg视频处理任务');
+  writeLog(`处理参数: ${JSON.stringify(basicVideoInfoObj, null, 2)}`);
+
   let {
     checkName,
     beforeTime,
@@ -321,41 +403,116 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
 
   try {
     const files = await fsPromises.readdir(videoFolderPath);
-    const videoPromises = [];
-    for (const file of files) {
-      if (path.extname(file).toLowerCase() === ".mp4" || path.extname(file).toLowerCase() === ".mov") {
-        const filePath = path.join(videoFolderPath, file);
-        try {
-          videoPromises.push(processVideo(filePath, basicVideoInfoObj,
-            pathInfoObj, enableMerge ? mergeVideoInfoObj : null))  // 根据enableMerge决定是否传入mergeVideoInfoObj
-        } catch (error) {
-          console.error("处理视频出错:", error);
-        }
-      }
-    }
-    await Promise.all(videoPromises)
-    if (checkName) return
+    const videoFiles = files.filter(file => {
+      const ext = path.extname(file).toLowerCase();
+      return ext === ".mp4" || ext === ".mov";
+    });
 
-    // 只在启用合并时执行合并操作
+    writeLog(`找到待处理视频文件数量: ${videoFiles.length}`);
+
+    // 根据CPU核心数划分任务
+    const batchSize = Math.max(1, Math.floor(videoFiles.length / cpuCount));
+    const batches = [];
+    
+    for (let i = 0; i < videoFiles.length; i += batchSize) {
+      batches.push(videoFiles.slice(i, i + batchSize));
+    }
+
+    writeLog(`任务分片情况: 总共${batches.length}个批次，每批次处理${batchSize}个文件`);
+
+    // 创建工作线程池
+    const processVideoInWorker = async (filePath) => {
+      return new Promise((resolve, reject) => {
+        const worker = new Worker(__filename, {
+          workerData: {
+            filePath: path.join(videoFolderPath, filePath),
+            basicVideoInfoObj,
+            pathInfoObj,
+            mergeVideoInfoObj: enableMerge ? mergeVideoInfoObj : null
+          }
+        });
+
+        worker.on('message', (message) => {
+          if (message.success) {
+            resolve(message.result);
+          } else {
+            reject(new Error(message.error));
+          }
+        });
+
+        worker.on('error', reject);
+        worker.on('exit', (code) => {
+          if (code !== 0) {
+            reject(new Error(`工作线程退出，退出码 ${code}`));
+          }
+        });
+      });
+    };
+
+    // 并行处理每个批次
+    writeLog('开始并行处理视频批次');
+    const results = await Promise.all(
+      batches.map(async (batch, batchIndex) => {
+        writeLog(`开始处理第${batchIndex + 1}批次，包含${batch.length}个文件`);
+        const batchStartTime = Date.now();
+        
+        const batchResults = await Promise.all(
+          batch.map(async (file) => {
+            try {
+              const result = await processVideoInWorker(file);
+              writeLog(`完成处理文件: ${file}`);
+              return result;
+            } catch (error) {
+              writeLog(`处理文件失败: ${file}, 错误: ${error.message}`);
+              return null;
+            }
+          })
+        );
+
+        const batchDuration = ((Date.now() - batchStartTime) / 1000).toFixed(2);
+        writeLog(`第${batchIndex + 1}批次处理完成，耗时: ${batchDuration}秒`);
+        return batchResults;
+      })
+    );
+
+    // 处理合并视频的逻辑
     if (enableMerge) {
+      writeLog('开始处理视频合并任务');
       await Promise.all(mergeVideoInfoObj.needMergeBiliBiliVideoPath.map(async ({ txtPath, mp4File }) => {
-        let command = ''
+        let command = '';
         if (enableMergeMusic) {
           command = `ffmpeg -f concat -safe 0 -i "${txtPath}" -i "${mergeMusicPath}" -c copy -map 0:v:0 -map 1:a:0 -shortest "${mp4File}"`;
         } else {
           command = `ffmpeg -f concat -safe 0 -i "${txtPath}" -c copy "${mp4File}"`;
         }
         return await runFFmpegCommand(command);
-      }))
+      }));
+
+      // 清理临时文件
       await Promise.all(mergeVideoInfoObj.needDeleteTempFilePath.map(async (filePath) => {
         return await fsPromises.unlink(filePath);
-      }))
+      }));
     }
-    // 将文件名映射保存为 JSON 文件
+
+    const totalDuration = ((Date.now() - startTime) / 1000).toFixed(2);
+    writeLog(`所有视频处理任务完成，总耗时: ${totalDuration}秒`);
+    
+    // 保存文件名映射
     fs.writeFileSync(mapFilePath, JSON.stringify(fileNameMap, null, 2));
+    writeLog('文件名映射已保存');
+    
+    return {
+      success: true,
+      totalDuration,
+      processedFiles: videoFiles.length,
+      batchCount: batches.length
+    };
   } catch (err) {
-    console.error("主程序执行出错: " + err);
+    const errorDuration = ((Date.now() - startTime) / 1000).toFixed(2);
+    writeLog(`主程序执行出错 (耗时${errorDuration}秒): ${err.message}`);
+    writeLog(err.stack || '无堆栈信息');
     fs.writeFileSync(mapFilePath, JSON.stringify(fileNameMap, null, 2));
+    throw err;
   }
 }
 
