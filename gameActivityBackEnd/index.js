@@ -24,10 +24,10 @@ const { querybilibiliAllAccountsData } = require("./handleCrawer/bilibili.js");
 
 const {
   ffmpegHandleVideos,
-} = require("../TikTokDownloader/videoReName_FFmpegHandle.js");
+} = require("./ffmpegHandle/videoReName_FFmpegHandle.js");
 const {
   downloadVideosAndGroup,
-} = require("../TikTokDownloader/videoDownloadAndGroupList.js");
+} = require("./ffmpegHandle/videoDownloadAndGroupList.js");
 const accountJson = getJsonData("accountList.json");
 
 
@@ -675,31 +675,35 @@ async function executeExpiredJobs(platform) {
     const now = new Date();
     const expiredJobs = [];
 
-    // 遍历所有游戏的定时任务
-    scheduleJobs.forEach((game) => {
-      if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
-        // 获取游戏配置
-        const { topicName, missionId, tag, tid } = game;
-        const gameExpiredJobs = game.scheduleJob
-          .filter((job) => {
-            const jobTime = new Date(job.execTime);
-            return (
-              jobTime < now &&
-              job.successExecAccount.length < accountJson[accountType].length
-            );
-          })
-          .map((job) => ({
-            ...job,
-            topicName,
-            missionId,
-            tag,
-            tid,
-            platform: platform,
-            gameIndex: scheduleJobs.indexOf(game),
-            jobIndex: game.scheduleJob.indexOf(job),
-          }));
-        expiredJobs.push(...gameExpiredJobs);
+    // 遍历所有游戏的定时任务，过滤掉已过期的任务
+    scheduleJobs = scheduleJobs.filter(game => {
+      if (!game.etime || new Date(game.etime) > now) {
+        if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
+          // 获取游戏配置
+          const { topicName, missionId, tag, tid } = game;
+          const gameExpiredJobs = game.scheduleJob
+            .filter((job) => {
+              const jobTime = new Date(job.execTime);
+              return (
+                jobTime < now &&
+                job.successExecAccount.length < accountJson[accountType].length
+              );
+            })
+            .map((job) => ({
+              ...job,
+              topicName,
+              missionId,
+              tag,
+              tid,
+              platform: platform,
+              gameIndex: scheduleJobs.indexOf(game),
+              jobIndex: game.scheduleJob.indexOf(job),
+            }));
+          expiredJobs.push(...gameExpiredJobs);
+        }
+        return true; // 保留未过期的任务
       }
+      return false; // 移除过期的任务
     });
 
     // 处理过期任务
@@ -803,8 +807,8 @@ async function executeExpiredJobs(platform) {
       await Promise.all(uploadPromises);
     }
 
-    // 统一写入对应文件
-    fs.writeFileSync(configPath, JSON.stringify(scheduleJobs, null, 2));
+    // 统一写入对应文件，此时已经过滤掉了过期的任务
+    writeLocalDataJson(scheduleJobs, configPath);
 
     return {
       code: 200,
@@ -913,21 +917,21 @@ app.post("/scheduleUpload", async (req, res) => {
       startTime,
       intervalHours,
       immediately,
+      etime, // 添加活动结束时间
     } = req.body;
-
-
 
     if (immediately) {
       await checkAndExecuteJobs();
     } else {
-
-    
-      const scheduleJobsPath = platformConfig[platform].configPath
-
+      const scheduleJobsPath = platformConfig[platform].configPath;
+      console.log("scheduleJobsPath", scheduleJobsPath);
+      
       let scheduleJobs = [];
 
       try {
-        scheduleJobs = JSON.parse(fs.readFileSync(scheduleJobsPath));
+        scheduleJobs = getJsonData(scheduleJobsPath);
+        console.log(scheduleJobs);
+        
       } catch (err) {
         console.log("定时任务配置文件不存在,创建新文件");
         scheduleJobs = [];
@@ -942,7 +946,8 @@ app.post("/scheduleUpload", async (req, res) => {
         missionId,
         tag,
         videoDir,
-        scheduleJob: newJobs
+        scheduleJob: newJobs,
+        etime, // 添加活动结束时间
       };
 
       // 根据平台补充不同字段
@@ -958,11 +963,13 @@ app.post("/scheduleUpload", async (req, res) => {
           ...platformSpecificConfig
         });
       } else {
+        // 更新现有配置的结束时间和任务
+        scheduleJobs[topicIndex].etime = etime;
         scheduleJobs[topicIndex].scheduleJob.push(...newJobs);
       }
 
       // 保存配置到文件
-      fs.writeFileSync(scheduleJobsPath, JSON.stringify(scheduleJobs, null, 2));
+      writeLocalDataJson(scheduleJobs, scheduleJobsPath);
 
       res.json({
         code: 200,

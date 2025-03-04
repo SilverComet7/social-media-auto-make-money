@@ -754,6 +754,10 @@
         <el-form-item label="视频目录">
           <el-input v-model="scheduleForm.videoDir" placeholder="请输入视频所在目录路径" />
         </el-form-item>
+        <!-- 活动结束时间 -->
+         <el-form-item label="活动结束时间">
+          <el-date-picker v-model="scheduleForm.etime" type="datetime" placeholder="选择结束时间" />
+        </el-form-item>
         <el-form-item label="特殊赛道标签组">
           <el-select v-model="selectedTrack" placeholder="选择特殊赛道" @change="handleTrackChange"
             style="margin-bottom: 10px" clearable>
@@ -923,6 +927,7 @@ interface ScheduleForm {
   intervalHours: number
   immediately: boolean
   selectedArea: string
+  etime: Date | null  // 添加活动结束时间字段
 }
 
 const formatDate = (timestamp: number): string => {
@@ -955,7 +960,8 @@ const scheduleForm = ref<ScheduleForm>({
   intervalHours: 24,
   platform: '',
   immediately: false,
-  selectedArea: '游戏区'
+  selectedArea: '游戏区',
+  etime: null  // 初始化活动结束时间
 })
 
 // 打开定时任务设置弹窗
@@ -964,7 +970,7 @@ const setScheduleJob = (
   platform: PlatformReward,
   row: GameActivity,
 ) => {
-  const { topic, specialTag } = rew
+  const { topic, specialTag, eDate } = rew
   const missionId = topicJson.value.find((item: any) => item.topic_name === topic)?.mission_id
 
   // B站平台 如果没有找到对应的 missionId
@@ -1002,7 +1008,7 @@ const setScheduleJob = (
     selectedArea: '游戏区',
     tid: 172,
     videoDir: '',
-    ...rew
+    etime: eDate ? new Date(eDate) : null  // 设置活动结束时间
   }
 
   scheduleDialogVisible.value = true
@@ -1213,7 +1219,7 @@ const downloadSettings = ref({
   checkNewAdd: false,
   allDownload: false,
   checkName: false,
-  earliest: '', // 近两个月
+  earliest: '2025/01/01', // 近两个月
   currentUpdateGameList: [],
 })
 
@@ -1230,9 +1236,9 @@ const defaultDeduplicationConfigs = {
     blurRadius: 0.2,
     enableFade: false,
     fadeDuration: 0.5,
-    brightness: 0.1,
-    contrast: 1.1,
-    saturation: 1.1,
+    brightness: 0.05,
+    contrast: 1.02,
+    saturation: 1.04,
     enableBgBlur: false,
     bgBlurTop: 0.1,
     bgBlurBottom: 0.1,
@@ -1246,9 +1252,9 @@ const defaultDeduplicationConfigs = {
     blurRadius: 0.2,
     enableFade: false,
     fadeDuration: 0.5,
-    brightness: 0.1,
-    contrast: 1.1,
-    saturation: 1.1,
+    brightness: 0.05,
+    contrast: 1.02,
+    saturation: 1.04,
     enableBgBlur: false,
     bgBlurTop: 0.1,
     bgBlurBottom: 0.1,

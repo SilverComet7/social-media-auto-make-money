@@ -25,10 +25,12 @@ const allGameList = [
 
 
 const PROJECT_ROOT = "D:\\code\\platform_game_activity\\";
+const TikTokDownloader_ROOT = "D:\\code\\platform_game_activity\\TikTokDownloader\\";
 
 module.exports = {
     allGameList,
-    PROJECT_ROOT
+    PROJECT_ROOT,
+    TikTokDownloader_ROOT
 }   
 
 // 赛道
