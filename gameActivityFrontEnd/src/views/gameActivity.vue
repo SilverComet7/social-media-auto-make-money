@@ -1,7 +1,9 @@
 <template>
   <div class="table-container">
-    <el-tabs type="card">
-      <el-tab-pane label="四平台游戏活动激励">
+    <el-backtop :right="100" :bottom="100" />
+
+    <el-tabs v-model="activeTab" type="card">
+      <el-tab-pane label="四平台游戏活动激励" name="platform">
         <div class="flex justify-between">
           <el-affix :offset="20" class="text-blue-800">
             <h4>公共标签参考</h4>
@@ -79,7 +81,7 @@
           <el-table-column prop="endDiffDate" label="剩余天数" width="150" sortable>
             <template #default="scope"> {{ getDaysDiff(scope.row.etime * 1000) }} 天 </template>
           </el-table-column>
-          <el-table-column label="各平台活动与达标条件" width="750">
+          <el-table-column label="各平台活动与达标条件" min-width="650">
             <template #default="scope">
               <el-card v-for="(platform, platformIndex) in scope.row.rewards" :key="platformIndex">
                 <div class="flex">
@@ -177,7 +179,7 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="B站活动激励">
+      <el-tab-pane label="B站活动激励" name="bilibili" lazy>
         <el-table v-if="bilibiliActTableData.length" :data="bilibiliActTableData" style="width: 100%" border>
           <el-table-column type="index" label="No." width="50" fixed />
           <el-table-column prop="name" label="Activity Name" width="250" fixed>
@@ -324,7 +326,7 @@
         </el-table>
         <el-empty v-else description="No data available" />
       </el-tab-pane>
-      <el-tab-pane label="B站打卡挑战">
+      <el-tab-pane label="B站打卡挑战" name="bilibili_daka" lazy>
         <el-affix :offset="20" :right="20" class="right-4">
           <el-button type="primary" @click="fetchNewDakaData">查询新的打卡挑战数据</el-button>
         </el-affix>
@@ -400,10 +402,7 @@
                         <el-table-column prop="target_progress" label="进度">
                           <template #default="scope">
                             <el-progress :percentage="scope.row.target_value !== 0
-                              ? (
-                                (scope.row.target_progress / scope.row.target_value) *
-                                100
-                              ).toFixed(0)
+                              ? Math.round((scope.row.target_progress / scope.row.target_value) * 100)
                               : 0
                               " />
                           </template>
@@ -450,8 +449,6 @@
         </div>
       </el-tab-pane> -->
     </el-tabs>
-    <el-backtop :right="100" :bottom="100" />
-
 
     <el-dialog title="下载视频和分组区分" v-model="dialogVisible" :before-close="cancelDownloadSettings">
       <el-form :model="downloadSettings" label-width="150px">
@@ -755,7 +752,7 @@
           <el-input v-model="scheduleForm.videoDir" placeholder="请输入视频所在目录路径" />
         </el-form-item>
         <!-- 活动结束时间 -->
-         <el-form-item label="活动结束时间">
+        <el-form-item label="活动结束时间">
           <el-date-picker v-model="scheduleForm.etime" type="datetime" placeholder="选择结束时间" />
         </el-form-item>
         <el-form-item label="特殊赛道标签组">
@@ -1047,6 +1044,7 @@ const confirmScheduleJob = async (immediately = false) => {
     ElMessage.error('设置定时任务失败')
   }
 }
+const activeTab = ref('platform')
 
 const editRewardDialogVisible = ref(false)
 const editRewardForm = ref({
