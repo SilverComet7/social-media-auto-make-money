@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  # Crawler 服务
+
+
+  # tiktokDownloader 服务
+
+
+  # 游戏活动平台服务
+  game:
+    image: game:v1
+    # 永久休眠启动
+    command: tail -f /dev/null
