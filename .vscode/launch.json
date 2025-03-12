@@ -30,6 +30,13 @@
         "0"
       ],
       "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: download douyin video",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/TikTokDownloader/main.py",
+      "console": "integratedTerminal"
     }
   ]
 }

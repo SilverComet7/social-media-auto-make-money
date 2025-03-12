@@ -23,7 +23,7 @@ function writeLog(message) {
   const timestamp = new Date().toISOString();
   const logMessage = `[${timestamp}] ${message}\n`;
   console.log(logMessage.trim());
-  
+
   ensureLogDirectory();
   fs.appendFileSync(logFilePath, logMessage);
 }
@@ -37,7 +37,7 @@ if (!isMainThread) {
   const { filePath, basicVideoInfoObj, pathInfoObj, mergeVideoInfoObj } = workerData;
   const startTime = Date.now();
   writeLog(`工作线程开始处理文件: ${path.basename(filePath)}`);
-  
+
   processVideo(filePath, basicVideoInfoObj, pathInfoObj, mergeVideoInfoObj)
     .then(result => {
       const duration = ((Date.now() - startTime) / 1000).toFixed(2);
@@ -77,7 +77,7 @@ async function runFFmpegCommand(command) {
     // 检测GPU支持情况
     let gpuInfo = '';
     let gpuType = 'CPU';
-    
+
     try {
       // 检测 NVIDIA GPU
       const { stdout: nvidiaInfo } = await execPromise('nvidia-smi -L').catch(() => ({ stdout: '' }));
@@ -106,12 +106,12 @@ async function runFFmpegCommand(command) {
 
     const { stdout, stderr } = await execPromise(command);
     const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-    
+
     if (stderr) {
       writeLog(`FFmpeg警告输出 (耗时${duration}秒): ${stderr}`);
     }
     writeLog(`FFmpeg命令执行完成，耗时: ${duration}秒`);
-    
+
     return { success: true, duration };
   } catch (error) {
     const duration = ((Date.now() - startTime) / 1000).toFixed(2);
@@ -155,10 +155,10 @@ async function processVideo(filePath, basicVideoInfoObj,
     groupName,
     deduplicationConfig,
     addPublishTime,
-    enableMerge
+    enableMerge,
+    addEnding
   } = basicVideoInfoObj;
 
-  scalePercent = scalePercent / 100;
 
   let {
     musicFilePath,
@@ -205,16 +205,6 @@ async function processVideo(filePath, basicVideoInfoObj,
     `${fileName}_game_filelist.txt`
   );
 
-
-  if (deduplicationConfig && deduplicationConfig.enable && Object.keys(deduplicationConfig).length > 0) {
-    try {
-      await deduplicateVideo(filePath, deduplicationConfig);
-      console.log(`视频去重处理完成: ${filePath}`);
-    } catch (error) {
-      console.error(`视频去重处理失败: ${error.message}`);
-    }
-  }
-
   if (!fs.existsSync(newVideoFolderPath)) {
     fs.mkdirSync(newVideoFolderPath);
     if (enableMerge) fs.mkdirSync(path.join(newVideoFolderPath, `/合集`));
@@ -241,10 +231,23 @@ async function processVideo(filePath, basicVideoInfoObj,
     if (fs.existsSync(videoTempPath)) await fsPromises.unlink(videoTempPath);
   }
 
-  await deleteTempFile(mergeVideoInfoObj); // 先删除之前的文件，避免ffmpeg卡住
+  // 先删除之前的文件，避免ffmpeg卡住
+  await deleteTempFile(mergeVideoInfoObj);
+
+
+  // 开始处理视频
+  if (deduplicationConfig && deduplicationConfig.enable && Object.keys(deduplicationConfig).length > 0) {
+    try {
+      await deduplicateVideo(filePath, deduplicationConfig);
+      console.log(`视频去重处理完成: ${filePath}`);
+    } catch (error) {
+      console.error(`视频去重处理失败: ${error.message}`);
+    }
+  }
 
   let videoParams = await getVideoParams(filePath);
   let w_h = "_9_16";
+  let scale = '';
   if (Number(videoParams.width) > Number(videoParams.height)) {
     w_h = "_16_9";
     scale = `scale=1920:1080`;
@@ -252,11 +255,15 @@ async function processVideo(filePath, basicVideoInfoObj,
     w_h = "_9_16";
     scale = `scale=1080:1920`;
   }
-  if (scalePercent) scale = `scale=${videoParams.width * scalePercent}:${videoParams.height * scalePercent}`
-  // 视频重新编码 , 不含背景音乐
+
+  // 视频分辨率
+  if (scalePercent) { 
+    scalePercent = scalePercent / 100; 
+    scale = `scale=${videoParams.width * scalePercent}:${videoParams.height * scalePercent}` 
+  }
   let command2 = ''
-  if (groupName == "coser本人" || gameName == "coser本人") {
-    // coser本人打上本人文字水印
+  // 如果分组是coser本人，或者游戏名是coser本人，或者文件名包含coser本人，则打上本人文字水印
+  if (groupName == "coser本人" || gameName == "coser本人" || filePath.includes("coser本人")) {
     command2 = `ffmpeg -ss ${beforeTime}  -i "${filePath}"  -r ${fps} -vf "${scale},drawtext=fontfile='./SourceHanSansCN-Bold.otf':text='coser：${nickName}':fontsize=18:fontcolor=white:x=50:y=50" -c:v libx264 -c:a aac "${videoTempPath}"`;
   } else {
     command2 = `ffmpeg -ss ${beforeTime}  -i "${filePath}"  -r ${fps} -vf "${scale}" -c:v libx264 -c:a aac "${videoTempPath}"`;
@@ -283,9 +290,12 @@ async function processVideo(filePath, basicVideoInfoObj,
     mergeVideoInfoObj.needDeleteTempFilePath.push(videoTempPath)
   }
 
+
   const endingFilePath = path.join(TikTokDownloader_ROOT, `./素材/after/点赞关注${w_h}.mp4`);
   // 步骤3：生成准备要合并的文件路径文件 filelist.txt  
-  const filelistContentTest = `file '${videoTempPath}'\nfile '${endingFilePath}'`;
+  const filelistContentTest = addEnding
+    ? `file '${videoTempPath}'\nfile '${endingFilePath}'`
+    : `file '${videoTempPath}'`;
   fs.writeFileSync(fileListPath, filelistContentTest);
   const finalVideoPath = path.join(newVideoFolderPath, `${fileName}${fileExt}`);
 
@@ -308,6 +318,7 @@ async function processVideo(filePath, basicVideoInfoObj,
     fileNameMap[originFileName] = fileName;
   }
 
+  // 删除临时文件
   return await deleteTempFile(mergeVideoInfoObj);
 
 }
@@ -390,7 +401,6 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
   const mergeMusicPath = path.join(TikTokDownloader_ROOT, `./素材/music/${mergeMusicName}.mp3`);
   const foldPathName = `gameList/${gameName}/${groupName}`;
   const videoFolderPath = videoDir || path.join(TikTokDownloader_ROOT, `${foldPathName}`);
-
   const newVideoFolderPath = path.join(videoFolderPath, formatDate() + `_截取${beforeTime}秒后_${replaceMusic ? `音乐=${musicName}` : ''}缩放${scalePercent}%_合集时间大于${mergeVideoInfoObj.mergedLimitTime}_帧数=${fps}`);
   const newOriginalFolderPath = path.join(videoFolderPath + '/已处理');
 
@@ -413,7 +423,7 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
     // 根据CPU核心数划分任务
     const batchSize = Math.max(1, Math.floor(videoFiles.length / cpuCount));
     const batches = [];
-    
+
     for (let i = 0; i < videoFiles.length; i += batchSize) {
       batches.push(videoFiles.slice(i, i + batchSize));
     }
@@ -455,7 +465,7 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
       batches.map(async (batch, batchIndex) => {
         writeLog(`开始处理第${batchIndex + 1}批次，包含${batch.length}个文件`);
         const batchStartTime = Date.now();
-        
+
         const batchResults = await Promise.all(
           batch.map(async (file) => {
             try {
@@ -496,11 +506,11 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
 
     const totalDuration = ((Date.now() - startTime) / 1000).toFixed(2);
     writeLog(`所有视频处理任务完成，总耗时: ${totalDuration}秒`);
-    
+
     // 保存文件名映射
     fs.writeFileSync(mapFilePath, JSON.stringify(fileNameMap, null, 2));
     writeLog('文件名映射已保存');
-    
+
     return {
       success: true,
       totalDuration,
