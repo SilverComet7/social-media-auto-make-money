@@ -482,7 +482,6 @@ async function getPlatformData() {
   // let xhsData = await queryXiaoHongShuAllAccountsData();
   let douyinData = await queryDouYinAllAccountsData();
   let bilibiliData = await querybilibiliAllAccountsData();
-
   const oldOtherGameDataArr = getJsonData("gameData.json");
   const BiliBiliScheduleJobJson = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
   const jsonData = oldOtherGameDataArr.map((item) => {
@@ -499,7 +498,7 @@ async function getPlatformData() {
                 videoData: douyinData.map((t) => {
                   // 过滤不满足条件的视频
                   const valuedList = t.aweme_list.filter(
-                    (l) => (l.desc.includes(i.specialTag) || l.desc.includes(i.name)) &&
+                    (l) => (l.desc.includes(i.specialTag) || l.desc.includes(item.name)) &&
                       l.view >= (i.minView || 100)
                   );
                   // 目前忽视了挂在小手柄问题，可手动isGet调整
@@ -533,7 +532,7 @@ async function getPlatformData() {
               };
             }),
           };
-        } 
+        }
         // else if (e.name === "小红书") {
         //   return {
         //     ...e,

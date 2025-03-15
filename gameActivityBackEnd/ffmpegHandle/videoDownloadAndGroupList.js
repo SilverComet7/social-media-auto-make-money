@@ -2,7 +2,53 @@ const fs = require('fs');
 const fsPromises = require('fs').promises;
 const path = require('path');
 const { spawn } = require('child_process');
-const { allGameList, TikTokDownloader_ROOT } = require('../../const.js')
+const { allGameList, TikTokDownloader_ROOT, specialGameList } = require('../../const.js')
+
+async function moveFilePath(gameFolder, oldFilePath, fileName, checkName) {
+  const newFilePath = path.join(gameFolder, fileName);
+  if (checkName) {
+    console.log("🚀 ~ processFiles ~ newFilePath:", newFilePath)
+    return
+  }
+  try {
+    await fsPromises.rename(oldFilePath, newFilePath);
+    console.log(`文件已重命名并移动: ${oldFilePath} -> ${newFilePath}`);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+
+async function groupVideos(gameArr, fileName, dirMatchAccountGameType, videosDirPath, folderName, checkName) {
+  const fileGameType = gameArr.find(game => fileName.includes(game));
+  const fileIsSpecialGameType = specialGameList.includes(dirMatchAccountGameType);
+  let gameFolder = '';
+  const oldFilePath = path.join(videosDirPath, folderName, fileName);
+  // 是视频文件
+  const isMp4File = path.extname(fileName).toLowerCase() === '.mp4';
+  // 是mp4文件且文件标题包含某个游戏类型
+  if (isMp4File && fileGameType) {
+    if (dirMatchAccountGameType === 'coser同行' || dirMatchAccountGameType === 'coser本人') {
+      gameFolder = path.join(TikTokDownloader_ROOT, "gameList", fileGameType + '/' + dirMatchAccountGameType); // gameList/游戏名/coserXX
+    } else {
+      gameFolder = path.join(TikTokDownloader_ROOT, "gameList", fileGameType + '/攻略'); // gameList/游戏名/攻略
+    }
+    if (!fs.existsSync(gameFolder)) {
+      await fsPromises.mkdir(gameFolder, { recursive: true });
+      await fsPromises.mkdir(path.join(gameFolder, '/未处理'), { recursive: true });
+    }
+    await moveFilePath(gameFolder, oldFilePath, fileName, checkName);
+  } else if (isMp4File && fileIsSpecialGameType) {
+    // 文件名不包含游戏类型，但是分组是特殊赛道，可移动分组后查看视频再进行手动区分
+    const gameFolder = path.join(TikTokDownloader_ROOT, "gameList", dirMatchAccountGameType);
+    if (!fs.existsSync(gameFolder)) {
+      await fsPromises.mkdir(gameFolder, { recursive: true });
+    }
+    await moveFilePath(gameFolder, oldFilePath, fileName, checkName);
+  }
+}
+
+
 
 async function downloadVideosAndGroup({
   isDownload,    // 是否下载视频,  false 则只进行mp4文件分组
@@ -19,7 +65,8 @@ async function downloadVideosAndGroup({
 
   strategy = 'group', // 新增策略参数
   keyword = '',       // 新增关键词参数
-  filePath = ''       // 新增下载文件路径参数
+  filePath = '',      // 新增下载文件路径参数
+  groupDir = ''       // 新增分组目录参数
 }) {
 
   try {
@@ -53,9 +100,12 @@ async function downloadVideosAndGroup({
         if (earliest || earliest == '') acc.earliest = earliest
         return acc;
       });
+      settings.run_command = '6 7 2 '
       if (strategy == 'group') settings.run_command = '6 1 1 Q' // 分组下载 参考TikTokDownloader
       // if (strategy == 'keyword') 
-      if (strategy == 'filePath') settings.run_command = '6 2 2 Q' // TODO  处理默认路径 读取特定download.txt文件路径下载  
+      // if (strategy == 'filePath') settings.run_command = '6 2 2 Q' // TODO  处理默认路径 读取特定download.txt文件路径下载  
+
+      const input_command = 'coser  1  1  0'
       await fsPromises.writeFile(settingsPath, JSON.stringify(settings, null, 2), "utf8");
       console.log("settings.json 更新完成");
 
@@ -76,7 +126,8 @@ async function downloadVideosAndGroup({
               shell: true,
               env: {
                 PYTHONUTF8: '1',  // 强制Python使用UTF-8编码
-                PYTHONIOENCODING: 'utf-8'  // 设置输入输出编码
+                PYTHONIOENCODING: 'utf-8',  // 设置输入输出编码
+                input_command: input_command
               }
             });
 
@@ -135,79 +186,40 @@ async function downloadVideosAndGroup({
       await fsPromises.writeFile(oldSettingsPath, JSON.stringify(settings, null, 2), "utf8");
     }
 
-
-
     // 全部游戏类型，后续将coser同行 coser本人 的mp4视频,根据名称是否包含该游戏分组到各自的游戏文件夹下的对应子文件夹 coser同行 coser本人
     let gameArr = accountsUrls.filter(item => !['coser同行', 'coser本人'].includes(item.game)).map(acc => acc.game).concat(currentUpdateGameList)
     gameArr = [...new Set(gameArr.concat(allGameList))]
-
-
-    const videosDirPath = path.join(TikTokDownloader_ROOT, 'accountDownload') || 'D:\\code\\TikTokDownloader';
+    const videosDirPath = groupDir || path.join(TikTokDownloader_ROOT, 'accountDownload')
     const files = await fsPromises.readdir(videosDirPath, { withFileTypes: true });
-
     for (const file of files) {
+      // 是文件夹
+      const folderName = file.name;
       if (file.isDirectory()) {
-        const folderName = file.name;
-        const account = accountsUrls.find(acc => folderName.includes(acc.name));
-        if (account && account.game) {
+        // 该账号的分类
+        const dirMatchAccountGameType = accountsUrls.find(acc => folderName.includes(acc.name))?.game
+        // 是某个账号类型
+        if (dirMatchAccountGameType) {
           const directoryFolder = await fsPromises.readdir(videosDirPath + "/" + folderName);
           for (const fileName of directoryFolder) {
-
-            const gameName = gameArr.find(game => fileName.includes(game))
-            let gameFolder = ''
-            const oldFilePath = path.join(videosDirPath, folderName, fileName);
-            const isSpecialGameType = ['coser同行', 'coser本人', '搞笑', '可爱赛道'].includes(account.game);
-            const isMp4File = path.extname(fileName).toLowerCase() === '.mp4';
-            // 是mp4文件且文件标题包含某个游戏名称
-            if (isMp4File && gameName) {
-              if (account.game === 'coser同行' || account.game === 'coser本人') {
-                gameFolder = path.join(TikTokDownloader_ROOT, "gameList", gameName + '/' + account.game); // gameList/游戏名/coserXX
-              } else {
-                gameFolder = path.join(TikTokDownloader_ROOT, "gameList", gameName + '/攻略'); // gameList/游戏名/攻略
-              }
-              if (!fs.existsSync(gameFolder)) {
-                await fsPromises.mkdir(gameFolder, { recursive: true });
-                await fsPromises.mkdir(path.join(gameFolder, '/未处理'), { recursive: true });
-              }
-              let newFilePath = path.join(gameFolder, fileName);
-              if (checkName) {
-                console.log("🚀 ~ processFiles ~ newFilePath:", newFilePath)
-                continue
-              }
-              try {
-                await fsPromises.rename(oldFilePath, newFilePath);
-                console.log(`文件已重命名并移动: ${oldFilePath} -> ${newFilePath}`);
-              } catch (err) {
-                console.error('无法重命名文件:', err);
-              }
-            } else if (isMp4File && isSpecialGameType) {
-              // 文件名不包含游戏类型，但是分组是特殊赛道，可移动分组后查看视频再进行手动区分
-              const gameFolder = path.join(TikTokDownloader_ROOT, "gameList", account.game);
-              if (!fs.existsSync(gameFolder)) {
-                await fsPromises.mkdir(gameFolder, { recursive: true });
-              }
-              let newFilePath = path.join(gameFolder, fileName);
-              if (checkName) {
-                console.log("🚀 ~ processFiles ~ newFilePath:", newFilePath)
-                continue
-              }
-              try {
-                await fsPromises.rename(oldFilePath, newFilePath);
-                console.log(`文件移动到新文件夹: ${oldFilePath} -> ${newFilePath}`);
-              } catch (err) {
-                console.error('无法移动文件:', err);
-              }
-            }
+            await groupVideos(gameArr, fileName, dirMatchAccountGameType, videosDirPath, folderName, checkName);
           }
         }
+      } else {
+        // 文件  D:\code\platform_game_activity\TikTokDownloader\gameList\coser本人
+        // 判断路径中  是否包含某个gameType
+        // const dirMatchAccountGameType = specialGameList.find(game => videosDirPath.includes(game))
+        // await handleVideos(gameArr, file, dirMatchAccountGameType, videosDirPath, folderName);
       }
     }
   }
   catch (err) {
     console.error('读取或解析settings.json文件时出错:', err);
   }
+
 }
+
 
 module.exports = {
   downloadVideosAndGroup
 }
+
