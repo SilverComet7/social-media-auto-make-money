@@ -27,8 +27,8 @@
             <div class="operation-group bg-blue-300 p-4 rounded">
               <h3 class="text-lg font-bold mb-2 text-black">视频处理操作</h3>
               <div class="flex">
-                <el-button type="primary" @click="handleDownloadSettings">下载视频并分组</el-button>
-                <el-button type="primary" @click="ffmpegDialogVisible = true">ffmpeg去重处理</el-button>
+                <el-button type="primary" @click="handleDownloadSettings">下载视频后分组</el-button>
+                <el-button type="primary" @click="ffmpegDialogVisible = true">处理视频</el-button>
               </div>
             </div>
             <!-- 定时任务栏 -->
@@ -148,7 +148,7 @@
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
                             <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                            }}</span>
+                              }}</span>
                             <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
                             <template v-if="speReq?.videoData">
                               <div v-for="r in speReq.videoData" :key="r">
@@ -233,7 +233,7 @@
                       <span v-if="req.like" :class="req.like <= 500 ? ' text-orange-500' : ''">
                         <span>+</span>点赞>={{ req.like }}</span>
                       <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                      }}</span>
+                        }}</span>
                       <el-tooltip effect="dark" placement="top-start"
                         :content="getTooltipContent(req, scope.row.bilibili)" v-if="scope.row.bilibili">
                         <el-progress :percentage="getCompletionPercentage(req, scope.row.bilibili).percentage"
@@ -283,7 +283,7 @@
                           <span v-if="req.cday"> <span>+</span>投稿天数>={{ req.cday }}</span>
                           <span v-if="req.like"> <span>+</span>点赞>={{ req.like }}</span>
                           <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                          }}</span>
+                            }}</span>
 
                           <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
@@ -461,12 +461,14 @@
               <el-radio label="group">按分组下载</el-radio>
               <el-radio label="keyword">关键词下载</el-radio>
               <el-radio label="file">读取download.txt</el-radio>
+              <el-radio label="checkNewAdd">新旧JSON文件对比下载</el-radio>
+              <el-radio label="all">账号全部启用下载</el-radio>
             </el-radio-group>
           </el-form-item>
 
           <template v-if="downloadSettings.selectedStrategy === 'keyword'">
             <el-form-item label="关键词">
-              <el-input v-model="downloadSettings.keyword" placeholder="输入视频关键词，多个用逗号分隔" />
+              <el-input v-model="downloadSettings.keyword" placeholder="输入视频关键词" />
             </el-form-item>
           </template>
 
@@ -481,18 +483,14 @@
               <el-checkbox v-for="game in allGameList" :key="game.name" v-model="game.checked" :label="game.name" />
             </el-form-item>
           </template>
-          <el-form-item label="新旧JSON文件对比">
-            <el-switch v-model="downloadSettings.checkNewAdd" active-text="是" inactive-text="否" />
-          </el-form-item>
-          <el-form-item label="开启全部视频下载">
-            <el-switch v-model="downloadSettings.allDownload" active-text="是" inactive-text="否" />
-          </el-form-item>
 
           <el-form-item label="视频开始时间">
             <el-input v-model="downloadSettings.earliest" placeholder="统一下载的最早时间 xx/xx/xx" />
           </el-form-item>
         </div>
-
+        <el-form-item label="分组目录" v-else>
+          <el-input v-model="downloadSettings.groupDir" placeholder="请输入分组目录" />
+        </el-form-item>
         <el-form-item label="分组只检测名称">
           <el-switch v-model="downloadSettings.checkName" active-text="是" inactive-text="否" />
         </el-form-item>
@@ -522,18 +520,27 @@
         <el-form-item label="处理地址">
           <el-input v-model="ffmpegSettings.videoDir" placeholder="请输入处理地址" />
         </el-form-item>
-        <el-form-item label="添加发布时间">
-          <el-switch v-model="ffmpegSettings.addPublishTime" active-text="是" inactive-text="否" />
+
+        <el-divider>标题相关</el-divider>
+
+        <!-- 是否开启重命名 -->
+        <el-form-item label="是否开启重命名">
+          <el-switch v-model="ffmpegSettings.enableRename" active-text="是" inactive-text="否" />
+          <div v-if="ffmpegSettings.enableRename">
+            <el-form-item label="单独检测名称">
+              <el-switch v-model="ffmpegSettings.checkName" active-text="是" inactive-text="否" />
+            </el-form-item>
+            <el-form-item label="仅重命名">
+              <el-switch v-model="ffmpegSettings.onlyRename" active-text="是" inactive-text="否" />
+            </el-form-item>
+            <el-form-item label="重命名添加发布时间">
+              <el-switch v-model="ffmpegSettings.addPublishTime" active-text="是" inactive-text="否" />
+            </el-form-item>
+          </div>
         </el-form-item>
 
-        <el-form-item label="单独检测名称">
-          <el-switch v-model="ffmpegSettings.checkName" active-text="是" inactive-text="否" />
-        </el-form-item>
-        <el-form-item label="仅重命名">
-          <el-switch v-model="ffmpegSettings.onlyRename" active-text="是" inactive-text="否" />
-        </el-form-item>
-        <div v-if="!ffmpegSettings.onlyRename && !ffmpegSettings.checkName">
-          <el-divider>视频去重配置</el-divider>
+        <div >
+          <el-divider>视频预处理配置</el-divider>
           <el-form-item label="是否开启去重配置">
             <el-switch v-model="ffmpegSettings.deduplicationConfig.enable" @change="handleDeduplicationChange" />
             <div v-if="ffmpegSettings.deduplicationConfig.enable">
@@ -593,24 +600,28 @@
             </div>
           </el-form-item>
 
-          <el-divider>基础变换</el-divider>
-          <el-form-item label="截取开始时间n秒后">
-            <el-input-number v-model="ffmpegSettings.beforeTime" :min="0" :max="100" />
-          </el-form-item>
-          <el-form-item label="帧率">
-            <el-input-number v-model="ffmpegSettings.fps" :min="30" :max="60" />
-          </el-form-item>
-          <el-form-item label="分辨率百分比">
-            <el-input-number v-model="ffmpegSettings.scalePercent" :min="0" :max="100" />
-          </el-form-item>
-
-
-
-          <el-form-item label="单视频替换音乐">
-            <el-switch v-model="ffmpegSettings.replaceMusic" active-text="是" inactive-text="否" />
-            <el-select v-model="ffmpegSettings.musicName" placeholder="请选择音乐" v-if="ffmpegSettings.replaceMusic">
-              <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
-            </el-select>
+          <el-form-item label="是否开启视频变换">
+            <el-switch v-model="ffmpegSettings.enableTransform"  />
+            <template v-if="ffmpegSettings.enableTransform">
+              <el-form-item label="截取开始时间n秒后">
+                <el-input-number v-model="ffmpegSettings.beforeTime" :min="0" :max="100" />
+              </el-form-item>
+              <el-form-item label="添加片尾">
+                <el-switch v-model="ffmpegSettings.addEnding" active-text="是" inactive-text="否" />
+              </el-form-item>
+              <el-form-item label="帧率">
+                <el-input-number v-model="ffmpegSettings.fps" :min="30" :max="60" />
+              </el-form-item>
+              <el-form-item label="分辨率百分比">
+                <el-input-number v-model="ffmpegSettings.scalePercent" :min="0" :max="100" />
+              </el-form-item>
+              <el-form-item label="单视频替换音乐">
+                <el-switch v-model="ffmpegSettings.replaceMusic" active-text="是" inactive-text="否" />
+                <el-select v-model="ffmpegSettings.musicName" placeholder="请选择音乐" v-if="ffmpegSettings.replaceMusic">
+                  <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
+                </el-select>
+              </el-form-item>
+            </template>
           </el-form-item>
 
           <!-- 新增合并视频控制选项 -->
@@ -619,18 +630,30 @@
             <el-switch v-model="ffmpegSettings.enableMerge" />
           </el-form-item>
 
-          <el-form-item label="合并时长限制(秒)" v-if="ffmpegSettings.enableMerge">
-            <el-input-number v-model="ffmpegSettings.mergedLimitTime" :min="10" :max="60" :step="5" />
-          </el-form-item>
+          <template v-if="ffmpegSettings.enableMerge">
+            <el-form-item label="合并视频最小时长(秒)">
+              <el-input-number v-model="ffmpegSettings.mergedMinTime" :min="8" :max="60" />
+            </el-form-item>
+            <el-form-item label="每个分镜秒数">
+              <el-input-number v-model="ffmpegSettings.segmentDuration" :min="1" :max="60" />
+              <!-- 自动根据合并最小时长以及秒数计算需要的分镜（视频文件）数，向上取整 -->
 
-          <!-- 合集音乐控制 -->
-          <el-form-item label="启用合集音乐" v-if="ffmpegSettings.enableMerge">
-            <el-switch v-model="ffmpegSettings.enableMergeMusic" />
-            <el-select v-if="ffmpegSettings.enableMergeMusic" v-model="ffmpegSettings.mergeMusicName"
-              placeholder="请选择音乐">
-              <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
-            </el-select>
-          </el-form-item>
+              需要{{ Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration) }}个大于该分镜秒数的视频文件
+            </el-form-item>
+
+            <el-form-item label="混剪数量">
+              <el-input-number v-model="ffmpegSettings.mixCount" :min="1" :max="100" />
+            </el-form-item>
+
+            <el-form-item label="启用合集音乐">
+              <el-switch v-model="ffmpegSettings.enableMergeMusic" />
+              <el-select v-if="ffmpegSettings.enableMergeMusic" v-model="ffmpegSettings.mergeMusicName"
+                placeholder="请选择音乐">
+                <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
+              </el-select>
+            </el-form-item>
+
+          </template>
 
         </div>
       </el-form>
@@ -1052,8 +1075,8 @@ const editRewardForm = ref({
   specialTagRequirements: [
     {
       name: '',
-      // minVideoTime: 6,
-      // minView: 100,
+      minVideoTime: 6,
+      minView: 100,
       // topic: '',
       specialTag: '',
       eDate: '',
@@ -1214,15 +1237,15 @@ const downloadSettings = ref({
   selectedStrategy: 'group',
   keyword: '',
   filePath: '',
-  checkNewAdd: false,
-  allDownload: false,
+  checkNewAdd: computed(() => downloadSettings.value.selectedStrategy === 'checkNewAdd' ? true : false),
+  allDownload: computed(() => downloadSettings.value.selectedStrategy === 'allDownload' ? true : false),
   checkName: false,
   earliest: '2025/01/01', // 近两个月
   currentUpdateGameList: [],
 })
 
 const ffmpegDialogVisible = ref(false)
-const musicOptions = ref(['billll', '难却'])
+const musicOptions = ref(['随机', 'billll', '难却'])
 // 定义不同类别的默认去重配置
 const defaultDeduplicationConfigs = {
   攻略: {
@@ -1273,11 +1296,15 @@ const ffmpegSettings = ref({
     enable: false,
     ...defaultDeduplicationConfigs.coser,
   },
-
+  addEnding: false, // 默认添加片尾
   enableMerge: false,
-  mergedLimitTime: 30,
-  enableMergeMusic: false,
-  mergeMusicName: 'billll',
+  mergedMinTime: 30,
+  enableMergeMusic: true,
+  segmentDuration: 5, // 默认分镜秒数
+  mixCount: 10, // 默认混剪数量
+  mergeMusicName: '随机',
+  videoDir: '' // 视频处理路径
+
 })
 
 // 处理去重开关变化

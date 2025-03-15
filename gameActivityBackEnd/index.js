@@ -479,12 +479,9 @@ app.post("/getPlatformData", async (req, res) => {
 });
 
 async function getPlatformData() {
-  let douyinData = [];
-  let xhsData = [];
-  let bilibiliData = [];
-  xhsData = await queryXiaoHongShuAllAccountsData();
-  douyinData = await queryDouYinAllAccountsData();
-  bilibiliData = await querybilibiliAllAccountsData();
+  // let xhsData = await queryXiaoHongShuAllAccountsData();
+  let douyinData = await queryDouYinAllAccountsData();
+  let bilibiliData = await querybilibiliAllAccountsData();
   const oldOtherGameDataArr = getJsonData("gameData.json");
   const BiliBiliScheduleJobJson = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
   const jsonData = oldOtherGameDataArr.map((item) => {
@@ -496,12 +493,12 @@ async function getPlatformData() {
           return {
             ...e,
             specialTagRequirements: e.specialTagRequirements.map((i) => {
-              return {
+              return {  
                 ...i,
                 videoData: douyinData.map((t) => {
                   // 过滤不满足条件的视频
                   const valuedList = t.aweme_list.filter(
-                    (l) => l.desc.includes(i.specialTag) &&
+                    (l) => (l.desc.includes(i.specialTag) || l.desc.includes(item.name)) &&
                       l.view >= (i.minView || 100)
                   );
                   // 目前忽视了挂在小手柄问题，可手动isGet调整
@@ -535,51 +532,53 @@ async function getPlatformData() {
               };
             }),
           };
-        } else if (e.name === "小红书") {
-          return {
-            ...e,
-            specialTagRequirements: e.specialTagRequirements.map((i) => {
-              return {
-                ...i,
-                videoData: xhsData.map((t) => {
-                  // 过滤不满足条件的视频
-                  const valuedList = t.aweme_list.filter((l) => l.desc
-                    .split(" ")
-                    .map((e) => "#" + e)
-                    .join(" ")
-                    .includes(i.specialTag)
-                  );
+        }
+        // else if (e.name === "小红书") {
+        //   return {
+        //     ...e,
+        //     specialTagRequirements: e.specialTagRequirements.map((i) => {
+        //       return {
+        //         ...i,
+        //         videoData: xhsData.map((t) => {
+        //           // 过滤不满足条件的视频
+        //           const valuedList = t.aweme_list.filter((l) => l.desc
+        //             .split(" ")
+        //             .map((e) => "#" + e)
+        //             .join(" ")
+        //             .includes(i.specialTag)
+        //           );
 
-                  let alsoRelayList = [];
-                  if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-                    alsoRelayList = i?.videoData
-                      .find((c) => c.userName === t.user.name)
-                      .onePlayNumList.filter((l) => {
-                        // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
-                        if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
-                          return false;
-                        }
-                        // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-                        // if (l.create_time > formatSecondTimestamp(eDate)) {
-                        //     return false
-                        // }
-                        return true;
-                      });
-                  }
+        //           let alsoRelayList = [];
+        //           if (i?.videoData?.find((c) => c.userName === t.user.name)) {
+        //             alsoRelayList = i?.videoData
+        //               .find((c) => c.userName === t.user.name)
+        //               .onePlayNumList.filter((l) => {
+        //                 // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
+        //                 if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
+        //                   return false;
+        //                 }
+        //                 // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
+        //                 // if (l.create_time > formatSecondTimestamp(eDate)) {
+        //                 //     return false
+        //                 // }
+        //                 return true;
+        //               });
+        //           }
 
-                  let list = valuedList.concat(alsoRelayList);
-                  return {
-                    userName: t.user.name,
-                    allNum: list.length,
-                    allLike: list.reduce((a, b) => a + b.like, 0),
-                    // allViewNum: list.reduce((a, b) => a + b.view, 0),
-                    onePlayNumList: list,
-                  };
-                }),
-              };
-            }),
-          };
-        } else if (e.name === "bilibili") {
+        //           let list = valuedList.concat(alsoRelayList);
+        //           return {
+        //             userName: t.user.name,
+        //             allNum: list.length,
+        //             allLike: list.reduce((a, b) => a + b.like, 0),
+        //             // allViewNum: list.reduce((a, b) => a + b.view, 0),
+        //             onePlayNumList: list,
+        //           };
+        //         }),
+        //       };
+        //     }),
+        //   };
+        // }
+         else if (e.name === "bilibili") {
           return {
             ...e,
             specialTagRequirements: e.specialTagRequirements.map((i) => {

@@ -107,6 +107,13 @@ function calculateTotalMoney(gameData) {
   return totalMoney;
 }
 
+// 获取随机音乐名称
+function getRandomMusicName(dirPath = 'D:/code/platform_game_activity/TikTokDownloader/素材/music') {
+  const musicNames = fs.readdirSync(dirPath);
+  return musicNames[Math.floor(Math.random() * musicNames.length)];
+}
+
+
 module.exports = {
   formatDate,
   getJsonData,
@@ -115,4 +122,5 @@ module.exports = {
   concurrentFetchWithDelay,
   calculateTotalMoney,
   writeLocalDataJson,
+  getRandomMusicName
 };
