@@ -498,8 +498,11 @@ async function getPlatformData() {
                 videoData: douyinData.map((t) => {
                   // 过滤不满足条件的视频
                   const valuedList = t.aweme_list.filter(
-                    (l) => (l.desc.includes(i.specialTag) || l.desc.includes(item.name)) &&
+                    (l) => {
+                      if(i.specialTag == '') return false;
+                      return (l.desc.includes(i.specialTag) || l.desc.includes(item.name)) &&
                       l.view >= (i.minView || 100)
+                    }
                   );
                   // 目前忽视了挂在小手柄问题，可手动isGet调整
                   let alsoRelayList = [];
