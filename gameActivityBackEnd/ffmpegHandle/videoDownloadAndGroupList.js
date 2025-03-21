@@ -62,6 +62,7 @@ async function downloadVideosAndGroup({
   currentUpdateGameList,    // 控制哪些game下载
 
   earliest,    // 统一下载的最早时间,为空字符串则没有日期限制下载全部作品,活动起始时间
+  latest,
 
   strategy = 'group', // 新增策略参数
   keyword = '',       // 新增关键词参数
@@ -98,14 +99,15 @@ async function downloadVideosAndGroup({
         // 如果开启全部下载，则全部启用
         if (allDownload) acc.enable = true;
         if (earliest || earliest == '') acc.earliest = earliest
+        if (latest || latest == '') acc.latest = latest
         return acc;
       });
-      settings.run_command = '6 7 2 '
+      // settings.run_command = '6 7 2 ' // 视频筛选
       if (strategy == 'group') settings.run_command = '6 1 1 Q' // 分组下载 参考TikTokDownloader
       // if (strategy == 'keyword') 
       // if (strategy == 'filePath') settings.run_command = '6 2 2 Q' // TODO  处理默认路径 读取特定download.txt文件路径下载  
+      const input_command = 'xxcoser  1  1  0'
 
-      const input_command = 'coser  1  1  0'
       await fsPromises.writeFile(settingsPath, JSON.stringify(settings, null, 2), "utf8");
       console.log("settings.json 更新完成");
 

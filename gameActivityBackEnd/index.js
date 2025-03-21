@@ -887,7 +887,7 @@ async function checkAndExecuteJobs() {
 }
 
 // 提高任务检查频率（每2小时检查一次）
-setInterval(checkAndExecuteJobs, 2 * 60 * 60 * 1000);
+// setInterval(checkAndExecuteJobs, 2 * 60 * 60 * 1000);
 
 app.post("/scheduleUpload", async (req, res) => {
   async function generateScheduleJobs(videoDir, startTime, intervalHours) {
@@ -1033,7 +1033,6 @@ app.get("/getNewTopicData", async (req, res) => {
   }
 });
 
-// 注册路由
 
 // app.use('/api/reply', replyRoutes);
 
