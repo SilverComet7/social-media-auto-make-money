@@ -507,69 +507,116 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
     // 读取当前文件夹下的视频文件，可能是预处理后的temp文件
     videoFiles = await getVideoFiles(videoFolderPath);
     if (enableMerge) {
-      // 并行制作 mixCount 个视频
+      let availableVideos = [...videoFiles];
+
       await Promise.all(Array.from({ length: mixCount }, async (_, index) => {
-        const mergeMusicPath = path.join(TikTokDownloader_ROOT, `./素材/music/${mergeMusicName === '随机' ? getRandomMusicName() : mergeMusicName + '.mp3'}`);
+        const mergeMusicPath = path.join(TikTokDownloader_ROOT,
+          `./素材/music/${mergeMusicName === '随机' ? getRandomMusicName() : mergeMusicName + '.mp3'}`);
         let totalDuration = 0;
         let fileStr = '';
+        let localAvailableVideos = [...availableVideos];
 
-        while (totalDuration < mergedMinTime) {
-          const randomFile = videoFiles[Math.floor(Math.random() * videoFiles.length)];
+        // 用于存储第一个视频的参数
+        let firstVideoParams = null;
+        let targetWidth, targetHeight;
+        const transitionDuration = 0.5;
+
+        while (totalDuration < mergedMinTime && localAvailableVideos.length > 0) {
+          const randomIndex = Math.floor(Math.random() * localAvailableVideos.length);
+          const randomFile = localAvailableVideos.splice(randomIndex, 1)[0];
           const filePath = path.join(videoFolderPath, randomFile);
 
-          // 获取视频参数
           const videoParams = await getVideoParams(filePath);
-          const maxStartTime = videoParams.duration - segmentDuration;
+          const maxStartTime = videoParams.duration - segmentDuration - transitionDuration;
           if (maxStartTime <= 0) continue;
 
-          const startTime = Math.random() * maxStartTime;
+          // 如果是第一个视频，记录其参数作为目标宽高比
+          if (!firstVideoParams) {
+            firstVideoParams = videoParams;
+            targetWidth = videoParams.width;
+            targetHeight = videoParams.height;
+            writeLog(`选定第一个视频的宽高比为 ${targetWidth}:${targetHeight}`);
+          }
+
+          const startTime = Math.floor(Math.random() * maxStartTime)
           const tempFilePath = path.join(videoFolderPath, `temp_${index}_${Date.now()}_${randomFile}.mp4`);
 
-          // 添加转场效果
-          // 使用 xfade 滤镜，持续时间为 0.5 秒
-          const transitionDuration = 0.5;
+          // 检查当前视频是否需要转换
+          const needsConversion = videoParams.width / videoParams.height !== firstVideoParams.width / firstVideoParams.height;
 
-          if (fileStr === '') {
-            // 第一个片段，不需要转场
-            const command = `ffmpeg -ss ${startTime} -t ${segmentDuration} -i "${filePath}" -c:v libx264 -c:a aac "${tempFilePath}"`;
+          if (needsConversion) {
+            writeLog(`视频 ${randomFile} 需要转换以匹配目标宽高比`);
+            // 计算新的尺寸，保持宽高比并添加黑边
+            let scaleFilter = '';
+            const sourceRatio = videoParams.width / videoParams.height;
+            const targetRatio = targetWidth / targetHeight;
+
+            if (sourceRatio > targetRatio) {
+              // 源视频更宽，需要在上下添加黑边
+              const newHeight = Math.floor(targetWidth / sourceRatio);
+              const padHeight = Math.floor((targetHeight - newHeight) / 2);
+              scaleFilter = `scale=${targetWidth}:${newHeight},pad=${targetWidth}:${targetHeight}:0:${padHeight}:black`;
+            } else {
+              // 源视频更高，需要在两侧添加黑边
+              const newWidth = Math.floor(targetHeight * sourceRatio);
+              const padWidth = Math.floor((targetWidth - newWidth) / 2);
+              scaleFilter = `scale=${newWidth}:${targetHeight},pad=${targetWidth}:${targetHeight}:${padWidth}:0:black`;
+            }
+
+            const command = `ffmpeg -ss ${startTime} -t ${segmentDuration + transitionDuration} -i "${filePath}" -vf "${scaleFilter}" -c:v libx264 -c:a aac "${tempFilePath}"`;
             await runFFmpegCommand(command);
+
           } else {
-            // 后续片段，添加转场效果
-            // 为转场预留时间，多截取 transitionDuration 秒
-            const command = `ffmpeg -ss ${startTime} -t ${segmentDuration + transitionDuration} -i "${filePath}" -c:v libx264 -c:a aac "${tempFilePath}"`;
-            await runFFmpegCommand(command);
+            writeLog(`视频 ${randomFile} 无需转换，直接使用`);
+            // 视频宽高比匹配，直接使用copy
+            if (fileStr === '') {
+              const command = `ffmpeg -ss ${startTime} -t ${segmentDuration} -i "${filePath}" -c copy "${tempFilePath}"`;
+              await runFFmpegCommand(command);
+            } else {
+              const command = `ffmpeg -ss ${startTime} -t ${segmentDuration + transitionDuration} -i "${filePath}" -c copy "${tempFilePath}"`;
+              await runFFmpegCommand(command);
+            }
           }
 
           fileStr += `file '${tempFilePath}'\n`;
           totalDuration += segmentDuration;
         }
 
-        // 修改合并视频的命令，添加转场效果
-        const mergedFilePath = path.join(isPreProcess ? newVideoFolderPath : videoFolderPath, `merged_video_${index + 1}_${Date.now()}.mp4`);
-        const fileListPath = path.join(videoFolderPath, `filelist_${index}_${Date.now()}.txt`);
-        await fsPromises.writeFile(fileListPath, fileStr);
+        // 修改输出文件名，添加宽高比信息
+        const aspectRatio = firstVideoParams.width > firstVideoParams.height ? "16_9" : "9_16";
+        const mergedFilePath = path.join(
+          isPreProcess ? newVideoFolderPath : videoFolderPath,
+          `merged_video_${aspectRatio}_${index}_${Date.now()}.mp4`
+        );
 
+        // 修改合并视频的命令，添加转场效果
+        const mergedFileListPath = path.join(videoFolderPath, `filelist_${index}_${Date.now()}.txt`);
+        await fsPromises.writeFile(mergedFileListPath, fileStr);
         // 从文件列表中获取临时文件
         const tempFiles = fileStr.split('\n').map(line => line.replace("file '", "").replace("'", "")).filter(Boolean);
+        try {
+          // 构建输入文件参数
+          const inputsStr = tempFiles.map(file => `-i "${file}"`).join(' ');
 
-        // 构建输入文件参数
-        const inputsStr = tempFiles.map(file => `-i "${file}"`).join(' ');
+          // 构建滤镜复杂度字符串
+          let filterComplex = '';
+          let lastOutput = '0';
 
-        // 构建滤镜复杂度字符串
-        let filterComplex = '';
-        let lastOutput = '0';
+          for (let i = 1; i < tempFiles.length; i++) {
+            filterComplex += `[${lastOutput}][${i}]xfade=transition=fade:duration=0.5:offset=${i * segmentDuration - 0.5}[v${i}];`;
+            lastOutput = `v${i}`;
+          }
 
-        for (let i = 1; i < tempFiles.length; i++) {
-          filterComplex += `[${lastOutput}][${i}]xfade=transition=fade:duration=0.5:offset=${i * segmentDuration - 0.5}[v${i}];`;
-          lastOutput = `v${i}`;
+          // 最终的合并命令
+          const mergeCommand = `ffmpeg ${inputsStr} -i "${mergeMusicPath}" -filter_complex "${filterComplex}" -map "[${lastOutput}]" -map ${tempFiles.length}:a -c:v libx264 -c:a aac -shortest "${mergedFilePath}"`;
+          await runFFmpegCommand(mergeCommand);
+
+          await deleteFiles(tempFiles, mergedFileListPath);
+        } catch (error) {
+          console.log('合并视频失败' + error);
+          await deleteFiles(tempFiles, mergedFileListPath);
+          throw error
         }
-
-        // 最终的合并命令
-        const mergeCommand = `ffmpeg ${inputsStr} -i "${mergeMusicPath}" -filter_complex "${filterComplex}" -map "[${lastOutput}]" -map ${tempFiles.length}:a -c:v libx264 -c:a aac -shortest "${mergedFilePath}"`;
-        await runFFmpegCommand(mergeCommand);
-
-        await Promise.all(tempFiles.map(tempFile => fsPromises.unlink(tempFile)));
-        await fsPromises.unlink(fileListPath);
       }));
 
       // // 预处理后的视频顺序合并
@@ -610,6 +657,11 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
     writeLog(err.stack || '无堆栈信息');
     fs.writeFileSync(mapFilePath, JSON.stringify(fileNameMap, null, 2));
     throw err;
+  }
+
+  async function deleteFiles(tempFiles, fileListPath) {
+    await Promise.all(tempFiles.map(tempFile => fsPromises.unlink(tempFile)));
+    await fsPromises.unlink(fileListPath);
   }
 }
 
