@@ -462,8 +462,8 @@
               <el-radio label="group">按分组下载</el-radio>
               <el-radio label="checkNewAdd">新旧JSON文件对比下载（新增账号时使用）</el-radio>
               <el-radio label="all">账号全部启用下载</el-radio>
-              <el-radio label="keyword">关键词下载</el-radio>
-              <el-radio label="file">读取download.txt</el-radio>
+              <!-- <el-radio label="keyword">关键词下载</el-radio> -->
+              <el-radio label="filePath">读取download.txt</el-radio>
             </el-radio-group>
           </el-form-item>
 
@@ -473,7 +473,7 @@
             </el-form-item>
           </template>
 
-          <template v-if="downloadSettings.selectedStrategy === 'file'">
+          <template v-if="downloadSettings.selectedStrategy === 'filePath'">
             <el-form-item label="文件路径">
               <el-input v-model="downloadSettings.filePath" placeholder="输入download.txt完整路径" />
             </el-form-item>
@@ -485,7 +485,7 @@
             </el-form-item>
           </template>
 
-          <template v-if="!['keyword','file'].includes(downloadSettings.selectedStrategy)">
+          <template v-if="!['keyword','filePath'].includes(downloadSettings.selectedStrategy)">
             <el-form-item label="视频开始时间">
               <el-input v-model="downloadSettings.earliest" placeholder="统一下载的最早时间 xx/xx/xx" />
             </el-form-item>
@@ -610,9 +610,13 @@
           <el-form-item label="是否开启视频变换">
             <el-switch v-model="ffmpegSettings.enableTransform" />
             <template v-if="ffmpegSettings.enableTransform">
-              <el-form-item label="截取开始时间n秒后">
+              <el-form-item label="截取开始n秒后">
                 <el-input-number v-model="ffmpegSettings.beforeTime" :min="0" :max="100" />
               </el-form-item>
+              <el-form-item label="截取结尾n秒前">
+                <el-input-number v-model="ffmpegSettings.afterTime" :min="0" :max="100" />
+              </el-form-item>
+
               <el-form-item label="添加固定片尾">
                 <el-switch v-model="ffmpegSettings.addEnding" active-text="是" inactive-text="否" />
               </el-form-item>
@@ -1249,7 +1253,7 @@ const downloadSettings = ref({
   isDownload: true,
   selectedStrategy: 'group',
   keyword: '',
-  filePath: '',
+  filePath: `D:\\code\\platform_game_activity\\TikTokDownloader\\downloadList.txt`,
   checkNewAdd: computed(() => downloadSettings.value.selectedStrategy === 'checkNewAdd' ? true : false),
   allDownload: computed(() => downloadSettings.value.selectedStrategy === 'allDownload' ? true : false),
   checkName: false,
@@ -1299,6 +1303,7 @@ const ffmpegSettings = ref({
   onlyRename: false,
   checkName: false,
   beforeTime: 1,
+  afterTime: 1,
   fps: 30,
   scalePercent: 0,  // 1920X1080
   replaceMusic: false,
