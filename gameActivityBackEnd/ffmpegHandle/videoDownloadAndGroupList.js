@@ -103,7 +103,7 @@ async function downloadVideosAndGroup({
         return acc;
       });
       // settings.run_command = '6 7 2 ' // 视频筛选
-      if (selectedStrategy == 'group') settings.run_command = '6 1 1 Q' // 分组下载 参考TikTokDownloader
+      if (['group',"checkNewAdd",'all'].includes(selectedStrategy) ) settings.run_command = '6 1 1 Q' // 分组下载 参考TikTokDownloader
       // if (selectedStrategy == 'keyword')  const input_command = 'xxcoser  1  1  0'
       if (selectedStrategy == 'filePath') settings.run_command = '6 2 2 Q' // TODO  处理默认路径 读取特定download.txt文件路径下载
 

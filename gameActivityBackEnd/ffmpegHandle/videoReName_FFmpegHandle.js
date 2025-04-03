@@ -72,7 +72,7 @@ if (fs.existsSync(mapFilePath)) {
   }
 }
 
-async function runFFmpegCommand(command) {
+ async function runFFmpegCommand(command) {
   const startTime = Date.now();
   try {
     // 检测GPU支持情况
@@ -437,7 +437,7 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
       const videoFiles = await getVideoFiles(videoFolderPath);
       writeLog(`找到待处理视频文件数量: ${videoFiles.length}`);
       // 根据CPU核心数划分任务
-      const batchSize = Math.max(1, Math.floor(videoFiles.length / cpuCount));
+      const batchSize = Math.max(1, Math.floor(videoFiles .length / cpuCount));
       const batches = [];
       for (let i = 0; i < videoFiles.length; i += batchSize) {
         batches.push(videoFiles.slice(i, i + batchSize));
@@ -458,7 +458,7 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
           worker.on('message', (message) => {
             if (message.success) {
               // 从子进程返回的消息中更新 要删除的filePath
-              mergeVideoInfoObj.needDeleteTempFilePath.push(...message.result.mergeVideoInfoObj.needDeleteTempFilePath)
+              if(isPreProcess && enableMerge) mergeVideoInfoObj.needDeleteTempFilePath.push(...message.result.mergeVideoInfoObj.needDeleteTempFilePath)
               resolve(message.result);
             } else {
               reject(new Error(message.error));
@@ -632,7 +632,7 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
 
     }
     // 清理临时文件
-    if (isPreProcess) {
+    if (isPreProcess && enableMerge) {
       await Promise.all(mergeVideoInfoObj.needDeleteTempFilePath.map(async (videoPath) => {
         return await fsPromises.unlink(videoPath);
       }));
@@ -673,7 +673,8 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
 
 module.exports = {
   ffmpegHandleVideos,
-  generateNewName
+  generateNewName,
+  runFFmpegCommand
 }
 
 // 读取当前目录下的视频文件
