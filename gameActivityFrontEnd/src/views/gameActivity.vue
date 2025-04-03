@@ -18,9 +18,10 @@
             <!-- 爬虫查询栏 -->
             <div class="operation-group bg-gray-300 p-4 rounded">
               <h3 class="text-lg font-bold mb-2 text-black">爬虫查询操作</h3>
-              <div class="flex">
+              <div class="flex ">
                 <el-button type="primary" @click="updateOnePlatData('抖音')">查询视频数据</el-button>
                 <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
+                <!-- <el-button type="primary" @click="fetchNewActData">查询B站新Topic</el-button> -->
               </div>
             </div>
             <!-- 视频下载处理栏 -->
@@ -148,7 +149,7 @@
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
                             <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                              }}</span>
+                            }}</span>
                             <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
                             <template v-if="speReq?.videoData">
                               <div v-for="r in speReq.videoData" :key="r">
@@ -233,7 +234,7 @@
                       <span v-if="req.like" :class="req.like <= 500 ? ' text-orange-500' : ''">
                         <span>+</span>点赞>={{ req.like }}</span>
                       <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                        }}</span>
+                      }}</span>
                       <el-tooltip effect="dark" placement="top-start"
                         :content="getTooltipContent(req, scope.row.bilibili)" v-if="scope.row.bilibili">
                         <el-progress :percentage="getCompletionPercentage(req, scope.row.bilibili).percentage"
@@ -283,7 +284,7 @@
                           <span v-if="req.cday"> <span>+</span>投稿天数>={{ req.cday }}</span>
                           <span v-if="req.like"> <span>+</span>点赞>={{ req.like }}</span>
                           <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                            }}</span>
+                          }}</span>
 
                           <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
@@ -459,10 +460,10 @@
           <el-form-item label="下载策略">
             <el-radio-group v-model="downloadSettings.selectedStrategy">
               <el-radio label="group">按分组下载</el-radio>
-              <el-radio label="keyword">关键词下载</el-radio>
-              <el-radio label="file">读取download.txt</el-radio>
-              <el-radio label="checkNewAdd">新旧JSON文件对比下载</el-radio>
+              <el-radio label="checkNewAdd">新旧JSON文件对比下载（新增账号时使用）</el-radio>
               <el-radio label="all">账号全部启用下载</el-radio>
+              <!-- <el-radio label="keyword">关键词下载</el-radio> -->
+              <el-radio label="filePath">读取download.txt</el-radio>
             </el-radio-group>
           </el-form-item>
 
@@ -472,7 +473,7 @@
             </el-form-item>
           </template>
 
-          <template v-if="downloadSettings.selectedStrategy === 'file'">
+          <template v-if="downloadSettings.selectedStrategy === 'filePath'">
             <el-form-item label="文件路径">
               <el-input v-model="downloadSettings.filePath" placeholder="输入download.txt完整路径" />
             </el-form-item>
@@ -484,9 +485,15 @@
             </el-form-item>
           </template>
 
-          <el-form-item label="视频开始时间">
-            <el-input v-model="downloadSettings.earliest" placeholder="统一下载的最早时间 xx/xx/xx" />
-          </el-form-item>
+          <template v-if="!['keyword','filePath'].includes(downloadSettings.selectedStrategy)">
+            <el-form-item label="视频开始时间">
+              <el-input v-model="downloadSettings.earliest" placeholder="统一下载的最早时间 xx/xx/xx" />
+            </el-form-item>
+            <el-form-item label="视频结束时间">
+              <el-input v-model="downloadSettings.latest" placeholder="统一下载的截止时间 xx/xx/xx" />
+            </el-form-item>
+          </template>
+
         </div>
         <el-form-item label="分组目录" v-else>
           <el-input v-model="downloadSettings.groupDir" placeholder="请输入分组目录" />
@@ -527,19 +534,19 @@
         <el-form-item label="是否开启重命名">
           <el-switch v-model="ffmpegSettings.enableRename" active-text="是" inactive-text="否" />
           <div v-if="ffmpegSettings.enableRename">
-            <el-form-item label="单独检测名称">
+            <el-form-item label="预检查名称（避免相同名称）">
               <el-switch v-model="ffmpegSettings.checkName" active-text="是" inactive-text="否" />
             </el-form-item>
-            <el-form-item label="仅重命名">
+            <!-- <el-form-item label="仅重命名">
               <el-switch v-model="ffmpegSettings.onlyRename" active-text="是" inactive-text="否" />
-            </el-form-item>
-            <el-form-item label="重命名添加发布时间">
+            </el-form-item> -->
+            <el-form-item label="添加发布时间（避免相同名称）">
               <el-switch v-model="ffmpegSettings.addPublishTime" active-text="是" inactive-text="否" />
             </el-form-item>
           </div>
         </el-form-item>
 
-        <div >
+        <div>
           <el-divider>视频预处理配置</el-divider>
           <el-form-item label="是否开启去重配置">
             <el-switch v-model="ffmpegSettings.deduplicationConfig.enable" @change="handleDeduplicationChange" />
@@ -565,11 +572,11 @@
                   v-model="ffmpegSettings.deduplicationConfig.blurRadius" :min="0" :max="1" :step="0.1" />
               </el-form-item>
 
-              <el-form-item label="启用淡入淡出">
+              <!-- <el-form-item label="启用淡入淡出">
                 <el-switch v-model="ffmpegSettings.deduplicationConfig.enableFade" />
                 <el-input-number v-if="ffmpegSettings.deduplicationConfig.enableFade"
                   v-model="ffmpegSettings.deduplicationConfig.fadeDuration" :min="0" :max="2" :step="0.1" />
-              </el-form-item>
+              </el-form-item> -->
 
               <el-form-item label="亮度调整">
                 <el-slider v-model="ffmpegSettings.deduplicationConfig.brightness" :min="-1" :max="1" :step="0.1" />
@@ -601,12 +608,16 @@
           </el-form-item>
 
           <el-form-item label="是否开启视频变换">
-            <el-switch v-model="ffmpegSettings.enableTransform"  />
+            <el-switch v-model="ffmpegSettings.enableTransform" />
             <template v-if="ffmpegSettings.enableTransform">
-              <el-form-item label="截取开始时间n秒后">
+              <el-form-item label="截取开始n秒后">
                 <el-input-number v-model="ffmpegSettings.beforeTime" :min="0" :max="100" />
               </el-form-item>
-              <el-form-item label="添加片尾">
+              <el-form-item label="截取结尾n秒前">
+                <el-input-number v-model="ffmpegSettings.afterTime" :min="0" :max="100" />
+              </el-form-item>
+
+              <el-form-item label="添加固定片尾">
                 <el-switch v-model="ffmpegSettings.addEnding" active-text="是" inactive-text="否" />
               </el-form-item>
               <el-form-item label="帧率">
@@ -950,9 +961,9 @@ interface ScheduleForm {
   etime: Date | null  // 添加活动结束时间字段
 }
 
-const formatDate = (timestamp: number): string => {
-  const date = new Date(timestamp * 1000)
-  return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+const formatDate = (timestamp?: number, splitStr: string = '-'): string => {
+  const date =  timestamp ?  new Date(timestamp * 1000) : new Date()
+  return date.getFullYear() + splitStr + (date.getMonth() + 1) + splitStr + date.getDate()
 }
 
 // 计算天数差
@@ -1232,15 +1243,22 @@ const cancelEditReward = () => {
 
 const allGameList = ref([])
 const dialogVisible = ref(false)
+const getDefaultDate = (monthsAgo = 0) => {
+  const date = new Date();
+  date.setMonth(date.getMonth() - monthsAgo);
+  return formatDate(date.getTime() / 1000, '/');
+}
+
 const downloadSettings = ref({
   isDownload: true,
   selectedStrategy: 'group',
   keyword: '',
-  filePath: '',
+  filePath: `D:\\code\\platform_game_activity\\TikTokDownloader\\downloadList.txt`,
   checkNewAdd: computed(() => downloadSettings.value.selectedStrategy === 'checkNewAdd' ? true : false),
   allDownload: computed(() => downloadSettings.value.selectedStrategy === 'allDownload' ? true : false),
   checkName: false,
-  earliest: '2025/01/01', // 近两个月
+  earliest: getDefaultDate(2), // 默认近两个月 YYYY/MM/DD
+  latest: getDefaultDate(),  // 默认当前 YYYY/MM/DD
   currentUpdateGameList: [],
 })
 
@@ -1249,8 +1267,8 @@ const musicOptions = ref(['随机', 'billll', '难却'])
 // 定义不同类别的默认去重配置
 const defaultDeduplicationConfigs = {
   攻略: {
-    speedFactor: 0.9,
-    enableMirror: false,
+    speedFactor: 0.97,
+    enableMirror: true,
     enableRotate: true,
     rotateAngle: 0.5,
     enableBlur: false,
@@ -1265,8 +1283,8 @@ const defaultDeduplicationConfigs = {
     bgBlurBottom: 0.1,
   },
   coser: {
-    speedFactor: 0.9,
-    enableMirror: false,
+    speedFactor: 0.97,
+    enableMirror: true,
     enableRotate: true,
     rotateAngle: 0.5,
     enableBlur: false,
@@ -1285,6 +1303,7 @@ const ffmpegSettings = ref({
   onlyRename: false,
   checkName: false,
   beforeTime: 1,
+  afterTime: 1,
   fps: 30,
   scalePercent: 0,  // 1920X1080
   replaceMusic: false,
@@ -1298,10 +1317,10 @@ const ffmpegSettings = ref({
   },
   addEnding: false, // 默认添加片尾
   enableMerge: false,
-  mergedMinTime: 30,
+  mergedMinTime: 10,
   enableMergeMusic: true,
-  segmentDuration: 5, // 默认分镜秒数
-  mixCount: 10, // 默认混剪数量
+  segmentDuration: 3, // 默认分镜秒数
+  mixCount: 2, // 默认混剪数量
   mergeMusicName: '随机',
   videoDir: '' // 视频处理路径
 

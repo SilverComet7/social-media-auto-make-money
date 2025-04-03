@@ -887,7 +887,7 @@ async function checkAndExecuteJobs() {
 }
 
 // 提高任务检查频率（每2小时检查一次）
-setInterval(checkAndExecuteJobs, 2 * 60 * 60 * 1000);
+// setInterval(checkAndExecuteJobs, 2 * 60 * 60 * 1000);
 
 app.post("/scheduleUpload", async (req, res) => {
   async function generateScheduleJobs(videoDir, startTime, intervalHours) {
@@ -1021,19 +1021,18 @@ app.get("/getNewTopicData", async (req, res) => {
         msg: "Topic数据更新成功",
         data: topicData.data
       });
-    } else {
-      throw new Error(topicData.message || "获取Topic数据失败");
+    } 
+    else {
+      throw new Error(topicData || "获取Topic数据失败");
     }
   } catch (error) {
     console.error("获取Topic数据时出错:", error);
-    res.status(500).json({
-      code: 500,
-      msg: error.message || "获取Topic数据失败"
+    res.json({
+      msg: error,
     });
   }
 });
 
-// 注册路由
 
 // app.use('/api/reply', replyRoutes);
 

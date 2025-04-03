@@ -2,43 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 const util = require('util');
+const { runFFmpegCommand } = require('./videoReName_FFmpegHandle');
+
 
 const fsPromises = fs.promises;
 const execPromise = util.promisify(exec);
 
-
-// 获取视频的宽度和高度
-async function getVideoDimensions(filePath) {
-    const command = `ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of default=noprint_wrappers=1:nokey=1 "${filePath}"`;
-    try {
-        const { stdout, stderr } = await execPromise(command);
-        if (stderr) {
-            console.error(`FFmpeg标准错误输出: ${stderr}`);
-        }
-        const [width, height] = stdout.trim().split('\n');
-        return { width: parseInt(width, 10), height: parseInt(height, 10) };
-    } catch (error) {
-        console.error(`获取视频尺寸时出错: ${error.message}`);
-        throw error;
-    }
-}
-
-// 修改分辨率和帧数
-async function modifyResolutionAndFrameRate(inputFilePath, outputFilePath, scalePercent, targetWidth, targetHeight, frameRate) {
-    const { width: originalWidth, height: originalHeight } = await getVideoDimensions(inputFilePath);
-
-    const newWidth = Math.round(originalWidth * scalePercent);
-    const newHeight = Math.round(originalHeight * scalePercent);
-
-    const command = `ffmpeg -i "${inputFilePath}" -vf "scale=${newWidth}:${newHeight},fps=${frameRate}" "${outputFilePath}"`;
-    try {
-        await execPromise(command);
-        console.log(`分辨率和帧数修改完成: ${outputFilePath}`);
-    } catch (error) {
-        console.error(`修改分辨率和帧数时出错: ${error.message}`);
-        throw error;
-    }
-}
 
 async function deduplicateVideo(filePath, deduplicationConfig = {
     speedFactor: 0.95,
@@ -120,7 +89,7 @@ async function deduplicateVideo(filePath, deduplicationConfig = {
 
     try {
         // 执行单个 ffmpeg 命令
-        await execPromise(command);
+        await runFFmpegCommand(command);
         console.log('视频处理完成');
 
         // 替换原文件

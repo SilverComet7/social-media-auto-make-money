@@ -72,7 +72,7 @@ if (fs.existsSync(mapFilePath)) {
   }
 }
 
-async function runFFmpegCommand(command) {
+ async function runFFmpegCommand(command) {
   const startTime = Date.now();
   try {
     // 检测GPU支持情况
@@ -80,17 +80,26 @@ async function runFFmpegCommand(command) {
     let gpuType = 'CPU';
 
     try {
-      // 检测 NVIDIA GPU
-      const { stdout: nvidiaInfo } = await execPromise('nvidia-smi -L').catch(() => ({ stdout: '' }));
-      if (nvidiaInfo.toLowerCase().includes('nvidia')) {
-        gpuInfo = nvidiaInfo;
+      // 检测 NVIDIA GPU   根据不同平台使用不同命令？
+      const osPlatform = os.platform();  // 1. windows 2. linux 3. MacOS
+      let differentOsCheckCommand = 'wmic path win32_VideoController get name';
+      // if (osPlatform === 'win32') {
+      //   checkCommand = 'wmic path win32_VideoController get name';
+      // } else if (osPlatform === 'linux') {
+      //   checkCommand = 'lspci | grep VGA';
+      // } else if (osPlatform === 'darwin') {
+      //   checkCommand = 'system_profiler SPDisplaysDataType | grep -A 1 "Chipset Model"';
+      // }
+
+      const { stdout: GpuInfo } = await execPromise(differentOsCheckCommand).catch(() => ({ stdout: '' }));
+      if (GpuInfo.toLowerCase().includes('nvidia')) {
+        gpuInfo = GpuInfo;
         gpuType = 'NVIDIA';
         command = command.replace('-c:v libx264', '-c:v h264_nvenc -preset p4 -tune hq');
       } else {
         // 检测 AMD GPU
-        const { stdout: amdInfo } = await execPromise('lspci | grep AMD').catch(() => ({ stdout: '' }));
-        if (amdInfo.toLowerCase().includes('amd')) {
-          gpuInfo = amdInfo;
+        if (GpuInfo.toLowerCase().includes('amd') || GpuInfo.toLowerCase().includes('radeon')) {
+          gpuInfo = GpuInfo;
           gpuType = 'AMD';
           command = command.replace('-c:v libx264', '-c:v h264_amf -quality quality -preset quality');
         }
@@ -239,23 +248,23 @@ async function processVideo(filePath, basicVideoInfoObj,
 
 
   if (mergeVideoInfoObj) {
-  //   const videoTrueDuration = (videoParams.duration - beforeTime);
-  //   mergeVideoInfoObj.totalDuration += videoTrueDuration
-  //   mergeVideoInfoObj.fileStr += `file '${videoTempPath}'\n`;
-  //   if (mergeVideoInfoObj.totalDuration > mergeVideoInfoObj.mergedMinTime) {
-  //     const mergedTxtPath = path.join(newVideoFolderPath, `/合集/${gameName}coser合集${mergeVideoInfoObj.videoIndex + 1}_filelist.txt`)
-  //     const mp4File = path.join(newVideoFolderPath, `/合集/${gameName}coser合集${mergeVideoInfoObj.videoIndex + 1}.mp4`)
-  //     fsPromises.writeFile(mergedTxtPath, mergeVideoInfoObj.fileStr);
-  //     mergeVideoInfoObj.totalDuration = 0
-  //     mergeVideoInfoObj.fileStr = ''
-  //     mergeVideoInfoObj.videoIndex += 1
-  //     mergeVideoInfoObj.needMergeBiliBiliVideoPath.push({
-  //       txtPath: mergedTxtPath,
-  //       mp4File
-  //     })
+    //   const videoTrueDuration = (videoParams.duration - beforeTime);
+    //   mergeVideoInfoObj.totalDuration += videoTrueDuration
+    //   mergeVideoInfoObj.fileStr += `file '${videoTempPath}'\n`;
+    //   if (mergeVideoInfoObj.totalDuration > mergeVideoInfoObj.mergedMinTime) {
+    //     const mergedTxtPath = path.join(newVideoFolderPath, `/合集/${gameName}coser合集${mergeVideoInfoObj.videoIndex + 1}_filelist.txt`)
+    //     const mp4File = path.join(newVideoFolderPath, `/合集/${gameName}coser合集${mergeVideoInfoObj.videoIndex + 1}.mp4`)
+    //     fsPromises.writeFile(mergedTxtPath, mergeVideoInfoObj.fileStr);
+    //     mergeVideoInfoObj.totalDuration = 0
+    //     mergeVideoInfoObj.fileStr = ''
+    //     mergeVideoInfoObj.videoIndex += 1
+    //     mergeVideoInfoObj.needMergeBiliBiliVideoPath.push({
+    //       txtPath: mergedTxtPath,
+    //       mp4File
+    //     })
 
-  //     mergeVideoInfoObj.needDeleteTempFilePath.push(mergedTxtPath)
-  //   }
+    //     mergeVideoInfoObj.needDeleteTempFilePath.push(mergedTxtPath)
+    //   }
     mergeVideoInfoObj.needDeleteTempFilePath.push(videoTempPath)
   }
 
@@ -291,7 +300,8 @@ async function processVideo(filePath, basicVideoInfoObj,
   // fileNameMap[originFileName] = fileName;
   // }
 
-  return await deleteTempFile(mergeVideoInfoObj);
+  await deleteTempFile(mergeVideoInfoObj);
+  return { mergeVideoInfoObj }
 }
 
 
@@ -389,10 +399,7 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
   }
 
   try {
-
-
-
-    const videoFiles = await getVideoFiles(videoFolderPath);
+    let videoFiles = await getVideoFiles(videoFolderPath);
     // 重命名相关
     if (enableRename) {
       const fileArr = []
@@ -430,7 +437,7 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
       const videoFiles = await getVideoFiles(videoFolderPath);
       writeLog(`找到待处理视频文件数量: ${videoFiles.length}`);
       // 根据CPU核心数划分任务
-      const batchSize = Math.max(1, Math.floor(videoFiles.length / cpuCount));
+      const batchSize = Math.max(1, Math.floor(videoFiles .length / cpuCount));
       const batches = [];
       for (let i = 0; i < videoFiles.length; i += batchSize) {
         batches.push(videoFiles.slice(i, i + batchSize));
@@ -450,6 +457,8 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
 
           worker.on('message', (message) => {
             if (message.success) {
+              // 从子进程返回的消息中更新 要删除的filePath
+              if(isPreProcess && enableMerge) mergeVideoInfoObj.needDeleteTempFilePath.push(...message.result.mergeVideoInfoObj.needDeleteTempFilePath)
               resolve(message.result);
             } else {
               reject(new Error(message.error));
@@ -489,61 +498,125 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
           return batchResults;
         })
       );
-
     }
 
     console.log('所有视频预处理完毕');
 
     // 处理合并视频的逻辑,如果有去重或视频变换后的 temp 文件，则合并temp文件，否则合并原视频
+
+    // 读取当前文件夹下的视频文件，可能是预处理后的temp文件
+    videoFiles = await getVideoFiles(videoFolderPath);
     if (enableMerge) {
+      let availableVideos = [...videoFiles];
 
-      // 读取当前文件夹下的视频文件，可能是预处理后的temp文件
-      const videoFiles = await getVideoFiles(videoFolderPath);
-
-      // 并行制作 mixCount 个视频
       await Promise.all(Array.from({ length: mixCount }, async (_, index) => {
-        const mergeMusicPath = path.join(TikTokDownloader_ROOT, `./素材/music/${mergeMusicName === '随机' ? getRandomMusicName() : mergeMusicName + '.mp3'}`);
+        const mergeMusicPath = path.join(TikTokDownloader_ROOT,
+          `./素材/music/${mergeMusicName === '随机' ? getRandomMusicName() : mergeMusicName + '.mp3'}`);
         let totalDuration = 0;
         let fileStr = '';
+        let localAvailableVideos = [...availableVideos];
 
-        while (totalDuration < mergedMinTime) {
-          // 随机选择一个视频文件
-          const randomFile = videoFiles[Math.floor(Math.random() * videoFiles.length)];
+        // 用于存储第一个视频的参数
+        let firstVideoParams = null;
+        let targetWidth, targetHeight;
+        const transitionDuration = 0.5;
+
+        while (totalDuration < mergedMinTime && localAvailableVideos.length > 0) {
+          const randomIndex = Math.floor(Math.random() * localAvailableVideos.length);
+          const randomFile = localAvailableVideos.splice(randomIndex, 1)[0];
           const filePath = path.join(videoFolderPath, randomFile);
 
-          // 获取视频参数
           const videoParams = await getVideoParams(filePath);
-          const maxStartTime = videoParams.duration - segmentDuration;
+          const maxStartTime = videoParams.duration - segmentDuration - transitionDuration;
           if (maxStartTime <= 0) continue;
 
-          // 随机选择开始时间
-          const startTime = Math.random() * maxStartTime;
+          // 如果是第一个视频，记录其参数作为目标宽高比
+          if (!firstVideoParams) {
+            firstVideoParams = videoParams;
+            targetWidth = videoParams.width;
+            targetHeight = videoParams.height;
+            writeLog(`选定第一个视频的宽高比为 ${targetWidth}:${targetHeight}`);
+          }
 
-          // 临时文件路径 增加randomFile 名称
+          const startTime = Math.floor(Math.random() * maxStartTime)
           const tempFilePath = path.join(videoFolderPath, `temp_${index}_${Date.now()}_${randomFile}.mp4`);
 
-          // 截取视频片段
-          const command = `ffmpeg -ss ${startTime} -t ${segmentDuration} -i "${filePath}" -c copy "${tempFilePath}"`;
-          await runFFmpegCommand(command);
+          // 检查当前视频是否需要转换
+          const needsConversion = videoParams.width / videoParams.height !== firstVideoParams.width / firstVideoParams.height;
 
-          // 更新合并信息
+          if (needsConversion) {
+            writeLog(`视频 ${randomFile} 需要转换以匹配目标宽高比`);
+            // 计算新的尺寸，保持宽高比并添加黑边
+            let scaleFilter = '';
+            const sourceRatio = videoParams.width / videoParams.height;
+            const targetRatio = targetWidth / targetHeight;
+
+            if (sourceRatio > targetRatio) {
+              // 源视频更宽，需要在上下添加黑边
+              const newHeight = Math.floor(targetWidth / sourceRatio);
+              const padHeight = Math.floor((targetHeight - newHeight) / 2);
+              scaleFilter = `scale=${targetWidth}:${newHeight},pad=${targetWidth}:${targetHeight}:0:${padHeight}:black`;
+            } else {
+              // 源视频更高，需要在两侧添加黑边
+              const newWidth = Math.floor(targetHeight * sourceRatio);
+              const padWidth = Math.floor((targetWidth - newWidth) / 2);
+              scaleFilter = `scale=${newWidth}:${targetHeight},pad=${targetWidth}:${targetHeight}:${padWidth}:0:black`;
+            }
+
+            const command = `ffmpeg -ss ${startTime} -t ${segmentDuration + transitionDuration} -i "${filePath}" -vf "${scaleFilter}" -c:v libx264 -c:a aac "${tempFilePath}"`;
+            await runFFmpegCommand(command);
+
+          } else {
+            writeLog(`视频 ${randomFile} 无需转换，直接使用`);
+            // 视频宽高比匹配，直接使用copy
+            if (fileStr === '') {
+              const command = `ffmpeg -ss ${startTime} -t ${segmentDuration} -i "${filePath}" -c copy "${tempFilePath}"`;
+              await runFFmpegCommand(command);
+            } else {
+              const command = `ffmpeg -ss ${startTime} -t ${segmentDuration + transitionDuration} -i "${filePath}" -c copy "${tempFilePath}"`;
+              await runFFmpegCommand(command);
+            }
+          }
+
           fileStr += `file '${tempFilePath}'\n`;
           totalDuration += segmentDuration;
         }
 
-        // 合并视频片段
-        const mergedFilePath = path.join(isPreProcess ? newVideoFolderPath  : videoFolderPath, `merged_video_${index + 1}_${Date.now()}.mp4`);
-        const fileListPath = path.join(videoFolderPath, `filelist_${index}_${Date.now()}.txt`);
-        await fsPromises.writeFile(fileListPath, fileStr);
+        // 修改输出文件名，添加宽高比信息
+        const aspectRatio = firstVideoParams.width > firstVideoParams.height ? "16_9" : "9_16";
+        const mergedFilePath = path.join(
+          isPreProcess ? newVideoFolderPath : videoFolderPath,
+          `merged_video_${aspectRatio}_${index}_${Date.now()}.mp4`
+        );
 
-        // 增加随机音频
-        const mergeCommand = `ffmpeg -f concat -safe 0 -i "${fileListPath}" -i "${mergeMusicPath}" -c copy -map 0:v:0 -map 1:a:0 -shortest "${mergedFilePath}"`;
-        await runFFmpegCommand(mergeCommand);
-
-        // 清理临时文件
+        // 修改合并视频的命令，添加转场效果
+        const mergedFileListPath = path.join(videoFolderPath, `filelist_${index}_${Date.now()}.txt`);
+        await fsPromises.writeFile(mergedFileListPath, fileStr);
+        // 从文件列表中获取临时文件
         const tempFiles = fileStr.split('\n').map(line => line.replace("file '", "").replace("'", "")).filter(Boolean);
-        await Promise.all(tempFiles.map(tempFile => fsPromises.unlink(tempFile)));
-        await fsPromises.unlink(fileListPath);
+        try {
+          // 构建输入文件参数
+          const inputsStr = tempFiles.map(file => `-i "${file}"`).join(' ');
+
+          // 构建滤镜复杂度字符串
+          let filterComplex = '';
+          let lastOutput = '0';
+
+          for (let i = 1; i < tempFiles.length; i++) {
+            filterComplex += `[${lastOutput}][${i}]xfade=transition=fade:duration=0.5:offset=${i * segmentDuration - 0.5}[v${i}];`;
+            lastOutput = `v${i}`;
+          }
+
+          // 最终的合并命令
+          const mergeCommand = `ffmpeg ${inputsStr} -i "${mergeMusicPath}" -filter_complex "${filterComplex}" -map "[${lastOutput}]" -map ${tempFiles.length}:a -c:v libx264 -c:a aac -shortest "${mergedFilePath}"`;
+          await runFFmpegCommand(mergeCommand);
+
+          await deleteFiles(tempFiles, mergedFileListPath);
+        } catch (error) {
+          console.log('合并视频失败' + error);
+          await deleteFiles(tempFiles, mergedFileListPath);
+          throw error
+        }
       }));
 
       // // 预处理后的视频顺序合并
@@ -559,11 +632,11 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
 
     }
     // 清理临时文件
-    if(isPreProcess){
+    if (isPreProcess && enableMerge) {
       await Promise.all(mergeVideoInfoObj.needDeleteTempFilePath.map(async (videoPath) => {
         return await fsPromises.unlink(videoPath);
       }));
-    } 
+    }
 
     const totalDuration = ((Date.now() - startTime) / 1000).toFixed(2);
     writeLog(`所有视频处理任务完成，总耗时: ${totalDuration}秒`);
@@ -585,6 +658,11 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
     fs.writeFileSync(mapFilePath, JSON.stringify(fileNameMap, null, 2));
     throw err;
   }
+
+  async function deleteFiles(tempFiles, fileListPath) {
+    await Promise.all(tempFiles.map(tempFile => fsPromises.unlink(tempFile)));
+    await fsPromises.unlink(fileListPath);
+  }
 }
 
 
@@ -595,7 +673,8 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
 
 module.exports = {
   ffmpegHandleVideos,
-  generateNewName
+  generateNewName,
+  runFFmpegCommand
 }
 
 // 读取当前目录下的视频文件
