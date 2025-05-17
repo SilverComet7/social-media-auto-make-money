@@ -21,7 +21,7 @@
               <div class="flex ">
                 <el-button type="primary" @click="updateOnePlatData('抖音')">查询视频数据</el-button>
                 <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
-                <!-- <el-button type="primary" @click="fetchNewActData">查询B站新Topic</el-button> -->
+                <el-button type="primary" @click="fetchNewTopicData">查询B站新Topic</el-button>
               </div>
             </div>
             <!-- 视频下载处理栏 -->
@@ -485,7 +485,7 @@
             </el-form-item>
           </template>
 
-          <template v-if="!['keyword','filePath'].includes(downloadSettings.selectedStrategy)">
+          <template v-if="!['keyword', 'filePath'].includes(downloadSettings.selectedStrategy)">
             <el-form-item label="视频开始时间">
               <el-input v-model="downloadSettings.earliest" placeholder="统一下载的最早时间 xx/xx/xx" />
             </el-form-item>
@@ -962,7 +962,7 @@ interface ScheduleForm {
 }
 
 const formatDate = (timestamp?: number, splitStr: string = '-'): string => {
-  const date =  timestamp ?  new Date(timestamp * 1000) : new Date()
+  const date = timestamp ? new Date(timestamp * 1000) : new Date()
   return date.getFullYear() + splitStr + (date.getMonth() + 1) + splitStr + date.getDate()
 }
 
@@ -1257,7 +1257,7 @@ const downloadSettings = ref({
   checkNewAdd: computed(() => downloadSettings.value.selectedStrategy === 'checkNewAdd' ? true : false),
   allDownload: computed(() => downloadSettings.value.selectedStrategy === 'allDownload' ? true : false),
   checkName: false,
-  earliest: getDefaultDate(2), // 默认近两个月 YYYY/MM/DD
+  earliest: getDefaultDate(4), // 默认近4个月 YYYY/MM/DD
   latest: getDefaultDate(),  // 默认当前 YYYY/MM/DD
   currentUpdateGameList: [],
 })
@@ -1275,9 +1275,9 @@ const defaultDeduplicationConfigs = {
     blurRadius: 0.2,
     enableFade: false,
     fadeDuration: 0.5,
-    brightness: 0.05,
-    contrast: 1.02,
-    saturation: 1.04,
+    brightness: 0,
+    contrast: 1,
+    saturation: 1,
     enableBgBlur: false,
     bgBlurTop: 0.1,
     bgBlurBottom: 0.1,
@@ -1291,9 +1291,9 @@ const defaultDeduplicationConfigs = {
     blurRadius: 0.2,
     enableFade: false,
     fadeDuration: 0.5,
-    brightness: 0.05,
-    contrast: 1.02,
-    saturation: 1.04,
+    brightness: 0,
+    contrast: 1,
+    saturation: 1,
     enableBgBlur: false,
     bgBlurTop: 0.1,
     bgBlurBottom: 0.1,
@@ -1302,8 +1302,8 @@ const defaultDeduplicationConfigs = {
 const ffmpegSettings = ref({
   onlyRename: false,
   checkName: false,
-  beforeTime: 1,
-  afterTime: 1,
+  beforeTime: 0,
+  afterTime: 0,
   fps: 30,
   scalePercent: 0,  // 1920X1080
   replaceMusic: false,
@@ -1459,6 +1459,18 @@ const fetchData = async () => {
 const fetchNewActData = async () => {
   try {
     const response = await fetch('http://localhost:3000/getNewActData')
+    const res = await response.json()
+    if (res.code == -101) {
+      return ElMessage.error('请先登录')
+    }
+    fetchData()
+  } catch (error) {
+    console.error('Error fetching data:', error)
+  }
+}
+const fetchNewTopicData = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/getNewTopicData')
     const res = await response.json()
     if (res.code == -101) {
       return ElMessage.error('请先登录')

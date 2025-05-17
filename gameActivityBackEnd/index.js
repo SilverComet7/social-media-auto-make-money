@@ -493,15 +493,18 @@ async function getPlatformData() {
           return {
             ...e,
             specialTagRequirements: e.specialTagRequirements.map((i) => {
-              return {  
+              return {
                 ...i,
                 videoData: douyinData.map((t) => {
                   // 过滤不满足条件的视频
                   const valuedList = t.aweme_list.filter(
                     (l) => {
-                      if(i.specialTag == '') return false;
-                      return (l.desc.includes(i.specialTag) || l.desc.includes(item.name)) &&
-                      l.view >= (i.minView || 100)
+                      if (i.specialTag == '') return false;
+                      return (l.desc.includes(i.specialTag)
+                        // || l.desc.includes(item.name)
+                      )
+                        &&
+                        l.view >= (i.minView || 100)
                     }
                   );
                   // 目前忽视了挂在小手柄问题，可手动isGet调整
@@ -581,7 +584,7 @@ async function getPlatformData() {
         //     }),
         //   };
         // }
-         else if (e.name === "bilibili") {
+        else if (e.name === "bilibili") {
           return {
             ...e,
             specialTagRequirements: e.specialTagRequirements.map((i) => {
@@ -649,8 +652,8 @@ async function getPlatformData() {
 
 // 每24小时更新一次平台数据
 setInterval(getPlatformData, 1000 * 60 * 60 * 24);
- // 根据平台选择配置文件
- const platformConfig = {
+// 根据平台选择配置文件
+const platformConfig = {
   bilibili: {
     configPath: "scheduleJob/BiliBiliScheduleJob.json",
     uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload\\uploader\\bilibili_uploader\\biliup.exe"),
@@ -685,10 +688,20 @@ async function executeExpiredJobs(platform) {
           const { topicName, missionId, tag, tid } = game;
           const gameExpiredJobs = game.scheduleJob
             .filter((job) => {
+              if(job.successExecAccount.length < accountJson[accountType].length) return true
               const jobTime = new Date(job.execTime);
+              const currentTime = new Date();
+              const timeDiff = jobTime - currentTime;
+              // 如果执行时间在 3 天内且距离当前时间大于 4 小时，则设置定时上传
+              const threeDaysInMs = 3 * 24 * 60 * 60 * 1000;
+              const fourHoursInMs = 4 * 60 * 60 * 1000;
+              const latest3days = timeDiff <= threeDaysInMs && timeDiff >= fourHoursInMs
+
+                ? Math.floor(execTime.getTime() / 1000)
+                : '';
+
               return (
-                jobTime < now &&
-                job.successExecAccount.length < accountJson[accountType].length
+                jobTime < now || latest3days
               );
             })
             .map((job) => ({
@@ -834,17 +847,27 @@ async function executeExpiredJobs(platform) {
 // 生成平台特定的上传命令
 function generateUploadCommand(platform, uploaderPath, account, job) {
   if (platform === 'bilibili') {
+    // https://github.com/biliup/biliup-rs 文档
     const configPath = path.join(path.dirname(uploaderPath), `${account.accountName}.json`);
-    return [
+    const time = Math.floor(new Date(job.execTime).getTime() / 1000);  // 转为10位数时间戳 
+    // 判断发布时间离当前时间必须≥4小时且≤15天
+    const time_4h_And_15day = time > Date.now() + 4 * 3600 * 1000 && time < Date.now() + 15 * 24 * 3600 * 1000;
+
+    const bilibiliVideoUploadCommand = [
       uploaderPath,
       '-u', `"${configPath}"`,
       'upload',
-      '--tag', job.tag,
+      '--tag', `${job.tag}`,
       '--mission-id', job.missionId,
       '--tid', job.tid.toString(),
       '--title', `"${path.basename(job.videoPath, ".mp4")}"`,
-      `"${job.videoPath}"`
-    ];
+    ]
+    if (time_4h_And_15day) {
+      bilibiliVideoUploadCommand.push('--dtime', time.toString(),`"${job.videoPath}"`);
+    }else{
+      bilibiliVideoUploadCommand.push(`"${job.videoPath}"`);
+    }
+    return bilibiliVideoUploadCommand
   }
 
   if (platform === '抖音') {
@@ -873,7 +896,7 @@ const releaseSemaphore = () => semaphore.release();
 // 修改定时任务检查逻辑（立即执行过期任务）
 async function checkAndExecuteJobs() {
   try {
-    const platforms = ['bilibili', '抖音'];
+    const platforms = ['bilibili'];
     const results = await Promise.allSettled(platforms.map(p => executeExpiredJobs(p)));
 
     results.forEach((result, index) => {
