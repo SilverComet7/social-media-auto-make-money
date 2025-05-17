@@ -2,32 +2,15 @@ const fs = require("fs");
 const path = require("path");
 const { exec } = require("child_process");
 const util = require("util");
+const os = require('os');
 const fsPromises = fs.promises;
 const execPromise = util.promisify(exec);
 const { deduplicateVideo } = require('./videoTransformDeduplication.js');
 const { TikTokDownloader_ROOT } = require("../../const.js");
-const os = require('os');
 const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
 const { getRandomMusicName } = require("../commonFunction.js");
+const { runFFmpegCommand,writeLog } = require("./common.js");
 
-// 日志记录函数
-const logFilePath = path.join(__dirname, 'logs/ffmpeg_process.log');
-
-function ensureLogDirectory() {
-  const logDir = path.dirname(logFilePath);
-  if (!fs.existsSync(logDir)) {
-    fs.mkdirSync(logDir, { recursive: true });
-  }
-}
-
-function writeLog(message) {
-  const timestamp = new Date().toISOString();
-  const logMessage = `[${timestamp}] ${message}\n`;
-  console.log(logMessage.trim());
-
-  ensureLogDirectory();
-  fs.appendFileSync(logFilePath, logMessage);
-}
 
 // 获取CPU核心数
 const cpuCount = os.cpus().length;
@@ -72,67 +55,7 @@ if (fs.existsSync(mapFilePath)) {
   }
 }
 
- async function runFFmpegCommand(command) {
-  const startTime = Date.now();
-  try {
-    // 检测GPU支持情况
-    let gpuInfo = '';
-    let gpuType = 'CPU';
 
-    try {
-      // 检测 NVIDIA GPU   根据不同平台使用不同命令？
-      const osPlatform = os.platform();  // 1. windows 2. linux 3. MacOS
-      let differentOsCheckCommand = 'wmic path win32_VideoController get name';
-      // if (osPlatform === 'win32') {
-      //   checkCommand = 'wmic path win32_VideoController get name';
-      // } else if (osPlatform === 'linux') {
-      //   checkCommand = 'lspci | grep VGA';
-      // } else if (osPlatform === 'darwin') {
-      //   checkCommand = 'system_profiler SPDisplaysDataType | grep -A 1 "Chipset Model"';
-      // }
-
-      const { stdout: GpuInfo } = await execPromise(differentOsCheckCommand).catch(() => ({ stdout: '' }));
-      if (GpuInfo.toLowerCase().includes('nvidia')) {
-        gpuInfo = GpuInfo;
-        gpuType = 'NVIDIA';
-        command = command.replace('-c:v libx264', '-c:v h264_nvenc -preset p4 -tune hq');
-      } else {
-        // 检测 AMD GPU
-        if (GpuInfo.toLowerCase().includes('amd') || GpuInfo.toLowerCase().includes('radeon')) {
-          gpuInfo = GpuInfo;
-          gpuType = 'AMD';
-          command = command.replace('-c:v libx264', '-c:v h264_amf -quality quality -preset quality');
-        }
-      }
-    } catch (error) {
-      writeLog(`GPU检测失败: ${error.message}`);
-    }
-
-    writeLog(`使用硬件: ${gpuType}`);
-    if (gpuInfo) {
-      writeLog(`GPU信息: ${gpuInfo.trim()}`);
-    }
-    writeLog(`执行FFmpeg命令: ${command}`);
-
-    const { stdout, stderr } = await execPromise(command);
-    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-
-    if (stderr) {
-      writeLog(`FFmpeg警告输出 (耗时${duration}秒): ${stderr}`);
-    }
-    writeLog(`FFmpeg命令执行完成，耗时: ${duration}秒`);
-
-    return { success: true, duration };
-  } catch (error) {
-    const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-    writeLog(`FFmpeg命令执行失败 (耗时${duration}秒):`);
-    writeLog(`错误信息: ${error.message}`);
-    if (error.stderr) {
-      writeLog(`FFmpeg错误输出: ${error.stderr}`);
-    }
-    throw error;
-  }
-}
 
 async function getVideoParams(filePath) {
   try {
@@ -173,7 +96,7 @@ async function processVideo(filePath, basicVideoInfoObj,
   const fileExt = path.extname(filePath);
   let originFileName = path.basename(filePath, path.extname(filePath));
   let { fileName, nickName } = generateNewName(originFileName, gameName, groupName, addPublishTime);
-  fileName = fileName + Date.now()
+  fileName = `${fileName} + ${Date.now()}`
 
 
   let {
@@ -210,7 +133,7 @@ async function processVideo(filePath, basicVideoInfoObj,
 
 
   // 开始视频去重处理
-  if (deduplicationConfig && deduplicationConfig.enable && Object.keys(deduplicationConfig).length > 0) {
+  if (deduplicationConfig && deduplicationConfig.enable) {
     try {
       await deduplicateVideo(filePath, deduplicationConfig);
       console.log(`视频去重处理完成: ${filePath}`);
@@ -328,6 +251,11 @@ function generateNewName(originFileName, gameName, groupName, addPublishTime) {
     fileName = fileName + '_' + publishTime;
   }
 
+  // 如果文件名是空，则使用默认文件名
+  // if(!fileName){
+  //   fileName = 
+  // }
+
   return { fileName, nickName };
 }
 
@@ -437,7 +365,7 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
       const videoFiles = await getVideoFiles(videoFolderPath);
       writeLog(`找到待处理视频文件数量: ${videoFiles.length}`);
       // 根据CPU核心数划分任务
-      const batchSize = Math.max(1, Math.floor(videoFiles .length / cpuCount));
+      const batchSize = Math.max(1, Math.floor(videoFiles.length / cpuCount));
       const batches = [];
       for (let i = 0; i < videoFiles.length; i += batchSize) {
         batches.push(videoFiles.slice(i, i + batchSize));
@@ -458,7 +386,7 @@ async function ffmpegHandleVideos(basicVideoInfoObj = {
           worker.on('message', (message) => {
             if (message.success) {
               // 从子进程返回的消息中更新 要删除的filePath
-              if(isPreProcess && enableMerge) mergeVideoInfoObj.needDeleteTempFilePath.push(...message.result.mergeVideoInfoObj.needDeleteTempFilePath)
+              if (isPreProcess && enableMerge) mergeVideoInfoObj.needDeleteTempFilePath.push(...message.result.mergeVideoInfoObj.needDeleteTempFilePath)
               resolve(message.result);
             } else {
               reject(new Error(message.error));
