@@ -679,7 +679,6 @@ async function executeExpiredJobs(platform) {
 
     const now = new Date();
     const expiredJobs = [];
-
     // 遍历所有游戏的定时任务，过滤掉已过期的任务
     scheduleJobs = scheduleJobs.filter(game => {
       if (!game.etime || new Date(game.etime) > now) {
@@ -716,7 +715,7 @@ async function executeExpiredJobs(platform) {
             }));
           expiredJobs.push(...gameExpiredJobs);
         }
-        return true; // 保留未过期的任务
+        return true;
       }
       return false; // 移除过期的任务
     });
@@ -743,7 +742,7 @@ async function executeExpiredJobs(platform) {
 
       // 并行执行上传任务
       const uploadPromises = [];
-      const MAX_CONCURRENT_UPLOADS = 3; // 最大并发数
+      const MAX_CONCURRENT_UPLOADS = 6; // 最大并发数
 
       for (let account of accountJson[accountType]) {
         if (job.successExecAccount.includes(account.accountName)) continue;
@@ -755,11 +754,8 @@ async function executeExpiredJobs(platform) {
             try {
               // 使用信号量控制并发
               await acquireSemaphore(MAX_CONCURRENT_UPLOADS);
-              await waitSecond(5000);
               await new Promise((resolve, reject) => {
-
                 let child;
-
                 // 根据平台类型采用不同的执行方式
                 if (platform === 'bilibili') {
                   // Windows系统需要特殊处理参数格式
@@ -768,8 +764,6 @@ async function executeExpiredJobs(platform) {
                     shell: true
                   });
                 } else if (platform === '抖音') {
-                  // Python命令需要拆分为独立参数
-
                   child = spawn(uploadCmd, {
                     shell: true,
                     env: {
@@ -822,13 +816,17 @@ async function executeExpiredJobs(platform) {
       await Promise.all(uploadPromises);
     }
 
-    // 统一写入对应文件，此时已经过滤掉了过期的任务
-    writeLocalDataJson(scheduleJobs, configPath);
+    // 统一写入对应文件，此时已经过滤掉了过期的任务,所有任务执行完再写入
+    
+    // writeLocalDataJson(scheduleJobs, configPath);
 
     return {
       code: 200,
       msg: `${platform}过期任务执行完成`,
-      jobs: scheduleJobs,
+      data:{
+        jobs: scheduleJobs,
+        configPath
+      }
     };
   } catch (error) {
     console.error(`执行${platform}过期任务失败:`, error);
@@ -896,12 +894,29 @@ const releaseSemaphore = () => semaphore.release();
 // 修改定时任务检查逻辑（立即执行过期任务）
 async function checkAndExecuteJobs() {
   try {
-    const platforms = ['bilibili'];
+    const platforms = ['bilibili','抖音'];
     const results = await Promise.allSettled(platforms.map(p => executeExpiredJobs(p)));
+    
+    // 所有平台任务完成后统一写入文件
+    const successResults = results.filter(r => r.status === 'fulfilled' && r.value?.code === 200);
+    
+    // 只有所有平台都成功执行才进行文件写入
+    if (successResults.length === platforms.length) {
+      successResults.forEach(result => {
+        const { jobs, configPath } = result.value.data;
+        if (jobs && configPath) {
+          writeLocalDataJson(jobs, configPath);
+          console.log(`成功写入配置文件: ${configPath}`);
+        }
+      });
+    }
 
+    // 记录执行失败的平台
     results.forEach((result, index) => {
-      if (result.status === 'rejected') {
-        console.error(`${platforms[index]}任务执行失败:`, result.reason);
+      if (result.status === 'rejected' || result.value?.code !== 200) {
+        console.error(`${platforms[index]}任务执行失败:`, 
+          result.status === 'rejected' ? result.reason : result.value?.msg
+        );
       }
     });
   } catch (error) {
