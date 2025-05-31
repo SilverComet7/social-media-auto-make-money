@@ -4,46 +4,44 @@
 
     <el-tabs v-model="activeTab" type="card">
       <el-tab-pane label="四平台游戏活动激励" name="platform">
+
+        <!-- ! toFix 不能稳定固定在页面顶部 -->
+        <el-affix position="top" :offset="40" class="text-blue-800">
+          <el-button type="primary" @click="fetchData">获取后台合并数据</el-button>
+          <h4>公共标签参考</h4>
+          <div class="bg-red-300 h-[5vw] overflow-auto">
+            <div>#游戏鉴赏官 #联机游戏</div>
+            <div>#二次元 #音乐 #巅峰赛 #故事 #搞笑 #教程</div>
+            <div>#MMORPG #古风 #逆水寒</div>
+            <div>#射击游戏 #FPS #穿越火线 #无畏契约 #暗区突围 #三角洲行动 #枪战</div>
+          </div>
+        </el-affix>
         <div class="flex justify-between">
-          <el-affix :offset="20" class="text-blue-800">
-            <h4>公共标签参考</h4>
-            <div class="bg-red-300 h-[5vw] overflow-auto">
-              <div>#游戏鉴赏官 #联机游戏</div>
-              <div>#二次元 #音乐 #巅峰赛 #故事 #搞笑 #教程</div>
-              <div>#MMORPG #古风 #逆水寒</div>
-              <div>#射击游戏 #FPS #穿越火线 #无畏契约 #暗区突围 #三角洲行动 #枪战</div>
-            </div>
-          </el-affix>
-          <div class="flex justify-between">
-            <!-- 爬虫查询栏 -->
-            <div class="operation-group bg-gray-300 p-4 rounded">
-              <h3 class="text-lg font-bold mb-2 text-black">爬虫查询操作</h3>
-              <div class="flex">
-                <el-button type="primary" @click="updateOnePlatData('抖音')">查询视频数据</el-button>
-                <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
-                <el-button type="primary" @click="fetchNewTopicData">查询B站新Topic</el-button>
-              </div>
-            </div>
-            <!-- 视频下载处理栏 -->
-            <div class="operation-group bg-blue-300 p-4 rounded">
-              <h3 class="text-lg font-bold mb-2 text-black">视频处理操作</h3>
-              <div class="flex">
-                <el-button type="primary" @click="handleDownloadSettings">下载视频后分组</el-button>
-                <el-button type="primary" @click="ffmpegDialogVisible = true">处理视频</el-button>
-              </div>
-            </div>
-            <!-- 定时任务栏 -->
-            <div class="operation-group bg-green-300 p-4 rounded">
-              <h3 class="text-lg font-bold mb-2 text-black">定时任务操作</h3>
-              <div class="flex">
-                <el-button type="primary" @click="confirmScheduleJob(true)">执行定时任务</el-button>
-                <el-button type="primary" @click="handleManualAccount">执行手动养号</el-button>
-              </div>
+          <!-- 爬虫查询栏 -->
+          <div class="operation-group bg-gray-300 p-4 rounded">
+            <h3 class="text-lg font-bold mb-2 text-black">爬虫查询操作</h3>
+            <div class="flex">
+              <el-button type="primary" @click="updateAllPlatformData">查询全平台视频数据</el-button>
+              <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
+              <el-button type="primary" @click="fetchNewTopicData">查询B站活动Topic</el-button>
             </div>
           </div>
-          <el-affix :offset="20">
-            <el-button type="primary" @click="fetchData">获取后台合并数据</el-button>
-          </el-affix>
+          <!-- 视频下载处理栏 -->
+          <div class="operation-group bg-blue-300 p-4 rounded">
+            <h3 class="text-lg font-bold mb-2 text-black">视频处理操作</h3>
+            <div class="flex">
+              <el-button type="primary" @click="handleDownloadSettings">下载视频后分组</el-button>
+              <el-button type="primary" @click="ffmpegDialogVisible = true">处理视频</el-button>
+            </div>
+          </div>
+          <!-- 定时任务栏 -->
+          <div class="operation-group bg-green-300 p-4 rounded">
+            <h3 class="text-lg font-bold mb-2 text-black">定时任务操作</h3>
+            <div class="flex">
+              <el-button type="primary" @click="confirmScheduleJob(true)">执行定时任务</el-button>
+              <el-button type="primary" @click="handleManualAccount">执行手动养号</el-button>
+            </div>
+          </div>
         </div>
         <el-table v-if="gameTableData.length" :data="gameTableData" style="width: 100%" border>
           <el-table-column type="index" label="No." width="50" fixed />
@@ -116,20 +114,20 @@
                           <el-button type="primary"
                             @click="setScheduleJob(speReq, platform, scope.row)">设置该活动定时执行任务</el-button>
                           <el-button :type="BiliBiliScheduleJob.find(
-                            (e) => e.topicName === speReq.topic,
-                          )?.scheduleJob?.some((job) => !job.successExecAccount?.length) ||
-                              DouyinScheduleJob.find(
-                                (e) => e.topicName === speReq.name,
-                              )?.scheduleJob?.some((job) => !job.successExecAccount?.length)
-                              ? 'danger'
-                              : 'info'
+                            (jobSetting) => jobSetting.topicName === speReq.topic,
+                          )?.scheduleJob?.some((job) => job.successExecAccount?.length < 3) ||
+                            DouyinScheduleJob.find(
+                              (jobSetting) => jobSetting.topicName === speReq.name,
+                            )?.scheduleJob?.some((job) => job.successExecAccount?.length < 2)
+                            ? 'danger'
+                            : 'info'
                             " v-if="
                               BiliBiliScheduleJob.find((e) => e.topicName === speReq.topic) ||
                               DouyinScheduleJob.find((e) => e.topicName === speReq.name)
                             " @click="showScheduleJobDialog(speReq, platform.name)">查看定时任务</el-button>
                           <h4 class="font-bold" v-if="speReq.eDate" :class="getDaysDiff(new Date(speReq.eDate).getTime()) <= 4
-                              ? 'text-orange-500'
-                              : ''
+                            ? 'text-orange-500'
+                            : ''
                             ">
                             活动结束{{ speReq.eDate }} 还剩{{
                               getDaysDiff(new Date(speReq.eDate).getTime())
@@ -392,8 +390,8 @@
                         <el-table-column prop="award_name" label="奖励名称">
                           <template #default="scope">
                             <span :class="scope.row.target_value <= scope.row.target_progress
-                                ? 'text-emerald-400'
-                                : ''
+                              ? 'text-emerald-400'
+                              : ''
                               ">{{ scope.row.award_name }}
                             </span>
                           </template>
@@ -409,10 +407,10 @@
                         <el-table-column prop="target_progress" label="进度">
                           <template #default="scope">
                             <el-progress :percentage="scope.row.target_value !== 0
-                                ? Math.round(
-                                  (scope.row.target_progress / scope.row.target_value) * 100,
-                                )
-                                : 0
+                              ? Math.round(
+                                (scope.row.target_progress / scope.row.target_value) * 100,
+                              )
+                              : 0
                               " />
                           </template>
                         </el-table-column>
@@ -426,8 +424,8 @@
                   <el-table-column prop="award_name" label="奖励名称" width="120">
                     <template #default="scope">
                       <span :class="scope.row.target_value <= scope.row.target_progress
-                          ? 'text-emerald-400'
-                          : ''
+                        ? 'text-emerald-400'
+                        : ''
                         ">{{ scope.row.award_name }}
                       </span>
                     </template>
@@ -657,7 +655,7 @@
               <!-- 自动根据合并最小时长以及秒数计算需要的分镜（视频文件）数，向上取整 -->
 
               需要{{
-                Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration)
+              Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration)
               }}个大于该分镜秒数的视频文件
             </el-form-item>
 
@@ -808,7 +806,8 @@
           </el-select>
         </el-form-item>
         <el-form-item label="标签">
-          <el-input v-model="scheduleForm.tag" type="textarea" :rows="3" placeholder="标签将根据选择的赛道自动生成，也可以手动编辑" />
+          <el-input v-model="scheduleForm.tag" :disabled="scheduleForm.disabledTag" type="textarea" :rows="3"
+            placeholder="标签将根据选择的赛道自动生成，也可以手动编辑" />
         </el-form-item>
 
         <el-form-item label="开始时间">
@@ -873,7 +872,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { ElMessage } from 'element-plus'
-// import topicJson from '../../public/topic.json'
 import bilibiliTid from '../../public/bilibiliTid.json'
 
 interface BilibiliArea {
@@ -948,6 +946,7 @@ interface ScheduleForm {
   gameName: string
   platform: string
   tag: string
+  disabledTag: boolean
   topicName: string
   videoDir: string
   tid: number
@@ -983,6 +982,7 @@ const scheduleForm = ref<ScheduleForm>({
   topicName: '',
   videoDir: '',
   tag: '',
+  disabledTag: false,
   tid: 172,
   missionId: '',
   startTime: null,
@@ -1001,6 +1001,19 @@ const setScheduleJob = (
 ) => {
   const { topic, specialTag, eDate } = rew
   const missionId = topicJson.value.find((item: any) => item.topic_name === topic)?.mission_id
+  // 获取已存在的定时任务tag
+  let existingTag = ''
+  if (platform.name === 'bilibili') {
+    const existingJob = BiliBiliScheduleJob.value.find(j => j.topicName === topic)
+    if (existingJob?.scheduleJob?.length > 0) {
+      existingTag = existingJob.tag
+    }
+  } else if (platform.name === '抖音') {
+    const existingJob = DouyinScheduleJob.value.find(j => j.topicName === rew.name)
+    if (existingJob?.scheduleJob?.length > 0) {
+      existingTag = existingJob.tag
+    }
+  }
 
   // B站平台 如果没有找到对应的 missionId
   if (!missionId && platform.name === 'bilibili') {
@@ -1029,7 +1042,8 @@ const setScheduleJob = (
     gameName: row.name,
     topicName: topic || rew.name,
     platform: platform.name,
-    tag: allTag,
+    tag: existingTag || allTag,
+    disabledTag: !!existingTag,
     missionId: missionId || '',
     startTime: new Date(new Date().setHours(24 + 6, 0, 0, 0)), // 次日早晨6点
     intervalHours: 2,
@@ -1546,13 +1560,13 @@ const updateData = async (row, specialTag) => {
   })
 }
 
-const updateOnePlatData = async (rewardName) => {
+const updateAllPlatformData = async () => {
   await fetch(`http://localhost:3000/getPlatformData`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ rewardName }),
+    body: JSON.stringify({}),
   }).then((res) => {
     if (res.ok) {
       fetchData()
@@ -1769,7 +1783,6 @@ const computedTrackTags = computed(() => {
   const allTags = [
     ...new Set([`#${scheduleForm.value.gameName}`, ...config.baseTags, ...config.extraTags]),
   ]
-  // 格式化标签函数
   const formatTagsByPlatform = (tags: string[], platform: string): string => {
     const formattedTags = tags.map((tag) => {
       if (platform === 'bilibili') {

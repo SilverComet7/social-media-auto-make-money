@@ -454,6 +454,175 @@ app.post("/getPlatformData", async (req, res) => {
   try {
     const jsonData = await getPlatformData();
 
+    async function getPlatformData() {
+      // let xhsData = await queryXiaoHongShuAllAccountsData();
+      let douyinData = await queryDouYinAllAccountsData();
+      let bilibiliData = await querybilibiliAllAccountsData();
+      const oldOtherGameDataArr = getJsonData("gameData.json");
+      const BiliBiliScheduleJobJson = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
+      const jsonData = oldOtherGameDataArr.map((item) => {
+        return {
+          ...item,
+          updateDate: formatDate(new Date().getTime()),
+          rewards: item.rewards.map((e) => {
+            if (e.name === "抖音") {
+              return {
+                ...e,
+                specialTagRequirements: e.specialTagRequirements.map((i) => {
+                  return {
+                    ...i,
+                    videoData: douyinData.map((t) => {
+                      // 过滤不满足条件的视频
+                      const valuedList = t.aweme_list.filter(
+                        (l) => {
+                          if (i.specialTag == '') return false;
+                          return (l.desc.includes(i.specialTag)
+                          )
+                            &&
+                            l.view >= (i.minView || 100)
+                        }
+                      );
+                      // 目前忽视了挂在小手柄问题，可手动isGet调整
+                      let alsoRelayList = [];
+                      if (i?.videoData?.find((c) => c.userName === t.user.name)) {
+                        alsoRelayList = i?.videoData
+                          .find((c) => c.userName === t.user.name)
+                          .onePlayNumList.filter((l) => {
+                            // 保留活动期间过去发过的稿件数据计入（因为单次可能只发36条数据）
+                            if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
+                              return false;
+                            }
+                            // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
+                            // if (l.create_time > formatSecondTimestamp(eDate)) {
+                            //     return false
+                            // }
+                            return true;
+                          });
+                      }
+
+                      let list = valuedList.concat(alsoRelayList).sort((a, b) => {
+                        return b.create_time - a.create_time;
+                      });
+                      return {
+                        userName: t.user.name,
+                        allNum: list.length,
+                        allViewNum: list.reduce((a, b) => a + b.view, 0),
+                        onePlayNumList: list,
+                      };
+                    }),
+                  };
+                }),
+              };
+            }
+              // else if (e.name === "小红书") {
+              //   return {
+              //     ...e,
+              //     specialTagRequirements: e.specialTagRequirements.map((i) => {
+              //       return {
+              //         ...i,
+              //         videoData: xhsData.map((t) => {
+              //           // 过滤不满足条件的视频
+              //           const valuedList = t.aweme_list.filter((l) => l.desc
+              //             .split(" ")
+              //             .map((e) => "#" + e)
+              //             .join(" ")
+              //             .includes(i.specialTag)
+              //           );
+
+              //           let alsoRelayList = [];
+              //           if (i?.videoData?.find((c) => c.userName === t.user.name)) {
+              //             alsoRelayList = i?.videoData
+              //               .find((c) => c.userName === t.user.name)
+              //               .onePlayNumList.filter((l) => {
+              //                 // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
+              //                 if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
+              //                   return false;
+              //                 }
+              //                 // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
+              //                 // if (l.create_time > formatSecondTimestamp(eDate)) {
+              //                 //     return false
+              //                 // }
+              //                 return true;
+              //               });
+              //           }
+
+            //           let list = valuedList.concat(alsoRelayList);
+            //           return {
+            //             userName: t.user.name,
+            //             allNum: list.length,
+            //             allLike: list.reduce((a, b) => a + b.like, 0),
+            //             // allViewNum: list.reduce((a, b) => a + b.view, 0),
+            //             onePlayNumList: list,
+            //           };
+            //         }),
+            //       };
+            //     }),
+            //   };
+            // }
+            else if (e.name === "bilibili") {
+              return {
+                ...e,
+                specialTagRequirements: e.specialTagRequirements.map((differentTopic) => {
+                  const hasSameTopicScheduleJob = BiliBiliScheduleJobJson.find(job => job.topicName === differentTopic.topic);
+
+                  return {
+                    ...differentTopic,
+                    videoData: bilibiliData.map((t) => {
+                      const valuedList = t.aweme_list.filter(l => {
+                        // 检查视频描述是否包含活动名称
+                        const matchesName = l.desc.includes(item.name);
+                        // 如果有定时任务，检查视频的文件名称是否在是某个topic的，有则计数
+                        let isTopicScheduleJob = false;
+                        if (hasSameTopicScheduleJob) {
+                          isTopicScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
+                            const jobFileName = job.videoPath.split('\\').pop().replace('.mp4', '');
+                            return l.title.includes(jobFileName);
+                          });
+                        }
+
+                        return matchesName || isTopicScheduleJob;
+                      });
+
+                      let alsoRelayList = [];
+                      if (differentTopic?.videoData?.find((c) => c.userName === t.user.name)) {
+                        alsoRelayList = differentTopic?.videoData
+                          .find((c) => c.userName === t.user.name)
+                          .onePlayNumList.filter((l) => {
+                            // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
+                            if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
+                              return false;
+                            }
+                            // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
+                            // if (l.create_time > formatSecondTimestamp(eDate)) {
+                            //     return false
+                            // }
+                            return true;
+                          });
+                      }
+
+                      let list = valuedList.concat(alsoRelayList);
+                      return {
+                        userName: t.user.name,
+                        allNum: list.length,
+                        // allLike: list.reduce((a, b) => a + b.like, 0),
+                        allViewNum: list.reduce((a, b) => a + b.view, 0),
+                        onePlayNumList: list,
+                      };
+                    }),
+                  };
+                }),
+              };
+            }
+            return e;
+          }),
+        };
+      });
+      writeLocalDataJson(jsonData, "gameData.json");
+      return jsonData;
+    }
+
+    // 每24小时更新一次平台数据
+    setInterval(getPlatformData, 1000 * 60 * 60 * 24);
     res.json({
       code: 200,
       data: jsonData,
@@ -465,175 +634,6 @@ app.post("/getPlatformData", async (req, res) => {
   }
 });
 
-async function getPlatformData() {
-  // let xhsData = await queryXiaoHongShuAllAccountsData();
-  let douyinData = await queryDouYinAllAccountsData();
-  let bilibiliData = await querybilibiliAllAccountsData();
-  const oldOtherGameDataArr = getJsonData("gameData.json");
-  const BiliBiliScheduleJobJson = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
-  const jsonData = oldOtherGameDataArr.map((item) => {
-    return {
-      ...item,
-      updateDate: formatDate(new Date().getTime()),
-      rewards: item.rewards.map((e) => {
-        if (e.name === "抖音") {
-          return {
-            ...e,
-            specialTagRequirements: e.specialTagRequirements.map((i) => {
-              return {
-                ...i,
-                videoData: douyinData.map((t) => {
-                  // 过滤不满足条件的视频
-                  const valuedList = t.aweme_list.filter(
-                    (l) => {
-                      if (i.specialTag == '') return false;
-                      return (l.desc.includes(i.specialTag)
-                      )
-                        &&
-                        l.view >= (i.minView || 100)
-                    }
-                  );
-                  // 目前忽视了挂在小手柄问题，可手动isGet调整
-                  let alsoRelayList = [];
-                  if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-                    alsoRelayList = i?.videoData
-                      .find((c) => c.userName === t.user.name)
-                      .onePlayNumList.filter((l) => {
-                        // 保留活动期间过去发过的稿件数据计入（因为单次可能只发36条数据）
-                        if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
-                          return false;
-                        }
-                        // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-                        // if (l.create_time > formatSecondTimestamp(eDate)) {
-                        //     return false
-                        // }
-                        return true;
-                      });
-                  }
-
-                  let list = valuedList.concat(alsoRelayList).sort((a, b) => {
-                    return b.create_time - a.create_time;
-                  });
-                  return {
-                    userName: t.user.name,
-                    allNum: list.length,
-                    allViewNum: list.reduce((a, b) => a + b.view, 0),
-                    onePlayNumList: list,
-                  };
-                }),
-              };
-            }),
-          };
-        }
-        // else if (e.name === "小红书") {
-        //   return {
-        //     ...e,
-        //     specialTagRequirements: e.specialTagRequirements.map((i) => {
-        //       return {
-        //         ...i,
-        //         videoData: xhsData.map((t) => {
-        //           // 过滤不满足条件的视频
-        //           const valuedList = t.aweme_list.filter((l) => l.desc
-        //             .split(" ")
-        //             .map((e) => "#" + e)
-        //             .join(" ")
-        //             .includes(i.specialTag)
-        //           );
-
-        //           let alsoRelayList = [];
-        //           if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-        //             alsoRelayList = i?.videoData
-        //               .find((c) => c.userName === t.user.name)
-        //               .onePlayNumList.filter((l) => {
-        //                 // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
-        //                 if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
-        //                   return false;
-        //                 }
-        //                 // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-        //                 // if (l.create_time > formatSecondTimestamp(eDate)) {
-        //                 //     return false
-        //                 // }
-        //                 return true;
-        //               });
-        //           }
-
-        //           let list = valuedList.concat(alsoRelayList);
-        //           return {
-        //             userName: t.user.name,
-        //             allNum: list.length,
-        //             allLike: list.reduce((a, b) => a + b.like, 0),
-        //             // allViewNum: list.reduce((a, b) => a + b.view, 0),
-        //             onePlayNumList: list,
-        //           };
-        //         }),
-        //       };
-        //     }),
-        //   };
-        // }
-        else if (e.name === "bilibili") {
-          return {
-            ...e,
-            specialTagRequirements: e.specialTagRequirements.map((differentTopic) => {
-              const hasSameTopicScheduleJob = BiliBiliScheduleJobJson.find(job => job.topicName === differentTopic.topic);
-
-              return {
-                ...differentTopic,
-                videoData: bilibiliData.map((t) => {
-                  const valuedList = t.aweme_list.filter(l => {
-                    // 检查视频描述是否包含活动名称
-                    const matchesName = l.desc.includes(item.name);
-                    // 如果有定时任务，检查视频的文件名称是否在是某个topic的，有则计数
-                    let isTopicScheduleJob = false;
-                    if (hasSameTopicScheduleJob) {
-                      isTopicScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
-                        const jobFileName = job.videoPath.split('\\').pop().replace('.mp4', '');
-                        return l.title.includes(jobFileName);
-                      });
-                    }
-
-                    return matchesName || isTopicScheduleJob;
-                  });
-
-                  let alsoRelayList = [];
-                  if (differentTopic?.videoData?.find((c) => c.userName === t.user.name)) {
-                    alsoRelayList = differentTopic?.videoData
-                      .find((c) => c.userName === t.user.name)
-                      .onePlayNumList.filter((l) => {
-                        // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
-                        if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
-                          return false;
-                        }
-                        // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-                        // if (l.create_time > formatSecondTimestamp(eDate)) {
-                        //     return false
-                        // }
-                        return true;
-                      });
-                  }
-
-                  let list = valuedList.concat(alsoRelayList);
-                  return {
-                    userName: t.user.name,
-                    allNum: list.length,
-                    // allLike: list.reduce((a, b) => a + b.like, 0),
-                    allViewNum: list.reduce((a, b) => a + b.view, 0),
-                    onePlayNumList: list,
-                  };
-                }),
-              };
-            }),
-          };
-        }
-        return e;
-      }),
-    };
-  });
-  writeLocalDataJson(jsonData, "gameData.json");
-  return jsonData;
-}
-
-// 每24小时更新一次平台数据
-setInterval(getPlatformData, 1000 * 60 * 60 * 24);
 // 根据平台选择配置文件
 const platformConfig = {
   bilibili: {
