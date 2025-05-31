@@ -71,7 +71,6 @@ async function get_BiliBili_Data(i, account = accountJson.bilibili[0]) {
     if (!data?.data?.arc_audits) {
       return;
     }
-    // 按时间过滤出活动稿件
     const list = data.data.arc_audits
       .filter(
         (item) => item.Archive.ctime > i.stime && item.Archive.ctime < i.etime
@@ -276,9 +275,9 @@ app.post("/ffmpegHandleVideos", async (req, res) => {
   }
 });
 
-app.get("/getNewDakaData", async (req, res) => {
+app.get("/getBiliBiliDakaData", async (req, res) => {
   try {
-    async function getDakaNewData() {
+    async function get_BiliBili_DakaData() {
       const url =
         "https://member.bilibili.com/x2/creative/h5/clock/v4/activity/list";
       const params = {
@@ -291,7 +290,6 @@ app.get("/getNewDakaData", async (req, res) => {
         const response = await fetch(url, { params, headers });
         let dakaData = await response.json();
         if (dakaData.code === -101) {
-          // TODO 自动去登录B站获取新的Cookie
           dakaData = JSON.parse(fs.readFileSync("./B站打卡活动.json"));
           return dakaData;
         }
@@ -322,7 +320,7 @@ app.get("/getNewDakaData", async (req, res) => {
         throw error;
       }
     }
-    const data = await getDakaNewData();
+    const data = await get_BiliBili_DakaData();
     res.json(data);
   } catch (error) {
     console.error("Error in /data endpoint:", error);
@@ -335,12 +333,11 @@ app.get("/data", async (req, res) => {
   const DouyinScheduleJob = getJsonData("scheduleJob/DouyinScheduleJob.json");
 
   try {
-    // 每次都实时读取data.json 文件并返回
     const data = getJsonData();
     let otherGameData = getJsonData("gameData.json");
     // 计算otherGameData rewards下各平台specialTagRequirements里的最近的活动结束时间，并赋值给最外层etime
     otherGameData.forEach((game) => {
-      let minEtime = game.etime || Number.MAX_SAFE_INTEGER; // 默认活动最大
+      let minEtime = game.etime || Number.MAX_SAFE_INTEGER;
       game.rewards.forEach((reward) => {
         if (reward.specialTagRequirements) {
           reward.specialTagRequirements = reward.specialTagRequirements.filter(
@@ -356,7 +353,7 @@ app.get("/data", async (req, res) => {
               const eTime =
                 (new Date(requirement.eDate).getTime() + 24 * 60 * 60 * 60) /
                 1000;
-              // // 如果结束日期小于当天的time，则跳过 不计入最近结束日期
+              // 如果结束日期小于当天的time，则跳过 不计入最近结束日期
               // if (eTime < new Date().getTime() / 1000) return;
               // 如果结束日期小于minEtime，则更新minEtime
               if (eTime < minEtime) {
@@ -576,34 +573,30 @@ async function getPlatformData() {
         else if (e.name === "bilibili") {
           return {
             ...e,
-            specialTagRequirements: e.specialTagRequirements.map((i) => {
-              // 查找对应的定时任务
-              const hasSameTopicScheduleJob = BiliBiliScheduleJobJson.find(job => job.topicName === i.topic);
+            specialTagRequirements: e.specialTagRequirements.map((differentTopic) => {
+              const hasSameTopicScheduleJob = BiliBiliScheduleJobJson.find(job => job.topicName === differentTopic.topic);
 
               return {
-                ...i,
+                ...differentTopic,
                 videoData: bilibiliData.map((t) => {
-                  // 过滤不满足条件的视频
                   const valuedList = t.aweme_list.filter(l => {
-                    // 检查视频标题或描述是否包含游戏名称
-                    const matchesName = l.title.includes(item.name) || l.desc.includes(item.name);
-
-                    // 如果有定时任务，检查视频文件名是否在定时任务中
-                    let matchesScheduleJob = false;
+                    // 检查视频描述是否包含活动名称
+                    const matchesName = l.desc.includes(item.name);
+                    // 如果有定时任务，检查视频的文件名称是否在是某个topic的，有则计数
+                    let isTopicScheduleJob = false;
                     if (hasSameTopicScheduleJob) {
-                      const videoFileName = l.title;
-                      matchesScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
+                      isTopicScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
                         const jobFileName = job.videoPath.split('\\').pop().replace('.mp4', '');
-                        return videoFileName.includes(jobFileName);
+                        return l.title.includes(jobFileName);
                       });
                     }
 
-                    return matchesName || matchesScheduleJob;
+                    return matchesName || isTopicScheduleJob;
                   });
 
                   let alsoRelayList = [];
-                  if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-                    alsoRelayList = i?.videoData
+                  if (differentTopic?.videoData?.find((c) => c.userName === t.user.name)) {
+                    alsoRelayList = differentTopic?.videoData
                       .find((c) => c.userName === t.user.name)
                       .onePlayNumList.filter((l) => {
                         // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
@@ -804,7 +797,7 @@ async function executeExpiredJobs(platform) {
     return {
       code: 200,
       msg: `${platform}过期任务执行完成`,
-      data:{
+      data: {
         jobs: scheduleJobs,
         configPath
       }
@@ -845,7 +838,7 @@ function generateUploadCommand(platform, uploaderPath, account, job) {
     ]
     if (time_4h_And_15day) {
       bilibiliVideoUploadCommand.push('--dtime', time, `"${job.videoPath}"`);
-    }else{
+    } else {
       bilibiliVideoUploadCommand.push(`"${job.videoPath}"`);
     }
     return bilibiliVideoUploadCommand
@@ -882,7 +875,7 @@ const releaseSemaphore = () => semaphore.release();
 
 async function checkAndExecuteJobs() {
   try {
-    const platforms = ['bilibili','抖音'];
+    const platforms = ['bilibili', '抖音'];
     const results = await Promise.allSettled(platforms.map(p => executeExpiredJobs(p)));
     
     // 所有平台任务完成后统一写入文件，避免一个平台处理完写入导致debug开发模式下重新启动进程

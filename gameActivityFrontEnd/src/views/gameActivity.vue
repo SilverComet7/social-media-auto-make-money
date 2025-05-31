@@ -1502,7 +1502,7 @@ const handleManualAccount = async () => {
 
 const fetchNewDakaData = async () => {
   try {
-    const response = await fetch('http://localhost:3000/getNewDakaData')
+    const response = await fetch('http://localhost:3000/getBiliBiliDakaData')
     if (!response.ok) {
       throw new Error('Network response was not ok')
     }
