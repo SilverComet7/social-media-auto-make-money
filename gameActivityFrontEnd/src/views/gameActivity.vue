@@ -288,8 +288,6 @@
 
                           <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
-                          <!-- 多个账号的完成情况 -->
-                          <!-- {{ reward.name }} -->
                           <template v-if="rew?.videoData">
                             <div v-for="r in rew.videoData" :key="r">
                               {{ r.userName }}:
@@ -773,7 +771,6 @@
       </template>
     </el-dialog>
 
-    <!-- 设置定时上传任务 -->
     <el-dialog title="设置定时上传任务" v-model="scheduleDialogVisible" :before-close="cancelScheduleJob">
       <el-form :model="scheduleForm" label-width="120px">
         <el-form-item label="游戏名称">
@@ -785,7 +782,6 @@
         <el-form-item label="视频目录">
           <el-input v-model="scheduleForm.videoDir" placeholder="请输入视频所在目录路径" />
         </el-form-item>
-        <!-- 活动结束时间 -->
         <el-form-item label="活动结束时间">
           <el-date-picker v-model="scheduleForm.etime" type="datetime" placeholder="选择结束时间" />
         </el-form-item>
@@ -841,7 +837,6 @@
       </template>
     </el-dialog>
 
-    <!-- 定时任务查看弹窗 -->
     <el-dialog title="定时任务列表" v-model="scheduleJobDialogVisible" width="70%">
       <template v-if="currentScheduleJob">
         <h3 class="mb-4">活动名称: {{ currentScheduleJob.topicName }}</h3>
@@ -1033,8 +1028,8 @@ const setScheduleJob = (
     platform: platform.name,
     tag: allTag,
     missionId: missionId || '',
-    startTime: null,
-    intervalHours: 24,
+    startTime: new Date(new Date().setHours(24 + 6, 0, 0, 0)), // 次日早晨6点
+    intervalHours: 2,
     immediately: false,
     selectedArea: '游戏区',
     tid: 172,
@@ -1052,6 +1047,7 @@ const cancelScheduleJob = () => {
 
 // 确认设置
 const confirmScheduleJob = async (immediately = false) => {
+
   try {
     const response = await fetch('http://localhost:3000/scheduleUpload', {
       method: 'POST',
@@ -1831,3 +1827,4 @@ h4 {
   font-size: 12px;
 }
 </style>
+

@@ -31,7 +31,6 @@ const {
 const accountJson = getJsonData("accountList.json");
 
 
-// 导入路由
 const replyRoutes = require('./src/modules/reply/controllers/reply.controller');
 
 app.use(cors());
@@ -126,12 +125,6 @@ app.get("/getNewActData", async (req, res) => {
           return {
             ...(oldDataHasThisRewardsItem
               ? {
-                // searchKeyWord: oldDataHasThisRewardsItem.searchKeyWord,
-                // baseTopic: oldDataHasThisRewardsItem.baseTopic,
-                // specialTagAll: oldDataHasThisRewardsItem.specialTagAll,
-                // rewards: oldDataHasThisRewardsItem.rewards,
-                // bilibili: oldDataHasThisRewardsItem.bilibili,
-                // lastJudgeTime: oldDataHasThisRewardsItem.lastJudgeTime,
                 ...oldDataHasThisRewardsItem,
               }
               : {
@@ -163,7 +156,7 @@ app.get("/getNewActData", async (req, res) => {
             comment: item.comment,
             sDate: formatDate(item.stime * 1000) || "2023/1/11",
             eDate: formatDate(item.etime * 1000) || "2025/1/11",
-            specialTag: "#" + item.name,
+            specialTag: '',
             // searchKeyWord: item.name,
             reward: [],
           };
@@ -180,7 +173,6 @@ app.get("/getNewActData", async (req, res) => {
             });
           } else {
             // 3. 如果gameData.json中已经收录该游戏活动，则将该游戏活动收录到对应gameName下的rewards的下name为bilibili下的specialTagRequirements中细分活动中
-
             const gameBilibiliRewards = oldOtherDataArr
               .find((item2) => item2.name === gameName)
               ?.rewards?.find((item2) => item2.name === "bilibili");
@@ -248,12 +240,10 @@ app.post("/addPlatformReward", async (req, res) => {
       oldOtherDataArr[gameIndex].rewards.unshift(platformData);
     } else {
       // 2. 如果已有该平台的其他活动赛道，则添加新的活动赛道
-      // if (!isUpdate) oldOtherDataArr[gameIndex].rewards[platformIndex].specialTagRequirements = platformData.specialTagRequirements.concat(oldOtherDataArr[gameIndex].rewards[platformIndex].specialTagRequirements)
-      // else
       oldOtherDataArr[gameIndex].rewards[platformIndex] = platformData;
     }
 
-    // 写入本地文件
+
     writeLocalDataJson(oldOtherDataArr, "gameData.json");
 
     res.json({ code: 0, msg: "奖励更新成功" });
@@ -501,7 +491,6 @@ async function getPlatformData() {
                     (l) => {
                       if (i.specialTag == '') return false;
                       return (l.desc.includes(i.specialTag)
-                        // || l.desc.includes(item.name)
                       )
                         &&
                         l.view >= (i.minView || 100)
@@ -596,7 +585,7 @@ async function getPlatformData() {
                 videoData: bilibiliData.map((t) => {
                   // 过滤不满足条件的视频
                   const valuedList = t.aweme_list.filter(l => {
-                    // 检查视频标题或描述是否包含 topic
+                    // 检查视频标题或描述是否包含游戏名称
                     const matchesName = l.title.includes(item.name) || l.desc.includes(item.name);
 
                     // 如果有定时任务，检查视频文件名是否在定时任务中
@@ -680,24 +669,21 @@ async function executeExpiredJobs(platform) {
     const now = new Date();
     const expiredJobs = [];
     // 遍历所有游戏的定时任务，过滤掉已过期的任务
-    scheduleJobs = scheduleJobs.filter(game => {
-      if (!game.etime || new Date(game.etime) > now) {
+    scheduleJobs.forEach(game => {
+      if (game.etime && new Date(game.etime) > now) {
         if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
           // 获取游戏配置
           const { topicName, missionId, tag, tid } = game;
           const gameExpiredJobs = game.scheduleJob
             .filter((job) => {
-              if(job.successExecAccount.length < accountJson[accountType].length) return true
+              if (job.successExecAccount.length >= accountJson[accountType].length) return false // 如果已上传成功，则跳过
               const jobTime = new Date(job.execTime);
               const currentTime = new Date();
               const timeDiff = jobTime - currentTime;
-              // 如果执行时间在 3 天内且距离当前时间大于 4 小时，则设置定时上传
+              // 如果执行时间 3 天内且大于 4 小时，则设置定时上传
               const threeDaysInMs = 3 * 24 * 60 * 60 * 1000;
               const fourHoursInMs = 4 * 60 * 60 * 1000;
-              const latest3days = timeDiff <= threeDaysInMs && timeDiff >= fourHoursInMs
-
-                ? Math.floor(execTime.getTime() / 1000)
-                : '';
+              const latest3days = timeDiff >= fourHoursInMs && timeDiff <= threeDaysInMs
 
               return (
                 jobTime < now || latest3days
@@ -715,9 +701,7 @@ async function executeExpiredJobs(platform) {
             }));
           expiredJobs.push(...gameExpiredJobs);
         }
-        return true;
       }
-      return false; // 移除过期的任务
     });
 
     // 处理过期任务
@@ -748,7 +732,7 @@ async function executeExpiredJobs(platform) {
         if (job.successExecAccount.includes(account.accountName)) continue;
 
         const uploadCmd = generateUploadCommand(platform, uploaderPath, account, job);
-        await waitSecond(10000);
+        await waitSecond(5000);
         uploadPromises.push(
           (async () => {
             try {
@@ -816,9 +800,6 @@ async function executeExpiredJobs(platform) {
       await Promise.all(uploadPromises);
     }
 
-    // 统一写入对应文件，此时已经过滤掉了过期的任务,所有任务执行完再写入
-    
-    // writeLocalDataJson(scheduleJobs, configPath);
 
     return {
       code: 200,
@@ -837,7 +818,7 @@ async function executeExpiredJobs(platform) {
   }
 
   async function waitSecond(time = 5000) {
-    const randomDelay = Math.floor(2000 + Math.random() * time); // 随机延迟2-n秒 
+    const randomDelay = Math.floor(2000 + Math.random() * time); // 随机延迟2-n秒
     await new Promise(resolve => setTimeout(resolve, randomDelay));
   }
 }
@@ -847,9 +828,11 @@ function generateUploadCommand(platform, uploaderPath, account, job) {
   if (platform === 'bilibili') {
     // https://github.com/biliup/biliup-rs 文档
     const configPath = path.join(path.dirname(uploaderPath), `${account.accountName}.json`);
-    const time = Math.floor(new Date(job.execTime).getTime() / 1000);  // 转为10位数时间戳 
-    // 判断发布时间离当前时间必须≥4小时且≤15天
-    const time_4h_And_15day = time > Date.now() + 4 * 3600 * 1000 && time < Date.now() + 15 * 24 * 3600 * 1000;
+    // 确保使用 UTC+8 时区
+    const execTime = new Date(job.execTime);
+    const time = execTime.getTime() / 1000;  // 转为10位数时间戳
+    // 判断发布时间离当前时间≥4小时且≤3天
+    const time_4h_And_15day = time > Date.now() / 1000 + 4 * 3600 && time < Date.now() / 1000 + 3 * 24 * 3600;
 
     const bilibiliVideoUploadCommand = [
       uploaderPath,
@@ -861,7 +844,7 @@ function generateUploadCommand(platform, uploaderPath, account, job) {
       '--title', `"${path.basename(job.videoPath, ".mp4")}"`,
     ]
     if (time_4h_And_15day) {
-      bilibiliVideoUploadCommand.push('--dtime', time.toString(),`"${job.videoPath}"`);
+      bilibiliVideoUploadCommand.push('--dtime', time, `"${job.videoPath}"`);
     }else{
       bilibiliVideoUploadCommand.push(`"${job.videoPath}"`);
     }
@@ -869,7 +852,14 @@ function generateUploadCommand(platform, uploaderPath, account, job) {
   }
 
   if (platform === '抖音') {
-    return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}" douyin ${account.accountName} upload "${job.videoPath}" -pt ${Date.now() > new Date(job.execTime) ? 0 : 1} ${Date.now() > new Date(job.execTime) ? '' : `-t "${new Date(job.execTime).toISOString()}"`}`;
+    // 确保使用 UTC+8 时区
+    const execTime = new Date(job.execTime);
+    const isPastTime = Date.now() > execTime;
+    // 将ISO格式转换为抖音需要的 %Y-%m-%d %H:%M 格式
+    const formattedTime = isPastTime ? '' :
+      `-t "${execTime.toISOString().replace('T', ' ').substring(0, 16)}"`;
+
+    return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}" douyin ${account.accountName} upload "${job.videoPath}" -pt ${isPastTime ? 0 : 1} ${isPastTime ? '' : formattedTime}`;
   }
 }
 
@@ -914,7 +904,7 @@ async function checkAndExecuteJobs() {
     // 记录执行失败的平台
     results.forEach((result, index) => {
       if (result.status === 'rejected' || result.value?.code !== 200) {
-        console.error(`${platforms[index]}任务执行失败:`, 
+        console.error(`${platforms[index]}任务执行失败:`,
           result.status === 'rejected' ? result.reason : result.value?.msg
         );
       }
@@ -933,14 +923,17 @@ app.post("/scheduleUpload", async (req, res) => {
     const videoFiles = files.filter((f) => f.endsWith(".mp4"));
     const jobs = [];
     let execTime = new Date(startTime);
+    let i = 0
+    const h = execTime.getHours()
     for (const file of videoFiles) {
+      execTime.setHours(8 + h + i * intervalHours);
       jobs.push({
         videoPath: path.join(videoDir, file),
-        execTime: new Date(execTime),
+        execTime: execTime.toISOString(),
         successExecAccount: [],
       });
       // 增加指定的时间间隔
-      execTime.setHours(execTime.getHours() + intervalHours);
+      i++
     }
     return jobs;
   }
@@ -964,14 +957,12 @@ app.post("/scheduleUpload", async (req, res) => {
       await checkAndExecuteJobs();
     } else {
       const scheduleJobsPath = platformConfig[platform].configPath;
-      console.log("scheduleJobsPath", scheduleJobsPath);
-      
+
       let scheduleJobs = [];
 
       try {
         scheduleJobs = getJsonData(scheduleJobsPath);
-        console.log(scheduleJobs);
-        
+
       } catch (err) {
         console.log("定时任务配置文件不存在,创建新文件");
         scheduleJobs = [];
@@ -1028,12 +1019,15 @@ app.post("/scheduleUpload", async (req, res) => {
 
 app.get("/getNewTopicData", async (req, res) => {
   try {
-    const fetchUrl = "https://member.bilibili.com/x/vupre/web/topic/type";
+    const fetchUrl = "https://member.bilibili.com/x/vupre/web/topic/type/v2";
     const params = {
-      type_id: 172,
+      // type_id: 172,
       pn: 0,
       ps: 200,
-      title: "",
+      // title: "742e7f92a98b4ac79a5767a3017a38c9",
+      platform: 'pc',
+      type_id: 21,
+      type_pid: 1008,
       t: Date.now()
     };
 
@@ -1049,17 +1043,16 @@ app.get("/getNewTopicData", async (req, res) => {
     });
 
     const topicData = await response.json();
-    
+
     if (topicData.code === 0 && topicData.data) {
-      // 写入topic.json文件
       writeLocalDataJson(topicData.data, "topic.json");
-      
+
       res.json({
         code: 200,
         msg: "Topic数据更新成功",
         data: topicData.data
       });
-    } 
+    }
     else {
       throw new Error(topicData || "获取Topic数据失败");
     }
@@ -1070,9 +1063,6 @@ app.get("/getNewTopicData", async (req, res) => {
     });
   }
 });
-
-
-// app.use('/api/reply', replyRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
