@@ -852,7 +852,6 @@ function generateUploadCommand(platform, uploaderPath, account, job) {
   }
 
   if (platform === '抖音') {
-    // 确保使用 UTC+8 时区
     const execTime = new Date(job.execTime);
     const isPastTime = Date.now() > execTime;
     // 将ISO格式转换为抖音需要的 %Y-%m-%d %H:%M 格式
@@ -881,16 +880,13 @@ const semaphore = {
 const acquireSemaphore = (max) => semaphore.acquire(max);
 const releaseSemaphore = () => semaphore.release();
 
-// 修改定时任务检查逻辑（立即执行过期任务）
 async function checkAndExecuteJobs() {
   try {
     const platforms = ['bilibili','抖音'];
     const results = await Promise.allSettled(platforms.map(p => executeExpiredJobs(p)));
     
-    // 所有平台任务完成后统一写入文件
+    // 所有平台任务完成后统一写入文件，避免一个平台处理完写入导致debug开发模式下重新启动进程
     const successResults = results.filter(r => r.status === 'fulfilled' && r.value?.code === 200);
-    
-    // 只有所有平台都成功执行才进行文件写入
     if (successResults.length === platforms.length) {
       successResults.forEach(result => {
         const { jobs, configPath } = result.value.data;
@@ -914,8 +910,6 @@ async function checkAndExecuteJobs() {
   }
 }
 
-// 提高任务检查频率（每2小时检查一次）
-// setInterval(checkAndExecuteJobs, 2 * 60 * 60 * 1000);
 
 app.post("/scheduleUpload", async (req, res) => {
   async function generateScheduleJobs(videoDir, startTime, intervalHours) {
@@ -1021,10 +1015,8 @@ app.get("/getNewTopicData", async (req, res) => {
   try {
     const fetchUrl = "https://member.bilibili.com/x/vupre/web/topic/type/v2";
     const params = {
-      // type_id: 172,
       pn: 0,
       ps: 200,
-      // title: "742e7f92a98b4ac79a5767a3017a38c9",
       platform: 'pc',
       type_id: 21,
       type_pid: 1008,

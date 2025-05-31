@@ -7,7 +7,7 @@
         <div class="flex justify-between">
           <el-affix :offset="20" class="text-blue-800">
             <h4>公共标签参考</h4>
-            <div class=" bg-red-300 h-[5vw] overflow-auto">
+            <div class="bg-red-300 h-[5vw] overflow-auto">
               <div>#游戏鉴赏官 #联机游戏</div>
               <div>#二次元 #音乐 #巅峰赛 #故事 #搞笑 #教程</div>
               <div>#MMORPG #古风 #逆水寒</div>
@@ -18,7 +18,7 @@
             <!-- 爬虫查询栏 -->
             <div class="operation-group bg-gray-300 p-4 rounded">
               <h3 class="text-lg font-bold mb-2 text-black">爬虫查询操作</h3>
-              <div class="flex ">
+              <div class="flex">
                 <el-button type="primary" @click="updateOnePlatData('抖音')">查询视频数据</el-button>
                 <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
                 <el-button type="primary" @click="fetchNewTopicData">查询B站新Topic</el-button>
@@ -115,13 +115,21 @@
                           </h4>
                           <el-button type="primary"
                             @click="setScheduleJob(speReq, platform, scope.row)">设置该活动定时执行任务</el-button>
-                          <el-button type="info" v-if="
-                            BiliBiliScheduleJob.find((e) => e.topicName === speReq.topic) ||
-                            DouyinScheduleJob.find((e) => e.topicName === speReq.name)
-                          " @click="showScheduleJobDialog(speReq, platform.name)">查看定时任务</el-button>
+                          <el-button :type="BiliBiliScheduleJob.find(
+                            (e) => e.topicName === speReq.topic,
+                          )?.scheduleJob?.some((job) => !job.successExecAccount?.length) ||
+                              DouyinScheduleJob.find(
+                                (e) => e.topicName === speReq.name,
+                              )?.scheduleJob?.some((job) => !job.successExecAccount?.length)
+                              ? 'danger'
+                              : 'info'
+                            " v-if="
+                              BiliBiliScheduleJob.find((e) => e.topicName === speReq.topic) ||
+                              DouyinScheduleJob.find((e) => e.topicName === speReq.name)
+                            " @click="showScheduleJobDialog(speReq, platform.name)">查看定时任务</el-button>
                           <h4 class="font-bold" v-if="speReq.eDate" :class="getDaysDiff(new Date(speReq.eDate).getTime()) <= 4
-                            ? 'text-orange-500'
-                            : ''
+                              ? 'text-orange-500'
+                              : ''
                             ">
                             活动结束{{ speReq.eDate }} 还剩{{
                               getDaysDiff(new Date(speReq.eDate).getTime())
@@ -149,7 +157,7 @@
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
                             <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                            }}</span>
+                              }}</span>
                             <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
                             <template v-if="speReq?.videoData">
                               <div v-for="r in speReq.videoData" :key="r">
@@ -234,7 +242,7 @@
                       <span v-if="req.like" :class="req.like <= 500 ? ' text-orange-500' : ''">
                         <span>+</span>点赞>={{ req.like }}</span>
                       <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                      }}</span>
+                        }}</span>
                       <el-tooltip effect="dark" placement="top-start"
                         :content="getTooltipContent(req, scope.row.bilibili)" v-if="scope.row.bilibili">
                         <el-progress :percentage="getCompletionPercentage(req, scope.row.bilibili).percentage"
@@ -284,7 +292,7 @@
                           <span v-if="req.cday"> <span>+</span>投稿天数>={{ req.cday }}</span>
                           <span v-if="req.like"> <span>+</span>点赞>={{ req.like }}</span>
                           <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                          }}</span>
+                            }}</span>
 
                           <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
@@ -384,8 +392,8 @@
                         <el-table-column prop="award_name" label="奖励名称">
                           <template #default="scope">
                             <span :class="scope.row.target_value <= scope.row.target_progress
-                              ? 'text-emerald-400'
-                              : ''
+                                ? 'text-emerald-400'
+                                : ''
                               ">{{ scope.row.award_name }}
                             </span>
                           </template>
@@ -401,8 +409,10 @@
                         <el-table-column prop="target_progress" label="进度">
                           <template #default="scope">
                             <el-progress :percentage="scope.row.target_value !== 0
-                              ? Math.round((scope.row.target_progress / scope.row.target_value) * 100)
-                              : 0
+                                ? Math.round(
+                                  (scope.row.target_progress / scope.row.target_value) * 100,
+                                )
+                                : 0
                               " />
                           </template>
                         </el-table-column>
@@ -416,8 +426,8 @@
                   <el-table-column prop="award_name" label="奖励名称" width="120">
                     <template #default="scope">
                       <span :class="scope.row.target_value <= scope.row.target_progress
-                        ? 'text-emerald-400'
-                        : ''
+                          ? 'text-emerald-400'
+                          : ''
                         ">{{ scope.row.award_name }}
                       </span>
                     </template>
@@ -491,7 +501,6 @@
               <el-input v-model="downloadSettings.latest" placeholder="统一下载的截止时间 xx/xx/xx" />
             </el-form-item>
           </template>
-
         </div>
         <el-form-item label="分组目录" v-else>
           <el-input v-model="downloadSettings.groupDir" placeholder="请输入分组目录" />
@@ -647,7 +656,9 @@
               <el-input-number v-model="ffmpegSettings.segmentDuration" :min="1" :max="60" />
               <!-- 自动根据合并最小时长以及秒数计算需要的分镜（视频文件）数，向上取整 -->
 
-              需要{{ Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration) }}个大于该分镜秒数的视频文件
+              需要{{
+                Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration)
+              }}个大于该分镜秒数的视频文件
             </el-form-item>
 
             <el-form-item label="混剪数量">
@@ -661,9 +672,7 @@
                 <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
               </el-select>
             </el-form-item>
-
           </template>
-
         </div>
       </el-form>
       <template #footer>
@@ -809,8 +818,6 @@
           <el-input-number v-model="scheduleForm.intervalHours" :min="1" :max="24" placeholder="请输入上传间隔" />
         </el-form-item>
 
-
-
         <template v-if="scheduleForm.platform === 'bilibili'">
           <el-form-item label="分区选择">
             <el-select v-model="scheduleForm.selectedArea" placeholder="请选择分区" @change="handleAreaChange">
@@ -824,10 +831,6 @@
             <el-input v-model="scheduleForm.missionId" placeholder="请输入活动ID" />
           </el-form-item>
         </template>
-
-
-
-
       </el-form>
       <template #footer>
         <span class="dialog-footer">
@@ -953,7 +956,7 @@ interface ScheduleForm {
   intervalHours: number
   immediately: boolean
   selectedArea: string
-  etime: Date | null  // 添加活动结束时间字段
+  etime: Date | null // 添加活动结束时间字段
 }
 
 const formatDate = (timestamp?: number, splitStr: string = '-'): string => {
@@ -987,7 +990,7 @@ const scheduleForm = ref<ScheduleForm>({
   platform: '',
   immediately: false,
   selectedArea: '游戏区',
-  etime: null  // 初始化活动结束时间
+  etime: null, // 初始化活动结束时间
 })
 
 // 打开定时任务设置弹窗
@@ -1034,7 +1037,7 @@ const setScheduleJob = (
     selectedArea: '游戏区',
     tid: 172,
     videoDir: '',
-    etime: eDate ? new Date(eDate) : null  // 设置活动结束时间
+    etime: eDate ? new Date(eDate) : null, // 设置活动结束时间
   }
 
   scheduleDialogVisible.value = true
@@ -1047,7 +1050,6 @@ const cancelScheduleJob = () => {
 
 // 确认设置
 const confirmScheduleJob = async (immediately = false) => {
-
   try {
     const response = await fetch('http://localhost:3000/scheduleUpload', {
       method: 'POST',
@@ -1240,9 +1242,9 @@ const cancelEditReward = () => {
 const allGameList = ref([])
 const dialogVisible = ref(false)
 const getDefaultDate = (monthsAgo = 0) => {
-  const date = new Date();
-  date.setMonth(date.getMonth() - monthsAgo);
-  return formatDate(date.getTime() / 1000, '/');
+  const date = new Date()
+  date.setMonth(date.getMonth() - monthsAgo)
+  return formatDate(date.getTime() / 1000, '/')
 }
 
 const downloadSettings = ref({
@@ -1250,11 +1252,15 @@ const downloadSettings = ref({
   selectedStrategy: 'group',
   keyword: '',
   filePath: `D:\\code\\platform_game_activity\\TikTokDownloader\\downloadList.txt`,
-  checkNewAdd: computed(() => downloadSettings.value.selectedStrategy === 'checkNewAdd' ? true : false),
-  allDownload: computed(() => downloadSettings.value.selectedStrategy === 'allDownload' ? true : false),
+  checkNewAdd: computed(() =>
+    downloadSettings.value.selectedStrategy === 'checkNewAdd' ? true : false,
+  ),
+  allDownload: computed(() =>
+    downloadSettings.value.selectedStrategy === 'allDownload' ? true : false,
+  ),
   checkName: false,
   earliest: getDefaultDate(4), // 默认近4个月 YYYY/MM/DD
-  latest: getDefaultDate(),  // 默认当前 YYYY/MM/DD
+  latest: getDefaultDate(), // 默认当前 YYYY/MM/DD
   currentUpdateGameList: [],
 })
 
@@ -1301,7 +1307,7 @@ const ffmpegSettings = ref({
   beforeTime: 0,
   afterTime: 0,
   fps: 30,
-  scalePercent: 0,  // 1920X1080
+  scalePercent: 0, // 1920X1080
   replaceMusic: false,
   musicName: 'billll',
   gameName: '',
@@ -1318,8 +1324,7 @@ const ffmpegSettings = ref({
   segmentDuration: 3, // 默认分镜秒数
   mixCount: 2, // 默认混剪数量
   mergeMusicName: '随机',
-  videoDir: '' // 视频处理路径
-
+  videoDir: '', // 视频处理路径
 })
 
 // 处理去重开关变化
@@ -1734,21 +1739,24 @@ interface SpecialTrackConfigs {
 const selectedTrack = ref<string>('')
 
 const specialTrackConfigs: SpecialTrackConfigs = {
-  'coser本人': {
+  coser本人: {
     baseTags: ['#coser', '#cos正片', '#cos', '#写真'],
-    extraTags: ['#coser本人']
+    extraTags: ['#coser本人'],
   },
-  'coser同行': {
+  coser同行: {
     baseTags: ['#coser', '#cos正片', '#cos', '#写真'],
-    extraTags: ['#coser同行']
+    extraTags: ['#coser同行'],
   },
-  '搞笑': {
+  搞笑: {
     baseTags: ['#搞笑', '#游戏搞笑', '#沙雕'],
-    extraTags: ['#沙雕剪辑']
-  }
+    extraTags: ['#沙雕剪辑'],
+  },
+  攻略: {
+    baseTags: ['#攻略', '#教程', '#剪辑'],
+    extraTags: ['#下载'],
+  },
 }
 
-// 使用 computed 属性计算特殊赛道的标签
 const computedTrackTags = computed(() => {
   if (!selectedTrack.value || !scheduleForm.value?.gameName) {
     return ''
@@ -1759,28 +1767,22 @@ const computedTrackTags = computed(() => {
 
   // 合并基础标签、额外标签和游戏名称
   const allTags = [
-    ...new Set([
-      `#${scheduleForm.value.gameName}`,
-      ...config.baseTags,
-      ...config.extraTags
-    ])
+    ...new Set([`#${scheduleForm.value.gameName}`, ...config.baseTags, ...config.extraTags]),
   ]
+  // 格式化标签函数
+  const formatTagsByPlatform = (tags: string[], platform: string): string => {
+    const formattedTags = tags.map((tag) => {
+      if (platform === 'bilibili') {
+        return tag.startsWith('#') ? tag.slice(1) : tag
+      }
+      return tag.startsWith('#') ? tag : `#${tag}`
+    })
 
-  // 根据平台格式化标签
+    return formattedTags.join(platform === 'bilibili' ? ',' : ' ')
+  }
+
   return formatTagsByPlatform(allTags, scheduleForm.value.platform)
 })
-
-// 格式化标签函数
-const formatTagsByPlatform = (tags: string[], platform: string): string => {
-  const formattedTags = tags.map(tag => {
-    if (platform === 'bilibili') {
-      return tag.startsWith('#') ? tag.slice(1) : tag
-    }
-    return tag.startsWith('#') ? tag : `#${tag}`
-  })
-
-  return formattedTags.join(platform === 'bilibili' ? ',' : ' ')
-}
 
 // 处理赛道选择变化
 const handleTrackChange = (value: string): void => {
@@ -1789,14 +1791,12 @@ const handleTrackChange = (value: string): void => {
     return
   }
 
-  // 使用计算好的标签
   scheduleForm.value.tag = computedTrackTags.value
 }
 </script>
 
 <style scoped>
 .table-container {
-  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 20px;
 }
@@ -1827,4 +1827,3 @@ h4 {
   font-size: 12px;
 }
 </style>
-
