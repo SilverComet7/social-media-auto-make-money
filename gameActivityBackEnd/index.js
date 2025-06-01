@@ -645,6 +645,11 @@ const platformConfig = {
     configPath: "scheduleJob/DouyinScheduleJob.json",
     uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
     accountType: "douyin"
+  },
+  '小红书': {
+    configPath: "scheduleJob/XhsScheduleJob.json",
+    uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
+    accountType: "xhs"
   }
 };
 
@@ -745,6 +750,14 @@ async function executeExpiredJobs(platform) {
                     shell: true,
                     env: {
                       // ...process.env,
+                      PYTHONUTF8: '1',  // 强制Python使用UTF-8编码
+                      PYTHONIOENCODING: 'utf-8'  // 设置输入输出编码
+                    }
+                  });
+                } else if (platform === '小红书') {
+                  child = spawn(uploadCmd, {
+                    shell: true,
+                    env: {
                       PYTHONUTF8: '1',  // 强制Python使用UTF-8编码
                       PYTHONIOENCODING: 'utf-8'  // 设置输入输出编码
                     }
@@ -852,6 +865,15 @@ function generateUploadCommand(platform, uploaderPath, account, job) {
       `-t "${execTime.toISOString().replace('T', ' ').substring(0, 16)}"`;
 
     return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}" douyin ${account.accountName} upload "${job.videoPath}" -pt ${isPastTime ? 0 : 1} ${isPastTime ? '' : formattedTime}`;
+  }
+
+  if (platform === '小红书') {
+    const execTime = new Date(job.execTime);
+    const isPastTime = Date.now() > execTime;
+    const formattedTime = isPastTime ? '' :
+      `-t "${execTime.toISOString().replace('T', ' ').substring(0, 16)}"`;
+
+    return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/examples/upload_video_to_xhs.py')}" ${account.accountName} "${job.videoPath}" -pt ${isPastTime ? 0 : 1} ${isPastTime ? '' : formattedTime}`;
   }
 }
 

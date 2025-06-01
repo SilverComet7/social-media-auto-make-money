@@ -113,18 +113,8 @@
                           </h4>
                           <el-button type="primary"
                             @click="setScheduleJob(speReq, platform, scope.row)">设置该活动定时执行任务</el-button>
-                          <el-button :type="BiliBiliScheduleJob.find(
-                            (jobSetting) => jobSetting.topicName === speReq.topic,
-                          )?.scheduleJob?.some((job) => job.successExecAccount?.length < 3) ||
-                            DouyinScheduleJob.find(
-                              (jobSetting) => jobSetting.topicName === speReq.name,
-                            )?.scheduleJob?.some((job) => job.successExecAccount?.length < 2)
-                            ? 'danger'
-                            : 'info'
-                            " v-if="
-                              BiliBiliScheduleJob.find((e) => e.topicName === speReq.topic) ||
-                              DouyinScheduleJob.find((e) => e.topicName === speReq.name)
-                            " @click="showScheduleJobDialog(speReq, platform.name)">查看定时任务</el-button>
+                          <el-button :type="getScheduleJobButtonType(speReq, platform.name)" v-if="scheduleJobMap[platform.name]?.find((e) => e.topicName === speReq.topic || e.topicName === speReq.name)
+                          " @click="showScheduleJobDialog(speReq, platform.name)">查看定时任务</el-button>
                           <h4 class="font-bold" v-if="speReq.eDate" :class="getDaysDiff(new Date(speReq.eDate).getTime()) <= 4
                             ? 'text-orange-500'
                             : ''
@@ -155,7 +145,7 @@
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
                             <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                              }}</span>
+                            }}</span>
                             <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
                             <template v-if="speReq?.videoData">
                               <div v-for="r in speReq.videoData" :key="r">
@@ -240,7 +230,7 @@
                       <span v-if="req.like" :class="req.like <= 500 ? ' text-orange-500' : ''">
                         <span>+</span>点赞>={{ req.like }}</span>
                       <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                        }}</span>
+                      }}</span>
                       <el-tooltip effect="dark" placement="top-start"
                         :content="getTooltipContent(req, scope.row.bilibili)" v-if="scope.row.bilibili">
                         <el-progress :percentage="getCompletionPercentage(req, scope.row.bilibili).percentage"
@@ -290,7 +280,7 @@
                           <span v-if="req.cday"> <span>+</span>投稿天数>={{ req.cday }}</span>
                           <span v-if="req.like"> <span>+</span>点赞>={{ req.like }}</span>
                           <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                            }}</span>
+                          }}</span>
 
                           <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
@@ -655,7 +645,7 @@
               <!-- 自动根据合并最小时长以及秒数计算需要的分镜（视频文件）数，向上取整 -->
 
               需要{{
-              Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration)
+                Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration)
               }}个大于该分镜秒数的视频文件
             </el-form-item>
 
@@ -681,7 +671,7 @@
     </el-dialog>
 
     <!-- 设置奖励dialog -->
-    <el-dialog title="编辑奖励" v-model="editRewardDialogVisible" width="50%" :before-close="cancelEditReward">
+    <el-dialog title="编辑奖励" v-model="editRewardDialogVisible" width="50%">
       <el-form :model="editRewardForm" label-width="150px">
         <el-form-item label="平台名称">
           <el-select v-model="editRewardForm.platformName" placeholder="请选择平台">
@@ -772,7 +762,7 @@
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="cancelEditReward">取 消</el-button>
+          <el-button @click="editRewardDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="confirmEditReward">确 定</el-button>
         </span>
       </template>
@@ -795,7 +785,7 @@
         <el-form-item label="特殊赛道标签组">
           <el-select v-model="selectedTrack" placeholder="选择特殊赛道" @change="handleTrackChange"
             style="margin-bottom: 10px" clearable>
-            <el-option v-for="(config, track) in specialTrackConfigs" :key="track" :label="track" :value="track">
+            <el-option v-for="(config, track) in specialTrackTagConfigs" :key="track" :label="track" :value="track">
               <div>
                 <div>{{ track }}</div>
                 <small class="text-gray-500">
@@ -931,7 +921,7 @@ interface PlatformReward {
 interface GameActivity {
   name: string
   act_url: string
-  etime: number
+  etime: string
   addTime: string
   rewards: PlatformReward[]
   updateDate?: string
@@ -1000,7 +990,11 @@ const setScheduleJob = (
   row: GameActivity,
 ) => {
   const { topic, specialTag, eDate } = rew
-  const missionId = topicJson.value.find((item: any) => item.topic_name === topic)?.mission_id
+  if (!(topic || rew.name)) {
+    ElMessage.error('没有找到对应的 topic 或 name')
+    return
+  }
+  const missionId = topicJson.value.find((item) => item.topic_name === topic)?.mission_id
   // 获取已存在的定时任务tag
   let existingTag = ''
   if (platform.name === 'bilibili') {
@@ -1249,8 +1243,19 @@ const confirmEditReward = async () => {
   })
 }
 
-const cancelEditReward = () => {
-  editRewardDialogVisible.value = false
+// 获取按钮类型
+const getScheduleJobButtonType = (speReq, platformName:PlatformType) => {
+  if (platformName === 'bilibili') {
+    const jobSetting = scheduleJobMap.value[platformName].find(job => job.topicName === speReq.topic);
+    return jobSetting?.scheduleJob?.some(job => job.successExecAccount?.length < 3) ? 'danger' : 'info';
+  } else if (platformName === '抖音') {
+    const jobSetting = scheduleJobMap.value[platformName].find(job => job.topicName === speReq.name);
+    return jobSetting?.scheduleJob?.some(job => job.successExecAccount?.length < 2) ? 'danger' : 'info';
+  } else if (platformName === '小红书') {
+    const jobSetting = scheduleJobMap.value[platformName].find(job => job.topicName === speReq.name);
+    return jobSetting?.scheduleJob?.some(job => job.successExecAccount?.length < 1) ? 'danger' : 'info';
+  }
+  return 'info';
 }
 
 const allGameList = ref([])
@@ -1441,13 +1446,47 @@ const getCommonTagAll = (row) => {
 const bilibiliActTableData = ref([])
 const gameTableData = ref([])
 const dakaTableData = ref([])
+
+
+
 const BiliBiliScheduleJob = ref([])
 const DouyinScheduleJob = ref([])
+
+// 定义平台类型
+type PlatformType = 'bilibili' | '抖音' | '小红书';
+// 定义定时任务项接口
+interface ScheduleJobItem {
+  videoPath: string;
+  execTime: string;
+  successExecAccount: string[];
+}
+
+interface ScheduleJob {
+  gameName: string;
+  topicName: string;
+  missionId: number;
+  tag: string;
+  videoDir: string;
+  scheduleJob: ScheduleJobItem[];
+  etime: string;
+  tid: number;
+}
+
+
+const scheduleJobMap = ref<Record<PlatformType, ScheduleJob[]>>({
+  bilibili: [],
+  douyin: [],
+  xhs: [],
+  '抖音': [],
+  '小红书': [],
+})
+
+
 const topicJson = ref([])
 
 const fetchData = async () => {
   try {
-    const response = await fetch('http://localhost:3000/data')
+    const response = await fetch('http://localhost:3000/allData')
     if (!response.ok) {
       throw new Error('Network response was not ok')
     }
@@ -1461,8 +1500,9 @@ const fetchData = async () => {
     dakaTableData.value = res.dakaData
     gameTableData.value = res.gameData
     allGameList.value = res.allGameList.map((e) => ({ name: e, checked: false }))
-    BiliBiliScheduleJob.value = res.scheduleJob.BiliBiliScheduleJob
-    DouyinScheduleJob.value = res.scheduleJob.DouyinScheduleJob
+    // BiliBiliScheduleJob.value = res.scheduleJob.BiliBiliScheduleJob
+    // DouyinScheduleJob.value = res.scheduleJob.DouyinScheduleJob
+    scheduleJobMap.value = res.scheduleJob
     topicJson.value = res.topicJson
 
     ElMessage.success('数据刷新成功')
@@ -1702,14 +1742,14 @@ const scheduleJobDialogVisible = ref(false)
 const currentScheduleJob = ref(null)
 
 // 添加新的方法
-const showScheduleJobDialog = async (speReq?: any, platformType: string) => {
+const showScheduleJobDialog = async (speReq , platformName:PlatformType ) => {
   try {
     let scheduleJob
     const { topic, name } = speReq
-    if (platformType === 'bilibili') {
-      scheduleJob = BiliBiliScheduleJob.value.find((e) => e.topicName === topic)
-    } else if (platformType === '抖音') {
-      scheduleJob = DouyinScheduleJob.value.find((e) => e.topicName === name)
+    if (platformName === 'bilibili') {
+      scheduleJob = scheduleJobMap.value[platformName].find((e) => e.topicName === topic)
+    } else if (platformName === '抖音' || platformName === '小红书') {
+      scheduleJob = scheduleJobMap.value[platformName].find((e) => e.topicName === name)
     }
     currentScheduleJob.value = scheduleJob
     scheduleJobDialogVisible.value = true
@@ -1752,7 +1792,7 @@ interface SpecialTrackConfigs {
 
 const selectedTrack = ref<string>('')
 
-const specialTrackConfigs: SpecialTrackConfigs = {
+const specialTrackTagConfigs: SpecialTrackConfigs = {
   coser本人: {
     baseTags: ['#coser', '#cos正片', '#cos', '#写真'],
     extraTags: ['#coser本人'],
@@ -1776,7 +1816,7 @@ const computedTrackTags = computed(() => {
     return ''
   }
 
-  const config = specialTrackConfigs[selectedTrack.value]
+  const config = specialTrackTagConfigs[selectedTrack.value]
   if (!config) return ''
 
   // 合并基础标签、额外标签和游戏名称
