@@ -31,7 +31,6 @@ const {
 const accountJson = getJsonData("accountList.json");
 
 
-// 导入路由
 const replyRoutes = require('./src/modules/reply/controllers/reply.controller');
 
 app.use(cors());
@@ -72,7 +71,6 @@ async function get_BiliBili_Data(i, account = accountJson.bilibili[0]) {
     if (!data?.data?.arc_audits) {
       return;
     }
-    // 按时间过滤出活动稿件
     const list = data.data.arc_audits
       .filter(
         (item) => item.Archive.ctime > i.stime && item.Archive.ctime < i.etime
@@ -126,12 +124,6 @@ app.get("/getNewActData", async (req, res) => {
           return {
             ...(oldDataHasThisRewardsItem
               ? {
-                // searchKeyWord: oldDataHasThisRewardsItem.searchKeyWord,
-                // baseTopic: oldDataHasThisRewardsItem.baseTopic,
-                // specialTagAll: oldDataHasThisRewardsItem.specialTagAll,
-                // rewards: oldDataHasThisRewardsItem.rewards,
-                // bilibili: oldDataHasThisRewardsItem.bilibili,
-                // lastJudgeTime: oldDataHasThisRewardsItem.lastJudgeTime,
                 ...oldDataHasThisRewardsItem,
               }
               : {
@@ -163,7 +155,7 @@ app.get("/getNewActData", async (req, res) => {
             comment: item.comment,
             sDate: formatDate(item.stime * 1000) || "2023/1/11",
             eDate: formatDate(item.etime * 1000) || "2025/1/11",
-            specialTag: "#" + item.name,
+            specialTag: '',
             // searchKeyWord: item.name,
             reward: [],
           };
@@ -180,7 +172,6 @@ app.get("/getNewActData", async (req, res) => {
             });
           } else {
             // 3. 如果gameData.json中已经收录该游戏活动，则将该游戏活动收录到对应gameName下的rewards的下name为bilibili下的specialTagRequirements中细分活动中
-
             const gameBilibiliRewards = oldOtherDataArr
               .find((item2) => item2.name === gameName)
               ?.rewards?.find((item2) => item2.name === "bilibili");
@@ -248,12 +239,10 @@ app.post("/addPlatformReward", async (req, res) => {
       oldOtherDataArr[gameIndex].rewards.unshift(platformData);
     } else {
       // 2. 如果已有该平台的其他活动赛道，则添加新的活动赛道
-      // if (!isUpdate) oldOtherDataArr[gameIndex].rewards[platformIndex].specialTagRequirements = platformData.specialTagRequirements.concat(oldOtherDataArr[gameIndex].rewards[platformIndex].specialTagRequirements)
-      // else
       oldOtherDataArr[gameIndex].rewards[platformIndex] = platformData;
     }
 
-    // 写入本地文件
+
     writeLocalDataJson(oldOtherDataArr, "gameData.json");
 
     res.json({ code: 0, msg: "奖励更新成功" });
@@ -286,9 +275,9 @@ app.post("/ffmpegHandleVideos", async (req, res) => {
   }
 });
 
-app.get("/getNewDakaData", async (req, res) => {
+app.get("/getBiliBiliDakaData", async (req, res) => {
   try {
-    async function getDakaNewData() {
+    async function get_BiliBili_DakaData() {
       const url =
         "https://member.bilibili.com/x2/creative/h5/clock/v4/activity/list";
       const params = {
@@ -301,7 +290,6 @@ app.get("/getNewDakaData", async (req, res) => {
         const response = await fetch(url, { params, headers });
         let dakaData = await response.json();
         if (dakaData.code === -101) {
-          // TODO 自动去登录B站获取新的Cookie
           dakaData = JSON.parse(fs.readFileSync("./B站打卡活动.json"));
           return dakaData;
         }
@@ -332,7 +320,7 @@ app.get("/getNewDakaData", async (req, res) => {
         throw error;
       }
     }
-    const data = await getDakaNewData();
+    const data = await get_BiliBili_DakaData();
     res.json(data);
   } catch (error) {
     console.error("Error in /data endpoint:", error);
@@ -345,12 +333,11 @@ app.get("/data", async (req, res) => {
   const DouyinScheduleJob = getJsonData("scheduleJob/DouyinScheduleJob.json");
 
   try {
-    // 每次都实时读取data.json 文件并返回
     const data = getJsonData();
     let otherGameData = getJsonData("gameData.json");
     // 计算otherGameData rewards下各平台specialTagRequirements里的最近的活动结束时间，并赋值给最外层etime
     otherGameData.forEach((game) => {
-      let minEtime = game.etime || Number.MAX_SAFE_INTEGER; // 默认活动最大
+      let minEtime = game.etime || Number.MAX_SAFE_INTEGER;
       game.rewards.forEach((reward) => {
         if (reward.specialTagRequirements) {
           reward.specialTagRequirements = reward.specialTagRequirements.filter(
@@ -366,7 +353,7 @@ app.get("/data", async (req, res) => {
               const eTime =
                 (new Date(requirement.eDate).getTime() + 24 * 60 * 60 * 60) /
                 1000;
-              // // 如果结束日期小于当天的time，则跳过 不计入最近结束日期
+              // 如果结束日期小于当天的time，则跳过 不计入最近结束日期
               // if (eTime < new Date().getTime() / 1000) return;
               // 如果结束日期小于minEtime，则更新minEtime
               if (eTime < minEtime) {
@@ -467,6 +454,175 @@ app.post("/getPlatformData", async (req, res) => {
   try {
     const jsonData = await getPlatformData();
 
+    async function getPlatformData() {
+      // let xhsData = await queryXiaoHongShuAllAccountsData();
+      let douyinData = await queryDouYinAllAccountsData();
+      let bilibiliData = await querybilibiliAllAccountsData();
+      const oldOtherGameDataArr = getJsonData("gameData.json");
+      const BiliBiliScheduleJobJson = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
+      const jsonData = oldOtherGameDataArr.map((item) => {
+        return {
+          ...item,
+          updateDate: formatDate(new Date().getTime()),
+          rewards: item.rewards.map((e) => {
+            if (e.name === "抖音") {
+              return {
+                ...e,
+                specialTagRequirements: e.specialTagRequirements.map((i) => {
+                  return {
+                    ...i,
+                    videoData: douyinData.map((t) => {
+                      // 过滤不满足条件的视频
+                      const valuedList = t.aweme_list.filter(
+                        (l) => {
+                          if (i.specialTag == '') return false;
+                          return (l.desc.includes(i.specialTag)
+                          )
+                            &&
+                            l.view >= (i.minView || 100)
+                        }
+                      );
+                      // 目前忽视了挂在小手柄问题，可手动isGet调整
+                      let alsoRelayList = [];
+                      if (i?.videoData?.find((c) => c.userName === t.user.name)) {
+                        alsoRelayList = i?.videoData
+                          .find((c) => c.userName === t.user.name)
+                          .onePlayNumList.filter((l) => {
+                            // 保留活动期间过去发过的稿件数据计入（因为单次可能只发36条数据）
+                            if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
+                              return false;
+                            }
+                            // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
+                            // if (l.create_time > formatSecondTimestamp(eDate)) {
+                            //     return false
+                            // }
+                            return true;
+                          });
+                      }
+
+                      let list = valuedList.concat(alsoRelayList).sort((a, b) => {
+                        return b.create_time - a.create_time;
+                      });
+                      return {
+                        userName: t.user.name,
+                        allNum: list.length,
+                        allViewNum: list.reduce((a, b) => a + b.view, 0),
+                        onePlayNumList: list,
+                      };
+                    }),
+                  };
+                }),
+              };
+            }
+              // else if (e.name === "小红书") {
+              //   return {
+              //     ...e,
+              //     specialTagRequirements: e.specialTagRequirements.map((i) => {
+              //       return {
+              //         ...i,
+              //         videoData: xhsData.map((t) => {
+              //           // 过滤不满足条件的视频
+              //           const valuedList = t.aweme_list.filter((l) => l.desc
+              //             .split(" ")
+              //             .map((e) => "#" + e)
+              //             .join(" ")
+              //             .includes(i.specialTag)
+              //           );
+
+              //           let alsoRelayList = [];
+              //           if (i?.videoData?.find((c) => c.userName === t.user.name)) {
+              //             alsoRelayList = i?.videoData
+              //               .find((c) => c.userName === t.user.name)
+              //               .onePlayNumList.filter((l) => {
+              //                 // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
+              //                 if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
+              //                   return false;
+              //                 }
+              //                 // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
+              //                 // if (l.create_time > formatSecondTimestamp(eDate)) {
+              //                 //     return false
+              //                 // }
+              //                 return true;
+              //               });
+              //           }
+
+            //           let list = valuedList.concat(alsoRelayList);
+            //           return {
+            //             userName: t.user.name,
+            //             allNum: list.length,
+            //             allLike: list.reduce((a, b) => a + b.like, 0),
+            //             // allViewNum: list.reduce((a, b) => a + b.view, 0),
+            //             onePlayNumList: list,
+            //           };
+            //         }),
+            //       };
+            //     }),
+            //   };
+            // }
+            else if (e.name === "bilibili") {
+              return {
+                ...e,
+                specialTagRequirements: e.specialTagRequirements.map((differentTopic) => {
+                  const hasSameTopicScheduleJob = BiliBiliScheduleJobJson.find(job => job.topicName === differentTopic.topic);
+
+                  return {
+                    ...differentTopic,
+                    videoData: bilibiliData.map((t) => {
+                      const valuedList = t.aweme_list.filter(l => {
+                        // 检查视频描述是否包含活动名称
+                        const matchesName = l.desc.includes(item.name);
+                        // 如果有定时任务，检查视频的文件名称是否在是某个topic的，有则计数
+                        let isTopicScheduleJob = false;
+                        if (hasSameTopicScheduleJob) {
+                          isTopicScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
+                            const jobFileName = job.videoPath.split('\\').pop().replace('.mp4', '');
+                            return l.title.includes(jobFileName);
+                          });
+                        }
+
+                        return matchesName || isTopicScheduleJob;
+                      });
+
+                      let alsoRelayList = [];
+                      if (differentTopic?.videoData?.find((c) => c.userName === t.user.name)) {
+                        alsoRelayList = differentTopic?.videoData
+                          .find((c) => c.userName === t.user.name)
+                          .onePlayNumList.filter((l) => {
+                            // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
+                            if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
+                              return false;
+                            }
+                            // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
+                            // if (l.create_time > formatSecondTimestamp(eDate)) {
+                            //     return false
+                            // }
+                            return true;
+                          });
+                      }
+
+                      let list = valuedList.concat(alsoRelayList);
+                      return {
+                        userName: t.user.name,
+                        allNum: list.length,
+                        // allLike: list.reduce((a, b) => a + b.like, 0),
+                        allViewNum: list.reduce((a, b) => a + b.view, 0),
+                        onePlayNumList: list,
+                      };
+                    }),
+                  };
+                }),
+              };
+            }
+            return e;
+          }),
+        };
+      });
+      writeLocalDataJson(jsonData, "gameData.json");
+      return jsonData;
+    }
+
+    // 每24小时更新一次平台数据
+    setInterval(getPlatformData, 1000 * 60 * 60 * 24);
     res.json({
       code: 200,
       data: jsonData,
@@ -478,179 +634,8 @@ app.post("/getPlatformData", async (req, res) => {
   }
 });
 
-async function getPlatformData() {
-  // let xhsData = await queryXiaoHongShuAllAccountsData();
-  let douyinData = await queryDouYinAllAccountsData();
-  let bilibiliData = await querybilibiliAllAccountsData();
-  const oldOtherGameDataArr = getJsonData("gameData.json");
-  const BiliBiliScheduleJobJson = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
-  const jsonData = oldOtherGameDataArr.map((item) => {
-    return {
-      ...item,
-      updateDate: formatDate(new Date().getTime()),
-      rewards: item.rewards.map((e) => {
-        if (e.name === "抖音") {
-          return {
-            ...e,
-            specialTagRequirements: e.specialTagRequirements.map((i) => {
-              return {  
-                ...i,
-                videoData: douyinData.map((t) => {
-                  // 过滤不满足条件的视频
-                  const valuedList = t.aweme_list.filter(
-                    (l) => {
-                      if(i.specialTag == '') return false;
-                      return (l.desc.includes(i.specialTag) || l.desc.includes(item.name)) &&
-                      l.view >= (i.minView || 100)
-                    }
-                  );
-                  // 目前忽视了挂在小手柄问题，可手动isGet调整
-                  let alsoRelayList = [];
-                  if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-                    alsoRelayList = i?.videoData
-                      .find((c) => c.userName === t.user.name)
-                      .onePlayNumList.filter((l) => {
-                        // 保留活动期间过去发过的稿件数据计入（因为单次可能只发36条数据）
-                        if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
-                          return false;
-                        }
-                        // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-                        // if (l.create_time > formatSecondTimestamp(eDate)) {
-                        //     return false
-                        // }
-                        return true;
-                      });
-                  }
-
-                  let list = valuedList.concat(alsoRelayList).sort((a, b) => {
-                    return b.create_time - a.create_time;
-                  });
-                  return {
-                    userName: t.user.name,
-                    allNum: list.length,
-                    allViewNum: list.reduce((a, b) => a + b.view, 0),
-                    onePlayNumList: list,
-                  };
-                }),
-              };
-            }),
-          };
-        }
-        // else if (e.name === "小红书") {
-        //   return {
-        //     ...e,
-        //     specialTagRequirements: e.specialTagRequirements.map((i) => {
-        //       return {
-        //         ...i,
-        //         videoData: xhsData.map((t) => {
-        //           // 过滤不满足条件的视频
-        //           const valuedList = t.aweme_list.filter((l) => l.desc
-        //             .split(" ")
-        //             .map((e) => "#" + e)
-        //             .join(" ")
-        //             .includes(i.specialTag)
-        //           );
-
-        //           let alsoRelayList = [];
-        //           if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-        //             alsoRelayList = i?.videoData
-        //               .find((c) => c.userName === t.user.name)
-        //               .onePlayNumList.filter((l) => {
-        //                 // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
-        //                 if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
-        //                   return false;
-        //                 }
-        //                 // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-        //                 // if (l.create_time > formatSecondTimestamp(eDate)) {
-        //                 //     return false
-        //                 // }
-        //                 return true;
-        //               });
-        //           }
-
-        //           let list = valuedList.concat(alsoRelayList);
-        //           return {
-        //             userName: t.user.name,
-        //             allNum: list.length,
-        //             allLike: list.reduce((a, b) => a + b.like, 0),
-        //             // allViewNum: list.reduce((a, b) => a + b.view, 0),
-        //             onePlayNumList: list,
-        //           };
-        //         }),
-        //       };
-        //     }),
-        //   };
-        // }
-         else if (e.name === "bilibili") {
-          return {
-            ...e,
-            specialTagRequirements: e.specialTagRequirements.map((i) => {
-              // 查找对应的定时任务
-              const hasSameTopicScheduleJob = BiliBiliScheduleJobJson.find(job => job.topicName === i.topic);
-
-              return {
-                ...i,
-                videoData: bilibiliData.map((t) => {
-                  // 过滤不满足条件的视频
-                  const valuedList = t.aweme_list.filter(l => {
-                    // 检查视频标题或描述是否包含 topic
-                    const matchesName = l.title.includes(item.name) || l.desc.includes(item.name);
-
-                    // 如果有定时任务，检查视频文件名是否在定时任务中
-                    let matchesScheduleJob = false;
-                    if (hasSameTopicScheduleJob) {
-                      const videoFileName = l.title;
-                      matchesScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
-                        const jobFileName = job.videoPath.split('\\').pop().replace('.mp4', '');
-                        return videoFileName.includes(jobFileName);
-                      });
-                    }
-
-                    return matchesName || matchesScheduleJob;
-                  });
-
-                  let alsoRelayList = [];
-                  if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-                    alsoRelayList = i?.videoData
-                      .find((c) => c.userName === t.user.name)
-                      .onePlayNumList.filter((l) => {
-                        // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
-                        if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
-                          return false;
-                        }
-                        // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-                        // if (l.create_time > formatSecondTimestamp(eDate)) {
-                        //     return false
-                        // }
-                        return true;
-                      });
-                  }
-
-                  let list = valuedList.concat(alsoRelayList);
-                  return {
-                    userName: t.user.name,
-                    allNum: list.length,
-                    // allLike: list.reduce((a, b) => a + b.like, 0),
-                    allViewNum: list.reduce((a, b) => a + b.view, 0),
-                    onePlayNumList: list,
-                  };
-                }),
-              };
-            }),
-          };
-        }
-        return e;
-      }),
-    };
-  });
-  writeLocalDataJson(jsonData, "gameData.json");
-  return jsonData;
-}
-
-// 每24小时更新一次平台数据
-setInterval(getPlatformData, 1000 * 60 * 60 * 24);
- // 根据平台选择配置文件
- const platformConfig = {
+// 根据平台选择配置文件
+const platformConfig = {
   bilibili: {
     configPath: "scheduleJob/BiliBiliScheduleJob.json",
     uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload\\uploader\\bilibili_uploader\\biliup.exe"),
@@ -660,6 +645,11 @@ setInterval(getPlatformData, 1000 * 60 * 60 * 24);
     configPath: "scheduleJob/DouyinScheduleJob.json",
     uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
     accountType: "douyin"
+  },
+  '小红书': {
+    configPath: "scheduleJob/XhsScheduleJob.json",
+    uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
+    accountType: "xhs"
   }
 };
 
@@ -676,19 +666,25 @@ async function executeExpiredJobs(platform) {
 
     const now = new Date();
     const expiredJobs = [];
-
     // 遍历所有游戏的定时任务，过滤掉已过期的任务
-    scheduleJobs = scheduleJobs.filter(game => {
-      if (!game.etime || new Date(game.etime) > now) {
+    scheduleJobs.forEach(game => {
+      if (game.etime && new Date(game.etime) > now) {
         if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
           // 获取游戏配置
           const { topicName, missionId, tag, tid } = game;
           const gameExpiredJobs = game.scheduleJob
             .filter((job) => {
+              if (job.successExecAccount.length >= accountJson[accountType].length) return false // 如果已上传成功，则跳过
               const jobTime = new Date(job.execTime);
+              const currentTime = new Date();
+              const timeDiff = jobTime - currentTime;
+              // 如果执行时间 3 天内且大于 4 小时，则设置定时上传
+              const threeDaysInMs = 3 * 24 * 60 * 60 * 1000;
+              const fourHoursInMs = 4 * 60 * 60 * 1000;
+              const latest3days = timeDiff >= fourHoursInMs && timeDiff <= threeDaysInMs
+
               return (
-                jobTime < now &&
-                job.successExecAccount.length < accountJson[accountType].length
+                jobTime < now || latest3days
               );
             })
             .map((job) => ({
@@ -703,9 +699,7 @@ async function executeExpiredJobs(platform) {
             }));
           expiredJobs.push(...gameExpiredJobs);
         }
-        return true; // 保留未过期的任务
       }
-      return false; // 移除过期的任务
     });
 
     // 处理过期任务
@@ -730,23 +724,20 @@ async function executeExpiredJobs(platform) {
 
       // 并行执行上传任务
       const uploadPromises = [];
-      const MAX_CONCURRENT_UPLOADS = 3; // 最大并发数
+      const MAX_CONCURRENT_UPLOADS = 6; // 最大并发数
 
       for (let account of accountJson[accountType]) {
         if (job.successExecAccount.includes(account.accountName)) continue;
 
         const uploadCmd = generateUploadCommand(platform, uploaderPath, account, job);
-        await waitSecond(10000);
+        await waitSecond(5000);
         uploadPromises.push(
           (async () => {
             try {
               // 使用信号量控制并发
               await acquireSemaphore(MAX_CONCURRENT_UPLOADS);
-              await waitSecond(5000);
               await new Promise((resolve, reject) => {
-
                 let child;
-
                 // 根据平台类型采用不同的执行方式
                 if (platform === 'bilibili') {
                   // Windows系统需要特殊处理参数格式
@@ -755,12 +746,18 @@ async function executeExpiredJobs(platform) {
                     shell: true
                   });
                 } else if (platform === '抖音') {
-                  // Python命令需要拆分为独立参数
-
                   child = spawn(uploadCmd, {
                     shell: true,
                     env: {
                       // ...process.env,
+                      PYTHONUTF8: '1',  // 强制Python使用UTF-8编码
+                      PYTHONIOENCODING: 'utf-8'  // 设置输入输出编码
+                    }
+                  });
+                } else if (platform === '小红书') {
+                  child = spawn(uploadCmd, {
+                    shell: true,
+                    env: {
                       PYTHONUTF8: '1',  // 强制Python使用UTF-8编码
                       PYTHONIOENCODING: 'utf-8'  // 设置输入输出编码
                     }
@@ -809,13 +806,14 @@ async function executeExpiredJobs(platform) {
       await Promise.all(uploadPromises);
     }
 
-    // 统一写入对应文件，此时已经过滤掉了过期的任务
-    writeLocalDataJson(scheduleJobs, configPath);
 
     return {
       code: 200,
       msg: `${platform}过期任务执行完成`,
-      jobs: scheduleJobs,
+      data: {
+        jobs: scheduleJobs,
+        configPath
+      }
     };
   } catch (error) {
     console.error(`执行${platform}过期任务失败:`, error);
@@ -826,7 +824,7 @@ async function executeExpiredJobs(platform) {
   }
 
   async function waitSecond(time = 5000) {
-    const randomDelay = Math.floor(2000 + Math.random() * time); // 随机延迟2-n秒 
+    const randomDelay = Math.floor(2000 + Math.random() * time); // 随机延迟2-n秒
     await new Promise(resolve => setTimeout(resolve, randomDelay));
   }
 }
@@ -834,21 +832,48 @@ async function executeExpiredJobs(platform) {
 // 生成平台特定的上传命令
 function generateUploadCommand(platform, uploaderPath, account, job) {
   if (platform === 'bilibili') {
+    // https://github.com/biliup/biliup-rs 文档
     const configPath = path.join(path.dirname(uploaderPath), `${account.accountName}.json`);
-    return [
+    // 确保使用 UTC+8 时区
+    const execTime = new Date(job.execTime);
+    const time = execTime.getTime() / 1000;  // 转为10位数时间戳
+    // 判断发布时间离当前时间≥4小时且≤3天
+    const time_4h_And_15day = time > Date.now() / 1000 + 4 * 3600 && time < Date.now() / 1000 + 3 * 24 * 3600;
+
+    const bilibiliVideoUploadCommand = [
       uploaderPath,
       '-u', `"${configPath}"`,
       'upload',
-      '--tag', job.tag,
+      '--tag', `${job.tag}`,
       '--mission-id', job.missionId,
       '--tid', job.tid.toString(),
       '--title', `"${path.basename(job.videoPath, ".mp4")}"`,
-      `"${job.videoPath}"`
-    ];
+    ]
+    if (time_4h_And_15day) {
+      bilibiliVideoUploadCommand.push('--dtime', time, `"${job.videoPath}"`);
+    } else {
+      bilibiliVideoUploadCommand.push(`"${job.videoPath}"`);
+    }
+    return bilibiliVideoUploadCommand
   }
 
   if (platform === '抖音') {
-    return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}" douyin ${account.accountName} upload "${job.videoPath}" -pt ${Date.now() > new Date(job.execTime) ? 0 : 1} ${Date.now() > new Date(job.execTime) ? '' : `-t "${new Date(job.execTime).toISOString()}"`}`;
+    const execTime = new Date(job.execTime);
+    const isPastTime = Date.now() > execTime;
+    // 将ISO格式转换为抖音需要的 %Y-%m-%d %H:%M 格式
+    const formattedTime = isPastTime ? '' :
+      `-t "${execTime.toISOString().replace('T', ' ').substring(0, 16)}"`;
+
+    return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}" douyin ${account.accountName} upload "${job.videoPath}" -pt ${isPastTime ? 0 : 1} ${isPastTime ? '' : formattedTime}`;
+  }
+
+  if (platform === '小红书') {
+    const execTime = new Date(job.execTime);
+    const isPastTime = Date.now() > execTime;
+    const formattedTime = isPastTime ? '' :
+      `-t "${execTime.toISOString().replace('T', ' ').substring(0, 16)}"`;
+
+    return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/examples/upload_video_to_xhs.py')}" ${account.accountName} "${job.videoPath}" -pt ${isPastTime ? 0 : 1} ${isPastTime ? '' : formattedTime}`;
   }
 }
 
@@ -870,15 +895,29 @@ const semaphore = {
 const acquireSemaphore = (max) => semaphore.acquire(max);
 const releaseSemaphore = () => semaphore.release();
 
-// 修改定时任务检查逻辑（立即执行过期任务）
 async function checkAndExecuteJobs() {
   try {
     const platforms = ['bilibili', '抖音'];
     const results = await Promise.allSettled(platforms.map(p => executeExpiredJobs(p)));
+    
+    // 所有平台任务完成后统一写入文件，避免一个平台处理完写入导致debug开发模式下重新启动进程
+    const successResults = results.filter(r => r.status === 'fulfilled' && r.value?.code === 200);
+    if (successResults.length === platforms.length) {
+      successResults.forEach(result => {
+        const { jobs, configPath } = result.value.data;
+        if (jobs && configPath) {
+          writeLocalDataJson(jobs, configPath);
+          console.log(`成功写入配置文件: ${configPath}`);
+        }
+      });
+    }
 
+    // 记录执行失败的平台
     results.forEach((result, index) => {
-      if (result.status === 'rejected') {
-        console.error(`${platforms[index]}任务执行失败:`, result.reason);
+      if (result.status === 'rejected' || result.value?.code !== 200) {
+        console.error(`${platforms[index]}任务执行失败:`,
+          result.status === 'rejected' ? result.reason : result.value?.msg
+        );
       }
     });
   } catch (error) {
@@ -886,8 +925,6 @@ async function checkAndExecuteJobs() {
   }
 }
 
-// 提高任务检查频率（每2小时检查一次）
-// setInterval(checkAndExecuteJobs, 2 * 60 * 60 * 1000);
 
 app.post("/scheduleUpload", async (req, res) => {
   async function generateScheduleJobs(videoDir, startTime, intervalHours) {
@@ -895,14 +932,17 @@ app.post("/scheduleUpload", async (req, res) => {
     const videoFiles = files.filter((f) => f.endsWith(".mp4"));
     const jobs = [];
     let execTime = new Date(startTime);
+    let i = 0
+    const h = execTime.getHours()
     for (const file of videoFiles) {
+      execTime.setHours(8 + h + i * intervalHours);
       jobs.push({
         videoPath: path.join(videoDir, file),
-        execTime: new Date(execTime),
+        execTime: execTime.toISOString(),
         successExecAccount: [],
       });
       // 增加指定的时间间隔
-      execTime.setHours(execTime.getHours() + intervalHours);
+      i++
     }
     return jobs;
   }
@@ -926,14 +966,12 @@ app.post("/scheduleUpload", async (req, res) => {
       await checkAndExecuteJobs();
     } else {
       const scheduleJobsPath = platformConfig[platform].configPath;
-      console.log("scheduleJobsPath", scheduleJobsPath);
-      
+
       let scheduleJobs = [];
 
       try {
         scheduleJobs = getJsonData(scheduleJobsPath);
-        console.log(scheduleJobs);
-        
+
       } catch (err) {
         console.log("定时任务配置文件不存在,创建新文件");
         scheduleJobs = [];
@@ -990,12 +1028,13 @@ app.post("/scheduleUpload", async (req, res) => {
 
 app.get("/getNewTopicData", async (req, res) => {
   try {
-    const fetchUrl = "https://member.bilibili.com/x/vupre/web/topic/type";
+    const fetchUrl = "https://member.bilibili.com/x/vupre/web/topic/type/v2";
     const params = {
-      type_id: 172,
       pn: 0,
       ps: 200,
-      title: "",
+      platform: 'pc',
+      type_id: 21,
+      type_pid: 1008,
       t: Date.now()
     };
 
@@ -1011,17 +1050,16 @@ app.get("/getNewTopicData", async (req, res) => {
     });
 
     const topicData = await response.json();
-    
+
     if (topicData.code === 0 && topicData.data) {
-      // 写入topic.json文件
       writeLocalDataJson(topicData.data, "topic.json");
-      
+
       res.json({
         code: 200,
         msg: "Topic数据更新成功",
         data: topicData.data
       });
-    } 
+    }
     else {
       throw new Error(topicData || "获取Topic数据失败");
     }
@@ -1032,9 +1070,6 @@ app.get("/getNewTopicData", async (req, res) => {
     });
   }
 });
-
-
-// app.use('/api/reply', replyRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

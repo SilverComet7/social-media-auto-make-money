@@ -4,46 +4,44 @@
 
     <el-tabs v-model="activeTab" type="card">
       <el-tab-pane label="四平台游戏活动激励" name="platform">
+
+        <!-- ! toFix 不能稳定固定在页面顶部 -->
+        <el-affix position="top" :offset="40" class="text-blue-800">
+          <el-button type="primary" @click="fetchData">获取后台合并数据</el-button>
+          <h4>公共标签参考</h4>
+          <div class="bg-red-300 h-[5vw] overflow-auto">
+            <div>#游戏鉴赏官 #联机游戏</div>
+            <div>#二次元 #音乐 #巅峰赛 #故事 #搞笑 #教程</div>
+            <div>#MMORPG #古风 #逆水寒</div>
+            <div>#射击游戏 #FPS #穿越火线 #无畏契约 #暗区突围 #三角洲行动 #枪战</div>
+          </div>
+        </el-affix>
         <div class="flex justify-between">
-          <el-affix :offset="20" class="text-blue-800">
-            <h4>公共标签参考</h4>
-            <div class=" bg-red-300 h-[5vw] overflow-auto">
-              <div>#游戏鉴赏官 #联机游戏</div>
-              <div>#二次元 #音乐 #巅峰赛 #故事 #搞笑 #教程</div>
-              <div>#MMORPG #古风 #逆水寒</div>
-              <div>#射击游戏 #FPS #穿越火线 #无畏契约 #暗区突围 #三角洲行动 #枪战</div>
-            </div>
-          </el-affix>
-          <div class="flex justify-between">
-            <!-- 爬虫查询栏 -->
-            <div class="operation-group bg-gray-300 p-4 rounded">
-              <h3 class="text-lg font-bold mb-2 text-black">爬虫查询操作</h3>
-              <div class="flex ">
-                <el-button type="primary" @click="updateOnePlatData('抖音')">查询视频数据</el-button>
-                <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
-                <!-- <el-button type="primary" @click="fetchNewActData">查询B站新Topic</el-button> -->
-              </div>
-            </div>
-            <!-- 视频下载处理栏 -->
-            <div class="operation-group bg-blue-300 p-4 rounded">
-              <h3 class="text-lg font-bold mb-2 text-black">视频处理操作</h3>
-              <div class="flex">
-                <el-button type="primary" @click="handleDownloadSettings">下载视频后分组</el-button>
-                <el-button type="primary" @click="ffmpegDialogVisible = true">处理视频</el-button>
-              </div>
-            </div>
-            <!-- 定时任务栏 -->
-            <div class="operation-group bg-green-300 p-4 rounded">
-              <h3 class="text-lg font-bold mb-2 text-black">定时任务操作</h3>
-              <div class="flex">
-                <el-button type="primary" @click="confirmScheduleJob(true)">执行定时任务</el-button>
-                <el-button type="primary" @click="handleManualAccount">执行手动养号</el-button>
-              </div>
+          <!-- 爬虫查询栏 -->
+          <div class="operation-group bg-gray-300 p-4 rounded">
+            <h3 class="text-lg font-bold mb-2 text-black">爬虫查询操作</h3>
+            <div class="flex">
+              <el-button type="primary" @click="updateAllPlatformData">查询全平台视频数据</el-button>
+              <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
+              <el-button type="primary" @click="fetchNewTopicData">查询B站活动Topic</el-button>
             </div>
           </div>
-          <el-affix :offset="20">
-            <el-button type="primary" @click="fetchData">获取后台合并数据</el-button>
-          </el-affix>
+          <!-- 视频下载处理栏 -->
+          <div class="operation-group bg-blue-300 p-4 rounded">
+            <h3 class="text-lg font-bold mb-2 text-black">视频处理操作</h3>
+            <div class="flex">
+              <el-button type="primary" @click="handleDownloadSettings">下载视频后分组</el-button>
+              <el-button type="primary" @click="ffmpegDialogVisible = true">处理视频</el-button>
+            </div>
+          </div>
+          <!-- 定时任务栏 -->
+          <div class="operation-group bg-green-300 p-4 rounded">
+            <h3 class="text-lg font-bold mb-2 text-black">定时任务操作</h3>
+            <div class="flex">
+              <el-button type="primary" @click="confirmScheduleJob(true)">执行定时任务</el-button>
+              <el-button type="primary" @click="handleManualAccount">执行手动养号</el-button>
+            </div>
+          </div>
         </div>
         <el-table v-if="gameTableData.length" :data="gameTableData" style="width: 100%" border>
           <el-table-column type="index" label="No." width="50" fixed />
@@ -115,9 +113,7 @@
                           </h4>
                           <el-button type="primary"
                             @click="setScheduleJob(speReq, platform, scope.row)">设置该活动定时执行任务</el-button>
-                          <el-button type="info" v-if="
-                            BiliBiliScheduleJob.find((e) => e.topicName === speReq.topic) ||
-                            DouyinScheduleJob.find((e) => e.topicName === speReq.name)
+                          <el-button :type="getScheduleJobButtonType(speReq, platform.name)" v-if="scheduleJobMap[platform.name]?.find((e) => e.topicName === speReq.topic || e.topicName === speReq.name)
                           " @click="showScheduleJobDialog(speReq, platform.name)">查看定时任务</el-button>
                           <h4 class="font-bold" v-if="speReq.eDate" :class="getDaysDiff(new Date(speReq.eDate).getTime()) <= 4
                             ? 'text-orange-500'
@@ -288,8 +284,6 @@
 
                           <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
-                          <!-- 多个账号的完成情况 -->
-                          <!-- {{ reward.name }} -->
                           <template v-if="rew?.videoData">
                             <div v-for="r in rew.videoData" :key="r">
                               {{ r.userName }}:
@@ -403,7 +397,9 @@
                         <el-table-column prop="target_progress" label="进度">
                           <template #default="scope">
                             <el-progress :percentage="scope.row.target_value !== 0
-                              ? Math.round((scope.row.target_progress / scope.row.target_value) * 100)
+                              ? Math.round(
+                                (scope.row.target_progress / scope.row.target_value) * 100,
+                              )
                               : 0
                               " />
                           </template>
@@ -485,7 +481,7 @@
             </el-form-item>
           </template>
 
-          <template v-if="!['keyword','filePath'].includes(downloadSettings.selectedStrategy)">
+          <template v-if="!['keyword', 'filePath'].includes(downloadSettings.selectedStrategy)">
             <el-form-item label="视频开始时间">
               <el-input v-model="downloadSettings.earliest" placeholder="统一下载的最早时间 xx/xx/xx" />
             </el-form-item>
@@ -493,7 +489,6 @@
               <el-input v-model="downloadSettings.latest" placeholder="统一下载的截止时间 xx/xx/xx" />
             </el-form-item>
           </template>
-
         </div>
         <el-form-item label="分组目录" v-else>
           <el-input v-model="downloadSettings.groupDir" placeholder="请输入分组目录" />
@@ -649,7 +644,9 @@
               <el-input-number v-model="ffmpegSettings.segmentDuration" :min="1" :max="60" />
               <!-- 自动根据合并最小时长以及秒数计算需要的分镜（视频文件）数，向上取整 -->
 
-              需要{{ Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration) }}个大于该分镜秒数的视频文件
+              需要{{
+                Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration)
+              }}个大于该分镜秒数的视频文件
             </el-form-item>
 
             <el-form-item label="混剪数量">
@@ -663,9 +660,7 @@
                 <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
               </el-select>
             </el-form-item>
-
           </template>
-
         </div>
       </el-form>
       <template #footer>
@@ -676,7 +671,7 @@
     </el-dialog>
 
     <!-- 设置奖励dialog -->
-    <el-dialog title="编辑奖励" v-model="editRewardDialogVisible" width="50%" :before-close="cancelEditReward">
+    <el-dialog title="编辑奖励" v-model="editRewardDialogVisible" width="50%">
       <el-form :model="editRewardForm" label-width="150px">
         <el-form-item label="平台名称">
           <el-select v-model="editRewardForm.platformName" placeholder="请选择平台">
@@ -767,13 +762,12 @@
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="cancelEditReward">取 消</el-button>
+          <el-button @click="editRewardDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="confirmEditReward">确 定</el-button>
         </span>
       </template>
     </el-dialog>
 
-    <!-- 设置定时上传任务 -->
     <el-dialog title="设置定时上传任务" v-model="scheduleDialogVisible" :before-close="cancelScheduleJob">
       <el-form :model="scheduleForm" label-width="120px">
         <el-form-item label="游戏名称">
@@ -785,14 +779,13 @@
         <el-form-item label="视频目录">
           <el-input v-model="scheduleForm.videoDir" placeholder="请输入视频所在目录路径" />
         </el-form-item>
-        <!-- 活动结束时间 -->
         <el-form-item label="活动结束时间">
           <el-date-picker v-model="scheduleForm.etime" type="datetime" placeholder="选择结束时间" />
         </el-form-item>
         <el-form-item label="特殊赛道标签组">
           <el-select v-model="selectedTrack" placeholder="选择特殊赛道" @change="handleTrackChange"
             style="margin-bottom: 10px" clearable>
-            <el-option v-for="(config, track) in specialTrackConfigs" :key="track" :label="track" :value="track">
+            <el-option v-for="(config, track) in specialTrackTagConfigs" :key="track" :label="track" :value="track">
               <div>
                 <div>{{ track }}</div>
                 <small class="text-gray-500">
@@ -803,7 +796,8 @@
           </el-select>
         </el-form-item>
         <el-form-item label="标签">
-          <el-input v-model="scheduleForm.tag" type="textarea" :rows="3" placeholder="标签将根据选择的赛道自动生成，也可以手动编辑" />
+          <el-input v-model="scheduleForm.tag" :disabled="scheduleForm.disabledTag" type="textarea" :rows="3"
+            placeholder="标签将根据选择的赛道自动生成，也可以手动编辑" />
         </el-form-item>
 
         <el-form-item label="开始时间">
@@ -812,8 +806,6 @@
         <el-form-item label="上传间隔(小时)">
           <el-input-number v-model="scheduleForm.intervalHours" :min="1" :max="24" placeholder="请输入上传间隔" />
         </el-form-item>
-
-
 
         <template v-if="scheduleForm.platform === 'bilibili'">
           <el-form-item label="分区选择">
@@ -828,10 +820,6 @@
             <el-input v-model="scheduleForm.missionId" placeholder="请输入活动ID" />
           </el-form-item>
         </template>
-
-
-
-
       </el-form>
       <template #footer>
         <span class="dialog-footer">
@@ -841,7 +829,6 @@
       </template>
     </el-dialog>
 
-    <!-- 定时任务查看弹窗 -->
     <el-dialog title="定时任务列表" v-model="scheduleJobDialogVisible" width="70%">
       <template v-if="currentScheduleJob">
         <h3 class="mb-4">活动名称: {{ currentScheduleJob.topicName }}</h3>
@@ -875,7 +862,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { ElMessage } from 'element-plus'
-// import topicJson from '../../public/topic.json'
 import bilibiliTid from '../../public/bilibiliTid.json'
 
 interface BilibiliArea {
@@ -935,7 +921,7 @@ interface PlatformReward {
 interface GameActivity {
   name: string
   act_url: string
-  etime: number
+  etime: string
   addTime: string
   rewards: PlatformReward[]
   updateDate?: string
@@ -950,6 +936,7 @@ interface ScheduleForm {
   gameName: string
   platform: string
   tag: string
+  disabledTag: boolean
   topicName: string
   videoDir: string
   tid: number
@@ -958,11 +945,11 @@ interface ScheduleForm {
   intervalHours: number
   immediately: boolean
   selectedArea: string
-  etime: Date | null  // 添加活动结束时间字段
+  etime: Date | null // 添加活动结束时间字段
 }
 
 const formatDate = (timestamp?: number, splitStr: string = '-'): string => {
-  const date =  timestamp ?  new Date(timestamp * 1000) : new Date()
+  const date = timestamp ? new Date(timestamp * 1000) : new Date()
   return date.getFullYear() + splitStr + (date.getMonth() + 1) + splitStr + date.getDate()
 }
 
@@ -985,6 +972,7 @@ const scheduleForm = ref<ScheduleForm>({
   topicName: '',
   videoDir: '',
   tag: '',
+  disabledTag: false,
   tid: 172,
   missionId: '',
   startTime: null,
@@ -992,7 +980,7 @@ const scheduleForm = ref<ScheduleForm>({
   platform: '',
   immediately: false,
   selectedArea: '游戏区',
-  etime: null  // 初始化活动结束时间
+  etime: null, // 初始化活动结束时间
 })
 
 // 打开定时任务设置弹窗
@@ -1002,7 +990,24 @@ const setScheduleJob = (
   row: GameActivity,
 ) => {
   const { topic, specialTag, eDate } = rew
-  const missionId = topicJson.value.find((item: any) => item.topic_name === topic)?.mission_id
+  if (!(topic || rew.name)) {
+    ElMessage.error('没有找到对应的 topic 或 name')
+    return
+  }
+  const missionId = topicJson.value.find((item) => item.topic_name === topic)?.mission_id
+  // 获取已存在的定时任务tag
+  let existingTag = ''
+  if (platform.name === 'bilibili') {
+    const existingJob = BiliBiliScheduleJob.value.find(j => j.topicName === topic)
+    if (existingJob?.scheduleJob?.length > 0) {
+      existingTag = existingJob.tag
+    }
+  } else if (platform.name === '抖音') {
+    const existingJob = DouyinScheduleJob.value.find(j => j.topicName === rew.name)
+    if (existingJob?.scheduleJob?.length > 0) {
+      existingTag = existingJob.tag
+    }
+  }
 
   // B站平台 如果没有找到对应的 missionId
   if (!missionId && platform.name === 'bilibili') {
@@ -1031,15 +1036,16 @@ const setScheduleJob = (
     gameName: row.name,
     topicName: topic || rew.name,
     platform: platform.name,
-    tag: allTag,
+    tag: existingTag || allTag,
+    disabledTag: !!existingTag,
     missionId: missionId || '',
-    startTime: null,
-    intervalHours: 24,
+    startTime: new Date(new Date().setHours(24 + 6, 0, 0, 0)), // 次日早晨6点
+    intervalHours: 2,
     immediately: false,
     selectedArea: '游戏区',
     tid: 172,
     videoDir: '',
-    etime: eDate ? new Date(eDate) : null  // 设置活动结束时间
+    etime: eDate ? new Date(eDate) : null, // 设置活动结束时间
   }
 
   scheduleDialogVisible.value = true
@@ -1237,16 +1243,27 @@ const confirmEditReward = async () => {
   })
 }
 
-const cancelEditReward = () => {
-  editRewardDialogVisible.value = false
+// 获取按钮类型
+const getScheduleJobButtonType = (speReq, platformName:PlatformType) => {
+  if (platformName === 'bilibili') {
+    const jobSetting = scheduleJobMap.value[platformName].find(job => job.topicName === speReq.topic);
+    return jobSetting?.scheduleJob?.some(job => job.successExecAccount?.length < 3) ? 'danger' : 'info';
+  } else if (platformName === '抖音') {
+    const jobSetting = scheduleJobMap.value[platformName].find(job => job.topicName === speReq.name);
+    return jobSetting?.scheduleJob?.some(job => job.successExecAccount?.length < 2) ? 'danger' : 'info';
+  } else if (platformName === '小红书') {
+    const jobSetting = scheduleJobMap.value[platformName].find(job => job.topicName === speReq.name);
+    return jobSetting?.scheduleJob?.some(job => job.successExecAccount?.length < 1) ? 'danger' : 'info';
+  }
+  return 'info';
 }
 
 const allGameList = ref([])
 const dialogVisible = ref(false)
 const getDefaultDate = (monthsAgo = 0) => {
-  const date = new Date();
-  date.setMonth(date.getMonth() - monthsAgo);
-  return formatDate(date.getTime() / 1000, '/');
+  const date = new Date()
+  date.setMonth(date.getMonth() - monthsAgo)
+  return formatDate(date.getTime() / 1000, '/')
 }
 
 const downloadSettings = ref({
@@ -1254,11 +1271,15 @@ const downloadSettings = ref({
   selectedStrategy: 'group',
   keyword: '',
   filePath: `D:\\code\\platform_game_activity\\TikTokDownloader\\downloadList.txt`,
-  checkNewAdd: computed(() => downloadSettings.value.selectedStrategy === 'checkNewAdd' ? true : false),
-  allDownload: computed(() => downloadSettings.value.selectedStrategy === 'allDownload' ? true : false),
+  checkNewAdd: computed(() =>
+    downloadSettings.value.selectedStrategy === 'checkNewAdd' ? true : false,
+  ),
+  allDownload: computed(() =>
+    downloadSettings.value.selectedStrategy === 'allDownload' ? true : false,
+  ),
   checkName: false,
-  earliest: getDefaultDate(2), // 默认近两个月 YYYY/MM/DD
-  latest: getDefaultDate(),  // 默认当前 YYYY/MM/DD
+  earliest: getDefaultDate(4), // 默认近4个月 YYYY/MM/DD
+  latest: getDefaultDate(), // 默认当前 YYYY/MM/DD
   currentUpdateGameList: [],
 })
 
@@ -1275,9 +1296,9 @@ const defaultDeduplicationConfigs = {
     blurRadius: 0.2,
     enableFade: false,
     fadeDuration: 0.5,
-    brightness: 0.05,
-    contrast: 1.02,
-    saturation: 1.04,
+    brightness: 0,
+    contrast: 1,
+    saturation: 1,
     enableBgBlur: false,
     bgBlurTop: 0.1,
     bgBlurBottom: 0.1,
@@ -1291,9 +1312,9 @@ const defaultDeduplicationConfigs = {
     blurRadius: 0.2,
     enableFade: false,
     fadeDuration: 0.5,
-    brightness: 0.05,
-    contrast: 1.02,
-    saturation: 1.04,
+    brightness: 0,
+    contrast: 1,
+    saturation: 1,
     enableBgBlur: false,
     bgBlurTop: 0.1,
     bgBlurBottom: 0.1,
@@ -1302,10 +1323,10 @@ const defaultDeduplicationConfigs = {
 const ffmpegSettings = ref({
   onlyRename: false,
   checkName: false,
-  beforeTime: 1,
-  afterTime: 1,
+  beforeTime: 0,
+  afterTime: 0,
   fps: 30,
-  scalePercent: 0,  // 1920X1080
+  scalePercent: 0, // 1920X1080
   replaceMusic: false,
   musicName: 'billll',
   gameName: '',
@@ -1322,8 +1343,7 @@ const ffmpegSettings = ref({
   segmentDuration: 3, // 默认分镜秒数
   mixCount: 2, // 默认混剪数量
   mergeMusicName: '随机',
-  videoDir: '' // 视频处理路径
-
+  videoDir: '', // 视频处理路径
 })
 
 // 处理去重开关变化
@@ -1426,13 +1446,47 @@ const getCommonTagAll = (row) => {
 const bilibiliActTableData = ref([])
 const gameTableData = ref([])
 const dakaTableData = ref([])
+
+
+
 const BiliBiliScheduleJob = ref([])
 const DouyinScheduleJob = ref([])
+
+// 定义平台类型
+type PlatformType = 'bilibili' | '抖音' | '小红书';
+// 定义定时任务项接口
+interface ScheduleJobItem {
+  videoPath: string;
+  execTime: string;
+  successExecAccount: string[];
+}
+
+interface ScheduleJob {
+  gameName: string;
+  topicName: string;
+  missionId: number;
+  tag: string;
+  videoDir: string;
+  scheduleJob: ScheduleJobItem[];
+  etime: string;
+  tid: number;
+}
+
+
+const scheduleJobMap = ref<Record<PlatformType, ScheduleJob[]>>({
+  bilibili: [],
+  douyin: [],
+  xhs: [],
+  '抖音': [],
+  '小红书': [],
+})
+
+
 const topicJson = ref([])
 
 const fetchData = async () => {
   try {
-    const response = await fetch('http://localhost:3000/data')
+    const response = await fetch('http://localhost:3000/allData')
     if (!response.ok) {
       throw new Error('Network response was not ok')
     }
@@ -1446,8 +1500,9 @@ const fetchData = async () => {
     dakaTableData.value = res.dakaData
     gameTableData.value = res.gameData
     allGameList.value = res.allGameList.map((e) => ({ name: e, checked: false }))
-    BiliBiliScheduleJob.value = res.scheduleJob.BiliBiliScheduleJob
-    DouyinScheduleJob.value = res.scheduleJob.DouyinScheduleJob
+    // BiliBiliScheduleJob.value = res.scheduleJob.BiliBiliScheduleJob
+    // DouyinScheduleJob.value = res.scheduleJob.DouyinScheduleJob
+    scheduleJobMap.value = res.scheduleJob
     topicJson.value = res.topicJson
 
     ElMessage.success('数据刷新成功')
@@ -1459,6 +1514,18 @@ const fetchData = async () => {
 const fetchNewActData = async () => {
   try {
     const response = await fetch('http://localhost:3000/getNewActData')
+    const res = await response.json()
+    if (res.code == -101) {
+      return ElMessage.error('请先登录')
+    }
+    fetchData()
+  } catch (error) {
+    console.error('Error fetching data:', error)
+  }
+}
+const fetchNewTopicData = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/getNewTopicData')
     const res = await response.json()
     if (res.code == -101) {
       return ElMessage.error('请先登录')
@@ -1489,7 +1556,7 @@ const handleManualAccount = async () => {
 
 const fetchNewDakaData = async () => {
   try {
-    const response = await fetch('http://localhost:3000/getNewDakaData')
+    const response = await fetch('http://localhost:3000/getBiliBiliDakaData')
     if (!response.ok) {
       throw new Error('Network response was not ok')
     }
@@ -1533,13 +1600,13 @@ const updateData = async (row, specialTag) => {
   })
 }
 
-const updateOnePlatData = async (rewardName) => {
+const updateAllPlatformData = async () => {
   await fetch(`http://localhost:3000/getPlatformData`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ rewardName }),
+    body: JSON.stringify({}),
   }).then((res) => {
     if (res.ok) {
       fetchData()
@@ -1675,14 +1742,14 @@ const scheduleJobDialogVisible = ref(false)
 const currentScheduleJob = ref(null)
 
 // 添加新的方法
-const showScheduleJobDialog = async (speReq?: any, platformType: string) => {
+const showScheduleJobDialog = async (speReq , platformName:PlatformType ) => {
   try {
     let scheduleJob
     const { topic, name } = speReq
-    if (platformType === 'bilibili') {
-      scheduleJob = BiliBiliScheduleJob.value.find((e) => e.topicName === topic)
-    } else if (platformType === '抖音') {
-      scheduleJob = DouyinScheduleJob.value.find((e) => e.topicName === name)
+    if (platformName === 'bilibili') {
+      scheduleJob = scheduleJobMap.value[platformName].find((e) => e.topicName === topic)
+    } else if (platformName === '抖音' || platformName === '小红书') {
+      scheduleJob = scheduleJobMap.value[platformName].find((e) => e.topicName === name)
     }
     currentScheduleJob.value = scheduleJob
     scheduleJobDialogVisible.value = true
@@ -1725,54 +1792,50 @@ interface SpecialTrackConfigs {
 
 const selectedTrack = ref<string>('')
 
-const specialTrackConfigs: SpecialTrackConfigs = {
-  'coser本人': {
+const specialTrackTagConfigs: SpecialTrackConfigs = {
+  coser本人: {
     baseTags: ['#coser', '#cos正片', '#cos', '#写真'],
-    extraTags: ['#coser本人']
+    extraTags: ['#coser本人'],
   },
-  'coser同行': {
+  coser同行: {
     baseTags: ['#coser', '#cos正片', '#cos', '#写真'],
-    extraTags: ['#coser同行']
+    extraTags: ['#coser同行'],
   },
-  '搞笑': {
+  搞笑: {
     baseTags: ['#搞笑', '#游戏搞笑', '#沙雕'],
-    extraTags: ['#沙雕剪辑']
-  }
+    extraTags: ['#沙雕剪辑'],
+  },
+  攻略: {
+    baseTags: ['#攻略', '#教程', '#剪辑'],
+    extraTags: ['#下载'],
+  },
 }
 
-// 使用 computed 属性计算特殊赛道的标签
 const computedTrackTags = computed(() => {
   if (!selectedTrack.value || !scheduleForm.value?.gameName) {
     return ''
   }
 
-  const config = specialTrackConfigs[selectedTrack.value]
+  const config = specialTrackTagConfigs[selectedTrack.value]
   if (!config) return ''
 
   // 合并基础标签、额外标签和游戏名称
   const allTags = [
-    ...new Set([
-      `#${scheduleForm.value.gameName}`,
-      ...config.baseTags,
-      ...config.extraTags
-    ])
+    ...new Set([`#${scheduleForm.value.gameName}`, ...config.baseTags, ...config.extraTags]),
   ]
+  const formatTagsByPlatform = (tags: string[], platform: string): string => {
+    const formattedTags = tags.map((tag) => {
+      if (platform === 'bilibili') {
+        return tag.startsWith('#') ? tag.slice(1) : tag
+      }
+      return tag.startsWith('#') ? tag : `#${tag}`
+    })
 
-  // 根据平台格式化标签
+    return formattedTags.join(platform === 'bilibili' ? ',' : ' ')
+  }
+
   return formatTagsByPlatform(allTags, scheduleForm.value.platform)
 })
-
-// 格式化标签函数
-const formatTagsByPlatform = (tags: string[], platform: string): string => {
-  const formattedTags = tags.map(tag => {
-    if (platform === 'bilibili') {
-      return tag.startsWith('#') ? tag.slice(1) : tag
-    }
-    return tag.startsWith('#') ? tag : `#${tag}`
-  })
-
-  return formattedTags.join(platform === 'bilibili' ? ',' : ' ')
-}
 
 // 处理赛道选择变化
 const handleTrackChange = (value: string): void => {
@@ -1781,14 +1844,12 @@ const handleTrackChange = (value: string): void => {
     return
   }
 
-  // 使用计算好的标签
   scheduleForm.value.tag = computedTrackTags.value
 }
 </script>
 
 <style scoped>
 .table-container {
-  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 20px;
 }

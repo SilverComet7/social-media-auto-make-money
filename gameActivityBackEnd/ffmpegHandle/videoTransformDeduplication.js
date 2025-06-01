@@ -1,12 +1,12 @@
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
-const util = require('util');
-const { runFFmpegCommand } = require('./videoReName_FFmpegHandle');
+// const { exec } = require('child_process');
+// const util = require('util');
+const { runFFmpegCommand } = require('./common.js');
 
 
 const fsPromises = fs.promises;
-const execPromise = util.promisify(exec);
+// const execPromise = util.promisify(exec);
 
 
 async function deduplicateVideo(filePath, deduplicationConfig = {
@@ -31,10 +31,10 @@ async function deduplicateVideo(filePath, deduplicationConfig = {
 
     // 构建滤镜链
     let filters = [];
-    
+
     // 1. 变速处理 (通过setpts和atempo)
     if (deduplicationConfig.speedFactor !== 1) {
-        filters.push(`setpts=${1/deduplicationConfig.speedFactor}*PTS`);
+        filters.push(`setpts=${1 / deduplicationConfig.speedFactor}*PTS`);
         // 音频速度调整将在最终命令中单独处理
     }
 
@@ -59,8 +59,8 @@ async function deduplicateVideo(filePath, deduplicationConfig = {
     }
 
     // 6. 色彩调整
-    if (deduplicationConfig.brightness !== 0 || 
-        deduplicationConfig.contrast !== 1 || 
+    if (deduplicationConfig.brightness !== 0 ||
+        deduplicationConfig.contrast !== 1 ||
         deduplicationConfig.saturation !== 1) {
         filters.push(`eq=brightness=${deduplicationConfig.brightness}:contrast=${deduplicationConfig.contrast}:saturation=${deduplicationConfig.saturation}`);
     }
