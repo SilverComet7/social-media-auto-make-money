@@ -328,9 +328,7 @@ app.get("/getBiliBiliDakaData", async (req, res) => {
   }
 });
 
-app.get("/data", async (req, res) => {
-  const BiliBiliScheduleJob = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
-  const DouyinScheduleJob = getJsonData("scheduleJob/DouyinScheduleJob.json");
+app.get("/allData", async (req, res) => {
 
   try {
     const data = getJsonData();
@@ -406,6 +404,12 @@ app.get("/data", async (req, res) => {
           act_rule: { topic: e.detail.act_rule.topic },
         },
       }));
+    const BiliBiliScheduleJob = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
+    const DouyinScheduleJob = getJsonData("scheduleJob/DouyinScheduleJob.json");
+    const XhsScheduleJob = getJsonData("scheduleJob/XhsScheduleJob.json");
+
+    // 获取账号列表
+    const accountList = getJsonData("accountList.json");
 
     res.json({
       gameData,
@@ -414,9 +418,11 @@ app.get("/data", async (req, res) => {
       allGameList,
       topicJson: getJsonData("topic.json")?.topics,
       scheduleJob: {
-        BiliBiliScheduleJob,
-        DouyinScheduleJob
-      }
+        bilibili: BiliBiliScheduleJob,
+        '抖音': DouyinScheduleJob,
+        '小红书': XhsScheduleJob
+      },
+      platformAccountMap: accountList // 添加账号列表到返回数据中
     });
   } catch (error) {
     console.error("Error in /data endpoint:", error);
@@ -621,7 +627,6 @@ app.post("/getPlatformData", async (req, res) => {
       return jsonData;
     }
 
-    // 每24小时更新一次平台数据
     setInterval(getPlatformData, 1000 * 60 * 60 * 24);
     res.json({
       code: 200,
@@ -670,7 +675,6 @@ async function executeExpiredJobs(platform) {
     scheduleJobs.forEach(game => {
       if (game.etime && new Date(game.etime) > now) {
         if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
-          // 获取游戏配置
           const { topicName, missionId, tag, tid } = game;
           const gameExpiredJobs = game.scheduleJob
             .filter((job) => {
@@ -702,10 +706,8 @@ async function executeExpiredJobs(platform) {
       }
     });
 
-    // 处理过期任务
     for (const job of expiredJobs) {
-      // 仅抖音平台需要生成元数据文件
-      if (platform === '抖音') {
+      if (platform === '抖音' || platform === '小红书') {
         const metaFilePath = path.join(path.dirname(job.videoPath),
           path.basename(job.videoPath, '.mp4') + '.txt');
 
@@ -718,7 +720,7 @@ async function executeExpiredJobs(platform) {
           ].join('\n');
 
           fs.writeFileSync(metaFilePath, metaContent);
-          console.log(`生成抖音元数据文件: ${metaFilePath}`);
+          console.log(`生成${platform}元数据文件: ${metaFilePath}`);
         }
       }
 
@@ -728,6 +730,12 @@ async function executeExpiredJobs(platform) {
 
       for (let account of accountJson[accountType]) {
         if (job.successExecAccount.includes(account.accountName)) continue;
+
+        // 如果指定了要执行的账号，则只执行指定的账号
+        if (job.selectedAccounts && job.selectedAccounts.length > 0 &&
+          !job.selectedAccounts.includes(account.accountName)) {
+          continue;
+        }
 
         const uploadCmd = generateUploadCommand(platform, uploaderPath, account, job);
         await waitSecond(5000);
@@ -860,7 +868,6 @@ function generateUploadCommand(platform, uploaderPath, account, job) {
   if (platform === '抖音') {
     const execTime = new Date(job.execTime);
     const isPastTime = Date.now() > execTime;
-    // 将ISO格式转换为抖音需要的 %Y-%m-%d %H:%M 格式
     const formattedTime = isPastTime ? '' :
       `-t "${execTime.toISOString().replace('T', ' ').substring(0, 16)}"`;
 
@@ -897,9 +904,9 @@ const releaseSemaphore = () => semaphore.release();
 
 async function checkAndExecuteJobs() {
   try {
-    const platforms = ['bilibili', '抖音'];
+    const platforms = ['bilibili', '抖音', '小红书'];
     const results = await Promise.allSettled(platforms.map(p => executeExpiredJobs(p)));
-    
+
     // 所有平台任务完成后统一写入文件，避免一个平台处理完写入导致debug开发模式下重新启动进程
     const successResults = results.filter(r => r.status === 'fulfilled' && r.value?.code === 200);
     if (successResults.length === platforms.length) {
@@ -959,7 +966,8 @@ app.post("/scheduleUpload", async (req, res) => {
       startTime,
       intervalHours,
       immediately,
-      etime, // 添加活动结束时间
+      etime,
+      selectedAccounts,
     } = req.body;
 
     if (immediately) {
@@ -987,7 +995,8 @@ app.post("/scheduleUpload", async (req, res) => {
         tag,
         videoDir,
         scheduleJob: newJobs,
-        etime, // 添加活动结束时间
+        etime,
+        selectedAccounts: selectedAccounts || [], // 添加选定的账号列表
       };
 
       // 根据平台补充不同字段
@@ -1008,7 +1017,6 @@ app.post("/scheduleUpload", async (req, res) => {
         scheduleJobs[topicIndex].scheduleJob.push(...newJobs);
       }
 
-      // 保存配置到文件
       writeLocalDataJson(scheduleJobs, scheduleJobsPath);
 
       res.json({

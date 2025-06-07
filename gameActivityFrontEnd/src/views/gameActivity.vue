@@ -22,8 +22,8 @@
             <h3 class="text-lg font-bold mb-2 text-black">爬虫查询操作</h3>
             <div class="flex">
               <el-button type="primary" @click="updateAllPlatformData">查询全平台视频数据</el-button>
-              <el-button type="primary" @click="fetchNewActData">查询B站新活动</el-button>
-              <el-button type="primary" @click="fetchNewTopicData">查询B站活动Topic</el-button>
+              <el-button type="primary" @click="fetchNewBiliBiliActivityData">查询B站新活动</el-button>
+              <el-button type="primary" @click="fetchNewBiliBiliTopicData">查询B站活动Topic</el-button>
             </div>
           </div>
           <!-- 视频下载处理栏 -->
@@ -39,7 +39,7 @@
             <h3 class="text-lg font-bold mb-2 text-black">定时任务操作</h3>
             <div class="flex">
               <el-button type="primary" @click="confirmScheduleJob(true)">执行定时任务</el-button>
-              <el-button type="primary" @click="handleManualAccount">执行手动养号</el-button>
+              <!-- <el-button type="primary" @click="handleManualAccount">执行手动养号</el-button> -->
             </div>
           </div>
         </div>
@@ -145,7 +145,7 @@
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
                             <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                            }}</span>
+                              }}</span>
                             <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
                             <template v-if="speReq?.videoData">
                               <div v-for="r in speReq.videoData" :key="r">
@@ -230,7 +230,7 @@
                       <span v-if="req.like" :class="req.like <= 500 ? ' text-orange-500' : ''">
                         <span>+</span>点赞>={{ req.like }}</span>
                       <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                      }}</span>
+                        }}</span>
                       <el-tooltip effect="dark" placement="top-start"
                         :content="getTooltipContent(req, scope.row.bilibili)" v-if="scope.row.bilibili">
                         <el-progress :percentage="getCompletionPercentage(req, scope.row.bilibili).percentage"
@@ -280,7 +280,7 @@
                           <span v-if="req.cday"> <span>+</span>投稿天数>={{ req.cday }}</span>
                           <span v-if="req.like"> <span>+</span>点赞>={{ req.like }}</span>
                           <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                          }}</span>
+                            }}</span>
 
                           <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
@@ -806,6 +806,14 @@
         <el-form-item label="上传间隔(小时)">
           <el-input-number v-model="scheduleForm.intervalHours" :min="1" :max="24" placeholder="请输入上传间隔" />
         </el-form-item>
+        <el-form-item label="选择要执行账号">
+          <el-select v-model="scheduleForm.selectedAccounts" multiple placeholder="请选择要使用的账号" style="width: 100%">
+            <el-option v-for="account in allPlatformAccounts[scheduleForm.platform]" :key="account.id"
+              :label="account.accountName" :value="account.accountName">
+            </el-option>
+          </el-select>
+        </el-form-item>
+
 
         <template v-if="scheduleForm.platform === 'bilibili'">
           <el-form-item label="分区选择">
@@ -862,7 +870,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { ElMessage } from 'element-plus'
-import bilibiliTid from '../../public/bilibiliTid.json'
+import bilibiliTid from '../../public/bilibiliTid.json' // B站分区数据
 
 interface BilibiliArea {
   name: string
@@ -946,14 +954,28 @@ interface ScheduleForm {
   immediately: boolean
   selectedArea: string
   etime: Date | null // 添加活动结束时间字段
+  selectedAccounts: Accounts // 新增账号选择字段
 }
+interface Accounts {
+  bilibili: Platform[];
+  douyin: Platform[];
+  xhs: Platform[];
+  kuaishou: Platform[];
+}
+
+interface Platform {
+  id: string;
+  accountName: string;
+  Cookie: string;
+}
+
 
 const formatDate = (timestamp?: number, splitStr: string = '-'): string => {
   const date = timestamp ? new Date(timestamp * 1000) : new Date()
   return date.getFullYear() + splitStr + (date.getMonth() + 1) + splitStr + date.getDate()
 }
 
-// 计算天数差
+
 const getDaysDiff = (timeStamp1: number, timeStamp2: number = new Date().getTime()): number => {
   const diffTime = timeStamp1 - timeStamp2
   const endDiffDate = diffTime / (1000 * 60 * 60 * 24)
@@ -980,7 +1002,8 @@ const scheduleForm = ref<ScheduleForm>({
   platform: '',
   immediately: false,
   selectedArea: '游戏区',
-  etime: null, // 初始化活动结束时间
+  etime: null,
+  selectedAccounts: [],
 })
 
 // 打开定时任务设置弹窗
@@ -994,26 +1017,23 @@ const setScheduleJob = (
     ElMessage.error('没有找到对应的 topic 或 name')
     return
   }
-  const missionId = topicJson.value.find((item) => item.topic_name === topic)?.mission_id
-  // 获取已存在的定时任务tag
-  let existingTag = ''
-  if (platform.name === 'bilibili') {
-    const existingJob = BiliBiliScheduleJob.value.find(j => j.topicName === topic)
-    if (existingJob?.scheduleJob?.length > 0) {
-      existingTag = existingJob.tag
-    }
-  } else if (platform.name === '抖音') {
-    const existingJob = DouyinScheduleJob.value.find(j => j.topicName === rew.name)
-    if (existingJob?.scheduleJob?.length > 0) {
-      existingTag = existingJob.tag
-    }
-  }
 
+  const missionId = topicJson.value.find((item) => item.topic_name === topic)?.mission_id
   // B站平台 如果没有找到对应的 missionId
   if (!missionId && platform.name === 'bilibili') {
     ElMessage.error('没有找到对应的 missionId')
     return
   }
+
+
+  const platformName = platform.name
+  // 获取已存在的定时任务tag
+  let existingTag = ''
+  const existingJob = scheduleJobMap.value[platformName].find(j => j.topicName === rew.name)
+  if (existingJob?.scheduleJob?.length > 0) {
+    existingTag = existingJob.tag
+  }
+
 
   // 生成全量标签：活动标签 + 支撑标签 + 游戏名称
   const allTag = [
@@ -1046,6 +1066,7 @@ const setScheduleJob = (
     tid: 172,
     videoDir: '',
     etime: eDate ? new Date(eDate) : null, // 设置活动结束时间
+    selectedAccounts: allPlatformAccounts.value[platformName].map(account => account.accountName),
   }
 
   scheduleDialogVisible.value = true
@@ -1151,10 +1172,8 @@ const openEditRewardDialog = (gameName, platform) => {
   let specialTagRequirements = [
     {
       name: '',
-      // minVideoTime: 6,
-      // minView: 100,
       specialTag: '',
-      // topic: '',
+
       eDate: '',
       reward: [
         {
@@ -1207,7 +1226,6 @@ const confirmEditReward = async () => {
       // delete specialTagRequirement.name
       specialTagRequirement.reward = specialTagRequirement.reward
         .filter((reward) =>
-          // 过滤出起码有一个值的参数
           Object.values(reward).some((value) => value !== 0 && value !== false && value !== ''),
         )
         .map((e) => {
@@ -1244,7 +1262,7 @@ const confirmEditReward = async () => {
 }
 
 // 获取按钮类型
-const getScheduleJobButtonType = (speReq, platformName:PlatformType) => {
+const getScheduleJobButtonType = (speReq, platformName: PlatformType) => {
   if (platformName === 'bilibili') {
     const jobSetting = scheduleJobMap.value[platformName].find(job => job.topicName === speReq.topic);
     return jobSetting?.scheduleJob?.some(job => job.successExecAccount?.length < 3) ? 'danger' : 'info';
@@ -1390,7 +1408,6 @@ const confirmDownloadSettings = async () => {
 }
 
 const confirmFFmpegSettings = async () => {
-  // 发送后端请求下载
   await fetch(`http://localhost:3000/ffmpegHandleVideos`, {
     method: 'post',
     headers: {
@@ -1447,11 +1464,6 @@ const bilibiliActTableData = ref([])
 const gameTableData = ref([])
 const dakaTableData = ref([])
 
-
-
-const BiliBiliScheduleJob = ref([])
-const DouyinScheduleJob = ref([])
-
 // 定义平台类型
 type PlatformType = 'bilibili' | '抖音' | '小红书';
 // 定义定时任务项接口
@@ -1475,14 +1487,12 @@ interface ScheduleJob {
 
 const scheduleJobMap = ref<Record<PlatformType, ScheduleJob[]>>({
   bilibili: [],
-  douyin: [],
-  xhs: [],
   '抖音': [],
   '小红书': [],
 })
 
-
 const topicJson = ref([])
+const allPlatformAccounts = ref({})
 
 const fetchData = async () => {
   try {
@@ -1500,22 +1510,22 @@ const fetchData = async () => {
     dakaTableData.value = res.dakaData
     gameTableData.value = res.gameData
     allGameList.value = res.allGameList.map((e) => ({ name: e, checked: false }))
-    // BiliBiliScheduleJob.value = res.scheduleJob.BiliBiliScheduleJob
-    // DouyinScheduleJob.value = res.scheduleJob.DouyinScheduleJob
     scheduleJobMap.value = res.scheduleJob
     topicJson.value = res.topicJson
-
+    // 默认全选当前平台所有账号
+    allPlatformAccounts.value = res.platformAccountMap
     ElMessage.success('数据刷新成功')
   } catch (error) {
     console.error('Error fetching data:', error)
   }
 }
 
-const fetchNewActData = async () => {
+const fetchNewBiliBiliActivityData = async () => {
   try {
     const response = await fetch('http://localhost:3000/getNewActData')
     const res = await response.json()
     if (res.code == -101) {
+      // 自动登录
       return ElMessage.error('请先登录')
     }
     fetchData()
@@ -1523,7 +1533,7 @@ const fetchNewActData = async () => {
     console.error('Error fetching data:', error)
   }
 }
-const fetchNewTopicData = async () => {
+const fetchNewBiliBiliTopicData = async () => {
   try {
     const response = await fetch('http://localhost:3000/getNewTopicData')
     const res = await response.json()
@@ -1566,7 +1576,12 @@ const fetchNewDakaData = async () => {
   }
 }
 
-// 获取不友好的评论  评论接口 http://localhost:3000/unfavorableReply
+
+onMounted(() => {
+  fetchData()
+})
+
+// 差评相关
 
 const unfavorableReplyList = ref([])
 const fetchUnfavorableReply = async () => {
@@ -1581,10 +1596,21 @@ const fetchUnfavorableReply = async () => {
     console.error('Error fetching data:', error)
   }
 }
+const deleteUnfavorableReply = async (row) => {
+  await fetch(`http://localhost:3000/deleteUnfavorableReply`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ...row }),
+  }).then((res) => {
+    if (res.ok) {
+      ElMessage.success('删除成功')
+    }
+  })
+}
 
-onMounted(() => {
-  fetchData()
-})
+
 
 const updateData = async (row, specialTag) => {
   await fetch(`http://localhost:3000/updateDataOne`, {
@@ -1613,6 +1639,8 @@ const updateAllPlatformData = async () => {
     }
   })
 }
+
+// 计算任务进度条
 
 const getCompletionPercentage = (requirement, videoData) => {
   let totalRequirements = 0
@@ -1723,26 +1751,14 @@ const formatRequirement = (requirement) => {
   return ''
 }
 
-const deleteUnfavorableReply = async (row) => {
-  await fetch(`http://localhost:3000/deleteUnfavorableReply`, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ ...row }),
-  }).then((res) => {
-    if (res.ok) {
-      ElMessage.success('删除成功')
-    }
-  })
-}
+
 
 // 添加新的响应式变量
 const scheduleJobDialogVisible = ref(false)
 const currentScheduleJob = ref(null)
 
 // 添加新的方法
-const showScheduleJobDialog = async (speReq , platformName:PlatformType ) => {
+const showScheduleJobDialog = async (speReq, platformName: PlatformType) => {
   try {
     let scheduleJob
     const { topic, name } = speReq
