@@ -28,9 +28,7 @@ const {
 const {
   downloadVideosAndGroup,
 } = require("./ffmpegHandle/videoDownloadAndGroupList.js");
-const accountJson = getJsonData("accountList.json");
-
-
+const accountJson = getJsonData("accountList.json")
 const replyRoutes = require('./src/modules/reply/controllers/reply.controller');
 
 app.use(cors());
@@ -328,9 +326,7 @@ app.get("/getBiliBiliDakaData", async (req, res) => {
   }
 });
 
-app.get("/data", async (req, res) => {
-  const BiliBiliScheduleJob = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
-  const DouyinScheduleJob = getJsonData("scheduleJob/DouyinScheduleJob.json");
+app.get("/allData", async (req, res) => {
 
   try {
     const data = getJsonData();
@@ -406,6 +402,12 @@ app.get("/data", async (req, res) => {
           act_rule: { topic: e.detail.act_rule.topic },
         },
       }));
+    const BiliBiliScheduleJob = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
+    const DouyinScheduleJob = getJsonData("scheduleJob/DouyinScheduleJob.json");
+    const XhsScheduleJob = getJsonData("scheduleJob/XhsScheduleJob.json");
+
+    // 获取账号列表
+    const accountList = getJsonData("accountList.json");
 
     res.json({
       gameData,
@@ -414,9 +416,11 @@ app.get("/data", async (req, res) => {
       allGameList,
       topicJson: getJsonData("topic.json")?.topics,
       scheduleJob: {
-        BiliBiliScheduleJob,
-        DouyinScheduleJob
-      }
+        bilibili: BiliBiliScheduleJob,
+        '抖音': DouyinScheduleJob,
+        '小红书': XhsScheduleJob
+      },
+      platformAccountMap: accountList // 添加账号列表到返回数据中
     });
   } catch (error) {
     console.error("Error in /data endpoint:", error);
@@ -621,7 +625,6 @@ app.post("/getPlatformData", async (req, res) => {
       return jsonData;
     }
 
-    // 每24小时更新一次平台数据
     setInterval(getPlatformData, 1000 * 60 * 60 * 24);
     res.json({
       code: 200,
@@ -653,7 +656,7 @@ const platformConfig = {
   }
 };
 
-async function executeExpiredJobs(platform) {
+async function executePlatformExpiredJobs(platform) {
   try {
     const { configPath, uploaderPath, accountType } = platformConfig[platform];
     let scheduleJobs = [];
@@ -670,9 +673,8 @@ async function executeExpiredJobs(platform) {
     scheduleJobs.forEach(game => {
       if (game.etime && new Date(game.etime) > now) {
         if (game.scheduleJob && Array.isArray(game.scheduleJob)) {
-          // 获取游戏配置
-          const { topicName, missionId, tag, tid } = game;
-          const gameExpiredJobs = game.scheduleJob
+          const { scheduleJob, ...gameInfo } = game;
+          const gameExpiredJobs = scheduleJob
             .filter((job) => {
               if (job.successExecAccount.length >= accountJson[accountType].length) return false // 如果已上传成功，则跳过
               const jobTime = new Date(job.execTime);
@@ -689,11 +691,8 @@ async function executeExpiredJobs(platform) {
             })
             .map((job) => ({
               ...job,
-              topicName,
-              missionId,
-              tag,
-              tid,
-              platform: platform,
+              ...gameInfo,
+              platform,
               gameIndex: scheduleJobs.indexOf(game),
               jobIndex: game.scheduleJob.indexOf(job),
             }));
@@ -702,10 +701,8 @@ async function executeExpiredJobs(platform) {
       }
     });
 
-    // 处理过期任务
     for (const job of expiredJobs) {
-      // 仅抖音平台需要生成元数据文件
-      if (platform === '抖音') {
+      if (platform === '抖音' || platform === '小红书') {
         const metaFilePath = path.join(path.dirname(job.videoPath),
           path.basename(job.videoPath, '.mp4') + '.txt');
 
@@ -718,7 +715,7 @@ async function executeExpiredJobs(platform) {
           ].join('\n');
 
           fs.writeFileSync(metaFilePath, metaContent);
-          console.log(`生成抖音元数据文件: ${metaFilePath}`);
+          console.log(`生成${platform}元数据文件: ${metaFilePath}`);
         }
       }
 
@@ -729,6 +726,12 @@ async function executeExpiredJobs(platform) {
       for (let account of accountJson[accountType]) {
         if (job.successExecAccount.includes(account.accountName)) continue;
 
+        // 如果指定了要执行的账号，则只执行指定的账号
+        if (job.selectedAccounts && job.selectedAccounts.length > 0 &&
+          !job.selectedAccounts.includes(account.accountName)) {
+          continue;
+        }
+
         const uploadCmd = generateUploadCommand(platform, uploaderPath, account, job);
         await waitSecond(5000);
         uploadPromises.push(
@@ -736,7 +739,7 @@ async function executeExpiredJobs(platform) {
             try {
               // 使用信号量控制并发
               await acquireSemaphore(MAX_CONCURRENT_UPLOADS);
-              await new Promise((resolve, reject) => {
+              return await new Promise((resolve, reject) => {
                 let child;
                 // 根据平台类型采用不同的执行方式
                 if (platform === 'bilibili') {
@@ -751,7 +754,11 @@ async function executeExpiredJobs(platform) {
                     env: {
                       // ...process.env,
                       PYTHONUTF8: '1',  // 强制Python使用UTF-8编码
-                      PYTHONIOENCODING: 'utf-8'  // 设置输入输出编码
+                      PYTHONIOENCODING: 'utf-8',  // 设置输入输出编码
+                      // 标题输入控制
+                      title_control: job.douyinTitleControl ? '1' : '0',
+                      // 游戏绑定控制
+                      game_binding: job.douyinGameBinding ? '1' : '0'
                     }
                   });
                 } else if (platform === '小红书') {
@@ -789,21 +796,57 @@ async function executeExpiredJobs(platform) {
                     scheduleJobs[job.gameIndex].scheduleJob[job.jobIndex]
                       .successExecAccount.push(account.accountName);
                     console.log(`${platform}上传成功 ${account.accountName} ${job.videoPath}`);
-                    resolve();
+                    resolve({
+                      success: true,
+                      accountName: account.accountName
+                    });
                   } else {
+                    console.error(`${platform}上传失败 ${account.accountName} 退出代码: ${code}`);
                     reject(new Error(`${platform}上传失败 ${account.accountName}`));
                   }
                 });
               });
             } catch (err) {
               console.error(`${platform}账号 ${account.accountName} 上传出错:`, err);
+              releaseSemaphore(); // 确保即使出错也释放信号量
+              return {
+                success: false,
+                accountName: account.accountName,
+                error: err.message
+              };
             }
           })()
         );
       }
 
-      // 等待所有上传完成
-      await Promise.all(uploadPromises);
+      // 等待所有上传完成，使用allSettled确保所有任务都被处理
+      const results = await Promise.allSettled(uploadPromises);
+
+      // 处理结果
+      let successCount = 0;
+      let failedCount = 0;
+
+      results.forEach(result => {
+        if (result.status === 'fulfilled' && result.value && result.value.success) {
+          successCount++;
+        } else {
+          failedCount++;
+          // 记录失败的账号和原因
+          const accountName = result.status === 'fulfilled' ?
+            result.value?.accountName :
+            '未知账号';
+          const errorMsg = result.status === 'fulfilled' ?
+            result.value?.error :
+            result.reason?.message || '未知错误';
+          console.error(`${platform}账号 ${accountName} 上传失败: ${errorMsg}`);
+        }
+      });
+
+      console.log(`${platform}任务执行完成: ${job.videoPath}`);
+      console.log(`成功: ${successCount}, 失败: ${failedCount}`);
+
+      // 确保配置文件被更新
+      // writeLocalDataJson(scheduleJobs, configPath);
     }
 
 
@@ -860,7 +903,6 @@ function generateUploadCommand(platform, uploaderPath, account, job) {
   if (platform === '抖音') {
     const execTime = new Date(job.execTime);
     const isPastTime = Date.now() > execTime;
-    // 将ISO格式转换为抖音需要的 %Y-%m-%d %H:%M 格式
     const formattedTime = isPastTime ? '' :
       `-t "${execTime.toISOString().replace('T', ' ').substring(0, 16)}"`;
 
@@ -897,31 +939,50 @@ const releaseSemaphore = () => semaphore.release();
 
 async function checkAndExecuteJobs() {
   try {
-    const platforms = ['bilibili', '抖音'];
-    const results = await Promise.allSettled(platforms.map(p => executeExpiredJobs(p)));
-    
-    // 所有平台任务完成后统一写入文件，避免一个平台处理完写入导致debug开发模式下重新启动进程
-    const successResults = results.filter(r => r.status === 'fulfilled' && r.value?.code === 200);
-    if (successResults.length === platforms.length) {
-      successResults.forEach(result => {
-        const { jobs, configPath } = result.value.data;
-        if (jobs && configPath) {
-          writeLocalDataJson(jobs, configPath);
-          console.log(`成功写入配置文件: ${configPath}`);
-        }
-      });
-    }
+    const platforms = ['bilibili', '抖音', '小红书'];
+    const results = await Promise.allSettled(platforms.map(p => executePlatformExpiredJobs(p)));
 
-    // 记录执行失败的平台
+    // 记录执行结果
+    let successPlatforms = 0;
+    let failedPlatforms = 0;
+
     results.forEach((result, index) => {
-      if (result.status === 'rejected' || result.value?.code !== 200) {
-        console.error(`${platforms[index]}任务执行失败:`,
+      const platformName = platforms[index];
+
+      if (result.status === 'fulfilled' && result.value?.code === 200) {
+        successPlatforms++;
+
+        console.log(`${platformName}平台任务执行成功`);
+      } else {
+        failedPlatforms++;
+        console.error(`${platformName}平台任务执行失败:`,
           result.status === 'rejected' ? result.reason : result.value?.msg
         );
       }
+      const { jobs, configPath } = result.value.data;
+      if (jobs && configPath) {
+        writeLocalDataJson(jobs, configPath);
+        console.log(`成功写入配置文件: ${configPath}`);
+      }
     });
+
+    console.log(`定时任务执行完成统计 - 成功平台数: ${successPlatforms}, 失败平台数: ${failedPlatforms}`);
+
+    return {
+      code: 200,
+      msg: "定时任务执行完成",
+      data: {
+        successPlatforms,
+        failedPlatforms
+      }
+    };
   } catch (error) {
     console.error('任务检查异常:', error);
+    return {
+      code: 500,
+      msg: "任务执行异常",
+      error: error.message
+    };
   }
 }
 
@@ -959,11 +1020,13 @@ app.post("/scheduleUpload", async (req, res) => {
       startTime,
       intervalHours,
       immediately,
-      etime, // 添加活动结束时间
+      etime,
+      selectedAccounts,
     } = req.body;
 
     if (immediately) {
-      await checkAndExecuteJobs();
+      const result = await checkAndExecuteJobs();
+      return res.json(result);
     } else {
       const scheduleJobsPath = platformConfig[platform].configPath;
 
@@ -987,7 +1050,10 @@ app.post("/scheduleUpload", async (req, res) => {
         tag,
         videoDir,
         scheduleJob: newJobs,
-        etime, // 添加活动结束时间
+        etime,
+        selectedAccounts: selectedAccounts || [], // 添加选定的账号列表
+        douyinTitleControl: req.body.douyinTitleControl || false, // 添加抖音标题输入控制
+        douyinGameBinding: req.body.douyinGameBinding || false,   // 添加抖音游戏绑定控制
       };
 
       // 根据平台补充不同字段
@@ -1008,7 +1074,6 @@ app.post("/scheduleUpload", async (req, res) => {
         scheduleJobs[topicIndex].scheduleJob.push(...newJobs);
       }
 
-      // 保存配置到文件
       writeLocalDataJson(scheduleJobs, scheduleJobsPath);
 
       res.json({
