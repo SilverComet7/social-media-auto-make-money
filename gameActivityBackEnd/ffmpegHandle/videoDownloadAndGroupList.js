@@ -2,7 +2,7 @@ const fs = require('fs');
 const fsPromises = require('fs').promises;
 const path = require('path');
 const { spawn } = require('child_process');
-const { allGameList, TikTokDownloader_ROOT, specialGameList } = require('../../const.js')
+const { allGameList, TikTokDownloader_ROOT, specialGameList } = require('../const.js')
 
 async function moveFilePath(gameFolder, oldFilePath, fileName, checkName) {
   const newFilePath = path.join(gameFolder, fileName);
@@ -68,6 +68,7 @@ async function downloadVideosAndGroup({
   keyword = '',       // 新增关键词参数
   filePath = '',      // 新增下载文件路径参数
   groupDir = ''       // 新增分组目录参数
+  // 时长筛选控制
 }) {
 
   try {
@@ -122,16 +123,17 @@ async function downloadVideosAndGroup({
         const envVars = {
           PYTHONUTF8: '1',
           PYTHONIOENCODING: 'utf-8',
+          // todo 时长筛选控制 
         };
 
         // 如果是filePath策略且提供了文件路径,添加到环境变量
         if (selectedStrategy === 'filePath' && filePath) {
-          envVars.download_path = filePath;
           // 检查文件是否存在
           if (!fs.existsSync(filePath)) {
             console.error(`文件不存在: ${filePath}`);
             return;
           }
+          envVars.download_path = filePath;
         }
 
         // 使用Promise包装spawn进程
