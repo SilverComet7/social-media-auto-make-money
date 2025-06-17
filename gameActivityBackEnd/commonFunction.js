@@ -36,11 +36,6 @@ function getJsonData(inJsonPath = "data.json") {
     try {
       let oldDataArr = JSON.parse(data);
 
-      // 确保返回的是数组
-      if (!Array.isArray(oldDataArr)) {
-        console.warn(`${jsonPath} 的内容不是数组格式`);
-      }
-
       return oldDataArr;
     } catch (parseError) {
       console.error(`JSON 解析错误 (${jsonPath}):`, parseError);
@@ -70,16 +65,20 @@ async function concurrentFetchWithDelay(
 
   const limitedPromises = promises.map((promiseFactory) =>
     limit(async () => {
-      if (typeof promiseFactory !== "function") {
-        throw new TypeError(
-          "Each element in the promises array must be a function that returns a Promise."
+      try {
+        if (typeof promiseFactory !== "function") {
+          throw new TypeError(
+            "Each element in the promises array must be a function that returns a Promise."
+          );
+        }
+        const result = await promiseFactory();
+        await new Promise((resolve) =>
+          setTimeout(resolve, Math.random() * (maxDelay - minDelay) + minDelay)
         );
+        return result;
+      } catch (error) {
+        console.error(error);
       }
-      const result = await promiseFactory();
-      await new Promise((resolve) =>
-        setTimeout(resolve, Math.random() * (maxDelay - minDelay) + minDelay)
-      );
-      return result;
     })
   );
 

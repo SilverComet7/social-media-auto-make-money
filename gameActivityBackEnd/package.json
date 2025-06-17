@@ -4,7 +4,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --ignore '*.json' --ignore 'jsonFile/*' index.js",
-    "start": "node index.js"
+    "dev_ts": "nodemon --ext js,ts --ignore '*.json' --ignore 'jsonFile/*' --exec ts-node index.js",
+    "dev:ts": "ts-node index.ts",
+    "start": "node index.js",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts,.js",
+    "lint:fix": "eslint . --ext .ts,.js --fix"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +18,17 @@
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "node-schedule": "^2.1.1",
-    "p-limit": "^6.2.0"
+    "p-limit": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.1",
+    "@typescript-eslint/eslint-plugin": "^8.34.0",
+    "@typescript-eslint/parser": "^8.34.0",
+    "eslint": "^9.28.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }

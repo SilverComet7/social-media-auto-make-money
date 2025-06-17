@@ -6,7 +6,7 @@ const port = 3000;
 const path = require("path");
 const { exec, spawn } = require("child_process");
 const schedule = require("node-schedule");
-const { PROJECT_ROOT, allGameList } = require("../const.js");
+const { PROJECT_ROOT, allGameList } = require("./const.js");
 
 const {
   concurrentFetchWithDelay,
@@ -19,7 +19,7 @@ const {
 
 const { queryDouYinAllAccountsData } = require("./handleCrawer/douyin.js");
 const { queryXiaoHongShuAllAccountsData } = require("./handleCrawer/xhs.js");
-const { querybilibiliAllAccountsData } = require("./handleCrawer/bilibili.js");
+const { querybilibiliAllAccountsData } = require("./handleCrawer/bilibili");
 
 
 const {
@@ -29,7 +29,7 @@ const {
   downloadVideosAndGroup,
 } = require("./ffmpegHandle/videoDownloadAndGroupList.js");
 const accountJson = getJsonData("accountList.json")
-const replyRoutes = require('./src/modules/reply/controllers/reply.controller');
+const replyRoutes = require('./src/modules/reply/controllers/reply.controller.js');
 
 app.use(cors());
 app.use(express.json());
@@ -579,8 +579,8 @@ app.post("/getPlatformData", async (req, res) => {
                         let isTopicScheduleJob = false;
                         if (hasSameTopicScheduleJob) {
                           isTopicScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
-                            const jobFileName = job.videoPath.split('\\').pop().replace('.mp4', '');
-                            return l.title.includes(jobFileName);
+                            const jobFileName = job.videoPath.split('\\').pop();
+                            return jobFileName.includes(l.title)
                           });
                         }
 
