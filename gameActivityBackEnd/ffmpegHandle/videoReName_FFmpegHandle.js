@@ -6,17 +6,15 @@ const os = require('os');
 const fsPromises = fs.promises;
 const execPromise = util.promisify(exec);
 const { deduplicateVideo } = require('./videoTransformDeduplication.js');
-const { TikTokDownloader_ROOT } = require("../../const.js");
+const { TikTokDownloader_ROOT } = require("../const.js");
 const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
 const { getRandomMusicName } = require("../commonFunction.js");
 const { runFFmpegCommand,writeLog } = require("./common.js");
 
 
-// 获取CPU核心数
-const cpuCount = os.cpus().length;
-writeLog(`系统CPU核心数: ${cpuCount}`);
+const cpuCount = os.cpus().length / 2;
+writeLog(`系统CPU核心数/2: ${cpuCount}`);
 
-// 工作线程处理函数
 if (!isMainThread) {
   const { filePath, basicVideoInfoObj, pathInfoObj, mergeVideoInfoObj } = workerData;
   const startTime = Date.now();
@@ -96,7 +94,6 @@ async function processVideo(filePath, basicVideoInfoObj,
   const fileExt = path.extname(filePath);
   let originFileName = path.basename(filePath, path.extname(filePath));
   let { fileName, nickName } = generateNewName(originFileName, gameName, groupName, addPublishTime);
-  fileName = `${fileName} + ${Date.now()}`
 
 
   let {
