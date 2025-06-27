@@ -52,7 +52,8 @@ module.exports = {
     allGameList,
     PROJECT_ROOT,
     TikTokDownloader_ROOT,
-    specialGameList: specialTypeList
+    specialGameList: specialTypeList,
+    isVideoFile
 }
 
 // 赛道
@@ -60,8 +61,6 @@ module.exports = {
 // 通用tag
 // 通用title库
 // 通用奖励
-
-
 // 文件
 // 多平台
 // 多账号

@@ -4,8 +4,7 @@ const cors = require("cors");
 const app = express();
 const port = 3000;
 const path = require("path");
-const { exec, spawn } = require("child_process");
-const schedule = require("node-schedule");
+const { spawn } = require("child_process");
 const { PROJECT_ROOT, allGameList } = require("./const.js");
 
 const {
@@ -18,7 +17,6 @@ const {
 } = require("./commonFunction.js");
 
 const { queryDouYinAllAccountsData } = require("./handleCrawer/douyin.js");
-const { queryXiaoHongShuAllAccountsData } = require("./handleCrawer/xhs.js");
 const { querybilibiliAllAccountsData } = require("./handleCrawer/bilibili");
 
 
@@ -29,7 +27,6 @@ const {
   downloadVideosAndGroup,
 } = require("./ffmpegHandle/videoDownloadAndGroupList.js");
 const accountJson = getJsonData("accountList.json")
-const replyRoutes = require('./src/modules/reply/controllers/reply.controller.js');
 
 app.use(cors());
 app.use(express.json());
@@ -62,7 +59,6 @@ async function get_BiliBili_Data(i, account = accountJson.bilibili[0]) {
   await fetch(fetchUrl, {
     headers: {
       ...headers,
-      // "Cookie": account.Cookie
     },
   }).then(async (response) => {
     const data = await response.json();
@@ -436,7 +432,6 @@ app.post("/updateDataOne", async (req, res) => {
     const arr = oldDataArr.map((item) => {
       if (item.searchKeyWord === searchKeyWord) {
         item.bilibili = newData;
-        // item["updateData"] = true
         item["updateDate"] = formatDate(new Date().getTime());
       }
       return item;
@@ -637,7 +632,6 @@ app.post("/getPlatformData", async (req, res) => {
   }
 });
 
-// 根据平台选择配置文件
 const platformConfig = {
   bilibili: {
     configPath: "scheduleJob/BiliBiliScheduleJob.json",
@@ -663,7 +657,7 @@ async function executePlatformExpiredJobs(platform) {
     try {
       scheduleJobs = getJsonData(configPath);
     } catch (err) {
-      console.log(`${platform}定时任务配置文件不存在`);
+      console.log(`${platform}定时任务配置文件不存在`, err);
       return;
     }
 
@@ -872,7 +866,6 @@ async function executePlatformExpiredJobs(platform) {
   }
 }
 
-// 生成平台特定的上传命令
 function generateUploadCommand(platform, uploaderPath, account, job) {
   if (platform === 'bilibili') {
     // https://github.com/biliup/biliup-rs 文档
@@ -919,7 +912,6 @@ function generateUploadCommand(platform, uploaderPath, account, job) {
   }
 }
 
-// 信号量控制
 const semaphore = {
   count: 0,
   queue: [],
@@ -1034,9 +1026,8 @@ app.post("/scheduleUpload", async (req, res) => {
 
       try {
         scheduleJobs = getJsonData(scheduleJobsPath);
-
       } catch (err) {
-        console.log("定时任务配置文件不存在,创建新文件");
+        console.log("定时任务配置文件不存在,创建新文件", err);
         scheduleJobs = [];
       }
 
