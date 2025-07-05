@@ -45,52 +45,6 @@ const headers = {
   Cookie: Cookie,
 };
 
-
-
-async function get_BiliBili_Data(i, account = accountJson.bilibili[0]) {
-  const keyword = i.searchKeyWord || "逆水寒";
-  const fetchUrl = `https://member.bilibili.com/x/web/archives?status=is_pubing%2Cpubed%2Cnot_pubed&pn=1&ps=30&keyword=${keyword}&coop=1&interactive=1`;
-  const bilibili = {
-    allNum: 0,
-    allViewNum: 0,
-    onePlayNumList: [],
-  };
-
-  await fetch(fetchUrl, {
-    headers: {
-      ...headers,
-    },
-  }).then(async (response) => {
-    const data = await response.json();
-    if (!data?.data?.arc_audits) {
-      return;
-    }
-    const list = data.data.arc_audits
-      .filter(
-        (item) => item.Archive.ctime > i.stime && item.Archive.ctime < i.etime
-      )
-      .map((item) => ({
-        view: item.stat.view,
-        like: item.stat.like,
-        reply: item.stat.reply,
-        title: item.Archive.title,
-        bvid: item.Archive.bvid,
-        ctime: item.Archive.ctime,
-        ptime: item.Archive.ptime,
-      }))
-      .sort((a, b) => b.view - a.view);
-
-    bilibili.allNum = list.length;
-    bilibili.onePlayNumList = list;
-
-    list.forEach((element) => {
-      bilibili.allViewNum += element.view;
-    });
-  });
-
-  return bilibili;
-}
-
 app.get("/getNewActData", async (req, res) => {
   try {
     async function getActivitiesList() {
@@ -417,31 +371,6 @@ app.get("/allData", async (req, res) => {
         '小红书': XhsScheduleJob
       },
       platformAccountMap: accountList // 添加账号列表到返回数据中
-    });
-  } catch (error) {
-    console.error("Error in /data endpoint:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-app.post("/updateDataOne", async (req, res) => {
-  try {
-    const { searchKeyWord } = req.body;
-    const newData = await get_BiliBili_Data(req.body);
-    const oldDataArr = getJsonData();
-    const arr = oldDataArr.map((item) => {
-      if (item.searchKeyWord === searchKeyWord) {
-        item.bilibili = newData;
-        item["updateDate"] = formatDate(new Date().getTime());
-      }
-      return item;
-    });
-
-    writeLocalDataJson(arr);
-
-    res.json({
-      code: 200,
-      msg: "更新成功",
     });
   } catch (error) {
     console.error("Error in /data endpoint:", error);
@@ -988,10 +917,12 @@ app.post("/scheduleUpload", async (req, res) => {
     let i = 0
     const h = execTime.getHours()
     for (const file of videoFiles) {
-      execTime.setHours(8 + h + i * intervalHours);
+      // 创建新的Date对象，避免修改原对象
+      const currentExecTime = new Date(execTime);
+      currentExecTime.setHours(8 + h + i * intervalHours);
       jobs.push({
         videoPath: path.join(videoDir, file),
-        execTime: execTime.toISOString(),
+        execTime: currentExecTime.toISOString(),
         successExecAccount: [],
       });
       // 增加指定的时间间隔
