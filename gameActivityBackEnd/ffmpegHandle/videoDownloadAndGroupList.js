@@ -52,15 +52,10 @@ async function groupVideos(gameArr, fileName, dirMatchAccountGameType, videosDir
 
 async function downloadVideosAndGroup({
   isDownload,    // 是否下载视频,  false 则只进行mp4文件分组
-
   checkNewAdd,    // 检测新旧文件对比，只下载新增的文件
-
   allDownload,    // 是否开启setting.json中全部视频的下载
-
   checkName, // 检测debugger
-
   currentUpdateGameList,    // 控制哪些game下载
-
   earliest,    // 统一下载的最早时间,为空字符串则没有日期限制下载全部作品,活动起始时间
   latest,
 
@@ -82,53 +77,58 @@ async function downloadVideosAndGroup({
     let oldAccountsUrls = oldSettings.accounts_urls;
 
     if (isDownload) {
+      // 根据不同下载方式，设置启用状态
       accountsUrls = accountsUrls.map(acc => {
-        if (currentUpdateGameList.includes(acc.game)) {
-          acc.enable = true;
-        } else {
-          acc.enable = false;
-        }
-        // 对比新旧数据, 避免多次下载
-        if (checkNewAdd) {
-          const oldAcc = oldAccountsUrls.find(oldAcc => oldAcc.name === acc.name);
-          if (oldAcc) {
-            acc.enable = false;
-          } else {
-            acc.enable = true;
-          }
-        }
         // 如果开启全部下载，则全部启用
         if (allDownload) acc.enable = true;
-        if (earliest || earliest == '') acc.earliest = earliest
-        if (latest || latest == '') acc.latest = latest
+        else if (checkNewAdd) {
+          // 对比新旧数据, 避免多次下载
+          const oldAcc = oldAccountsUrls.find(oldAcc => oldAcc.name === acc.name);
+          acc.enable = !oldAcc; // 简化逻辑：如果找到旧数据则禁用，否则启用
+        } else {
+          // 分组下载 游戏列表设置启用状态  如果上一次下载的时间对比这一次，latest最近7天内没有下载过，则下载
+          const latestDate = new Date(acc.latest);
+          const fifteenDaysAgo = new Date();
+          fifteenDaysAgo.setDate(fifteenDaysAgo.getDate() - 7);
+          acc.enable = latestDate < fifteenDaysAgo && currentUpdateGameList.includes(acc.game)
+        }
+        if (acc.enable && earliest) acc.earliest = earliest
+        if (acc.enable && latest) acc.latest = latest
         return acc;
       });
-      // settings.run_command = '6 7 2 ' // 视频筛选
-      if (['group',"checkNewAdd",'all'].includes(selectedStrategy) ) settings.run_command = '6 1 1 Q' // 分组下载 参考TikTokDownloader
+      // 记录一下当前启用的账号和每个游戏分组总共有多少个账号
+      const isEnableAccount = accountsUrls.filter(acc => acc.enable);
+      const gameAccountCount = Object.entries(
+        accountsUrls.reduce((acc, cur) => {
+          acc[cur.game] = acc[cur.game] || [];
+          acc[cur.game].push(cur);
+          return acc;
+        }, {})
+      ).map(([game, items]) => ({
+        game,
+        count: items.length
+      }));
+      console.log(isEnableAccount, gameAccountCount);
+
+      // 根据不同下载方式，设置运行命令  参考TikTokDownloader
+      if (['group', "checkNewAdd", 'all'].includes(selectedStrategy)) settings.run_command = '6 1 1 Q'
+      else if (selectedStrategy == 'filePath') settings.run_command = '6 2 2 Q'
       // if (selectedStrategy == 'keyword')  const input_command = 'xxcoser  1  1  0'
-      if (selectedStrategy == 'filePath') settings.run_command = '6 2 2 Q' // TODO  处理默认路径 读取特定download.txt文件路径下载
 
-
+      // 及时更新setting.json，保证运行命令和启用状态能生效
       await fsPromises.writeFile(settingsPath, JSON.stringify(settings, null, 2), "utf8");
-      console.log("settings.json 更新完成");
-
-
-      const pythonScriptPath = path.join(TikTokDownloader_ROOT, 'main.py');
-      const pythonExecutable = 'python';
 
       try {
-        console.log(`Python 脚本开始执行: `);
 
-        // 准备环境变量
+        const pythonScriptPath = path.join(TikTokDownloader_ROOT, 'main.py');
+        const pythonExecutable = 'python';
         const envVars = {
           PYTHONUTF8: '1',
           PYTHONIOENCODING: 'utf-8',
-          // todo 时长筛选控制 
         };
 
-        // 如果是filePath策略且提供了文件路径,添加到环境变量
+        // 如果是filePath策略且提供了文件路径,添加到环境变量，文件路径下载
         if (selectedStrategy === 'filePath' && filePath) {
-          // 检查文件是否存在
           if (!fs.existsSync(filePath)) {
             console.error(`文件不存在: ${filePath}`);
             return;
@@ -136,7 +136,7 @@ async function downloadVideosAndGroup({
           envVars.download_path = filePath;
         }
 
-        // 使用Promise包装spawn进程
+        // spawn 子进程，与主进程并行执行
         await new Promise((resolve, reject) => {
           const pythonProcess = spawn(pythonExecutable, [pythonScriptPath], {
             shell: true,
@@ -177,39 +177,24 @@ async function downloadVideosAndGroup({
           });
         });
 
-        // 更新下载了的日期为当前日期 XXXX/XX/XX
-        const currentDate = new Date().toLocaleDateString();
-        accountsUrls = accountsUrls.map(acc => {
-          if (currentUpdateGameList.includes(acc.game)) {
-            acc.earliest = currentDate;
-          }
-          return acc;
-        });
-        // 更新 settings.json 文件
-        await fsPromises.writeFile(settingsPath, JSON.stringify(settings, null, 2), "utf8");
-        console.log("settings.json 更新完成");
+
       } catch (error) {
-        console.error(`执行 Python 脚本时出错: ${error.message}`);
         console.error(`Python 脚本标准错误输出: ${error.stderr}`);
         return;
       }
 
-      // 更新 settings.json 文件
+      // 更新settings最新 oldSettingsPath.json 文件，方便下次下载时对比
       await fsPromises.writeFile(oldSettingsPath, JSON.stringify(settings, null, 2), "utf8");
     }
 
-    console.log('分组开始');
-    
-    // 全部游戏类型，后续将coser同行 coser本人 的mp4视频,根据名称是否包含该游戏分组到各自的游戏文件夹下的对应子文件夹 coser同行 coser本人
+
     let gameArr = accountsUrls.filter(item => !['coser同行', 'coser本人'].includes(item.game)).map(acc => acc.game).concat(currentUpdateGameList)
     gameArr = [...new Set(gameArr.concat(allGameList))]
     const videosDirPath = groupDir || path.join(TikTokDownloader_ROOT, 'accountDownload')
     const files = await fsPromises.readdir(videosDirPath, { withFileTypes: true });
     for (const file of files) {
-      // 是文件夹
       const folderName = file.name;
       if (file.isDirectory()) {
-        // 该账号的分类
         const dirMatchAccountGameType = accountsUrls.find(acc => folderName.includes(acc.name))?.game
         // 是某个账号类型
         if (dirMatchAccountGameType) {
