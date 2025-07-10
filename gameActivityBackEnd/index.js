@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 const path = require("path");
 const { spawn } = require("child_process");
-const { PROJECT_ROOT, allGameList } = require("./const.js");
+const { PROJECT_ROOT, allGameList, platformConfig } = require("./const.js");
 
 const {
   concurrentFetchWithDelay,
@@ -16,13 +16,13 @@ const {
   writeLocalDataJson,
 } = require("./commonFunction.js");
 
-const { queryDouYinAllAccountsData } = require("./handleCrawer/douyin.js");
-const { querybilibiliAllAccountsData } = require("./handleCrawer/bilibili");
+const { queryDouYinAllAccountsData } = require("./crawerHandle/douyin.js");
+const { querybilibiliAllAccountsData } = require("./crawerHandle/bilibili");
 
 
 const {
   ffmpegHandleVideos,
-} = require("./ffmpegHandle/videoReName_FFmpegHandle.js");
+} = require("./ffmpegHandle/videoReName_FFmpegHandle");
 const {
   downloadVideosAndGroup,
 } = require("./ffmpegHandle/videoDownloadAndGroupList.js");
@@ -278,11 +278,11 @@ app.get("/getBiliBiliDakaData", async (req, res) => {
 
 app.get("/allData", async (req, res) => {
 
+  // todo 都是同步的任务？
   try {
-    const data = getJsonData();
-    let otherGameData = getJsonData("gameData.json");
-    // 计算otherGameData rewards下各平台specialTagRequirements里的最近的活动结束时间，并赋值给最外层etime
-    otherGameData.forEach((game) => {
+    let gameData = getJsonData("gameData.json");
+    // 计算rewards下各平台specialTagRequirements里的最近的活动结束时间，并赋值给最外层etime
+    gameData.forEach((game) => {
       let minEtime = game.etime || Number.MAX_SAFE_INTEGER;
       game.rewards.forEach((reward) => {
         if (reward.specialTagRequirements) {
@@ -292,7 +292,6 @@ app.get("/allData", async (req, res) => {
               return (dateTime) >
                 new Date().getTime()
             }
-
           );
           reward.specialTagRequirements.forEach((requirement) => {
             if (requirement.eDate) {
@@ -312,7 +311,7 @@ app.get("/allData", async (req, res) => {
       game.etime = minEtime;
     });
 
-    const gameData = otherGameData
+    gameData = gameData
       .sort((a, b) => a.etime - b.etime)
       .map((item) => {
         return {
@@ -321,7 +320,7 @@ app.get("/allData", async (req, res) => {
         };
       });
 
-    const bilibiliActData = data
+    const bilibiliActData = getJsonData('data.json')
       .filter(
         (item) =>
           !item.notDo &&
@@ -335,9 +334,8 @@ app.get("/allData", async (req, res) => {
         };
       });
 
-    let dakaData = getJsonData("B站打卡活动.json");
 
-    dakaData = dakaData
+    const dakaData = getJsonData("B站打卡活动.json")
       .filter((item) => item.stime * 1000 < new Date().getTime())
       .map((e) => ({
         act_id: e.act_id,
@@ -355,8 +353,6 @@ app.get("/allData", async (req, res) => {
     const BiliBiliScheduleJob = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
     const DouyinScheduleJob = getJsonData("scheduleJob/DouyinScheduleJob.json");
     const XhsScheduleJob = getJsonData("scheduleJob/XhsScheduleJob.json");
-
-    // 获取账号列表
     const accountList = getJsonData("accountList.json");
 
     res.json({
@@ -561,23 +557,6 @@ app.post("/getPlatformData", async (req, res) => {
   }
 });
 
-const platformConfig = {
-  bilibili: {
-    configPath: "scheduleJob/BiliBiliScheduleJob.json",
-    uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload\\uploader\\bilibili_uploader\\biliup.exe"),
-    accountType: "bilibili"
-  },
-  '抖音': {
-    configPath: "scheduleJob/DouyinScheduleJob.json",
-    uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
-    accountType: "douyin"
-  },
-  '小红书': {
-    configPath: "scheduleJob/XhsScheduleJob.json",
-    uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
-    accountType: "xhs"
-  }
-};
 
 async function executePlatformExpiredJobs(platform) {
   try {
@@ -868,17 +847,10 @@ async function checkAndExecuteJobs() {
     let failedPlatforms = 0;
 
     results.forEach((result, index) => {
-      const platformName = platforms[index];
-
       if (result.status === 'fulfilled' && result.value?.code === 200) {
         successPlatforms++;
-
-        console.log(`${platformName}平台任务执行成功`);
       } else {
         failedPlatforms++;
-        console.error(`${platformName}平台任务执行失败:`,
-          result.status === 'rejected' ? result.reason : result.value?.msg
-        );
       }
       const { jobs, configPath } = result.value.data;
       if (jobs && configPath) {

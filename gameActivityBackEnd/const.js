@@ -1,5 +1,8 @@
 // 例举account_urls 可能没包含的相应的game攻略，不会分类
 
+const path = require("path");
+
+
 const specialTypeList = ['coser同行', 'coser本人', '搞笑', '可爱赛道']
 const gameList = [
     // TODO 后续按厂商分类 按类型分类
@@ -32,9 +35,9 @@ const gameList = [
     "战双帕弥什", "使命召唤手游", "幻塔", "穿越火线", "一梦江湖", "恋与制作人", "炉石传说", "卡拉彼丘", "codm",
     // 其它厂商
     "碧蓝航线", "无限暖暖", "闪耀暖暖", "无尽梦回", "天龙八部", "重返未来", "崩坏3", "无畏契约", "魔兽世界",
-    "七日世界", "潮汐守望者", "梦幻西游"
+    "七日世界", "潮汐守望者", "梦幻西游",
+    "异环", "异人", "影之诗", "彩虹六号", "COMD"
 ]
-
 const allGameList = [
     ...specialTypeList,
     "游戏综合",
@@ -47,13 +50,38 @@ const isVideoFile = ['.mp4', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.webm', '.
 const PROJECT_ROOT = "D:\\code\\platform_game_activity\\";
 const TikTokDownloader_ROOT = "D:\\code\\platform_game_activity\\TikTokDownloader\\";
 
+
+const platformConfig = {
+    bilibili: {
+        configPath: "scheduleJob/BiliBiliScheduleJob.json",
+        uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload\\uploader\\bilibili_uploader\\biliup.exe"),
+        accountType: "bilibili"
+    },
+    '抖音': {
+        configPath: "scheduleJob/DouyinScheduleJob.json",
+        uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
+        accountType: "douyin"
+    },
+    '小红书': {
+        configPath: "scheduleJob/XhsScheduleJob.json",
+        uploaderPath: path.join(PROJECT_ROOT, "social-auto-upload"),
+        accountType: "xhs"
+    }
+};
+
+// todo docker 内的网络
+const requestHost = "http://127.0.0.1:8080"
+
+
 module.exports = {
     gameList,
     allGameList,
     PROJECT_ROOT,
     TikTokDownloader_ROOT,
     specialGameList: specialTypeList,
-    isVideoFile
+    isVideoFile,
+    platformConfig,
+    requestHost
 }
 
 // 赛道
