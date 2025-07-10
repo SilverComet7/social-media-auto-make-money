@@ -4,9 +4,8 @@
 
     <el-tabs v-model="activeTab" type="card">
       <el-tab-pane label="四平台游戏活动激励" name="platform">
-
         <!-- ! toFix 不能稳定固定在页面顶部 -->
-        <el-affix position="top" :offset="40" class="text-blue-800">
+        <!-- <el-affix position="top" :offset="40" class="text-blue-800">
           <el-button type="primary" @click="fetchData">获取后台合并数据</el-button>
           <h4>公共标签参考</h4>
           <div class="bg-red-300 h-[5vw] overflow-auto">
@@ -15,15 +14,16 @@
             <div>#MMORPG #古风 #逆水寒</div>
             <div>#射击游戏 #FPS #穿越火线 #无畏契约 #暗区突围 #三角洲行动 #枪战</div>
           </div>
-        </el-affix>
+        </el-affix> -->
         <div class="flex justify-between">
-          <!-- 爬虫查询栏 -->
+          <!-- 查询栏 -->
           <div class="operation-group bg-gray-300 p-4 rounded">
             <h3 class="text-lg font-bold mb-2 text-black">爬虫查询操作</h3>
             <div class="flex">
               <el-button type="primary" @click="updateAllPlatformData">查询全平台视频数据</el-button>
-              <el-button type="primary" @click="fetchNewBiliBiliActivityData">查询B站新活动</el-button>
-              <el-button type="primary" @click="fetchNewBiliBiliTopicData">查询B站活动Topic</el-button>
+              <el-button type="primary"
+                @click="() => { fetchNewBiliBiliActivityData(); fetchNewBiliBiliTopicData() }">查询B站新活动与Topic</el-button>
+              <!-- <el-button type="primary" @click="fetchNewBiliBiliTopicData">查询B站活动Topic</el-button> -->
             </div>
           </div>
           <!-- 视频下载处理栏 -->
@@ -49,7 +49,8 @@
           <el-table-column prop="name" label="Game Name" width="250" fixed>
             <template #default="scope">
               <div :class="scope.row.notDo ? 'text-red-500' : ''">
-                <a :href="scope.row.act_url" target="_blank" :class="scope.row.updateData || scope.row.new ? 'text-green-500 ' : 'text-blue-500'
+                <!-- https://www.douyin.com/search/${scope.row.name} -->
+                <a :href="`https://www.douyin.com/search/${scope.row.name}`" target="_blank" :class="scope.row.updateData || scope.row.new ? 'text-green-500 ' : 'text-blue-500'
                   " class="font-bold">
                   {{ scope.row.name }}
                 </a>
@@ -60,10 +61,7 @@
                     ">ffmpeg处理</el-button>
                 </div>
                 <p>上一次更新时间 {{ scope.row.updateDate }}</p>
-                <el-button type="primary" @click="updateData(scope.row)"
-                  v-if="scope.row.searchKeyWord">更新B站数据</el-button>
                 <p>任务结束日期 {{ formatDate(scope.row.etime) }}</p>
-                <!-- <p>添加任务日期 {{ scope.row.addTime }}</p> -->
                 <el-button type="primary" @click="openEditRewardDialog(scope.row.name)">添加平台奖励</el-button>
               </div>
             </template>
@@ -147,7 +145,7 @@
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
                             <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                              }}</span>
+                            }}</span>
                             <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
                             <template v-if="speReq?.videoData">
                               <div v-for="r in speReq.videoData" :key="r">
@@ -189,8 +187,6 @@
                   {{ scope.row.name }}
                 </a>
                 <p>上一次更新时间 {{ scope.row.updateDate }}</p>
-                <el-button type="primary" @click="updateData(scope.row)"
-                  v-if="scope.row.searchKeyWord">更新B站数据</el-button>
                 <p>视频时长需 {{ scope.row.timeRange ?? '>=30s' }}</p>
                 <p>任务结束日期 {{ formatDate(scope.row.etime) }}</p>
                 <p>添加任务日期 {{ scope.row.addTime }}</p>
@@ -232,7 +228,7 @@
                       <span v-if="req.like" :class="req.like <= 500 ? ' text-orange-500' : ''">
                         <span>+</span>点赞>={{ req.like }}</span>
                       <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                        }}</span>
+                      }}</span>
                       <el-tooltip effect="dark" placement="top-start"
                         :content="getTooltipContent(req, scope.row.bilibili)" v-if="scope.row.bilibili">
                         <el-progress :percentage="getCompletionPercentage(req, scope.row.bilibili).percentage"
@@ -282,7 +278,7 @@
                           <span v-if="req.cday"> <span>+</span>投稿天数>={{ req.cday }}</span>
                           <span v-if="req.like"> <span>+</span>点赞>={{ req.like }}</span>
                           <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                            }}</span>
+                          }}</span>
 
                           <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
@@ -438,15 +434,6 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <!-- <el-tab-pane label="B站稿件的评论管理">
-        <el-button type="primary" @click="fetchUnfavorableReply">查询所有不喜欢的评论</el-button>
-        <div v-for="(unfavorableReply, index) in unfavorableReplyList" :key="index">
-          {{ unfavorableReply.message }}
-          <el-button type="primary" @click="deleteUnfavorableReply(unfavorableReply)"
-            >delete</el-button
-          >
-        </div>
-      </el-tab-pane> -->
     </el-tabs>
 
     <el-dialog title="下载视频和分组区分" v-model="dialogVisible" :before-close="cancelDownloadSettings">
@@ -455,6 +442,13 @@
           <el-switch v-model="downloadSettings.isDownload" active-text="是" inactive-text="否" />
         </el-form-item>
         <div v-if="downloadSettings.isDownload">
+
+          <template v-if="downloadSettings.selectedStrategy === 'group'">
+            <el-form-item label="选择分组">
+              <el-checkbox v-for="game in allGameList" :key="game.name" v-model="game.checked" :label="game.name" />
+            </el-form-item>
+          </template>
+
           <el-form-item label="下载策略">
             <el-radio-group v-model="downloadSettings.selectedStrategy">
               <el-radio label="group">按分组下载</el-radio>
@@ -474,12 +468,6 @@
           <template v-if="downloadSettings.selectedStrategy === 'filePath'">
             <el-form-item label="文件路径">
               <el-input v-model="downloadSettings.filePath" placeholder="输入download.txt完整路径" />
-            </el-form-item>
-          </template>
-
-          <template v-if="downloadSettings.selectedStrategy === 'group'">
-            <el-form-item label="选择分组">
-              <el-checkbox v-for="game in allGameList" :key="game.name" v-model="game.checked" :label="game.name" />
             </el-form-item>
           </template>
 
@@ -507,7 +495,6 @@
       </template>
     </el-dialog>
 
-    <!-- ffmpeg dialog -->
     <el-dialog title="FFmpeg 处理设置" v-model="ffmpegDialogVisible">
       <el-form :model="ffmpegSettings" label-width="250px">
         <el-form-item label="名称">
@@ -645,16 +632,13 @@
             <el-form-item label="每个分镜秒数">
               <el-input-number v-model="ffmpegSettings.segmentDuration" :min="1" :max="60" />
               <!-- 自动根据合并最小时长以及秒数计算需要的分镜（视频文件）数，向上取整 -->
-
               需要{{
                 Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration)
               }}个大于该分镜秒数的视频文件
             </el-form-item>
-
             <el-form-item label="混剪数量">
               <el-input-number v-model="ffmpegSettings.mixCount" :min="1" :max="100" />
             </el-form-item>
-
             <el-form-item label="启用合集音乐">
               <el-switch v-model="ffmpegSettings.enableMergeMusic" />
               <el-select v-if="ffmpegSettings.enableMergeMusic" v-model="ffmpegSettings.mergeMusicName"
@@ -672,7 +656,6 @@
       </template>
     </el-dialog>
 
-    <!-- 设置奖励dialog -->
     <el-dialog title="编辑奖励" v-model="editRewardDialogVisible" width="50%">
       <el-form :model="editRewardForm" label-width="150px">
         <el-form-item label="平台名称">
@@ -876,7 +859,6 @@
       </template>
     </el-dialog>
 
-    <!-- 添加未完成定时任务确认对话框 -->
     <el-dialog title="未完成定时任务列表" v-model="unfinishedTasksDialogVisible" width="70%">
       <div v-if="unfinishedTasks.length > 0">
         <el-alert title="以下是未完成的定时任务，请确认是否继续执行" type="warning" :closable="false" show-icon />
@@ -1073,6 +1055,7 @@ const setScheduleJob = (
   const hasTopicName = topic || rew.name
   if (!hasTopicName) {
     ElMessage.error('没有找到对应的 topic 或 活动name')
+    // 想再去调用B站接口获取最新的topic
     return
   }
 
@@ -1112,7 +1095,6 @@ const setScheduleJob = (
 
 
 
-
   scheduleForm.value = {
     gameName: row.name,
     topicName: topic || rew.name,
@@ -1144,16 +1126,16 @@ const cancelScheduleJob = () => {
 const confirmScheduleJob = async (immediately = false) => {
   try {
     // 如果是立即执行模式，显示加载中提示
-    let loadingInstance;
-    if (immediately) {
-      loadingInstance = ElLoading.service({
-        fullscreen: true,
-        text: '正在执行定时任务，请稍候...',
-        background: 'rgba(0, 0, 0, 0.7)'
-      });
-    }
+    // let loadingInstance;
+    // if (immediately) {
+    //   loadingInstance = ElLoading.service({
+    //     fullscreen: true,
+    //     text: '正在执行定时任务，请稍候...',
+    //     background: 'rgba(0, 0, 0, 0.7)'
+    //   });k
+    // }
 
-    const response = await fetch('http://localhost:3000/scheduleUpload', {
+    const response = await fetch('/api/scheduleUpload', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -1162,9 +1144,9 @@ const confirmScheduleJob = async (immediately = false) => {
     })
 
     // 关闭加载提示
-    if (loadingInstance) {
-      loadingInstance.close();
-    }
+    // if (loadingInstance) {
+    //   loadingInstance.close();
+    // }
 
     if (!response.ok) {
       throw new Error('设置失败')
@@ -1344,7 +1326,7 @@ const confirmEditReward = async () => {
     },
   )
   // 发送后端请求更新奖励
-  await fetch(`http://localhost:3000/addPlatformReward`, {
+  await fetch(`/api/addPlatformReward`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
@@ -1404,7 +1386,7 @@ const musicOptions = ref(['随机', 'billll', '难却'])
 // 定义不同类别的默认去重配置
 const defaultDeduplicationConfigs = {
   攻略: {
-    speedFactor: 0.97,
+    speedFactor: 0.95,
     enableMirror: true,
     enableRotate: true,
     rotateAngle: 0.5,
@@ -1412,7 +1394,7 @@ const defaultDeduplicationConfigs = {
     blurRadius: 0.2,
     enableFade: false,
     fadeDuration: 0.5,
-    brightness: 0,
+    brightness: 0.05,
     contrast: 1,
     saturation: 1,
     enableBgBlur: false,
@@ -1420,7 +1402,7 @@ const defaultDeduplicationConfigs = {
     bgBlurBottom: 0.1,
   },
   coser: {
-    speedFactor: 0.97,
+    speedFactor: 0.95,
     enableMirror: true,
     enableRotate: true,
     rotateAngle: 0.5,
@@ -1428,7 +1410,7 @@ const defaultDeduplicationConfigs = {
     blurRadius: 0.2,
     enableFade: false,
     fadeDuration: 0.5,
-    brightness: 0,
+    brightness: 0.05,
     contrast: 1,
     saturation: 1,
     enableBgBlur: false,
@@ -1491,7 +1473,7 @@ const confirmDownloadSettings = async () => {
     .filter((game) => game.checked)
     .map((game) => game.name)
 
-  await fetch(`http://localhost:3000/downloadVideosAndGroup`, {
+  await fetch(`/api/downloadVideosAndGroup`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
@@ -1506,7 +1488,7 @@ const confirmDownloadSettings = async () => {
 }
 
 const confirmFFmpegSettings = async () => {
-  await fetch(`http://localhost:3000/ffmpegHandleVideos`, {
+  await fetch(`/api/ffmpegHandleVideos`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
@@ -1594,7 +1576,7 @@ const allPlatformAccounts = ref({})
 
 const fetchData = async () => {
   try {
-    const response = await fetch('http://localhost:3000/allData')
+    const response = await fetch('/api/allData')
     if (!response.ok) {
       throw new Error('Network response was not ok')
     }
@@ -1620,7 +1602,7 @@ const fetchData = async () => {
 
 const fetchNewBiliBiliActivityData = async () => {
   try {
-    const response = await fetch('http://localhost:3000/getNewActData')
+    const response = await fetch('/api/getNewActData')
     const res = await response.json()
     if (res.code == -101) {
       // 自动登录
@@ -1633,12 +1615,12 @@ const fetchNewBiliBiliActivityData = async () => {
 }
 const fetchNewBiliBiliTopicData = async () => {
   try {
-    const response = await fetch('http://localhost:3000/getNewTopicData')
+    const response = await fetch('/api/getNewTopicData')
     const res = await response.json()
     if (res.code == -101) {
       return ElMessage.error('请先登录')
     }
-    fetchData()
+    // fetchData()
   } catch (error) {
     console.error('Error fetching data:', error)
   }
@@ -1646,7 +1628,7 @@ const fetchNewBiliBiliTopicData = async () => {
 
 const handleManualAccount = async () => {
   try {
-    const response = await fetch('http://localhost:3000/manualAccount')
+    const response = await fetch('/api/manualAccount')
     if (!response.ok) {
       throw new Error('Network response was not ok')
     }
@@ -1664,7 +1646,7 @@ const handleManualAccount = async () => {
 
 const fetchNewDakaData = async () => {
   try {
-    const response = await fetch('http://localhost:3000/getBiliBiliDakaData')
+    const response = await fetch('/api/getBiliBiliDakaData')
     if (!response.ok) {
       throw new Error('Network response was not ok')
     }
@@ -1677,55 +1659,13 @@ const fetchNewDakaData = async () => {
 
 onMounted(() => {
   fetchData()
+  // fetch('/api/test').then(res => {
+  //   console.log(res)
+  // })
 })
 
-// 差评相关
-
-const unfavorableReplyList = ref([])
-const fetchUnfavorableReply = async () => {
-  try {
-    const response = await fetch('http://localhost:3000/unfavorableReply')
-    if (!response.ok) {
-      throw new Error('Network response was not ok')
-    }
-    const res = await response.json()
-    unfavorableReplyList.value = res
-  } catch (error) {
-    console.error('Error fetching data:', error)
-  }
-}
-const deleteUnfavorableReply = async (row) => {
-  await fetch(`http://localhost:3000/deleteUnfavorableReply`, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ ...row }),
-  }).then((res) => {
-    if (res.ok) {
-      ElMessage.success('删除成功')
-    }
-  })
-}
-
-
-
-const updateData = async (row, specialTag) => {
-  await fetch(`http://localhost:3000/updateDataOne`, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ ...row, specialTag }),
-  }).then((res) => {
-    if (res.ok) {
-      fetchData()
-    }
-  })
-}
-
 const updateAllPlatformData = async () => {
-  await fetch(`http://localhost:3000/getPlatformData`, {
+  await fetch(`/api/getPlatformData`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
@@ -1738,7 +1678,6 @@ const updateAllPlatformData = async () => {
   })
 }
 
-// 计算任务进度条
 
 const getCompletionPercentage = (requirement, videoData) => {
   let totalRequirements = 0
@@ -1920,7 +1859,7 @@ const specialTrackTagConfigs: SpecialTrackConfigs = {
     extraTags: ['#沙雕剪辑'],
   },
   攻略: {
-    baseTags: ['#攻略', '#教程', '#剪辑'],
+    baseTags: ['#攻略', '#教程'],
     extraTags: ['#下载'],
   },
 }
