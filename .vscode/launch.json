@@ -10,17 +10,37 @@
         "douyin",
         "Feeling",
         "upload",
-        "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\诛仙世界\\coser同行\\2025-1-16-2-32-11_截取1秒后_缩放0%_合集时间大于30_帧数=30\\二次元.mp4",
+        "D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\闪耀暖暖\\coser本人\\2025-5-17-16-22-57_截取0秒后_缩放0%_合集时间大于10_帧数=30\\已发\\take my hand  + 1747470178344.mp4",
         "-pt",
         "0"
       ],
+      "env": {
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUNBUFFERED": "1",
+        "title_control": "1",
+        "game_binding": "1"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: CLI upload xhs",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/social-auto-upload/examples/upload_video_to_xhs.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: CLI upload bilibili",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/social-auto-upload/examples/upload_video_to_bilibili.py",
       "console": "integratedTerminal"
     },
     {
       "name": "Python: bilibili upload",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/social-auto-upload/upload/bilibili_uploader.py",
+      "program": "${workspaceFolder}/social-auto-upload/uploader/bilibili_uploader.py",
       "args": [
         "bilibili",
         "Feeling",

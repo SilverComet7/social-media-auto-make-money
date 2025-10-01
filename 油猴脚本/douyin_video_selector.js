@@ -5,14 +5,17 @@
 // @description  在抖音视频页面添加复选框，用于选择和收集视频ID
 // @author       Your name
 // @match        https://www.douyin.com/search/*
+// @match        https://www.douyin.com/user/*
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
     // 创建复制按钮
     function createCopyButton() {
+        // 只在/search/页面显示
+        if (!/\/search\//.test(window.location.pathname)) return;
         const button = document.createElement('button');
         button.textContent = '复制已选视频ID';
         button.style.cssText = `
@@ -50,7 +53,7 @@
                     height: 20px;
                     cursor: pointer;
                 `;
-                
+
                 // 获取视频ID
                 const videoId = video.id || '';
                 if (videoId) {
@@ -61,7 +64,8 @@
                         checkbox.dataset.videoId = 'https://www.douyin.com/video/' + idMatch[1];
                     }
                 }
-                
+
+                // video.style.position = 'relative';
                 video.insertBefore(checkbox, video.firstChild);
             }
         });
@@ -73,7 +77,7 @@
         const videoIds = Array.from(selectedCheckboxes)
             .map(checkbox => checkbox.dataset.videoId)
             .filter(id => id); // 过滤掉未成功获取ID的项
-        
+
         if (videoIds.length === 0) {
             alert('请至少选择一个视频！');
             return;
@@ -82,6 +86,77 @@
         const videoIdText = videoIds.join('\n');
         navigator.clipboard.writeText(videoIdText).then(() => {
             alert(`已成功复制 ${videoIds.length} 个视频ID到剪贴板！`);
+        }).catch(err => {
+            console.error('复制失败:', err);
+            alert('复制失败，请重试！');
+        });
+    }
+
+
+    // ========== 新增：个人主页用户信息复制按钮 ==========
+    function createCopyUserInfoButton() {
+        // 只在/user/页面显示
+        if (!/\/user\//.test(window.location.pathname)) return;
+        if (document.getElementById('copy-user-info-btn')) return; // 防止重复添加
+
+        const button = document.createElement('button');
+        button.id = 'copy-user-info-btn';
+        button.textContent = '复制用户信息';
+        button.style.cssText = `
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            z-index: 9999;
+            padding: 10px 20px;
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        `;
+        button.addEventListener('click', copyUserInfo);
+        document.body.appendChild(button);
+    }
+
+    function copyUserInfo() {
+        // 获取昵称（尝试多种常见选择器）
+        let name = '';
+        // 1. 2024年常见昵称选择器
+        const nameSelectors = [
+            'h1[class*="xgplayer-nickname"], h1[class*="xgplayer-user-nickname"]', // 旧版
+            'span[class*="xgplayer-nickname"], span[class*="xgplayer-user-nickname"]',
+            'span[class*="Nu66P_ba"]', // 2024新版
+            'h1[class*="Nu66P_ba"]',
+            'h1', // 兜底
+            'span',
+        ];
+        for (const sel of nameSelectors) {
+            const el = document.querySelector(sel);
+            if (el && el.textContent && el.textContent.length >= 2 && el.textContent.length <= 30) {
+                name = el.textContent.trim();
+                break;
+            }
+        }
+        if (!name) {
+            alert('未能自动获取昵称，请手动填写');
+            name = prompt('请输入昵称：', '');
+            if (!name) return;
+        }
+        const url = window.location.href;
+        const userInfo = {
+            mark: name,
+            game: '游戏综合',
+            name: name,
+            url: url,
+            tab: 'post',
+            earliest: '2025/3/8',
+            latest: '2025/6/8',
+            enable: false
+        };
+        const text = JSON.stringify(userInfo, null, 2);
+        navigator.clipboard.writeText(text).then(() => {
+            alert('用户信息已复制到剪贴板！');
         }).catch(err => {
             console.error('复制失败:', err);
             alert('复制失败，请重试！');
@@ -97,7 +172,7 @@
     function init() {
         createCopyButton();
         addCheckboxesToVideos();
-        
+        createCopyUserInfoButton(); // 新增：初始化时插入用户信息按钮
         // 监听页面内容变化
         observer.observe(document.body, {
             childList: true,
@@ -111,4 +186,4 @@
     } else {
         init();
     }
-})(); 
+})();

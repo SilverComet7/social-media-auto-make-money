@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 const path = require("path");
 const { spawn } = require("child_process");
-const { PROJECT_ROOT, allGameList, platformConfig } = require("./const.js");
+const { PROJECT_ROOT, allGameList, platformConfig, TikTokDownloader_ROOT } = require("./const.js");
 
 const {
   concurrentFetchWithDelay,
@@ -30,6 +30,13 @@ const accountJson = getJsonData("accountList.json")
 
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`)
+  next()
+})
+// 静态资源服务（确保前端能访问视频文件）
+app.use('/static_videos', express.static(TikTokDownloader_ROOT + '/gamelist'));
+
 
 const Cookie = accountJson.bilibili[0].Cookie;
 const csrfToken = Cookie.split("; ")
@@ -355,6 +362,8 @@ app.get("/allData", async (req, res) => {
     const XhsScheduleJob = getJsonData("scheduleJob/XhsScheduleJob.json");
     const accountList = getJsonData("accountList.json");
 
+    // 遍历视频目录,拿到各目录的视频列表
+
     res.json({
       gameData,
       bilibiliActData,
@@ -494,8 +503,8 @@ app.post("/getPlatformData", async (req, res) => {
                     videoData: bilibiliData.map((t) => {
                       const valuedList = t.aweme_list.filter(l => {
                         // 检查视频描述是否包含活动名称
-                        const matchesName = l.desc.includes(item.name);
-                        // 如果有定时任务，检查视频的文件名称是否在是某个topic的，有则计数
+                        const matchesName = (l.desc === differentTopic.topic) || (l.desc === differentTopic.name)
+                        // 如果有定时任务，检查视频的文件名称是否在是某个topic的
                         let isTopicScheduleJob = false;
                         if (hasSameTopicScheduleJob) {
                           isTopicScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
@@ -528,7 +537,6 @@ app.post("/getPlatformData", async (req, res) => {
                       return {
                         userName: t.user.name,
                         allNum: list.length,
-                        // allLike: list.reduce((a, b) => a + b.like, 0),
                         allViewNum: list.reduce((a, b) => a + b.view, 0),
                         onePlayNumList: list,
                       };
@@ -557,6 +565,57 @@ app.post("/getPlatformData", async (req, res) => {
   }
 });
 
+app.get('/batchVideoGames', async (req, res) => {
+  try {
+    const gameData = getJsonData("gameData.json");
+    const now = Date.now() / 1000;
+    const gameListDir = path.join(TikTokDownloader_ROOT, "gameList");
+    const result = [];
+
+    for (const game of gameData) {
+      if (!game.etime || game.etime < now) continue; // 只要剩余天数>0
+      const dirPath = game.name;
+      const absDir = path.join(gameListDir, dirPath);
+      if (!fs.existsSync(absDir)) continue;
+      const files = fs.readdirSync(absDir);
+      const videoList = files.filter(f => /\.(mp4|mov|webm|mkv)$/i.test(f)).map(f => ({
+        name: f,
+        url: `/static_videos/${encodeURIComponent(dirPath)}/${encodeURIComponent(f)}`
+      }));
+      result.push({
+        game: game.name,
+        dirPath,
+        etime: game.etime,
+        videoList,
+        // 可扩展：ffmpegConfig: {}
+      });
+    }
+    res.json({ code: 200, data: result });
+  } catch (err) {
+    res.status(500).json({ code: 500, msg: err.message });
+  }
+});
+
+app.get('/getLatestTopic', async (req, res) => {
+  const { topic } = req.query;
+  console.log(topic);
+
+  if (!topic) {
+    return res.status(400).json({ code: 400, message: 'Missing topic parameter' });
+  }
+  try {
+    const response = await fetch(`https://member.bilibili.com/x/vupre/web/topic/search?keywords=${encodeURIComponent(topic)}&page_size=50&offset=0&t=${Date.now()}`, {
+      headers,
+    });
+    const result = await response.json();
+    res.json({
+      code: 200,
+      data: { mission_id: result?.data?.result?.topics[0]?.mission_id }
+    });
+  } catch (err) {
+    res.status(500).json({ code: 500, message: 'Bilibili API request failed', error: err.toString() });
+  }
+});
 
 async function executePlatformExpiredJobs(platform) {
   try {
@@ -839,7 +898,9 @@ const releaseSemaphore = () => semaphore.release();
 
 async function checkAndExecuteJobs() {
   try {
-    const platforms = ['bilibili', '抖音', '小红书'];
+    const platforms = ['抖音', '小红书'
+      // , 'bilibili'
+    ];
     const results = await Promise.allSettled(platforms.map(p => executePlatformExpiredJobs(p)));
 
     // 记录执行结果
@@ -881,7 +942,8 @@ async function checkAndExecuteJobs() {
 
 
 app.post("/scheduleUpload", async (req, res) => {
-  async function generateScheduleJobs(videoDir, startTime, intervalHours) {
+  function generateScheduleJobs(videoDir, startTime, intervalHours) {
+
     const files = fs.readdirSync(videoDir);
     const videoFiles = files.filter((f) => f.endsWith(".mp4"));
     const jobs = [];
@@ -917,6 +979,8 @@ app.post("/scheduleUpload", async (req, res) => {
       immediately,
       etime,
       selectedAccounts,
+      douyinTitleControl,
+      douyinGameBinding,
     } = req.body;
 
     if (immediately) {
@@ -924,9 +988,7 @@ app.post("/scheduleUpload", async (req, res) => {
       return res.json(result);
     } else {
       const scheduleJobsPath = platformConfig[platform].configPath;
-
       let scheduleJobs = [];
-
       try {
         scheduleJobs = getJsonData(scheduleJobsPath);
       } catch (err) {
@@ -934,7 +996,7 @@ app.post("/scheduleUpload", async (req, res) => {
         scheduleJobs = [];
       }
 
-      const newJobs = await generateScheduleJobs(videoDir, startTime, intervalHours);
+      const newJobs = generateScheduleJobs(videoDir, startTime, intervalHours, topicName);
 
       // 添加平台特定字段
       const baseConfig = {
@@ -946,8 +1008,8 @@ app.post("/scheduleUpload", async (req, res) => {
         scheduleJob: newJobs,
         etime,
         selectedAccounts: selectedAccounts || [], // 添加选定的账号列表
-        douyinTitleControl: req.body.douyinTitleControl || false, // 添加抖音标题输入控制
-        douyinGameBinding: req.body.douyinGameBinding || false,   // 添加抖音游戏绑定控制
+        douyinTitleControl: douyinTitleControl || false, // 添加抖音标题输入控制
+        douyinGameBinding: douyinGameBinding || false,   // 添加抖音游戏绑定控制
       };
 
       // 根据平台补充不同字段
@@ -964,8 +1026,12 @@ app.post("/scheduleUpload", async (req, res) => {
         });
       } else {
         // 更新现有配置的结束时间和任务
+        const filterNewJobs = newJobs.filter(job => !scheduleJobs[topicIndex].scheduleJob.some(j => j.videoPath === job.videoPath));
+        scheduleJobs[topicIndex].scheduleJob.push(...filterNewJobs);
         scheduleJobs[topicIndex].etime = etime;
-        scheduleJobs[topicIndex].scheduleJob.push(...newJobs);
+        scheduleJobs[topicIndex].douyinTitleControl = douyinTitleControl;
+        scheduleJobs[topicIndex].douyinGameBinding = douyinGameBinding;
+        scheduleJobs[topicIndex].selectedAccounts = selectedAccounts;
       }
 
       writeLocalDataJson(scheduleJobs, scheduleJobsPath);

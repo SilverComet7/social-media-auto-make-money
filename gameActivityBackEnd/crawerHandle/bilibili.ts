@@ -22,7 +22,6 @@ interface VideoItem {
 }
 
 
-// 读取 accountList.json 文件
 const accountListPath = path.join(__dirname, '../jsonFile', 'accountList.json');
 const accountList = JSON.parse(fs.readFileSync(accountListPath, 'utf8')) as AccountList;
 
@@ -44,7 +43,7 @@ async function querybilibiliAllAccountsData() {
     const data = await concurrentFetchWithDelay(promises, 1000, 3000, 1); // 延迟 1-3 秒
     const handleData = data.map(item => ({
         user: {
-            name: item.userName
+            name: item?.userName
         },
         aweme_list: item.videos.list.map((e: VideoItem) => ({
             title: e.title,

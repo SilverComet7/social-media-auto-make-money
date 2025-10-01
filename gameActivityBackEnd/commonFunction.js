@@ -16,11 +16,13 @@ const getDaysDiff = (timeStamp1, timeStamp2) => {
   return Math.ceil(endDiffDate);
 };
 
-const formatDate = (timestamp = new Date().getTime()) => {
+const formatDate = (timestamp = new Date().getTime(), seconds = false) => {
   const date = new Date(timestamp);
-  return (
-    date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
-  );
+  if (seconds) {
+    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate()) + "-" + date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds()
+  }
+  const basicDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + (date.getDate())
+  return basicDate
 };
 
 function getJsonData(inJsonPath = "data.json") {
@@ -39,7 +41,6 @@ function getJsonData(inJsonPath = "data.json") {
       return oldDataArr;
     } catch (parseError) {
       console.error(`JSON 解析错误 (${jsonPath}):`, parseError);
-      console.error("问题数据:", data.substring(0, 200) + "..."); // 只显示前200个字符
       return [];
     }
   } catch (error) {

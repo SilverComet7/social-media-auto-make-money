@@ -23,7 +23,6 @@
               <el-button type="primary" @click="updateAllPlatformData">查询全平台视频数据</el-button>
               <el-button type="primary"
                 @click="() => { fetchNewBiliBiliActivityData(); fetchNewBiliBiliTopicData() }">查询B站新活动与Topic</el-button>
-              <!-- <el-button type="primary" @click="fetchNewBiliBiliTopicData">查询B站活动Topic</el-button> -->
             </div>
           </div>
           <!-- 视频下载处理栏 -->
@@ -31,7 +30,7 @@
             <h3 class="text-lg font-bold mb-2 text-black">视频处理操作</h3>
             <div class="flex">
               <el-button type="primary" @click="handleDownloadSettings">下载视频后分组</el-button>
-              <el-button type="primary" @click="ffmpegDialogVisible = true">处理视频</el-button>
+              <el-button type="primary" @click="batchFFmpegDialogVisible = true">批处理视频</el-button>
             </div>
           </div>
           <!-- 定时任务栏 -->
@@ -145,7 +144,7 @@
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
                             <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                            }}</span>
+                              }}</span>
                             <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
                             <template v-if="speReq?.videoData">
                               <div v-for="r in speReq.videoData" :key="r">
@@ -228,7 +227,7 @@
                       <span v-if="req.like" :class="req.like <= 500 ? ' text-orange-500' : ''">
                         <span>+</span>点赞>={{ req.like }}</span>
                       <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                      }}</span>
+                        }}</span>
                       <el-tooltip effect="dark" placement="top-start"
                         :content="getTooltipContent(req, scope.row.bilibili)" v-if="scope.row.bilibili">
                         <el-progress :percentage="getCompletionPercentage(req, scope.row.bilibili).percentage"
@@ -278,7 +277,7 @@
                           <span v-if="req.cday"> <span>+</span>投稿天数>={{ req.cday }}</span>
                           <span v-if="req.like"> <span>+</span>点赞>={{ req.like }}</span>
                           <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
-                          }}</span>
+                            }}</span>
 
                           <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
@@ -505,29 +504,23 @@
         <el-form-item label="分组">
           <el-select v-model="ffmpegSettings.groupName" placeholder="请选择分组" filterable clearable>
             <el-option label="攻略" value="攻略" />
-            <el-option v-for="game in allGameList" :key="game.name" :label="game.name" :value="game.name" />
+            <el-option v-for="game in allGameList.slice(0, 2)" :key="game.name" :label="game.name" :value="game.name" />
           </el-select>
         </el-form-item>
         <el-form-item label="处理地址">
           <el-input v-model="ffmpegSettings.videoDir" placeholder="请输入处理地址" />
         </el-form-item>
-
         <el-divider>标题相关</el-divider>
-
-        <!-- 是否开启重命名 -->
         <el-form-item label="是否开启重命名">
           <el-switch v-model="ffmpegSettings.enableRename" active-text="是" inactive-text="否" />
-          <div v-if="ffmpegSettings.enableRename">
+          <!-- <div v-if="ffmpegSettings.enableRename">
             <el-form-item label="预检查名称（避免相同名称）">
               <el-switch v-model="ffmpegSettings.checkName" active-text="是" inactive-text="否" />
             </el-form-item>
-            <!-- <el-form-item label="仅重命名">
-              <el-switch v-model="ffmpegSettings.onlyRename" active-text="是" inactive-text="否" />
-            </el-form-item> -->
             <el-form-item label="添加发布时间（避免相同名称）">
               <el-switch v-model="ffmpegSettings.addPublishTime" active-text="是" inactive-text="否" />
             </el-form-item>
-          </div>
+          </div> -->
         </el-form-item>
 
         <div>
@@ -753,7 +746,7 @@
       </template>
     </el-dialog>
 
-    <el-dialog title="设置定时上传任务" v-model="scheduleDialogVisible" :before-close="cancelScheduleJob">
+    <el-dialog title="设置定时上传任务" v-model="scheduleDialogVisible">
       <el-form :model="scheduleForm" label-width="120px">
         <el-form-item label="游戏名称">
           <el-input v-model="scheduleForm.gameName" placeholder="请输入游戏名称" />
@@ -825,7 +818,7 @@
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="cancelScheduleJob">取 消</el-button>
+          <el-button @click="scheduleDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="confirmScheduleJob(false)">确 定</el-button>
         </span>
       </template>
@@ -892,6 +885,11 @@
         </span>
       </template>
     </el-dialog>
+
+    <BatchGameFFmpegDialog v-model="batchFFmpegDialogVisible" :publicFFmpegConfig="publicFFmpegConfig"
+      :batchDialogVisible="batchFFmpegDialogVisible">
+    </BatchGameFFmpegDialog>
+
   </div>
 </template>
 
@@ -899,6 +897,8 @@
 import { ref, onMounted, computed } from 'vue'
 import { ElMessage, ElLoading, ElMessageBox } from 'element-plus'
 import bilibiliTid from '../../public/bilibiliTid.json' // B站分区数据
+import BatchGameFFmpegDialog from '../components/FFmpegBatchGameDialog.vue'
+import { allGameList } from '@/state/globalState'
 
 interface BilibiliArea {
   name: string
@@ -1017,7 +1017,7 @@ const copyTag = (tag: string): void => {
   ElMessage.success('复制成功')
 }
 
-// 新增的响应式变量
+
 const scheduleDialogVisible = ref(false)
 const scheduleForm = ref<ScheduleForm>({
   gameName: '',
@@ -1037,15 +1037,15 @@ const scheduleForm = ref<ScheduleForm>({
   douyinTitleControl: false,
   douyinGameBinding: false,
 })
-// Map platform names to accountList keys
+
 const platformToKey = {
   'bilibili': 'bilibili',
   '抖音': 'douyin',
   '小红书': 'xhs',
   '快手': 'kuaishou'
 };
-// 打开定时任务设置弹窗
-const setScheduleJob = (
+
+const setScheduleJob = async (
   rew: SpecialTagRequirement,
   platform: PlatformReward,
   row: GameActivity,
@@ -1055,15 +1055,25 @@ const setScheduleJob = (
   const hasTopicName = topic || rew.name
   if (!hasTopicName) {
     ElMessage.error('没有找到对应的 topic 或 活动name')
-    // 想再去调用B站接口获取最新的topic
     return
   }
 
-  const missionId = topicJson.value.find((item) => item.topic_name === topic)?.mission_id
+  let missionId = topicJson.value.find((item) => item.topic_name === topic)?.mission_id
   // B站平台 如果没有找到对应的 missionId
   if (!missionId && platform.name === 'bilibili') {
-    ElMessage.error('没有找到对应的 missionId')
-    return
+    if (!topic) {
+      ElMessage.error('没有找到对应的 topic')
+      return
+    }
+    const response = await fetch(`/api/getLatestTopic?topic=${encodeURIComponent(topic)}`)
+    const result = await response.json()
+    if (result.code === 200) {
+      ElMessage.error('没有找到对应的 missionId，从B站获取最新missionId')
+      missionId = result.data.mission_id
+    } else {
+      ElMessage.error('没有找到对应的 missionId')
+      return
+    }
   }
 
 
@@ -1117,23 +1127,9 @@ const setScheduleJob = (
   scheduleDialogVisible.value = true
 }
 
-// 取消设置
-const cancelScheduleJob = () => {
-  scheduleDialogVisible.value = false
-}
 
-// 确认设置
 const confirmScheduleJob = async (immediately = false) => {
   try {
-    // 如果是立即执行模式，显示加载中提示
-    // let loadingInstance;
-    // if (immediately) {
-    //   loadingInstance = ElLoading.service({
-    //     fullscreen: true,
-    //     text: '正在执行定时任务，请稍候...',
-    //     background: 'rgba(0, 0, 0, 0.7)'
-    //   });k
-    // }
 
     const response = await fetch('/api/scheduleUpload', {
       method: 'POST',
@@ -1143,10 +1139,6 @@ const confirmScheduleJob = async (immediately = false) => {
       body: JSON.stringify({ ...scheduleForm.value, immediately }),
     })
 
-    // 关闭加载提示
-    // if (loadingInstance) {
-    //   loadingInstance.close();
-    // }
 
     if (!response.ok) {
       throw new Error('设置失败')
@@ -1185,8 +1177,8 @@ const confirmScheduleJob = async (immediately = false) => {
     ElMessage.error('设置定时任务失败');
   }
 }
-const activeTab = ref('platform')
 
+const activeTab = ref('platform')
 const editRewardDialogVisible = ref(false)
 const editRewardForm = ref({
   platformName: '',
@@ -1253,7 +1245,6 @@ const openEditRewardDialog = (gameName, platform) => {
     {
       name: '',
       specialTag: '',
-
       eDate: '',
       reward: [
         {
@@ -1356,7 +1347,7 @@ const getScheduleJobButtonType = (speReq, platformName: PlatformType) => {
   return 'info';
 }
 
-const allGameList = ref([])
+
 const dialogVisible = ref(false)
 const getDefaultDate = (monthsAgo = 0) => {
   const date = new Date()
@@ -1380,6 +1371,12 @@ const downloadSettings = ref({
   latest: getDefaultDate(), // 默认当前 YYYY/MM/DD
   currentUpdateGameList: [],
 })
+
+const batchFFmpegDialogVisible = ref(false)
+const batchGames = computed(() =>
+  // 计算出有活动的游戏，allMoney > 0 的游戏
+  allGameList.value.filter((g) => g.allMoney > 0)
+)
 
 const ffmpegDialogVisible = ref(false)
 const musicOptions = ref(['随机', 'billll', '难却'])
@@ -1419,6 +1416,7 @@ const defaultDeduplicationConfigs = {
   },
 }
 const ffmpegSettings = ref({
+  enableRename: true,
   onlyRename: false,
   checkName: false,
   beforeTime: 0,
@@ -1429,6 +1427,7 @@ const ffmpegSettings = ref({
   musicName: 'billll',
   gameName: '',
   groupName: '',
+
   addPublishTime: false,
   deduplicationConfig: {
     enable: false,
@@ -1443,7 +1442,7 @@ const ffmpegSettings = ref({
   mergeMusicName: '随机',
   videoDir: '', // 视频处理路径
 })
-
+const publicFFmpegConfig = ref(ffmpegSettings.value)
 // 处理去重开关变化
 const handleDeduplicationChange = (value) => {
   if (value) {
@@ -1553,7 +1552,7 @@ interface ScheduleJobItem {
   successExecAccount: string[];
 }
 
-interface ScheduleJob {
+export interface ScheduleJob {
   gameName: string;
   topicName: string;
   missionId: number;
@@ -1592,8 +1591,8 @@ const fetchData = async () => {
     allGameList.value = res.allGameList.map((e) => ({ name: e, checked: false }))
     scheduleJobMap.value = res.scheduleJob
     topicJson.value = res.topicJson
-    // 默认全选当前平台所有账号
     allPlatformAccounts.value = res.platformAccountMap
+    batchGames
     ElMessage.success('数据刷新成功')
   } catch (error) {
     console.error('Error fetching data:', error)
@@ -1790,7 +1789,6 @@ const formatRequirement = (requirement) => {
 
 
 
-// 添加新的响应式变量
 const scheduleJobDialogVisible = ref(false)
 const currentScheduleJob = ref(null)
 
@@ -1890,7 +1888,7 @@ const computedTrackTags = computed(() => {
   return formatTagsByPlatform(allTags, scheduleForm.value.platform)
 })
 
-// 处理赛道选择变化
+// 处理赛道变化
 const handleTrackChange = (value: string): void => {
   if (!value) {
     scheduleForm.value.tag = ''
@@ -1900,7 +1898,6 @@ const handleTrackChange = (value: string): void => {
   scheduleForm.value.tag = computedTrackTags.value
 }
 
-// 添加新的响应式变量
 const unfinishedTasksDialogVisible = ref(false)
 const unfinishedTasks = ref([])
 

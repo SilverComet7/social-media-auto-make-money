@@ -1,6 +1,5 @@
 <template>
   <div class="min-h-screen bg-gray-900 p-10 flex flex-col items-center justify-center">
-    <!--  w-[1920px] h-[1080px] -->
 
     <!-- <audio :src="`${voice}`"></audio> -->
     <audio ref="audioPlayer" src="../../public/五月天 - 后来的我们.mp3"></audio>

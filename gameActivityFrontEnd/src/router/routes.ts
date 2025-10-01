@@ -19,5 +19,11 @@ export const routes: RouteConfig[] = [
     name: '虎扑评分',
     icon: DataAnalysis,
     component: () => import('../views/HupuRating.vue')
+  },
+  {
+    path: '/SortDemo',
+    name: '排序排版演示',
+    icon: DataAnalysis,
+    component: () => import('../views/SortDemo.vue')
   }
 ]
