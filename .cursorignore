@@ -1,0 +1,18 @@
+# 忽略图像相关目录
+/@image/
+
+# 忽略常见临时文件
+node_modules/
+.DS_Store
+*.log
+*.tmp
+*.swp
+*.code-workspace
+
+# 忽略IDE相关配置
+.vscode/
+.idea/
+
+# 忽略上传中间文件
+temp/
+output/

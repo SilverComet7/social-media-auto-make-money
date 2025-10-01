@@ -40,7 +40,7 @@
         </div>
         <div v-else>
           <!-- <input v-show="isCardEdit" v-model="des" /> -->
-           {{ description }}
+          {{ description }}
           <!-- <span v-show="!isCardEdit">{{ description }}</span> -->
         </div>
       </div>

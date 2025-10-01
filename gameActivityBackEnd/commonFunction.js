@@ -1,16 +1,15 @@
 const fs = require("fs");
-
-// 格式化 YYYY-MM-DD 为秒级时间戳
+const path = require("path");
+const jsonParentPath = 'jsonFile';
 
 function formatSecondTimestamp(dateString, unit) {
   const date = new Date(dateString);
   if (unit === 'second') {
-      return Math.floor(date.getTime() / 1000);
+    return Math.floor(date.getTime() / 1000);
   }
   return date.getTime();
 }
 
-// 计算天数差
 const getDaysDiff = (timeStamp1, timeStamp2) => {
   const diffTime = timeStamp1 - timeStamp2;
   const endDiffDate = diffTime / (1000 * 60 * 60 * 24);
@@ -24,7 +23,9 @@ const formatDate = (timestamp = new Date().getTime()) => {
   );
 };
 
-function getOldData(jsonPath = "./data.json") {
+function getJsonData(inJsonPath = "data.json") {
+  const jsonPath = path.join(__dirname, jsonParentPath, inJsonPath);
+
   try {
     if (!fs.existsSync(jsonPath)) {
       console.warn(`文件不存在: ${jsonPath}`);
@@ -34,11 +35,6 @@ function getOldData(jsonPath = "./data.json") {
 
     try {
       let oldDataArr = JSON.parse(data);
-
-      // 确保返回的是数组
-      if (!Array.isArray(oldDataArr)) {
-        console.warn(`${jsonPath} 的内容不是数组格式`);
-      }
 
       return oldDataArr;
     } catch (parseError) {
@@ -52,6 +48,12 @@ function getOldData(jsonPath = "./data.json") {
   }
 }
 
+async function writeLocalDataJson(arr, fileName = "data.json") {
+  const data = JSON.stringify(arr, null, 2);
+  const filePath = path.join(__dirname, jsonParentPath, fileName);
+  fs.writeFileSync(filePath, data);
+}
+
 async function concurrentFetchWithDelay(
   promises,
   minDelay = 100,
@@ -59,27 +61,31 @@ async function concurrentFetchWithDelay(
   limitNum = 5
 ) {
   const pLimit = (await import("p-limit")).default;
-  const limit = pLimit(limitNum); // 假设我们限制并发为1，可以根据需要调整
+  const limit = pLimit(limitNum);
 
   const limitedPromises = promises.map((promiseFactory) =>
     limit(async () => {
-      if (typeof promiseFactory !== "function") {
-        throw new TypeError(
-          "Each element in the promises array must be a function that returns a Promise."
+      try {
+        if (typeof promiseFactory !== "function") {
+          throw new TypeError(
+            "Each element in the promises array must be a function that returns a Promise."
+          );
+        }
+        const result = await promiseFactory();
+        await new Promise((resolve) =>
+          setTimeout(resolve, Math.random() * (maxDelay - minDelay) + minDelay)
         );
+        return result;
+      } catch (error) {
+        console.error(error);
       }
-      const result = await promiseFactory();
-      await new Promise((resolve) =>
-        setTimeout(resolve, Math.random() * (maxDelay - minDelay) + minDelay)
-      );
-      return result;
     })
   );
 
   return Promise.all(limitedPromises);
 }
 
-// 计算能简单瓜分到的钱
+// 计算能简单瓜分到的钱  任务指标【根据账号数据调整】
 function calculateTotalMoney(gameData) {
   let totalMoney = 0;
 
@@ -100,11 +106,20 @@ function calculateTotalMoney(gameData) {
   return totalMoney;
 }
 
+// 获取随机音乐名称
+function getRandomMusicName(dirPath = 'D:/code/platform_game_activity/TikTokDownloader/素材/music') {
+  const musicNames = fs.readdirSync(dirPath);
+  return musicNames[Math.floor(Math.random() * musicNames.length)];
+}
+
+
 module.exports = {
   formatDate,
-  getOldData,
+  getJsonData,
   formatSecondTimestamp,
   getDaysDiff,
   concurrentFetchWithDelay,
   calculateTotalMoney,
+  writeLocalDataJson,
+  getRandomMusicName
 };
