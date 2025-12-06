@@ -18,6 +18,17 @@ async function moveFilePath(gameFolder, oldFilePath, fileName, checkName) {
   }
 }
 
+// 打开Windows文件夹
+function openWindowsFolder(folderPath) {
+  try {
+    // 使用Windows的explorer命令打开文件夹
+    spawn('explorer', [folderPath], { shell: true });
+    console.log(`已打开文件夹: ${folderPath}`);
+  } catch (err) {
+    console.error(`打开文件夹失败: ${folderPath}`, err);
+  }
+}
+
 
 async function groupVideos(gameArr, fileName, dirMatchAccountGameType, videosDirPath, folderName, checkName) {
   const fileGameType = gameArr.find(game => fileName.includes(game));
@@ -58,12 +69,12 @@ async function downloadVideosAndGroup({
   currentUpdateGameList,    // 控制哪些game下载
   earliest,    // 统一下载的最早时间,为空字符串则没有日期限制下载全部作品,活动起始时间
   latest,
+  minDuration = 30,    // 视频最小时长（秒），默认30秒
 
   selectedStrategy = 'group', // 新增策略参数
   keyword = '',       // 新增关键词参数
   filePath = '',      // 新增下载文件路径参数
   groupDir = ''       // 新增分组目录参数
-  // 时长筛选控制
 }) {
 
   try {
@@ -110,6 +121,9 @@ async function downloadVideosAndGroup({
       }));
       console.log(isEnableAccount, gameAccountCount);
 
+      // 收集实际下载的游戏类型（去重）
+      const downloadedGameTypes = [...new Set(isEnableAccount.map(acc => acc.game))];
+
       // 根据不同下载方式，设置运行命令  参考TikTokDownloader
       if (['group', "checkNewAdd", 'all'].includes(selectedStrategy)) settings.run_command = '6 1 1 Q'
       else if (selectedStrategy == 'filePath') settings.run_command = '6 2 2 Q'
@@ -134,6 +148,11 @@ async function downloadVideosAndGroup({
             return;
           }
           envVars.download_path = filePath;
+        }
+
+        // 传递视频最小时长参数给Python脚本
+        if (minDuration && minDuration > 0) {
+          envVars.MIN_DURATION = minDuration.toString();
         }
 
         // spawn 子进程，与主进程并行执行
@@ -165,6 +184,19 @@ async function downloadVideosAndGroup({
           pythonProcess.on('exit', (code) => {
             if (code === 0) {
               console.log('Python脚本执行成功');
+              // 下载完成后，如果游戏类型数量在1-3个，打开对应的文件夹
+              if (downloadedGameTypes.length >= 1 && downloadedGameTypes.length <= 3) {
+                downloadedGameTypes.forEach(gameType => {
+                  const gameFolderPath = path.join(TikTokDownloader_ROOT, "gameList", gameType);
+                  if (fs.existsSync(gameFolderPath)) {
+                    openWindowsFolder(gameFolderPath);
+                  } else {
+                    console.log(`文件夹不存在，跳过打开: ${gameFolderPath}`);
+                  }
+                });
+              } else if (downloadedGameTypes.length > 3) {
+                console.log(`下载了${downloadedGameTypes.length}个游戏类型，为避免打开过多文件夹，已跳过自动打开`);
+              }
               resolve();
             } else {
               reject(new Error(`Python脚本执行失败，退出码: ${code}`));

@@ -21,8 +21,10 @@
             <h3 class="text-lg font-bold mb-2 text-black">爬虫查询操作</h3>
             <div class="flex">
               <el-button type="primary" @click="updateAllPlatformData">查询全平台视频数据</el-button>
-              <el-button type="primary"
-                @click="() => { fetchNewBiliBiliActivityData(); fetchNewBiliBiliTopicData() }">查询B站新活动与Topic</el-button>
+              <el-button type="primary" @click="() => {
+                fetchNewBiliBiliActivityData();
+                // fetchNewBiliBiliTopicData()
+              }">查询B站新活动与Topic</el-button>
             </div>
           </div>
           <!-- 视频下载处理栏 -->
@@ -106,7 +108,8 @@
                           <a :href="speReq.act_url" target="_blank" class="font-bold text-blue-600"
                             v-if="platform.name === 'bilibili'">{{ speReq.name }} {{ speReq.comment }}</a>
                           <h4 class="font-bold" v-else>{{ speReq.name }}</h4>
-                          <h4 class="font-bold" v-if="platform.name === 'bilibili'">
+                          <h4 class="font-bold text-blue-800 cursor-pointer" v-if="platform.name === 'bilibili'"
+                            @click="copyTag(speReq.topic)">
                             话题：{{ speReq.topic }}
                           </h4>
                           <el-button type="primary"
@@ -442,12 +445,6 @@
         </el-form-item>
         <div v-if="downloadSettings.isDownload">
 
-          <template v-if="downloadSettings.selectedStrategy === 'group'">
-            <el-form-item label="选择分组">
-              <el-checkbox v-for="game in allGameList" :key="game.name" v-model="game.checked" :label="game.name" />
-            </el-form-item>
-          </template>
-
           <el-form-item label="下载策略">
             <el-radio-group v-model="downloadSettings.selectedStrategy">
               <el-radio label="group">按分组下载</el-radio>
@@ -457,6 +454,14 @@
               <el-radio label="filePath">读取download.txt</el-radio>
             </el-radio-group>
           </el-form-item>
+
+          <template v-if="downloadSettings.selectedStrategy === 'group'">
+            <el-form-item label="选择分组">
+              <el-checkbox v-for="game in allGameList" :key="game.name" v-model="game.checked" :label="game.name" />
+            </el-form-item>
+          </template>
+
+
 
           <template v-if="downloadSettings.selectedStrategy === 'keyword'">
             <el-form-item label="关键词">
@@ -476,6 +481,10 @@
             </el-form-item>
             <el-form-item label="视频结束时间">
               <el-input v-model="downloadSettings.latest" placeholder="统一下载的截止时间 xx/xx/xx" />
+            </el-form-item>
+            <el-form-item label="视频最小时长（秒）">
+              <el-input-number v-model="downloadSettings.minDuration" :min="0" :max="600" placeholder="默认30秒" />
+              <span class="ml-2 text-gray-500">只下载时长大于等于此值的视频</span>
             </el-form-item>
           </template>
         </div>
@@ -626,7 +635,7 @@
               <el-input-number v-model="ffmpegSettings.segmentDuration" :min="1" :max="60" />
               <!-- 自动根据合并最小时长以及秒数计算需要的分镜（视频文件）数，向上取整 -->
               需要{{
-                Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration)
+              Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration)
               }}个大于该分镜秒数的视频文件
             </el-form-item>
             <el-form-item label="混剪数量">
@@ -1369,6 +1378,7 @@ const downloadSettings = ref({
   checkName: false,
   earliest: getDefaultDate(4), // 默认近4个月 YYYY/MM/DD
   latest: getDefaultDate(), // 默认当前 YYYY/MM/DD
+  minDuration: 30, // 默认30秒以上
   currentUpdateGameList: [],
 })
 
@@ -1604,7 +1614,6 @@ const fetchNewBiliBiliActivityData = async () => {
     const response = await fetch('/api/getNewActData')
     const res = await response.json()
     if (res.code == -101) {
-      // 自动登录
       return ElMessage.error('请先登录')
     }
     fetchData()
@@ -1619,7 +1628,6 @@ const fetchNewBiliBiliTopicData = async () => {
     if (res.code == -101) {
       return ElMessage.error('请先登录')
     }
-    // fetchData()
   } catch (error) {
     console.error('Error fetching data:', error)
   }
