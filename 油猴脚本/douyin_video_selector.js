@@ -143,6 +143,9 @@
             name = prompt('请输入昵称：', '');
             if (!name) return;
         }
+
+        const bilibiliSearchUrl = 'https://search.bilibili.com/upuser?keyword=' + encodeURIComponent(name);
+        window.open(bilibiliSearchUrl, '_blank', 'noopener');
         const url = window.location.href;
         const userInfo = {
             mark: name,
@@ -163,9 +166,36 @@
         });
     }
 
+
+    function filterNoUsers() {
+        // 只在 /jingxuan/search/ 且 type=user 的页面执行
+        const isJingxuanUserSearch =
+            /\/jingxuan\/search\//.test(window.location.pathname) &&
+            /(^|&|\?)type=user(&|$)/.test(window.location.search);
+
+        if (!isJingxuanUserSearch) return;
+
+        // 一个相对稳妥的遍历方式：
+        // 找所有指向 /user/ 的链接，然后向上找到整张用户卡片容器
+        const userLinks = document.querySelectorAll('a[href*="/user/"]');
+
+        userLinks.forEach(link => {
+            const card = link.closest('div[class]'); // 粗粒度：向上找最近的 div 容器
+            if (!card) return;
+
+            const text = (card.textContent || '').trim();
+            if (!text) return;
+
+            if (text.includes('搬运') || text.includes('全网')) {
+                card.style.display = 'none';
+            }
+        });
+    }
+
     // 监听页面变化
     const observer = new MutationObserver(() => {
         addCheckboxesToVideos();
+        filterNoUsers();
     });
 
     // 初始化
@@ -173,6 +203,8 @@
         createCopyButton();
         addCheckboxesToVideos();
         createCopyUserInfoButton(); // 新增：初始化时插入用户信息按钮
+        // 新增：初始化时先过滤一次
+        filterNoUsers();
         // 监听页面内容变化
         observer.observe(document.body, {
             childList: true,

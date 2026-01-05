@@ -69,8 +69,7 @@ async function downloadVideosAndGroup({
   currentUpdateGameList,    // 控制哪些game下载
   earliest,    // 统一下载的最早时间,为空字符串则没有日期限制下载全部作品,活动起始时间
   latest,
-  minDuration = 30,    // 视频最小时长（秒），默认30秒
-
+  minDuration = 6,    // 视频最小时长（秒），默认6秒
   selectedStrategy = 'group', // 新增策略参数
   keyword = '',       // 新增关键词参数
   filePath = '',      // 新增下载文件路径参数
@@ -98,10 +97,11 @@ async function downloadVideosAndGroup({
           acc.enable = !oldAcc; // 简化逻辑：如果找到旧数据则禁用，否则启用
         } else {
           // 分组下载 游戏列表设置启用状态  如果上一次下载的时间对比这一次，latest最近7天内没有下载过，则下载
-          const latestDate = new Date(acc.latest);
+          const lastDownloadDate = new Date(acc.latest);
           const fifteenDaysAgo = new Date();
           fifteenDaysAgo.setDate(fifteenDaysAgo.getDate() - 7);
-          acc.enable = latestDate < fifteenDaysAgo && currentUpdateGameList.includes(acc.game)
+          const is_7_Days_download = lastDownloadDate < fifteenDaysAgo;
+          acc.enable = currentUpdateGameList.includes(acc.game)
         }
         if (acc.enable && earliest) acc.earliest = earliest
         if (acc.enable && latest) acc.latest = latest

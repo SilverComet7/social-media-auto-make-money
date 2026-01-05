@@ -20,9 +20,9 @@ async function queryDouYinAllAccountsData() {
     })
 
     let data = await concurrentFetchWithDelay(promises, 1000, 3000, 1); 
-    let handleData = data.map((item, index) => ({
+    let handleData = data.filter(Boolean).map((item) => ({
         user: {
-            name: item?.user?.nickname || item.aweme_list?.[0]?.author.nickname,
+            name: item?.user?.nickname || item?.aweme_list?.[0]?.author.nickname,
             aweme_count: item.user.aweme_count,
             follower_count: item.user.follower_count
         },

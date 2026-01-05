@@ -112,12 +112,13 @@
                             @click="copyTag(speReq.topic)">
                             话题：{{ speReq.topic }}
                           </h4>
+                          <div>播放量：{{ speReq.arc_play_vv }} </div>
                           <el-button type="primary"
-                            @click="setScheduleJob(speReq, platform, scope.row)">设置该活动定时执行任务</el-button>
+                            @click="setScheduleJob(speReq, platform, scope.row)">设置该活动定时任务</el-button>
                           <el-button :type="getScheduleJobButtonType(speReq, platform.name)" v-if="scheduleJobMap[platform.name]?.find((e) => e.topicName === speReq.topic || e.topicName === speReq.name)
                           " @click="showScheduleJobDialog(speReq, platform.name)">{{ getScheduleJobButtonType(speReq,
                             platform.name) === 'danger' ? '查看未完成任务' : '查看定时任务' }}</el-button>
-                          <h4 class="font-bold" v-if="speReq.eDate" :class="getDaysDiff(new Date(speReq.eDate).getTime()) <= 4
+                          <h4 class="font-bold" v-if="speReq.eDate" :class="getDaysDiff(new Date(speReq.eDate).getTime()) <= 10
                             ? 'text-orange-500'
                             : ''
                             ">
@@ -250,7 +251,7 @@
                           : getDaysDiff(scope.row.etime * 1000) >= 0
                       ">
                         <!-- <h4 class="font-bold" v-if="rew.sDate">活动开始{{ rew.sDate }} </h4> -->
-                        <h4 class="font-bold" v-if="rew.eDate" :class="getDaysDiff(new Date(rew.eDate).getTime()) <= 4 ? 'text-orange-500' : ''
+                        <h4 class="font-bold" v-if="rew.eDate" :class="getDaysDiff(new Date(rew.eDate).getTime()) <= 15 ? 'text-orange-500' : ''
                           ">
                           活动结束{{ rew.eDate }} 还剩{{
                             getDaysDiff(new Date(rew.eDate).getTime())
@@ -321,7 +322,7 @@
         </el-table>
         <el-empty v-else description="No data available" />
       </el-tab-pane>
-      <el-tab-pane label="B站打卡挑战" name="bilibili_daka" lazy>
+      <!-- <el-tab-pane label="B站打卡挑战" name="bilibili_daka" lazy>
         <el-affix :offset="20" :right="20" class="right-4">
           <el-button type="primary" @click="fetchNewDakaData">查询新的打卡挑战数据</el-button>
         </el-affix>
@@ -435,7 +436,7 @@
             </template>
           </el-table-column>
         </el-table>
-      </el-tab-pane>
+      </el-tab-pane> -->
     </el-tabs>
 
     <el-dialog title="下载视频和分组区分" v-model="dialogVisible" :before-close="cancelDownloadSettings">
@@ -482,11 +483,11 @@
             <el-form-item label="视频结束时间">
               <el-input v-model="downloadSettings.latest" placeholder="统一下载的截止时间 xx/xx/xx" />
             </el-form-item>
-            <el-form-item label="视频最小时长（秒）">
-              <el-input-number v-model="downloadSettings.minDuration" :min="0" :max="600" placeholder="默认30秒" />
-              <span class="ml-2 text-gray-500">只下载时长大于等于此值的视频</span>
-            </el-form-item>
           </template>
+          <el-form-item label="视频最小时长（秒）">
+            <el-input-number v-model="downloadSettings.minDuration" :min="0" :max="600" placeholder="默认30秒" />
+            <span class="ml-2 text-gray-500">只下载时长大于等于此值的视频</span>
+          </el-form-item>
         </div>
         <el-form-item label="分组目录" v-else>
           <el-input v-model="downloadSettings.groupDir" placeholder="请输入分组目录" />
@@ -504,153 +505,7 @@
     </el-dialog>
 
     <el-dialog title="FFmpeg 处理设置" v-model="ffmpegDialogVisible">
-      <el-form :model="ffmpegSettings" label-width="250px">
-        <el-form-item label="名称">
-          <el-select v-model="ffmpegSettings.gameName" placeholder="请输入游戏名称" filterable clearable>
-            <el-option v-for="game in allGameList" :key="game.name" :label="game.name" :value="game.name" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="分组">
-          <el-select v-model="ffmpegSettings.groupName" placeholder="请选择分组" filterable clearable>
-            <el-option label="攻略" value="攻略" />
-            <el-option v-for="game in allGameList.slice(0, 2)" :key="game.name" :label="game.name" :value="game.name" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="处理地址">
-          <el-input v-model="ffmpegSettings.videoDir" placeholder="请输入处理地址" />
-        </el-form-item>
-        <el-divider>标题相关</el-divider>
-        <el-form-item label="是否开启重命名">
-          <el-switch v-model="ffmpegSettings.enableRename" active-text="是" inactive-text="否" />
-          <!-- <div v-if="ffmpegSettings.enableRename">
-            <el-form-item label="预检查名称（避免相同名称）">
-              <el-switch v-model="ffmpegSettings.checkName" active-text="是" inactive-text="否" />
-            </el-form-item>
-            <el-form-item label="添加发布时间（避免相同名称）">
-              <el-switch v-model="ffmpegSettings.addPublishTime" active-text="是" inactive-text="否" />
-            </el-form-item>
-          </div> -->
-        </el-form-item>
-
-        <div>
-          <el-divider>视频预处理配置</el-divider>
-          <el-form-item label="是否开启去重配置">
-            <el-switch v-model="ffmpegSettings.deduplicationConfig.enable" @change="handleDeduplicationChange" />
-            <div v-if="ffmpegSettings.deduplicationConfig.enable">
-              <el-form-item label="变速因子">
-                <el-slider v-model="ffmpegSettings.deduplicationConfig.speedFactor" :min="0.8" :max="1.2"
-                  :step="0.05" />
-              </el-form-item>
-
-              <el-form-item label="启用镜像">
-                <el-switch v-model="ffmpegSettings.deduplicationConfig.enableMirror" />
-              </el-form-item>
-
-              <el-form-item label="启用旋转">
-                <el-switch v-model="ffmpegSettings.deduplicationConfig.enableRotate" />
-                <el-input-number v-if="ffmpegSettings.deduplicationConfig.enableRotate"
-                  v-model="ffmpegSettings.deduplicationConfig.rotateAngle" :min="0" :max="360" :step="1" />
-              </el-form-item>
-
-              <el-form-item label="启用模糊">
-                <el-switch v-model="ffmpegSettings.deduplicationConfig.enableBlur" />
-                <el-slider v-if="ffmpegSettings.deduplicationConfig.enableBlur"
-                  v-model="ffmpegSettings.deduplicationConfig.blurRadius" :min="0" :max="1" :step="0.1" />
-              </el-form-item>
-
-              <!-- <el-form-item label="启用淡入淡出">
-                <el-switch v-model="ffmpegSettings.deduplicationConfig.enableFade" />
-                <el-input-number v-if="ffmpegSettings.deduplicationConfig.enableFade"
-                  v-model="ffmpegSettings.deduplicationConfig.fadeDuration" :min="0" :max="2" :step="0.1" />
-              </el-form-item> -->
-
-              <el-form-item label="亮度调整">
-                <el-slider v-model="ffmpegSettings.deduplicationConfig.brightness" :min="-1" :max="1" :step="0.1" />
-              </el-form-item>
-
-              <el-form-item label="对比度调整">
-                <el-slider v-model="ffmpegSettings.deduplicationConfig.contrast" :min="0" :max="2" :step="0.1" />
-              </el-form-item>
-
-              <el-form-item label="饱和度调整">
-                <el-slider v-model="ffmpegSettings.deduplicationConfig.saturation" :min="0" :max="2" :step="0.1" />
-              </el-form-item>
-
-              <!-- <el-divider>背景虚化设置</el-divider> -->
-              <el-form-item label="启用背景虚化">
-                <el-switch v-model="ffmpegSettings.deduplicationConfig.enableBgBlur" />
-              </el-form-item>
-
-              <template v-if="ffmpegSettings.deduplicationConfig.enableBgBlur">
-                <el-form-item label="上部虚化比例">
-                  <el-slider v-model="ffmpegSettings.deduplicationConfig.bgBlurTop" :min="0" :max="1" :step="0.1" />
-                </el-form-item>
-
-                <el-form-item label="下部虚化比例">
-                  <el-slider v-model="ffmpegSettings.deduplicationConfig.bgBlurBottom" :min="0" :max="1" :step="0.1" />
-                </el-form-item>
-              </template>
-            </div>
-          </el-form-item>
-
-          <el-form-item label="是否开启视频变换">
-            <el-switch v-model="ffmpegSettings.enableTransform" />
-            <template v-if="ffmpegSettings.enableTransform">
-              <el-form-item label="截取开始n秒后">
-                <el-input-number v-model="ffmpegSettings.beforeTime" :min="0" :max="100" />
-              </el-form-item>
-              <el-form-item label="截取结尾n秒前">
-                <el-input-number v-model="ffmpegSettings.afterTime" :min="0" :max="100" />
-              </el-form-item>
-
-              <el-form-item label="添加固定片尾">
-                <el-switch v-model="ffmpegSettings.addEnding" active-text="是" inactive-text="否" />
-              </el-form-item>
-              <el-form-item label="帧率">
-                <el-input-number v-model="ffmpegSettings.fps" :min="30" :max="60" />
-              </el-form-item>
-              <el-form-item label="分辨率百分比">
-                <el-input-number v-model="ffmpegSettings.scalePercent" :min="0" :max="100" />
-              </el-form-item>
-              <el-form-item label="单视频替换音乐">
-                <el-switch v-model="ffmpegSettings.replaceMusic" active-text="是" inactive-text="否" />
-                <el-select v-model="ffmpegSettings.musicName" placeholder="请选择音乐" v-if="ffmpegSettings.replaceMusic">
-                  <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
-                </el-select>
-              </el-form-item>
-            </template>
-          </el-form-item>
-
-          <!-- 新增合并视频控制选项 -->
-          <el-divider>合并视频设置</el-divider>
-          <el-form-item label="启用视频合并">
-            <el-switch v-model="ffmpegSettings.enableMerge" />
-          </el-form-item>
-
-          <template v-if="ffmpegSettings.enableMerge">
-            <el-form-item label="合并视频最小时长(秒)">
-              <el-input-number v-model="ffmpegSettings.mergedMinTime" :min="8" :max="60" />
-            </el-form-item>
-            <el-form-item label="每个分镜秒数">
-              <el-input-number v-model="ffmpegSettings.segmentDuration" :min="1" :max="60" />
-              <!-- 自动根据合并最小时长以及秒数计算需要的分镜（视频文件）数，向上取整 -->
-              需要{{
-              Math.ceil(ffmpegSettings.mergedMinTime / ffmpegSettings.segmentDuration)
-              }}个大于该分镜秒数的视频文件
-            </el-form-item>
-            <el-form-item label="混剪数量">
-              <el-input-number v-model="ffmpegSettings.mixCount" :min="1" :max="100" />
-            </el-form-item>
-            <el-form-item label="启用合集音乐">
-              <el-switch v-model="ffmpegSettings.enableMergeMusic" />
-              <el-select v-if="ffmpegSettings.enableMergeMusic" v-model="ffmpegSettings.mergeMusicName"
-                placeholder="请选择音乐">
-                <el-option v-for="music in musicOptions" :key="music" :label="music" :value="music" />
-              </el-select>
-            </el-form-item>
-          </template>
-        </div>
-      </el-form>
+      <ffmpegConfigForm v-model="ffmpegSettings" @deduplication-change="handleDeduplicationChange" />
       <template #footer>
         <span class="dialog-footer">
           <el-button type="primary" @click="confirmFFmpegSettings">确 定</el-button>
@@ -668,7 +523,7 @@
             <el-option label="快手" value="快手" />
           </el-select>
         </el-form-item>
-        <el-form-item label="B站多标签引流" v-if="editRewardForm.platformName === 'bilibili'">
+        <el-form-item label="B站多标签" v-if="editRewardForm.platformName === 'bilibili'">
           <el-input v-model="editRewardForm.suppleTag" placeholder="请输入支撑标签" />
         </el-form-item>
         <el-form-item label="活动赛道">
@@ -823,6 +678,9 @@
           <el-form-item label="活动ID">
             <el-input v-model="scheduleForm.missionId" placeholder="请输入活动ID" />
           </el-form-item>
+          <el-form-item label="话题ID">
+            <el-input v-model="scheduleForm.topicId" placeholder="请输入话题ID" />
+          </el-form-item>
         </template>
       </el-form>
       <template #footer>
@@ -907,6 +765,7 @@ import { ref, onMounted, computed } from 'vue'
 import { ElMessage, ElLoading, ElMessageBox } from 'element-plus'
 import bilibiliTid from '../../public/bilibiliTid.json' // B站分区数据
 import BatchGameFFmpegDialog from '../components/FFmpegBatchGameDialog.vue'
+import ffmpegConfigForm from '@/components/ffmpegConfigForm.vue'
 import { allGameList } from '@/state/globalState'
 
 interface BilibiliArea {
@@ -953,6 +812,8 @@ interface SpecialTagRequirement {
   minVideoTime?: number
   minView?: number
   topic?: string
+  mission_id?: string
+  topic_id?: string
   reward: Reward[]
   videoData?: VideoData[]
 }
@@ -1059,7 +920,7 @@ const setScheduleJob = async (
   platform: PlatformReward,
   row: GameActivity,
 ) => {
-  const { topic, specialTag, eDate } = rew
+  const { topic, specialTag, eDate, mission_id } = rew
 
   const hasTopicName = topic || rew.name
   if (!hasTopicName) {
@@ -1067,7 +928,7 @@ const setScheduleJob = async (
     return
   }
 
-  let missionId = topicJson.value.find((item) => item.topic_name === topic)?.mission_id
+  let missionId = topicJson.value.find((item) => item.topic_name === topic)?.mission_id || mission_id
   // B站平台 如果没有找到对应的 missionId
   if (!missionId && platform.name === 'bilibili') {
     if (!topic) {
@@ -1113,6 +974,7 @@ const setScheduleJob = async (
     .join(platform.name === 'bilibili' ? ',' : ' ')
 
 
+  const videoDir = `D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\${row.name}\\攻略\\已重命名处理\\${topic || rew.name}`
 
   scheduleForm.value = {
     gameName: row.name,
@@ -1120,13 +982,14 @@ const setScheduleJob = async (
     platform: platform.name,
     tag: existingTag || allTag,
     disabledTag: !!existingTag,
-    missionId: missionId || '',
+    missionId: missionId || rew.mission_id,
+    topicId: rew.topic_id,
     startTime: new Date(new Date().setHours(24 + 6, 0, 0, 0)), // 次日早晨6点
     intervalHours: 2,
     immediately: false,
     selectedArea: '游戏区',
     tid: 172,
-    videoDir: '',
+    videoDir,
     etime: eDate ? new Date(eDate) : null, // 设置活动结束时间
     selectedAccounts: allPlatformAccounts.value[platformToKey[platformName]].map(account => account.accountName),
     douyinTitleControl: false,
@@ -1378,7 +1241,7 @@ const downloadSettings = ref({
   checkName: false,
   earliest: getDefaultDate(4), // 默认近4个月 YYYY/MM/DD
   latest: getDefaultDate(), // 默认当前 YYYY/MM/DD
-  minDuration: 30, // 默认30秒以上
+  minDuration: 6, // 默认6秒以上
   currentUpdateGameList: [],
 })
 
@@ -1396,8 +1259,8 @@ const defaultDeduplicationConfigs = {
     speedFactor: 0.95,
     enableMirror: true,
     enableRotate: true,
-    rotateAngle: 0.5,
-    enableBlur: false,
+    rotateAngle: 0.1,
+    enableBlur: true,
     blurRadius: 0.2,
     enableFade: false,
     fadeDuration: 0.5,
@@ -1407,22 +1270,46 @@ const defaultDeduplicationConfigs = {
     enableBgBlur: false,
     bgBlurTop: 0.1,
     bgBlurBottom: 0.1,
+    // 帧率去重默认配置
+    enableFrameChange: true,
+    frameChangeMode: 'light',
+    targetFps: 24,
+    finalFps: 30,
+    interpolateMode: 'mci',
+    // overlay 特效默认配置
+    enableOverlayEffect: true,
+    overlayPath: 'effect.mp4',
+    overlayLoop: true,
+    overlayBlendMode: 'lighten',
+    overlayOpacity: 1
   },
   coser: {
     speedFactor: 0.95,
     enableMirror: true,
     enableRotate: true,
-    rotateAngle: 0.5,
-    enableBlur: false,
-    blurRadius: 0.2,
+    rotateAngle: 0.1,
+    enableBlur: true,
+    blurRadius: 0.1,
     enableFade: false,
     fadeDuration: 0.5,
     brightness: 0.05,
-    contrast: 1,
-    saturation: 1,
+    contrast: 1.05,
+    saturation: 0.95,
     enableBgBlur: false,
     bgBlurTop: 0.1,
     bgBlurBottom: 0.1,
+    // 帧率去重默认配置
+    enableFrameChange: true,
+    frameChangeMode: 'light',
+    targetFps: 24,
+    finalFps: 30,
+    interpolateMode: 'mci',
+    // overlay 特效默认配置
+    enableOverlayEffect: true,
+    overlayPath: 'effect.mp4',
+    overlayLoop: true,
+    overlayBlendMode: 'lighten',
+    overlayOpacity: 1
   },
 }
 const ffmpegSettings = ref({
@@ -1451,21 +1338,50 @@ const ffmpegSettings = ref({
   mixCount: 2, // 默认混剪数量
   mergeMusicName: '随机',
   videoDir: '', // 视频处理路径
+
+  // 新增：特效配置
+  effectConfig: {
+    enable: false,
+    preset: 'none', // none, dynamic, dreamy, artistic, vintage, blackAndWhite, vibrant, slowMo, custom
+    selectedEffects: [],
+    applyOnMerge: false,
+    params: {
+      rotateAngle: 45,
+      blurAmount: 10,
+      sharpAmount: 1,
+      speedUpFactor: 1.5,
+      slowDownFactor: 0.75,
+      hue: 0,
+      saturation: 1,
+      zoomLevel: 1.2,
+      pixelSize: 10,
+      mosaicSize: 20,
+      borderWidth: 10,
+      borderColor: 'black'
+    }
+  },
+
+  // GPU加速配置
+  gpuQuality: 'balanced', // speed, balanced, quality
+
+  // 断点续传配置
+  enableResumeTask: false,
+  autoResumeTask: false
 })
 const publicFFmpegConfig = ref(ffmpegSettings.value)
 // 处理去重开关变化
 const handleDeduplicationChange = (value) => {
   if (value) {
     // 根据分组类型设置默认配置
-    const isCoser = ffmpegSettings.value.groupName.includes('coser')
-    const defaultConfig = isCoser
-      ? defaultDeduplicationConfigs.coser
-      : defaultDeduplicationConfigs.攻略
+    // const isCoser = ffmpegSettings.value.groupName.includes('coser')
+    // const defaultConfig = isCoser
+    //   ? defaultDeduplicationConfigs.coser
+    //   : defaultDeduplicationConfigs.攻略
 
     // 更新去重配置
     ffmpegSettings.value.deduplicationConfig = {
       enable: true,
-      ...defaultConfig,
+      ...defaultDeduplicationConfigs.coser,
     }
   }
 }
@@ -1518,7 +1434,7 @@ const cancelDownloadSettings = () => {
 }
 
 const getDaysHtml = (etime) => {
-  return `活动结束${formatDate(etime)} <br> 还剩  <span class="${getDaysDiff(etime * 1000) < 7 && getDaysDiff(etime * 1000) > 0 ? 'text-red-500' : ''}"> ${getDaysDiff(etime * 1000)}天`
+  return `活动结束${formatDate(etime)} <br> 还剩  <span class="${getDaysDiff(etime * 1000) < 15 && getDaysDiff(etime * 1000) > 0 ? 'text-red-500' : ''}"> ${getDaysDiff(etime * 1000)}天`
 }
 
 const getSpecialTagAll = (reward) => {
@@ -1666,13 +1582,10 @@ const fetchNewDakaData = async () => {
 
 onMounted(() => {
   fetchData()
-  // fetch('/api/test').then(res => {
-  //   console.log(res)
-  // })
 })
 
 const updateAllPlatformData = async () => {
-  await fetch(`/api/getPlatformData`, {
+  await fetch(`/api/getPlatformVideoData`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
@@ -1864,9 +1777,10 @@ const specialTrackTagConfigs: SpecialTrackConfigs = {
     baseTags: ['#搞笑', '#游戏搞笑', '#沙雕'],
     extraTags: ['#沙雕剪辑'],
   },
+
   攻略: {
-    baseTags: ['#攻略', '#教程'],
-    extraTags: ['#下载'],
+    baseTags: ['#攻略', '#教程', '入坑指南', "新手"],
+    extraTags: [],
   },
 }
 
