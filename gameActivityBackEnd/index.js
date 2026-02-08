@@ -96,16 +96,12 @@ app.get("/getNewActData", async (req, res) => {
         });
       writeLocalDataJson(newDataArr, 'data.json');
 
-
-
       let gameData = getJsonData("gameData.json");
       const gameDataArr = newActList
         .filter((item) => {
           return allGameList.some((gameName) => item.name.includes(gameName));
         })
       // 相同的游戏名活动去重，避免重复请求
-
-
 
       await Promise.all(
         gameDataArr
@@ -135,7 +131,7 @@ app.get("/getNewActData", async (req, res) => {
               const game_rewards_bilibili = thisGamePlatforms?.find((platform) => platform.name === "bilibili");
 
               if (!game_rewards_bilibili) {
-                thisGamePlatforms.unshift({
+                thisGamePlatforms?.unshift({
                   name: "bilibili",
                   specialTagRequirements: [],
                 });
@@ -155,7 +151,9 @@ app.get("/getNewActData", async (req, res) => {
                 }
 
                 const topicsWithActivity = result.data.result.topics.filter(
-                  topic => topic.show_activity_icon === true && topic.mission_id === activity.id && !game_rewards_bilibili?.specialTagRequirements.find((e) => e.topic_id === topic.id)
+                  topic => topic.show_activity_icon === true
+                    && topic.mission_id === activity.id  // 大活动id
+                    && game_rewards_bilibili?.specialTagRequirements.every((e) => e?.topic_id !== topic.id) // 已存活动没有相同id的小活动
                 ).map(topic => ({
                   name: activity.name,
                   act_url: activity.act_url,
@@ -173,14 +171,10 @@ app.get("/getNewActData", async (req, res) => {
                 if (!bilibili_special_acts_ing_list) {
                   game_rewards_bilibili.specialTagRequirements.push(...topicsWithActivity);
                 }
-
-
               }
             } catch (error) {
               console.error("Error fetching topic data:", error);
             }
-
-
           }));
 
       writeLocalDataJson(gameData, "gameData.json");

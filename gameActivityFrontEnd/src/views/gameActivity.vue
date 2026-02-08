@@ -4,17 +4,6 @@
 
     <el-tabs v-model="activeTab" type="card">
       <el-tab-pane label="四平台游戏活动激励" name="platform">
-        <!-- ! toFix 不能稳定固定在页面顶部 -->
-        <!-- <el-affix position="top" :offset="40" class="text-blue-800">
-          <el-button type="primary" @click="fetchData">获取后台合并数据</el-button>
-          <h4>公共标签参考</h4>
-          <div class="bg-red-300 h-[5vw] overflow-auto">
-            <div>#游戏鉴赏官 #联机游戏</div>
-            <div>#二次元 #音乐 #巅峰赛 #故事 #搞笑 #教程</div>
-            <div>#MMORPG #古风 #逆水寒</div>
-            <div>#射击游戏 #FPS #穿越火线 #无畏契约 #暗区突围 #三角洲行动 #枪战</div>
-          </div>
-        </el-affix> -->
         <div class="flex justify-between">
           <!-- 查询栏 -->
           <div class="operation-group bg-gray-300 p-4 rounded">
@@ -485,8 +474,12 @@
             </el-form-item>
           </template>
           <el-form-item label="视频最小时长（秒）">
-            <el-input-number v-model="downloadSettings.minDuration" :min="0" :max="600" placeholder="默认30秒" />
-            <span class="ml-2 text-gray-500">只下载时长大于等于此值的视频</span>
+            <div class="flex items-center">
+              <el-input-number v-model="downloadSettings.minDuration" :min="0" :max="600" placeholder="默认30秒" />
+              <el-button size="mini" class="ml-2" @click="downloadSettings.minDuration = 6">6s</el-button>
+              <el-button size="mini" class="ml-2" @click="downloadSettings.minDuration = 30">30s</el-button>
+              <span class="ml-2 text-gray-500">只下载时长大于等于此值的视频</span>
+            </div>
           </el-form-item>
         </div>
         <el-form-item label="分组目录" v-else>
@@ -529,12 +522,15 @@
         <el-form-item label="活动赛道">
           <div v-for="(specialTagRequirement, index) in editRewardForm.specialTagRequirements" :key="index">
             <el-card>
+              <!-- 不做该任务（展示但整个框标橙色） 参与人数多|奖励少 -->
+              <el-form-item label="不做该任务">
+                <el-switch v-model="specialTagRequirement.isNotDo" active-text="是" inactive-text="否" />
+              </el-form-item>
               <el-form-item label="活动名称">
                 <el-input v-model="specialTagRequirement.name" placeholder="请输入活动名称" />
               </el-form-item>
-              <!-- el-switch 不做该任务（展示但整个框标橙色） 参与人数多|奖励少 -->
-              <el-form-item label="不做该任务">
-                <el-switch v-model="specialTagRequirement.isNotDo" active-text="是" inactive-text="否" />
+              <el-form-item label="活动话题">
+                <el-input v-model="specialTagRequirement.topic" placeholder="请输入活动话题" />
               </el-form-item>
               <el-form-item label="视频最低时长">
                 <el-input-number v-model="specialTagRequirement.minVideoTime" />
@@ -542,15 +538,18 @@
               <el-form-item label="视频最低观看量">
                 <el-input-number v-model="specialTagRequirement.minView" />
               </el-form-item>
-              <el-form-item label="B站活动话题" v-if="editRewardForm.platformName === 'bilibili'">
-                <el-input v-model="specialTagRequirement.topic" placeholder="请输入活动话题" />
-              </el-form-item>
               <el-form-item label="必带标签">
                 <el-input v-model="specialTagRequirement.specialTag" placeholder="请输入必带标签" />
               </el-form-item>
               <el-form-item label="结束时间">
                 <el-date-picker v-model="specialTagRequirement.eDate" type="date" placeholder="选择结束时间"
                   format="YYYY/MM/DD" value-format="YYYY/MM/DD" />
+              </el-form-item>
+              <el-form-item label="活动ID" v-if="editRewardForm.platformName === 'bilibili'">
+                <el-input v-model="specialTagRequirement.mission_id" placeholder="请输入活动ID" />
+              </el-form-item>
+              <el-form-item label="话题ID" v-if="editRewardForm.platformName === 'bilibili'">
+                <el-input v-model="specialTagRequirement.topic_id" placeholder="请输入话题ID" />
               </el-form-item>
               <el-form-item label="奖励参数">
                 <div v-for="(reward, rewardIndex) in specialTagRequirement.reward" :key="rewardIndex">
@@ -561,9 +560,9 @@
                     <el-input-number v-model="reward.allViewNum" :min="0" :max="100" />
                     <span v-if="reward.allViewNum">{{ reward.allViewNum * 10000 }}</span>
                   </el-form-item>
-                  <el-form-item label="视频最低播放量计入">
+                  <!-- <el-form-item label="视频最低播放量计入">
                     <el-input-number v-model="reward.minView" :min="0" />
-                  </el-form-item>
+                  </el-form-item> -->
                   <el-form-item label="参与人数">
                     <el-input-number v-model="reward.joinedPerson" :min="0" :max="10000" />
                   </el-form-item>
@@ -592,7 +591,6 @@
                 </div>
                 <el-button type="primary" @click="addReward(index)">添加奖励</el-button>
               </el-form-item>
-
               <el-button type="danger" @click="removeSpecialTagRequirement(index)">删除活动赛道</el-button>
             </el-card>
           </div>
@@ -625,15 +623,20 @@
           <el-date-picker v-model="scheduleForm.etime" type="datetime" placeholder="选择结束时间" />
         </el-form-item>
         <el-form-item label="特殊赛道标签组">
-          <el-select v-model="selectedTrack" placeholder="选择特殊赛道" @change="handleTrackChange"
+          <el-select v-model="selectedTrack" multiple placeholder="选择特殊赛道（支持多选）" @change="handleTrackChange"
             style="margin-bottom: 10px" clearable>
-            <el-option v-for="(config, track) in specialTrackTagConfigs" :key="track" :label="track" :value="track">
-              <div>
+            <el-option v-for="(config, track) in specialTrackTagConfigs" :key="track"
+              :label="track + ' ' + config.baseTags.join(' ') + (config.extraTags && config.extraTags.length ? ' 附加:' + config.extraTags.join(' ') : '')"
+              :value="track">
+              <template #default>
                 <div>{{ track }}</div>
-                <small class="text-gray-500">
+                <small class="text-gray-500 block">
                   {{ config.baseTags.join(' ') }}
                 </small>
-              </div>
+                <small v-if="config.extraTags && config.extraTags.length" class="text-gray-500 block">
+                  附加: {{ config.extraTags.join(' ') }}
+                </small>
+              </template>
             </el-option>
           </el-select>
         </el-form-item>
@@ -675,10 +678,10 @@
               <el-option v-for="subArea in getSubAreas" :key="subArea.tid" :label="subArea.name" :value="subArea.tid" />
             </el-select>
           </el-form-item>
-          <el-form-item label="活动ID">
+          <el-form-item label="活动ID(大ID)">
             <el-input v-model="scheduleForm.missionId" placeholder="请输入活动ID" />
           </el-form-item>
-          <el-form-item label="话题ID">
+          <el-form-item label="话题ID(小ID)">
             <el-input v-model="scheduleForm.topicId" placeholder="请输入话题ID" />
           </el-form-item>
         </template>
@@ -929,7 +932,7 @@ const setScheduleJob = async (
   }
 
   let missionId = topicJson.value.find((item) => item.topic_name === topic)?.mission_id || mission_id
-  // B站平台 如果没有找到对应的 missionId
+  // B站平台 如果没有找到对应的 missionId 则尝试通过 topic 从接口获取最新的 missionId
   if (!missionId && platform.name === 'bilibili') {
     if (!topic) {
       ElMessage.error('没有找到对应的 topic')
@@ -1510,10 +1513,14 @@ const fetchData = async () => {
       if (item.show) {
         return true
       }
+      // Hide activities with 'infinite' end time (backend sets Number.MAX_SAFE_INTEGER for missing end dates)
+      if (!item.etime || item.etime >= Number.MAX_SAFE_INTEGER) return false
       return item.etime > new Date().getTime() / 1000 && !item.notDo
     })
     dakaTableData.value = res.dakaData
+    // Exclude activities with infinite end time (treated as no end)
     gameTableData.value = res.gameData
+    // .filter((item) => !(item.etime && item.etime >= Number.MAX_SAFE_INTEGER))
     allGameList.value = res.allGameList.map((e) => ({ name: e, checked: false }))
     scheduleJobMap.value = res.scheduleJob
     topicJson.value = res.topicJson
@@ -1762,40 +1769,62 @@ interface SpecialTrackConfigs {
   [key: string]: SpecialTrackConfig
 }
 
-const selectedTrack = ref<string>('')
+const selectedTrack = ref<string[]>([])
 
 const specialTrackTagConfigs: SpecialTrackConfigs = {
-  coser本人: {
+  coser: {
     baseTags: ['#coser', '#cos正片', '#cos', '#写真'],
-    extraTags: ['#coser本人'],
-  },
-  coser同行: {
-    baseTags: ['#coser', '#cos正片', '#cos', '#写真'],
-    extraTags: ['#coser同行'],
+    extraTags: [],
   },
   搞笑: {
     baseTags: ['#搞笑', '#游戏搞笑', '#沙雕'],
     extraTags: ['#沙雕剪辑'],
   },
-
   攻略: {
-    baseTags: ['#攻略', '#教程', '入坑指南', "新手"],
+    baseTags: ['#攻略', '#新手教程', '入坑指南'],
+    extraTags: [],
+  },
+  乙游: {
+    baseTags: ['#乙游', '#女性向游戏', '#galagame'],
+    extraTags: [],
+  },
+  二次元: {
+    baseTags: ['#二次元', '#角色扮演', '#动漫游戏'],
+    extraTags: [],
+  },
+  MMO: {
+    baseTags: ['#MMO', '#大型多人在线', '#网游'],
+    extraTags: [],
+  },
+  FPS: {
+    baseTags: ['#FPS', '#射击游戏', '#第一人称'],
+    extraTags: [],
+  },
+  RPG: {
+    baseTags: ['#RPG', '#角色扮演游戏', '#冒险'],
     extraTags: [],
   },
 }
 
 const computedTrackTags = computed(() => {
-  if (!selectedTrack.value || !scheduleForm.value?.gameName) {
+  if (!selectedTrack.value || selectedTrack.value.length === 0 || !scheduleForm.value?.gameName) {
     return ''
   }
 
-  const config = specialTrackTagConfigs[selectedTrack.value]
-  if (!config) return ''
+  // 收集所有选中赛道的标签
+  const allTagsSet = new Set<string>()
+  allTagsSet.add(`#${scheduleForm.value.gameName}`)
 
-  // 合并基础标签、额外标签和游戏名称
-  const allTags = [
-    ...new Set([`#${scheduleForm.value.gameName}`, ...config.baseTags, ...config.extraTags]),
-  ]
+  selectedTrack.value.forEach((track) => {
+    const config = specialTrackTagConfigs[track]
+    if (config) {
+      config.baseTags.forEach((t) => allTagsSet.add(t))
+      config.extraTags.forEach((t) => allTagsSet.add(t))
+    }
+  })
+
+  const allTags = Array.from(allTagsSet)
+
   const formatTagsByPlatform = (tags: string[], platform: string): string => {
     const formattedTags = tags.map((tag) => {
       if (platform === 'bilibili') {
@@ -1811,13 +1840,17 @@ const computedTrackTags = computed(() => {
 })
 
 // 处理赛道变化
-const handleTrackChange = (value: string): void => {
-  if (!value) {
+const handleTrackChange = (value: string[] | string): void => {
+  const hasValue = Array.isArray(value) ? value.length > 0 : !!value
+  if (!hasValue) {
     scheduleForm.value.tag = ''
     return
   }
 
-  scheduleForm.value.tag = computedTrackTags.value
+  // 仅在未禁用自动生成标签时更新
+  if (!scheduleForm.value.disabledTag) {
+    scheduleForm.value.tag = computedTrackTags.value
+  }
 }
 
 const unfinishedTasksDialogVisible = ref(false)

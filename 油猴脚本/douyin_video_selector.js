@@ -157,7 +157,7 @@
             latest: '2025/6/8',
             enable: false
         };
-        const text = JSON.stringify(userInfo, null, 2);
+        const text = JSON.stringify(userInfo, null, 2) + ',';
         navigator.clipboard.writeText(text).then(() => {
             alert('用户信息已复制到剪贴板！');
         }).catch(err => {

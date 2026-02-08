@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "nodemon --ignore '*.json' --ignore 'jsonFile/*' index.js",
     "dev_ts": "nodemon --ext js,ts --ignore '*.json' --ignore 'jsonFile/*' --exec ts-node index.js",
-    "dev:ts": "ts-node index.ts",
     "start": "node index.js",
+    "start_ts": "ts-node index.ts",
     "build": "tsc",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix"
