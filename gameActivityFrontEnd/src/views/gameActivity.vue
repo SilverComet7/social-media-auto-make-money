@@ -101,7 +101,7 @@
                             @click="copyTag(speReq.topic)">
                             话题：{{ speReq.topic }}
                           </h4>
-                          <div>播放量：{{ speReq.arc_play_vv }} </div>
+                          <!-- <div>播放量：{{ speReq.arc_play_vv }} </div> -->
                           <el-button type="primary"
                             @click="setScheduleJob(speReq, platform, scope.row)">设置该活动定时任务</el-button>
                           <el-button :type="getScheduleJobButtonType(speReq, platform.name)" v-if="scheduleJobMap[platform.name]?.find((e) => e.topicName === speReq.topic || e.topicName === speReq.name)
@@ -126,6 +126,7 @@
                             单稿件最低时长：{{ speReq.minVideoTime || 6 }}s
                           </p>
                           <p v-if="speReq.minView">单稿件最低播放量：{{ speReq.minView || 100 }}</p>
+                          <P v-if="speReq.minImageCount">图片类型内容的最少张数：{{ speReq.minImageCount }}</P>
                           <div v-for="(req, reqIndex) in speReq.reward" :key="reqIndex">
                             <span v-if="req.time"> 持续时间>={{ req.time }} </span>
                             <span v-if="req.allNum">总投稿数{{ req.allNum }} </span>
@@ -532,12 +533,6 @@
               <el-form-item label="活动话题">
                 <el-input v-model="specialTagRequirement.topic" placeholder="请输入活动话题" />
               </el-form-item>
-              <el-form-item label="视频最低时长">
-                <el-input-number v-model="specialTagRequirement.minVideoTime" />
-              </el-form-item>
-              <el-form-item label="视频最低观看量">
-                <el-input-number v-model="specialTagRequirement.minView" />
-              </el-form-item>
               <el-form-item label="必带标签">
                 <el-input v-model="specialTagRequirement.specialTag" placeholder="请输入必带标签" />
               </el-form-item>
@@ -545,48 +540,58 @@
                 <el-date-picker v-model="specialTagRequirement.eDate" type="date" placeholder="选择结束时间"
                   format="YYYY/MM/DD" value-format="YYYY/MM/DD" />
               </el-form-item>
+              <el-divider>内容计入限制条件</el-divider>
+              <el-form-item label="视频最低时长(秒)">
+                <el-input-number v-model="specialTagRequirement.minVideoTime" placeholder="视频类型内容的最低时长限制" :step='6' />
+              </el-form-item>
+              <el-form-item label="图片最少张数">
+                <el-input-number v-model="specialTagRequirement.minImageCount" placeholder="图片类型内容的最少张数要求" :step='2' />
+              </el-form-item>
+              <el-form-item label="稿件最低观看量计入">
+                <el-input-number v-model="specialTagRequirement.minView" :min="0" />
+              </el-form-item>
+              <el-form-item label="单稿最低点赞量计入">
+                <el-input-number v-model="specialTagRequirement.like" :min="0" :max="20" />
+              </el-form-item>
               <el-form-item label="活动ID" v-if="editRewardForm.platformName === 'bilibili'">
                 <el-input v-model="specialTagRequirement.mission_id" placeholder="请输入活动ID" />
               </el-form-item>
               <el-form-item label="话题ID" v-if="editRewardForm.platformName === 'bilibili'">
                 <el-input v-model="specialTagRequirement.topic_id" placeholder="请输入话题ID" />
               </el-form-item>
-              <el-form-item label="奖励参数">
+              <el-form-item label="内容类型">
+                <el-select v-model="specialTagRequirement.type" placeholder="请选择过滤类型">
+                  <el-option label="不过滤" value="all" />
+                  <el-option label="仅视频" value="video" />
+                  <el-option label="仅图文" value="image" />
+                </el-select>
+              </el-form-item>
+              <el-form-item label="达标奖">
                 <div v-for="(reward, rewardIndex) in specialTagRequirement.reward" :key="rewardIndex">
-                  <el-form-item label="投稿数">
+                  <el-form-item label="总投稿数">
                     <el-input-number v-model="reward.allNum" :min="0" :max="1000" />
                   </el-form-item>
-                  <el-form-item label="视频总观看量(w)">
+                  <el-form-item label="总稿播放量(w)">
                     <el-input-number v-model="reward.allViewNum" :min="0" :max="100" />
                     <span v-if="reward.allViewNum">{{ reward.allViewNum * 10000 }}</span>
                   </el-form-item>
-                  <!-- <el-form-item label="视频最低播放量计入">
-                    <el-input-number v-model="reward.minView" :min="0" />
-                  </el-form-item> -->
-                  <el-form-item label="参与人数">
-                    <el-input-number v-model="reward.joinedPerson" :min="0" :max="10000" />
-                  </el-form-item>
-                  <el-form-item label="视频单稿观看量(w)">
-                    <el-input-number v-model="reward.view" :min="0" :max="100" />
-                    <span v-if="reward.view">{{ reward.view * 10000 }}</span>
-                  </el-form-item>
-                  <el-form-item label="单稿件点赞">
-                    <el-input-number v-model="reward.like" :min="0" :max="100000" />
-                  </el-form-item>
-                  <el-form-item label="稿件总点赞量">
+                  <el-form-item label="总稿点赞量">
                     <el-input-number v-model="reward.allLikeNum" :min="0" :max="1000000" />
                   </el-form-item>
-                  <el-form-item label="投稿天数">
+                  <el-form-item label="单稿播放量">
+                    <el-input-number v-model="reward.view" :min="0" />
+                    <span v-if="reward.view">{{ reward.view }}</span>
+                  </el-form-item>
+                  <el-form-item label="持续投稿天数">
                     <el-input-number v-model="reward.cday" :min="0" :max="100" />
+                  </el-form-item>
+                  <el-form-item label="总互动量（点赞+收藏+评论）">
+                    <el-input-number v-model="reward.allInteractiveNum" :min="0" :max="200" />
                   </el-form-item>
                   <el-form-item label="奖励金额(w)">
                     <el-input-number v-model="reward.money" :min="0" :max="100" />
                     <span v-if="reward.money">{{ reward.money * 10000 }}</span>
                   </el-form-item>
-                  <el-form-item label="是否达标">
-                    <el-switch v-model="reward.isGet" active-text="是" inactive-text="否" />
-                  </el-form-item>
-
                   <el-button type="danger" @click="removeReward(index, rewardIndex)">删除</el-button>
                 </div>
                 <el-button type="primary" @click="addReward(index)">添加奖励</el-button>
@@ -596,9 +601,7 @@
           </div>
           <el-button type="primary" @click="addSpecialTagRequirement">添加活动赛道</el-button>
         </el-form-item>
-        <!-- <el-form-item label="不做该任务（展示但整个框标橙色） 参与人数多|奖励少 ">
-          <el-switch v-model="editRewardForm.isNotDo" active-text="是" inactive-text="否" />
-        </el-form-item> -->
+
       </el-form>
       <template #footer>
         <span class="dialog-footer">
@@ -606,6 +609,83 @@
           <el-button type="primary" @click="confirmEditReward">确 定</el-button>
         </span>
       </template>
+    </el-dialog>
+
+    <el-dialog title="定时任务查看" v-model="scheduleViewerDialogVisible" width="80%">
+      <div>
+        <el-row style="margin-bottom: 10px" :gutter="8">
+          <el-col :span="6">
+            <el-select v-model="viewerPlatformFilter" clearable placeholder="平台过滤">
+              <el-option label="全部" :value="''" />
+              <el-option label="抖音" value="抖音" />
+              <el-option label="bilibili" value="bilibili" />
+              <el-option label="小红书" value="小红书" />
+            </el-select>
+          </el-col>
+          <el-col :span="8">
+            <el-date-picker v-model="scheduleViewerTimeRange" type="datetimerange" range-separator="至"
+              start-placeholder="开始时间" end-placeholder="结束时间" align="right" style="width:100%" />
+          </el-col>
+          <el-col :span="6">
+            <el-button @click="selectVideosByRange" type="warning">按时间范围勾选</el-button>
+            <el-button @click="clearRangeSelection" class="ml-2">清除选择</el-button>
+          </el-col>
+          <el-col :span="4" style="text-align: right">
+            <el-input v-model="viewerFilter" placeholder="搜索活动/游戏/平台" clearable style="width:100%" />
+          </el-col>
+        </el-row>
+        <el-row style="margin-bottom: 10px">
+          <el-col :span="18"></el-col>
+          <el-col :span="6" style="text-align: right">
+            <el-button type="primary" @click="dispatchSelectedVideos">开始分发7日内活动({{
+              totalSelectedCount }})</el-button>
+            <el-button @click="scheduleViewerDialogVisible = false">关闭</el-button>
+          </el-col>
+        </el-row>
+
+        <el-table :data="filteredViewerJobs" style="width: 100%" row-key="jobKey" :default-expand-all="false">
+          <el-table-column type="expand">
+            <template #default="{ row }">
+              <div>
+                <el-row style="margin-bottom:8px;">
+                  <el-col :span="12">活动: <strong>{{ row.topicName }}</strong> &nbsp; 平台: {{ row.platform }}</el-col>
+                  <el-col :span="12" style="text-align:right">已分发: {{ row.dispatchedCount }} / {{ row.totalCount }}
+                    &nbsp; 剩余天数: {{ row.daysLeft }}</el-col>
+                </el-row>
+                <el-table :data="row.scheduleJob" style="width: 100%"
+                  @selection-change="(selection) => onSelectionChange(row.jobKey, selection)" row-key="videoPath"
+                  :row-class-name="(r) => r.successExecAccount && r.successExecAccount.length > 0 ? 'row-dispatched' : ''"
+                  :ref="(el) => setTableRef(row.jobKey, el)">
+                  <el-table-column type="selection" width="55" />
+                  <el-table-column prop="videoPath" label="视频文件" min-width="300">
+                    <template #default="{ row: r }">{{ getFileName(r.videoPath) }}</template>
+                  </el-table-column>
+                  <el-table-column prop="execTime" label="执行时间" width="200">
+                    <template #default="{ row: r }">{{ formatDateTime(r.execTime) }}</template>
+                  </el-table-column>
+                  <el-table-column label="已执行账号" min-width="200">
+                    <template #default="{ row: r }">
+                      <el-tag v-for="account in r.successExecAccount" :key="account" class="mr-2">{{ account }}</el-tag>
+                    </template>
+                  </el-table-column>
+                </el-table>
+              </div>
+            </template>
+          </el-table-column>
+
+          <el-table-column prop="topicName" label="活动/话题" />
+          <el-table-column prop="platform" label="平台" width="100" />
+          <el-table-column label="视频数" width="100">
+            <template #default="{ row }">{{ row.totalCount }}</template>
+          </el-table-column>
+          <el-table-column label="已分发/总视频" width="160">
+            <template #default="{ row }">{{ row.dispatchedCount }} / {{ row.totalCount }}</template>
+          </el-table-column>
+          <el-table-column label="剩余天数" width="100">
+            <template #default="{ row }">{{ row.daysLeft }}</template>
+          </el-table-column>
+        </el-table>
+      </div>
     </el-dialog>
 
     <el-dialog title="设置定时上传任务" v-model="scheduleDialogVisible">
@@ -694,67 +774,7 @@
       </template>
     </el-dialog>
 
-    <el-dialog title="定时任务列表" v-model="scheduleJobDialogVisible" width="70%">
-      <template v-if="currentScheduleJob">
-        <h3 class="mb-4">活动名称: {{ currentScheduleJob.topicName }}</h3>
-        <el-table :data="currentScheduleJob.scheduleJob" style="width: 100%">
-          <el-table-column label="视频文件" min-width="300">
-            <template #default="scope">
-              {{ getFileName(scope.row.videoPath) }}
-            </template>
-          </el-table-column>
-          <el-table-column label="执行时间" width="200">
-            <template #default="scope">
-              {{ formatDateTime(scope.row.execTime) }}
-            </template>
-          </el-table-column>
-          <el-table-column label="已执行账号" min-width="200">
-            <template #default="scope">
-              <el-tag v-for="account in scope.row.successExecAccount" :key="account" class="mr-2">
-                {{ account }}
-              </el-tag>
-            </template>
-          </el-table-column>
-        </el-table>
-      </template>
-      <template v-else>
-        <el-empty description="未找到相关定时任务" />
-      </template>
-    </el-dialog>
-
-    <el-dialog title="未完成定时任务列表" v-model="unfinishedTasksDialogVisible" width="70%">
-      <div v-if="unfinishedTasks.length > 0">
-        <el-alert title="以下是未完成的定时任务，请确认是否继续执行" type="warning" :closable="false" show-icon />
-        <el-table :data="unfinishedTasks" style="width: 100%; margin-top: 20px">
-          <el-table-column label="游戏名称" prop="gameName" width="150" />
-          <el-table-column label="平台" prop="platform" width="100" />
-          <el-table-column label="活动名称" prop="topicName" min-width="200" />
-          <el-table-column label="已完成账号数/总账号数" min-width="200">
-            <template #default="scope">
-              <el-tag :type="scope.row.accountStatus.completed < scope.row.accountStatus.total ? 'danger' : 'success'">
-                {{ scope.row.accountStatus.completed }}/{{ scope.row.accountStatus.total }}
-              </el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column label="剩余天数" width="100">
-            <template #default="scope">
-              <el-tag :type="scope.row.daysLeft <= 3 ? 'danger' : 'info'">
-                {{ scope.row.daysLeft }}天
-              </el-tag>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
-      <div v-else class="text-center p-8">
-        <el-empty description="没有未完成的定时任务" />
-      </div>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="unfinishedTasksDialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="executeScheduleJobs">确认执行</el-button>
-        </span>
-      </template>
-    </el-dialog>
+    <!-- 合并后的定时任务查看弹窗已替代原有两个弹窗 -->
 
     <BatchGameFFmpegDialog v-model="batchFFmpegDialogVisible" :publicFFmpegConfig="publicFFmpegConfig"
       :batchDialogVisible="batchFFmpegDialogVisible">
@@ -791,18 +811,19 @@ interface VideoData {
     bvid: string
   }>
   allViewNum: number
-  allLike: number
+  allLikeNum: number
 }
 
 interface Reward {
-  allNum?: number
-  allViewNum?: number
+  allNum?: number   // 总投稿数
+  allViewNum?: number   // 总播放数
   joinedPerson?: number
-  view?: number
-  like?: number
-  allLikeNum?: number
-  cday?: number
+  view?: number   // 单稿件观看量
+  like?: number   // 单稿件点赞数
+  allLikeNum?: number  // 稿件总点赞量
+  cday?: number     // 投稿持续天数
   minView?: number
+  type?: 'video' | 'image' | 'all'  // 类型过滤：all 不过滤，video 仅视频，image 仅图文
   money?: number
   isGet: boolean
 }
@@ -813,6 +834,7 @@ interface SpecialTagRequirement {
   eDate: string
   isNotDo?: boolean
   minVideoTime?: number
+  minImageCount?: number
   minView?: number
   topic?: string
   mission_id?: string
@@ -1042,7 +1064,7 @@ const confirmScheduleJob = async (immediately = false) => {
       }
 
       scheduleDialogVisible.value = false;
-      unfinishedTasksDialogVisible.value = false;
+      scheduleViewerDialogVisible.value = false;
       fetchData();
     } else {
       ElMessage.error(result.msg || '设置失败');
@@ -1088,6 +1110,9 @@ const addSpecialTagRequirement = () => {
     name: '',
     specialTag: '',
     eDate: '',
+    minVideoTime: undefined,
+    minImageCount: undefined,
+    minView: undefined,
     reward: [],
   })
 }
@@ -1106,6 +1131,7 @@ const addReward = (index) => {
     allLikeNum: undefined,
     cday: undefined,
     minView: undefined,
+    type: 'all',
     money: undefined,
     isGet: false,
   })
@@ -1121,6 +1147,9 @@ const openEditRewardDialog = (gameName, platform) => {
       name: '',
       specialTag: '',
       eDate: '',
+      minVideoTime: undefined,
+      minImageCount: undefined,
+      minView: undefined,
       reward: [
         {
           allNum: undefined,
@@ -1658,8 +1687,8 @@ function getCurrentValue(key, data, requirement) {
       return calculateCday(data.onePlayNumList)
     case 'like':
       return data.onePlayNumList.reduce((sum, item) => sum + item.like, 0)
-    case 'allLike':
-      return data.allLike
+    case 'allLikeNum':
+      return data.allLikeNum
     case 'allViewNum':
       return requirement?.minView
         ? data.onePlayNumList
@@ -1720,7 +1749,36 @@ const formatRequirement = (requirement) => {
 const scheduleJobDialogVisible = ref(false)
 const currentScheduleJob = ref(null)
 
-// 添加新的方法
+// 合并弹窗数据（前端查看与分发控制）
+const scheduleViewerDialogVisible = ref(false)
+const viewerJobs = ref([]) // 每个 job 包含 scheduleJob 数组和统计
+const viewerFilter = ref('')
+const selectedVideosMap = ref({}) // { jobKey: [selectedRows] }
+
+const totalSelectedCount = computed(() => {
+  return Object.values(selectedVideosMap.value).reduce((s, arr) => s + (arr?.length || 0), 0)
+})
+
+const makeJobKey = (job, platform) => `${platform}::${job.topicName || job.gameName}`
+
+const buildViewerJob = (job, platform) => {
+  const totalCount = job.scheduleJob?.length || 0
+  const requiredAccounts = platform === 'bilibili' ? 3 : platform === '抖音' ? 2 : 1
+  // 已分发：按视频是否已达到应分发账号数来判断
+  const dispatchedCount = job.scheduleJob?.reduce((s, it) => s + ((it.successExecAccount?.length || 0) >= requiredAccounts ? 1 : 0), 0) || 0
+  const daysLeft = job.etime ? getDaysDiff(new Date(job.etime).getTime()) : 0
+  return {
+    ...job,
+    platform,
+    totalCount,
+    dispatchedCount,
+    requiredAccounts,
+    daysLeft,
+    jobKey: makeJobKey(job, platform)
+  }
+}
+
+// 打开查看弹窗（展示某个活动的定时任务）
 const showScheduleJobDialog = async (speReq, platformName: PlatformType) => {
   try {
     let scheduleJob
@@ -1730,8 +1788,14 @@ const showScheduleJobDialog = async (speReq, platformName: PlatformType) => {
     } else if (platformName === '抖音' || platformName === '小红书') {
       scheduleJob = scheduleJobMap.value[platformName].find((e) => e.topicName === name)
     }
-    currentScheduleJob.value = scheduleJob
-    scheduleJobDialogVisible.value = true
+    if (!scheduleJob) {
+      ElMessage.warning('未找到定时任务')
+      return
+    }
+    viewerJobs.value = [buildViewerJob(scheduleJob, platformName)]
+    // 清空选择
+    selectedVideosMap.value = {}
+    scheduleViewerDialogVisible.value = true
   } catch (error) {
     console.error('获取定时任务失败:', error)
     ElMessage.error('获取定时任务失败')
@@ -1745,6 +1809,130 @@ const getFileName = (path) => {
 const formatDateTime = (dateStr) => {
   const date = new Date(dateStr)
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+}
+
+// 处理合并查看弹窗的选择和分发
+const onSelectionChange = (jobKey, selection) => {
+  selectedVideosMap.value = {
+    ...selectedVideosMap.value,
+    [jobKey]: selection,
+  }
+}
+
+const tableRefs = ref({})
+const setTableRef = (key, el) => {
+  if (!key) return
+  if (el) tableRefs.value[key] = el
+}
+
+const scheduleViewerTimeRange = ref(null) // [startDate, endDate]
+const viewerPlatformFilter = ref('')
+
+const selectVideosByRange = () => {
+  if (!scheduleViewerTimeRange.value || scheduleViewerTimeRange.value.length !== 2) {
+    ElMessage.warning('请先选择开始和结束时间范围')
+    return
+  }
+  const [start, end] = scheduleViewerTimeRange.value.map(d => new Date(d).getTime())
+  const newMap = {}
+  viewerJobs.value.forEach(job => {
+    // 如果平台过滤已选择且与job不匹配则跳过
+    if (viewerPlatformFilter.value && job.platform !== viewerPlatformFilter.value) return
+    const selected = (job.scheduleJob || []).filter(v => {
+      const t = new Date(v.execTime).getTime()
+      return t >= start && t <= end
+    })
+    if (selected.length > 0) newMap[job.jobKey] = selected
+  })
+  selectedVideosMap.value = newMap
+  // 同步到 el-table 的选择状态，使复选框在 UI 上被勾选
+  // nextTick(() => {
+  Object.entries(newMap).forEach(([jobKey, rows]) => {
+    const tbl = tableRefs.value[jobKey]
+    if (!tbl || !Array.isArray(rows)) return
+    // 先清空所有选择，再逐个勾选
+    try {
+      tbl.clearSelection && tbl.clearSelection()
+    } catch (e) { }
+    rows.forEach(r => {
+      try {
+        tbl.toggleRowSelection && tbl.toggleRowSelection(r, true)
+      } catch (e) { }
+    })
+  })
+  // })
+
+  ElMessage.success('已勾选符合时间范围的视频')
+}
+
+const clearRangeSelection = () => {
+  selectedVideosMap.value = {}
+  scheduleViewerTimeRange.value = null
+}
+
+const filteredViewerJobs = computed(() => {
+  let jobs = viewerJobs.value || []
+  if (viewerPlatformFilter.value) {
+    jobs = jobs.filter(j => j.platform === viewerPlatformFilter.value)
+  }
+  if (viewerFilter.value) {
+    const keyword = viewerFilter.value.toLowerCase()
+    jobs = jobs.filter(j => (j.topicName || '').toLowerCase().includes(keyword) || (j.gameName || '').toLowerCase().includes(keyword) || (j.platform || '').toLowerCase().includes(keyword))
+  }
+  return jobs
+})
+
+// 发起分发请求（将所选视频传给后端处理）
+const dispatchSelectedVideos = async () => {
+  const jobsPayload = []
+  Object.entries(selectedVideosMap.value).forEach(([jobKey, arr]) => {
+    if (!arr || arr.length === 0) return
+    const [platform] = jobKey.split('::')
+    const topic = jobKey.split('::')[1]
+    arr.forEach(item => {
+      jobsPayload.push({ platform, topicName: topic, videoPath: item.videoPath })
+    })
+  })
+
+  if (jobsPayload.length === 0) {
+    ElMessage.warning('未选择任何视频')
+    return
+  }
+
+  try {
+    const payload = {
+      jobs: jobsPayload,
+      filter: {
+        platform: viewerPlatformFilter.value || undefined,
+        startTime: scheduleViewerTimeRange.value && scheduleViewerTimeRange.value[0] ? new Date(scheduleViewerTimeRange.value[0]).toISOString() : undefined,
+        endTime: scheduleViewerTimeRange.value && scheduleViewerTimeRange.value[1] ? new Date(scheduleViewerTimeRange.value[1]).toISOString() : undefined,
+      },
+      schedule: scheduleViewerTimeRange.value && scheduleViewerTimeRange.value.length === 2 ? {
+        startTime: new Date(scheduleViewerTimeRange.value[0]).toISOString(),
+        endTime: new Date(scheduleViewerTimeRange.value[1]).toISOString()
+      } : undefined
+    }
+
+    const resp = await fetch('/api/executeScheduleJobs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    if (!resp.ok) throw new Error('请求失败')
+    const result = await resp.json()
+    if (result.code === 200) {
+      ElMessage.success('分发已触发，后台处理中')
+      // 清空选择并刷新数据
+      selectedVideosMap.value = {}
+      scheduleViewerDialogVisible.value = false
+      fetchData()
+    } else {
+      ElMessage.error(result.msg || '分发触发失败')
+    }
+  } catch (err) {
+    console.error('触发分发失败', err)
+    ElMessage.error('触发分发失败')
+  }
 }
 
 // 添加计算属性获取子分区列表
@@ -1900,15 +2088,26 @@ const getUnfinishedTasks = () => {
   return tasks.sort((a, b) => a.daysLeft - b.daysLeft)
 }
 
-// 修改执行定时任务的流程
+// 修改执行定时任务的流程：合并到查看弹窗并展示未完成任务
 const showUnfinishedTasksDialog = () => {
-  unfinishedTasks.value = getUnfinishedTasks()
-  unfinishedTasksDialogVisible.value = true
+  const tasks = getUnfinishedTasks()
+  // 将 tasks 转换为 viewerJobs 形式（platform 与 scheduleJob 需要填充）
+  const jobs = []
+  tasks.forEach(t => {
+    const platformJobs = scheduleJobMap.value[t.platform] || []
+    const matched = platformJobs.find(j => j.topicName === t.topicName)
+    if (matched) {
+      jobs.push(buildViewerJob(matched, t.platform))
+    }
+  })
+  viewerJobs.value = jobs
+  selectedVideosMap.value = {}
+  scheduleViewerDialogVisible.value = true
 }
 
-// 确认执行所有定时任务
+// 确认执行所有定时任务（保留旧方法兼容）
 const executeScheduleJobs = async () => {
-  unfinishedTasksDialogVisible.value = false
+  // 如果用户希望直接执行所有未完成任务，调用后端立即执行（复用原 confirmScheduleJob 接口）
   await confirmScheduleJob(true)
 }
 
@@ -1944,5 +2143,9 @@ h4 {
 .text-gray-500 {
   color: #6b7280;
   font-size: 12px;
+}
+
+.row-dispatched {
+  background: #f5f7fa;
 }
 </style>

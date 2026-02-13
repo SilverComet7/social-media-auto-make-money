@@ -16,7 +16,7 @@ const {
 
 const { queryDouYinAllAccountsData } = require("./crawerHandle/douyin.js");
 const { querybilibiliAllAccountsData } = require("./crawerHandle/bilibili");
-
+const { queryXiaoHongShuAllAccountsData } = require("./crawerHandle/xhs.js");
 
 const {
   ffmpegHandleVideos,
@@ -371,9 +371,9 @@ app.post("/getPlatformVideoData", async (req, res) => {
     const jsonData = await useThirdUtil_GetVideoData();
 
     async function useThirdUtil_GetVideoData() {
-      // let xhsData = await queryXiaoHongShuAllAccountsData();
-      let douyinData = await queryDouYinAllAccountsData();
+      let xhsData = await queryXiaoHongShuAllAccountsData();
       let bilibiliData = await querybilibiliAllAccountsData();
+      let douyinData = await queryDouYinAllAccountsData();
       const oldOtherGameDataArr = getJsonData("gameData.json");
       const BiliBiliScheduleJobJson = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
       const jsonData = oldOtherGameDataArr.map((item) => {
@@ -392,10 +392,17 @@ app.post("/getPlatformVideoData", async (req, res) => {
                       const valuedList = t.aweme_list.filter(
                         (l) => {
                           if (i.specialTag == '') return false;
-                          return (l.desc.includes(i.specialTag)
-                          )
-                            &&
-                            l.view >= (i.minView || 100)
+                          const tagMatches = l.desc.includes(i.specialTag) && l.view >= (i.minView || 100);
+                          if (!tagMatches) return false;
+                          
+                          // 检查 type 是否匹配
+                          if (i.reward && i.reward.length > 0) {
+                            const rewardType = i.reward[0]?.type;
+                            if (rewardType && rewardType !== 'all') {
+                              return (l.type || 'video') === rewardType;
+                            }
+                          }
+                          return true;
                         }
                       );
                       // 目前忽视了挂在小手柄问题，可手动isGet调整
@@ -430,51 +437,77 @@ app.post("/getPlatformVideoData", async (req, res) => {
                 }),
               };
             }
-              // else if (e.name === "小红书") {
-              //   return {
-              //     ...e,
-              //     specialTagRequirements: e.specialTagRequirements.map((i) => {
-              //       return {
-              //         ...i,
-              //         videoData: xhsData.map((t) => {
-              //           // 过滤不满足条件的视频
-              //           const valuedList = t.aweme_list.filter((l) => l.desc
-              //             .split(" ")
-              //             .map((e) => "#" + e)
-              //             .join(" ")
-              //             .includes(i.specialTag)
-              //           );
+            else 
+              if (e.name === "小红书") {
+              return {
+                ...e,
+                specialTagRequirements: e.specialTagRequirements.map((i) => {
+                  // 将 specialTag 的 "#tag1 #tag2" 格式转换为数组 ["tag1", "tag2"]
+                  const requiredTags = (i.specialTag || '')
+                    .split(/\s+/)
+                    .filter(tag => tag.length > 0)
+                    .map(tag => tag.replace(/^#/, ''));
 
-              //           let alsoRelayList = [];
-              //           if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-              //             alsoRelayList = i?.videoData
-              //               .find((c) => c.userName === t.user.name)
-              //               .onePlayNumList.filter((l) => {
-              //                 // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
-              //                 if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
-              //                   return false;
-              //                 }
-              //                 // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-              //                 // if (l.create_time > formatSecondTimestamp(eDate)) {
-              //                 //     return false
-              //                 // }
-              //                 return true;
-              //               });
-              //           }
+                  return {
+                    ...i,
+                    videoData: xhsData.map((t) => {
+                      // 过滤不满足条件的笔记 - 根据 tag 和 type
+                      // tag_list 格式: "tag1,tag2,tag3"
+                      const valuedList = t.aweme_list.filter((l) => {
+                        if (requiredTags.length === 0) return false;
+                        
+                        // 检查 tag 是否匹配
+                        const noteTags = (l.tag_list || '')
+                          .toLowerCase()
+                          .split(',')
+                          .map(tag => tag.trim());
+                        
+                        const tagsMatched = requiredTags.every(requiredTag => 
+                          noteTags.some(noteTag => 
+                            noteTag.includes(requiredTag.toLowerCase())
+                          )
+                        );
 
-            //           let list = valuedList.concat(alsoRelayList);
-            //           return {
-            //             userName: t.user.name,
-            //             allNum: list.length,
-            //             allLike: list.reduce((a, b) => a + b.like, 0),
-            //             // allViewNum: list.reduce((a, b) => a + b.view, 0),
-            //             onePlayNumList: list,
-            //           };
-            //         }),
-            //       };
-            //     }),
-            //   };
-            // }
+                        if (!tagsMatched) return false;
+
+                        // 检查 type 是否匹配（如果设置了类型过滤）
+                        if (i.reward && i.reward.length > 0) {
+                          // 获取 reward 中的第一个 type 字段用于过滤
+                          const rewardType = i.reward[0]?.type;
+                          if (rewardType && rewardType !== 'all') {
+                            // 如果设置了特定类型，只保留该类型的笔记
+                            return (l.type || 'video') === rewardType;
+                          }
+                        }
+
+                        return true;
+                      });
+
+                      let alsoRelayList = [];
+                      if (i?.videoData?.find((c) => c.userName === t.user.name)) {
+                        alsoRelayList = i?.videoData
+                          .find((c) => c.userName === t.user.name)
+                          .onePlayNumList.filter((l) => {
+                            // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
+                            if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
+                              return false;
+                            }
+                            return true;
+                          });
+                      }
+
+                      let list = valuedList.concat(alsoRelayList);
+                      return {
+                        userName: t.user.name,
+                        allNum: list.length,
+                        allLikeNum: list.reduce((a, b) => a + b.like, 0),
+                        onePlayNumList: list,
+                      };
+                    }),
+                  };
+                }),
+              };
+            }
             else if (e.name === "bilibili") {
               return {
                 ...e,
@@ -496,7 +529,17 @@ app.post("/getPlatformVideoData", async (req, res) => {
                           });
                         }
 
-                        return matchesName || isTopicScheduleJob;
+                        if (!(matchesName || isTopicScheduleJob)) return false;
+
+                        // 检查 type 是否匹配
+                        if (differentTopic.reward && differentTopic.reward.length > 0) {
+                          const rewardType = differentTopic.reward[0]?.type;
+                          if (rewardType && rewardType !== 'all') {
+                            return (l.type || 'video') === rewardType;
+                          }
+                        }
+
+                        return true;
                       });
 
                       let alsoRelayList = [];
@@ -536,7 +579,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
       return jsonData;
     }
 
-    // setInterval(getPlatformData, 1000 * 60 * 60 * 24);
+    // setInterval(getPlatformData, 1000 * 60 * 60 * 24); // 每24小时更新一次数据
     res.json({
       code: 200,
       data: jsonData,
@@ -549,43 +592,8 @@ app.post("/getPlatformVideoData", async (req, res) => {
 });
 
 
-// app.get('/batchVideoGames', async (req, res) => {
-//   try {
-//     const gameData = getJsonData("gameData.json");
-//     const now = Date.now() / 1000;
-//     const gameListDir = path.join(TikTokDownloader_ROOT, "gameList");
-//     const result = [];
-
-//     for (const game of gameData) {
-//       if (!game.etime || game.etime < now) continue; // 只要剩余天数>0
-//       const dirPath = game.name;
-//       const absDir = path.join(gameListDir, dirPath);
-//       if (!fs.existsSync(absDir)) continue;
-//       const files = fs.readdirSync(absDir);
-//       const videoList = files.filter(f => /\.(mp4|mov|webm|mkv)$/i.test(f)).map(f => ({
-//         name: f,
-//         url: `/static_videos/${encodeURIComponent(dirPath)}/${encodeURIComponent(f)}`
-//       }));
-//       result.push({
-//         game: game.name,
-//         dirPath,
-//         etime: game.etime,
-//         videoList,
-//       });
-//     }
-//     res.json({ code: 200, data: result });
-//   } catch (err) {
-//     res.status(500).json({ code: 500, msg: err.message });
-//   }
-// });
-
-
-
-
-// 前端所需
 app.get("/allData", async (req, res) => {
 
-  // todo 都是同步的任务？
   try {
     let gameData = getJsonData("gameData.json");
     // 计算rewards下各平台specialTagRequirements里的最近的活动结束时间，并赋值给最外层etime
@@ -663,7 +671,6 @@ app.get("/allData", async (req, res) => {
     const accountList = getJsonData("accountList.json");
 
     // 遍历视频目录,拿到各目录的视频列表
-
     res.json({
       gameData,
       bilibiliActData,

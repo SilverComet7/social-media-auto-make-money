@@ -30,7 +30,7 @@ async function querybilibiliAllAccountsData() {
     const promises = accountList.bilibili.map((account: BilibiliAccount) => {
         const userId = account.id;
         const limit = 60;
-        const url = `http://127.0.0.1:8080/bilibili/user?id=${userId}&limit=${limit}&accountName=${account.accountName}`;
+        const url = `http://127.0.0.1:8080/bilibili/user?id=${userId}&limit=${limit}`;
 
         return () => fetch(url)
             .then(response => response.json())

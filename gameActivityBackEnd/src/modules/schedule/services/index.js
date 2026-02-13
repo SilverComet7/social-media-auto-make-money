@@ -9,7 +9,7 @@ const { getJsonData, writeLocalDataJson } = require("../../../../commonFunction.
 const accountJson = getJsonData("accountList.json")
 
 const platforms = [
-    '抖音',
+    // '抖音',
     // '小红书',
     'bilibili'
 ];
@@ -57,8 +57,8 @@ async function executePlatformExpiredJobs(platform) {
                             const jobTime = new Date(job.execTime);
                             const currentTime = new Date();
                             const timeDiff = jobTime - currentTime;
-                            // 如果执行时间 3 天内且大于 4 小时，则设置定时上传
-                            const threeDaysInMs = 3 * 24 * 60 * 60 * 1000;
+                            // 如果执行时间 7 天内且大于 4 小时，则设置定时上传
+                            const threeDaysInMs = 7 * 24 * 60 * 60 * 1000;
                             const fourHoursInMs = 4 * 60 * 60 * 1000;
                             const latest3days = timeDiff >= fourHoursInMs && timeDiff <= threeDaysInMs
 
@@ -458,9 +458,119 @@ async function handleScheduleUpload(body) {
     }
 }
 
+// 接收前端选中的具体视频任务，设置其 execTime 为当前时间以便立即触发执行
+async function handleExecuteScheduleJobs(body) {
+    try {
+        const { jobs, filter, schedule } = body; // jobs: [{ platform, topicName, videoPath }]
+        if (!jobs || jobs.length === 0) {
+            return { code: 400, msg: '没有要执行的任务' };
+        }
+
+        // 按平台分组处理
+        // const byPlatform = {};
+        // jobs.forEach(j => {
+        //     if (!byPlatform[j.platform]) byPlatform[j.platform] = [];
+        //     byPlatform[j.platform].push(j);
+        // });
+
+        // for (const platform of Object.keys(byPlatform)) {
+        //     const cfg = platformConfig[platform];
+        //     if (!cfg) continue;
+        //     const configPath = cfg.configPath;
+        //     let scheduleJobs = [];
+        //     try {
+        //         scheduleJobs = getJsonData(configPath) || [];
+        //     } catch (err) {
+        //         console.warn(`读取 ${platform} 定时任务配置失败:`, err);
+        //         continue;
+        //     }
+
+        //     const list = byPlatform[platform];
+
+        //     // 按 topic 分组，以便对每个活动分别排序与调度
+        //     const topicsMap = {};
+        //     list.forEach(it => {
+        //         const topic = it.topicName || it.topic || '';
+        //         if (!topicsMap[topic]) topicsMap[topic] = [];
+        //         topicsMap[topic].push(it);
+        //     });
+
+        //     // 平台调度限制
+        //     const minIntervalMs = 2 * 60 * 60 * 1000; // 2小时
+        //     const maxRangeMs = 14 * 24 * 60 * 60 * 1000; // 14天
+
+        //     for (const topicName of Object.keys(topicsMap)) {
+        //         const items = topicsMap[topicName];
+
+        //         // 找到对应的配置项
+        //         const targetGame = scheduleJobs.find(g => (g.topicName === topicName || g.gameName === topicName));
+        //         if (!targetGame) continue;
+
+        //         // 为每个被选中的视频找到原始 execTime 以便按原始时间排序
+        //         const videoEntries = items.map(it => {
+        //             const sj = (targetGame.scheduleJob || []).find(s => s.videoPath === it.videoPath);
+        //             return { item: it, origTime: sj ? new Date(sj.execTime).getTime() : 0 };
+        //         }).sort((a, b) => a.origTime - b.origTime);
+
+        //         // 计算要写入的 execTime 列表
+        //         let execTimes = [];
+        //         if (schedule && schedule.startTime && schedule.endTime) {
+        //             const startMs = new Date(schedule.startTime).getTime();
+        //             const endMs = new Date(schedule.endTime).getTime();
+        //             if (isNaN(startMs) || isNaN(endMs) || endMs <= startMs) {
+        //                 return { code: 400, msg: '无效的时间范围' };
+        //             }
+        //             const rangeMs = endMs - startMs;
+        //             if (rangeMs > maxRangeMs) {
+        //                 return { code: 400, msg: '时间范围不得超过 14 天' };
+        //             }
+        //             const n = videoEntries.length;
+        //             if (n === 0) continue;
+        //             const intervalMs = n > 1 ? Math.floor(rangeMs / (n - 1)) : 0;
+        //             if (n > 1 && intervalMs < minIntervalMs) {
+        //                 return { code: 400, msg: `选定时间范围太紧，至少需要 ${Math.ceil(minIntervalMs / (60*60*1000))} 小时间隔` };
+        //             }
+        //             for (let i = 0; i < n; i++) {
+        //                 const t = n === 1 ? startMs : (startMs + i * intervalMs);
+        //                 execTimes.push(new Date(t).toISOString());
+        //             }
+        //         } else {
+        //             // 立即执行（全部设置为当前时间）
+        //             const nowIso = new Date().toISOString();
+        //             execTimes = videoEntries.map(() => nowIso);
+        //         }
+
+        //         // 更新 targetGame.scheduleJob 中对应的 execTime
+        //         if (execTimes.length > 0) {
+        //             const sjList = targetGame.scheduleJob || [];
+        //             videoEntries.forEach((ve, idx) => {
+        //                 sjList.forEach((sj, si) => {
+        //                     if (sj.videoPath === ve.item.videoPath) {
+        //                         sjList[si] = { ...sj, execTime: execTimes[idx] };
+        //                     }
+        //                 });
+        //             });
+        //             targetGame.scheduleJob = sjList;
+        //         }
+        //     }
+
+        //     // 写回配置文件
+        //     writeLocalDataJson(scheduleJobs, configPath);
+        // }
+
+        // 触发检查并执行（使用已有的检查逻辑）
+        const execResult = await checkAndExecuteJobs();
+        return { code: 200, msg: '已触发执行', data: execResult.data };
+    } catch (err) {
+        console.error('handleExecuteScheduleJobs 错误:', err);
+        return { code: 500, msg: '执行失败', error: err.message };
+    }
+}
+
 // 导出所有服务函数
 module.exports = {
     handleScheduleUpload,
+    handleExecuteScheduleJobs,
     executePlatformExpiredJobs,
     checkAndExecuteJobs,
     generateUploadCommand
