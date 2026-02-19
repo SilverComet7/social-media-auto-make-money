@@ -312,121 +312,7 @@
         </el-table>
         <el-empty v-else description="No data available" />
       </el-tab-pane>
-      <!-- <el-tab-pane label="B站打卡挑战" name="bilibili_daka" lazy>
-        <el-affix :offset="20" :right="20" class="right-4">
-          <el-button type="primary" @click="fetchNewDakaData">查询新的打卡挑战数据</el-button>
-        </el-affix>
-        <el-table :data="dakaTableData" style="width: 100%" border>
-          <el-table-column prop="title" label="活动标题" width="180">
-            <template #default="scope">
-              <a :href="`https://member.bilibili.com/york/platform-punch-card/detail?navhide=1&id=${scope.row.act_id}&from=1`"
-                target="_blank">
-                {{ scope.row.title }}
-                <div v-if="scope.row.icon_state === 1">立即投稿</div>
-                <div v-else class="text-red-500">去报名</div>
-              </a>
-              <div>
-                <el-tag v-for="tag in scope.row.act_tags" :key="tag" style="margin-right: 5px">
-                  {{ tag }}
-                </el-tag>
-              </div>
-            </template>
-          </el-table-column>
-          <el-table-column label="话题" width="150">
-            <template #default="scope">
-              <el-tag v-for="tag in scope.row.detail.act_rule.topic" :key="tag" style="margin-right: 5px">
-                {{ tag.name }}
-              </el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="etime" label="结束时间" width="180">
-            <template #default="scope">
-              <div v-html="getDaysHtml(scope.row.etime)"></div>
-              <div v-html="scope.row.detail.task_data?.main?.desc || scope.row.detail.task_data?.desc"></div>
-            </template>
-          </el-table-column>
-          <el-table-column label="规则文本" width="300">
-            <template #default="scope">
-              <div v-html="scope.row.detail.rule_text.split('\n\n【打卡稿件的要求】\n')[0]" />
-            </template>
-          </el-table-column>
-          <el-table-column label="任务数据" min-width="1000">
-            <template #default="scope">
-              <div v-if="scope.row.detail.task_data.weeks">
-                <el-table :data="scope.row.detail.task_data.weeks">
-                  <el-table-column prop="now_week" label="当前周">
-                    <template #default="scope">
-                      {{ scope.row.now_week ? '是' : '否' }}
-                    </template>
-                  </el-table-column>
-                  <el-table-column prop="task_state" label="任务状态" />
-                  <el-table-column prop="etime" label="结束时间">
-                    <template #default="scope">
-                      <div v-html="getDaysHtml(scope.row.etime)"></div>
-                    </template>
-                  </el-table-column>
-                  <el-table-column label="任务详情" min-width="600">
-                    <template #default="scope">
-                      <el-table :data="scope.row.tasks">
-                        <el-table-column prop="award_name" label="奖励名称">
-                          <template #default="scope">
-                            <span :class="scope.row.target_value <= scope.row.target_progress
-                              ? 'text-emerald-400'
-                              : ''
-                              ">{{ scope.row.award_name }}
-                            </span>
-                          </template>
-                        </el-table-column>
-                        <el-table-column prop="target_type" label="目标类型">
-                          <template #default="scope">
-                            <span v-if="scope.row.target_type === 'av_num'">投稿数 </span>
-                            <span v-if="scope.row.target_type === 'av_day'">投稿天数 </span>
-                            <span v-if="scope.row.target_type === 'view'">播放量 </span>
-                          </template>
-                        </el-table-column>
-                        <el-table-column prop="target_value" label="目标值" />
-                        <el-table-column prop="target_progress" label="进度">
-                          <template #default="scope">
-                            <el-progress :percentage="scope.row.target_value !== 0
-                              ? Math.round(
-                                (scope.row.target_progress / scope.row.target_value) * 100,
-                              )
-                              : 0
-                              " />
-                          </template>
-                        </el-table-column>
-                      </el-table>
-                    </template>
-                  </el-table-column>
-                </el-table>
-              </div>
-              <div v-else-if="scope.row.detail.task_data.tasks">
-                <el-table :data="scope.row.detail.task_data.tasks" style="width: 100%">
-                  <el-table-column prop="award_name" label="奖励名称" width="120">
-                    <template #default="scope">
-                      <span :class="scope.row.target_value <= scope.row.target_progress
-                        ? 'text-emerald-400'
-                        : ''
-                        ">{{ scope.row.award_name }}
-                      </span>
-                    </template>
-                  </el-table-column>
-                  <el-table-column prop="target_type" label="目标类型" width="120">
-                    <template #default="scope">
-                      <span v-if="scope.row.target_type === 'av_num'">投稿数 </span>
-                      <span v-if="scope.row.target_type === 'av_day'">投稿天数 </span>
-                      <span v-if="scope.row.target_type === 'view'">播放量 </span>
-                    </template>
-                  </el-table-column>
-                  <el-table-column prop="target_value" label="目标值" width="100" />
-                  <el-table-column prop="target_progress" label="进度" width="100" />
-                </el-table>
-              </div>
-              <div v-else>无任务数据</div>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-tab-pane> -->
+
     </el-tabs>
 
     <el-dialog title="下载视频和分组区分" v-model="dialogVisible" :before-close="cancelDownloadSettings">
@@ -1603,17 +1489,6 @@ const handleManualAccount = async () => {
   }
 }
 
-const fetchNewDakaData = async () => {
-  try {
-    const response = await fetch('/api/getBiliBiliDakaData')
-    if (!response.ok) {
-      throw new Error('Network response was not ok')
-    }
-    fetchData()
-  } catch (error) {
-    console.error('Error fetching data:', error)
-  }
-}
 
 
 onMounted(() => {

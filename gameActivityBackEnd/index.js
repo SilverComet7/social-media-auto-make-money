@@ -291,58 +291,7 @@ app.post("/addPlatformReward", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-app.get("/getBiliBiliDakaData", async (req, res) => {
-  try {
-    async function get_BiliBili_DakaData() {
-      const url =
-        "https://member.bilibili.com/x2/creative/h5/clock/v4/activity/list";
-      const params = {
-        act_type: 0,
-        csrf: csrfToken,
-        s_locale: "zh_CN",
-      };
 
-      try {
-        const response = await fetch(url, { params, headers });
-        let dakaData = await response.json();
-        if (dakaData.code === -101) {
-          dakaData = JSON.parse(fs.readFileSync("./B站打卡活动.json"));
-          return dakaData;
-        }
-        dakaData = dakaData.data.list.filter(
-          (item) => item.etime * 1000 > new Date().getTime()
-        );
-
-        // 循环 dakaData 中的数据，通过act_id去获取详情
-        const dakaNewData = await concurrentFetchWithDelay(
-          dakaData.map((item) => {
-            return () =>
-              fetch(
-                `https://member.bilibili.com/x2/creative/h5/clock/v4/act/detail?act_id=${item.act_id}&csrf=${csrfToken}&s_locale=zh_CN`,
-                { headers }
-              )
-                .then((response) => response.json())
-                .then((res) => ({
-                  ...item,
-                  detail: { ...res.data },
-                }));
-          })
-        );
-        writeLocalDataJson(dakaNewData, "B站打卡活动.json");
-
-        return dakaNewData;
-      } catch (error) {
-        console.error("获取打卡数据时出错:", error.message);
-        throw error;
-      }
-    }
-    const data = await get_BiliBili_DakaData();
-    res.json(data);
-  } catch (error) {
-    console.error("Error in /data endpoint:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
 // 下载视频与处理
 app.post("/downloadVideosAndGroup", async (req, res) => {
   try {
