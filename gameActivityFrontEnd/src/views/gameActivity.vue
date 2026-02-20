@@ -9,10 +9,21 @@
           <div class="operation-group bg-gray-300 p-4 rounded">
             <h3 class="text-lg font-bold mb-2 text-black">爬虫查询操作</h3>
             <div class="flex">
-              <el-button type="primary" @click="updateAllPlatformData">查询全平台视频数据</el-button>
-              <el-button type="primary" @click="() => {
-  fetchNewBiliBiliActivityData();
-}">查询B站新活动与Topic</el-button>
+              <el-button type="primary" @click="platformDialogVisible = true">查询全平台视频数据</el-button>
+
+              <!-- 平台选择弹窗 -->
+              <el-dialog title="选择平台" v-model="platformDialogVisible">
+                <el-checkbox-group v-model="selectedPlatformList">
+                  <el-checkbox label="抖音">抖音</el-checkbox>
+                  <el-checkbox label="小红书">小红书</el-checkbox>
+                  <el-checkbox label="bilibili">bilibili</el-checkbox>
+                </el-checkbox-group>
+                <span slot="footer" class="dialog-footer">
+                  <el-button @click="platformDialogVisible = false">取消</el-button>
+                  <el-button type="primary" @click="confirmUpdatePlatforms">确定</el-button>
+                </span>
+              </el-dialog>
+              <el-button type="primary" @click="fetchNewBiliBiliActivityData">查询B站新活动与Topic</el-button>
               <el-button type="primary" @click="fetchNewXhsActivityData">查询小红书新活动</el-button>
             </div>
           </div>
@@ -483,9 +494,9 @@
                   <el-form-item label="总投稿数">
                     <el-input-number v-model="reward.allNum" :min="0" :max="1000" />
                   </el-form-item>
-                  <el-form-item label="单稿播放量">
+                  <el-form-item label="单稿播放量(w)">
                     <el-input-number v-model="reward.view" :min="0" />
-                    <span v-if="reward.view">{{ reward.view }}</span>
+                    <span v-if="reward.view">{{ reward.view * 10000 }}</span>
                   </el-form-item>
                   <el-form-item label="总稿播放量(w)">
                     <el-input-number v-model="reward.allViewNum" :min="0" :max="100" />
@@ -1537,19 +1548,28 @@ onMounted(() => {
   fetchData()
 })
 
-const updateAllPlatformData = async () => {
+// 控制选择查询的平台
+const platformDialogVisible = ref(false);
+const selectedPlatformList = ref<string[]>(['抖音', '小红书', 'bilibili']);
+
+const confirmUpdatePlatforms = async () => {
+  platformDialogVisible.value = false;
+  await updateAllPlatformData(selectedPlatformList.value);
+};
+
+const updateAllPlatformData = async (platforms: string[] = []) => {
   await fetch(`/api/getPlatformVideoData`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({}),
+    body: JSON.stringify({ platforms }),
   }).then((res) => {
     if (res.ok) {
-      fetchData()
+      fetchData();
     }
-  })
-}
+  });
+};
 
 
 const getCompletionPercentage = (requirement, videoData, act) => {

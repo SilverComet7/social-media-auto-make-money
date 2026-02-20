@@ -62,8 +62,6 @@ function buildXhsHeaders(req) {
   };
 }
 
-
-
 // 获取各平台活动数据，处理活动数据
 app.get("/getNewActData", async (req, res) => {
   try {
@@ -359,68 +357,105 @@ app.post("/ffmpegHandleVideos", async (req, res) => {
 
 app.post("/getPlatformVideoData", async (req, res) => {
   try {
+    // 从请求中读取需要更新的平台列表，默认都包含
+    const requested = Array.isArray(req.body.platforms)
+      ? req.body.platforms
+      : [];
+    const selectedPlatforms = new Set(
+      requested.length > 0 ? requested : ["抖音", "小红书", "bilibili"]
+    );
+
     const jsonData = await useThirdUtil_GetVideoData();
 
     async function useThirdUtil_GetVideoData() {
-      let xhsNoGameData = await queryXiaoHongShuAllAccountsData();
-      let bilibiliData = await querybilibiliAllAccountsData();
-      let douyinData = await queryDouYinAllAccountsData();
+      // 只有在平台被选中时才去调用对应的查询函数，以减轻开销
+      let xhsVideoData = selectedPlatforms.has("小红书")
+        ? await queryXiaoHongShuAllAccountsData()
+        : null;
+      let bilibiliVideoData = selectedPlatforms.has("bilibili")
+        ? await querybilibiliAllAccountsData()
+        : null;
+      let douyinVideoData = selectedPlatforms.has("抖音")
+        ? await queryDouYinAllAccountsData()
+        : null;
+
       const oldOtherGameDataArr = getJsonData("gameData.json");
       const BiliBiliScheduleJobJson = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
+
+
+      // -----------------------------------------------------------------------------
+      // utilities for platform videoData merging and statistics
+      // -----------------------------------------------------------------------------
+
+      /**
+       * Merge two arrays of video records keyed by `aweme_id`.
+       * New entries override old ones; result is sorted by create_time desc.
+       *
+       * @param {Array<Object>} prevList - previously stored records (may be empty)
+       * @param {Array<Object>} valuedList - newly fetched records to merge
+       * @returns {Array<Object>} merged and sorted list
+       */
+      function mergeVideoLists(prevList = [], valuedList = []) {
+        const map = new Map();
+        prevList.forEach((l) => map.set(l.aweme_id, l));
+        valuedList.forEach((l) => map.set(l.aweme_id, l));
+        return Array.from(map.values()).sort((a, b) => {
+          return (b.create_time || 0) - (a.create_time || 0);
+        });
+      }
+
+      /**
+       * Sum a numeric field across a list of records.
+       *
+       * @param {Array<Object>} list
+       * @param {string} field
+       * @returns {number}
+       */
+      function sumField(list = [], field) {
+        return list.reduce((acc, cur) => acc + (cur[field] || 0), 0);
+      }
+
+
+
       const jsonData = oldOtherGameDataArr.map((item) => {
         return {
           ...item,
           updateDate: formatDate(new Date().getTime()),
           rewards: item.rewards.map((e) => {
             if (e.name === "抖音") {
+              if (!selectedPlatforms.has("抖音")) return e; // 未选择则保持原样
               return {
                 ...e,
                 activityRequirements: e.activityRequirements.map((i) => {
                   return {
                     ...i,
-                    videoData: douyinData.map((t) => {
+                    videoData: douyinVideoData.map((t) => {
                       // 过滤不满足条件的视频
                       const valuedList = t.aweme_list.filter(
                         (l) => {
                           if (i.specialTag == '') return false;
                           const tagMatches = l.desc.includes(i.specialTag) && l.view >= (i.minView || 100);
                           if (!tagMatches) return false;
-                          
-                          // 检查 type 是否匹配
-                          if (i.reward && i.reward.length > 0) {
-                            const rewardType = i.reward[0]?.type;
-                            if (rewardType && rewardType !== 'all') {
-                              return (l.type || 'video') === rewardType;
-                            }
-                          }
+
+                          // // 检查 type 是否匹配
+                          // if (i.reward && i.reward.length > 0) {
+                          //   const rewardType = i.reward[0]?.type;
+                          //   if (rewardType && rewardType !== 'all') {
+                          //     return (l.type || 'video') === rewardType;
+                          //   }
+                          // }
                           return true;
                         }
                       );
                       // 目前忽视了挂在小手柄问题，可手动isGet调整
-                      let alsoRelayList = [];
-                      if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-                        alsoRelayList = i?.videoData
-                          .find((c) => c.userName === t.user.name)
-                          .videoList.filter((l) => {
-                            // 保留活动期间过去发过的稿件数据计入（因为单次可能只发36条数据）
-                            if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
-                              return false;
-                            }
-                            // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-                            // if (l.create_time > formatSecondTimestamp(eDate)) {
-                            //     return false
-                            // }
-                            return true;
-                          });
-                      }
-
-                      let list = valuedList.concat(alsoRelayList).sort((a, b) => {
-                        return b.create_time - a.create_time;
-                      });
+                      const prevList =
+                        i?.videoData?.find((c) => c.userName === t.user.name)
+                          ?.videoList || [];
+                      const list = mergeVideoLists(prevList, valuedList);
                       return {
                         userName: t.user.name,
                         allNum: list.length,
-                        allViewNum: list.reduce((a, b) => a + b.view, 0),
+                        allViewNum: sumField(list, 'view'),
                         videoList: list,
                       };
                     }),
@@ -428,8 +463,8 @@ app.post("/getPlatformVideoData", async (req, res) => {
                 }),
               };
             }
-            else 
-              if (e.name === "小红书") {
+            else if (e.name === "小红书") {
+              if (!selectedPlatforms.has("小红书")) return e;
               return {
                 ...e,
                 activityRequirements: e.activityRequirements.map((i) => {
@@ -441,57 +476,36 @@ app.post("/getPlatformVideoData", async (req, res) => {
 
                   return {
                     ...i,
-                    videoData: xhsNoGameData.map((t) => {
+                    videoData: xhsVideoData.map((t) => {
                       // 过滤不满足条件的笔记 - 根据 tag 和 type
                       // tag_list 格式: "tag1,tag2,tag3"
                       const valuedList = t.aweme_list.filter((l) => {
                         if (requiredTags.length === 0) return false;
-                        
+
                         // 检查 tag 是否匹配
                         const noteTags = (l.tag_list || '')
                           .toLowerCase()
                           .split(',')
                           .map(tag => tag.trim());
-                        
-                        const tagsMatched = requiredTags.every(requiredTag => 
-                          noteTags.some(noteTag => 
+
+                        const tagsMatched = requiredTags.every(requiredTag =>
+                          noteTags.some(noteTag =>
                             noteTag.includes(requiredTag.toLowerCase())
                           )
                         );
 
                         if (!tagsMatched) return false;
-
-                        // 检查 type 是否匹配（如果设置了类型过滤）
-                        if (i.reward && i.reward.length > 0) {
-                          // 获取 reward 中的第一个 type 字段用于过滤
-                          const rewardType = i.reward[0]?.type;
-                          if (rewardType && rewardType !== 'all') {
-                            // 如果设置了特定类型，只保留该类型的笔记
-                            return (l.type || 'video') === rewardType;
-                          }
-                        }
-
                         return true;
                       });
 
-                      let alsoRelayList = [];
-                      if (i?.videoData?.find((c) => c.userName === t.user.name)) {
-                        alsoRelayList = i?.videoData
-                          .find((c) => c.userName === t.user.name)
-                          .videoList.filter((l) => {
-                            // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
-                            if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
-                              return false;
-                            }
-                            return true;
-                          });
-                      }
-
-                      let list = valuedList.concat(alsoRelayList);
+                      const prevList =
+                        i?.videoData?.find((c) => c.userName === t.user.name)
+                          ?.videoList || [];
+                      const list = mergeVideoLists(prevList, valuedList);
                       return {
                         userName: t.user.name,
                         allNum: list.length,
-                        allLikeNum: list.reduce((a, b) => a + b.like, 0),
+                        allLikeNum: sumField(list, 'like'),
                         videoList: list,
                       };
                     }),
@@ -500,6 +514,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
               };
             }
             else if (e.name === "bilibili") {
+              if (!selectedPlatforms.has("bilibili")) return e;
               return {
                 ...e,
                 activityRequirements: e.activityRequirements.map((differentTopic) => {
@@ -507,11 +522,9 @@ app.post("/getPlatformVideoData", async (req, res) => {
 
                   return {
                     ...differentTopic,
-                    videoData: bilibiliData.map((t) => {
+                    videoData: bilibiliVideoData.map((t) => {
                       const valuedList = t.aweme_list.filter(l => {
-                        // 检查视频描述是否包含活动名称
                         const matchesName = (l.desc === differentTopic.topic) || (l.desc === differentTopic.name)
-                        // 如果有定时任务，检查视频的文件名称是否在是某个topic的
                         let isTopicScheduleJob = false;
                         if (hasSameTopicScheduleJob) {
                           isTopicScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
@@ -522,39 +535,24 @@ app.post("/getPlatformVideoData", async (req, res) => {
 
                         if (!(matchesName || isTopicScheduleJob)) return false;
 
-                        // 检查 type 是否匹配
-                        if (differentTopic.reward && differentTopic.reward.length > 0) {
-                          const rewardType = differentTopic.reward[0]?.type;
-                          if (rewardType && rewardType !== 'all') {
-                            return (l.type || 'video') === rewardType;
-                          }
-                        }
+                        // if (differentTopic.reward && differentTopic.reward.length > 0) {
+                        //   const rewardType = differentTopic.reward[0]?.type;
+                        //   if (rewardType && rewardType !== 'all') {
+                        //     return (l.type || 'video') === rewardType;
+                        //   }
+                        // }
 
                         return true;
                       });
 
-                      let alsoRelayList = [];
-                      if (differentTopic?.videoData?.find((c) => c.userName === t.user.name)) {
-                        alsoRelayList = differentTopic?.videoData
-                          .find((c) => c.userName === t.user.name)
-                          .videoList.filter((l) => {
-                            // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
-                            if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
-                              return false;
-                            }
-                            // 视频发布时间在活动开始结束期内的  l.create_time < formatSecondTimestamp(sDate) ||
-                            // if (l.create_time > formatSecondTimestamp(eDate)) {
-                            //     return false
-                            // }
-                            return true;
-                          });
-                      }
-
-                      let list = valuedList.concat(alsoRelayList);
+                      const prevList =
+                        differentTopic?.videoData?.find((c) => c.userName === t.user.name)
+                          ?.videoList || [];
+                      const list = mergeVideoLists(prevList, valuedList);
                       return {
                         userName: t.user.name,
                         allNum: list.length,
-                        allViewNum: list.reduce((a, b) => a + b.view, 0),
+                        allViewNum: sumField(list, 'view'),
                         videoList: list,
                       };
                     }),
