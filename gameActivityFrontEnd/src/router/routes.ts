@@ -3,8 +3,8 @@ import { List, DataAnalysis } from '@element-plus/icons-vue'
 export interface RouteConfig {
   path: string
   name: string
-  icon: any
-  component?: any
+  icon: unknown
+  component?: unknown
 }
 
 export const routes: RouteConfig[] = [

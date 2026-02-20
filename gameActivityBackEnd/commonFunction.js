@@ -92,8 +92,8 @@ function calculateTotalMoney(gameData) {
 
   if (!gameData?.rewards) return 0;
   for (const reward of gameData.rewards) {
-    if (!reward?.specialTagRequirements) continue;
-    for (const requirement of reward.specialTagRequirements) {
+    if (!reward?.activityRequirements) continue;
+    for (const requirement of reward.activityRequirements) {
       if (reward.minView >= 5000) continue; // 单稿最低播放大于5000 不参与计算
       for (const rewardItem of requirement.reward) {
         if (rewardItem.allViewNum >= 50000) continue; // 总播放大于50000 不参与计算

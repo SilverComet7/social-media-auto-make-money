@@ -11,8 +11,7 @@
             <div class="flex">
               <el-button type="primary" @click="updateAllPlatformData">查询全平台视频数据</el-button>
               <el-button type="primary" @click="() => {
-                fetchNewBiliBiliActivityData();
-                // fetchNewBiliBiliTopicData()
+  fetchNewBiliBiliActivityData();
               }">查询B站新活动与Topic</el-button>
             </div>
           </div>
@@ -29,7 +28,7 @@
             <h3 class="text-lg font-bold mb-2 text-black">定时任务操作</h3>
             <div class="flex">
               <el-button type="primary" @click="showUnfinishedTasksDialog">执行定时任务</el-button>
-              <!-- <el-button type="primary" @click="handleManualAccount">执行手动养号</el-button> -->
+              <el-button type="primary" @click="handleManualAccount">执行手动养号</el-button>
             </div>
           </div>
         </div>
@@ -39,7 +38,6 @@
           <el-table-column prop="name" label="Game Name" width="250" fixed>
             <template #default="scope">
               <div :class="scope.row.notDo ? 'text-red-500' : ''">
-                <!-- https://www.douyin.com/search/${scope.row.name} -->
                 <a :href="`https://www.douyin.com/search/${scope.row.name}`" target="_blank" :class="scope.row.updateData || scope.row.new ? 'text-green-500 ' : 'text-blue-500'
                   " class="font-bold">
                   {{ scope.row.name }}
@@ -87,7 +85,7 @@
                     </p>
                   </div>
                   <div class="flex-1">
-                    <template v-for="speReq in platform.specialTagRequirements">
+                    <template v-for="speReq in platform.activityRequirements">
                       <el-card :key="speReq" v-if="
                         speReq.eDate
                           ? getDaysDiff(new Date(speReq.eDate).getTime()) >= 0
@@ -101,13 +99,12 @@
                             @click="copyTag(speReq.topic)">
                             话题：{{ speReq.topic }}
                           </h4>
-                          <!-- <div>播放量：{{ speReq.arc_play_vv }} </div> -->
                           <el-button type="primary"
                             @click="setScheduleJob(speReq, platform, scope.row)">设置该活动定时任务</el-button>
                           <el-button :type="getScheduleJobButtonType(speReq, platform.name)" v-if="scheduleJobMap[platform.name]?.find((e) => e.topicName === speReq.topic || e.topicName === speReq.name)
                           " @click="showScheduleJobDialog(speReq, platform.name)">{{ getScheduleJobButtonType(speReq,
                             platform.name) === 'danger' ? '查看未完成任务' : '查看定时任务' }}</el-button>
-                          <h4 class="font-bold" v-if="speReq.eDate" :class="getDaysDiff(new Date(speReq.eDate).getTime()) <= 10
+                          <h4 v-if="speReq.eDate" class="font-bold" :class="getDaysDiff(new Date(speReq.eDate).getTime()) <= 10
                             ? 'text-orange-500'
                             : ''
                             ">
@@ -115,31 +112,33 @@
                               getDaysDiff(new Date(speReq.eDate).getTime())
                             }}天
                           </h4>
-                          <div>
-                            <p class="text-blue-800 cursor-pointer" @click="copyTag(speReq.specialTag)"
-                              v-if="speReq.specialTag">
-                              必带TAG:
-                              {{ speReq.specialTag }}
-                            </p>
-                          </div>
+                          <p class="text-blue-800 cursor-pointer" @click="copyTag(speReq.specialTag)"
+                            v-if="speReq.specialTag">
+                            必带TAG:
+                            {{ speReq.specialTag }}
+                          </p>
                           <p v-if="speReq.minVideoTime">
                             单稿件最低时长：{{ speReq.minVideoTime || 6 }}s
                           </p>
-                          <p v-if="speReq.minView">单稿件最低播放量：{{ speReq.minView || 100 }}</p>
                           <P v-if="speReq.minImageCount">图片类型内容的最少张数：{{ speReq.minImageCount }}</P>
+                          <p v-if="speReq.minView">单稿件最低播放量计入：{{ speReq.minView || 100 }}</p>
+                          <P v-if="speReq.minLike">单稿件最低点赞量计入：{{ speReq.minLike || 0 }}</P>
+                          <el-divider />
                           <div v-for="(req, reqIndex) in speReq.reward" :key="reqIndex">
-                            <span v-if="req.time"> 持续时间>={{ req.time }} </span>
-                            <span v-if="req.allNum">总投稿数{{ req.allNum }} </span>
+                            <span v-if="req.allNum">总投稿数>={{ req.allNum }} </span>
                             <span v-if="req.allViewNum" :class="req.allViewNum <= 20000 ? ' text-orange-500' : ''">
-                              总播放量{{ req.allViewNum }}
+                              总播放量>={{ req.allViewNum }}
                             </span>
-                            <span v-if="req.view"> 单视频播放量{{ req.view }} </span>
+                            <span v-if="req.view"> 单视频播放量>={{ req.view }} </span>
                             <span v-if="req.cday"> 投稿天数>={{ req.cday }} </span>
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
+
+                            <!-- 互动 -->
+
                             <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
                               }}</span>
-                            <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
+
                             <template v-if="speReq?.videoData">
                               <div v-for="r in speReq.videoData" :key="r">
                                 {{ r.userName }}:
@@ -231,10 +230,10 @@
                     </div>
                   </div>
                   <div v-if="
-                    reward.specialTagRequirements &&
+  reward.activityRequirements &&
                     ['抖音', '快手', '小红书', 'bilibili'].includes(reward.name)
                   " class="flex-1">
-                    <template v-for="(rew, reqIndex) in reward.specialTagRequirements">
+                    <template v-for="(rew, reqIndex) in reward.activityRequirements">
                       <el-card :key="reqIndex" v-if="
                         rew.eDate
                           ? getDaysDiff(new Date(rew.eDate).getTime()) >= 0
@@ -255,7 +254,7 @@
                             {{
                               rew.specialTag ||
                               rew.specialTagAll ||
-                              reward.specialTagRequirements.map((e) => e.specialTag).join(' ')
+  reward.activityRequirements.map((e) => e.specialTag).join(' ')
                             }}
                           </p>
                         </div>
@@ -272,8 +271,6 @@
                           <span v-if="req.like"> <span>+</span>点赞>={{ req.like }}</span>
                           <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
                             }}</span>
-
-                          <span v-if="req.minView">> | 单视频播放量>={{ req.minView }}计入</span>
 
                           <template v-if="rew?.videoData">
                             <div v-for="r in rew.videoData" :key="r">
@@ -300,8 +297,8 @@
                 @click="copyTag(getCommonTagAll(scope.row) || scope.row.commonTagALL)">
                 总标签 :{{ getCommonTagAll(scope.row) || scope.row.commonTagALL }}
               </p>
-              <div v-if="scope.row?.bilibili?.onePlayNumList.length >= 1">
-                <p v-for="(video, index) in scope.row.bilibili.onePlayNumList" :key="index">
+              <div v-if="scope.row?.bilibili?.videoList.length >= 1">
+                <p v-for="(video, index) in scope.row.bilibili.videoList" :key="index">
                   <a :href="`https://www.bilibili.com/video/${video.bvid}/?spm_id_from=333.337.search-card.all.click&vd_source=c9acef8cde35247caf98fa45c32fe95f`"
                     target="_blank" class="text-blue-500">{{ video.title }}</a>
                   ({{ video.view }} 播放) ({{ video.like }} 点赞) ({{ video.reply }} 回复)
@@ -407,66 +404,69 @@
           <el-input v-model="editRewardForm.suppleTag" placeholder="请输入支撑标签" />
         </el-form-item>
         <el-form-item label="活动赛道">
-          <div v-for="(specialTagRequirement, index) in editRewardForm.specialTagRequirements" :key="index">
+          <div v-for="(activityRequirement, index) in editRewardForm.activityRequirements" :key="index">
             <el-card>
               <!-- 不做该任务（展示但整个框标橙色） 参与人数多|奖励少 -->
               <el-form-item label="不做该任务">
-                <el-switch v-model="specialTagRequirement.isNotDo" active-text="是" inactive-text="否" />
+                <el-switch v-model="activityRequirement.isNotDo" active-text="是" inactive-text="否" />
               </el-form-item>
               <el-form-item label="活动名称">
-                <el-input v-model="specialTagRequirement.name" placeholder="请输入活动名称" />
+                <el-input v-model="activityRequirement.name" placeholder="请输入活动名称" />
               </el-form-item>
               <el-form-item label="活动话题">
-                <el-input v-model="specialTagRequirement.topic" placeholder="请输入活动话题" />
+                <el-input v-model="activityRequirement.topic" placeholder="请输入活动话题" />
               </el-form-item>
               <el-form-item label="必带标签">
-                <el-input v-model="specialTagRequirement.specialTag" placeholder="请输入必带标签" />
+                <el-input v-model="activityRequirement.specialTag" placeholder="请输入必带标签" />
               </el-form-item>
               <el-form-item label="结束时间">
-                <el-date-picker v-model="specialTagRequirement.eDate" type="date" placeholder="选择结束时间"
+                <el-date-picker v-model="activityRequirement.eDate" type="date" placeholder="选择结束时间"
                   format="YYYY/MM/DD" value-format="YYYY/MM/DD" />
               </el-form-item>
               <el-divider>内容计入限制条件</el-divider>
               <el-form-item label="视频最低时长(秒)">
-                <el-input-number v-model="specialTagRequirement.minVideoTime" placeholder="视频类型内容的最低时长限制" :step='6' />
+                <el-input-number v-model="activityRequirement.minVideoTime" placeholder="视频类型内容的最低时长限制" :step='6' />
               </el-form-item>
               <el-form-item label="图片最少张数">
-                <el-input-number v-model="specialTagRequirement.minImageCount" placeholder="图片类型内容的最少张数要求" :step='2' />
+                <el-input-number v-model="activityRequirement.minImageCount" placeholder="图片类型内容的最少张数要求" :step='2' />
               </el-form-item>
               <el-form-item label="稿件最低观看量计入">
-                <el-input-number v-model="specialTagRequirement.minView" :min="0" />
+                <el-input-number v-model="activityRequirement.minView" :min="0" />
               </el-form-item>
               <el-form-item label="单稿最低点赞量计入">
-                <el-input-number v-model="specialTagRequirement.like" :min="0" :max="20" />
+                <el-input-number v-model="activityRequirement.minLike" :min="0" :max="20" />
               </el-form-item>
               <el-form-item label="活动ID" v-if="editRewardForm.platformName === 'bilibili'">
-                <el-input v-model="specialTagRequirement.mission_id" placeholder="请输入活动ID" />
+                <el-input v-model="activityRequirement.mission_id" placeholder="请输入活动ID" />
               </el-form-item>
               <el-form-item label="话题ID" v-if="editRewardForm.platformName === 'bilibili'">
-                <el-input v-model="specialTagRequirement.topic_id" placeholder="请输入话题ID" />
+                <el-input v-model="activityRequirement.topic_id" placeholder="请输入话题ID" />
               </el-form-item>
               <el-form-item label="内容类型">
-                <el-select v-model="specialTagRequirement.type" placeholder="请选择过滤类型">
+                <el-select v-model="activityRequirement.type" placeholder="请选择过滤类型">
                   <el-option label="不过滤" value="all" />
                   <el-option label="仅视频" value="video" />
                   <el-option label="仅图文" value="image" />
                 </el-select>
               </el-form-item>
               <el-form-item label="达标奖">
-                <div v-for="(reward, rewardIndex) in specialTagRequirement.reward" :key="rewardIndex">
+                <div v-for="(reward, rewardIndex) in activityRequirement.reward" :key="rewardIndex">
                   <el-form-item label="总投稿数">
                     <el-input-number v-model="reward.allNum" :min="0" :max="1000" />
+                  </el-form-item>
+                  <el-form-item label="单稿播放量">
+                    <el-input-number v-model="reward.view" :min="0" />
+                    <span v-if="reward.view">{{ reward.view }}</span>
                   </el-form-item>
                   <el-form-item label="总稿播放量(w)">
                     <el-input-number v-model="reward.allViewNum" :min="0" :max="100" />
                     <span v-if="reward.allViewNum">{{ reward.allViewNum * 10000 }}</span>
                   </el-form-item>
+                  <el-form-item label="单稿点赞量">
+                    <el-input-number v-model="reward.like" :min="0" :max="200" />
+                  </el-form-item>
                   <el-form-item label="总稿点赞量">
                     <el-input-number v-model="reward.allLikeNum" :min="0" :max="1000000" />
-                  </el-form-item>
-                  <el-form-item label="单稿播放量">
-                    <el-input-number v-model="reward.view" :min="0" />
-                    <span v-if="reward.view">{{ reward.view }}</span>
                   </el-form-item>
                   <el-form-item label="持续投稿天数">
                     <el-input-number v-model="reward.cday" :min="0" :max="100" />
@@ -671,50 +671,31 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { ElMessage, ElLoading, ElMessageBox } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import bilibiliTid from '../../public/bilibiliTid.json' // B站分区数据
 import BatchGameFFmpegDialog from '../components/FFmpegBatchGameDialog.vue'
 import ffmpegConfigForm from '@/components/ffmpegConfigForm.vue'
 import { allGameList } from '@/state/globalState'
 
-interface BilibiliArea {
+
+
+// gameActivity接口定义
+
+interface GameActivity {
   name: string
-  children: {
-    tid: number
-    name: string
-  }[]
+  rewards: PlatformReward[]
+  updateDate?: string
 }
 
-interface VideoData {
-  userName: string
-  allNum: number
-  onePlayNumList: Array<{
-    view: number
-    like: number
-    reply: number
-    ctime: number
-    title: string
-    bvid: string
-  }>
-  allViewNum: number
-  allLikeNum: number
+
+interface PlatformReward {
+  name: string
+  activityRequirements: ActivityRequirement[]
+  suppleTag?: string
 }
 
-interface Reward {
-  allNum?: number   // 总投稿数
-  allViewNum?: number   // 总播放数
-  joinedPerson?: number
-  view?: number   // 单稿件观看量
-  like?: number   // 单稿件点赞数
-  allLikeNum?: number  // 稿件总点赞量
-  cday?: number     // 投稿持续天数
-  minView?: number
-  type?: 'video' | 'image' | 'all'  // 类型过滤：all 不过滤，video 仅视频，image 仅图文
-  money?: number
-  isGet: boolean
-}
 
-interface SpecialTagRequirement {
+interface ActivityRequirement {
   name: string
   specialTag: string
   eDate: string
@@ -729,25 +710,40 @@ interface SpecialTagRequirement {
   videoData?: VideoData[]
 }
 
-interface PlatformReward {
-  name: string
-  specialTagRequirements: SpecialTagRequirement[]
-  suppleTag?: string
+interface Reward {
+  allNum?: number   // 总投稿数
+  allViewNum?: number   // 总播放数
+  view?: number   // 单稿件观看量
+  like?: number   // 单稿件点赞数
+  allLikeNum?: number  // 稿件总点赞量
+  cday?: number     // 投稿持续天数
+  allInteractiveNum?: number // 总互动量（点赞+收藏+评论）
+  money?: number
+  isGet: boolean
 }
 
-interface GameActivity {
-  name: string
-  act_url: string
-  etime: string
-  addTime: string
-  rewards: PlatformReward[]
-  updateDate?: string
-  searchKeyWord?: string
-  notDo?: boolean
-  new?: boolean
-  updateData?: boolean
-  bilibili?: VideoData
+interface VideoData {
+  userName: string
+  allNum: number
+  videoList: Array<{
+    view: number
+    like: number
+    reply: number
+    ctime: number
+    title: string
+    bvid: string
+  }>
+  allViewNum: number
+  allLikeNum: number
 }
+
+
+
+
+
+
+
+// 定时任务
 
 interface ScheduleForm {
   gameName: string
@@ -767,6 +763,7 @@ interface ScheduleForm {
   douyinTitleControl: boolean
   douyinGameBinding: boolean
 }
+
 interface Accounts {
   bilibili: Platform[];
   douyin: Platform[];
@@ -779,6 +776,16 @@ interface Platform {
   accountName: string;
   Cookie: string;
 }
+
+interface BilibiliArea {
+  name: string
+  children: {
+    tid: number
+    name: string
+  }[]
+}
+
+
 
 
 const formatDate = (timestamp?: number, splitStr: string = '-'): string => {
@@ -827,7 +834,7 @@ const platformToKey = {
 };
 
 const setScheduleJob = async (
-  rew: SpecialTagRequirement,
+  rew: ActivityRequirement,
   platform: PlatformReward,
   row: GameActivity,
 ) => {
@@ -965,24 +972,21 @@ const activeTab = ref('platform')
 const editRewardDialogVisible = ref(false)
 const editRewardForm = ref({
   platformName: '',
-  specialTagRequirements: [
+  activityRequirements: [
     {
       name: '',
       minVideoTime: 6,
       minView: 100,
-      // topic: '',
       specialTag: '',
       eDate: '',
       reward: [
         {
           allNum: undefined,
           allViewNum: undefined,
-          joinedPerson: undefined,
           view: undefined,
           like: undefined,
           allLikeNum: undefined,
           cday: undefined,
-          minView: undefined,
           money: undefined,
           isGet: false,
         },
@@ -992,43 +996,39 @@ const editRewardForm = ref({
 })
 
 const addSpecialTagRequirement = () => {
-  editRewardForm.value.specialTagRequirements.push({
+  editRewardForm.value.activityRequirements.push({
     name: '',
     specialTag: '',
     eDate: '',
     minVideoTime: undefined,
     minImageCount: undefined,
-    minView: undefined,
     reward: [],
   })
 }
 
 const removeSpecialTagRequirement = (index) => {
-  editRewardForm.value.specialTagRequirements.splice(index, 1)
+  editRewardForm.value.activityRequirements.splice(index, 1)
 }
 
 const addReward = (index) => {
-  editRewardForm.value.specialTagRequirements[index].reward.push({
+  editRewardForm.value.activityRequirements[index].reward.push({
     allNum: undefined,
     allViewNum: undefined,
-    joinedPerson: undefined,
     view: undefined,
     like: undefined,
     allLikeNum: undefined,
     cday: undefined,
-    minView: undefined,
-    type: 'all',
     money: undefined,
     isGet: false,
   })
 }
 
 const removeReward = (index, rewardIndex) => {
-  editRewardForm.value.specialTagRequirements[index].reward.splice(rewardIndex, 1)
+  editRewardForm.value.activityRequirements[index].reward.splice(rewardIndex, 1)
 }
 
 const openEditRewardDialog = (gameName, platform) => {
-  let specialTagRequirements = [
+  let activityRequirements = [
     {
       name: '',
       specialTag: '',
@@ -1040,22 +1040,20 @@ const openEditRewardDialog = (gameName, platform) => {
         {
           allNum: undefined,
           allViewNum: undefined,
-          joinedPerson: undefined,
           view: undefined,
           like: undefined,
           allLikeNum: undefined,
           cday: undefined,
-          minView: undefined,
           money: undefined,
           isGet: false,
         },
       ],
     },
   ]
-  if (platform?.specialTagRequirements) {
-    specialTagRequirements = JSON.parse(JSON.stringify(platform?.specialTagRequirements))?.map(
-      (specialTagRequirement) => {
-        specialTagRequirement.reward = specialTagRequirement.reward
+  if (platform?.activityRequirements) {
+    activityRequirements = JSON.parse(JSON.stringify(platform?.activityRequirements))?.map(
+      (activityRequirement) => {
+        activityRequirement.reward = activityRequirement.reward
           .filter((reward) =>
             Object.values(reward).some((value) => value !== 0 && value !== false && value !== ''),
           )
@@ -1065,7 +1063,7 @@ const openEditRewardDialog = (gameName, platform) => {
             if (e.money) e.money = e.money / 10000
             return e
           })
-        return specialTagRequirement
+        return activityRequirement
       },
     )
   }
@@ -1073,7 +1071,7 @@ const openEditRewardDialog = (gameName, platform) => {
     ...platform,
     platformName: platform?.name || '抖音',
     isUpdate: !!platform,
-    specialTagRequirements: specialTagRequirements,
+    activityRequirements: activityRequirements,
   }
   editRewardForm.value.gameName = gameName
   editRewardDialogVisible.value = true
@@ -1081,11 +1079,11 @@ const openEditRewardDialog = (gameName, platform) => {
 
 const confirmEditReward = async () => {
   const filteredReward = JSON.parse(JSON.stringify(editRewardForm.value))
-  filteredReward.specialTagRequirements = filteredReward.specialTagRequirements.map(
-    (specialTagRequirement) => {
-      // specialTagRequirement.name = specialTagRequirement.name
-      // delete specialTagRequirement.name
-      specialTagRequirement.reward = specialTagRequirement.reward
+  filteredReward.activityRequirements = filteredReward.activityRequirements.map(
+    (activityRequirement) => {
+      // activityRequirement.name = activityRequirement.name
+      // delete activityRequirement.name
+      activityRequirement.reward = activityRequirement.reward
         .filter((reward) =>
           Object.values(reward).some((value) => value !== 0 && value !== false && value !== ''),
         )
@@ -1103,7 +1101,7 @@ const confirmEditReward = async () => {
           return e
         })
 
-      return specialTagRequirement
+      return activityRequirement
     },
   )
   // 发送后端请求更新奖励
@@ -1356,11 +1354,11 @@ const getDaysHtml = (etime) => {
 }
 
 const getSpecialTagAll = (reward) => {
-  if (!reward?.specialTagRequirements) {
+  if (!reward?.activityRequirements) {
     return ''
   }
   const a = [
-    ...new Set(reward.specialTagRequirements.map((e) => e.specialTag.split(' ')).flat()),
+    ...new Set(reward.activityRequirements.map((e) => e.specialTag.split(' ')).flat()),
   ].join(' ')
   return a
 }
@@ -1459,17 +1457,7 @@ const fetchNewBiliBiliActivityData = async () => {
     console.error('Error fetching data:', error)
   }
 }
-const fetchNewBiliBiliTopicData = async () => {
-  try {
-    const response = await fetch('/api/getNewTopicData')
-    const res = await response.json()
-    if (res.code == -101) {
-      return ElMessage.error('请先登录')
-    }
-  } catch (error) {
-    console.error('Error fetching data:', error)
-  }
-}
+
 
 const handleManualAccount = async () => {
   try {
@@ -1518,7 +1506,7 @@ const getCompletionPercentage = (requirement, videoData) => {
   const targetValues = {}
 
   for (const key in requirement) {
-    if (key === 'money' || key === 'isGet' || key === 'minView' || key === 'joinedPerson') continue
+    if (key === 'money' || key === 'isGet') continue
 
     totalRequirements++
     const currentValue = getCurrentValue(key, videoData, requirement)
@@ -1557,16 +1545,16 @@ function getCurrentValue(key, data, requirement) {
     case 'allNum':
       return data.allNum
     case 'view':
-      return Math.max(...data.onePlayNumList.map((item) => item.view))
+      return Math.max(...data.videoList.map((item) => item.view))
     case 'cday':
-      return calculateCday(data.onePlayNumList)
+      return calculateCday(data.videoList)
     case 'like':
-      return data.onePlayNumList.reduce((sum, item) => sum + item.like, 0)
+      return data.videoList.reduce((sum, item) => sum + item.like, 0)
     case 'allLikeNum':
       return data.allLikeNum
     case 'allViewNum':
       return requirement?.minView
-        ? data.onePlayNumList
+        ? data.videoList
           .filter((i) => i.view >= requirement?.minView)
           .reduce((sum, item) => sum + item.view, 0)
         : data.allViewNum
@@ -1575,10 +1563,10 @@ function getCurrentValue(key, data, requirement) {
   }
 }
 
-function calculateCday(onePlayNumList) {
+function calculateCday(videoList) {
   const uniqueDates = new Set()
 
-  onePlayNumList.forEach((item) => {
+  videoList.forEach((item) => {
     const dateString = formatDate(item.ctime) // Get YYYY-MM-DD format
     uniqueDates.add(dateString)
   })
@@ -1619,10 +1607,6 @@ const formatRequirement = (requirement) => {
   return ''
 }
 
-
-
-const scheduleJobDialogVisible = ref(false)
-const currentScheduleJob = ref(null)
 
 // 合并弹窗数据（前端查看与分发控制）
 const scheduleViewerDialogVisible = ref(false)
@@ -1668,7 +1652,6 @@ const showScheduleJobDialog = async (speReq, platformName: PlatformType) => {
       return
     }
     viewerJobs.value = [buildViewerJob(scheduleJob, platformName)]
-    // 清空选择
     selectedVideosMap.value = {}
     scheduleViewerDialogVisible.value = true
   } catch (error) {
@@ -1852,7 +1835,7 @@ const specialTrackTagConfigs: SpecialTrackConfigs = {
     extraTags: [],
   },
   二次元: {
-    baseTags: ['#二次元', '#角色扮演', '#动漫游戏'],
+    baseTags: ['#二次元', '#角色扮演'],
     extraTags: [],
   },
   MMO: {

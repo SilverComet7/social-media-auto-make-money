@@ -119,7 +119,7 @@ app.get("/getNewActData", async (req, res) => {
                   rewards: [
                     {
                       name: "bilibili",
-                      specialTagRequirements: [],
+                      activityRequirements: [],
                     },
                   ],
                 });
@@ -133,11 +133,11 @@ app.get("/getNewActData", async (req, res) => {
               if (!game_rewards_bilibili) {
                 thisGamePlatforms?.unshift({
                   name: "bilibili",
-                  specialTagRequirements: [],
+                  activityRequirements: [],
                 });
               } else {
                 const bilibili_special_acts_ing_list =
-                  game_rewards_bilibili?.specialTagRequirements?.find(
+                  game_rewards_bilibili?.activityRequirements?.find(
                     (act) => act.mission_id === activity.id && !act.topic_id
                   );
 
@@ -153,7 +153,7 @@ app.get("/getNewActData", async (req, res) => {
                 const topicsWithActivity = result.data.result.topics.filter(
                   topic => topic.show_activity_icon === true
                     && topic.mission_id === activity.id  // 大活动id
-                    && game_rewards_bilibili?.specialTagRequirements.every((e) => e?.topic_id !== topic.id) // 已存活动没有相同id的小活动
+                    && game_rewards_bilibili?.activityRequirements.every((e) => e?.topic_id !== topic.id) // 已存活动没有相同id的小活动
                 ).map(topic => ({
                   name: activity.name,
                   act_url: activity.act_url,
@@ -169,7 +169,7 @@ app.get("/getNewActData", async (req, res) => {
                 }))
 
                 if (!bilibili_special_acts_ing_list) {
-                  game_rewards_bilibili.specialTagRequirements.push(...topicsWithActivity);
+                  game_rewards_bilibili.activityRequirements.push(...topicsWithActivity);
                 }
               }
             } catch (error) {
@@ -209,50 +209,7 @@ app.get('/getLatestTopic', async (req, res) => {
     res.status(500).json({ code: 500, message: 'Bilibili API request failed', error: err.toString() });
   }
 })
-app.get("/getNewTopicData", async (req, res) => {
-  try {
-    const fetchUrl = "https://member.bilibili.com/x/vupre/web/topic/type/v2";
-    const params = {
-      pn: 0,
-      ps: 200,
-      platform: 'pc',
-      type_id: 21,
-      type_pid: 1008,
-      t: Date.now()
-    };
 
-    const queryString = Object.keys(params)
-      .map(key => `${key}=${encodeURIComponent(params[key])}`)
-      .join('&');
-
-    const response = await fetch(`${fetchUrl}?${queryString}`, {
-      headers: {
-        ...headers,
-        "referer": "https://member.bilibili.com/"
-      }
-    });
-
-    const topicData = await response.json();
-
-    if (topicData.code === 0 && topicData.data) {
-      writeLocalDataJson(topicData.data, "topic.json");
-
-      res.json({
-        code: 200,
-        msg: "Topic数据更新成功",
-        data: topicData.data
-      });
-    }
-    else {
-      throw new Error(topicData || "获取Topic数据失败");
-    }
-  } catch (error) {
-    console.error("获取Topic数据时出错:", error);
-    res.json({
-      msg: error,
-    });
-  }
-});
 app.post("/addPlatformReward", async (req, res) => {
   try {
     const { platformData } = req.body;
@@ -333,7 +290,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
             if (e.name === "抖音") {
               return {
                 ...e,
-                specialTagRequirements: e.specialTagRequirements.map((i) => {
+                activityRequirements: e.activityRequirements.map((i) => {
                   return {
                     ...i,
                     videoData: douyinData.map((t) => {
@@ -359,7 +316,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
                       if (i?.videoData?.find((c) => c.userName === t.user.name)) {
                         alsoRelayList = i?.videoData
                           .find((c) => c.userName === t.user.name)
-                          .onePlayNumList.filter((l) => {
+                          .videoList.filter((l) => {
                             // 保留活动期间过去发过的稿件数据计入（因为单次可能只发36条数据）
                             if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
                               return false;
@@ -379,7 +336,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
                         userName: t.user.name,
                         allNum: list.length,
                         allViewNum: list.reduce((a, b) => a + b.view, 0),
-                        onePlayNumList: list,
+                        videoList: list,
                       };
                     }),
                   };
@@ -390,7 +347,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
               if (e.name === "小红书") {
               return {
                 ...e,
-                specialTagRequirements: e.specialTagRequirements.map((i) => {
+                activityRequirements: e.activityRequirements.map((i) => {
                   // 将 specialTag 的 "#tag1 #tag2" 格式转换为数组 ["tag1", "tag2"]
                   const requiredTags = (i.specialTag || '')
                     .split(/\s+/)
@@ -436,7 +393,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
                       if (i?.videoData?.find((c) => c.userName === t.user.name)) {
                         alsoRelayList = i?.videoData
                           .find((c) => c.userName === t.user.name)
-                          .onePlayNumList.filter((l) => {
+                          .videoList.filter((l) => {
                             // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
                             if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
                               return false;
@@ -450,7 +407,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
                         userName: t.user.name,
                         allNum: list.length,
                         allLikeNum: list.reduce((a, b) => a + b.like, 0),
-                        onePlayNumList: list,
+                        videoList: list,
                       };
                     }),
                   };
@@ -460,7 +417,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
             else if (e.name === "bilibili") {
               return {
                 ...e,
-                specialTagRequirements: e.specialTagRequirements.map((differentTopic) => {
+                activityRequirements: e.activityRequirements.map((differentTopic) => {
                   const hasSameTopicScheduleJob = BiliBiliScheduleJobJson.find(job => job.topicName === differentTopic.topic);
 
                   return {
@@ -495,7 +452,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
                       if (differentTopic?.videoData?.find((c) => c.userName === t.user.name)) {
                         alsoRelayList = differentTopic?.videoData
                           .find((c) => c.userName === t.user.name)
-                          .onePlayNumList.filter((l) => {
+                          .videoList.filter((l) => {
                             // 保留活动期间过去发过的稿件数据计入（因为单次可能只发20条数据）
                             if (valuedList.find((v) => v.aweme_id === l.aweme_id)) {
                               return false;
@@ -513,7 +470,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
                         userName: t.user.name,
                         allNum: list.length,
                         allViewNum: list.reduce((a, b) => a + b.view, 0),
-                        onePlayNumList: list,
+                        videoList: list,
                       };
                     }),
                   };
@@ -549,15 +506,15 @@ app.get("/allData", async (req, res) => {
     gameData.forEach((game) => {
       let minEtime = game.etime || Number.MAX_SAFE_INTEGER;
       game.rewards.forEach((reward) => {
-        if (reward.specialTagRequirements) {
-          reward.specialTagRequirements = reward?.specialTagRequirements?.filter(
+        if (reward.activityRequirements) {
+          reward.activityRequirements = reward?.activityRequirements?.filter(
             (e) => {
               const dateTime = formatSecondTimestamp(e.eDate + ' 23:59:59');
               return (dateTime) >
                 new Date().getTime()
             }
           );
-          reward.specialTagRequirements.forEach((requirement) => {
+          reward.activityRequirements.forEach((requirement) => {
             if (requirement.eDate) {
               const eTime =
                 (new Date(requirement.eDate).getTime() + 24 * 60 * 60 * 60) /
