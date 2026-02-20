@@ -8,11 +8,7 @@ const { PROJECT_ROOT, platformConfig } = require("../../../../const.js");
 const { getJsonData, writeLocalDataJson } = require("../../../../commonFunction.js");
 const accountJson = getJsonData("accountList.json")
 
-const platforms = [
-    // '抖音',
-    // '小红书',
-    'bilibili'
-];
+
 
 const semaphore = {
     count: 0,
@@ -30,7 +26,6 @@ const semaphore = {
 };
 const acquireSemaphore = (max) => semaphore.acquire(max);
 const releaseSemaphore = () => semaphore.release();
-
 
 
 async function executePlatformExpiredJobs(platform) {
@@ -103,8 +98,8 @@ async function executePlatformExpiredJobs(platform) {
                 if (job.successExecAccount.includes(account.accountName)) continue;
 
                 // 如果指定了要执行的账号，则只执行指定的账号
-                if (job.selectedAccounts.length > 0 &&
-                    !job.selectedAccounts.includes(account.accountName)) {
+                if (job.needExecAccounts.length > 0 &&
+                    !job.needExecAccounts.includes(account.accountName)) {
                     continue;
                 }
 
@@ -311,7 +306,11 @@ function generateUploadCommand(platform, uploaderPath, account, job) {
 async function checkAndExecuteJobs() {
     try {
 
-        const results = await Promise.allSettled(platforms.map(p => executePlatformExpiredJobs(p)));
+        const results = await Promise.allSettled([
+            // '抖音',
+            // '小红书',
+            'bilibili'
+        ].map(p => executePlatformExpiredJobs(p)));
 
         // 记录执行结果
         let successPlatforms = 0;
@@ -349,6 +348,7 @@ async function checkAndExecuteJobs() {
         };
     }
 }
+
 // 将原来的 app.post 逻辑提取为服务函数
 async function handleScheduleUpload(body) {
     function generateScheduleJobs(videoDir, startTime, intervalHours) {
@@ -383,7 +383,7 @@ async function handleScheduleUpload(body) {
         intervalHours,
         immediately,
         etime,
-        selectedAccounts,
+        needExecAccounts,
         douyinTitleControl,
         douyinGameBinding,
         topicId
@@ -410,7 +410,7 @@ async function handleScheduleUpload(body) {
             videoDir,
             scheduleJob: newJobs,
             etime,
-            selectedAccounts: selectedAccounts || [],
+            needExecAccounts: needExecAccounts || [],
         };
         // 抖音平台才增加控制
         if (platform === '抖音') {

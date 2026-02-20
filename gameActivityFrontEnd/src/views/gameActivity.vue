@@ -12,7 +12,8 @@
               <el-button type="primary" @click="updateAllPlatformData">查询全平台视频数据</el-button>
               <el-button type="primary" @click="() => {
   fetchNewBiliBiliActivityData();
-              }">查询B站新活动与Topic</el-button>
+}">查询B站新活动与Topic</el-button>
+              <el-button type="primary" @click="fetchNewXhsActivityData">查询小红书新活动</el-button>
             </div>
           </div>
           <!-- 视频下载处理栏 -->
@@ -85,46 +86,46 @@
                     </p>
                   </div>
                   <div class="flex-1">
-                    <template v-for="speReq in platform.activityRequirements">
-                      <el-card :key="speReq" v-if="
-                        speReq.eDate
-                          ? getDaysDiff(new Date(speReq.eDate).getTime()) >= 0
+                    <template v-for="act in platform.activityRequirements">
+                      <el-card :key="act" v-if="
+                        act.eDate
+                          ? getDaysDiff(new Date(act.eDate).getTime()) >= 0
                           : getDaysDiff(scope.row.etime * 1000) >= 0
                       ">
-                        <div :class="speReq.isNotDo ? 'bg-red-300' : ''">
-                          <a :href="speReq.act_url" target="_blank" class="font-bold text-blue-600"
-                            v-if="platform.name === 'bilibili'">{{ speReq.name }} {{ speReq.comment }}</a>
-                          <h4 class="font-bold" v-else>{{ speReq.name }}</h4>
+                        <div :class="act.isNotDo ? 'bg-red-300' : ''">
+                          <a v-if="act.act_url" :href="act.act_url" target="_blank" class="font-bold text-blue-600">{{
+                            act.name }} {{ act.comment }}</a>
+                          <h4 class="font-bold" v-else>{{ act.name }}</h4>
                           <h4 class="font-bold text-blue-800 cursor-pointer" v-if="platform.name === 'bilibili'"
-                            @click="copyTag(speReq.topic)">
-                            话题：{{ speReq.topic }}
+                            @click="copyTag(act.topic)">
+                            话题：{{ act.topic }}
                           </h4>
                           <el-button type="primary"
-                            @click="setScheduleJob(speReq, platform, scope.row)">设置该活动定时任务</el-button>
-                          <el-button :type="getScheduleJobButtonType(speReq, platform.name)" v-if="scheduleJobMap[platform.name]?.find((e) => e.topicName === speReq.topic || e.topicName === speReq.name)
-                          " @click="showScheduleJobDialog(speReq, platform.name)">{{ getScheduleJobButtonType(speReq,
+                            @click="setScheduleJob(act, platform, scope.row)">设置该活动定时任务</el-button>
+                          <el-button :type="getScheduleJobButtonType(act, platform.name)" v-if="scheduleJobMap[platform.name]?.find((e) => e.topicName === act.topic || e.topicName === act.name)
+                          " @click="showScheduleJobDialog(act, platform.name)">{{ getScheduleJobButtonType(act,
                             platform.name) === 'danger' ? '查看未完成任务' : '查看定时任务' }}</el-button>
-                          <h4 v-if="speReq.eDate" class="font-bold" :class="getDaysDiff(new Date(speReq.eDate).getTime()) <= 10
+                          <h4 v-if="act.eDate" class="font-bold" :class="getDaysDiff(new Date(act.eDate).getTime()) <= 10
                             ? 'text-orange-500'
                             : ''
                             ">
-                            活动结束{{ speReq.eDate }} 还剩{{
-                              getDaysDiff(new Date(speReq.eDate).getTime())
+                            活动结束{{ act.eDate }} 还剩{{
+                              getDaysDiff(new Date(act.eDate).getTime())
                             }}天
                           </h4>
-                          <p class="text-blue-800 cursor-pointer" @click="copyTag(speReq.specialTag)"
-                            v-if="speReq.specialTag">
+                          <p class="text-blue-800 cursor-pointer" @click="copyTag(act.specialTag)"
+                            v-if="act.specialTag">
                             必带TAG:
-                            {{ speReq.specialTag }}
+                            {{ act.specialTag }}
                           </p>
-                          <p v-if="speReq.minVideoTime">
-                            单稿件最低时长：{{ speReq.minVideoTime || 6 }}s
+                          <p v-if="act.minVideoTime">
+                            单稿件最低时长：{{ act.minVideoTime || 6 }}s
                           </p>
-                          <P v-if="speReq.minImageCount">图片类型内容的最少张数：{{ speReq.minImageCount }}</P>
-                          <p v-if="speReq.minView">单稿件最低播放量计入：{{ speReq.minView || 100 }}</p>
-                          <P v-if="speReq.minLike">单稿件最低点赞量计入：{{ speReq.minLike || 0 }}</P>
+                          <P v-if="act.minImageCount">图片类型内容的最少张数：{{ act.minImageCount }}</P>
+                          <p v-if="act.minView">单稿件最低播放量计入：{{ act.minView || 100 }}</p>
+                          <P v-if="act.minLike">单稿件最低点赞量计入：{{ act.minLike || 0 }}</P>
                           <el-divider />
-                          <div v-for="(req, reqIndex) in speReq.reward" :key="reqIndex">
+                          <div v-for="(req, reqIndex) in act.reward" :key="reqIndex">
                             <span v-if="req.allNum">总投稿数>={{ req.allNum }} </span>
                             <span v-if="req.allViewNum" :class="req.allViewNum <= 20000 ? ' text-orange-500' : ''">
                               总播放量>={{ req.allViewNum }}
@@ -133,20 +134,17 @@
                             <span v-if="req.cday"> 投稿天数>={{ req.cday }} </span>
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
-
-                            <!-- 互动 -->
-
                             <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
                               }}</span>
 
-                            <template v-if="speReq?.videoData">
-                              <div v-for="r in speReq.videoData" :key="r">
-                                {{ r.userName }}:
+                            <template v-if="act?.videoData">
+                              <div v-for="vData in act.videoData" :key="vData">
+                                {{ vData.userName }}:
                                 <el-tooltip effect="dark" placement="top-start"
-                                  :content="getTooltipContent(req, r, platform)" v-if="r.userName">
-                                  <el-progress :percentage="getCompletionPercentage(req, r).percentage"
-                                    :status="getCompletionStatus(req, r)"
-                                    :format="(percentage) => formatRequirement(req, percentage, r)" />
+                                  :content="getTooltipContent(req, vData, act)" v-if="vData.userName">
+                                  <el-progress :percentage="getCompletionPercentage(req, vData, act).percentage"
+                                    :status="getCompletionStatus(req, vData, act)"
+                                    :format="(percentage) => formatRequirement(req, percentage, vData, act)" />
                                 </el-tooltip>
                               </div>
                             </template>
@@ -310,6 +308,37 @@
         <el-empty v-else description="No data available" />
       </el-tab-pane>
 
+      <!-- 小红书数据标签页 -->
+      <el-tab-pane label="小红书活动激励" name="xhs" lazy>
+        <el-table v-if="xhsActTableData.length" :data="xhsActTableData" border>
+          <el-table-column type="index" label="No." width="50" fixed />
+          <el-table-column prop="name" label="活动名称" width="250" fixed />
+          <el-table-column prop="stime" label="开始" width="120">
+            <template #default="scope">
+              {{ new Date(scope.row.stime * 1000).toLocaleDateString() }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="etime" label="结束" width="120">
+            <template #default="scope">
+              {{ scope.row.etime ? new Date(scope.row.etime * 1000).toLocaleDateString() : '' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="act_url" label="链接">
+            <template #default="scope">
+              <a :href="scope.row.act_url" target="_blank">查看</a>
+            </template>
+          </el-table-column>
+          <el-table-column prop="allMoney" label="估算" width="100" sortable>
+            <template #header>
+              <el-tooltip class="item" effect="dark" content="总播放<5w" placement="top">
+                <span>allMoney <i class="el-icon-question"></i></span>
+              </el-tooltip>
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-empty v-else description="No data available" />
+      </el-tab-pane>
+
     </el-tabs>
 
     <el-dialog title="下载视频和分组区分" v-model="dialogVisible" :before-close="cancelDownloadSettings">
@@ -420,8 +449,8 @@
                 <el-input v-model="activityRequirement.specialTag" placeholder="请输入必带标签" />
               </el-form-item>
               <el-form-item label="结束时间">
-                <el-date-picker v-model="activityRequirement.eDate" type="date" placeholder="选择结束时间"
-                  format="YYYY/MM/DD" value-format="YYYY/MM/DD" />
+                <el-date-picker v-model="activityRequirement.eDate" type="date" placeholder="选择结束时间" format="YYYY/MM/DD"
+                  value-format="YYYY/MM/DD" />
               </el-form-item>
               <el-divider>内容计入限制条件</el-divider>
               <el-form-item label="视频最低时长(秒)">
@@ -472,7 +501,7 @@
                     <el-input-number v-model="reward.cday" :min="0" :max="100" />
                   </el-form-item>
                   <el-form-item label="总互动量（点赞+收藏+评论）">
-                    <el-input-number v-model="reward.allInteractiveNum" :min="0" :max="200" />
+                    <el-input-number v-model="reward.allInteractionNum" :min="0" :max="200" />
                   </el-form-item>
                   <el-form-item label="奖励金额(w)">
                     <el-input-number v-model="reward.money" :min="0" :max="100" />
@@ -618,7 +647,7 @@
           <el-input-number v-model="scheduleForm.intervalHours" :min="1" :max="24" placeholder="请输入上传间隔" />
         </el-form-item>
         <el-form-item label="选择要执行账号">
-          <el-select v-model="scheduleForm.selectedAccounts" multiple placeholder="请选择要使用的账号" style="width: 100%">
+          <el-select v-model="scheduleForm.needExecAccounts" multiple placeholder="请选择要使用的账号" style="width: 100%">
             <el-option v-for="account in allPlatformAccounts[platformToKey[scheduleForm.platform]]" :key="account.id"
               :label="account.accountName" :value="account.accountName">
             </el-option>
@@ -703,6 +732,8 @@ interface ActivityRequirement {
   minVideoTime?: number
   minImageCount?: number
   minView?: number
+  minLike?: number
+  type?: 'all' | 'video' | 'image'
   topic?: string
   mission_id?: string
   topic_id?: string
@@ -717,7 +748,7 @@ interface Reward {
   like?: number   // 单稿件点赞数
   allLikeNum?: number  // 稿件总点赞量
   cday?: number     // 投稿持续天数
-  allInteractiveNum?: number // 总互动量（点赞+收藏+评论）
+  allInteractionNum?: number // 总互动量（点赞+收藏+评论）
   money?: number
   isGet: boolean
 }
@@ -725,16 +756,15 @@ interface Reward {
 interface VideoData {
   userName: string
   allNum: number
+  allViewNum: number
+  allLikeNum: number
   videoList: Array<{
     view: number
     like: number
     reply: number
     ctime: number
     title: string
-    bvid: string
   }>
-  allViewNum: number
-  allLikeNum: number
 }
 
 
@@ -759,7 +789,7 @@ interface ScheduleForm {
   immediately: boolean
   selectedArea: string
   etime: Date | null // 添加活动结束时间字段
-  selectedAccounts: Accounts // 新增账号选择字段
+  needExecAccounts: Accounts // 新增账号选择字段
   douyinTitleControl: boolean
   douyinGameBinding: boolean
 }
@@ -821,7 +851,7 @@ const scheduleForm = ref<ScheduleForm>({
   immediately: false,
   selectedArea: '游戏区',
   etime: null,
-  selectedAccounts: [],
+  needExecAccounts: [],
   douyinTitleControl: false,
   douyinGameBinding: false,
 })
@@ -909,7 +939,7 @@ const setScheduleJob = async (
     tid: 172,
     videoDir,
     etime: eDate ? new Date(eDate) : null, // 设置活动结束时间
-    selectedAccounts: allPlatformAccounts.value[platformToKey[platformName]].map(account => account.accountName),
+    needExecAccounts: allPlatformAccounts.value[platformToKey[platformName]].map(account => account.accountName),
     douyinTitleControl: false,
     douyinGameBinding: false,
   }
@@ -1382,6 +1412,7 @@ const getCommonTagAll = (row) => {
 }
 
 const bilibiliActTableData = ref([])
+const xhsActTableData = ref([]) // 小红书活动列表
 const gameTableData = ref([])
 const dakaTableData = ref([])
 
@@ -1430,6 +1461,11 @@ const fetchData = async () => {
       if (!item.etime || item.etime >= Number.MAX_SAFE_INTEGER) return false
       return item.etime > new Date().getTime() / 1000 && !item.notDo
     })
+    xhsActTableData.value = res.xhsActData.filter((item) => {
+      if (item.show) return true
+      if (!item.etime || item.etime >= Number.MAX_SAFE_INTEGER) return false
+      return item.etime > new Date().getTime() / 1000 && !item.notDo
+    })
     dakaTableData.value = res.dakaData
     // Exclude activities with infinite end time (treated as no end)
     gameTableData.value = res.gameData
@@ -1455,6 +1491,24 @@ const fetchNewBiliBiliActivityData = async () => {
     fetchData()
   } catch (error) {
     console.error('Error fetching data:', error)
+  }
+}
+
+const fetchNewXhsActivityData = async () => {
+  try {
+    const response = await fetch('/api/getNewXhsActData', {
+      headers: {
+        // frontend may supply X-S token if needed
+        // 'X-S': prompt('请输入X-S签名(若未提供可留空)') || ''
+      }
+    })
+    const res = await response.json()
+    if (res.code == -101) {
+      return ElMessage.error('请先登录')
+    }
+    fetchData()
+  } catch (error) {
+    console.error('Error fetching xhs data:', error)
   }
 }
 
@@ -1498,7 +1552,7 @@ const updateAllPlatformData = async () => {
 }
 
 
-const getCompletionPercentage = (requirement, videoData) => {
+const getCompletionPercentage = (requirement, videoData, act) => {
   let totalRequirements = 0
   let completedRequirements = 0
   const details = []
@@ -1509,7 +1563,7 @@ const getCompletionPercentage = (requirement, videoData) => {
     if (key === 'money' || key === 'isGet') continue
 
     totalRequirements++
-    const currentValue = getCurrentValue(key, videoData, requirement)
+    const currentValue = getCurrentValue(key, videoData, requirement, act)
     const isCompleted = currentValue >= requirement[key]
     if (isCompleted) {
       completedRequirements++
@@ -1524,40 +1578,62 @@ const getCompletionPercentage = (requirement, videoData) => {
     targetValues[key] = requirement[key]
   }
 
+  // when only one requirement (after filtering out money/isGet), calculate proportion
+  let percentage
+  if (totalRequirements === 1) {
+    // use the key that was actually processed rather than assuming the first key of the original object
+    const processedKey = Object.keys(currentValues)[0]
+    percentage = Math.min(
+      (currentValues[processedKey] / targetValues[processedKey]) * 100,
+      100,
+    )
+  } else {
+    percentage = (completedRequirements / totalRequirements) * 100
+  }
+
   return {
-    percentage:
-      totalRequirements === 1
-        ? Math.min(
-          (currentValues[Object.keys(requirement)[0]] /
-            targetValues[Object.keys(requirement)[0]]) *
-          100,
-          100,
-        )
-        : (completedRequirements / totalRequirements) * 100,
+    percentage,
     details,
     currentValues,
     targetValues,
   }
 }
 
-function getCurrentValue(key, data, requirement) {
+function getCurrentValue(key, data, requirement, act) {
   switch (key) {
     case 'allNum':
+      // if there are filtering conditions, count videos that satisfy them
+      if (act?.minLike || act?.minView) {
+        const filterVideoList = data.videoList
+          .filter((i) => {
+            let ok = true
+            if (act?.minLike) ok = ok && i.like >= act.minLike
+            if (act?.minView) ok = ok && i.view >= act.minView
+            return ok
+          })
+        return filterVideoList.length
+      }
       return data.allNum
-    case 'view':
-      return Math.max(...data.videoList.map((item) => item.view))
-    case 'cday':
-      return calculateCday(data.videoList)
-    case 'like':
-      return data.videoList.reduce((sum, item) => sum + item.like, 0)
     case 'allLikeNum':
-      return data.allLikeNum
-    case 'allViewNum':
-      return requirement?.minView
+      return act?.minLike
         ? data.videoList
-          .filter((i) => i.view >= requirement?.minView)
+          .filter((i) => i.view >= act?.minLike)
+          .reduce((sum, item) => sum + item.like, 0)
+        : data.allLikeNum
+    case 'allViewNum':
+      return act?.minView
+        ? data.videoList
+          .filter((i) => i.view >= act?.minView)
           .reduce((sum, item) => sum + item.view, 0)
         : data.allViewNum
+    case "allInteractionNum":
+      return data.videoList.reduce((sum, item) => sum + (item.like + item.collected_count + item.comment_count), 0)
+    case 'view':
+      return Math.max(...data.videoList.map((item) => item.view))
+    case 'like':
+      return Math.max(...data.videoList.map((item) => item.like))
+    case 'cday':
+      return calculateCday(data.videoList)
     default:
       return 0
   }
@@ -1574,8 +1650,8 @@ function calculateCday(videoList) {
   return uniqueDates.size
 }
 
-const getTooltipContent = (requirement, videoData) => {
-  const completionInfo = getCompletionPercentage(requirement, videoData)
+const getTooltipContent = (requirement, videoData, act) => {
+  const completionInfo = getCompletionPercentage(requirement, videoData, act)
   let tooltipContent = ''
 
   completionInfo.details.forEach((detail) => {
@@ -1589,12 +1665,12 @@ const getTooltipContent = (requirement, videoData) => {
   return tooltipContent.trim()
 }
 
-const getCompletionStatus = (requirement, videoData) => {
-  const percentage = getCompletionPercentage(requirement, videoData)
+const getCompletionStatus = (requirement, videoData, act) => {
+  const percentage = getCompletionPercentage(requirement, videoData, act)
   return percentage.percentage >= 100 ? 'success' : 'exception'
 }
 
-const formatRequirement = (requirement) => {
+const formatRequirement = (requirement, percentage, videoData, act) => {
   if (requirement.allNum) {
     return `${requirement.allNum} videos`
   } else if (requirement.allViewNum) {

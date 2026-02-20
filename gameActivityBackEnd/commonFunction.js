@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const dayjs = require("dayjs");
 const jsonParentPath = 'jsonFile';
 
 function formatSecondTimestamp(dateString, unit) {
@@ -18,13 +19,21 @@ const getDaysDiff = (timeStamp1, timeStamp2) => {
 
 const formatDate = (timestamp = new Date().getTime(), seconds = false) => {
   const date = new Date(timestamp);
-  if (seconds) {
-    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate()) + "-" + date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds()
-  }
-  const basicDate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + (date.getDate())
-  return basicDate
-};
+  const pad = (n) => String(n).padStart(2, '0'); // 补零
 
+  const year = date.getFullYear();
+  const month = pad(date.getMonth() + 1);
+  const day = pad(date.getDate());
+
+  if (seconds) {
+    const hours = pad(date.getHours());
+    const minutes = pad(date.getMinutes());
+    const secs = pad(date.getSeconds());
+    return `${year}-${month}-${day} ${hours}:${minutes}:${secs}`;
+  }
+
+  return `${year}-${month}-${day}`;
+};
 function getJsonData(inJsonPath = "data.json") {
   const jsonPath = path.join(__dirname, jsonParentPath, inJsonPath);
 
@@ -113,6 +122,56 @@ function getRandomMusicName(dirPath = 'D:/code/platform_game_activity/TikTokDown
   return musicNames[Math.floor(Math.random() * musicNames.length)];
 }
 
+// 移除过期的活动（eDate 在当前日期之前）
+function removeExpiredActivities(gameData) {
+  if (!Array.isArray(gameData)) return gameData;
+
+  const today = dayjs();
+
+  return gameData
+    .map((game) => {
+      if (!game.rewards) return game;
+
+      return {
+        ...game,
+        rewards: game.rewards
+          .map((reward) => {
+            if (!reward.activityRequirements) return reward;
+
+            return {
+              ...reward,
+              activityRequirements: reward.activityRequirements.filter((activity) => {
+                // 检查 eDate 或 etime
+                const dateString = activity.eDate || (activity.etime ? formatDate(activity.etime * 1000) : null);
+                if (!dateString) return true; // 没有结束时间，保留
+
+                try {
+                  // 使用day.js处理日期格式 YYYY-MM-DD 或 YYYY/M/D
+                  const activityDate = dayjs(dateString);
+
+                  // 如果日期格式无效，保留活动
+                  if (!activityDate.isValid()) {
+                    console.warn(`Failed to parse date: ${dateString}`);
+                    return true;
+                  }
+
+                  // 使用 isAfter 判断：eDate > 今天 则保留，否则过滤掉
+                  return activityDate.isAfter(today, 'day');
+                } catch (e) {
+                  console.warn(`Failed to parse date: ${dateString}`);
+                  return true; // 解析失败时保留活动
+                }
+              })
+            };
+          })
+          .filter((reward) => {
+            // 保留所有平台，即使活动为空
+            return true;
+          })
+      };
+    })
+    .filter((game) => game.rewards && game.rewards.length > 0); // 移除没有任何平台的游戏
+}
 
 module.exports = {
   formatDate,
@@ -122,5 +181,6 @@ module.exports = {
   concurrentFetchWithDelay,
   calculateTotalMoney,
   writeLocalDataJson,
-  getRandomMusicName
+  getRandomMusicName,
+  removeExpiredActivities
 };

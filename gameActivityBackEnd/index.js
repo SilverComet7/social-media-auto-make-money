@@ -12,6 +12,7 @@ const {
   getJsonData,
   formatSecondTimestamp,
   writeLocalDataJson,
+  removeExpiredActivities,
 } = require("./commonFunction.js");
 
 const { queryDouYinAllAccountsData } = require("./crawerHandle/douyin.js");
@@ -36,9 +37,7 @@ app.use('/static_videos', express.static(TikTokDownloader_ROOT + '/gamelist'));
 
 const accountJson = getJsonData("accountList.json")
 const Cookie = accountJson.bilibili[0].Cookie;
-const csrfToken = Cookie.split("; ")
-  .find((cookie) => cookie.startsWith("bili_jct="))
-  .split("=")[1];
+
 const headers = {
   accept: "application/json, text/javascript, */*; q=0.01",
   "User-Agent":
@@ -49,13 +48,27 @@ const headers = {
   Cookie: Cookie,
 };
 
+// helper for XHS headers (uses cookie from accountList and optional X-S from caller)
+function buildXhsHeaders(req) {
+  const accountJson = getJsonData("accountList.json");
+  const Feeling = accountJson.xhs?.[0];
+  const xhsCookie = Feeling?.Cookie || "";
+  const xS = req.headers["x-s"] || req.query["x-s"] || Feeling?.["X-S"] || "";
+  return {
+    accept: "application/json, text/javascript, */*; q=0.01",
+    "User-Agent": headers["User-Agent"],
+    Cookie: xhsCookie,
+    "X-S": xS,
+  };
+}
+
 
 
 // 获取各平台活动数据，处理活动数据
 app.get("/getNewActData", async (req, res) => {
   try {
     async function getActivitiesList() {
-      let oldDataArr = getJsonData('data.json');
+      let oldDataArr = getJsonData('bilibiliNoGameData.json');
       const fetchUrl = `https://member.bilibili.com/x/web/activity/videoall`;
       const response = await fetch(fetchUrl, {
         headers,
@@ -72,7 +85,6 @@ app.get("/getNewActData", async (req, res) => {
         .filter((item) => {
           return !allGameList.some((gameName) => item.name.includes(gameName));
         });
-      // 非game 活动
       const newDataArr = noGameDataArr
         .map((item) => {
           const oldDataHasThisRewardsItem = oldDataArr.find(
@@ -94,14 +106,13 @@ app.get("/getNewActData", async (req, res) => {
               }),
           };
         });
-      writeLocalDataJson(newDataArr, 'data.json');
+      writeLocalDataJson(newDataArr, 'bilibiliNoGameData.json');
 
       let gameData = getJsonData("gameData.json");
       const gameDataArr = newActList
         .filter((item) => {
           return allGameList.some((gameName) => item.name.includes(gameName));
         })
-      // 相同的游戏名活动去重，避免重复请求
 
       await Promise.all(
         gameDataArr
@@ -177,6 +188,7 @@ app.get("/getNewActData", async (req, res) => {
             }
           }));
 
+      gameData = removeExpiredActivities(gameData);
       writeLocalDataJson(gameData, "gameData.json");
       return newActList;
     }
@@ -189,9 +201,82 @@ app.get("/getNewActData", async (req, res) => {
     });
   }
 });
+
+// new XHS activity route
+app.get("/getNewXhsActData", async (req, res) => {
+  try {
+    async function getActivitiesList() {
+      let oldDataArr = getJsonData('xhsNoGameData.json') || [];
+      const fetchUrl = 'https://creator.xiaohongshu.com/api/galaxy/v2/creator/activity_center/list?sort=2&type=1&source=3&topic_activity=0';
+      const headersXhs = buildXhsHeaders(req);
+      const response = await fetch(fetchUrl, { headers: headersXhs });
+      let result = await response.json();
+      const activity_list = result?.data?.activity_list;
+      if (!activity_list) return result;
+      let newActList = activity_list.map((e) => ({
+        name: e.activity_name || '',
+        stime: e.start_time ? Math.floor(e.start_time / 1000) : 0,
+        etime: e.end_time ? Math.floor(e.end_time / 1000) : 0,
+        act_url: e.activity_link || e.capa_deep_link || '',
+        comment: e.activity_reward || '',
+        addTime: `${new Date().getFullYear()}年${new Date().getMonth() + 1}月${new Date().getDate()}添加`,
+      }));
+
+      const noGameDataArr = newActList.filter((item) => !allGameList.some((gameName) => item.name.includes(gameName)));
+      const newDataArr = noGameDataArr.map((item) => {
+        const oldDataHasThis = oldDataArr.find((old) => item.name === old.name);
+        return oldDataHasThis ? { ...oldDataHasThis } : { ...item };
+      });
+      writeLocalDataJson(newDataArr, 'xhsNoGameData.json');
+
+      let gameData = getJsonData('gameData.json');
+      const gameDataArr = newActList.filter((item) => allGameList.some((gameName) => item.name.includes(gameName)));
+      await Promise.all(
+        gameDataArr.map(async (activity) => {
+          try {
+            const thisActivityGameName = allGameList.find((gameName) => activity.name.includes(gameName));
+            let oldGame = gameData.find((g) => g.name === thisActivityGameName);
+            if (!oldGame) {
+              oldGame = { name: thisActivityGameName, rewards: [{ name: '小红书', activityRequirements: [] }] };
+              gameData.push(oldGame);
+            }
+            let xhsPlatform = oldGame.rewards.find((p) => p.name === '小红书');
+            if (!xhsPlatform) {
+              xhsPlatform = { name: '小红书', activityRequirements: [] };
+              oldGame.rewards.unshift(xhsPlatform);
+            }
+            const exists = xhsPlatform.activityRequirements.find((act) => act.name === activity.name);
+            if (!exists) {
+              xhsPlatform.activityRequirements.push({
+                name: activity.name,
+                act_url: activity.act_url,
+                comment: activity.comment,
+                sDate: formatDate(activity.stime * 1000),
+                eDate: formatDate(activity.etime * 1000),
+                specialTag: '',
+                reward: [],
+              });
+            }
+          } catch (e) {
+            console.error('Error processing xhs activity', e);
+          }
+        })
+      );
+      gameData = removeExpiredActivities(gameData);
+      writeLocalDataJson(gameData, 'gameData.json');
+      return newActList;
+    }
+
+    const data = await getActivitiesList();
+    res.json(data);
+  } catch (error) {
+    console.error('Error in /getNewXhsActData endpoint:', error);
+    res.json({ msg: error });
+  }
+});
+
 app.get('/getLatestTopic', async (req, res) => {
   const { topic } = req.query;
-  console.log(topic);
 
   if (!topic) {
     return res.status(400).json({ code: 400, message: 'Missing topic parameter' });
@@ -249,7 +334,6 @@ app.post("/addPlatformReward", async (req, res) => {
   }
 });
 
-// 下载视频与处理
 app.post("/downloadVideosAndGroup", async (req, res) => {
   try {
     const { downloadSettings } = req.body;
@@ -260,6 +344,7 @@ app.post("/downloadVideosAndGroup", async (req, res) => {
     res.status(500).send("视频处理失败");
   }
 });
+
 app.post("/ffmpegHandleVideos", async (req, res) => {
   try {
     const { ffmpegSettings } = req.body;
@@ -271,13 +356,13 @@ app.post("/ffmpegHandleVideos", async (req, res) => {
     res.status(500).send("视频处理失败");
   }
 });
-// 获取各平台视频播放数据
+
 app.post("/getPlatformVideoData", async (req, res) => {
   try {
     const jsonData = await useThirdUtil_GetVideoData();
 
     async function useThirdUtil_GetVideoData() {
-      let xhsData = await queryXiaoHongShuAllAccountsData();
+      let xhsNoGameData = await queryXiaoHongShuAllAccountsData();
       let bilibiliData = await querybilibiliAllAccountsData();
       let douyinData = await queryDouYinAllAccountsData();
       const oldOtherGameDataArr = getJsonData("gameData.json");
@@ -356,7 +441,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
 
                   return {
                     ...i,
-                    videoData: xhsData.map((t) => {
+                    videoData: xhsNoGameData.map((t) => {
                       // 过滤不满足条件的笔记 - 根据 tag 和 type
                       // tag_list 格式: "tag1,tag2,tag3"
                       const valuedList = t.aweme_list.filter((l) => {
@@ -541,7 +626,7 @@ app.get("/allData", async (req, res) => {
         };
       });
 
-    const bilibiliActData = getJsonData('data.json')
+    const bilibiliActData = getJsonData('bilibiliNoGameData.json')
       .filter(
         (item) =>
           !item.notDo &&
@@ -555,22 +640,20 @@ app.get("/allData", async (req, res) => {
         };
       });
 
-
-    const dakaData = getJsonData("B站打卡活动.json")
-      .filter((item) => item.stime * 1000 < new Date().getTime())
-      .map((e) => ({
-        act_id: e.act_id,
-        title: e.title,
-        icon_state: e.icon_state,
-        stime: e.stime,
-        etime: e.etime,
-        act_tags: e.act_tags,
-        detail: {
-          rule_text: e.detail.rule_text,
-          task_data: e.detail.task_data,
-          act_rule: { topic: e.detail.act_rule.topic },
-        },
+    const xhsActData = getJsonData('xhsNoGameData.json')
+      .filter(
+        (item) =>
+          !item.notDo &&
+          !allGameList.some((gameName) => item.name.includes(gameName))
+      )
+      .sort((a, b) => a.etime - b.etime)
+      .map((item) => ({
+        ...item,
+        allMoney: calculateTotalMoney(item),
       }));
+
+
+
     const BiliBiliScheduleJob = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
     const DouyinScheduleJob = getJsonData("scheduleJob/DouyinScheduleJob.json");
     const XhsScheduleJob = getJsonData("scheduleJob/XhsScheduleJob.json");
@@ -580,9 +663,8 @@ app.get("/allData", async (req, res) => {
     res.json({
       gameData,
       bilibiliActData,
-      dakaData,
+      xhsActData,
       allGameList,
-      topicJson: getJsonData("topic.json")?.topics,
       scheduleJob: {
         bilibili: BiliBiliScheduleJob,
         '抖音': DouyinScheduleJob,
