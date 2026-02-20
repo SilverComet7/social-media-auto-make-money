@@ -18,6 +18,14 @@
                   <el-checkbox label="小红书">小红书</el-checkbox>
                   <el-checkbox label="bilibili">bilibili</el-checkbox>
                 </el-checkbox-group>
+                <div class="mt-4 pt-4 border-t">
+                  <el-checkbox v-model="clearPreviousData">
+                    <span class="text-yellow-600 font-semibold">清除过往数据，仅使用新爬取数据重新计算</span>
+                  </el-checkbox>
+                  <div class="text-gray-500 text-sm mt-2 ml-6">
+                    ⚠️ 勾选此项将清空选定平台所有用户的历史视频数据，仅保留本次爬取的数据进行统计
+                  </div>
+                </div>
                 <span slot="footer" class="dialog-footer">
                   <el-button @click="platformDialogVisible = false">取消</el-button>
                   <el-button type="primary" @click="confirmUpdatePlatforms">确定</el-button>
@@ -1551,19 +1559,21 @@ onMounted(() => {
 // 控制选择查询的平台
 const platformDialogVisible = ref(false);
 const selectedPlatformList = ref<string[]>(['抖音', '小红书', 'bilibili']);
+const clearPreviousData = ref(false); // 是否清除过往数据
 
 const confirmUpdatePlatforms = async () => {
   platformDialogVisible.value = false;
-  await updateAllPlatformData(selectedPlatformList.value);
+  await updateAllPlatformData(selectedPlatformList.value, clearPreviousData.value);
+  clearPreviousData.value = false; // 操作完后重置开关
 };
 
-const updateAllPlatformData = async (platforms: string[] = []) => {
+const updateAllPlatformData = async (platforms: string[] = [], clearData: boolean = false) => {
   await fetch(`/api/getPlatformVideoData`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ platforms }),
+    body: JSON.stringify({ platforms, clearPreviousData: clearData }),
   }).then((res) => {
     if (res.ok) {
       fetchData();

@@ -365,6 +365,12 @@ app.post("/getPlatformVideoData", async (req, res) => {
       requested.length > 0 ? requested : ["抖音", "小红书", "bilibili"]
     );
 
+    // 是否清除过往数据，默认 false（保留历史数据）
+    const clearPreviousData = req.body.clearPreviousData === true;
+    if (clearPreviousData) {
+      console.log(`⚠️  清除模式启用：将清除 ${Array.from(selectedPlatforms).join(', ')} 平台的历史数据，仅使用新爬取数据`);
+    }
+
     const jsonData = await useThirdUtil_GetVideoData();
 
     async function useThirdUtil_GetVideoData() {
@@ -447,10 +453,11 @@ app.post("/getPlatformVideoData", async (req, res) => {
                           return true;
                         }
                       );
-                      // 目前忽视了挂在小手柄问题，可手动isGet调整
-                      const prevList =
-                        i?.videoData?.find((c) => c.userName === t.user.name)
-                          ?.videoList || [];
+                      // 清除模式：不复用之前的数据；正常模式：合并新旧数据
+                      const prevList = clearPreviousData
+                        ? []
+                        : (i?.videoData?.find((c) => c.userName === t.user.name)
+                          ?.videoList || []);
                       const list = mergeVideoLists(prevList, valuedList);
                       return {
                         userName: t.user.name,
@@ -498,9 +505,11 @@ app.post("/getPlatformVideoData", async (req, res) => {
                         return true;
                       });
 
-                      const prevList =
-                        i?.videoData?.find((c) => c.userName === t.user.name)
-                          ?.videoList || [];
+                      // 清除模式：不复用之前的数据；正常模式：合并新旧数据
+                      const prevList = clearPreviousData
+                        ? []
+                        : (i?.videoData?.find((c) => c.userName === t.user.name)
+                          ?.videoList || []);
                       const list = mergeVideoLists(prevList, valuedList);
                       return {
                         userName: t.user.name,
@@ -524,7 +533,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
                     ...differentTopic,
                     videoData: bilibiliVideoData.map((t) => {
                       const valuedList = t.aweme_list.filter(l => {
-                        const matchesName = (l.desc === differentTopic.topic) || (l.desc === differentTopic.name)
+                        const matches_desc_topic = (l.desc === differentTopic.topic)
                         let isTopicScheduleJob = false;
                         if (hasSameTopicScheduleJob) {
                           isTopicScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
@@ -533,7 +542,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
                           });
                         }
 
-                        if (!(matchesName || isTopicScheduleJob)) return false;
+                        if (!(matches_desc_topic || isTopicScheduleJob)) return false;
 
                         // if (differentTopic.reward && differentTopic.reward.length > 0) {
                         //   const rewardType = differentTopic.reward[0]?.type;
@@ -545,9 +554,11 @@ app.post("/getPlatformVideoData", async (req, res) => {
                         return true;
                       });
 
-                      const prevList =
-                        differentTopic?.videoData?.find((c) => c.userName === t.user.name)
-                          ?.videoList || [];
+                      // 清除模式：不复用之前的数据；正常模式：合并新旧数据
+                      const prevList = clearPreviousData
+                        ? []
+                        : (differentTopic?.videoData?.find((c) => c.userName === t.user.name)
+                          ?.videoList || []);
                       const list = mergeVideoLists(prevList, valuedList);
                       return {
                         userName: t.user.name,

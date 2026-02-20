@@ -1,43 +1,43 @@
-const fs = require('fs');
-const path = require('path');
-const { concurrentFetchWithDelay } = require('../commonFunction.js');
+﻿const { queryPlatformData, readCrawlerData } = require('./mediaCrawlerHelper');
 
-// 读取 accountList.json 文件
-const accountListPath = path.join(__dirname, '../jsonFile', 'accountList.json');
-const accountList = JSON.parse(fs.readFileSync(accountListPath, 'utf8'));
+function transformDouyinData(crawlerData) {
+    if (!Array.isArray(crawlerData)) {
+        throw new Error('爬虫数据格式错误，应为数组');
+    }
 
-// 循环查询每个账号的数据
-async function queryDouYinAllAccountsData() {
-    const promises = accountList.douyin.map(account => {
-        const userId = account.id; 
-        const limit = 36;
-        const url = `http://127.0.0.1:8080/douyin/user?id=${userId}&limit=${limit}&accountName=${account.accountName}`;
+    const userMap = new Map();
+    crawlerData.forEach(note => {
+        const userId = note.user_id || (note.aweme_list && note.aweme_list[0]?.author?.uid) || note.nickname;
+        if (!userMap.has(userId)) {
+            userMap.set(userId, {
+                user: { name: note.user?.nickname || note.aweme_list?.[0]?.author?.nickname || '' },
+                aweme_list: []
+            });
+        }
+        const user = userMap.get(userId);
+        // if crawlerData already has aweme_list shape we can reuse, else adapt
+        if (note.aweme_list && Array.isArray(note.aweme_list)) {
+            note.aweme_list.forEach(e => {
+                user.aweme_list.push({
+                    title: e.title,
+                    aweme_id: e.aweme_id,
+                    desc: e.desc,
+                    create_time: e.create_time,
+                    view: e.statistics?.play_count || e.view || 0,
+                    like: e.statistics?.digg_count || e.like || 0,
+                });
+            });
+        }
+    });
 
-        return () => fetch(url).then(response => response.json()).then(res => {
-            const workDetails = res.data;
-            return workDetails
-        });
-    })
+    return Array.from(userMap.values());
+}
 
-    let data = await concurrentFetchWithDelay(promises, 1000, 3000, 1); 
-    let handleData = data.filter(Boolean).map((item) => ({
-        user: {
-            name: item?.user?.nickname || item?.aweme_list?.[0]?.author.nickname,
-            aweme_count: item.user.aweme_count,
-            follower_count: item.user.follower_count
-        },
-        aweme_list: item.aweme_list.map(e => ({
-            title: e.title,
-            aweme_id: e.aweme_id,
-            desc: e.desc,
-            create_time: e.create_time,
-            view: e.statistics.play_count,
-            like: e.statistics.digg_count,
-        }))
-    }))
-    return handleData
+async function queryDouYinAllAccountsData(platformDir) {
+    return queryPlatformData('douyin', transformDouyinData, platformDir);
 }
 
 module.exports = {
     queryDouYinAllAccountsData
-}
+};
+

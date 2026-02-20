@@ -1,67 +1,49 @@
-import fs from 'fs';
-import path from 'path';
-import { concurrentFetchWithDelay } from '../commonFunction.js';
+﻿import { queryPlatformData } from './mediaCrawlerHelper.js';
 
-// 定义类型接口
-interface BilibiliAccount {
-    id: string;
-    accountName: string;
-}
-
-interface AccountList {
-    bilibili: BilibiliAccount[];
-    [key: string]: any;
-}
-
-interface VideoItem {
+interface BiliNote {
+    video_id: string;
     title: string;
-    bvid: string;
-    description: string;
-    created: number;
-    play: number;
+    desc: string;
+    create_time: number;
+    video_play_count: string | number;
+    liked_count: string | number;
+    user_id: string;
+    nickname: string;
 }
 
+function transformBiliData(crawlerData: any[]): any[] {
+    if (!Array.isArray(crawlerData)) {
+        throw new Error('爬虫数据格式错误，应为数组');
+    }
 
-const accountListPath = path.join(__dirname, '../jsonFile', 'accountList.json');
-const accountList = JSON.parse(fs.readFileSync(accountListPath, 'utf8')) as AccountList;
+    const userMap = new Map<string, any>();
 
-// 循环查询每个账号的数据
-async function querybilibiliAllAccountsData() {
-    const promises = accountList.bilibili.map((account: BilibiliAccount) => {
-        const userId = account.id;
-        const limit = 60;
-        const url = `http://127.0.0.1:8080/bilibili/user?id=${userId}&limit=${limit}`;
-
-        return () => fetch(url)
-            .then(response => response.json())
-            .then((res: any) => {
-                const workDetails = res.data;
-                return { ...workDetails, userName: account.accountName };
-            });
+    crawlerData.forEach((note: BiliNote) => {
+        const userId = note.user_id || note.nickname;
+        if (!userMap.has(userId)) {
+            userMap.set(userId, { user: { name: note.nickname || '' }, aweme_list: [] });
+        }
+        const user = userMap.get(userId);
+        user.aweme_list.push({
+            title: note.title,
+            aweme_id: note.video_id,
+            desc: note.desc,
+            create_time: note.create_time,
+            view: Number(note.video_play_count) || 0,
+            like: Number(note.liked_count) || 0,
+        });
     });
 
-    const data = await concurrentFetchWithDelay(promises, 1000, 3000, 1); // 延迟 1-3 秒
-    const handleData = data.map(item => ({
-        user: {
-            name: item?.userName
-        },
-        aweme_list: item.videos.list.map((e: VideoItem) => ({
-            title: e.title,
-            aweme_id: e.bvid,
-            desc: e.description,
-            create_time: e.created,
-            view: e.play,
-        }))
-    }));
-
-    return handleData;
+    return Array.from(userMap.values());
 }
 
-// 使用 CommonJS 导出以兼容现有的 JS 文件
-// @ts-ignore - 忽略 TypeScript 对 module.exports 的警告
-module.exports = {
-    querybilibiliAllAccountsData
-};
+async function querybilibiliAllAccountsData(platformDir?: string) {
+    return queryPlatformData('bili', transformBiliData, platformDir);
+}
 
-// 同时也提供 ES Module 导出，以便将来迁移
+// commonjs export for compatibility
+// @ts-ignore
+module.exports = { querybilibiliAllAccountsData };
+
+// also export ES modules
 export { querybilibiliAllAccountsData };
