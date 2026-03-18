@@ -386,7 +386,6 @@ app.post("/getPlatformVideoData", async (req, res) => {
         : null;
 
       const oldOtherGameDataArr = getJsonData("gameData.json");
-      const BiliBiliScheduleJobJson = getJsonData("scheduleJob/BiliBiliScheduleJob.json");
 
 
       // -----------------------------------------------------------------------------
@@ -527,22 +526,15 @@ app.post("/getPlatformVideoData", async (req, res) => {
               return {
                 ...e,
                 activityRequirements: e.activityRequirements.map((differentTopic) => {
-                  const hasSameTopicScheduleJob = BiliBiliScheduleJobJson.find(job => job.topicName === differentTopic.topic);
 
                   return {
                     ...differentTopic,
                     videoData: bilibiliVideoData.map((t) => {
                       const valuedList = t.aweme_list.filter(l => {
                         const matches_desc_topic = (l.desc === differentTopic.topic)
-                        let isTopicScheduleJob = false;
-                        if (hasSameTopicScheduleJob) {
-                          isTopicScheduleJob = hasSameTopicScheduleJob.scheduleJob.some(job => {
-                            const jobFileName = job.videoPath.split('\\').pop();
-                            return jobFileName.includes(l.title)
-                          });
-                        }
 
-                        if (!(matches_desc_topic || isTopicScheduleJob)) return false;
+
+                        if (!(matches_desc_topic)) return false;
 
                         // if (differentTopic.reward && differentTopic.reward.length > 0) {
                         //   const rewardType = differentTopic.reward[0]?.type;
@@ -668,7 +660,6 @@ app.get("/allData", async (req, res) => {
     const XhsScheduleJob = getJsonData("scheduleJob/XhsScheduleJob.json");
     const accountList = getJsonData("accountList.json");
 
-    // 遍历视频目录,拿到各目录的视频列表
     res.json({
       gameData,
       bilibiliActData,
