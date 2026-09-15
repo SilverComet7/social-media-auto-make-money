@@ -1,6 +1,93 @@
 <template>
   <div class="table-container">
+    <!-- 固定在顶层的标签面板 -->
+    <div v-if="showTagPanel" class="fixed-tag-panel">
+      <div class="panel-header">
+        <h3>📌 标签速查面板</h3>
+        <div class="panel-controls">
+          <el-button size="small" type="info" @click="toggleTagPanelExpand">
+            {{ tagPanelExpanded ? '收起' : '展开' }}
+          </el-button>
+          <el-button size="small" type="danger" @click="showTagPanel = false">
+            关闭
+          </el-button>
+        </div>
+      </div>
+
+      <!-- 展开状态显示所有标签 -->
+      <div v-if="tagPanelExpanded" class="panel-content">
+        <!-- 赛道标签区域 -->
+        <div class="track-tags-section">
+          <div class="section-title">🎮 赛道标签库</div>
+          <div class="track-controls">
+            <el-button size="small" type="info" @click="toggleAllTracks">
+              {{ expandedTracks.size === Object.keys(specialTrackTagConfigs).length ? '全部收起' : '全部展开' }}
+            </el-button>
+          </div>
+
+          <div v-for="(trackConfig, trackName) in specialTrackTagConfigs" :key="trackName" class="track-group">
+            <div class="track-header">
+              <div class="track-header-left" @click="toggleTrack(trackName)">
+                <span class="track-toggle">{{ expandedTracks.has(trackName) ? '▼' : '▶' }}</span>
+                <span class="track-title">{{ trackName }}</span>
+                <span class="tag-count">({{ trackConfig.baseTags.length + trackConfig.extraTags.length }})</span>
+              </div>
+              <el-button size="small" type="primary" class="track-copy-btn"
+                @click="copyTrackTags(trackName, trackConfig)">
+                复制
+              </el-button>
+            </div>
+
+            <div v-if="expandedTracks.has(trackName)" class="track-content">
+              <div class="tags-wrapper">
+                <div v-for="tag in [...trackConfig.baseTags, ...trackConfig.extraTags]" :key="tag" class="tag-item"
+                  @click="copyTag(tag)">
+                  {{ tag }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 游戏对应的平台标签区域 -->
+        <div v-if="currentGameName" class="game-section">
+          <div class="section-title">🎯 游戏: {{ currentGameName }}</div>
+
+          <!-- 按平台分组显示标签 -->
+          <div v-for="platformTags in groupedTagsByPlatform" :key="platformTags.platform" class="platform-group">
+            <div class="platform-header">
+              <div class="platform-name">{{ platformTags.platform }}</div>
+              <el-button size="small" type="primary" class="platform-copy-btn"
+                @click="copyPlatformTags(platformTags.platform, platformTags.tags)">
+                复制
+              </el-button>
+            </div>
+            <div class="tags-wrapper">
+              <div v-for="tag in platformTags.tags" :key="tag" class="tag-item" @click="copyTag(tag)">
+                {{ tag }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-else class="empty-state">
+          <p>选择游戏后显示标签</p>
+        </div>
+      </div>
+
+      <!-- 收起状态仅显示摘要 -->
+      <div v-else class="panel-summary">
+        <span v-if="currentGameName">{{ currentGameName }}</span>
+        <span v-else class="text-gray-400">未选择游戏</span>
+      </div>
+    </div>
+
+    <!-- 显示/隐藏标签面板按钮 -->
+    <el-button v-if="!showTagPanel" size="small" type="primary" class="open-tag-panel-btn" @click="showTagPanel = true">
+      📌 打开标签速查
+    </el-button>
+
     <el-backtop :right="100" :bottom="100" />
+    <!-- 通用标签 -->
 
     <el-tabs v-model="activeTab" type="card">
       <el-tab-pane label="四平台游戏活动激励" name="platform">
@@ -26,10 +113,12 @@
                     ⚠️ 勾选此项将清空选定平台所有用户的历史视频数据，仅保留本次爬取的数据进行统计
                   </div>
                 </div>
-                <span slot="footer" class="dialog-footer">
-                  <el-button @click="platformDialogVisible = false">取消</el-button>
-                  <el-button type="primary" @click="confirmUpdatePlatforms">确定</el-button>
-                </span>
+                <template v-slot:footer>
+                  <span class="dialog-footer">
+                    <el-button @click="platformDialogVisible = false">取消</el-button>
+                    <el-button type="primary" @click="confirmUpdatePlatforms">确定</el-button>
+                  </span>
+                </template>
               </el-dialog>
               <el-button type="primary" @click="fetchNewBiliBiliActivityData">查询B站新活动与Topic</el-button>
               <el-button type="primary" @click="fetchNewXhsActivityData">查询小红书新活动</el-button>
@@ -52,75 +141,164 @@
             </div>
           </div>
         </div>
-        <el-table v-if="gameTableData.length" :data="gameTableData" style="width: 100%" border
-          :default-sort="{ prop: 'allMoney', order: 'descending' }">
+
+        <div class="flex  mb-4">
+          <div class="space-y-3 p-3">
+            <el-checkbox v-model="filterSettings.hideNoRewardGames">隐藏无奖励游戏</el-checkbox>
+            <div class="flex items-center gap-2">
+              <span class='text-black'>allMoney</span>
+              <el-input-number v-model="filterSettings.allMoneyMin" :min="0" size="small" placeholder="最小"
+                controls-position="right" />
+              <span class='text-black'>~</span>
+              <el-input-number v-model="filterSettings.allMoneyMax" :min="0" size="small" placeholder="最大"
+                controls-position="right" />
+            </div>
+            <div class="flex items-center gap-2">
+              <span class='text-black'>剩余天数</span>
+              <el-input-number v-model="filterSettings.daysLeftMin" :min="0" size="small" placeholder="最小"
+                controls-position="right" />
+              <span class='text-black'>~</span>
+              <el-input-number v-model="filterSettings.daysLeftMax" :min="0" size="small" placeholder="最大"
+                controls-position="right" />
+            </div>
+            <div class="flex  gap-2">
+              <el-button size="small" @click="resetFilterSettings">重置</el-button>
+              <el-button type="primary" size="small">确定</el-button>
+            </div>
+          </div>
+
+        </div>
+
+        <el-table v-if="filteredGameTableData.length" :data="filteredGameTableData" style="width: 100%" border
+          :default-sort="{ prop: 'endDiffDate', order: 'ascending' }">
           <el-table-column type="index" label="No." width="50" fixed />
           <el-table-column prop="name" label="Game Name" width="250" fixed>
             <template #default="scope">
               <div :class="scope.row.notDo ? 'text-red-500' : ''">
-                <a :href="`https://www.douyin.com/search/${scope.row.name}`" target="_blank" :class="scope.row.updateData || scope.row.new ? 'text-green-500 ' : 'text-blue-500'
-                  " class="font-bold">
+                <span :class="scope.row.updateData || scope.row.new ? 'text-green-500 ' : 'text-blue-500'
+                  " class="font-bold cursor-pointer hover:underline"
+                  @click="openSearchDialog(scope.row.name); handleGameNameClick(scope.row.name)">
                   {{ scope.row.name }}
-                </a>
+                </span>
                 <div>
                   <el-button type="primary" @click="handleDownloadSettings(scope.row.name)">下载视频</el-button>
                   <el-button type="primary" @click="
                     ((ffmpegDialogVisible = true), (ffmpegSettings.gameName = scope.row.name))
                     ">ffmpeg处理</el-button>
                 </div>
-                <p>上一次更新时间 {{ scope.row.updateDate }}</p>
-                <p>任务结束日期 {{ formatDate(scope.row.etime) }}</p>
-                <el-button type="primary" @click="openEditRewardDialog(scope.row.name)">添加平台奖励</el-button>
               </div>
             </template>
           </el-table-column>
           <el-table-column prop="allMoney" label="allMoney" width="150" sortable>
             <template #header>
-              <el-tooltip class="item" effect="dark" content="总播放<5w,单稿件<10000,点赞<500,最低单稿播放<5000" placement="top">
-                <span>allMoney <i class="el-icon-question"></i></span>
-              </el-tooltip>
+              <div class="flex items-center">
+                <el-tooltip class="item" effect="dark" content="总播放<5w,单稿件<10000,点赞<500,最低单稿播放<5000" placement="top">
+                  <span>allMoney </span>
+                </el-tooltip>
+                <el-popover trigger="click" placement="bottom" width="260">
+                  <div class="p-3 space-y-2">
+                    <div class="flex items-center gap-2">
+                      <span>最小</span>
+                      <el-input-number v-model="filterSettings.allMoneyMin" :min="0" size="mini"
+                        controls-position="right" />
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span>最大</span>
+                      <el-input-number v-model="filterSettings.allMoneyMax" :min="0" size="mini"
+                        controls-position="right" />
+                    </div>
+                    <div class="flex justify-end gap-2">
+                      <el-button size="mini" @click="resetFilterSettings">重置</el-button>
+                      <el-button type="primary" size="mini">确定</el-button>
+                    </div>
+                  </div>
+                  <template #reference>
+                    <el-icon>
+                      <Filter />
+                    </el-icon>
+                  </template>
+                </el-popover>
+              </div>
             </template>
             <template #default="scope">
               <span>{{ scope.row.allMoney }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="endDiffDate" label="剩余天数" width="150" sortable>
+          <el-table-column prop="endDiffDate" label="剩余天数" width="180" sortable>
+            <template #header>
+              <div class="flex items-center">
+                <span>剩余天数</span>
+                <el-popover trigger="click" placement="bottom" width="260">
+                  <div class="p-3 space-y-2">
+                    <div class="flex items-center gap-2">
+                      <span>最小</span>
+                      <el-input-number v-model="filterSettings.daysLeftMin" :min="0" size="mini"
+                        controls-position="right" />
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span>最大</span>
+                      <el-input-number v-model="filterSettings.daysLeftMax" :min="0" size="mini"
+                        controls-position="right" />
+                    </div>
+                    <div class="flex justify-end gap-2">
+                      <el-button size="mini" @click="resetFilterSettings">重置</el-button>
+                      <el-button type="primary" size="mini">确定</el-button>
+                    </div>
+                  </div>
+                  <template #reference>
+                    <el-icon>
+                      <Filter />
+                    </el-icon>
+                  </template>
+                </el-popover>
+              </div>
+            </template>
             <template #default="scope"> {{ getDaysDiff(scope.row.etime * 1000) }} 天 </template>
           </el-table-column>
           <el-table-column label="各平台活动与达标条件" min-width="650">
             <template #default="scope">
-              <el-card v-for="(platform, platformIndex) in scope.row.rewards" :key="platformIndex">
+              <el-card
+                v-for="(platform, platformIndex) in scope.row.rewards.filter(p => p.activityRequirements.filter(e => !e.isNotDo).length > 0)"
+                :key="platformIndex">
                 <div class="flex">
                   <div class="w-1/4">
                     <h4 class="font-bold" :class="platform.notDo ? 'text-red-500' : ''">
                       {{ platform.name }}
                     </h4>
-                    <el-button type="primary" @click="openEditRewardDialog(scope.row.name, platform)">编辑</el-button>
-                    <p class="text-blue-800 font-bold cursor-pointer" @click="copyTag(getSpecialTagAll(platform))">
-                      TAG: {{ getSpecialTagAll(platform) }}
+                    <el-button type="primary" @click="openEditRewardDialog(scope.row.name, platform)">编辑平台活动</el-button>
+                    <p class="text-blue-800 font-bold cursor-pointer" @click="copyTag(getSpecialTagAll(platform))"
+                      v-show="getSpecialTagAll(platform)">
+                      平台全活动汇总标签: <span> {{ getSpecialTagAll(platform) }}</span>
                     </p>
-                    <p class="text-blue-800 cursor-pointer" v-if="platform.suppleTag"
+                    <p class="text-blue-800 font-bold cursor-pointer" v-if="platform.suppleTag"
                       @click="copyTag(platform.suppleTag)">
-                      补充TAG: {{ platform.suppleTag }}
+                      平台标签: <span> {{ platform.suppleTag }}</span>
                     </p>
+                    <!-- <p class="text-blue-800 font-bold cursor-pointer" v-if="platform.wyczjTag"
+                      @click="copyTag(platform.wyczjTag)">
+                      创作匠TAG: <span>{{ platform.wyczjTag }}</span>
+                    </p> -->
                   </div>
                   <div class="flex-1">
-                    <template v-for="act in platform.activityRequirements">
-                      <el-card :key="act" v-if="
-                        act.eDate
-                          ? getDaysDiff(new Date(act.eDate).getTime()) >= 0
-                          : getDaysDiff(scope.row.etime * 1000) >= 0
-                      ">
+                    <template
+                      v-for="act in platform.activityRequirements.filter(a => !a.isNotDo && (a.eDate ? getDaysDiff(new Date(a.eDate).getTime()) >= 0 : getDaysDiff(scope.row.etime * 1000) >= 0))"
+                      :key="act">
+                      <el-card>
                         <div :class="act.isNotDo ? 'bg-red-300' : ''">
-                          <a v-if="act.act_url" :href="act.act_url" target="_blank" class="font-bold text-blue-600">{{
-                            act.name }} {{ act.comment }}</a>
-                          <h4 class="font-bold" v-else>{{ act.name }}</h4>
-                          <h4 class="font-bold text-blue-800 cursor-pointer" v-if="platform.name === 'bilibili'"
-                            @click="copyTag(act.topic)">
-                            话题：{{ act.topic }}
+                          <a v-if="act.act_url" :href="act.act_url" target="_blank"
+                            class="font-bold text-blue-600">活动名称：{{
+                              act.name }} <br /> 参与人数：{{ act.comment }}</a>
+                          <h4 class="font-bold text-blue-600" v-else>
+                            活动名称：{{ act.name }}
+                            <br /> 参与人数：
+                            <span v-if="act.participantCount">{{ act.participantCount + "人参加"
+                              }}</span>
                           </h4>
-                          <el-button type="primary"
-                            @click="setScheduleJob(act, platform, scope.row)">设置该活动定时任务</el-button>
+                          <h4 class="text-blue-800 cursor-pointer" v-if="platform.name === 'bilibili'"
+                            @click="copyTag(act.topic, true)">
+                            B站话题：{{ act.topic }} 总播放量：{{ act.arc_play_vv }}
+                          </h4>
+                          <el-button type="primary" @click="setScheduleJob(act, platform, scope.row)">设置定时任务</el-button>
                           <el-button :type="getScheduleJobButtonType(act, platform.name)" v-if="scheduleJobMap[platform.name]?.find((e) => e.topicName === act.topic || e.topicName === act.name)
                           " @click="showScheduleJobDialog(act, platform.name)">{{ getScheduleJobButtonType(act,
                             platform.name) === 'danger' ? '查看未完成任务' : '查看定时任务' }}</el-button>
@@ -128,31 +306,34 @@
                             ? 'text-orange-500'
                             : ''
                             ">
-                            活动结束{{ act.eDate }} 还剩{{
+
+                            活动结束日期：{{ act.eDate }} 还剩{{
                               getDaysDiff(new Date(act.eDate).getTime())
                             }}天
                           </h4>
-                          <p class="text-blue-800 cursor-pointer" @click="copyTag(act.specialTag)"
-                            v-if="act.specialTag">
-                            必带TAG:
-                            {{ act.specialTag }}
+                          <p class="text-blue-800 cursor-pointer" v-if="act.specialTag">
+                            <span @click="copyTag(act.specialTag, true)">活动必带标签（可跳转）：</span>
+                            <span @click="copyTag(act.specialTag)">{{ act.specialTag }}</span>
                           </p>
+
+                          <p v-if="act.hasRank">是否存在榜单：{{ act.hasRank ? '是' : "否" }}</p>
                           <p v-if="act.minVideoTime">
                             单稿件最低时长：{{ act.minVideoTime || 6 }}s
                           </p>
-                          <P v-if="act.minImageCount">图片类型内容的最少张数：{{ act.minImageCount }}</P>
+                          <P v-if="act.minImageCount" class="text-red-500">图片类型内容的最少张数：{{ act.minImageCount }}</P>
                           <p v-if="act.minView">单稿件最低播放量计入：{{ act.minView || 100 }}</p>
                           <P v-if="act.minLike">单稿件最低点赞量计入：{{ act.minLike || 0 }}</P>
                           <el-divider />
                           <div v-for="(req, reqIndex) in act.reward" :key="reqIndex">
                             <span v-if="req.allNum">总投稿数>={{ req.allNum }} </span>
+                            <span v-if="req.view"> 单视频播放量>={{ req.view }} </span>
                             <span v-if="req.allViewNum" :class="req.allViewNum <= 20000 ? ' text-orange-500' : ''">
                               总播放量>={{ req.allViewNum }}
                             </span>
-                            <span v-if="req.view"> 单视频播放量>={{ req.view }} </span>
                             <span v-if="req.cday"> 投稿天数>={{ req.cday }} </span>
                             <span v-if="req.like"> 单稿件点赞>={{ req.like }} </span>
                             <span v-if="req.allLikeNum"> 总点赞>={{ req.allLikeNum }} </span>
+                            <span v-if="req.allInteractionNum"> 总互动量>={{ req.allInteractionNum }} </span>
                             <span v-if="req.money" :class="req.money >= 50000 ? ' text-orange-500' : ''">=瓜分{{ req.money
                               }}</span>
 
@@ -174,17 +355,20 @@
                   </div>
                 </div>
               </el-card>
+              <el-button type="primary" @click="openEditRewardDialog(scope.row.name)">添加平台活动</el-button>
             </template>
           </el-table-column>
           <el-table-column label="Tag All" min-width="400">
             <template #default="scope">
               <p class="text-blue-800 cursor-pointer" @click="copyTag(getCommonTagAll(scope.row))">
-                总标签 :{{ getCommonTagAll(scope.row) }}
+                全平台活动标签汇总 :{{ getCommonTagAll(scope.row) }}
               </p>
             </template>
           </el-table-column>
         </el-table>
+        <el-empty v-else description="No data available" />
       </el-tab-pane>
+
       <el-tab-pane label="B站活动激励" name="bilibili" lazy>
         <el-table v-if="bilibiliActTableData.length" :data="bilibiliActTableData" style="width: 100%" border>
           <el-table-column type="index" label="No." width="50" fixed />
@@ -222,9 +406,6 @@
                     <p class="text-blue-800 font-bold cursor-pointer" @click="copyTag(getSpecialTagAll(reward))">
                       特殊TAG: {{ getSpecialTagAll(reward) || reward.specialTagAll }}
                     </p>
-
-                    <!-- <p class="text-blue-800 font-bold cursor-pointer" @click="copyTag(reward.specialTagAll)"
-                      v-if="reward.specialTagAll">该平台通用TAG: {{ reward.specialTagAll }}</p> -->
                   </div>
                   <div class="w-1/2 mx-4" v-if="reward.requirements?.length">
                     <div v-for="(req, reqIndex) in reward.requirements" :key="reqIndex">
@@ -246,9 +427,7 @@
                       </el-tooltip>
                     </div>
                   </div>
-                  <div v-if="
-  reward.activityRequirements &&
-                    ['抖音', '快手', '小红书', 'bilibili'].includes(reward.name)
+                  <div v-if="reward.activityRequirements
                   " class="flex-1">
                     <template v-for="(rew, reqIndex) in reward.activityRequirements">
                       <el-card :key="reqIndex" v-if="
@@ -327,7 +506,6 @@
         <el-empty v-else description="No data available" />
       </el-tab-pane>
 
-      <!-- 小红书数据标签页 -->
       <el-tab-pane label="小红书活动激励" name="xhs" lazy>
         <el-table v-if="xhsActTableData.length" :data="xhsActTableData" border>
           <el-table-column type="index" label="No." width="50" fixed />
@@ -350,14 +528,13 @@
           <el-table-column prop="allMoney" label="估算" width="100" sortable>
             <template #header>
               <el-tooltip class="item" effect="dark" content="总播放<5w" placement="top">
-                <span>allMoney <i class="el-icon-question"></i></span>
+                <span>allMoney </span>
               </el-tooltip>
             </template>
           </el-table-column>
         </el-table>
         <el-empty v-else description="No data available" />
       </el-tab-pane>
-
     </el-tabs>
 
     <el-dialog title="下载视频和分组区分" v-model="dialogVisible" :before-close="cancelDownloadSettings">
@@ -438,7 +615,7 @@
       </template>
     </el-dialog>
 
-    <el-dialog title="编辑奖励" v-model="editRewardDialogVisible" width="50%">
+    <el-dialog title="平台奖励" v-model="editRewardDialogVisible" width="50%">
       <el-form :model="editRewardForm" label-width="150px">
         <el-form-item label="平台名称">
           <el-select v-model="editRewardForm.platformName" placeholder="请选择平台">
@@ -446,93 +623,112 @@
             <el-option label="抖音" value="抖音" />
             <el-option label="小红书" value="小红书" />
             <el-option label="快手" value="快手" />
+            <el-option label="网易创作匠" value="网易创作匠" />
+            <el-option label="腾讯游可爱" value="腾讯游可爱" />
           </el-select>
         </el-form-item>
-        <el-form-item label="B站多标签" v-if="editRewardForm.platformName === 'bilibili'">
-          <el-input v-model="editRewardForm.suppleTag" placeholder="请输入支撑标签" />
+        <el-form-item label="平台标签">
+          <el-input v-model="editRewardForm.suppleTag" placeholder="请输入平台标签" />
         </el-form-item>
+
+
+
         <el-form-item label="活动赛道">
-          <div v-for="(activityRequirement, index) in editRewardForm.activityRequirements" :key="index">
-            <el-card>
-              <!-- 不做该任务（展示但整个框标橙色） 参与人数多|奖励少 -->
-              <el-form-item label="不做该任务">
-                <el-switch v-model="activityRequirement.isNotDo" active-text="是" inactive-text="否" />
-              </el-form-item>
-              <el-form-item label="活动名称">
-                <el-input v-model="activityRequirement.name" placeholder="请输入活动名称" />
-              </el-form-item>
-              <el-form-item label="活动话题">
-                <el-input v-model="activityRequirement.topic" placeholder="请输入活动话题" />
-              </el-form-item>
-              <el-form-item label="必带标签">
-                <el-input v-model="activityRequirement.specialTag" placeholder="请输入必带标签" />
-              </el-form-item>
-              <el-form-item label="结束时间">
-                <el-date-picker v-model="activityRequirement.eDate" type="date" placeholder="选择结束时间" format="YYYY/MM/DD"
-                  value-format="YYYY/MM/DD" />
-              </el-form-item>
-              <el-divider>内容计入限制条件</el-divider>
-              <el-form-item label="视频最低时长(秒)">
-                <el-input-number v-model="activityRequirement.minVideoTime" placeholder="视频类型内容的最低时长限制" :step='6' />
-              </el-form-item>
-              <el-form-item label="图片最少张数">
-                <el-input-number v-model="activityRequirement.minImageCount" placeholder="图片类型内容的最少张数要求" :step='2' />
-              </el-form-item>
-              <el-form-item label="稿件最低观看量计入">
-                <el-input-number v-model="activityRequirement.minView" :min="0" />
-              </el-form-item>
-              <el-form-item label="单稿最低点赞量计入">
-                <el-input-number v-model="activityRequirement.minLike" :min="0" :max="20" />
-              </el-form-item>
-              <el-form-item label="活动ID" v-if="editRewardForm.platformName === 'bilibili'">
-                <el-input v-model="activityRequirement.mission_id" placeholder="请输入活动ID" />
-              </el-form-item>
-              <el-form-item label="话题ID" v-if="editRewardForm.platformName === 'bilibili'">
-                <el-input v-model="activityRequirement.topic_id" placeholder="请输入话题ID" />
-              </el-form-item>
-              <el-form-item label="内容类型">
-                <el-select v-model="activityRequirement.type" placeholder="请选择过滤类型">
-                  <el-option label="不过滤" value="all" />
-                  <el-option label="仅视频" value="video" />
-                  <el-option label="仅图文" value="image" />
-                </el-select>
-              </el-form-item>
-              <el-form-item label="达标奖">
-                <div v-for="(reward, rewardIndex) in activityRequirement.reward" :key="rewardIndex">
-                  <el-form-item label="总投稿数">
-                    <el-input-number v-model="reward.allNum" :min="0" :max="1000" />
-                  </el-form-item>
-                  <el-form-item label="单稿播放量(w)">
-                    <el-input-number v-model="reward.view" :min="0" />
-                    <span v-if="reward.view">{{ reward.view * 10000 }}</span>
-                  </el-form-item>
-                  <el-form-item label="总稿播放量(w)">
-                    <el-input-number v-model="reward.allViewNum" :min="0" :max="100" />
-                    <span v-if="reward.allViewNum">{{ reward.allViewNum * 10000 }}</span>
-                  </el-form-item>
-                  <el-form-item label="单稿点赞量">
-                    <el-input-number v-model="reward.like" :min="0" :max="200" />
-                  </el-form-item>
-                  <el-form-item label="总稿点赞量">
-                    <el-input-number v-model="reward.allLikeNum" :min="0" :max="1000000" />
-                  </el-form-item>
-                  <el-form-item label="持续投稿天数">
-                    <el-input-number v-model="reward.cday" :min="0" :max="100" />
-                  </el-form-item>
-                  <el-form-item label="总互动量（点赞+收藏+评论）">
-                    <el-input-number v-model="reward.allInteractionNum" :min="0" :max="200" />
-                  </el-form-item>
-                  <el-form-item label="奖励金额(w)">
-                    <el-input-number v-model="reward.money" :min="0" :max="100" />
-                    <span v-if="reward.money">{{ reward.money * 10000 }}</span>
-                  </el-form-item>
-                  <el-button type="danger" @click="removeReward(index, rewardIndex)">删除</el-button>
-                </div>
-                <el-button type="primary" @click="addReward(index)">添加奖励</el-button>
-              </el-form-item>
-              <el-button type="danger" @click="removeSpecialTagRequirement(index)">删除活动赛道</el-button>
-            </el-card>
-          </div>
+          <el-card v-for="(activityRequirement, index) in editRewardForm.activityRequirements" :key="index"
+            class="w-full mb-4">
+            <el-form-item label="不做该任务">
+              <el-switch v-model="activityRequirement.isNotDo" active-text="是" inactive-text="否" />
+            </el-form-item>
+            <el-form-item label="活动名称">
+              <el-input v-model="activityRequirement.name" placeholder="请输入活动名称" />
+            </el-form-item>
+
+            <el-form-item label="B站活动话题">
+              <el-input v-model="activityRequirement.topic" placeholder="请输入活动话题" />
+            </el-form-item>
+            <el-form-item label="B站话题播放量">
+              {{ activityRequirement.arc_play_vv }}
+            </el-form-item>
+
+            <el-form-item label="活动标签">
+              <el-input v-model="activityRequirement.specialTag" placeholder="请输入活动标签" />
+            </el-form-item>
+
+            <el-form-item label="是否存在榜单">
+              <el-switch v-model="activityRequirement.hasRank" active-text="是" inactive-text="否" />
+            </el-form-item>
+            <el-form-item label="参与人数">
+              <el-input-number v-model="activityRequirement.participantCount" :min="0" />
+            </el-form-item>
+            <el-form-item label="结束时间">
+              <el-date-picker v-model="activityRequirement.eDate" type="date" placeholder="选择结束时间" format="YYYY/MM/DD"
+                value-format="YYYY/MM/DD" />
+            </el-form-item>
+            <el-form-item label="定时任务上传目录">
+              <el-input v-model="activityRequirement.videoDir" placeholder="请输入上传目录" />
+            </el-form-item>
+            <el-divider>单条有效内容计入限制条件</el-divider>
+            <el-form-item label="视频最低时长(秒)">
+              <el-input-number v-model="activityRequirement.minVideoTime" :step='6' />
+            </el-form-item>
+            <el-form-item label="图片最少张数">
+              <el-input-number v-model="activityRequirement.minImageCount" :step='2' />
+            </el-form-item>
+            <el-form-item label="稿件最低观看量">
+              <el-input-number v-model="activityRequirement.minView" :min="0" />
+            </el-form-item>
+            <el-form-item label="单稿最低点赞量">
+              <el-input-number v-model="activityRequirement.minLike" :min="0" :max="20" />
+            </el-form-item>
+            <el-form-item label="活动ID" v-if="editRewardForm.platformName === 'bilibili'">
+              <el-input v-model="activityRequirement.mission_id" placeholder="请输入活动ID" />
+            </el-form-item>
+            <el-form-item label="话题ID" v-if="editRewardForm.platformName === 'bilibili'">
+              <el-input v-model="activityRequirement.topic_id" placeholder="请输入话题ID" />
+            </el-form-item>
+            <el-form-item label="内容类型">
+              <el-select v-model="activityRequirement.type" placeholder="请选择过滤类型">
+                <el-option label="不过滤" value="all" />
+                <el-option label="仅视频" value="video" />
+                <el-option label="仅图文" value="image" />
+              </el-select>
+            </el-form-item>
+            <el-form-item label="达标奖">
+              <div v-for="(reward, rewardIndex) in activityRequirement.reward" :key="rewardIndex">
+                <el-form-item label="总投稿数">
+                  <el-input-number v-model="reward.allNum" :min="0" :max="1000" />
+                </el-form-item>
+                <el-form-item label="单稿播放量(w)">
+                  <el-input-number v-model="reward.view" :min="0" />
+                  <span v-if="reward.view">{{ reward.view * 10000 }}</span>
+                </el-form-item>
+                <el-form-item label="总稿播放量(w)">
+                  <el-input-number v-model="reward.allViewNum" :min="0" />
+                  <span v-if="reward.allViewNum">{{ reward.allViewNum * 10000 }}</span>
+                </el-form-item>
+                <el-form-item label="单稿点赞量">
+                  <el-input-number v-model="reward.like" :min="0" />
+                </el-form-item>
+                <el-form-item label="稿件总和点赞量">
+                  <el-input-number v-model="reward.allLikeNum" :min="0" :max="1000000" />
+                </el-form-item>
+                <el-form-item label="持续投稿天数">
+                  <el-input-number v-model="reward.cday" :min="0" :max="100" />
+                </el-form-item>
+                <el-form-item label="总互动量（点赞+收藏+评论）">
+                  <el-input-number v-model="reward.allInteractionNum" :min="0" />
+                </el-form-item>
+                <el-form-item label="奖励金额(w)">
+                  <el-input-number v-model="reward.money" :min="0" :max="100" />
+                  <span v-if="reward.money">{{ reward.money * 10000 }}</span>
+                </el-form-item>
+                <el-button type="danger" @click="removeReward(index, rewardIndex)">删除当前达标奖</el-button>
+              </div>
+              <el-button type="primary" @click="addReward(index)">添加达标奖</el-button>
+            </el-form-item>
+            <el-button type="danger" @click="removeSpecialTagRequirement(index)">删除当前赛道</el-button>
+            <el-button type="success" @click="duplicateLastTrack(index)">复制当前赛道</el-button>
+          </el-card>
           <el-button type="primary" @click="addSpecialTagRequirement">添加活动赛道</el-button>
         </el-form-item>
 
@@ -577,7 +773,7 @@
           </el-col>
         </el-row>
 
-        <el-table :data="filteredViewerJobs" style="width: 100%" row-key="jobKey" :default-expand-all="false">
+        <el-table :data="filteredViewerJobs" style="width: 100%" row-key="jobKey" :default-expand-all="true">
           <el-table-column type="expand">
             <template #default="{ row }">
               <div>
@@ -622,7 +818,7 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="设置定时上传任务" v-model="scheduleDialogVisible">
+    <el-dialog title="设置定时任务" v-model="scheduleDialogVisible">
       <el-form :model="scheduleForm" label-width="120px">
         <el-form-item label="游戏名称">
           <el-input v-model="scheduleForm.gameName" placeholder="请输入游戏名称" />
@@ -630,14 +826,14 @@
         <el-form-item label="活动名称">
           <el-input v-model="scheduleForm.topicName" placeholder="请输入活动名称" />
         </el-form-item>
-        <el-form-item label="视频目录">
+        <el-form-item label="稿件目录">
           <el-input v-model="scheduleForm.videoDir" placeholder="请输入视频所在目录路径" />
         </el-form-item>
         <el-form-item label="活动结束时间">
           <el-date-picker v-model="scheduleForm.etime" type="datetime" placeholder="选择结束时间" />
         </el-form-item>
-        <el-form-item label="特殊赛道标签组">
-          <el-select v-model="selectedTrack" multiple placeholder="选择特殊赛道（支持多选）" @change="handleTrackChange"
+        <el-form-item label="标签组">
+          <el-select v-model="selectedTrack" multiple placeholder="选择标签组（支持多选）" @change="handleTrackChange"
             style="margin-bottom: 10px" clearable>
             <el-option v-for="(config, track) in specialTrackTagConfigs" :key="track"
               :label="track + ' ' + config.baseTags.join(' ') + (config.extraTags && config.extraTags.length ? ' 附加:' + config.extraTags.join(' ') : '')"
@@ -658,21 +854,19 @@
           <el-input v-model="scheduleForm.tag" :disabled="scheduleForm.disabledTag" type="textarea" :rows="3"
             placeholder="标签将根据选择的赛道自动生成，也可以手动编辑" />
         </el-form-item>
-
-        <el-form-item label="开始时间">
+        <el-form-item label="稿件开始时间">
           <el-date-picker v-model="scheduleForm.startTime" type="datetime" placeholder="选择开始时间" />
         </el-form-item>
         <el-form-item label="上传间隔(小时)">
           <el-input-number v-model="scheduleForm.intervalHours" :min="1" :max="24" placeholder="请输入上传间隔" />
         </el-form-item>
-        <el-form-item label="选择要执行账号">
+        <el-form-item label="待分发账号">
           <el-select v-model="scheduleForm.needExecAccounts" multiple placeholder="请选择要使用的账号" style="width: 100%">
             <el-option v-for="account in allPlatformAccounts[platformToKey[scheduleForm.platform]]" :key="account.id"
               :label="account.accountName" :value="account.accountName">
             </el-option>
           </el-select>
         </el-form-item>
-
         <!-- 增加抖音平台的标题输入控制与游戏绑定控制 -->
         <template v-if="scheduleForm.platform === '抖音'">
           <el-form-item label="标题控制">
@@ -682,7 +876,7 @@
             <el-switch v-model="scheduleForm.douyinGameBinding" active-text="绑定游戏" inactive-text="不绑定游戏" />
           </el-form-item>
         </template>
-
+        <!-- B站平台活动ID控制 -->
         <template v-if="scheduleForm.platform === 'bilibili'">
           <el-form-item label="分区选择">
             <el-select v-model="scheduleForm.selectedArea" placeholder="请选择分区" @change="handleAreaChange">
@@ -699,6 +893,7 @@
             <el-input v-model="scheduleForm.topicId" placeholder="请输入话题ID" />
           </el-form-item>
         </template>
+
       </el-form>
       <template #footer>
         <span class="dialog-footer">
@@ -714,6 +909,9 @@
       :batchDialogVisible="batchFFmpegDialogVisible">
     </BatchGameFFmpegDialog>
 
+    <!-- 搜索网站选择对话框 -->
+    <SearchDialog v-model="searchDialogVisible" :gameName="currentGameForSearch" />
+
   </div>
 </template>
 
@@ -723,53 +921,72 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import bilibiliTid from '../../public/bilibiliTid.json' // B站分区数据
 import BatchGameFFmpegDialog from '../components/FFmpegBatchGameDialog.vue'
 import ffmpegConfigForm from '@/components/ffmpegConfigForm.vue'
+import SearchDialog from '../components/SearchDialog.vue'
 import { allGameList } from '@/state/globalState'
 
 
 
 // gameActivity接口定义
-
 interface GameActivity {
   name: string
+  gameName: string
+  // 用来搜索的名
+  searchName: string
+  // 厂商
+  manufacturer?: string
   rewards: PlatformReward[]
+  // 结束时间戳（秒）
+  etime?: number
+  // 汇总金额
+  allMoney?: number
+  suppleTag?: string
+  new?: boolean
+  // videoAuthor: author[]
   updateDate?: string
 }
 
 
+type PlatformName = 'bilibili' | '抖音' | '小红书' | '快手'
+
 interface PlatformReward {
-  name: string
+  name: PlatformName
   activityRequirements: ActivityRequirement[]
   suppleTag?: string
-}
+  wyczjTag?: string
 
+}
 
 interface ActivityRequirement {
   name: string
+  topic?: string
   specialTag: string
+  videoDir?: string  // 定时任务上传目录
   eDate: string
-  isNotDo?: boolean
+  reward: Reward[]
+  videoData?: VideoData[]
+  scheluleJob?: ScheduleJob[]
+  isNotDo?: boolean   // 是否不做该任务（展示但整个框标橙色）
+  hasRank?: boolean   // 是否有榜单
+  participantCount?: number // 参与人数
   minVideoTime?: number
   minImageCount?: number
   minView?: number
   minLike?: number
   type?: 'all' | 'video' | 'image'
-  topic?: string
   mission_id?: string
   topic_id?: string
-  reward: Reward[]
-  videoData?: VideoData[]
 }
 
 interface Reward {
   allNum?: number   // 总投稿数
+  view?: number   // 单稿件播放数
   allViewNum?: number   // 总播放数
-  view?: number   // 单稿件观看量
   like?: number   // 单稿件点赞数
-  allLikeNum?: number  // 稿件总点赞量
+  allLikeNum?: number  // 总点赞数
   cday?: number     // 投稿持续天数
   allInteractionNum?: number // 总互动量（点赞+收藏+评论）
-  money?: number
-  isGet: boolean
+  money?: number  // 瓜分金额
+  isGet: boolean  // 是否达标
 }
 
 interface VideoData {
@@ -786,45 +1003,26 @@ interface VideoData {
   }>
 }
 
-
-
-
-
-
-
 // 定时任务
-
 interface ScheduleForm {
   gameName: string
-  platform: string
+  platform: PlatformName
   tag: string
-  disabledTag: boolean
+  disabledTag: boolean  // 无法修改的标签状态
   topicName: string
   videoDir: string
-  tid: number
   missionId: string
   startTime: Date | null
   intervalHours: number
-  immediately: boolean
-  selectedArea: string
+  immediately: boolean  // 是否立即执行
+  selectedArea: string //  分区Id
+  tid: number  // 子分区ID
   etime: Date | null // 添加活动结束时间字段
-  needExecAccounts: Accounts // 新增账号选择字段
+  needExecAccounts: string[]
   douyinTitleControl: boolean
   douyinGameBinding: boolean
 }
 
-interface Accounts {
-  bilibili: Platform[];
-  douyin: Platform[];
-  xhs: Platform[];
-  kuaishou: Platform[];
-}
-
-interface Platform {
-  id: string;
-  accountName: string;
-  Cookie: string;
-}
 
 interface BilibiliArea {
   name: string
@@ -849,11 +1047,168 @@ const getDaysDiff = (timeStamp1: number, timeStamp2: number = new Date().getTime
   return Math.ceil(endDiffDate)
 }
 
-const copyTag = (tag: string): void => {
+const copyTag = (tag: string, openTag: boolean = false): void => {
+
   navigator.clipboard.writeText(tag)
   ElMessage.success('复制成功')
+
+
+  // TAG 多平台搜索（抖音、快手、B站、小红书），方便查看相同的作品
+  if (!openTag) {
+    return
+  }
+  const keyword = tag
+  // const kuaishouSearchUrl =
+  //   'https://www.kuaishou.com/search/' + encodeURIComponent(keyword) + '?source=NewReco';
+  const bilibiliSearchUrl = 'https://search.bilibili.com/all?keyword=' + encodeURIComponent(keyword);
+  const xhsSearchUrl =
+    'https://www.xiaohongshu.com/search_result?keyword=' +
+    encodeURIComponent(keyword) +
+    '&source=web_search_result_notes';
+  const douyinSearchUrl = 'https://www.douyin.com/search/' + encodeURIComponent(keyword);
+  // window.open(kuaishouSearchUrl, '_blank', 'noopener');
+  window.open(bilibiliSearchUrl, '_blank', 'noopener');
+  window.open(xhsSearchUrl, '_blank', 'noopener');
+  window.open(douyinSearchUrl, '_blank', 'noopener');
 }
 
+
+// 标签速查面板相关状态
+const showTagPanel = ref(false)
+const tagPanelExpanded = ref(true)
+const currentGameName = ref('')
+const expandedTracks = ref<Set<string>>(new Set())
+
+// 切换单个赛道展开/收起
+const toggleTrack = (trackName: string) => {
+  if (expandedTracks.value.has(trackName)) {
+    expandedTracks.value.delete(trackName)
+  } else {
+    expandedTracks.value.add(trackName)
+  }
+  // 触发响应式更新
+  expandedTracks.value = new Set(expandedTracks.value)
+}
+
+// 全部展开/收起赛道
+const toggleAllTracks = () => {
+  if (expandedTracks.value.size === Object.keys(specialTrackTagConfigs).length) {
+    // 全部收起
+    expandedTracks.value.clear()
+  } else {
+    // 全部展开
+    expandedTracks.value = new Set(Object.keys(specialTrackTagConfigs))
+  }
+  expandedTracks.value = new Set(expandedTracks.value)
+}
+
+// 复制所有赛道标签
+const copyAllTrackTags = () => {
+  const allTags: string[] = []
+  Object.values(specialTrackTagConfigs).forEach((config: any) => {
+    allTags.push(...config.baseTags, ...config.extraTags)
+  })
+  const tagsText = [...new Set(allTags)].join(' ')
+  navigator.clipboard.writeText(tagsText)
+  ElMessage.success(`已复制 ${[...new Set(allTags)].length} 个标签`)
+}
+
+// 复制单个赛道的所有标签
+const copyTrackTags = (trackName: string, trackConfig: any) => {
+  const trackTags = [...trackConfig.baseTags, ...trackConfig.extraTags]
+  const tagsText = trackTags.join(' ')
+  navigator.clipboard.writeText(tagsText)
+  ElMessage.success(`已复制 ${trackName} 分组的 ${trackTags.length} 个标签`)
+}
+
+// 复制单个平台的所有标签
+const copyPlatformTags = (platformName: string, tags: string[]) => {
+  const tagsText = tags.join(' ')
+  navigator.clipboard.writeText(tagsText)
+  ElMessage.success(`已复制 ${platformName} 的 ${tags.length} 个标签`)
+}
+
+// 获取当前游戏的所有信息
+const currentGameData = computed((): GameActivity | null => {
+  if (!currentGameName.value) return null
+  const game = gameTableData.value.find((game: GameActivity) => game.name === currentGameName.value)
+  return game || null
+})
+
+// 按平台分组标签
+const groupedTagsByPlatform = computed((): Array<{ platform: string; tags: string[] }> => {
+  const gameData = currentGameData.value
+  if (!gameData) return []
+
+  const platformGroups: Record<string, Set<string>> = {
+    'bilibili': new Set(),
+    '抖音': new Set(),
+    '小红书': new Set(),
+    '快手': new Set(),
+    "网易创作匠": new Set(),
+  }
+
+  // 添加游戏名称作为基础标签
+  Object.keys(platformGroups).forEach((platform: string) => {
+    platformGroups[platform].add(`#${gameData.name}`)
+  })
+
+  // 从每个奖励平台的活动要求中收集标签
+  gameData.rewards?.forEach((platform: PlatformReward) => {
+    const platformName = platform.name
+
+    // 添加平台补充标签
+    if (platform.suppleTag) {
+      platform.suppleTag.split(/\s+/).forEach((tag: string) => {
+        if (tag) {
+          platformGroups[platformName].add(tag.startsWith('#') ? tag : `#${tag}`)
+        }
+      })
+    }
+
+    // 添加活动特殊标签
+    platform.activityRequirements?.forEach((act: ActivityRequirement) => {
+      if (act.specialTag && !act.isNotDo) {
+        act.specialTag.split(/\s+/).forEach((tag: string) => {
+          if (tag) {
+            platformGroups[platformName].add(tag.startsWith('#') ? tag : `#${tag}`)
+          }
+        })
+      }
+    })
+  })
+
+  // 转换为数组格式，应用平台特定的格式规则
+  return Object.entries(platformGroups)
+    .filter(([_, tags]: [string, Set<string>]) => tags.size > 0)
+    .map(([platform, tags]: [string, Set<string>]) => {
+      let formattedTags = Array.from(tags)
+
+      // 根据平台格式化标签
+      if (platform === 'bilibili') {
+        formattedTags = formattedTags.map((tag: string) => tag.startsWith('#') ? tag.slice(1) : tag)
+      } else {
+        formattedTags = formattedTags.map((tag: string) => tag.startsWith('#') ? tag : `#${tag}`)
+      }
+
+      return {
+        platform,
+        tags: formattedTags.sort()
+      }
+    })
+})
+
+// 切换面板展开/收起
+const toggleTagPanelExpand = () => {
+  tagPanelExpanded.value = !tagPanelExpanded.value
+}
+
+// 监听表格行的游戏名称点击，更新标签面板
+const handleGameNameClick = (gameName: string) => {
+  currentGameName.value = gameName
+  showTagPanel.value = true
+  tagPanelExpanded.value = true
+}
 
 const scheduleDialogVisible = ref(false)
 const scheduleForm = ref<ScheduleForm>({
@@ -883,80 +1238,73 @@ const platformToKey = {
 };
 
 const setScheduleJob = async (
-  rew: ActivityRequirement,
-  platform: PlatformReward,
-  row: GameActivity,
+  actItem: ActivityRequirement,
+  platformItem: PlatformReward,
+  gameItem: GameActivity,
 ) => {
-  const { topic, specialTag, eDate, mission_id } = rew
+  const { topic, specialTag, eDate, mission_id, videoDir } = actItem
+  const hasTopicName = topic || actItem.name
+  const { name: gameName } = gameItem
 
-  const hasTopicName = topic || rew.name
-  if (!hasTopicName) {
+
+  if (!hasTopicName && platformItem.name === 'bilibili') {
     ElMessage.error('没有找到对应的 topic 或 活动name')
     return
   }
 
-  let missionId = topicJson.value.find((item) => item.topic_name === topic)?.mission_id || mission_id
-  // B站平台 如果没有找到对应的 missionId 则尝试通过 topic 从接口获取最新的 missionId
-  if (!missionId && platform.name === 'bilibili') {
+  const missionId = mission_id
+  // B站平台 如果没有找到对应的 missionId 则尝试通过 topic 从接口获取最新的 missionId 和子Id
+  if (!missionId && platformItem.name === 'bilibili') {
     if (!topic) {
       ElMessage.error('没有找到对应的 topic')
       return
     }
-    const response = await fetch(`/api/getLatestTopic?topic=${encodeURIComponent(topic)}`)
-    const result = await response.json()
-    if (result.code === 200) {
-      ElMessage.error('没有找到对应的 missionId，从B站获取最新missionId')
-      missionId = result.data.mission_id
-    } else {
-      ElMessage.error('没有找到对应的 missionId')
-      return
-    }
+
   }
 
 
-  const platformName = platform.name
+  const platformName = platformItem.name
   // 获取已存在的定时任务tag
   let existingTag = ''
-  const existingJob = scheduleJobMap.value[platformName].find(j => j.topicName === rew.name)
+  const existingJob = scheduleJobMap.value[platformName].find(j => j.topicName === actItem.name)
   if (existingJob?.scheduleJob?.length > 0) {
     existingTag = existingJob.tag
   }
 
 
-  // 生成全量标签：活动标签 + 支撑标签 + 游戏名称
+  // 生成全量标签：游戏名称 + wyczj标签 + 活动标签 + 支撑标签
   const allTag = [
     ...new Set([
-      '#' + row.name,
+      '#' + gameItem.name,
+      ...(platformItem.wyczjTag?.split(/\s+/) || []),
       ...(specialTag?.split(/\s+/) || []),
-      ...(platform.suppleTag?.split(/\s+/) || []),
+      ...(platformItem.suppleTag?.split(/\s+/) || []),
     ]),
   ]
     .filter(Boolean)
     .map((t) => {
-      if (platform.name === 'bilibili') {
+      if (platformItem.name === 'bilibili') {
         return t.startsWith('#') ? t.slice(1) : t
       }
       return t.startsWith('#') ? t : `#${t}`
     })
-    .join(platform.name === 'bilibili' ? ',' : ' ')
+    .join(platformItem.name === 'bilibili' ? ',' : ' ')
 
-
-  const videoDir = `D:\\code\\platform_game_activity\\TikTokDownloader\\gameList\\${row.name}\\攻略\\已重命名处理\\${topic || rew.name}`
 
   scheduleForm.value = {
-    gameName: row.name,
-    topicName: topic || rew.name,
-    platform: platform.name,
+    gameName,
+    topicName: topic || actItem.name,
+    platform: platformItem.name,
     tag: existingTag || allTag,
     disabledTag: !!existingTag,
-    missionId: missionId || rew.mission_id,
-    topicId: rew.topic_id,
+    missionId: missionId || actItem.mission_id,
+    topicId: actItem.topic_id,
     startTime: new Date(new Date().setHours(24 + 6, 0, 0, 0)), // 次日早晨6点
-    intervalHours: 2,
+    intervalHours: 6,
     immediately: false,
     selectedArea: '游戏区',
     tid: 172,
-    videoDir,
+    videoDir: videoDir || `D:\\edge_download\\游戏分发素材\\${topic || actItem.name}`,
     etime: eDate ? new Date(eDate) : null, // 设置活动结束时间
     needExecAccounts: allPlatformAccounts.value[platformToKey[platformName]].map(account => account.accountName),
     douyinTitleControl: false,
@@ -1027,7 +1375,9 @@ const editRewardForm = ref({
       minVideoTime: 6,
       minView: 100,
       specialTag: '',
+
       eDate: '',
+      participantCount: undefined,
       reward: [
         {
           allNum: undefined,
@@ -1035,6 +1385,7 @@ const editRewardForm = ref({
           view: undefined,
           like: undefined,
           allLikeNum: undefined,
+
           cday: undefined,
           money: undefined,
           isGet: false,
@@ -1049,6 +1400,7 @@ const addSpecialTagRequirement = () => {
     name: '',
     specialTag: '',
     eDate: '',
+    participantCount: undefined,
     minVideoTime: undefined,
     minImageCount: undefined,
     reward: [],
@@ -1057,6 +1409,16 @@ const addSpecialTagRequirement = () => {
 
 const removeSpecialTagRequirement = (index) => {
   editRewardForm.value.activityRequirements.splice(index, 1)
+}
+
+// 复制上一个活动赛道的数据
+const duplicateLastTrack = (currentIndex: number) => {
+  // 深拷贝上一个赛道的数据
+  const lastTrack = JSON.parse(JSON.stringify(editRewardForm.value.activityRequirements[currentIndex]))
+  // 添加到当前赛道后面
+  editRewardForm.value.activityRequirements.splice(currentIndex, 0, lastTrack)
+
+  ElMessage.success('已复制上一个赛道的配置')
 }
 
 const addReward = (index) => {
@@ -1082,6 +1444,7 @@ const openEditRewardDialog = (gameName, platform) => {
       name: '',
       specialTag: '',
       eDate: '',
+      participantCount: undefined,
       minVideoTime: undefined,
       minImageCount: undefined,
       minView: undefined,
@@ -1130,8 +1493,7 @@ const confirmEditReward = async () => {
   const filteredReward = JSON.parse(JSON.stringify(editRewardForm.value))
   filteredReward.activityRequirements = filteredReward.activityRequirements.map(
     (activityRequirement) => {
-      // activityRequirement.name = activityRequirement.name
-      // delete activityRequirement.name
+
       activityRequirement.reward = activityRequirement.reward
         .filter((reward) =>
           Object.values(reward).some((value) => value !== 0 && value !== false && value !== ''),
@@ -1194,7 +1556,7 @@ const getDefaultDate = (monthsAgo = 0) => {
 
 const downloadSettings = ref({
   isDownload: true,
-  selectedStrategy: 'group',
+  selectedStrategy: 'filePath',
   keyword: '',
   filePath: `D:\\code\\platform_game_activity\\TikTokDownloader\\downloadList.txt`,
   checkNewAdd: computed(() =>
@@ -1211,13 +1573,8 @@ const downloadSettings = ref({
 })
 
 const batchFFmpegDialogVisible = ref(false)
-const batchGames = computed(() =>
-  // 计算出有活动的游戏，allMoney > 0 的游戏
-  allGameList.value.filter((g) => g.allMoney > 0)
-)
 
 const ffmpegDialogVisible = ref(false)
-const musicOptions = ref(['随机', 'billll', '难却'])
 // 定义不同类别的默认去重配置
 const defaultDeduplicationConfigs = {
   攻略: {
@@ -1302,7 +1659,7 @@ const ffmpegSettings = ref({
   segmentDuration: 3, // 默认分镜秒数
   mixCount: 2, // 默认混剪数量
   mergeMusicName: '随机',
-  videoDir: '', // 视频处理路径
+  videoDir: 'D:\\code\\platform_game_activity\\TikTokDownloader\\Download', // 视频处理路径
 
   // 新增：特效配置
   effectConfig: {
@@ -1398,12 +1755,8 @@ const cancelDownloadSettings = () => {
   dialogVisible.value = false
 }
 
-const getDaysHtml = (etime) => {
-  return `活动结束${formatDate(etime)} <br> 还剩  <span class="${getDaysDiff(etime * 1000) < 15 && getDaysDiff(etime * 1000) > 0 ? 'text-red-500' : ''}"> ${getDaysDiff(etime * 1000)}天`
-}
-
 const getSpecialTagAll = (reward) => {
-  if (!reward?.activityRequirements) {
+  if (!reward?.activityRequirements || reward.activityRequirements.length === 1) {
     return ''
   }
   const a = [
@@ -1425,9 +1778,9 @@ const getCommonTagAll = (row) => {
         .split(' '),
     ),
   ]
-  const suppleTag = row?.suppleTag ? row.suppleTag.split(' ') : [] // 补充Tag,给B站/小红书提供
+  const suppleTag = row?.suppleTag ? row.suppleTag.split(' ') : [] // 平台标签,给B站/小红书提供
 
-  return [...new Set([row.name].concat(specialTagArr.concat(suppleTag)))].join(' ')
+  return [...new Set(specialTagArr.concat(suppleTag))].join(' ')
 }
 
 const bilibiliActTableData = ref([])
@@ -1435,25 +1788,95 @@ const xhsActTableData = ref([]) // 小红书活动列表
 const gameTableData = ref([])
 const dakaTableData = ref([])
 
+// 搜索对话框
+const searchDialogVisible = ref(false)
+const currentGameForSearch = ref('')
+const filterSettings = ref({
+  allMoneyMin: null as number | null,
+  allMoneyMax: null as number | null,
+  daysLeftMin: null as number | null,
+  daysLeftMax: 45 as number | null,
+  hideNoRewardGames: true,
+})
+
+const resetFilterSettings = () => {
+  filterSettings.value = {
+    allMoneyMin: null,
+    allMoneyMax: null,
+    daysLeftMin: null,
+    daysLeftMax: null,
+    hideNoRewardGames: false,
+  }
+}
+
+const getDaysLeft = (row: GameActivity) => (row.etime ? getDaysDiff(row.etime * 1000) : 0)
+
+const hasActiveRewards = (row: GameActivity) =>
+  (row.rewards || []).some((platform) =>
+    (platform.activityRequirements || []).some((act) =>
+      !act.isNotDo &&
+      (act.eDate
+        ? getDaysDiff(new Date(act.eDate).getTime()) >= 0
+        : getDaysLeft(row) >= 0),
+    ),
+  )
+
+const filteredGameTableData = computed(() => {
+  return gameTableData.value.filter((row) => {
+    const allMoney = Number(row.allMoney ?? 0)
+    const daysLeft = getDaysLeft(row)
+    const { allMoneyMin, allMoneyMax, daysLeftMin, daysLeftMax, hideNoRewardGames } = filterSettings.value
+
+    if (allMoneyMin !== null && allMoney < allMoneyMin) {
+      return false
+    }
+    if (allMoneyMax !== null && allMoney > allMoneyMax) {
+      return false
+    }
+    if (daysLeftMin !== null && daysLeft < daysLeftMin) {
+      return false
+    }
+    if (daysLeftMax !== null && daysLeft > daysLeftMax) {
+      return false
+    }
+    if (hideNoRewardGames && !hasActiveRewards(row)) {
+      return false
+    }
+    return true
+  })
+})
+
+const openSearchDialog = (gameName: string) => {
+  currentGameForSearch.value = gameName
+  searchDialogVisible.value = true
+}
+
 // 定义平台类型
 type PlatformType = 'bilibili' | '抖音' | '小红书';
-// 定义定时任务项接口
-interface ScheduleJobItem {
-  videoPath: string;
-  execTime: string;
-  successExecAccount: string[];
-}
+
+
 
 export interface ScheduleJob {
   gameName: string;
   topicName: string;
-  missionId: number;
   tag: string;
   videoDir: string;
-  scheduleJob: ScheduleJobItem[];
-  etime: string;
-  tid: number;
+  videoList: VideoItem[];
+  etime: Date;
+  needExecAccounts: string[];
+  tid?: number;
+  missionId?: number;
+  topicId?: number;
 }
+
+export interface VideoItem {
+  type: "video" | "image";
+  videoPath: string;
+  execTime: Date;
+  successExecAccount: string[];
+  needExecAccount: string[];
+}
+
 
 
 const scheduleJobMap = ref<Record<PlatformType, ScheduleJob[]>>({
@@ -1493,7 +1916,6 @@ const fetchData = async () => {
     scheduleJobMap.value = res.scheduleJob
     topicJson.value = res.topicJson
     allPlatformAccounts.value = res.platformAccountMap
-    batchGames
     ElMessage.success('数据刷新成功')
   } catch (error) {
     console.error('Error fetching data:', error)
@@ -1502,7 +1924,7 @@ const fetchData = async () => {
 
 const fetchNewBiliBiliActivityData = async () => {
   try {
-    const response = await fetch('/api/getNewActData')
+    const response = await fetch('/api/getNewBiliActData')
     const res = await response.json()
     if (res.code == -101) {
       return ElMessage.error('请先登录')
@@ -1554,6 +1976,9 @@ const handleManualAccount = async () => {
 
 onMounted(() => {
   fetchData()
+  // 初始化赛道标签，默认展开前3个
+  const trackNames = Object.keys(specialTrackTagConfigs)
+  expandedTracks.value = new Set(trackNames.slice(0, 3))
 })
 
 // 控制选择查询的平台
@@ -1618,7 +2043,16 @@ const getCompletionPercentage = (requirement, videoData, act) => {
       100,
     )
   } else {
-    percentage = (completedRequirements / totalRequirements) * 100
+    // for multiple requirements, instead of simply counting completed ones we calculate
+    // a weighted progress based on how far along each requirement is. This gives a
+    // smooth percentage that reflects partial completion of individual items.
+    let sumRatio = 0
+    details.forEach((d) => {
+      // avoid division by zero and cap at 1 (100%)
+      const ratio = d.required > 0 ? Math.min(d.current / d.required, 1) : 0
+      sumRatio += ratio
+    })
+    percentage = (sumRatio / totalRequirements) * 100
   }
 
   return {
@@ -1647,7 +2081,7 @@ function getCurrentValue(key, data, requirement, act) {
     case 'allLikeNum':
       return act?.minLike
         ? data.videoList
-          .filter((i) => i.view >= act?.minLike)
+          .filter((i) => i.like >= act?.minLike)
           .reduce((sum, item) => sum + item.like, 0)
         : data.allLikeNum
     case 'allViewNum':
@@ -1692,6 +2126,8 @@ const getTooltipContent = (requirement, videoData, act) => {
     tooltipContent += '\n'
   })
 
+  // append overall percentage for clarity
+  tooltipContent += `进度: ${completionInfo.percentage.toFixed(1)}%`
   return tooltipContent.trim()
 }
 
@@ -1726,7 +2162,7 @@ const totalSelectedCount = computed(() => {
 
 const makeJobKey = (job, platform) => `${platform}::${job.topicName || job.gameName}`
 
-const buildViewerJob = (job, platform) => {
+const buildViewerJob = (job, platform, activity) => {
   const totalCount = job.scheduleJob?.length || 0
   const requiredAccounts = platform === 'bilibili' ? 3 : platform === '抖音' ? 2 : 1
   // 已分发：按视频是否已达到应分发账号数来判断
@@ -1739,7 +2175,8 @@ const buildViewerJob = (job, platform) => {
     dispatchedCount,
     requiredAccounts,
     daysLeft,
-    jobKey: makeJobKey(job, platform)
+    jobKey: makeJobKey(job, platform),
+    activity // store corresponding activity/reward object
   }
 }
 
@@ -1757,8 +2194,36 @@ const showScheduleJobDialog = async (speReq, platformName: PlatformType) => {
       ElMessage.warning('未找到定时任务')
       return
     }
-    viewerJobs.value = [buildViewerJob(scheduleJob, platformName)]
+    viewerJobs.value = [buildViewerJob(scheduleJob, platformName, speReq)]
     selectedVideosMap.value = {}
+
+    // 自动勾选最近7日的稿件
+    const now = new Date().getTime()
+    const sevenDaysMs = 7 * 24 * 60 * 60 * 1000
+    const videos7DaysAgo = (scheduleJob.scheduleJob || []).filter(v => {
+      const execTime = new Date(v.execTime).getTime()
+      return execTime >= now - sevenDaysMs && execTime <= now + sevenDaysMs
+    })
+
+    if (videos7DaysAgo.length > 0) {
+      const jobKey = makeJobKey(scheduleJob, platformName)
+      selectedVideosMap.value[jobKey] = videos7DaysAgo
+
+      // 待下一帧 UI 更新后，同步勾选复选框
+      setTimeout(() => {
+        const tbl = tableRefs.value[jobKey]
+        if (!tbl || !Array.isArray(videos7DaysAgo)) return
+        try {
+          tbl.clearSelection && tbl.clearSelection()
+        } catch (e) { }
+        videos7DaysAgo.forEach(r => {
+          try {
+            tbl.toggleRowSelection && tbl.toggleRowSelection(r, true)
+          } catch (e) { }
+        })
+      }, 100)
+    }
+
     scheduleViewerDialogVisible.value = true
   } catch (error) {
     console.error('获取定时任务失败:', error)
@@ -1849,32 +2314,106 @@ const filteredViewerJobs = computed(() => {
 // 发起分发请求（将所选视频传给后端处理）
 const dispatchSelectedVideos = async () => {
   const jobsPayload = []
-  Object.entries(selectedVideosMap.value).forEach(([jobKey, arr]) => {
+  const selectedJobKeys = Object.keys(selectedVideosMap.value)
+
+  // helper to compute percent map for a topic from an activity object
+  const computePercentMap = (activity, topic) => {
+    const map = {}
+    const arr = activity.activityRequirements || []
+    arr.forEach(rew => {
+      // match on name or topic
+      if (rew.name !== topic && rew.topic !== topic) return
+      (rew.reward || []).forEach(req => {
+        (rew.videoData || []).forEach(r => {
+          if (!r.userName) return
+          const p = getCompletionPercentage(req, r, activity).percentage
+          map[r.userName] = map[r.userName] !== undefined ? Math.min(map[r.userName], p) : p
+        })
+      })
+    })
+    return map
+  }
+
+  // 构建待分发稿件列表及所有账户信息
+  const percentByTopic = {} // topic -> { account: percent }
+  selectedJobKeys.forEach(jobKey => {
+    const arr = selectedVideosMap.value[jobKey]
     if (!arr || arr.length === 0) return
     const [platform] = jobKey.split('::')
     const topic = jobKey.split('::')[1]
+    // compute percent map if not yet
+    if (percentByTopic[topic] === undefined) {
+      const vjob = viewerJobs.value.find(v => v.jobKey === jobKey)
+      if (vjob && vjob.activity) {
+        percentByTopic[topic] = computePercentMap(vjob.activity, topic)
+      } else {
+        percentByTopic[topic] = {}
+      }
+    }
     arr.forEach(item => {
-      jobsPayload.push({ platform, topicName: topic, videoPath: item.videoPath })
+      jobsPayload.push({
+        platform,
+        topicName: topic,
+        videoPath: item.videoPath,
+        execTime: item.execTime // 传递执行时间供后端做精确匹配
+      })
     })
   })
 
-  if (jobsPayload.length === 0) {
-    ElMessage.warning('未选择任何视频')
-    return
-  }
+  // if (jobsPayload.length === 0) {
+  //   ElMessage.warning('未选择任何视频')
+  //   return
+  // }
 
   try {
+    // 获取需要执行的账户列表（来自前端 allPlatformAccounts）
+    const accountsByPlatform = {}
+    jobsPayload.forEach(job => {
+      const key = platformToKey[job.platform]
+      if (key && !accountsByPlatform[job.platform]) {
+        accountsByPlatform[job.platform] = (allPlatformAccounts.value[key] || []).map(a => a.accountName)
+      }
+    })
+
+    // 自动设置分发时间范围为最近7日（如未手动选择）
+    let timeRange = scheduleViewerTimeRange.value
+    if (!timeRange || timeRange.length !== 2) {
+      const now = new Date()
+      const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
+      timeRange = [sevenDaysAgo, now]
+    }
+
+    let startTimeUtc8 = timeRange[0].toLocaleString('zh-CN', {
+      timeZone: 'Asia/Shanghai',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+
+    const endTimeUtc8 = new Date(timeRange[1]).toLocaleString('zh-CN', {
+      timeZone: 'Asia/Shanghai',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+
+
     const payload = {
-      jobs: jobsPayload,
-      filter: {
-        platform: viewerPlatformFilter.value || undefined,
-        startTime: scheduleViewerTimeRange.value && scheduleViewerTimeRange.value[0] ? new Date(scheduleViewerTimeRange.value[0]).toISOString() : undefined,
-        endTime: scheduleViewerTimeRange.value && scheduleViewerTimeRange.value[1] ? new Date(scheduleViewerTimeRange.value[1]).toISOString() : undefined,
-      },
-      schedule: scheduleViewerTimeRange.value && scheduleViewerTimeRange.value.length === 2 ? {
-        startTime: new Date(scheduleViewerTimeRange.value[0]).toISOString(),
-        endTime: new Date(scheduleViewerTimeRange.value[1]).toISOString()
-      } : undefined
+      jobs: jobsPayload, // 所有待分发的稿件清单
+      accountsByPlatform, // 各平台的账户列表
+      percentByTopic, // 用户完成百分比
+      endTime: endTimeUtc8,
+
+      schedule: {
+        startTime: startTimeUtc8,
+        endTime: endTimeUtc8
+      }
     }
 
     const resp = await fetch('/api/executeScheduleJobs', {
@@ -1885,7 +2424,10 @@ const dispatchSelectedVideos = async () => {
     if (!resp.ok) throw new Error('请求失败')
     const result = await resp.json()
     if (result.code === 200) {
-      ElMessage.success('分发已触发，后台处理中')
+      const msg = result.data?.skippedJobs
+        ? `分发已触发（实际待分发${result.data.filteredJobs}件，跳过已达标${result.data.skippedJobs}件）`
+        : '分发已触发，后台处理中'
+      ElMessage.success(msg)
       // 清空选择并刷新数据
       selectedVideosMap.value = {}
       scheduleViewerDialogVisible.value = false
@@ -2005,8 +2547,7 @@ const handleTrackChange = (value: string[] | string): void => {
   }
 }
 
-const unfinishedTasksDialogVisible = ref(false)
-const unfinishedTasks = ref([])
+
 
 // 获取未完成的定时任务
 const getUnfinishedTasks = () => {
@@ -2111,5 +2652,285 @@ h4 {
 
 .row-dispatched {
   background: #f5f7fa;
+}
+/* 固定标签面板样式 */
+.fixed-tag-panel {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 15px;
+  max-width: 450px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+  z-index: 999;
+  color: white;
+  font-weight: 500;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.panel-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.panel-controls :deep(.el-button) {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.panel-content {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  to {
+    opacity: 1;
+    max-height: 1000px;
+  }
+}
+
+.track-tags-section {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.track-controls {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.track-controls :deep(.el-button) {
+  padding: 5px 10px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.track-group {
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.track-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  transition: background 0.2s ease;
+  user-select: none;
+}
+
+.track-header:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.track-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.track-toggle {
+  font-size: 11px;
+  opacity: 0.7;
+  min-width: 12px;
+}
+
+.track-title {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.tag-count {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.track-copy-btn {
+  padding: 5px 10px;
+  font-size: 11px;
+}
+
+.track-copy-btn :deep(.el-button) {
+  padding: 5px 10px;
+  font-size: 11px;
+}
+
+.platform-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  margin-bottom: 8px;
+}
+
+.platform-name {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.platform-copy-btn {
+  padding: 5px 10px;
+  font-size: 11px;
+}
+
+.platform-copy-btn :deep(.el-button) {
+  padding: 5px 10px;
+  font-size: 11px;
+}
+
+.track-content {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  animation: expandTrack 0.2s ease-out;
+}
+
+@keyframes expandTrack {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.game-section {
+  margin-bottom: 15px;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 8px 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  word-break: break-word;
+}
+
+.platform-group {
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.platform-name {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.tags-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-item {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.tag-item:hover {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.panel-summary {
+  font-size: 13px;
+  max-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.empty-state p {
+  margin: 0;
+}
+
+.open-tag-panel-btn {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  z-index: 998;
+}
+
+/* 滚动条美化 */
+.fixed-tag-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.fixed-tag-panel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.fixed-tag-panel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.fixed-tag-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.text-gray-400 {
+  color: rgba(255, 255, 255, 0.6);
 }
 </style>

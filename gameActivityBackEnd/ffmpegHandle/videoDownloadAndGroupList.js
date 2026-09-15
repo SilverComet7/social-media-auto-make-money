@@ -2,7 +2,7 @@ const fs = require('fs');
 const fsPromises = require('fs').promises;
 const path = require('path');
 const { spawn } = require('child_process');
-const { allGameList, TikTokDownloader_ROOT, specialGameList } = require('../const.js')
+const { allGameList, TikTokDownloader_ROOT, specialGameList } = require('../const.ts')
 
 async function moveFilePath(gameFolder, oldFilePath, fileName, checkName) {
   const newFilePath = path.join(gameFolder, fileName);

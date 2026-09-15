@@ -117,9 +117,16 @@ function checkJsonFileExists(platform, platformDir = DEFAULT_CRAWLER_DIR) {
  */
 async function queryPlatformData(platform, transformFn, platformDir = DEFAULT_CRAWLER_DIR) {
     try {
+
+        if (platform === 'dy') {
+            platform = 'douyin';
+        }
         const fileExists = checkJsonFileExists(platform, platformDir);
         if (!fileExists) {
-            await runMediaCrawlerCommand(platform, 'cookie', 'creator', platformDir);
+            if (platform === 'douyin') {
+                platform = 'dy';
+            }
+            await runMediaCrawlerCommand(platform, 'qrcode', 'creator', platformDir);
         }
         const crawlerData = await readCrawlerData(platform, platformDir);
         const transformedData = transformFn(crawlerData);

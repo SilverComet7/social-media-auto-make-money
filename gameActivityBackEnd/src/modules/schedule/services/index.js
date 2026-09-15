@@ -1,10 +1,12 @@
-// const app = require("@/index");
-// const express = require('express');
-// const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 const { spawn } = require("child_process");
-const { PROJECT_ROOT, platformConfig } = require("../../../../const.js");
+const dayjs = require('dayjs');
+const utc = require('dayjs/plugin/utc');
+const timezone = require('dayjs/plugin/timezone');
+dayjs.extend(utc);
+dayjs.extend(timezone);
+const { PROJECT_ROOT, platformConfig } = require("../../../../const.ts");
 const { getJsonData, writeLocalDataJson } = require("../../../../commonFunction.js");
 const accountJson = getJsonData("accountList.json")
 
@@ -27,6 +29,58 @@ const semaphore = {
 const acquireSemaphore = (max) => semaphore.acquire(max);
 const releaseSemaphore = () => semaphore.release();
 
+
+function generateUploadCommand(platform, uploaderPath, account, job) {
+
+    const execTime = new Date(job.execTime);
+    const isPastTime = Date.now() > execTime;
+    const formattedTime = isPastTime ? '' :
+        `-t "${execTime.toISOString().replace('T', ' ').substring(0, 16)}"`;
+
+    if (platform === 'bilibili') {
+        // 读取元数据文件获取标题和描述
+        let desc = job.topicName // 默认使用活动名作为描述
+
+        // 构建命令参数
+        const params = [
+            `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}"`,
+            'bilibili',
+            account.accountName,
+            'upload',
+            `"${job.videoPath}"`,
+            '-pt', isPastTime ? 0 : 1
+        ];
+
+        // 添加定时发布时间
+        if (!isPastTime && formattedTime) {
+            params.push(formattedTime);
+        }
+
+        // 添加 bilibili 特定参数
+        if (job.missionId) {
+            params.push('--mission-id', job.missionId);
+        }
+        if (job.tid) {
+            params.push('--tid', job.tid);
+        }
+        if (desc) {
+            params.push('--desc', `"${desc}"`);
+        }
+        if (job.topicId) {
+            params.push('--topic-id', job.topicId);
+        }
+        return params.join(' ');
+    }
+
+
+    else if (platform === '抖音') {
+        return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}" douyin ${account.accountName} upload "${job.videoPath}" -pt ${isPastTime ? 0 : 1} ${isPastTime ? '' : formattedTime}`;
+    }
+
+    else if (platform === '小红书') {
+        return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/examples/upload_video_to_xhs.py')}" ${account.accountName} "${job.videoPath}" -pt ${isPastTime ? 0 : 1} ${isPastTime ? '' : formattedTime}`;
+    }
+}
 
 async function executePlatformExpiredJobs(platform) {
     try {
@@ -244,71 +298,12 @@ async function executePlatformExpiredJobs(platform) {
     }
 }
 
-function generateUploadCommand(platform, uploaderPath, account, job) {
-
-    const execTime = new Date(job.execTime);
-    const isPastTime = Date.now() > execTime;
-    const formattedTime = isPastTime ? '' :
-        `-t "${execTime.toISOString().replace('T', ' ').substring(0, 16)}"`;
-
-    if (platform === 'bilibili') {
-        // 读取元数据文件获取标题和描述
-        // const metaFilePath = path.join(path.dirname(job.videoPath),
-        //     path.basename(job.videoPath, '.mp4') + '.txt');
-        let desc = job.topicName // 默认使用活动名作为描述
-        // if (fs.existsSync(metaFilePath)) {
-        //     const metaContent = fs.readFileSync(metaFilePath, 'utf-8');
-        //     const lines = metaContent.split('\n');
-        //     desc = lines[0] || desc; // 使用第一行作为描述
-        // }
-
-        // 构建命令参数
-        const params = [
-            `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}"`,
-            'bilibili',
-            account.accountName,
-            'upload',
-            `"${job.videoPath}"`,
-            '-pt', isPastTime ? 0 : 1
-        ];
-
-        // 添加定时发布时间
-        if (!isPastTime && formattedTime) {
-            params.push(formattedTime);
-        }
-
-        // 添加 bilibili 特定参数
-        if (job.missionId) {
-            params.push('--mission-id', job.missionId);
-        }
-        if (job.tid) {
-            params.push('--tid', job.tid);
-        }
-        if (desc) {
-            params.push('--desc', `"${desc}"`);
-        }
-        if (job.topicId) {
-            params.push('--topic-id', job.topicId);
-        }
-        return params.join(' ');
-    }
-
-
-    else if (platform === '抖音') {
-        return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/cli_main.py')}" douyin ${account.accountName} upload "${job.videoPath}" -pt ${isPastTime ? 0 : 1} ${isPastTime ? '' : formattedTime}`;
-    }
-
-    else if (platform === '小红书') {
-        return `python "${path.join(PROJECT_ROOT, 'social-auto-upload/examples/upload_video_to_xhs.py')}" ${account.accountName} "${job.videoPath}" -pt ${isPastTime ? 0 : 1} ${isPastTime ? '' : formattedTime}`;
-    }
-}
-
-async function checkAndExecuteJobs() {
+async function executePlatformScheduleJobs() {
     try {
 
         const results = await Promise.allSettled([
-            // '抖音',
-            // '小红书',
+            '抖音',
+            '小红书',
             'bilibili'
         ].map(p => executePlatformExpiredJobs(p)));
 
@@ -349,25 +344,41 @@ async function checkAndExecuteJobs() {
     }
 }
 
-// 将原来的 app.post 逻辑提取为服务函数
 async function handleScheduleUpload(body) {
-    function generateScheduleJobs(videoDir, startTime, intervalHours) {
+    // 生成一组按间隔排布的定时任务
+    // 使用 dayjs + 时区插件确保按东八区北京时间计算，避免原始 setHours 方法
+    // 在 startTime 传入的 ISO 字符串中已有 UTC 信息，我们转换到 东八区 Asia/Shanghai 处理。
+    function generateScheduleJobs(videoDir, startTime, intervalHours, existingJobs) {
         const files = fs.readdirSync(videoDir);
         const videoFiles = files.filter((f) => f.endsWith(".mp4"));
+        const gameExistingJobs = existingJobs.find(g => g.videoDir === videoDir);
         const jobs = [];
-        let execTime = new Date(startTime);
-        let i = 0;
-        const h = execTime.getHours();
-        for (const file of videoFiles) {
-            const currentExecTime = new Date(execTime);
-            currentExecTime.setHours(8 + h + i * intervalHours);
+
+        // 确保文件顺序稳定（按文件名排序），避免因文件顺序导致的时间错位
+        videoFiles.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+
+        // 确保 intervalHours 为数字
+        const hours = Number(intervalHours) || 0;
+        const base = dayjs.tz(startTime)
+
+        videoFiles.filter(file => {
+            // 如果已有任务中存在相同视频路径的任务，则跳过生成新任务，避免重复
+            if (gameExistingJobs?.scheduleJob) {
+                const exists = gameExistingJobs.scheduleJob.some(job => job.videoPath === path.join(videoDir, file));
+                return !exists;
+            }
+            return true;
+        }).forEach((file, idx) => {
+            // 使用 immutable 的 add 生成每个任务时间，最后转为 ISO UTC 字符串保存
+
+            const exec = base.add(8 + (hours * (idx)), 'hour');
             jobs.push({
                 videoPath: path.join(videoDir, file),
-                execTime: currentExecTime.toISOString(),
+                execTime: exec.toISOString(), // UTC 格式，前端按本地显示
                 successExecAccount: [],
             });
-            i++;
-        }
+        });
+
         return jobs;
     }
 
@@ -390,7 +401,7 @@ async function handleScheduleUpload(body) {
     } = body;
 
     if (immediately) {
-        return await checkAndExecuteJobs();
+        return await executePlatformScheduleJobs();
     } else {
         const scheduleJobsPath = platformConfig[platform].configPath;
         let scheduleJobs = [];
@@ -401,7 +412,8 @@ async function handleScheduleUpload(body) {
             scheduleJobs = [];
         }
 
-        const newJobs = generateScheduleJobs(videoDir, startTime, intervalHours, topicName);
+
+        const newJobs = generateScheduleJobs(videoDir, startTime, intervalHours, scheduleJobs);
 
         const baseConfig = {
             gameName,
@@ -438,6 +450,7 @@ async function handleScheduleUpload(body) {
             // 更新新的videoPath，更新新的设置
             scheduleJobs[sameTopicIndex] = { ...baseConfig, scheduleJob: [...scheduleJobs[sameTopicIndex].scheduleJob, ...filterNewJobs] }
         }
+
         // 删除超过时间的任务
         const now = new Date();
         scheduleJobs = scheduleJobs.filter(game => {
@@ -458,24 +471,36 @@ async function handleScheduleUpload(body) {
     }
 }
 
-// 接收前端选中的具体视频任务，设置其 execTime 为当前时间以便立即触发执行
 async function handleExecuteScheduleJobs(body) {
     try {
-        const { jobs, filter, schedule } = body; // jobs: [{ platform, topicName, videoPath }]
-        if (!jobs || jobs.length === 0) {
-            return { code: 400, msg: '没有要执行的任务' };
-        }
+        const { jobs, accountsByPlatform, percentByTopic } = body;
 
-        // 按平台分组处理
-        // const byPlatform = {};
-        // jobs.forEach(j => {
-        //     if (!byPlatform[j.platform]) byPlatform[j.platform] = [];
-        //     byPlatform[j.platform].push(j);
-        // });
+        // if (!jobs || jobs.length === 0) {
+        //     return { code: 400, msg: '没有要执行的任务' };
+        // }
 
-        // for (const platform of Object.keys(byPlatform)) {
+        // 达标阈值定义：各平台分发账户数要求
+        const requiredAccountsThreshold = {
+            'bilibili': 3,
+            '抖音': 2,
+            '小红书': 1,
+        };
+
+
+        const byPlatformTopic = {};
+        jobs.forEach(j => {
+            const key = `${j.platform}::${j.topicName}`;
+            if (!byPlatformTopic[key]) byPlatformTopic[key] = [];
+            byPlatformTopic[key].push(j);
+        });
+
+        // const filteredJobs = [];
+
+        // for (const [platformTopicKey, jobList] of Object.entries(byPlatformTopic)) {
+        //     const [platform, topicName] = platformTopicKey.split('::');
         //     const cfg = platformConfig[platform];
         //     if (!cfg) continue;
+
         //     const configPath = cfg.configPath;
         //     let scheduleJobs = [];
         //     try {
@@ -485,93 +510,80 @@ async function handleExecuteScheduleJobs(body) {
         //         continue;
         //     }
 
-        //     const list = byPlatform[platform];
+        //     // 找到对应话题的配置
+        //     const targetGame = scheduleJobs.find(g => g.topicName === topicName);
+        //     if (!targetGame) continue;
 
-        //     // 按 topic 分组，以便对每个活动分别排序与调度
-        //     const topicsMap = {};
-        //     list.forEach(it => {
-        //         const topic = it.topicName || it.topic || '';
-        //         if (!topicsMap[topic]) topicsMap[topic] = [];
-        //         topicsMap[topic].push(it);
-        //     });
+        //     const requiredNum = requiredAccountsThreshold[platform] || 1;
 
-        //     // 平台调度限制
-        //     const minIntervalMs = 2 * 60 * 60 * 1000; // 2小时
-        //     const maxRangeMs = 14 * 24 * 60 * 60 * 1000; // 14天
+        //     // 参考前端提供的百分比数据判断跳过
+        //     const percentMap = (percentByTopic && percentByTopic[topicName]) || {};
+        //     jobList.forEach(job => {
+        //         const scheduleJobItem = (targetGame.scheduleJob || []).find(
+        //             sj => sj.videoPath === job.videoPath && sj.execTime === job.execTime
+        //         );
 
-        //     for (const topicName of Object.keys(topicsMap)) {
-        //         const items = topicsMap[topicName];
-
-        //         // 找到对应的配置项
-        //         const targetGame = scheduleJobs.find(g => (g.topicName === topicName || g.gameName === topicName));
-        //         if (!targetGame) continue;
-
-        //         // 为每个被选中的视频找到原始 execTime 以便按原始时间排序
-        //         const videoEntries = items.map(it => {
-        //             const sj = (targetGame.scheduleJob || []).find(s => s.videoPath === it.videoPath);
-        //             return { item: it, origTime: sj ? new Date(sj.execTime).getTime() : 0 };
-        //         }).sort((a, b) => a.origTime - b.origTime);
-
-        //         // 计算要写入的 execTime 列表
-        //         let execTimes = [];
-        //         if (schedule && schedule.startTime && schedule.endTime) {
-        //             const startMs = new Date(schedule.startTime).getTime();
-        //             const endMs = new Date(schedule.endTime).getTime();
-        //             if (isNaN(startMs) || isNaN(endMs) || endMs <= startMs) {
-        //                 return { code: 400, msg: '无效的时间范围' };
-        //             }
-        //             const rangeMs = endMs - startMs;
-        //             if (rangeMs > maxRangeMs) {
-        //                 return { code: 400, msg: '时间范围不得超过 14 天' };
-        //             }
-        //             const n = videoEntries.length;
-        //             if (n === 0) continue;
-        //             const intervalMs = n > 1 ? Math.floor(rangeMs / (n - 1)) : 0;
-        //             if (n > 1 && intervalMs < minIntervalMs) {
-        //                 return { code: 400, msg: `选定时间范围太紧，至少需要 ${Math.ceil(minIntervalMs / (60*60*1000))} 小时间隔` };
-        //             }
-        //             for (let i = 0; i < n; i++) {
-        //                 const t = n === 1 ? startMs : (startMs + i * intervalMs);
-        //                 execTimes.push(new Date(t).toISOString());
-        //             }
-        //         } else {
-        //             // 立即执行（全部设置为当前时间）
-        //             const nowIso = new Date().toISOString();
-        //             execTimes = videoEntries.map(() => nowIso);
+        //         if (!scheduleJobItem) {
+        //             console.warn(`未找到匹配的定时任务项: ${job.videoPath}`);
+        //             return;
         //         }
 
-        //         // 更新 targetGame.scheduleJob 中对应的 execTime
-        //         if (execTimes.length > 0) {
-        //             const sjList = targetGame.scheduleJob || [];
-        //             videoEntries.forEach((ve, idx) => {
-        //                 sjList.forEach((sj, si) => {
-        //                     if (sj.videoPath === ve.item.videoPath) {
-        //                         sjList[si] = { ...sj, execTime: execTimes[idx] };
-        //                     }
-        //                 });
+        //         // 计算该视频对应账户是否全部达到100%（若有 percentMap 提供）
+        //         let allAccountsDone = true;
+        //         const accounts = accountsByPlatform && accountsByPlatform[platform] ? accountsByPlatform[platform] : [];
+        //         if (accounts.length && Object.keys(percentMap).length) {
+        //             accounts.forEach(acc => {
+        //                 const p = percentMap[acc] || 0;
+        //                 if (p < 100) allAccountsDone = false;
         //             });
-        //             targetGame.scheduleJob = sjList;
+        //         } else {
+        //             const executedCount = (scheduleJobItem.successExecAccount || []).length;
+        //             allAccountsDone = executedCount >= requiredNum;
         //         }
-        //     }
 
-        //     // 写回配置文件
-        //     writeLocalDataJson(scheduleJobs, configPath);
+        //         if (allAccountsDone) {
+        //             console.log(`跳过已达标稿件(按percent): ${job.topicName} - ${job.videoPath}`);
+        //             return;
+        //         }
+
+        //         filteredJobs.push({
+        //             ...job,
+        //             requiredNum,
+        //             executedAccounts: scheduleJobItem.successExecAccount || []
+        //         });
+        //     });
+        // }
+
+        // if (filteredJobs.length === 0) {
+        //     return {
+        //         code: 200,
+        //         msg: '所有选中稿件均已达标或未找到匹配项，跳过执行',
+        //         data: { filteredCount: 0, totalCount: jobs.length }
+        //     };
         // }
 
         // 触发检查并执行（使用已有的检查逻辑）
-        const execResult = await checkAndExecuteJobs();
-        return { code: 200, msg: '已触发执行', data: execResult.data };
+        const execResult = await executePlatformScheduleJobs();
+        return {
+            code: 200,
+            msg: '已触发执行',
+            data: {
+                ...execResult.data,
+                // filteredJobs: filteredJobs.length,
+                totalJobs: jobs.length,
+                // skippedJobs: jobs.length - filteredJobs.length
+            }
+        };
     } catch (err) {
         console.error('handleExecuteScheduleJobs 错误:', err);
         return { code: 500, msg: '执行失败', error: err.message };
     }
 }
 
-// 导出所有服务函数
 module.exports = {
     handleScheduleUpload,
     handleExecuteScheduleJobs,
     executePlatformExpiredJobs,
-    checkAndExecuteJobs,
+    checkAndExecuteJobs: executePlatformScheduleJobs,
     generateUploadCommand
 };

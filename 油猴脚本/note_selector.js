@@ -6,7 +6,7 @@
 // @author       Your name
 // @match        https://www.douyin.com/search/*
 // @match        https://www.douyin.com/user/*
-// @match        https://www.xiaohongshu.com/search_result?keyword=*
+// @match        https://www.xiaohongshu.com/search_result/*
 // @match        https://www.xiaohongshu.com/user/profile/*
 // @grant        none
 // ==/UserScript==
@@ -54,7 +54,7 @@
 
     // 平台检测：抖音 vs 小红书
     function isXHS() {
-        return /xiaohongshu\.com/.test(window.location.host);
+        return /www\.xiaohongshu\.com/.test(window.location.host);
     }
 
     function isDouyinHost() {
@@ -69,55 +69,64 @@
         return isDouyinHost() && /\/user\//.test(window.location.pathname);
     }
 
-    const CROSS_SEARCH_TITLE_CLASS = 'douyin-cross-search-title';
+    const CROSS_SEARCH_TITLE_CLASS = 'cross-search-title';
 
     /** 去掉 # 及后续话题，只保留标题用于多平台搜索 */
-    function extractDouyinTitleForSearch(rawText) {
-        const t = (rawText || '').replace(/\s+/g, ' ').trim();
-        if (!t) return '';
-        const idx = t.indexOf('#');
-        if (idx === -1) return t;
-        return t.slice(0, idx).trim();
-    }
-
-    /** 仅用标题（不含 #话题）在 B站 / 小红书 / 快手 打开搜索 */
-    function openCrossPlatformVideoSearch(rawText) {
-        const keyword = extractDouyinTitleForSearch(rawText);
-        if (!keyword) return;
-        const kuaishouSearchUrl =
-            'https://www.kuaishou.com/search/' + encodeURIComponent(keyword) + '?source=NewReco';
-        const bilibiliSearchUrl = 'https://search.bilibili.com/all?keyword=' + encodeURIComponent(keyword);
-        const xhsSearchUrl =
-            'https://www.xiaohongshu.com/search_result?keyword=' +
-            encodeURIComponent(keyword) +
-            '&source=web_search_result_notes';
-        window.open(kuaishouSearchUrl, '_blank', 'noopener');
-        window.open(bilibiliSearchUrl, '_blank', 'noopener');
-        window.open(xhsSearchUrl, '_blank', 'noopener');
-    }
+    function extractTitleForSearch(rawText) {
+        return rawText
 
     function onCrossSearchTitleClick(e) {
         const el = e.currentTarget;
-        const keyword = extractDouyinTitleForSearch(el.textContent);
+        const keyword = extractTitleForSearch(el.textContent);
         if (!keyword) return;
         e.preventDefault();
         e.stopPropagation();
         e.stopImmediatePropagation();
-        openCrossPlatformVideoSearch(keyword);
+            openCrossPlatformSearch(keyword);
+        }
+
+        function openCrossPlatformSearch(rawText) {
+            const keyword = extractTitleForSearch(rawText);
+            if (!keyword) return;
+
+            const urls = [];
+            if (isXHS()) {
+                urls.push('https://search.bilibili.com/all?keyword=' + encodeURIComponent(keyword));
+                urls.push('https://www.douyin.com/search/' + encodeURIComponent(keyword));
+                // urls.push('https://www.kuaishou.com/search/' + encodeURIComponent(keyword) + '?source=NewReco');
+            } else if (isDouyinHost()) {
+                // urls.push('https://www.kuaishou.com/search/' + encodeURIComponent(keyword) + '?source=NewReco');
+                urls.push('https://search.bilibili.com/all?keyword=' + encodeURIComponent(keyword));
+                urls.push('https://www.xiaohongshu.com/search_result?keyword=' + encodeURIComponent(keyword) + '&source=web_search_result_notes');
+            } else {
+                urls.push('https://www.kuaishou.com/search/' + encodeURIComponent(keyword) + '?source=NewReco');
+                urls.push('https://search.bilibili.com/all?keyword=' + encodeURIComponent(keyword));
+                urls.push('https://www.xiaohongshu.com/search_result?keyword=' + encodeURIComponent(keyword) + '&source=web_search_result_notes');
+                urls.push('https://www.douyin.com/search/' + encodeURIComponent(keyword));
+            }
+            urls.forEach(url => window.open(url, '_blank', 'noopener'));
+        }
+
+        function isXhsSearchPage() {
+            return isXHS() && /search_result/.test(window.location.href);
+        }
+
+        function isXhsUserPage() {
+            return isXHS() && /\/user\/profile\//.test(window.location.pathname);
     }
 
-    /** 抖音瀑布流标题：点击即可多站搜索（搜索页 div.BjLsdJMi；用户页 p.eJFBAbdI.H4IE9Xgd） */
+        /** 搜索页/用户页标题：点击即可多站搜索 */
     function bindDouyinCrossSearchTitles() {
         if (isXHS() || !isDouyinHost() || hasModalId()) return;
 
         let selector = '';
         if (isDouyinSearchPage()) selector = 'div.BjLsdJMi';
-        else if (isDouyinUserPage()) selector = 'p.eJFBAbdI.H4IE9Xgd';
+        else if (isDouyinUserPage()) selector = 'p.eJFBAbdI.H4IE9Xgd' || "p.PHhKt_o4.jvzvQhgp";
         else return;
 
         document.querySelectorAll(selector).forEach(el => {
             if (el.dataset.douyinCrossSearchBound) return;
-            const keyword = extractDouyinTitleForSearch(el.textContent);
+            const keyword = extractTitleForSearch(el.textContent);
             if (!keyword) return;
             el.dataset.douyinCrossSearchBound = '1';
             el.classList.add(CROSS_SEARCH_TITLE_CLASS);
@@ -126,6 +135,38 @@
             el.addEventListener('click', onCrossSearchTitleClick, true);
         });
     }
+
+        function bindXhsCrossSearchTitles() {
+            if (!isXHS() || hasModalId()) return;
+
+            const selector = 'a.title > span';
+            if (!isXhsSearchPage() && !isXhsUserPage()) return;
+
+            document.querySelectorAll(selector).forEach(el => {
+                if (el.dataset.xhsCrossSearchBound) return;
+                const keyword = extractTitleForSearch(el.textContent);
+                if (!keyword) return;
+                el.dataset.xhsCrossSearchBound = '1';
+                el.classList.add(CROSS_SEARCH_TITLE_CLASS);
+                el.style.cursor = 'pointer';
+                el.style.textDecoration = 'underline';
+                el.style.textDecorationColor = '#fe2c55';
+                el.style.textDecorationThickness = '1px';
+                el.title = '点击：在 抖音、B站、快手 用当前标题搜索';
+            });
+        }
+
+        function handleXhsTitleCaptureClick(e) {
+            if (!isXhsSearchPage() && !isXhsUserPage()) return;
+            const span = e.target.closest('a.title > span');
+            if (!span) return;
+            const keyword = extractTitleForSearch(span.textContent);
+            if (!keyword) return;
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            openCrossPlatformSearch(keyword);
+        }
 
     // 为内容条目添加复选框（兼容抖音视频与小红书笔记）
     function addCheckboxesToItems() {
@@ -159,7 +200,7 @@
         } else {
             const videoSelectors = [
                 'div[class*="AMqhOzPC"]',
-                'li[class*="wqW3g_Kl WPzYSlFQ OguQAD1e"]'
+                'li[class*="AhHE71Bq F4b7sztk zvGw4rBu"]'
             ];
             const videos = document.querySelectorAll(videoSelectors.join(','));
             videos.forEach(video => {
@@ -321,6 +362,8 @@
     function copyUserInfo() {
         let name = '';
         const nameSelectors = [
+            'div.user-name',
+            'div.user-name span',
             'h1[class*="xgplayer-nickname"], h1[class*="xgplayer-user-nickname"]',
             'span[class*="xgplayer-nickname"], span[class*="xgplayer-user-nickname"]',
             'span[class*="Nu66P_ba"]',
@@ -340,12 +383,7 @@
             name = prompt('请输入昵称：', '');
             if (!name) return;
         }
-        const kuaishouSearchUrl = `https://www.kuaishou.com/search/${encodeURIComponent(name)}?source=NewReco`;
-        const bilibiliSearchUrl = 'https://search.bilibili.com/upuser?keyword=' + encodeURIComponent(name);
-        const xhsSearchUrl = 'https://www.xiaohongshu.com/search_result?keyword=' + encodeURIComponent(name) + '&source=web_user_page';
-        window.open(kuaishouSearchUrl, '_blank', 'noopener');
-        window.open(bilibiliSearchUrl, '_blank', 'noopener');
-        window.open(xhsSearchUrl, '_blank', 'noopener');
+        openCrossPlatformSearch(name)
 
 
         const url = window.location.href;
@@ -412,6 +450,7 @@
         updateCopyButtonVisibility();
         filterNoUsers();
         bindDouyinCrossSearchTitles();
+        bindXhsCrossSearchTitles();
     }
 
     // 监听页面变化（防抖优化，避免频繁执行）
@@ -455,6 +494,10 @@
         createCopyUserInfoButton(); // 初始化用户信息按钮
         filterNoUsers(); // 初始化无效用户过滤
         bindDouyinCrossSearchTitles();
+        bindXhsCrossSearchTitles();
+        if (isXHS()) {
+            window.addEventListener('click', handleXhsTitleCaptureClick, true);
+        }
         initDragSelect(); // 初始化拖拽框选功能
         // 监听页面内容变化（子元素+子树）
         observer.observe(document.body, {

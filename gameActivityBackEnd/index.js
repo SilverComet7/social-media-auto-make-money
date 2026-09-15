@@ -1,12 +1,10 @@
-const fs = require("fs");
 const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = 3000;
-const { allGameList, TikTokDownloader_ROOT } = require("./const.js");
+const { allGameList, TikTokDownloader_ROOT } = require("./const.ts");
 
 const {
-  concurrentFetchWithDelay,
   calculateTotalMoney,
   formatDate,
   getJsonData,
@@ -25,6 +23,49 @@ const {
 const {
   downloadVideosAndGroup,
 } = require("./ffmpegHandle/videoDownloadAndGroupList.js");
+
+const { setTimeout: sleep } = require("node:timers/promises");
+
+// 带超时和指数退避重试的 fetch
+async function fetchWithRetry(url, options = {}, { retries = 3, timeout = 10000 } = {}) {
+  let lastError;
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+    try {
+      const response = await fetch(url, { ...options, signal: controller.signal });
+      // 429/503 等限流状态码也触发重试
+      if (response.status === 429 || response.status === 503) {
+        throw new Error(`HTTP ${response.status} (rate limited)`);
+      }
+      return response;
+    } catch (err) {
+      lastError = err;
+      if (attempt < retries) {
+        const delay = 500 * Math.pow(2, attempt - 1) + Math.random() * 300;
+        console.log(`fetch 请求失败，${Math.round(delay)}ms 后重试 (${attempt}/${retries}): ${err.cause?.code || err.message}`);
+        await sleep(delay);
+      }
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  throw lastError;
+}
+
+// 限制并发数的 Promise.all，concurrency 建议 2~3
+async function mapWithConcurrency(list, concurrency, mapper) {
+  const results = new Array(list.length);
+  let nextIndex = 0;
+  const worker = async () => {
+    while (nextIndex < list.length) {
+      const i = nextIndex++;
+      results[i] = await mapper(list[i], i);
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(concurrency, list.length) }, worker));
+  return results;
+}
 
 app.use(cors());
 app.use(express.json());
@@ -54,36 +95,38 @@ function buildXhsHeaders(req) {
   const Feeling = accountJson.xhs?.[0];
   const xhsCookie = Feeling?.Cookie || "";
   const xS = req.headers["x-s"] || req.query["x-s"] || Feeling?.["X-S"] || "";
+  const xSCommon = req.headers["x-s-common"] || req.query["x-s-common"] || "";
   return {
     accept: "application/json, text/javascript, */*; q=0.01",
     "User-Agent": headers["User-Agent"],
     Cookie: xhsCookie,
     "X-S": xS,
+    "X-S-Common": xSCommon,
   };
 }
 
 // 获取各平台活动数据，处理活动数据
-app.get("/getNewActData", async (req, res) => {
+app.get("/getNewBiliActData", async (req, res) => {
   try {
     async function getActivitiesList() {
       let oldDataArr = getJsonData('bilibiliNoGameData.json');
       const fetchUrl = `https://member.bilibili.com/x/web/activity/videoall`;
-      const response = await fetch(fetchUrl, {
+      const response = await fetchWithRetry(fetchUrl, {
         headers,
       });
-      let newActList = await response.json();
-      if (!newActList?.data) return newActList;
-      newActList = newActList.data.map((e) => ({
+      let result = await response.json();
+      if (!result?.data) return result;
+      let newActivityList = result.data.map((e) => ({
         ...e,
         addTime: `${new Date().getFullYear()}年${new Date().getMonth() + 1
           }月${new Date().getDate()}添加`,
       }));
 
-      const noGameDataArr = newActList
+      const notGameActivityDataArr = newActivityList
         .filter((item) => {
           return !allGameList.some((gameName) => item.name.includes(gameName));
         });
-      const newDataArr = noGameDataArr
+      const newDataArr = notGameActivityDataArr
         .map((item) => {
           const oldDataHasThisRewardsItem = oldDataArr.find(
             (old) => item.name === old.name
@@ -107,24 +150,30 @@ app.get("/getNewActData", async (req, res) => {
       writeLocalDataJson(newDataArr, 'bilibiliNoGameData.json');
 
       let gameData = getJsonData("gameData.json");
-      const gameDataArr = newActList
+      const gameActivityDataArr = newActivityList
         .filter((item) => {
           return allGameList.some((gameName) => item.name.includes(gameName));
         })
 
-      await Promise.all(
-        gameDataArr
-          .map(async (activity) => {
+      const topicCache = new Map();
+      const fetchingPromises = new Map();
+
+
+      await mapWithConcurrency(
+        gameActivityDataArr,
+        3,
+        async (activity) => {
             try {
-              const thisActivityGameName = allGameList.find((gameName) =>
-                activity.name.includes(gameName)
+              const activityName = activity.name;
+              const activityBindGameName = allGameList.find((gameName) =>
+                activityName.includes(gameName)
               );
 
-              const oldGameDataHasThisGameName = gameData.find((game) => game.name === thisActivityGameName);
+              const oldGameDataHasThisGameName = gameData.find((game) => game.name === activityBindGameName);
               // 还不存在该游戏分类
               if (!oldGameDataHasThisGameName) {
                 gameData.push({
-                  name: thisActivityGameName,
+                  name: activityBindGameName,
                   rewards: [
                     {
                       name: "bilibili",
@@ -134,61 +183,91 @@ app.get("/getNewActData", async (req, res) => {
                 });
               }
 
-              const thisGamePlatforms = oldGameDataHasThisGameName
+              const bindGamePlatformsArr = oldGameDataHasThisGameName
                 ?.rewards;
               // 3. 如果gameData.json中已经收录该平台游戏，则将该游戏活动收录到对应gameName下的rewards的下name为bilibili下的specialTagRequirements中细分活动中
-              const game_rewards_bilibili = thisGamePlatforms?.find((platform) => platform.name === "bilibili");
+              const bindGame_bilibili_platform = bindGamePlatformsArr?.find((platform) => platform.name === "bilibili");
 
-              if (!game_rewards_bilibili) {
-                thisGamePlatforms?.unshift({
+              if (!bindGame_bilibili_platform) {
+                bindGamePlatformsArr?.unshift({
                   name: "bilibili",
                   activityRequirements: [],
                 });
               } else {
-                const bilibili_special_acts_ing_list =
-                  game_rewards_bilibili?.activityRequirements?.find(
-                    (act) => act.mission_id === activity.id && !act.topic_id
+                try {
+                  let topics;
+                  if (topicCache.has(activityBindGameName)) {
+                    topics = topicCache.get(activityBindGameName);
+                  } else if (fetchingPromises.has(activityBindGameName)) {
+                    topics = await fetchingPromises.get(activityBindGameName);
+                  } else {
+                    const fetchPromise = (async () => {
+                      const topicUrl = `https://member.bilibili.com/x/vupre/web/topic/search?keywords=${encodeURIComponent(activityBindGameName)}&page_size=50&offset=0&t=${Date.now()}`;
+                      const response = await fetchWithRetry(topicUrl, { headers });
+                      const result = await response.json();
+
+                      if (result.code !== 0 || !result.data?.result?.topics) {
+                        console.log(`  查询失败: ${result.message || '未知错误'}`);
+                        return [];
+                      }
+
+                      return result.data.result.topics;
+                    })();
+                    fetchingPromises.set(activityBindGameName, fetchPromise);
+                    topics = await fetchPromise;
+                    topicCache.set(activityBindGameName, topics);
+                    fetchingPromises.delete(activityBindGameName);
+                  }
+
+                  const topicsWithActivity = topics.filter(
+                    topic => topic.show_activity_icon === true
+                      && topic.mission_id === activity.id  // 大活动id
+                    // && bindGame_bilibili_platform?.activityRequirements.every((e) => e?.topic_id !== topic.id) // 已记录得大活动没有相同topic_id小活动
+                  ).map(topic => {
+
+                    // 更新同一个大活动下小活动的数据，并与老json可能已经存在的数据进行合并，形成最终的活动对象
+                    let oldActivityData = bindGame_bilibili_platform?.activityRequirements?.find((act) => act.topic_id === topic.id);
+
+                    return {
+                      // 保留原有活动数据中的其他字段，避免丢失
+                      ...(oldActivityData ? { ...oldActivityData } : {}),
+
+                      name: activityName,
+                      act_url: activity.act_url,
+                      comment: activity.comment,
+                      sDate: formatDate(activity.stime * 1000),
+                      eDate: formatDate(activity.etime * 1000),
+                      specialTag: oldActivityData ? oldActivityData.specialTag : '', // 保留原有特殊标签，后续更新时再进行替换或合并``,
+                      reward: oldActivityData ? oldActivityData.reward : [],
+                      mission_id: activity.id,
+                      topic_id: topic.id,
+                      topic: topic.name,
+                      arc_play_vv: topic.arc_play_vv,
+                    }
+                  });
+
+                  const existing = bindGame_bilibili_platform.activityRequirements || [];
+
+                  const merged = Array.from(
+                    new Map(
+                      [...existing, ...topicsWithActivity].map(item => [item.topic_id, item])
+                    ).values()
                   );
 
-                const topicUrl = `https://member.bilibili.com/x/vupre/web/topic/search?keywords=${encodeURIComponent(thisActivityGameName)}&page_size=50&offset=0&t=${Date.now()}`;
-                const response = await fetch(topicUrl, { headers });
-                const result = await response.json();
-
-                if (result.code !== 0 || !result.data?.result?.topics) {
-                  console.log(`  查询失败: ${result.message || '未知错误'}`);
-                  return
+                  bindGame_bilibili_platform.activityRequirements = merged;
+                } catch (error) {
+                  console.error("Error fetching topic data:", error);
                 }
 
-                const topicsWithActivity = result.data.result.topics.filter(
-                  topic => topic.show_activity_icon === true
-                    && topic.mission_id === activity.id  // 大活动id
-                    && game_rewards_bilibili?.activityRequirements.every((e) => e?.topic_id !== topic.id) // 已存活动没有相同id的小活动
-                ).map(topic => ({
-                  name: activity.name,
-                  act_url: activity.act_url,
-                  comment: activity.comment,
-                  sDate: formatDate(activity.stime * 1000),
-                  eDate: formatDate(activity.etime * 1000),
-                  specialTag: '',
-                  reward: [],
-                  mission_id: activity.id,
-                  topic_id: topic.id,
-                  topic: topic.name,
-                  arc_play_vv: topic.arc_play_vv,
-                }))
-
-                if (!bilibili_special_acts_ing_list) {
-                  game_rewards_bilibili.activityRequirements.push(...topicsWithActivity);
-                }
               }
             } catch (error) {
               console.error("Error fetching topic data:", error);
             }
-          }));
+        });
 
       gameData = removeExpiredActivities(gameData);
       writeLocalDataJson(gameData, "gameData.json");
-      return newActList;
+      return newActivityList;
     }
     const data = await getActivitiesList();
     res.json(data);
@@ -207,7 +286,7 @@ app.get("/getNewXhsActData", async (req, res) => {
       let oldDataArr = getJsonData('xhsNoGameData.json') || [];
       const fetchUrl = 'https://creator.xiaohongshu.com/api/galaxy/v2/creator/activity_center/list?sort=2&type=1&source=3&topic_activity=0';
       const headersXhs = buildXhsHeaders(req);
-      const response = await fetch(fetchUrl, { headers: headersXhs });
+      const response = await fetchWithRetry(fetchUrl, { headers: headersXhs });
       let result = await response.json();
       const activity_list = result?.data?.activity_list;
       if (!activity_list) return result;
@@ -280,7 +359,7 @@ app.get('/getLatestTopic', async (req, res) => {
     return res.status(400).json({ code: 400, message: 'Missing topic parameter' });
   }
   try {
-    const response = await fetch(`https://member.bilibili.com/x/vupre/web/topic/search?keywords=${encodeURIComponent(topic)}&page_size=50&offset=0&t=${Date.now()}`, {
+    const response = await fetchWithRetry(`https://member.bilibili.com/x/vupre/web/topic/search?keywords=${encodeURIComponent(topic)}&page_size=50&offset=0&t=${Date.now()}`, {
       headers,
     });
     const result = await response.json();
@@ -431,15 +510,15 @@ app.post("/getPlatformVideoData", async (req, res) => {
               if (!selectedPlatforms.has("抖音")) return e; // 未选择则保持原样
               return {
                 ...e,
-                activityRequirements: e.activityRequirements.map((i) => {
+                activityRequirements: e.activityRequirements.map((douyin_activity) => {
                   return {
-                    ...i,
+                    ...douyin_activity,
                     videoData: douyinVideoData.map((t) => {
                       // 过滤不满足条件的视频
                       const valuedList = t.aweme_list.filter(
                         (l) => {
-                          if (i.specialTag == '') return false;
-                          const tagMatches = l.desc.includes(i.specialTag) && l.view >= (i.minView || 100);
+                          if (douyin_activity.specialTag == '') return false;
+                          const tagMatches = l.desc.includes(douyin_activity.specialTag) && l.view >= (douyin_activity.minView || 100);
                           if (!tagMatches) return false;
 
                           // // 检查 type 是否匹配
@@ -455,7 +534,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
                       // 清除模式：不复用之前的数据；正常模式：合并新旧数据
                       const prevList = clearPreviousData
                         ? []
-                        : (i?.videoData?.find((c) => c.userName === t.user.name)
+                        : (douyin_activity?.videoData?.find((c) => c.userName === t.user.name)
                           ?.videoList || []);
                       const list = mergeVideoLists(prevList, valuedList);
                       return {
@@ -473,15 +552,15 @@ app.post("/getPlatformVideoData", async (req, res) => {
               if (!selectedPlatforms.has("小红书")) return e;
               return {
                 ...e,
-                activityRequirements: e.activityRequirements.map((i) => {
+                activityRequirements: e.activityRequirements.map((xhs_activity) => {
                   // 将 specialTag 的 "#tag1 #tag2" 格式转换为数组 ["tag1", "tag2"]
-                  const requiredTags = (i.specialTag || '')
+                  const requiredTags = (xhs_activity.specialTag || '')
                     .split(/\s+/)
                     .filter(tag => tag.length > 0)
                     .map(tag => tag.replace(/^#/, ''));
 
                   return {
-                    ...i,
+                    ...xhs_activity,
                     videoData: xhsVideoData.map((t) => {
                       // 过滤不满足条件的笔记 - 根据 tag 和 type
                       // tag_list 格式: "tag1,tag2,tag3"
@@ -507,7 +586,7 @@ app.post("/getPlatformVideoData", async (req, res) => {
                       // 清除模式：不复用之前的数据；正常模式：合并新旧数据
                       const prevList = clearPreviousData
                         ? []
-                        : (i?.videoData?.find((c) => c.userName === t.user.name)
+                        : (xhs_activity?.videoData?.find((c) => c.userName === t.user.name)
                           ?.videoList || []);
                       const list = mergeVideoLists(prevList, valuedList);
                       return {
@@ -525,35 +604,25 @@ app.post("/getPlatformVideoData", async (req, res) => {
               if (!selectedPlatforms.has("bilibili")) return e;
               return {
                 ...e,
-                activityRequirements: e.activityRequirements.map((differentTopic) => {
+                activityRequirements: e.activityRequirements.map((bili_activity) => {
 
                   return {
-                    ...differentTopic,
-                    videoData: bilibiliVideoData.map((t) => {
-                      const valuedList = t.aweme_list.filter(l => {
-                        const matches_desc_topic = (l.desc === differentTopic.topic)
-
-
+                    ...bili_activity,
+                    videoData: bilibiliVideoData.map((userVideoList) => {
+                      const valuedList = userVideoList.aweme_list.filter(l => {
+                        const matches_desc_topic = (l.desc === bili_activity.topic)
                         if (!(matches_desc_topic)) return false;
-
-                        // if (differentTopic.reward && differentTopic.reward.length > 0) {
-                        //   const rewardType = differentTopic.reward[0]?.type;
-                        //   if (rewardType && rewardType !== 'all') {
-                        //     return (l.type || 'video') === rewardType;
-                        //   }
-                        // }
-
                         return true;
                       });
 
                       // 清除模式：不复用之前的数据；正常模式：合并新旧数据
                       const prevList = clearPreviousData
                         ? []
-                        : (differentTopic?.videoData?.find((c) => c.userName === t.user.name)
+                        : (bili_activity?.videoData?.find((c) => c.userName === userVideoList.user.name)
                           ?.videoList || []);
                       const list = mergeVideoLists(prevList, valuedList);
                       return {
-                        userName: t.user.name,
+                        userName: userVideoList.user.name,
                         allNum: list.length,
                         allViewNum: sumField(list, 'view'),
                         videoList: list,

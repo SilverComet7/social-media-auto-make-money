@@ -34,7 +34,7 @@ function transformDouyinData(crawlerData) {
 }
 
 async function queryDouYinAllAccountsData(platformDir) {
-    return queryPlatformData('douyin', transformDouyinData, platformDir);
+    return queryPlatformData('dy', transformDouyinData, platformDir);
 }
 
 module.exports = {
